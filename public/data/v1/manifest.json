@@ -1,0 +1,8 @@
+{
+  "version": "1.0.3",
+  "generated": "2025-11-08",
+  "files": [
+    { "name": "rules.json", "sha256": "", "note": "sample rules" },
+    { "name": "units.json", "sha256": "", "note": "sample units" }
+  ]
+}

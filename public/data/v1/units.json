@@ -1,0 +1,34 @@
+[
+  {
+    "id": "unit_intercession_leader",
+    "name": "Intercession Sergeant",
+    "season": "Octarius",
+    "keywords": ["Astartes", "Leader", "Intercession"],
+    "abbr": "IC-S",
+    "summary": "M6\" WS3+ BS3+ A4 W15 Sv3+. Can equip bolt rifle or chainsword. Core ability: And They Shall Know No Fear (ignore modifiers to APL loss)."
+  },
+  {
+    "id": "unit_intercession_gunner",
+    "name": "Intercession Gunner",
+    "season": "Octarius",
+    "keywords": ["Astartes", "Gunner", "Intercession"],
+    "abbr": "IC-G",
+    "summary": "M6\" WS3+ BS3+ A3 W14 Sv3+. Equipped with bolt rifle (4/5, Lethal 5+). Tactical equipment: frag or krak grenade (1 per battle)."
+  },
+  {
+    "id": "unit_assault_intercession",
+    "name": "Assault Intercessor",
+    "season": "Octarius",
+    "keywords": ["Astartes", "Assault", "Intercession"],
+    "abbr": "AIC",
+    "summary": "M6\" WS3+ BS3+ A4 W14 Sv3+. Armed with chainsword (4/5, Balanced) and heavy bolt pistol."
+  },
+  {
+    "id": "unit_phobos_sniper",
+    "name": "Phobos Marksman",
+    "season": "Chalnath",
+    "keywords": ["Astartes", "Phobos", "Sniper"],
+    "abbr": "PHB-S",
+    "summary": "M6\" WS3+ BS2+ A3 W13 Sv3+. Equipped with stalker bolt rifle (4/5, MW1), camo cloak (Light Cover when not engaged)."
+  }
+]
