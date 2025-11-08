@@ -1,8 +1,11 @@
 {
-  "version": "1.0.3",
+  "version": "1.0.4",
   "generated": "2025-11-08",
   "files": [
-    { "name": "rules.json", "sha256": "", "note": "sample rules" },
-    { "name": "units.json", "sha256": "", "note": "sample units" }
+    { "name": "rules.json", "sha256": "" },
+    { "name": "units.json", "sha256": "" },
+    { "name": "sequence.json", "sha256": "" },
+    { "name": "factions.json", "sha256": "" },
+    { "name": "faction_fac_intercession.json", "sha256": "" }
   ]
 }

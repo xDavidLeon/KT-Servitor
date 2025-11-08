@@ -1,6 +1,7 @@
 // components/Header.js
 import React from 'react'
 import { forceUpdateAndReindex } from '../lib/update'
+import Nav from './Nav'
 
 function download(filename, text) {
   const blob = new Blob([text], { type: 'application/json' });
@@ -92,6 +93,7 @@ export default function Header({ version, status }) {
         >
           ⚙️
         </button>
+        <Nav />
         {open && (
           <div className="menu" id="hdr-gear">
             <button onClick={handleForceUpdate}>Force update</button>

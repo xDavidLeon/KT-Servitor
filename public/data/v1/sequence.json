@@ -1,0 +1,10 @@
+[
+    {"id":"seq_01_setup","order":1,"title":"Set Up the Killzone","body":"Select mission, set up terrain and objectives, place barricades."},
+    {"id":"seq_02_roster","order":2,"title":"Select Kill Teams","body":"Choose a faction and 1 fire team, select operatives & equipment (points)."},
+    {"id":"seq_03_deploy","order":3,"title":"Gather & Deploy","body":"Determine attacker/defender, deploy operatives per mission rules."},
+    {"id":"seq_04_initiative","order":4,"title":"Initiative Phase","body":"Roll for initiative; resolve scouting if applicable."},
+    {"id":"seq_05_strategy","order":5,"title":"Strategy Phase","body":"Gain CP; resolve Strategic Ploys and mission rules."},
+    {"id":"seq_06_firefight","order":6,"title":"Firefight Phase","body":"Alternate activations; perform actions (Move, Shoot, Fight, etc.)."},
+    {"id":"seq_07_end","order":7,"title":"End Phase & Scoring","body":"Resolve Tac Ops scoring and cleanup, check for game end."}
+  ]
+  
