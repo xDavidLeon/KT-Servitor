@@ -7,6 +7,85 @@ import SectionNavigator from '../../components/SectionNavigator'
 import { db } from '../../lib/db'
 import { ensureIndex } from '../../lib/search'
 
+function canonicalFactionId(rawId) {
+  if (!rawId) return rawId
+  return rawId.startsWith('fac_') ? rawId : `fac_${rawId}`
+}
+
+function parseStoredOperative(record) {
+  if (!record) return null
+  if (typeof record.body === 'string') {
+    try {
+      const parsed = JSON.parse(record.body)
+      return {
+        ...parsed,
+        id: record.id,
+        name: parsed.name || parsed.title || record.title,
+        factionKeyword: parsed.factionKeyword || record.factionKeyword || null,
+        keywords: parsed.keywords || record.tags || [],
+        weapons: parsed.weapons || [],
+        specialRules: parsed.specialRules || [],
+        specialActions: parsed.specialActions || [],
+        apl: parsed.apl ?? record.apl ?? null,
+        move: parsed.move || record.move || '',
+        save: parsed.save || record.save || '',
+        wounds: parsed.wounds ?? record.wounds ?? null,
+        maxSelections: parsed.maxSelections ?? record.maxSelections ?? null
+      }
+    } catch (err) {
+      // fall through to legacy structure
+    }
+  }
+
+  return {
+    id: record.id,
+    name: record.title,
+    factionKeyword: record.factionKeyword || null,
+    keywords: record.tags || [],
+    weapons: record.weapons || [],
+    specialRules: [],
+    specialActions: [],
+    apl: record.apl ?? null,
+    move: record.move || '',
+    save: record.save || '',
+    wounds: record.wounds ?? null,
+    maxSelections: record.maxSelections ?? null
+  }
+}
+
+function buildFactionFromArticles(baseRecord, relatedArticles, canonicalId) {
+  if (!baseRecord && (!relatedArticles || relatedArticles.length === 0)) return null
+
+  const toRule = (item) => ({ id: item.id, name: item.title, description: item.body })
+  const toGeneric = (item) => ({ id: item.id, name: item.title, description: item.body })
+
+  const factionKeyword = baseRecord?.factionKeyword || null
+  const archetypes = baseRecord?.archetypes || baseRecord?.tags || []
+
+  const operatives = (relatedArticles || [])
+    .filter(a => a.type === 'operative')
+    .map(parseStoredOperative)
+    .filter(Boolean)
+
+  return {
+    id: canonicalId,
+    name: baseRecord?.title || baseRecord?.name || canonicalId,
+    summary: baseRecord?.body || '',
+    factionKeyword,
+    archetypes,
+    rules: (relatedArticles || []).filter(a => a.type === 'faction_rule').map(toRule),
+    strategicPloys: (relatedArticles || [])
+      .filter(a => a.type === 'strategic_ploy' || a.type === 'ploy')
+      .map(toGeneric),
+    tacticalPloys: (relatedArticles || [])
+      .filter(a => a.type === 'tactical_ploy')
+      .map(toGeneric),
+    equipment: (relatedArticles || []).filter(a => a.type === 'equipment').map(toGeneric),
+    tacops: (relatedArticles || []).filter(a => a.type === 'tacop').map(toGeneric),
+    operatives
+  }
+}
+
 export default function FactionPage(){
   const { query:{id} } = useRouter()
   const [faction,setFaction] = useState(null)
@@ -39,18 +118,33 @@ export default function FactionPage(){
       console.log('Error loading new structure:', e.message)
     }
     
-    // Fallback to old structure (database)
-    const f = await db.articles.get(id)
-    setFaction(f)
-    const all = await db.articles.toArray()
-    const byFaction = all.filter(a => a.factionId === id)
-    setFactionData({
-      rules: byFaction.filter(a=> a.type==='faction_rule'),
-      operatives: byFaction.filter(a=> a.type==='operative'),
-      tacops: byFaction.filter(a=> a.type==='tacop'),
-      ploys: byFaction.filter(a=> a.type==='ploy'),
-      equipment: byFaction.filter(a=> a.type==='equipment'),
-    })
+    // Fallback to stored data in IndexedDB
+    const canonicalId = canonicalFactionId(id)
+    const baseRecord = canonicalId ? await db.articles.get(canonicalId) : null
+
+    let relatedArticles = []
+    if (canonicalId) {
+      try {
+        relatedArticles = await db.articles.where('factionId').equals(canonicalId).toArray()
+      } catch (err) {
+        const all = await db.articles.toArray()
+        relatedArticles = all.filter(a => a.factionId === canonicalId)
+      }
+    }
+
+    const fallbackData = buildFactionFromArticles(baseRecord, relatedArticles, canonicalId)
+
+    if (fallbackData) {
+      setFaction({
+        title: fallbackData.name,
+        body: fallbackData.summary
+      })
+      setFactionData(fallbackData)
+      return
+    }
+
+    setFaction(baseRecord)
+    setFactionData(null)
   })() },[id])
 
   if (!faction && !factionData) return <div className="container"><Header/><div className="card">Loading…</div></div>
