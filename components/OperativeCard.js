@@ -1,6 +1,8 @@
 export default function OperativeCard({ operative }) {
+  const anchorId = operative?.id || undefined
+
   return (
-    <div className="operative-card">
+    <div id={anchorId} className="operative-card">
       <div className="operative-header">
         <h4 style={{ margin: 0 }}>{operative.name || operative.title}</h4>
       </div>
