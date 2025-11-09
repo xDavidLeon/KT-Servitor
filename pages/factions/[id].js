@@ -151,6 +151,7 @@ export default function FactionPage(){
 
   // New structure
   if (factionData && factionData.operatives && Array.isArray(factionData.operatives)) {
+    const factionAnchorId = factionData.id || canonicalFactionId(id)
     return (
       <div className="container">
         <Header/>
@@ -161,7 +162,7 @@ export default function FactionPage(){
           </div>
         </div>
         <div className="card">
-          <h2 style={{marginTop:0}}>{factionData.name}</h2>
+          <h2 id={factionAnchorId} style={{marginTop:0}}>{factionData.name}</h2>
           {factionData.factionKeyword && factionData.factionKeyword !== 'UNKNOWN' && (
             <div style={{marginBottom: '0.5rem'}}>
               <span className="pill" style={{fontSize: '0.9rem', fontWeight: 'bold'}}>
@@ -249,7 +250,7 @@ export default function FactionPage(){
             <h3 style={{marginTop:0}}>Faction Rules</h3>
             {factionData.rules && factionData.rules.length > 0 ? (
               factionData.rules.map(rule => (
-                <div key={rule.id} style={{marginBottom: '0.75rem'}}>
+                <div key={rule.id} id={rule.id} style={{marginBottom: '0.75rem'}}>
                   <strong>{rule.name}</strong>
                   {rule.description && <div className="muted">{rule.description}</div>}
                 </div>
@@ -276,7 +277,7 @@ export default function FactionPage(){
             <h3 style={{marginTop:0}}>Strategic Ploys</h3>
             {factionData.strategicPloys && factionData.strategicPloys.length > 0 ? (
               factionData.strategicPloys.map(ploy => (
-                <div key={ploy.id} style={{marginBottom: '0.75rem'}}>
+                <div key={ploy.id} id={ploy.id} style={{marginBottom: '0.75rem'}}>
                   <strong>{ploy.name}</strong>
                   <div className="muted">{ploy.description}</div>
                 </div>
@@ -290,7 +291,7 @@ export default function FactionPage(){
             <h3 style={{marginTop:0}}>Tactical Ploys</h3>
             {factionData.tacticalPloys && factionData.tacticalPloys.length > 0 ? (
               factionData.tacticalPloys.map(ploy => (
-                <div key={ploy.id} style={{marginBottom: '0.75rem'}}>
+                <div key={ploy.id} id={ploy.id} style={{marginBottom: '0.75rem'}}>
                   <strong>{ploy.name}</strong>
                   <div className="muted">{ploy.description}</div>
                 </div>
@@ -304,7 +305,7 @@ export default function FactionPage(){
             <h3 style={{marginTop:0}}>Equipment</h3>
             {factionData.equipment && factionData.equipment.length > 0 ? (
               factionData.equipment.map(eq => (
-                <div key={eq.id} style={{marginBottom: '0.75rem'}}>
+                <div key={eq.id} id={eq.id} style={{marginBottom: '0.75rem'}}>
                   <strong>{eq.name}</strong>
                   <div className="muted">{eq.description}</div>
                 </div>
@@ -318,7 +319,7 @@ export default function FactionPage(){
             <div id="tac-ops" className="card" style={{marginTop: '1rem'}}>
               <h3 style={{marginTop:0}}>Tac Ops</h3>
               {factionData.tacops.map(tacop => (
-                <div key={tacop.id} style={{marginBottom: '0.75rem'}}>
+                <div key={tacop.id} id={tacop.id} style={{marginBottom: '0.75rem'}}>
                   <strong>{tacop.name || tacop.title}</strong>
                   <div className="muted">{tacop.description || tacop.body}</div>
                 </div>
@@ -332,6 +333,7 @@ export default function FactionPage(){
 
   // Old structure fallback
   const groups = factionData || { rules:[], operatives:[], tacops:[], ploys:[], equipment:[] }
+  const fallbackAnchorId = (factionData && factionData.id) || (faction && faction.id) || canonicalFactionId(id)
 
   return (
     <div className="container">
@@ -340,22 +342,22 @@ export default function FactionPage(){
         <FactionSelector currentFactionId={id} />
       </div>
       <div className="card">
-        <h2 style={{marginTop:0}}>{faction?.title}</h2>
+        <h2 id={fallbackAnchorId} style={{marginTop:0}}>{faction?.title}</h2>
         <p>{faction?.body}</p>
 
-        {Object.entries(groups).map(([k,arr])=> (
+        {Object.entries(groups).map(([k,arr]) => (
           <div key={k} className="card">
             <h3 style={{marginTop:0,textTransform:'capitalize'}}>{k === 'operatives' ? 'Datacards' : k}</h3>
             {arr.length===0 && <div className="muted">No items.</div>}
             {k === 'operatives' ? (
               <div className="operatives-grid">
-                {arr.map(it=> (
+                {arr.map(it => (
                   <OperativeCard key={it.id} operative={it} />
                 ))}
               </div>
             ) : (
-              arr.map(it=> (
-                <div key={it.id} style={{marginBottom:'.5rem'}}>
+              arr.map(it => (
+                <div key={it.id} id={it.id} style={{marginBottom:'.5rem'}}>
                   <strong>{it.title}</strong>
                   <div className="muted">{it.body}</div>
                 </div>
