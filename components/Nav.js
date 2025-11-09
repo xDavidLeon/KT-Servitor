@@ -42,11 +42,13 @@ export default function Nav(){
   const factionRulesHref = firstFactionId ? `/factions/${firstFactionId}` : '/factions'
   
   return (
-    <div className="row" style={{marginTop:'.5rem'}}>
-      <Item href="/" label="Home"/>
-      <Item href="/sequence" label="Game Sequence"/>
-      <Item href={factionRulesHref} label="Faction Rules"/>
-      <Item href="/rules" label="Game Rules"/>
-    </div>
+    <nav className="nav-links" aria-label="Primary navigation">
+      <div className="nav-links-row">
+        <Item href="/" label="Home"/>
+        <Item href="/sequence" label="Game Sequence"/>
+        <Item href={factionRulesHref} label="Faction Rules"/>
+        <Item href="/rules" label="Game Rules"/>
+      </div>
+    </nav>
   )
 }
