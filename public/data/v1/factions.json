@@ -291,6 +291,13 @@
     "summary": "July '25"
   },
   {
+    "id": "fac_wolf_scouts",
+    "name": "Wolf Scouts",
+    "factionKeyword": "WOLF SCOUT",
+    "archetypes": [],
+    "summary": ""
+  },
+  {
     "id": "fac_wrecka_krew",
     "name": "Wrecka Krew",
     "factionKeyword": "WRECKA KREW",
@@ -303,5 +310,12 @@
     "factionKeyword": "WYRMBLADE",
     "archetypes": [],
     "summary": "Update 1.0"
+  },
+  {
+    "id": "fac_xv26_battlesuits",
+    "name": "XV26 Battlesuits",
+    "factionKeyword": "XV26 STEALTH BATTLESUIT",
+    "archetypes": [],
+    "summary": ""
   }
 ]

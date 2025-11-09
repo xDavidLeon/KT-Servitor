@@ -125,6 +125,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -177,6 +178,7 @@
           "description": "▶ Select one enemy operative within this operative’s control range. You can move that enemy operative up to 3\" to a location it can be placed. Then inflict D3+1 damage on it (even if you don’t move it); if the D3 result is a 3, also subtract 1 from that enemy operative’s APL stat until the end of its next activation. This operative can then immediately perform a free Charge action (even if it’s already performed the Charge action during that activation), but cannot move more than 3\" during that action. \r\n◆ This operative cannot perform this action unless an enemy operative is within its control range."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -227,6 +229,7 @@
           "description": "▶ Select one friendly HEARTHKYN SALVAGER operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point. \r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -289,6 +292,7 @@
           "description": "▶  Place one of your Utility Grenade markers within 6\" of this operative. It must be visible to this operative, or on Vantage terrain of a terrain feature that’s visible to this operative. Whenever an operative is within 3\" of that Utility Grenade marker, its controlling player must spend 1 additional AP for that operative to perform the Pick Up Marker and mission actions.\r\n▶  In the Ready step of the next Strategy phase, roll one D3. Remove that Utility Grenade marker after a number of activations equal to the result have been completed, or at the end of the turning point (whichever comes first).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -395,6 +399,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 3
     },
     {
@@ -440,6 +445,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -476,6 +482,7 @@
           "description": "▶ Select one enemy operative that’s a valid target for this operative and that doesn’t have one of your System Jam tokens; it gains one. Until the end of the battle, whenever an enemy operative has one of your System Jam tokens, it cannot be activated until each enemy operative without one is expended. When an enemy operative that has one of your System Jam tokens is activated, remove that token.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -513,6 +520,7 @@
           "description": "▶ If your Attack or Defence marker is in the killzone, remove it. \r\n▶ Place your Attack or Defence marker in the killzone.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -549,6 +557,7 @@
           "description": "▶ Place your Pan Spectral Scan marker in the killzone. Whenever a friendly HEARTHKYN SALVAGER operative is shooting an enemy operative that’s within 3\" of that marker, that friendly operative’s ranged weapons have the Accurate 1 and Saturate weapon rules. When this operative is next activated, is incapacitated or performs this action again (whichever comes first), remove that marker.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -585,6 +594,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -617,17 +627,77 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 9
     }
   ],
   "operativeSelection": {
     "leader": {
       "min": 0,
-      "max": 1
+      "max": 1,
+      "details": [
+        {
+          "name": "Theyn",
+          "min": null,
+          "max": 1
+        }
+      ]
     },
     "operatives": {
       "min": 9,
-      "max": 9
+      "max": 20,
+      "details": [
+        {
+          "name": "Dôzr",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Field Medic",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Grenadier",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Gunner",
+          "min": null,
+          "max": 3
+        },
+        {
+          "name": "Jump Pack Warrior",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Kinlynk",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Kognitâar",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Locâtr",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Lugger",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Warrior",
+          "min": null,
+          "max": 9
+        }
+      ]
     }
   }
 }

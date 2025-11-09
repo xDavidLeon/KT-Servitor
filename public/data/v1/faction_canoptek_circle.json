@@ -84,6 +84,7 @@
           "description": "▶ Select one friendly CANOPTEK CIRCLE operative visible to and within 6\" of this operative. Alternatively, if this operative is within your **OBELISK NODE MATRIX**, you can select one other friendly CANOPTEK CIRCLE operative within your **OBELISK NODE MATRIX**. The selected operative regains up to 3D3 lost wounds. It cannot be an operative that the Reanimate rule was used on during this turning point.\r\n\r\n\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or more than once per turning point."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -156,6 +157,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -208,6 +210,7 @@
           "description": "▶ Select one enemy operative visible to and within 3\" of this operative. Alternatively, if this operative is within your **OBELISK NODE MATRIX**, you can select one enemy operative within your **OBELISK NODE MATRIX**. Until the end of that enemy operative's next activation, subtract 1 from its APL stat.\r\n\r\n\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -280,6 +283,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -353,6 +357,7 @@
           "description": "▶ **SUPPORT**. Select a point on a terrain feature; that point must be visible to and within 8\" of this operative. Separately roll 2D6 for each operative within 2\" of that point. If the result is higher than that operative's remaining wounds, inflict damage on it equal to the difference.\r\n\r\n\r\n◆ This operative cannot perform this action while it has a Conceal order, or while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

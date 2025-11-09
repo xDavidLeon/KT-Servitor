@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import OperativeCard from '../../components/OperativeCard'
 import FactionSelector from '../../components/FactionSelector'
+import RichText from '../../components/RichText'
 import SectionNavigator from '../../components/SectionNavigator'
 import { db } from '../../lib/db'
 import { ensureIndex } from '../../lib/search'
@@ -180,7 +181,7 @@ export default function FactionPage(){
               ))}
             </div>
           )}
-          <p>{factionData.summary}</p>
+          <RichText as="p" text={factionData.summary} />
 
           {factionData.operativeSelection && factionData.operatives && (
             <div id="operative-selection" className="card" style={{marginTop: '1rem'}}>
@@ -194,20 +195,72 @@ export default function FactionPage(){
                   
                   return (
                     <div>
-                      <strong>Leader:</strong> {factionData.operativeSelection.leader.min === 0 ? '' : `${factionData.operativeSelection.leader.min} - `}
-                      {factionData.operativeSelection.leader.max || 1} operative{factionData.operativeSelection.leader.max !== 1 ? 's' : ''} with the <strong>Leader</strong> keyword
-                      {leaderOperatives.length > 0 && (
-                        <ul style={{marginTop: '0.5rem', marginLeft: '1.5rem', fontSize: '0.9rem', listStyle: 'disc'}}>
-                          {leaderOperatives.map(op => (
-                            <li key={op.id} className="muted">
-                              {op.name || op.title}
-                              {op.maxSelections !== null && op.maxSelections !== undefined && (
-                                <span> (max {op.maxSelections})</span>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
+                      {(() => {
+                        const leaderSelection = factionData.operativeSelection.leader || {};
+                        const leaderDetails = Array.isArray(leaderSelection.details) ? leaderSelection.details : [];
+                        const leaderMin = leaderSelection.min ?? 0;
+                        const leaderMax = leaderSelection.max ?? leaderMin ?? 1;
+                        const sameCount = leaderMax !== null && leaderMin === leaderMax;
+
+                        let requirementText = '';
+                        if (leaderMax === null) {
+                          requirementText = `at least ${leaderMin} operative${leaderMin === 1 ? '' : 's'}`;
+                        } else if (sameCount) {
+                          requirementText = `${leaderMax} operative${leaderMax === 1 ? '' : 's'}`;
+                        } else {
+                          requirementText = `${leaderMin} - ${leaderMax} operatives`;
+                        }
+
+                        const renderSuffix = (min, max) => {
+                          if (min != null && max != null && min === max) {
+                            return ` x${max}`;
+                          }
+                          if (min != null && max != null) {
+                            return ` (min ${min}, max ${max})`;
+                          }
+                          if (max != null) {
+                            return ` (max ${max})`;
+                          }
+                          if (min != null && min > 0) {
+                            return ` (min ${min})`;
+                          }
+                          return '';
+                        };
+
+                        const renderList = (items, keyPrefix) => (
+                          <ul style={{marginTop: '0.5rem', marginLeft: '1.5rem', fontSize: '0.9rem', listStyle: 'disc'}}>
+                            {items.map((item, index) => {
+                              const min = item?.min ?? item?.minSelections ?? null;
+                              const max = item?.max ?? item?.maxSelections ?? null;
+                              const name = item?.name || item?.title;
+                              const suffix = renderSuffix(min, max);
+                              const key = item?.id || (keyPrefix + '-' + (name || index));
+                              return (
+                                <li key={key} className="muted">
+                                  {name}
+                                  {suffix && <span>{suffix}</span>}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        );
+
+                        if (leaderDetails.length > 0) {
+                          return (
+                            <>
+                              <strong>Leader:</strong> {requirementText}
+                              {renderList(leaderDetails, 'leader-detail')}
+                            </>
+                          );
+                        }
+
+                        return (
+                          <>
+                            <strong>Leader:</strong> {requirementText}
+                            {leaderOperatives.length > 0 && renderList(leaderOperatives, 'leader')}
+                          </>
+                        );
+                      })()}
                     </div>
                   );
                 })()}
@@ -219,26 +272,80 @@ export default function FactionPage(){
                   
                   return (
                     <div style={{marginTop: '0.5rem'}}>
-                      <strong>Operatives:</strong> {factionData.operativeSelection.operatives.min || 0}
-                      {factionData.operativeSelection.operatives.max !== null && 
-                        factionData.operativeSelection.operatives.max !== factionData.operativeSelection.operatives.min
-                        ? ` - ${factionData.operativeSelection.operatives.max}` 
-                        : ''} operative{(factionData.operativeSelection.operatives.max === 1 || (factionData.operativeSelection.operatives.max === null && factionData.operativeSelection.operatives.min === 1)) ? '' : 's'}
-                      {regularOperatives.length > 0 && (
-                        <ul style={{marginTop: '0.5rem', marginLeft: '1.5rem', fontSize: '0.9rem', listStyle: 'disc'}}>
-                          {regularOperatives.map(op => (
-                            <li key={op.id} className="muted">
-                              {op.name || op.title}
-                              {op.maxSelections !== null && op.maxSelections !== undefined && (
-                                <span> (max {op.maxSelections})</span>
-                              )}
-                              {op.maxSelections === null && (
-                                <span> (unlimited)</span>
-                              )}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
+                      {(() => {
+                        const operativeSelection = factionData.operativeSelection.operatives || {};
+                        const operativeDetails = Array.isArray(operativeSelection.details) ? operativeSelection.details : [];
+                        const opMin = operativeSelection.min ?? 0;
+                        const opMax = operativeSelection.max;
+
+                        let requirementText = '';
+                        if (opMax === null || opMax === undefined) {
+                          requirementText = `at least ${opMin} operative${opMin === 1 ? '' : 's'}`;
+                        } else if (opMin === opMax) {
+                          requirementText = `${opMax} operative${opMax === 1 ? '' : 's'}`;
+                        } else {
+                          requirementText = `${opMin} - ${opMax} operatives`;
+                        }
+
+                        const renderSuffix = (min, max) => {
+                          if (min != null && max != null && min === max) {
+                            return ` x${max}`;
+                          }
+                          if (min != null && max != null) {
+                            return ` (min ${min}, max ${max})`;
+                          }
+                          if (max != null) {
+                            return ` (max ${max})`;
+                          }
+                          if (min != null && min > 0) {
+                            return ` (min ${min})`;
+                          }
+                          return '';
+                        };
+
+                        const renderList = (items, keyPrefix) => (
+                          <ul style={{marginTop: '0.5rem', marginLeft: '1.5rem', fontSize: '0.9rem', listStyle: 'disc'}}>
+                            {items.map((item, index) => {
+                              const min = item?.min ?? item?.minSelections ?? null;
+                              const max = item?.max ?? item?.maxSelections ?? null;
+                              const name = item?.name || item?.title;
+                              const suffix = renderSuffix(min, max);
+                              const key = item?.id || (keyPrefix + '-' + (name || index));
+                              return (
+                                <li key={key} className="muted">
+                                  {name}
+                                  {suffix && <span>{suffix}</span>}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        );
+
+                        if (operativeDetails.length > 0) {
+                          return (
+                            <>
+                              <strong>Operatives:</strong> {requirementText}
+                              {renderList(operativeDetails, 'operative-detail')}
+                            </>
+                          );
+                        }
+
+                        let fallbackOperatives = regularOperatives.filter(op => (
+                          (op.minSelections != null && op.minSelections !== undefined && op.minSelections > 0) ||
+                          (op.maxSelections != null && op.maxSelections !== undefined && op.maxSelections > 0)
+                        ));
+
+                        if (fallbackOperatives.length === 0) {
+                          fallbackOperatives = regularOperatives;
+                        }
+
+                        return (
+                          <>
+                            <strong>Operatives:</strong> {requirementText}
+                            {fallbackOperatives.length > 0 && renderList(fallbackOperatives, 'operative')}
+                          </>
+                        );
+                      })()}
                     </div>
                   );
                 })()}
@@ -252,7 +359,7 @@ export default function FactionPage(){
               factionData.rules.map(rule => (
                 <div key={rule.id} id={rule.id} style={{marginBottom: '0.75rem'}}>
                   <strong>{rule.name}</strong>
-                  {rule.description && <div className="muted">{rule.description}</div>}
+                  {rule.description && <RichText className="muted" text={rule.description} />}
                 </div>
               ))
             ) : (
@@ -279,7 +386,7 @@ export default function FactionPage(){
               factionData.strategicPloys.map(ploy => (
                 <div key={ploy.id} id={ploy.id} style={{marginBottom: '0.75rem'}}>
                   <strong>{ploy.name}</strong>
-                  <div className="muted">{ploy.description}</div>
+                  <RichText className="muted" text={ploy.description} />
                 </div>
               ))
             ) : (
@@ -293,7 +400,7 @@ export default function FactionPage(){
               factionData.tacticalPloys.map(ploy => (
                 <div key={ploy.id} id={ploy.id} style={{marginBottom: '0.75rem'}}>
                   <strong>{ploy.name}</strong>
-                  <div className="muted">{ploy.description}</div>
+                  <RichText className="muted" text={ploy.description} />
                 </div>
               ))
             ) : (
@@ -307,7 +414,7 @@ export default function FactionPage(){
               factionData.equipment.map(eq => (
                 <div key={eq.id} id={eq.id} style={{marginBottom: '0.75rem'}}>
                   <strong>{eq.name}</strong>
-                  <div className="muted">{eq.description}</div>
+                  <RichText className="muted" text={eq.description} />
                 </div>
               ))
             ) : (
@@ -321,7 +428,7 @@ export default function FactionPage(){
               {factionData.tacops.map(tacop => (
                 <div key={tacop.id} id={tacop.id} style={{marginBottom: '0.75rem'}}>
                   <strong>{tacop.name || tacop.title}</strong>
-                  <div className="muted">{tacop.description || tacop.body}</div>
+                  <RichText className="muted" text={tacop.description || tacop.body} />
                 </div>
               ))}
             </div>
@@ -343,7 +450,7 @@ export default function FactionPage(){
       </div>
       <div className="card">
         <h2 id={fallbackAnchorId} style={{marginTop:0}}>{faction?.title}</h2>
-        <p>{faction?.body}</p>
+        <RichText as="p" text={faction?.body} />
 
         {Object.entries(groups).map(([k,arr]) => (
           <div key={k} className="card">
@@ -359,7 +466,7 @@ export default function FactionPage(){
               arr.map(it => (
                 <div key={it.id} id={it.id} style={{marginBottom:'.5rem'}}>
                   <strong>{it.title}</strong>
-                  <div className="muted">{it.body}</div>
+                  <RichText className="muted" text={it.body} />
                 </div>
               ))
             )}

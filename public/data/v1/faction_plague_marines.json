@@ -100,6 +100,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -172,6 +173,7 @@
           "description": "▶ PSYCHIC. Select one friendly operative visible to and within 3\" of this operative, then roll 2D6: if the result is 7, the selected operative regains 7 lost wounds; otherwise, the selected operative regains lost wounds equal to the highest D6.\r\n◆ An operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -213,6 +215,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -250,6 +253,7 @@
           "description": "▶ Inflict D3+2 damage on each other operative that’s both visible to and within 2\" of this operative. Roll separately for each: if it’s an enemy operative, on a 3, that enemy operative also gains one of your Poison tokens (if it doesn’t already have one).\r\n◆ This operative cannot perform this action while it has a Conceal order, or during an activation in which it has performed more than one **Fight** action, and it cannot perform more than one **Fight** action during an activation in which it performs this action."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -300,6 +304,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -344,6 +349,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -386,6 +392,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

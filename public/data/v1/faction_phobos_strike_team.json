@@ -88,6 +88,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -127,6 +128,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -147,6 +149,7 @@
       "weapons": [],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -186,6 +189,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -236,6 +240,7 @@
           "description": "▶ Select one friendly PHOBOS STRIKE TEAM operative within this operative’s control range to regain up to D3+3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -275,6 +280,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -324,6 +330,7 @@
           "description": "Until the start of this operative’s next activation or until it’s incapacitated (whichever comes first), whenever a friendly PHOBOS STRIKE TEAM operative is shooting an enemy operative within 8\" of this operative, that enemy operative cannot be obscured; if that friendly operative is an INCURSOR, its ranged weapons also have the Seek Light weapon rule.\r\nThis operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -382,6 +389,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -430,6 +438,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -469,6 +478,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -514,6 +524,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -562,6 +573,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -582,17 +594,72 @@
       "weapons": [],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     }
   ],
   "operativeSelection": {
     "leader": {
       "min": 0,
-      "max": 1
+      "max": 3,
+      "details": [
+        {
+          "name": "Infiltrator Sergeant",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Reiver Sergeant",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Incursor Sergeant",
+          "min": null,
+          "max": 1
+        }
+      ]
     },
     "operatives": {
       "min": 5,
-      "max": 5
+      "max": 7,
+      "details": [
+        {
+          "name": "Infiltrator Veteran",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Infiltrator Helix Adept",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Infiltrator Voxbreaker",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Infiltrator Saboteur",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Infiltrator Commsman",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Incursor Marksman",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Incursor Minelayer",
+          "min": null,
+          "max": 1
+        }
+      ]
     }
   }
 }

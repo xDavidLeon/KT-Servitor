@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1762659602072",
+  "version": "1.0.1762731556857",
   "generated": "2025-11-09",
   "files": [
     {
@@ -183,11 +183,19 @@
       "sha256": ""
     },
     {
+      "name": "faction_wolf_scouts.json",
+      "sha256": ""
+    },
+    {
       "name": "faction_wrecka_krew.json",
       "sha256": ""
     },
     {
       "name": "faction_wyrmblade.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_xv26_battlesuits.json",
       "sha256": ""
     }
   ]

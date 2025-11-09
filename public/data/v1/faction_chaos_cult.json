@@ -100,6 +100,7 @@
           "description": "▶ SUPPORT. One other friendly CHAOS CULT operative visible to and within 9\" of this operative can immediately perform a free **Charge** or **Dash** action (for the former, it cannot move more than 3\").\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": 1,
       "maxSelections": 1
     },
     {
@@ -139,6 +140,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": 2,
       "maxSelections": 2
     },
     {
@@ -200,6 +202,7 @@
           "description": "▶ PSYCHIC. Select one of the following effects to last until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first):\r\n- **Invigoration**: PSYCHIC. Whenever a friendly CHAOS CULT operative is within 4\" of this operative, Normal and Critical Dmg of 4 or more inflicts 1 less damage on that operative.\r\n- **Deterioration**: PSYCHIC. Whenever an enemy operative is within 4\" of this operative, Normal and Critical Dmg inflicts 1 more damage on that operative.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": 1,
       "maxSelections": 1
     },
     {
@@ -253,6 +256,7 @@
           "description": "PSYCHIC. Remove your Malefic Vortex marker from the killzone (if any). Then place your Malefic Vortex marker visible to this operative, or on Vantage terrain of a terrain feature that’s visible to this operative. Inflict 1 damage on each enemy operative within 2\" of that marker. In addition, in the Ready step of each Strategy phase, inflict 1 damage on each enemy operative within 2\" of that marker.\r\nThis operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": 1,
       "maxSelections": 1
     },
     {
@@ -295,6 +299,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": 9,
       "maxSelections": 9
     },
     {
@@ -330,6 +335,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -369,13 +375,47 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     }
   ],
   "operativeSelection": {
     "leader": {
-      "min": 0,
-      "max": 1
+      "min": 1,
+      "max": 1,
+      "details": [
+        {
+          "name": "Cult Demagogue",
+          "min": 1,
+          "max": 1
+        }
+      ]
+    },
+    "operatives": {
+      "min": 13,
+      "max": 13,
+      "details": [
+        {
+          "name": "Blessed Blade",
+          "min": 2,
+          "max": 2
+        },
+        {
+          "name": "Iconarch",
+          "min": 1,
+          "max": 1
+        },
+        {
+          "name": "Mindwitch",
+          "min": 1,
+          "max": 1
+        },
+        {
+          "name": "Chaos Devotee",
+          "min": 9,
+          "max": 9
+        }
+      ]
     }
   }
 }

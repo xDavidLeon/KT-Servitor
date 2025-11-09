@@ -6,6 +6,44 @@ import { ensureIndex } from '../lib/search'
 import { checkForUpdates } from '../lib/update'
 import { db } from '../lib/db'
 
+
+function rankResults(results, query) {
+  if (!query) return results
+  const normQuery = query.trim().toLowerCase()
+  if (!normQuery) return results
+
+  const normalize = (value) => (value || '').toString().trim().toLowerCase()
+
+  const getRank = (item) => {
+    const title = normalize(item.title)
+    const abbr = normalize(item.abbr)
+    const tags = Array.isArray(item.tags) ? item.tags.map(normalize) : []
+
+    if (title === normQuery || (abbr && abbr === normQuery) || tags.includes(normQuery)) {
+      return 0 // exact match
+    }
+    if (title.startsWith(normQuery) || (abbr && abbr.startsWith(normQuery)) || tags.some(tag => tag.startsWith(normQuery))) {
+      return 1 // prefix match
+    }
+    if (title.includes(normQuery) || (abbr && abbr.includes(normQuery)) || tags.some(tag => tag.includes(normQuery))) {
+      return 2 // partial match
+    }
+    return 3 // fallback to score ordering
+  }
+
+  return [...results].sort((a, b) => {
+    const rankA = getRank(a)
+    const rankB = getRank(b)
+    if (rankA !== rankB) return rankA - rankB
+
+    const scoreA = typeof a.score === 'number' ? a.score : 0
+    const scoreB = typeof b.score === 'number' ? b.score : 0
+    if (scoreA !== scoreB) return scoreB - scoreA
+
+    return (a.title || '').localeCompare(b.title || '')
+  })
+}
+
 export default function Home() {
   const [q, setQ] = useState('')
   const [res, setRes] = useState(null)
@@ -28,7 +66,7 @@ export default function Home() {
         const all = await db.articles.orderBy('title').toArray()
         setRes(all)
       } else {
-        setRes(idx.search(q, { prefix: true, fuzzy: 0.2 }))
+        setRes(rankResults(idx.search(q, { prefix: true, fuzzy: 0.2 }), q))
       }
     })()
   }, [])
@@ -40,7 +78,7 @@ export default function Home() {
         const all = await db.articles.orderBy('title').toArray()
         setRes(all)
       } else {
-        setRes(idx.search(q, { prefix: true, fuzzy: 0.2 }))
+        setRes(rankResults(idx.search(q, { prefix: true, fuzzy: 0.2 }), q))
       }
     })()
   }, [q])

@@ -1273,15 +1273,19 @@ async function parseCatalogue(filePath) {
         const profiles = normalizeProfiles(entry.profiles);
         profiles.forEach(profile => {
           if (!profile) return;
-          const typeName = getText(profile.typeName) || getAttr(profile, 'typeName');
-          if (typeName === 'Equipment') {
+          const typeName = (getText(profile.typeName) || getAttr(profile, 'typeName') || '').toLowerCase();
+          if (['equipment', 'abilities', 'unique actions', 'unique action', 'ability'].some(token => typeName.includes(token))) {
             const characteristics = normalizeCharacteristics(profile.characteristics);
             characteristics.forEach(char => {
               if (!char) return;
-              const charName = getAttr(char, 'name');
+              const charName = (getAttr(char, 'name') || '').toLowerCase();
               const charValue = getText(char);
-              if (charName && charName.toLowerCase() === 'equipment' && charValue) {
-                description = charValue;
+              if (charValue) {
+                if (charName.includes('equipment') || charName.includes('unique action') || charName.includes('ability')) {
+                  description = charValue;
+                } else if (!description) {
+                  description = charValue;
+                }
               }
             });
           }
@@ -1636,8 +1640,11 @@ async function parseCatalogue(filePath) {
         }
       });
       
-      // Extract selection constraints (max times this operative can be selected)
+            // Extract selection constraints (min/max times this operative can be selected)
       let maxSelections = null; // null means unlimited
+      let minSelections = null; // null means no minimum requirement
+      let maxConstraintId = null;
+      let minConstraintId = null;
       if (entry.constraints) {
         // Normalize constraints array structure
         // With explicitArray: true, constraints is: [ { constraint: [...] } ]
@@ -1663,9 +1670,7 @@ async function parseCatalogue(filePath) {
           // It's a single constraint object
           constraintsArray = [entry.constraints];
         }
-        
-        // Find constraint with scope="force" and field="selections"
-        let constraintId = null;
+
         for (const constraint of constraintsArray) {
           if (!constraint) continue;
           let constraintType = constraint.type;
@@ -1673,38 +1678,40 @@ async function parseCatalogue(filePath) {
           let constraintField = constraint.field;
           let constraintScope = constraint.scope;
           let constraintIdAttr = getAttr(constraint, 'id');
-          
-          // Handle array values (explicitArray: true)
+
           if (Array.isArray(constraintType)) constraintType = constraintType[0];
           if (Array.isArray(constraintValue)) constraintValue = constraintValue[0];
           if (Array.isArray(constraintField)) constraintField = constraintField[0];
           if (Array.isArray(constraintScope)) constraintScope = constraintScope[0];
           if (Array.isArray(constraintIdAttr)) constraintIdAttr = constraintIdAttr[0];
-          
-          // Fallback to getAttr if not found as property
+
           if (!constraintType) constraintType = getAttr(constraint, 'type');
           if (!constraintValue) constraintValue = getAttr(constraint, 'value');
           if (!constraintField) constraintField = getAttr(constraint, 'field');
           if (!constraintScope) constraintScope = getAttr(constraint, 'scope');
           if (!constraintIdAttr) constraintIdAttr = getAttr(constraint, 'id');
-          
-          // Also handle if id is in the $ attributes
+
           if (!constraintIdAttr && constraint.$ && constraint.$.id) {
             constraintIdAttr = constraint.$.id;
           }
-          
-          if (constraintField === 'selections' && constraintScope === 'force' && constraintType === 'max') {
+
+          if (constraintField === 'selections' && constraintScope === 'force') {
             const value = parseInt(String(constraintValue), 10);
             if (!isNaN(value)) {
-              maxSelections = value === -1 ? null : value; // -1 means unlimited
-              constraintId = constraintIdAttr; // Store the constraint ID for modifier matching
+              if (constraintType === 'max') {
+                maxSelections = value === -1 ? null : value;
+                maxConstraintId = constraintIdAttr;
+              } else if (constraintType === 'min') {
+                minSelections = value === -1 ? null : value;
+                minConstraintId = constraintIdAttr;
+              }
             }
           }
         }
-        
-        // Check modifiers that might change the max value
+
+        // Check modifiers that might change the min/max values
         // Modifiers reference constraints by their ID (modifier.field = constraint.id)
-        if (entry.modifiers && constraintId) {
+        if (entry.modifiers && (maxConstraintId || minConstraintId)) {
           let modifiersArray = [];
           if (Array.isArray(entry.modifiers)) {
             entry.modifiers.forEach(item => {
@@ -1724,49 +1731,39 @@ async function parseCatalogue(filePath) {
           } else {
             modifiersArray = [entry.modifiers];
           }
-          
-          // Collect all matching modifiers and prioritize unconditional ones
-          const matchingModifiers = [];
+
+          const matchingMaxModifiers = [];
+          const matchingMinModifiers = [];
+
           for (const modifier of modifiersArray) {
             if (!modifier) continue;
             let modifierType = modifier.type;
             let modifierValue = modifier.value;
             let modifierField = modifier.field;
-            
-            // Handle array values
+
             if (Array.isArray(modifierType)) modifierType = modifierType[0];
             if (Array.isArray(modifierValue)) modifierValue = modifierValue[0];
             if (Array.isArray(modifierField)) modifierField = modifierField[0];
-            
-            // Fallback to getAttr
+
             if (!modifierType) modifierType = getAttr(modifier, 'type');
             if (!modifierValue) modifierValue = getAttr(modifier, 'value');
             if (!modifierField) modifierField = getAttr(modifier, 'field');
-            
-            // Check if this modifier sets the constraint we found (modifier.field = constraint.id)
-            // modifierField might be an array, so normalize it
-            const normalizedModifierField = Array.isArray(modifierField) ? modifierField[0] : modifierField;
-            const normalizedConstraintId = Array.isArray(constraintId) ? constraintId[0] : constraintId;
-            
-            if (modifierType === 'set' && normalizedModifierField === normalizedConstraintId && modifierValue) {
+
+            if (modifierType === 'set' && modifierValue) {
               const value = parseInt(String(modifierValue), 10);
               if (!isNaN(value) && value >= 0) {
-                // Check if this modifier applies unconditionally or with conditions
                 let appliesUnconditionally = true;
                 let hasConditionGroups = false;
-                
-                // Check for conditions
+
                 if (modifier.conditions || modifier.conditionGroups) {
                   appliesUnconditionally = false;
-                  
-                  // Check if conditions are just "notInstanceOf default-force" (which is always true in normal play)
                   const conditions = modifier.conditions;
                   const conditionGroups = modifier.conditionGroups;
-                  
+
                   if (conditionGroups) {
                     hasConditionGroups = true;
                   }
-                  
+
                   if (conditions) {
                     let condsArray = [];
                     if (Array.isArray(conditions)) {
@@ -1776,46 +1773,54 @@ async function parseCatalogue(filePath) {
                     } else {
                       condsArray = [conditions];
                     }
-                    
+
                     if (condsArray.length === 1) {
                       const cond = condsArray[0];
                       const condType = Array.isArray(cond.type) ? cond.type[0] : (cond.type || getAttr(cond, 'type'));
                       if (condType === 'notInstanceOf') {
-                        // This is typically always true, so the modifier applies
                         appliesUnconditionally = true;
                       }
                     }
                   }
                 }
-                
-                matchingModifiers.push({
-                  value: value === 0 ? 0 : (value > 0 ? value : null),
-                  appliesUnconditionally: appliesUnconditionally,
-                  hasConditionGroups: hasConditionGroups
-                });
+
+                const normalizedModifierField = Array.isArray(modifierField) ? modifierField[0] : modifierField;
+                const normalizedMaxConstraintId = Array.isArray(maxConstraintId) ? maxConstraintId[0] : maxConstraintId;
+                const normalizedMinConstraintId = Array.isArray(minConstraintId) ? minConstraintId[0] : minConstraintId;
+
+                if (normalizedModifierField && normalizedModifierField === normalizedMaxConstraintId) {
+                  matchingMaxModifiers.push({
+                    value: value === 0 ? 0 : (value > 0 ? value : null),
+                    appliesUnconditionally,
+                    hasConditionGroups
+                  });
+                }
+                if (normalizedModifierField && normalizedModifierField === normalizedMinConstraintId) {
+                  matchingMinModifiers.push({
+                    value: value === 0 ? 0 : (value > 0 ? value : null),
+                    appliesUnconditionally,
+                    hasConditionGroups
+                  });
+                }
               }
             }
           }
-          
-          // Prioritize unconditional modifiers, then modifiers without condition groups
-          if (matchingModifiers.length > 0) {
-            const unconditional = matchingModifiers.find(m => m.appliesUnconditionally);
-            if (unconditional) {
-              maxSelections = unconditional.value;
-            } else {
-              // If no unconditional modifier, use the first one without condition groups, or the first one
-              const withoutGroups = matchingModifiers.find(m => !m.hasConditionGroups);
-              if (withoutGroups) {
-                maxSelections = withoutGroups.value;
-              } else {
-                maxSelections = matchingModifiers[0].value;
-              }
-            }
-          }
+
+          const pickBestValue = (modifiers, currentValue) => {
+            if (modifiers.length === 0) return currentValue;
+            const unconditional = modifiers.find(m => m.appliesUnconditionally);
+            if (unconditional) return unconditional.value;
+            const withoutGroups = modifiers.find(m => !m.hasConditionGroups);
+            if (withoutGroups) return withoutGroups.value;
+            return modifiers[0].value;
+          };
+
+          maxSelections = pickBestValue(matchingMaxModifiers, maxSelections);
+          minSelections = pickBestValue(matchingMinModifiers, minSelections);
         }
       }
-      
-      // Only add if we have at least some data (name is required)
+
+// Only add if we have at least some data (name is required)
       if (entryName && entryName !== 'Unnamed') {
         const operative = {
           id: `fac_${catalogueId}_op_${entryId}`,
@@ -1829,6 +1834,7 @@ async function parseCatalogue(filePath) {
           weapons: weapons,
           specialRules: specialRules,
           specialActions: specialActions,
+          minSelections: minSelections,
           maxSelections: maxSelections // null means unlimited, number means max times
         };
         
@@ -2270,14 +2276,92 @@ async function parseCatalogue(filePath) {
     faction.factionKeyword = factionKeyword;
   }
   
+  // Ensure operative selection covers generic operatives
+  const nonLeaderOperatives = operatives.filter(op => !(op.keywords && Array.isArray(op.keywords) && op.keywords.some(k => k && k.toLowerCase() === 'leader')));
+  if (nonLeaderOperatives.length > 0) {
+    if (!faction.operativeSelection) {
+      faction.operativeSelection = {
+        leader: {
+          min: 0,
+          max: 1
+        }
+      };
+    } else if (!faction.operativeSelection.leader) {
+      faction.operativeSelection.leader = {
+        min: 0,
+        max: 1
+      };
+    }
+
+    if (!faction.operativeSelection.operatives) {
+      let totalMax = 0;
+      let hasUnlimited = false;
+
+      nonLeaderOperatives.forEach(op => {
+        if (op.maxSelections === null || op.maxSelections === undefined) {
+          hasUnlimited = true;
+        } else {
+          totalMax += Number(op.maxSelections) || 0;
+        }
+      });
+
+      faction.operativeSelection.operatives = {
+        min: 0,
+        max: hasUnlimited ? null : (totalMax > 0 ? totalMax : null)
+      };
+    }
+  }
+
   // Build final faction object with new structure
   faction.rules = rules;
   faction.strategicPloys = strategicPloys;
   faction.tacticalPloys = tacticalPloys;
   faction.equipment = equipment;
   faction.operatives = operatives;
-  
+
+  if (faction.operativeSelection) {
+    const leaderOperativesForDetails = operatives.filter(op => op.keywords && Array.isArray(op.keywords) && op.keywords.some(k => k && k.toLowerCase() === 'leader'));
+    const nonLeaderOperativesForDetails = operatives.filter(op => !(op.keywords && Array.isArray(op.keywords) && op.keywords.some(k => k && k.toLowerCase() === 'leader')));
+
+    const leaderDetails = leaderOperativesForDetails
+      .filter(op => (op.minSelections !== null && op.minSelections !== undefined && op.minSelections > 0) || (op.maxSelections !== null && op.maxSelections !== undefined && op.maxSelections > 0))
+      .map(op => ({ name: op.name, min: op.minSelections, max: op.maxSelections }));
+
+    if (leaderDetails.length > 0) {
+      const totalLeaderMin = leaderDetails.reduce((sum, detail) => sum + (detail.min || 0), 0);
+      const hasUnlimitedLeader = leaderDetails.some(detail => detail.max === null || detail.max === undefined);
+      const totalLeaderMax = leaderDetails.reduce((sum, detail) => sum + (detail.max || 0), 0);
+
+      if (!faction.operativeSelection.leader) {
+        faction.operativeSelection.leader = { min: 0, max: hasUnlimitedLeader ? null : 1 };
+      }
+
+      faction.operativeSelection.leader.min = totalLeaderMin > 0 ? totalLeaderMin : (faction.operativeSelection.leader.min || 0);
+      faction.operativeSelection.leader.max = hasUnlimitedLeader ? null : (totalLeaderMax > 0 ? totalLeaderMax : faction.operativeSelection.leader.max);
+      faction.operativeSelection.leader.details = leaderDetails;
+    }
+
+    const operativeDetails = nonLeaderOperativesForDetails
+      .filter(op => (op.minSelections !== null && op.minSelections !== undefined && op.minSelections > 0) || (op.maxSelections !== null && op.maxSelections !== undefined && op.maxSelections > 0))
+      .map(op => ({ name: op.name, min: op.minSelections, max: op.maxSelections }));
+
+    if (operativeDetails.length > 0) {
+      faction.operativeSelection.operatives = faction.operativeSelection.operatives || { min: 0, max: null };
+
+      const totalOperativeMin = operativeDetails.reduce((sum, detail) => sum + (detail.min || 0), 0);
+      const hasUnlimitedOperative = operativeDetails.some(detail => detail.max === null || detail.max === undefined);
+      const totalOperativeMax = operativeDetails.reduce((sum, detail) => sum + (detail.max || 0), 0);
+
+      if (totalOperativeMin > 0) {
+        faction.operativeSelection.operatives.min = totalOperativeMin;
+      }
+      faction.operativeSelection.operatives.max = hasUnlimitedOperative ? null : (totalOperativeMax > 0 ? totalOperativeMax : faction.operativeSelection.operatives.max);
+      faction.operativeSelection.operatives.details = operativeDetails;
+    }
+  }
+
   return {
+
     faction,
     operatives: [], // Empty - now part of faction
     rules: [], // Empty - now part of faction
@@ -2479,4 +2563,5 @@ convertBattleScribeFiles().catch(error => {
   console.error('Fatal error:', error);
   process.exit(1);
 });
+
 

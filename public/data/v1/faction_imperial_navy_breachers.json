@@ -22,7 +22,7 @@
     {
       "id": "fac_imperial_navy_breachers_eq_system_override_device",
       "name": "System Override Device",
-      "description": ""
+      "description": "Once per turning point, one friendly **IMPERIAL NAVY BREACHER** operative can perform the **Operate Hatch** action for 1 less AP."
     },
     {
       "id": "fac_imperial_navy_breachers_eq_combat_stimms",
@@ -57,6 +57,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -107,6 +108,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -156,6 +158,7 @@
           "description": "▶ Place one of your Breach markers within this operative’s control range as close as possible to a terrain feature within control range of it. Whenever an operative is within 1\" of that marker, it treats parts of that terrain feature that are no more than 1\" thick as Accessible terrain.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a terrain feature isn’t within its control range."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -221,6 +224,7 @@
           "description": "▶ Select one enemy operative visible to and within 8\" of a friendly GHEISTSKULL operative. Roll one D6, adding 1 to the result if that enemy operative is a valid target for that friendly GHEISTSKULL operative: on a 3+, subtract 1 from that enemy operative’s APL stat until the end of its next activation.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a friendly GHEISTSKULL operative isn’t in the killzone."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -307,6 +311,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -372,6 +377,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -404,6 +410,7 @@
           "description": "▶ Until the end of the activation, add 6\" to this operative’s Move stat.\r\n◆ This operative can only perform this action once per battle, and cannot perform it during the first turning point."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -464,6 +471,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -496,6 +504,7 @@
           "description": "▶ Select one enemy operative visible to this operative. Until the end of the turning point, until that enemy operative is no longer visible to this operative or until this operative performs this action again (whichever comes first), whenever a friendly IMPERIAL NAVY BREACHER operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative’s ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -540,6 +549,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -594,6 +604,7 @@
           "description": "▶ Select one friendly **IMPERIAL NAVY BREACHER C.A.T. UNIT** operative. That operative can immediately perform one free action, but it cannot move more than 3\" during that action.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a friendly **IMPERIAL NAVY BREACHER C.A.T. UNIT** operative isn’t in the killzone."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

@@ -80,6 +80,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -146,6 +147,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -206,6 +208,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -280,6 +283,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -331,6 +335,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -394,6 +399,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -456,6 +462,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -508,6 +515,7 @@
           "description": "▶ **PSYCHIC**. Select one friendly **CORSAIR VOIDSCARRED** operative visible to and within 6\" of this operative. That operative regains 2D3 lost wounds.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -569,6 +577,7 @@
           "description": "▶ Perform two free **Shoot** actions with this operative (this takes precedence over action restrictions). You must select its fusion pistol for one action and its shuriken pistol for the other (in any order).\r\n◆ This operative cannot perform this action while it has a Conceal order, or during an activation in which it performed the **Shoot** action (or vice versa)."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -593,6 +602,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -669,6 +679,7 @@
           "description": "▶ **PSYCHIC**. Select one friendly **CORSAIR VOIDSCARRED** operative visible to and within 6\" of this operative. Until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first), the first time an attack dice inflicts Normal Dmg on that friendly operative, ignore that inflicted damage.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

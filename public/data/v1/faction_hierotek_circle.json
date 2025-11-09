@@ -74,6 +74,7 @@
           "description": "▶ Select one enemy operative visible to this operative. Until the start of this operative’s next activation, until it’s incapacitated or until this action is performed again by a friendly operative (whichever comes first), that selected operative gains one of your Madness tokens.\r\n▶ Whenever your opponent would activate an enemy operative that has one of your Madness tokens, you can roll one D6: if the result is equal to or higher than that enemy operative’s APL, they cannot activate it during this activation. If that operative is successfully activated, or there are no other enemy operatives eligible to be activated, remove its Madness token. \r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -120,6 +121,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -174,6 +176,7 @@
           "description": "▶ **SUPPORT**. Select one friendly **HIEROTEK CIRCLE** operative visible to and within 6\" of this operative. Until the start of this operative’s next activation, until it’s incapacitated or until this action is performed again by a friendly operative (whichever comes first), select two of the following weapon rules for one weapon from that selected operative’s datacard to have: Lethal 5+, Rending, Saturate, Severe.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -253,6 +256,7 @@
           "description": "▶ **SUPPORT**. Select one other expended friendly **HIEROTEK CIRCLE** operative visible to and within 5\" of this operative. Remove it from the killzone and set it back up visible to and within 5\" horizontally of this operative, in a location it can be placed. Note that a Comms Device from the universal equipment only affects the first distance of this rule.\r\n\r\n◆This operative cannot perform this action while within control range of an enemy operative, during the first turning point, or if a friendly operative has already performed this action during this turning point."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -297,6 +301,7 @@
           "description": "▶ Select one friendly **DEATHMARK** or **IMMORTAL** operative visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -342,6 +347,7 @@
           "description": "▶ Select one of your Reanimation markers visible to and within 6\" of this operative. Roll one D6: on a 3+, a friendly operative is **REANIMATED**; if you spent 1 additional AP, a friendly operative is automatically **REANIMATED** (you don’t need to roll one D6). An operative that’s **REANIMATED** from this unique action is set up expended if it was already expended during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -390,6 +396,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -442,6 +449,7 @@
           "description": "▶ Until the start of this operative’s next activation, whenever it’s shooting, enemy operatives cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -495,6 +503,7 @@
           "description": "▶ **SUPPORT**. Select one other friendly **HIEROTEK CIRCLE** operative (excluding **APPRENTEK** and **CRYPTEK**) visible to and within 6\" of this operative, or within 6\" of a friendly **DESPOTEK** operative that is visible to this operative. That selected operative can immediately perform a 1AP action for free (excluding **Accelerate**); it cannot move more than 2\" during that action, perform an action it has already performed during this turning point, or perform that action again during this turning point.\r\n◆This operative cannot perform this action while within control range of an enemy operative, or while counteracting."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

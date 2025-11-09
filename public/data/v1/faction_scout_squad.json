@@ -17,7 +17,7 @@
     {
       "id": "fac_scout_squad_eq_camo_cloak",
       "name": "Camo Cloak",
-      "description": ""
+      "description": "Whenever an operative is shooting a friendly **SCOUT SQUAD** operative (excluding **SNIPER**), if you can retain any cover saves, you can retain one additional cover save. This isn’t cumulative with improved cover saves from Vantage terrain."
     },
     {
       "id": "fac_scout_squad_eq_combat_blade",
@@ -73,6 +73,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -156,6 +157,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -202,6 +204,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -272,6 +275,7 @@
           "description": "▶ Until the start of this operative’s next activation, whenever it’s shooting, enemy operatives cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -317,6 +321,7 @@
           "description": "▶ Until the start of this operative’s next activation or until it’s incapacitated (whichever comes first), whenever a friendly **SCOUT SQUAD** operative is shooting an enemy operative within 8\" of this operative, that enemy operative cannot be obscured; if that friendly operative is a **SNIPER** that’s currently benefitting from the effects of its **Optics** action, its ranged weapons also have the Seek Light weapon rule.\r\n◆ This operative cannot perform this action while within control range of an\r\nenemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -341,6 +346,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

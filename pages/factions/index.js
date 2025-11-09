@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Header from '../../components/Header'
+import RichText from '../../components/RichText'
 import Link from 'next/link'
 import { db } from '../../lib/db'
 import { ensureIndex } from '../../lib/search'
@@ -27,7 +28,7 @@ export default function Factions(){
         {factions.map(f=> (
           <div key={f.id} className="card" style={{margin:'.5rem 0'}}>
             <div className="heading"><strong>{f.title}</strong></div>
-            <div className="muted">{f.body}</div>
+            <RichText className="muted" text={f.body} />
             <div style={{marginTop:'.5rem'}}>
               <Link href={`/factions/${f.id}`}>Open faction →</Link>
             </div>

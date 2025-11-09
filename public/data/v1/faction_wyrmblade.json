@@ -96,6 +96,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -176,6 +177,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -264,6 +266,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -337,6 +340,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 2
     },
     {
@@ -428,6 +432,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 2
     },
     {
@@ -484,6 +489,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -539,6 +545,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -602,6 +609,7 @@
           "description": "▶ Select one enemy operative visible to this operative. Until the end of the battle, or until this action is performed again by a friendly operative (whichever comes first), that enemy operative gains one of your Soulsight tokens. Whenever this operative is shooting an enemy operative that has one of your Soulsight tokens, all profiles of this operative's Sanctus sniper rifle have the Saturate weapon rule and that enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -649,17 +657,62 @@
           "description": "▶ Select one enemy operative visible to this operative. Until the end of the battle, or until this action is performed again by a friendly operative (whichever comes first), that enemy operative gains one of your Soulsight tokens. Whenever this operative is fighting or retaliating against an enemy operative that has one of your Soulsight tokens,its Sanctus bio-dagger has the Brutal and Balanced weapon rules.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     }
   ],
   "operativeSelection": {
     "leader": {
       "min": 0,
-      "max": 1
+      "max": 1,
+      "details": [
+        {
+          "name": "Neophyte Leader",
+          "min": null,
+          "max": 1
+        }
+      ]
     },
     "operatives": {
       "min": 13,
-      "max": 13
+      "max": 9,
+      "details": [
+        {
+          "name": "Kelermorph",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Neophyte Gunner",
+          "min": null,
+          "max": 2
+        },
+        {
+          "name": "Neophyte Heavy Gunner",
+          "min": null,
+          "max": 2
+        },
+        {
+          "name": "Neophyte Icon Bearer",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Locus",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Sanctus Sniper",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Sanctus Talon",
+          "min": null,
+          "max": 1
+        }
+      ]
     }
   }
 }

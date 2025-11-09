@@ -76,6 +76,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -129,6 +130,7 @@
           "description": "▶ Perform a free **Fight** action with this operative, then perform a free **Shoot** action with this operative (or vice versa). This operative can perform that Shoot action while within control range of an enemy operative, but if it does, it can and must target an enemy operative within its control range (even if other friendly operatives are within that enemy operative’s control range). You can only select an autopistol for that **Shoot** action."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -168,6 +170,7 @@
           "description": "▶ Perform a free **Reposition** action with this operative. During that action, it can move an additional 2\", and can move within control range of enemy operatives (it cannot begin or end the move there). Inflict D3+1 damage on each enemy operative it moved within control range of (roll separately for each after it’s moved, in the order it moved within control range of them).\r\n◆ This operative cannot perform this action while it has a Conceal order."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -230,6 +233,7 @@
           "description": "▶ SUPPORT. Select one other friendly FELLGOR RAVAGER operative (excluding SHAMAN and IRONHORN) visible to and within 3\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -274,6 +278,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 9
     },
     {
@@ -323,6 +328,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -366,6 +372,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -428,6 +435,7 @@
           "description": "▶ Select one friendly FELLGOR RAVAGER operative that doesn’t have one of your Frenzy tokens and is visible to and within 6\" of this operative. That friendly operative regains 2D3 lost wounds; if that operative has incapacitated an enemy operative while fighting or retaliating during the battle, it regains 6 lost wounds instead.\r\n◆ This operative cannot perform this action while it has a Conceal order."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -474,6 +482,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -514,6 +523,7 @@
           "description": "▶ Inflict D3+1 damage on each other operative visible to and within 2\" of this operative.\r\n◆ This operative cannot perform this action while it has a Conceal order."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -567,6 +577,7 @@
           "description": "▶ Until the start of this operative’s next activation or until this operative is incapacitated (whichever comes first), whenever an operative is shooting this operative, improve this operative’s Save stat by 1 and ignore the Piercing weapon rule."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -609,17 +620,82 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 9
     }
   ],
   "operativeSelection": {
     "leader": {
       "min": 0,
-      "max": 1
+      "max": 1,
+      "details": [
+        {
+          "name": "Ironhorn",
+          "min": null,
+          "max": 1
+        }
+      ]
     },
     "operatives": {
       "min": 9,
-      "max": 9
+      "max": 27,
+      "details": [
+        {
+          "name": "Gnarlscar",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Fluxbray",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Herd-goad",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Warrior with bludgeon",
+          "min": null,
+          "max": 9
+        },
+        {
+          "name": "Gorehorn",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Mangler",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Shaman",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Toxhorn",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Vandal",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Deathknell",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Warrior with cleaver",
+          "min": null,
+          "max": 9
+        }
+      ]
     }
   }
 }

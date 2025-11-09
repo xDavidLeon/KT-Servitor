@@ -61,6 +61,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -105,6 +106,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -149,6 +151,7 @@
           "description": "▶ Select one enemy operative visible to this operative. Until the end of that operative’s next activation, subtract 1 from its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -210,6 +213,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -263,6 +267,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -318,6 +323,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -360,6 +366,7 @@
           "description": "▶ **SUPPORT**. Select one other friendly **PATHFINDER** operative visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -406,6 +413,7 @@
           "description": "▶ Select one friendly **PATHFINDER** operative (excluding **DRONE**) within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -451,6 +459,7 @@
           "description": "▶ One friendly **PATHFINDER DRONE** operative can immediately perform one free action, but it cannot move more than 2\" during that action. That action can be one that’s normally restricted by its drone rule (this takes precedence over that rule). \r\n◆ This operative cannot perform this action while within control range of an enemy operative. This operative can perform this action more than once during its activation, but if it does, the same **DRONE** operative cannot perform the same free action more than once per activation."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -495,6 +504,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -553,6 +563,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -591,6 +602,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -623,6 +635,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -656,6 +669,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -689,6 +703,7 @@
           "description": "▶ Until the start of this operative’s next activation or until it's incapacitated (whichever comes first), whenever another friendly PATHFINDER operative is shooting with a pulse weapon within 3\" of this operative, that weapon has the Lethal 5+ and Severe weapon rules."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -722,6 +737,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

@@ -111,6 +111,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": 1,
       "maxSelections": 1
     },
     {
@@ -150,6 +151,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -244,6 +246,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 3
     },
     {
@@ -283,6 +286,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -323,6 +327,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -380,6 +385,7 @@
           "description": "▶ Select one friendly BROOD BROTHER operative (excluding PATRIARCH) within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -437,6 +443,7 @@
           "description": "▶ The first time this operative performs this action during the battle, place your Explosives marker within its control range. The second time this operative performs this action during the battle, inflict 2D6 damage on each operative within 2\" of that marker (roll separately for each) unless Heavy terrain is wholly intervening between that operative and that marker.\r\n◆ This operative cannot perform this action more than twice per battle, while within control range of an enemy operative, or during the same activation in which it performed the **Charge**, **Dash** or **Fall Back** action (or vice versa)."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -501,6 +508,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -542,6 +550,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -601,6 +610,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -646,6 +656,7 @@
           "description": "▶ Select one ready enemy operative that’s a valid target for this operative, or visible to this operative instead if you spend 1 additional AP. Roll one D6. Until the end of the turning point, that enemy operative cannot be activated or perform actions until it’s the last enemy operative to be activated, or until your opponent has activated a number of enemy operatives after this action equal to the result of the D6 (whichever comes first).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -687,6 +698,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -730,6 +742,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": 2,
       "maxSelections": null
     },
     {
@@ -796,6 +809,7 @@
           "description": "▶ PSYCHIC. Select one enemy operative that’s a valid target for this operative. Inflict 2 damage on it, or 4 damage instead if it’s within 6\" of this operative. Then roll one D6: if the result is higher than that enemy operative’s APL stat, inflict an additional 2 damage on it, or 4 damage instead if it’s within 6\" of this operative. Keep rolling one D6 in this manner until you roll equal to or less than that enemy operative’s APL stat, until it’s incapacitated, or until you inflict 8 damage on it during this action (whichever comes first).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -847,6 +861,7 @@
           "description": "▶ Change this operative’s order.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -914,17 +929,77 @@
           "description": "▶ You gain 1CP.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or more than once per turning point."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     }
   ],
   "operativeSelection": {
     "leader": {
-      "min": 0,
-      "max": 1
+      "min": 1,
+      "max": 1,
+      "details": [
+        {
+          "name": "Brood Brother Commander",
+          "min": 1,
+          "max": 1
+        }
+      ]
     },
     "operatives": {
-      "min": 9,
-      "max": 9
+      "min": 2,
+      "max": null,
+      "details": [
+        {
+          "name": "Brood Brother Agitator",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Brood Brother Gunner",
+          "min": null,
+          "max": 3
+        },
+        {
+          "name": "Brood Brother Iconward",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Brood Brother Knife Fighter",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Brood Brother Medic",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Brood Brother Sapper",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Brood Brother Sniper",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Brood Brother Veteran",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Brood Brother Vox-Operator",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Psychic Familiar",
+          "min": 2,
+          "max": null
+        }
+      ]
     }
   }
 }

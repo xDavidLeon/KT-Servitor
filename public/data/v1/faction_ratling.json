@@ -100,6 +100,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -139,6 +140,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -205,6 +207,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -258,6 +261,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -321,6 +325,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -368,6 +373,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -430,6 +436,7 @@
           "description": "▶ Select a point on a terrain feature; that point must be visible to and within 6\" of this operative. Remove this operative from the killzone and set it back up wholly within 6\" horizontally of that point, not within control range of an enemy operative, and with that point visible to it.\r\n◆ This action is treated as a **Reposition** action. This operative cannot perform this action while within control range of an enemy operative, or during an activation in which it performed the **Charge**, **Fall Back**, or **Shoot** action (or vice versa)."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -490,6 +497,7 @@
           "description": "▶ Until the start of this operative's next activation, whenever it's shooting, enemy operatives cannot be obscured and the stationary profile of this operative's suppressed sniper rifle has the Lethal 5+ weapon rule.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -537,6 +545,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -584,6 +593,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -636,6 +646,7 @@
           "description": "▶ SUPPORT. Select one enemy operative visible to this operative. Once during this turning point, when a friendly RATLING operative within 3\" of this operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative's ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative is not obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -692,6 +703,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -744,6 +756,7 @@
           "description": "▶ SUPPORT. Select one other friendly RATLING operative visible to and within 6\" of this operative. Until the end of its next activation, add 1 to that operative's APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

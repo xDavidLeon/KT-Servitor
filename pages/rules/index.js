@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Header from '../../components/Header'
+import RichText from '../../components/RichText'
 import SearchBox from '../../components/SearchBox'
 import { ensureIndex } from '../../lib/search'
 import { db } from '../../lib/db'
@@ -29,7 +30,7 @@ export default function Rules(){
         {rows.map(x=>(
           <div key={x.id} style={{marginBottom:'.5rem'}}>
             <strong>{x.title}</strong> <span className="pill">{x.type}</span>
-            <div className="muted">{x.body}</div>
+            <RichText className="muted" text={x.body} />
           </div>
         ))}
       </div>

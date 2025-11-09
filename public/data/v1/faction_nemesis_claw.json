@@ -102,6 +102,7 @@
           "description": "▶  PSYCHIC. Spend 1 of your Prescience points to gain 1CP. \r\n◆ This operative cannot perform this action while within control range of an enemy operative, or more than once per turning point."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -182,6 +183,7 @@
           "description": "▶ Select one objective marker this operative controls to gain one of your Terrorchem tokens. It cannot be an objective marker within control range of an enemy operative, or one that already has one of your Terrorchem tokens. The first time that objective marker is within control range of an enemy operative that doesn’t have one of your Terrorchem tokens, that operative gains that Terrorchem token, then inflict 2D3 damage on it (if it’s during an action, at the end of that action).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -265,6 +267,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -349,6 +352,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -388,6 +392,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -437,6 +442,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -486,6 +492,7 @@
           "description": "▶ PSYCHIC. Select one enemy operative within 6\" of this operative, then select one of the following for that enemy operative (you can only select each option once per battle): \r\n- Until the end of its next activation, subtract 1 from its APL stat. \r\n- Change its order.\r\n- Perform a free **Dash** action with it (specify the location for your opponent to move it to).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -529,6 +536,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 5
     },
     {
@@ -572,17 +580,67 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 5
     }
   ],
   "operativeSelection": {
     "leader": {
       "min": 0,
-      "max": 1
+      "max": 1,
+      "details": [
+        {
+          "name": "Visionary",
+          "min": null,
+          "max": 1
+        }
+      ]
     },
     "operatives": {
       "min": 5,
-      "max": 5
+      "max": 16,
+      "details": [
+        {
+          "name": "Fearmonger",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Heavy Gunner",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Gunner",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Screecher",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Skinthief",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Ventriloquar",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Warrior with bolt pistol; chainsword",
+          "min": null,
+          "max": 5
+        },
+        {
+          "name": "Warrior with boltgun; fists",
+          "min": null,
+          "max": 5
+        }
+      ]
     }
   }
 }

@@ -84,6 +84,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -136,6 +137,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -184,6 +186,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -252,6 +255,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -300,6 +304,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -373,6 +378,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -434,6 +440,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -457,17 +464,62 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 9
     }
   ],
   "operativeSelection": {
     "leader": {
       "min": 0,
-      "max": 1
+      "max": 1,
+      "details": [
+        {
+          "name": "Theyn",
+          "min": null,
+          "max": 1
+        }
+      ]
     },
     "operatives": {
       "min": 9,
-      "max": 9
+      "max": 15,
+      "details": [
+        {
+          "name": "Bladekyn",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Bombast",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Gunner",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Ironbraek",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Riflekyn",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Tracker",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Warrior",
+          "min": null,
+          "max": 9
+        }
+      ]
     }
   }
 }

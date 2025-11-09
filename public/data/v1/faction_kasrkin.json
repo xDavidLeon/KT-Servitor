@@ -84,6 +84,7 @@
           "description": "▶ Select one friendly KASRKIN operative, then select one SKILL AT ARMS for that operative to have until the Ready step of the next Strategy phase. This can be in addition to any SKILL AT ARMS it already has, but they cannot be the same.\r\n▶ Alternatively, instead of resolving the above effect, if your Clearance Sweep marker is in the killzone, you can remove it and place it again. \r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -131,6 +132,7 @@
           "description": "▶ Select one friendly KASRKIN operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point. \r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -182,6 +184,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -223,6 +226,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -274,6 +278,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -315,6 +320,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -364,6 +370,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -414,6 +421,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -486,6 +494,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -532,6 +541,7 @@
           "description": "▶ Until the start of this operative’s next activation or until it’s incapacitated (whichever comes first), whenever an enemy operative is within 8\" of this operative, that enemy operative is being scanned. Whenever a friendly KASRKIN operative is shooting an enemy operative that's being scanned, that enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -573,6 +583,7 @@
           "description": "▶ Select one other friendly KASRKIN operative. Until the end of that operative’s next activation, add 1 to its APL stat (to a maximum of 3 after all APL stat changes have been totalled).\r\n◆ This operative can perform this action twice during its activation, but cannot perform this action while within control range of an enemy operative"
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -614,17 +625,82 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 9
     }
   ],
   "operativeSelection": {
     "leader": {
       "min": 0,
-      "max": 1
+      "max": 1,
+      "details": [
+        {
+          "name": "Sergeant",
+          "min": null,
+          "max": 1
+        }
+      ]
     },
     "operatives": {
       "min": 9,
-      "max": 9
+      "max": 19,
+      "details": [
+        {
+          "name": "Combat Medic",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Demo-Trooper",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Gunner with flamer",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Gunner with plasma gun",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Gunner with meltagun",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Gunner with grenade launcher",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Gunner with hot-shot volley gun",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Sharpshooter",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Recon-Trooper",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Vox-Trooper",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Trooper",
+          "min": null,
+          "max": 9
+        }
+      ]
     }
   }
 }

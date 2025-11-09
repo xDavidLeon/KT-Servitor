@@ -1,0 +1,256 @@
+Kill Team is a tactical combat miniatures game set in the grim dark future of the 41st Millennium. Two rival teams of highly
+trained operatives battle and complete objectives to achieve victory. The rules presented here are simplified from those
+found in the Kill Team Core Book. They are intended for introductory, fast or easy play. A game is normally played with a
+mission from a mission pack, but you can play without one to learn the basic mechanics of the game. Some terms will be
+highlighted in orange, these are explained in more detail in their corresponding section of the Lite Rules. Rules for kill teams
+are available for free online at warhammer-community.com or on Warhammer 40,000 Kill Team: The App.
+SET UP
+Each player selects a kill team and gathers their Citadel miniatures (operatives) for
+those teams, alongside their free online rules, a killzone – 30" x 22" game board (unless
+otherwise specified) and terrain – a measuring device in inches, 10 six-sided dice (D6),
+tokens and markers.
+Set up the killzone, then randomly determine one player to have initiative. The player
+with initiative selects a drop zone from the mission map. If you're not playing a mission,
+the player with initiative selects one edge of the killzone to be theirs; the opposite edge is
+their opponent's. Each player’s drop zone is within 3" of their killzone edge.
+Starting with the player with initiative, players alternate setting up one third of their kill
+team (rounding up). When a player sets up an operative, it must be wholly within their
+drop zone and be given a Conceal order (place the corresponding token next to it).
+Engage Order
+An operative with an Engage order can perform actions as
+normal and counteract.
+A battle includes four turning points (unless specified otherwise). Each turning point
+includes a Strategy and Firefight phase.
+STRATEGY PHASE
+Each player rolls one D6: whoever rolls highest decides who has initiative; if it’s a tie,
+the player who doesn’t currently have initiative decides. Players start the battle with
+2CP each to spend on ploys. In the first Strategy phase, they each gain 1CP. In each
+Strategy phase after the first, the player with initiative gains 1CP, while the player
+without gains 2CP. Ploys cost 1CP each.
+Each player readies all friendly operatives (order token ready side up). Starting
+with the player who has initiative, players alternate using a STRATEGIC GAMBIT
+or passing, until each player passes in succession. Every strategy ploy is also a
+STRATEGIC GAMBIT. Each player cannot use each STRATEGIC GAMBIT more than
+once per turning point.
+FIREFIGHT PHASE
+The players alternate activating ready friendly operatives, starting with the player
+who has initiative. Whenever an operative activates, first select its order (Engage or
+Conceal). It then performs actions, and is known as the active operative while doing so.
+Each action costs AP, and you cannot spend more AP during an operative’s activation
+than its APL. Unless otherwise specified, an operative cannot perform the same action
+more than once during its activation. When the operative has finished performing
+actions, it’s expended (order token expended side up). When all operatives are
+expended, the turning point ends.
+Players can spend their CP on firefight ploys in this phase, including the Command
+Re-roll firefight ploy (below). Ploys cost 1CP each and, other than Command Re-roll,
+each player cannot use each ploy more than once per turning point.
+COMMAND RE-ROLL
+Use this firefight ploy after rolling your attack or defence dice. You can re-roll one of
+those dice.
+LITE RULES
+BEGIN THE BATTLE
+Ready Expended
+Conceal Order
+An operative with a Conceal order is not a valid target while
+in cover, but it cannot perform Shoot or Charge actions.
+Ready Expended
+ACTIONS
+REPOSITION 1AP
+Move the operative no more than its Move stat to a location it can be placed. It can’t
+move within control range of enemy operatives.
+An operative cannot perform this action while within control range of an enemy
+operative, or during the same activation as the Charge or Fall Back action.
+DASH 1AP
+Move like a Reposition, except the operative cannot move more than 3" or climb.
+An operative cannot perform this action while within control range of an enemy
+operative, or during the same activation as the Charge action.
+FALL BACK 2AP
+Move like a Reposition, except the operative can move within control range of an
+enemy operative, but cannot finish the move there.
+An operative cannot perform this action unless an enemy operative is within its
+control range. It cannot perform this action during the same activation as the
+Reposition or Charge action.
+CHARGE 1AP
+Move like a Reposition, except the operative can move an additional 2". It can move
+within control range of an enemy operative, and must finish the move there. If it
+moves within control range of an enemy operative that no other friendly operatives
+are within control range of, it cannot leave that operative’s control range.
+An operative cannot perform this action while it has a Conceal order, if it's already
+within control range of an enemy operative, or during the same activation as the
+Reposition, Dash or Fall Back action.
+SHOOT 1AP
+Shoot with the operative, as explained on the following page.
+An operative cannot perform this action while it has a Conceal order, or while within
+control range of an enemy operative.
+FIGHT 1AP
+Fight with the operative, as explained on the following page.
+An operative cannot perform this action unless an enemy operative is within its
+control range.
+© Copyright Games Workshop Limited 2024
+Have all your operatives been activated?
+COUNTERACT
+If all your operatives are expended but your opponent’s aren’t, when you would activate
+a ready friendly operative, one expended friendly operative with an Engage order can
+counteract to perform a 1AP action for free. Each operative can only counteract once
+per turning point, and cannot move more than 2" while doing so.
+Active
+operative
+TERRAIN
+Target operative
+in cover
+1"
+2"
+TERRAIN
+Target operative
+not in cover
+1"
+2" Active
+operative
+VALID TARGET
+Some rules, most commonly shooting, will require you to determine a valid
+target for an operative.
+If the intended target has an Engage order, it’s a valid target if
+it’s visible to the operative.
+If the intended target has a Conceal order, it’s a valid target if
+it’s visible to the operative and not in cover.
+COVER
+Cover is determined from one operative to another. An operative is in cover if
+there's intervening terrain within its control range. However, it cannot be in
+cover while within 2" of the other operative – it’s too close to hide.
+DAMAGE
+Operatives have a Wounds stat – the number of wounds they have. Damage
+inflicted reduces their wounds accordingly.
+Operatives with fewer that their starting wounds are wounded. Operatives
+with fewer than half of their starting wounds are injured: subtract 2" from
+their Move stat and worsen the Hit stat of their weapons by 1. Operatives with
+wounds of 0 or less are incapacitated and removed.
+VISIBLE
+For something to be visible, the operative must be able to see it (look from
+behind the operative and see if you can draw an unobstructed straight line
+from its head to any part of what it's trying to see – excluding bases).
+SHOOT
+The player whose operative is performing the action is the attacker. The player
+controlling the target is the defender. When rolling attack/defence dice, results
+of 6 are always successes and are critical; all other successes are normal;
+results of 1 are always a fail.
+1. Attacker selects one of their operative’s ranged weapons.
+2. Attacker selects an enemy operative that's a valid target for the active
+operative and has no friendly operatives within its control range.
+3. Attacker rolls attack dice – a number of D6 equal to the selected
+weapon’s Atk stat. Each result that equals or beats the weapon’s Hit stat is
+retained as a success. Each that doesn’t is discarded as a fail.
+4. Defender rolls defence dice – three D6. Each result that equals or beats
+the target’s Save stat is retained as a success. Each that doesn’t is
+discarded as a fail. If the target is in cover, the Defender can retain one of
+their defence dice as a normal success without rolling it.
+5. Defender resolves successful defence dice, allocating them to block
+successful attack dice.
+• A normal success can block a normal success.
+• Two normal successes can block a critical success.
+• A critical success can block a normal success or a critical success.
+6. Attacker resolves each unblocked attack dice (if any) to inflict damage on
+the target.
+• A normal success inflicts damage equal to the weapon's Normal Dmg
+stat (first value of Dmg stat).
+• A critical success inflicts damage equal to the weapon's Critical Dmg
+stat (second value of Dmg stat).
+FIGHT
+The player whose operative is performing the action is the attacker. The player
+controlling the target is the defender. When rolling attack dice, results of 6 are
+always successes and are critical; all other successes are normal; results of 1
+are always a fail.
+1. Attacker selects an enemy operative within the active operative's control
+range to fight against. That enemy operative will retaliate.
+2. Both players select one of their operative's melee weapons.
+3. Both players roll attack dice - a number of D6 equal to their selected
+weapon's Atk stat respectively. Each result that equals or beats their
+weapon's Hit stat is retained as a success. Each that doesn't is discarded
+as a fail.
+4. Starting with the attacker, players alternate resolving their successful
+unblocked attack dice (or all remaining if their opponent has none). To
+resolve a dice, they must strike or block:
+• S trike: Inflict damage on the enemy operative. A normal success inflicts
+damage equal to the weapon's Normal Dmg stat (first value of Dmg
+stat). A critical success inflicts damage equal to the weapon's Critical
+Dmg stat (second value of Dmg stat).
+• Block: Allocate this dice to block one of your opponent’s unresolved
+successes. A normal success can block a normal success. A critical
+success can block a normal or critical success.
+© Copyright Games Workshop Limited 2024
+CONTROL RANGE
+Something is within an operative's control range if it's visible to and within 1" of that
+operative. Control range between operatives is mutual, therefore operatives are within
+each other’s control range even if the above is only true for one of them.
+WEAPON RULES
+Accurate x: You can retain up to x attack dice as normal successes
+without rolling them. If a weapon has more than one instance of
+Accurate x, you can treat it as one instance of Accurate 2 instead
+(this takes precedence over x rules above).
+Balanced: You can re-roll one of your attack dice.
+Blast x: The target you select is the primary target. After shooting
+the primary target, shoot with this weapon against each secondary
+target in an order of your choice (roll each sequence separately).
+Secondary targets are other operatives visible to and within x of the
+primary target, e.g. Blast 2" (they are all valid targets, regardless
+of a Conceal order). Secondary targets are in cover and obscured if
+the primary target was.
+Brutal: Your opponent can only block with critical successes.
+Ceaseless: You can re-roll any of your attack dice results of one
+result (e.g. results of 2).
+Devastating x: Each retained critical success immediately inflicts
+x damage on the operative this weapon is being used against,
+e.g. Devastating 3. If the rule starts with a distance (e.g. 1"
+Devastating x), inflict x damage on that operative and each other
+operative visible to and within that distance of it. Note that success
+isn’t discarded after doing so – it can still be resolved later in
+the sequence.
+Heavy: An operative cannot use this weapon in an activation
+or counteraction in which it moved, and it cannot move in an
+activation or counteraction in which it used this weapon. If the
+rule is Heavy (x only), where x is a move action, only that move is
+allowed, e.g. Heavy (Dash only). This weapon rule has no effect on
+preventing the Guard action.
+Hot: After an operative uses this weapon, roll one D6: if the result
+is less than the weapon’s Hit stat, inflict damage on that operative
+equal to the result multiplied by two. If it’s used multiple times in
+one action (e.g. Blast), still only roll one D6.
+Lethal x+: Your successes equal to or greater than x are critical
+successes, e.g. Lethal 5+.
+Limited x: After an operative uses this weapon a number of times
+in the battle equal to x, they no longer have it. If it’s used multiple
+times in one action (e.g. Blast), treat this as one use.
+Piercing x: The defender collects x less defence dice, e.g.
+Piercing 1. If the rule is Piercing Crits x, this only comes into effect if
+you retain any critical successes.
+Punishing: If you retain any critical successes, you can retain one of
+your fails as a normal success instead of discarding it.
+Range x: Only operatives within x of the active operative can be
+valid targets, e.g. Range 9".
+Relentless: You can re-roll any of your attack dice.
+Rending: If you retain any critical successes, you can retain one of
+your normal successes as a critical success instead.
+Saturate: The defender cannot retain cover saves.
+Seek: When selecting a valid target, operatives with a Conceal order
+cannot use terrain for cover. If the rule is Seek Light, they cannot
+use Light terrain for cover. While this can allow operatives to be
+targeted (assuming they’re visible), it doesn’t remove their cover
+save (if any).
+Severe: If you don’t retain any critical successes, you can change
+one of your normal successes to a critical success. The Devastating
+and Piercing Crits weapon rules still take effect, but Punishing and
+Rending don’t.
+Shock: The first time you strike with a critical success in each
+sequence, also discard one of your opponent’s unresolved normal
+successes (or one of their critical successes if there are none).
+Silent: An operative can perform the Shoot action with this weapon
+while it has a Conceal order.
+Stun: If you retain any critical successes, subtract 1 from the APL
+stat of the operative this weapon is being used against until the end
+of its next activation.
+Torrent x: Select a valid target as normal as the primary
+target, then select any number of other valid targets within x
+of the first valid target, but not within control range of friendly
+operatives, as secondary targets, e.g. Torrent 2". Shoot with this
+weapon against all of them in an order of your choice (roll each
+sequence separately).
+© Copyright Games Workshop Limited 2024

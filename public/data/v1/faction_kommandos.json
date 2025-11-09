@@ -87,6 +87,7 @@
           "description": "▶ Perform a free **Dash** action and a free **Shoot** action with this operative in any order. You can only select a dakka shoota for that **Shoot** action.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or while it has a Conceal order."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -147,6 +148,7 @@
           "description": "▶ **SUPPORT**. Select one other friendly **KOMMANDO** operative (excluding **BOMB SQUIG**) visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or while counteracting."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -201,6 +203,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -245,6 +248,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -291,6 +295,7 @@
           "description": "▶ Place one of your Breach markers within this operative’s control range as close as possible to a terrain feature within control range of it. Whenever an operative is within 1\" of that marker, it treats parts of that terrain feature that are no more than 1\" thick as Accessible terrain.\r\n▶ This operative can perform this action during the **Charge** or **Reposition** action, and it can do so for 1 less AP during those actions. Any remaining move distance can be used after it does so.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a terrain feature isn’t within its control range."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -343,6 +348,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -393,6 +399,7 @@
           "description": "▶ **SUPPORT**. Select one other friendly **KOMMANDO** operative (excluding **BOMB SQUIG**) visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -432,6 +439,7 @@
           "description": "▶ Select a visible point on a terrain feature for this operative. Remove this operative from the killzone and set it back up within 1\" horizontally of that point in a location it can be placed, not within control range of enemy operatives, and with that point visible to it. This operative cannot perform the **Operate Hatch** action during this action.\r\n◆ This action is treated as a **Reposition** action. This operative cannot perform this action while within control range of an enemy operative, or during an activation in which it performed the **Charge** or **Fall Back** action (or vice versa)."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -481,6 +489,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -527,6 +536,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -589,6 +599,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

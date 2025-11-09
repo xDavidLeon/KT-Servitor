@@ -17,22 +17,22 @@
     {
       "id": "fac_warpcoven_eq_ensorcelled_rounds",
       "name": "Ensorcelled Rounds",
-      "description": ""
+      "description": "Friendly **WARPCOVEN** operatives’ inferno boltguns, inferno bolt pistols and autopistols have the Devastating 1 weapon rule."
     },
     {
       "id": "fac_warpcoven_eq_daemonmaw_weapons",
       "name": "Daemonmaw Weapons",
-      "description": ""
+      "description": "Add 1 to the Atk stat of friendly **WARPCOVEN RUBRIC MARINE** operatives’ melee weapons. Whenever a friendly **WARPCOVEN RUBRIC MARINE** operative is retaliating, its melee weapons have the Accurate 1 weapon rule."
     },
     {
       "id": "fac_warpcoven_eq_arcane_robes",
       "name": "Arcane Robes",
-      "description": ""
+      "description": "Once per turning point, whenever an attack dice would inflict Critical Dmg on a friendly **WARPCOVEN SORCERER** operative, you can use this rule. If you do, that attack dice inflicts Normal Dmg instead."
     },
     {
       "id": "fac_warpcoven_eq_sorcerous_scrolls",
       "name": "Sorcerous Scrolls",
-      "description": ""
+      "description": "Once per battle, when a friendly **WARPCOVEN SORCERER** operative is activated or counteracts, you can select a different **BOON OF TZEENTCH** for it to have until the end of the battle (it loses any it previously had). It cannot be the same **BOON OF TZEENTCH** any other friendly operative has. Note that if you use this rule when a friendly operative counteracts and you select Echoes from the Warp, it can be used immediately to change the operative’s order and perform a free action during that counteraction."
     }
   ],
   "operatives": [
@@ -122,6 +122,7 @@
           "description": "▶ **PSYCHIC**. Select one enemy operative visible to and within 9\" of this operative. Until the start of this operative’s next activation, until it's incapacitated or until this action is performed again by a friendly operative (whichever comes first), whenever that enemy operative is shooting, fighting or retaliating, your opponent must re-roll their attack dice results of 6, and whenever determining control of a marker, treat that enemy operative’s APL stat as 1 lower. Note this isn't a change to its APL stat, so any changes are cumulative with this.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -210,6 +211,7 @@
           "description": "▶ **PSYCHIC**. Select one friendly **WARPCOVEN** operative visible to and within 6\" of this operative. That operative regains up to 2D3 lost wounds\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -309,6 +311,7 @@
           "description": "▶ **PSYCHIC**. Select one enemy operative visible to this operative. Until the start of this operative’s next activation, until it's incapacitated or until this action is performed again by a friendly operative (whichever comes first), that enemy operative gains one of your Alight tokens (if it doesn’t already have one). Whenever a friendly **WARPCOVEN** operative is shooting against, fighting against or retaliating against an enemy operative that has one of your Alight tokens, that friendly operative’s weapons have the Ceaseless weapon rule.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -372,6 +375,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -416,6 +420,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -460,6 +465,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -507,6 +513,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -540,6 +547,7 @@
           "description": "▶ Until the Ready step of the next Strategy phase, add 1\" to the Move stat of friendly **WARPCOVEN TZAANGOR** operatives.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -577,6 +585,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -642,6 +651,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

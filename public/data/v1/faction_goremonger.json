@@ -98,6 +98,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -142,6 +143,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -186,6 +188,7 @@
           "description": "▶ Decrease this operative's GORE TANK. Instead of using a SANGUAVITAE rule, you can increase the GORE TANK of one other friendly GOREMONGER operative within 8\" of this operative.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if its GORE TANK is empty."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -238,6 +241,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -291,6 +295,7 @@
           "description": "▶ Perform a free **Dash** action and a free **Shoot** action with this operative in any order. You can only select dual autopistols (focused) for that **Shoot** action.\r\n◆ This operative cannot perform this action while it has a Conceal order, or while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -339,6 +344,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -387,6 +393,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

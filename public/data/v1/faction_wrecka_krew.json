@@ -118,6 +118,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -172,6 +173,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -240,6 +242,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -294,6 +297,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -341,6 +345,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -376,6 +381,7 @@
           "description": "▶ Select a terrain feature within this operative's control range. If it's equipment terrain, remove it. Otherwise, place one of your Breach markers within this operative's control range as close as possible to that terrain. Whenever an operative is within 1\" of that marker, it treats parts of that terrain feature that are no more than 1\" thick as Accessible terrain.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a terrain feature isn't within its control range."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -413,6 +419,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

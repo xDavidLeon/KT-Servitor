@@ -91,6 +91,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -207,6 +208,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -324,6 +326,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -369,6 +372,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -409,6 +413,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -496,6 +501,7 @@
           "description": "▶ Until the start of this operative’s next activation, whenever it’s shooting, enemy operatives cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -546,6 +552,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -635,6 +642,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -704,6 +712,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     }
   ],
@@ -714,7 +723,29 @@
     },
     "operatives": {
       "min": 5,
-      "max": 5
+      "max": 4,
+      "details": [
+        {
+          "name": "Assault Intercessor Grenadier",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Eliminator Sniper",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Heavy Intercessor Gunner",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Intercessor Gunner",
+          "min": null,
+          "max": 1
+        }
+      ]
     }
   }
 }

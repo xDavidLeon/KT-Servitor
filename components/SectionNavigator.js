@@ -43,32 +43,80 @@ export default function SectionNavigator({ factionData }) {
   useEffect(() => {
     if (!factionData) return
 
-    // Determine which sections are available based on faction data
-    const available = []
-    
-    if (factionData.operativeSelection && factionData.operatives) {
-      available.push(SECTIONS.find(s => s.id === 'operative-selection'))
-    }
-    if (factionData.rules && factionData.rules.length > 0) {
-      available.push(SECTIONS.find(s => s.id === 'faction-rules'))
-    }
-    if (factionData.operatives && factionData.operatives.length > 0) {
-      available.push(SECTIONS.find(s => s.id === 'datacards'))
-    }
-    if (factionData.strategicPloys && factionData.strategicPloys.length > 0) {
-      available.push(SECTIONS.find(s => s.id === 'strategic-ploys'))
-    }
-    if (factionData.tacticalPloys && factionData.tacticalPloys.length > 0) {
-      available.push(SECTIONS.find(s => s.id === 'tactical-ploys'))
-    }
-    if (factionData.equipment && factionData.equipment.length > 0) {
-      available.push(SECTIONS.find(s => s.id === 'equipment'))
-    }
-    if (factionData.tacops && factionData.tacops.length > 0) {
-      available.push(SECTIONS.find(s => s.id === 'tac-ops'))
+    const sections = []
+
+    const addSection = (id, children = []) => {
+      const base = SECTIONS.find(s => s.id === id)
+      if (!base) return
+      sections.push({ ...base, children })
     }
 
-    setAvailableSections(available.filter(Boolean))
+    const buildChildren = (items = [], getId, getLabel) => {
+      if (!Array.isArray(items)) return []
+      return items
+        .map((item, index) => {
+          const id = getId(item, index)
+          const label = getLabel(item, index)
+          if (!id || !label) return null
+          return { id, label }
+        })
+        .filter(Boolean)
+    }
+
+    if (factionData.operativeSelection && factionData.operatives) {
+      addSection('operative-selection')
+    }
+
+    if (factionData.rules && factionData.rules.length > 0) {
+      const ruleChildren = buildChildren(
+        factionData.rules,
+        (rule, index) => rule?.id || (rule?.name ? `rule-${index}` : null),
+        (rule, index) => rule?.name || rule?.title || `Rule ${index + 1}`
+      )
+      addSection('faction-rules', ruleChildren)
+    }
+
+    if (factionData.operatives && factionData.operatives.length > 0) {
+      const datacardChildren = buildChildren(
+        factionData.operatives,
+        (op, index) => (op?.id ? `operative-${op.id}` : null),
+        (op, index) => op?.name || op?.title || `Datacard ${index + 1}`
+      )
+      addSection('datacards', datacardChildren)
+    }
+
+    if (factionData.strategicPloys && factionData.strategicPloys.length > 0) {
+      const strategicChildren = buildChildren(
+        factionData.strategicPloys,
+        (ploy, index) => ploy?.id || (ploy?.name ? `strategic-ploy-${index}` : null),
+        (ploy, index) => ploy?.name || ploy?.title || `Strategic Ploy ${index + 1}`
+      )
+      addSection('strategic-ploys', strategicChildren)
+    }
+
+    if (factionData.tacticalPloys && factionData.tacticalPloys.length > 0) {
+      const tacticalChildren = buildChildren(
+        factionData.tacticalPloys,
+        (ploy, index) => ploy?.id || (ploy?.name ? `tactical-ploy-${index}` : null),
+        (ploy, index) => ploy?.name || ploy?.title || `Tactical Ploy ${index + 1}`
+      )
+      addSection('tactical-ploys', tacticalChildren)
+    }
+
+    if (factionData.equipment && factionData.equipment.length > 0) {
+      const equipmentChildren = buildChildren(
+        factionData.equipment,
+        (eq, index) => eq?.id || (eq?.name ? `equipment-${index}` : null),
+        (eq, index) => eq?.name || eq?.title || `Equipment ${index + 1}`
+      )
+      addSection('equipment', equipmentChildren)
+    }
+
+    if (factionData.tacops && factionData.tacops.length > 0) {
+      addSection('tac-ops')
+    }
+
+    setAvailableSections(sections)
   }, [factionData])
 
   // Close dropdown when clicking outside
@@ -129,33 +177,68 @@ export default function SectionNavigator({ factionData }) {
           }}
         >
           {availableSections.map(section => (
-            <button
-              key={section.id}
-              onClick={() => {
-                scrollToSection(section.id)
-                setIsOpen(false)
-              }}
-              style={{
-                display: 'block',
-                width: '100%',
-                padding: '0.65rem 1rem',
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--text)',
-                textAlign: 'left',
-                cursor: 'pointer',
-                fontSize: '0.9rem',
-                transition: 'background 0.2s'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.background = '#0f1320'
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.background = 'transparent'
-              }}
-            >
-              {section.label}
-            </button>
+            <div key={section.id}>
+              <button
+                onClick={() => {
+                  scrollToSection(section.id)
+                  setIsOpen(false)
+                }}
+                style={{
+                  display: 'block',
+                  width: '100%',
+                  padding: '0.65rem 1rem',
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--text)',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                  fontSize: '0.9rem',
+                  transition: 'background 0.2s'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = '#0f1320'
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'transparent'
+                }}
+              >
+                {section.label}
+              </button>
+
+              {section.children && section.children.length > 0 && (
+                <div>
+                  {section.children.map(child => (
+                    <button
+                      key={child.id}
+                      onClick={() => {
+                        scrollToSection(child.id)
+                        setIsOpen(false)
+                      }}
+                      style={{
+                        display: 'block',
+                        width: '100%',
+                        padding: '0.45rem 1rem 0.45rem 2.5rem',
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'var(--muted)',
+                        textAlign: 'left',
+                        cursor: 'pointer',
+                        fontSize: '0.85rem',
+                        transition: 'background 0.2s'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.background = '#12162a'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.background = 'transparent'
+                      }}
+                    >
+                      {child.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
       )}

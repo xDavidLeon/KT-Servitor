@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Header from '../components/Header'
+import RichText from '../components/RichText'
 import { db } from '../lib/db'
 import { ensureIndex } from '../lib/search'
 import { checkForUpdates } from '../lib/update'
@@ -28,7 +29,7 @@ export default function Sequence(){
         <ol>
           {steps.map(s=> (
             <li key={s.id} style={{marginBottom:'.6rem'}}>
-              <strong>{s.title}</strong><div className="muted">{s.body}</div>
+              <strong>{s.title}</strong><RichText className="muted" text={s.body} />
             </li>
           ))}
         </ol>

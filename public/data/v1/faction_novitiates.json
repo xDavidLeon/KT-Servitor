@@ -94,6 +94,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -139,6 +140,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -189,6 +191,7 @@
           "description": "▶ If your Auto-broadcaster marker isn’t in the killzone, place it within 8\" horizontally of this operative; otherwise, move your Auto-broadcaster marker up to 8\" horizontally. If this operative is removed from the killzone, remove your Auto-broadcaster marker from the killzone. \r\n▶ Whenever an enemy operative within 3\" of your Auto-broadcaster marker is shooting, fighting or retaliating, your opponent cannot re-roll their attack dice.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -236,6 +239,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -285,6 +289,7 @@
           "description": "▶ Select one other friendly **NOVITIATE** operative (excluding **SUPERIOR**) visible to and within 3\" of this operative that isn’t currently benefitting from the effects of this action. Until the end of that operative’s next activation, add 1\" to its Move stat, it can perform two Fight actions during its next activation, and one of them can be free. \r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -338,6 +343,7 @@
           "description": "▶ Select one friendly **NOVITIATE** operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point. \r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -389,6 +395,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -430,6 +437,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -478,6 +486,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -524,6 +533,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -573,6 +583,7 @@
           "description": "▶ You gain 1 Faith point. If this operative controls an objective marker, you also gain a number of Faith points equal to the turning point number.\r\n◆ This operative can only perform this action once per turning point, and cannot perform it while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -619,6 +630,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

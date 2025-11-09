@@ -71,6 +71,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -114,6 +115,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 8
     },
     {
@@ -159,6 +161,7 @@
           "description": "▶ Select one enemy operative visible to and within 6\" of this operative. That operative and each other operative within 1\" of it takes a poison test. For an operative to take a poison test, roll one D6, adding 1 to the result if that operative has a Save stat of 4+ or worse: on a 3+, inflict D3 damage on that operative and it gains one of your Poison tokens (if it doesn’t already have one).\r\n▶ Whenever an operative that has one of your Poison tokens is activated, inflict D3 damage on it.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -210,6 +213,7 @@
         }
       ],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -270,6 +274,7 @@
           "description": "▶ Select one friendly HAND OF THE ARCHON operative visible to and within 3\" of this operative, then select one of the following for that friendly operative:\r\n- It regains 2D3 lost wounds. \r\n- Select a different COMBAT DRUG rule for it to have for the battle (this replaces its previous one).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -301,6 +306,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -350,6 +356,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -412,6 +419,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": 1
     },
     {
@@ -477,17 +485,67 @@
           "description": "▶ Select one enemy operative visible to this operative. Until the end of the turning point, whenever this operative is shooting that enemy operative you can use this effect. If you do: \r\n- This operative’s ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": 1
     }
   ],
   "operativeSelection": {
     "leader": {
       "min": 0,
-      "max": 1
+      "max": 1,
+      "details": [
+        {
+          "name": "Archsybarite",
+          "min": null,
+          "max": 1
+        }
+      ]
     },
     "operatives": {
       "min": 8,
-      "max": 8
+      "max": 15,
+      "details": [
+        {
+          "name": "Agent",
+          "min": null,
+          "max": 8
+        },
+        {
+          "name": "Disciple of Yaelindra",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Crimson Duellist",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Elixicant",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Flayer",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Gunner",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Heavy Gunner",
+          "min": null,
+          "max": 1
+        },
+        {
+          "name": "Skysplinter Assassin",
+          "min": null,
+          "max": 1
+        }
+      ]
     }
   }
 }

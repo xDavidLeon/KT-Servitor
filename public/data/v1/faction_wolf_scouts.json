@@ -1,0 +1,526 @@
+{
+  "id": "fac_wolf_scouts",
+  "name": "Wolf Scouts",
+  "factionKeyword": "WOLF SCOUT",
+  "archetypes": [],
+  "summary": "",
+  "rules": [
+    {
+      "id": "fac_wolf_scouts_rule_hunting_astartes",
+      "name": "Hunting Astartes",
+      "description": "During each friendly WOLF SCOUT operative's activation, it can perform either two **Shoot** actions or two **Fight** actions. If it's two **Shoot** actions:\r\n- 1 additional AP must be spent for the second action if both actions are using a plasma gun or plasma pistol.\r\n- You cannot select two PSYCHIC ranged weapons.\r\n\r\n\r\nEach friendly WOLF SCOUT operative can counteract regardless of its order. Whenever it does so within your STORM, you can change its order first, or change its order instead of performing an action (for the latter, still treat it as having counteracted this turning point)."
+    },
+    {
+      "id": "fac_wolf_scouts_rule_elemental_storm",
+      "name": "Elemental Storm",
+      "description": "**STRATEGIC GAMBIT**. Remove your Storm marker from the killzone (if any), then place it in the killzone. Whenever an operative is within 6\" horizontally of your Storm marker, it's within your STORM.\r\n\r\n\r\nEach friendly WOLF SCOUT operative can perform the **Charge** action while it has a Conceal order if it starts and/or ends that action within your STORM."
+    }
+  ],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [
+    {
+      "id": "fac_wolf_scouts_eq_frost_weapons",
+      "name": "Frost Weapons",
+      "description": "Friendly WOLF SCOUT operatives' combat blades have the Lethal 5+ weapon rule, and one friendly WOLF SCOUT PACK LEADER operative's power weapon has the Lethal 4+ weapon rule (if any)."
+    },
+    {
+      "id": "fac_wolf_scouts_eq_runic_charms",
+      "name": "Runic Charms",
+      "description": "Once per turning point, when an operative is shooting a friendly WOLF SCOUT operative (excluding FENRISIAN WOLF), at the start of the Roll Defence Dice step, you can use this rule. If you do, worsen the x of the Piercing weapon rule by 1 (if any) until the end of that sequence. Note that Piercing 1 would therefore be ignored."
+    },
+    {
+      "id": "fac_wolf_scouts_eq_wolfteeth_necklaces",
+      "name": "Wolfteeth Necklaces",
+      "description": "Once per turning point, when a friendly WOLF SCOUT operative (excluding FENRISIAN WOLF) is shooting, fighting or retaliating, if you roll two or more fails, you can discard one of them to retain another as a normal success instead."
+    },
+    {
+      "id": "fac_wolf_scouts_eq_talismanic_trophies",
+      "name": "Talismanic Trophies",
+      "description": "Whenever a friendly WOLF SCOUT operative (excluding FENRISIAN WOLF) is fighting or retaliating, in the Resolve Attack Dice step, you can subtract 1 from the damage inflicted on it from one success."
+    }
+  ],
+  "operatives": [
+    {
+      "id": "fac_wolf_scouts_op_fenrisian_wolf",
+      "name": "Fenrisian Wolf",
+      "factionKeyword": "WOLF SCOUT",
+      "keywords": [
+        "Adeptus Astartes",
+        "Space Wolves",
+        "Imperium",
+        "Fenrisian Wolf",
+        "Operative"
+      ],
+      "apl": 2,
+      "move": "8\"",
+      "save": "5+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Fangs",
+          "type": "Melee Weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Instinctive Predator",
+          "description": "This operative cannot perform any actions other than **Charge**, **Fall Back**, **Fight** and **Reposition**. It cannot use any weapons that aren't on its datacard. This operative can perform the **Charge** action while it has a Conceal order."
+        },
+        {
+          "name": "Pounce",
+          "description": "Once per battle **STRATEGIC GAMBIT**. If this operative's APL stat is 2 or more, this operative can perform a free **Charge**, **Fall Back** or **Reposition** action. If it does, until the end of its next activation, subtract 1 from its APL stat and it cannot perform any of the aforementioned actions."
+        }
+      ],
+      "specialActions": [],
+      "minSelections": null,
+      "maxSelections": null
+    },
+    {
+      "id": "fac_wolf_scouts_op_pack_leader",
+      "name": "Pack Leader",
+      "factionKeyword": "WOLF SCOUT",
+      "keywords": [
+        "Adeptus Astartes",
+        "Space Wolves",
+        "Imperium",
+        "Pack Leader",
+        "Leader",
+        "Operative"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Power weapon",
+          "type": "Melee Weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Plasma pistol (standard)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma pistol (supercharge)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Lupine Guile",
+          "description": "Once per battle, when rolling of to decide initiative, if this operative is in the killzone, you can re-roll your dice."
+        },
+        {
+          "name": "Grizzled Veteran",
+          "description": "The first time this operative would be incapacitated during the battle, it's not incapacitated, has 1 wound remaining and cannot be incapacitated for the remainder of the action. All remaining attack dice are discarded (including yours if this operative is fighting or retaliating)."
+        }
+      ],
+      "specialActions": [],
+      "minSelections": null,
+      "maxSelections": null
+    },
+    {
+      "id": "fac_wolf_scouts_op_fangbearer",
+      "name": "Fangbearer",
+      "factionKeyword": "WOLF SCOUT",
+      "keywords": [
+        "Operative",
+        "Adeptus Astartes",
+        "Space Wolves",
+        "Imperium",
+        "Fangbearer"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 13,
+      "weapons": [
+        {
+          "name": "Absolver bolt pistol",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 9\"",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Combat blade",
+          "type": "Melee Weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Spiritual Chirurgy",
+          "description": "You can ignore any changes to the stats of friendly WOLF SCOUT operatives (excluding FENRISIAN WOLF) from being injured (including their weapons' stats). Friendly WOLF SCOUT operatives (excluding FENRISIAN WOLF) are not affected by enemy operatives' Shock and Stun weapon rules and you can ignore any changes to their APL stat. Note that friendly operatives have these rules if you select this operative for the battle (even if it's incapacitated later)."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Healing Balms (1AP)",
+          "description": "▶ Select one friendly WOLF SCOUT operative within this operative's control range to regain up to D3+3 lost wounds.\r\n\r\n\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ],
+      "minSelections": null,
+      "maxSelections": null
+    },
+    {
+      "id": "fac_wolf_scouts_op_frosteye",
+      "name": "Frosteye",
+      "factionKeyword": "WOLF SCOUT",
+      "keywords": [
+        "Operative",
+        "Adeptus Astartes",
+        "Space Wolves",
+        "Imperium",
+        "Frosteye"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 13,
+      "weapons": [
+        {
+          "name": "Instigator bolt carbine (heavy)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Piercing Crits 1",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Instigator bolt carbine (mobile)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing Crits 1",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Combat blade",
+          "type": "Melee Weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Storm-veiled Execution",
+          "description": "Whenever this operative is within your STORM:\r\n- It can perform the **Guard** action regardless of the killzone (see close quarters rules, Kill Team Core Book).\r\n- It can perform the **Guard** action while it has a Conceal order, but if it does, it cannot perform more than one **Shoot** action for the rest of the turning point (i.e. it cannot **Shoot** both during the interruption and during counteract)."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Hunter's Senses (1AP)",
+          "description": "▶ Select one of the following rules for all profiles of this operative's instigator bolt carbine to have until the start of its next activation:\r\n- Severe.\r\n- Saturate, and whenever this operative is shooting with that weapon, enemy operatives cannot be obscured.\r\n\r\n\r\n\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ],
+      "minSelections": null,
+      "maxSelections": null
+    },
+    {
+      "id": "fac_wolf_scouts_op_gunner",
+      "name": "Gunner",
+      "factionKeyword": "WOLF SCOUT",
+      "keywords": [
+        "Operative",
+        "Adeptus Astartes",
+        "Space Wolves",
+        "Imperium",
+        "Gunner"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 13,
+      "weapons": [
+        {
+          "name": "Plasma gun (standard)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Combat blade",
+          "type": "Melee Weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Tempest's Fury",
+          "description": "Whenever this operative is within your STORM:\r\n- All profiles of its plasma gun have the Punishing weapon rule.\r\n- Its plasma gun (supercharge) doesn't have the Hot weapon rule."
+        }
+      ],
+      "specialActions": [],
+      "minSelections": null,
+      "maxSelections": null
+    },
+    {
+      "id": "fac_wolf_scouts_op_trapmaster",
+      "name": "Trapmaster",
+      "factionKeyword": "WOLF SCOUT",
+      "keywords": [
+        "Operative",
+        "Adeptus Astartes",
+        "Space Wolves",
+        "Imperium",
+        "Trapmaster"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 13,
+      "weapons": [
+        {
+          "name": "Plasma pistol (standard)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma pistol (supercharge)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Combat blade",
+          "type": "Melee Weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Haywire Mine",
+          "description": "This operative is carrying your Haywire Mine marker. It can perform the **Pick Up Marker** action on that marker, but that marker cannot be placed within another operative's control range (if this operative is incapacitated while carrying that marker and that marker cannot be placed, it's removed with this operative)."
+        },
+        {
+          "name": "Proximity Mine",
+          "description": "The first time your Haywire Mine is within another operative's control range, remove that marker, subtract 1 from that operative's APL stat until the end of its next activation, and inflict 2D3+3 damage on it (or D3+6 if that marker is within 6\" horizontally of your Storm marker); if it isn't incapacitated, end its action (if any), even if that action's effects aren't fulfilled. If it cannot be placed, move it the minimum amount to do so. Note that this operative is ignored for these effects (i.e. it cannot set it off or take damage from that marker)."
+        }
+      ],
+      "specialActions": [],
+      "minSelections": null,
+      "maxSelections": null
+    },
+    {
+      "id": "fac_wolf_scouts_op_hunter",
+      "name": "Hunter",
+      "factionKeyword": "WOLF SCOUT",
+      "keywords": [
+        "Operative",
+        "Adeptus Astartes",
+        "Space Wolves",
+        "Imperium",
+        "Hunter"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 13,
+      "weapons": [
+        {
+          "name": "Combat blade",
+          "type": "Melee Weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": []
+        },
+        {
+          "name": "Plasma pistol (standard)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma pistol (supercharge)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Fierce Temperament",
+          "description": "Whenever this operative is within your STORM, its weapons have the Severe weapon rule."
+        }
+      ],
+      "specialActions": [],
+      "minSelections": null,
+      "maxSelections": null
+    },
+    {
+      "id": "fac_wolf_scouts_op_rune_priest_skjald",
+      "name": "Rune Priest Skjald",
+      "factionKeyword": "WOLF SCOUT",
+      "keywords": [
+        "Operative",
+        "Adeptus Astartes",
+        "Space Wolves",
+        "Imperium",
+        "Rune Priest Skjald",
+        "Psyker"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 13,
+      "weapons": [
+        {
+          "name": "Bolt pistol",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Jaws of the World Wolf",
+          "type": "Ranged Weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "PSYCHIC",
+            "Blast 2\"",
+            "Severe"
+          ]
+        },
+        {
+          "name": "Thunderclap",
+          "type": "Ranged Weapon",
+          "atk": "5",
+          "hit": "2+",
+          "dmg": "2/2",
+          "specialRules": [
+            "PSYCHIC",
+            "Range 6\"",
+            "Saturate",
+            "Seek Light",
+            "Stun",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Runic stave",
+          "type": "Melee Weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "PSYCHIC",
+            "Shock"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": [],
+      "minSelections": null,
+      "maxSelections": null
+    }
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 6,
+      "max": 6
+    }
+  }
+}

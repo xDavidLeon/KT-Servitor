@@ -88,6 +88,7 @@
           "description": "▶ Select one enemy operative visible to or within 8\" of this operative to gain one of your Omniscanner tokens. Whenever a friendly BATTLECLADE operative is shooting against, fighting against or retaliating against an enemy operative that has one of your Omniscanner tokens, that friendly operative's weapons have the Ceaseless weapon rule.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -130,6 +131,7 @@
           "description": "▶ Select one enemy operative visible to this operative. Until the end of the turning point, whenever a friendly BATTLECLADE operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative's ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -189,6 +191,7 @@
           "description": "▶ Place one of your Breach markers within this operative's control range as close as possible to a terrain feature within control range of it. Whenever an operative is within 1\" of that marker, it treats parts of that terrain feature that are no more than 1\" thick as Accessible terrain.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a terrain feature isn't within its control range."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -254,6 +257,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -320,6 +324,7 @@
       ],
       "specialRules": [],
       "specialActions": [],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -362,6 +367,7 @@
           "description": "▶ Select one friendly BATTLECLADE operative within this operative's control range to regain D3+3 lost wounds. It cannot be an operative that the Mechanosuture Array rule was used on during this turning point.\r\n\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     },
     {
@@ -414,6 +420,7 @@
           "description": "▶ SUPPORT. Select one friendly BATTLECLADE SERVITOR operative within 6\" of either this operative or a friendly BATTLECLADE AUTO-PROXY operative to immediately NETWORK COUNTERACT (you don't have to TRANSFER POWER to do so). Continue this operative's activation after doing so. For the purposes of the Comms Device universal equipment, the operative the distance is being determined from must control that marker.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
       ],
+      "minSelections": null,
       "maxSelections": null
     }
   ],

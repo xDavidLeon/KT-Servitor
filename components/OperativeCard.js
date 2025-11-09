@@ -1,5 +1,7 @@
+import RichText from './RichText'
+
 export default function OperativeCard({ operative }) {
-  const anchorId = operative?.id || undefined
+  const anchorId = operative?.id ? `operative-${operative.id}` : undefined
 
   return (
     <div id={anchorId} className="operative-card">
@@ -93,8 +95,8 @@ export default function OperativeCard({ operative }) {
           <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem' }}>
             {operative.specialRules.map((rule, idx) => (
               <li key={idx}>
-                <strong>{rule.name}:</strong>
-                <span className="muted"> {rule.description}</span>
+                <strong>{rule.name}:</strong>{' '}
+                <RichText as="span" className="muted" text={rule.description} inline />
               </li>
             ))}
           </ul>
@@ -107,8 +109,8 @@ export default function OperativeCard({ operative }) {
           <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem' }}>
             {operative.specialActions.map((action, idx) => (
               <li key={idx}>
-                <strong>{action.name}:</strong>
-                <span className="muted"> {action.description}</span>
+                <strong>{action.name}:</strong>{' '}
+                <RichText as="span" className="muted" text={action.description} inline />
               </li>
             ))}
           </ul>
