@@ -23,8 +23,11 @@ export default function Nav(){
       .catch(err => console.error('Error loading factions:', err))
   }, [])
   
-  const Item = ({href,label}) => {
-    const active = r.pathname === href || r.pathname.startsWith(href + '/')
+  const Item = ({href,label,isActive}) => {
+    const currentPath = r.asPath?.split('?')[0] || r.pathname
+    const active = typeof isActive === 'function'
+      ? isActive(currentPath)
+      : currentPath === href || currentPath.startsWith(`${href}/`)
     return (
       <Link href={href}
         className="pill"
@@ -41,13 +44,19 @@ export default function Nav(){
   // Use first faction if available, otherwise fallback to /factions
   const factionRulesHref = firstFactionId ? `/factions/${firstFactionId}` : '/factions'
   
+  const navItems = [
+    { key: 'home', href: '/', label: 'Home', isActive: (path) => path === '/' },
+    { key: 'sequence', href: '/sequence', label: 'Game Sequence', isActive: (path) => path === '/sequence' || path.startsWith('/sequence/') },
+    { key: 'factions', href: factionRulesHref, label: 'Faction Rules', isActive: (path) => path === '/factions' || path.startsWith('/factions/') },
+    { key: 'rules', href: '/rules', label: 'Game Rules', isActive: (path) => path === '/rules' || path.startsWith('/rules/') }
+  ]
+
   return (
     <nav className="nav-links" aria-label="Primary navigation">
       <div className="nav-links-row">
-        <Item href="/" label="Home"/>
-        <Item href="/sequence" label="Game Sequence"/>
-        <Item href={factionRulesHref} label="Faction Rules"/>
-        <Item href="/rules" label="Game Rules"/>
+        {navItems.map(({ key, href, label, isActive }) => (
+          <Item key={key} href={href} label={label} isActive={isActive} />
+        ))}
       </div>
     </nav>
   )

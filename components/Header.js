@@ -1,6 +1,6 @@
 // components/Header.js
 import React from 'react'
-import { forceUpdateAndReindex } from '../lib/update'
+import { forceUpdateAndReindex, checkForUpdates } from '../lib/update'
 import Nav from './Nav'
 
 function download(filename, text) {
@@ -14,6 +14,50 @@ function download(filename, text) {
 
 export default function Header({ version, status }) {
   const [open, setOpen] = React.useState(false);
+  const [internalVersion, setInternalVersion] = React.useState(version ?? null);
+  const [internalStatus, setInternalStatus] = React.useState(status ?? '');
+
+  const shouldFetchStatus = version === undefined || status === undefined;
+
+  React.useEffect(() => {
+    setInternalVersion(version ?? null);
+  }, [version]);
+
+  React.useEffect(() => {
+    if (status !== undefined) {
+      setInternalStatus(status ?? '');
+    }
+  }, [status]);
+
+  React.useEffect(() => {
+    if (!shouldFetchStatus) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        setInternalStatus('Checking for data updates…');
+        const upd = await checkForUpdates();
+        if (cancelled) return;
+        if (upd.error) {
+          setInternalStatus('Offline (using cached data)');
+        } else {
+          setInternalStatus(upd.updated ? 'Data updated' : 'Up to date');
+        }
+        if (upd.version) {
+          setInternalVersion(upd.version);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setInternalStatus('Offline (using cached data)');
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [shouldFetchStatus]);
+
+  const displayVersion = version ?? internalVersion;
+  const displayStatus = status ?? internalStatus;
 
   React.useEffect(() => {
     const onDoc = (e) => { if (!e.target.closest?.('#hdr-gear')) setOpen(false); };
@@ -66,18 +110,18 @@ export default function Header({ version, status }) {
           flexWrap: 'wrap'
         }}
       >
-        <div className="heading">
+          <div className="heading">
           <h1 style={{ margin: 0 }}>
             KT Servitor
           </h1>
-          {version && <span className="pill">v{version}</span>}
+            {displayVersion && <span className="pill">v{displayVersion}</span>}
         </div>
 
         <div
           className="muted"
           style={{ fontSize: '.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
         >
-          {status}
+            {displayStatus}
           <button
             id="hdr-gear"
             onClick={() => setOpen(v => !v)}
