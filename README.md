@@ -14,6 +14,35 @@ npm run build
 npm start
 ```
 
+## Deploy to Netlify
+
+### Option 1: Deploy via Netlify UI
+1. Push your code to GitHub/GitLab/Bitbucket
+2. Go to [Netlify](https://app.netlify.com) and click "Add new site" → "Import an existing project"
+3. Connect your repository
+4. Netlify will automatically detect the `netlify.toml` configuration
+5. Click "Deploy site"
+
+### Option 2: Deploy via Netlify CLI
+```bash
+# Install Netlify CLI globally
+npm install -g netlify-cli
+
+# Login to Netlify
+netlify login
+
+# Deploy (first time - will create site)
+netlify deploy --prod
+
+# Or deploy a draft
+netlify deploy
+```
+
+The `netlify.toml` file is already configured with:
+- Build command: `npm run build`
+- Next.js plugin: `@netlify/plugin-nextjs` (handles Next.js routing automatically)
+- Node version: 18
+
 ## Update data
 
 ### Manual editing
