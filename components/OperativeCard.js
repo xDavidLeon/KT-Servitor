@@ -6,24 +6,26 @@ export default function OperativeCard({ operative }) {
       </div>
       
       <div className="operative-stats">
-        <table className="stats-table">
-          <thead>
-            <tr>
-              {operative.apl !== null && operative.apl !== undefined && <th>APL</th>}
-              {operative.move && <th>MOVE</th>}
-              {operative.save && <th>SAVE</th>}
-              {operative.wounds !== null && operative.wounds !== undefined && <th>WOUNDS</th>}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {operative.apl !== null && operative.apl !== undefined && <td>{operative.apl}</td>}
-              {operative.move && <td>{operative.move}</td>}
-              {operative.save && <td>{operative.save}</td>}
-              {operative.wounds !== null && operative.wounds !== undefined && <td>{operative.wounds}</td>}
-            </tr>
-          </tbody>
-        </table>
+        <div className="table-scroll">
+          <table className="stats-table">
+            <thead>
+              <tr>
+                {operative.apl !== null && operative.apl !== undefined && <th>APL</th>}
+                {operative.move && <th>MOVE</th>}
+                {operative.save && <th>SAVE</th>}
+                {operative.wounds !== null && operative.wounds !== undefined && <th>WOUNDS</th>}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {operative.apl !== null && operative.apl !== undefined && <td>{operative.apl}</td>}
+                {operative.move && <td>{operative.move}</td>}
+                {operative.save && <td>{operative.save}</td>}
+                {operative.wounds !== null && operative.wounds !== undefined && <td>{operative.wounds}</td>}
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       
       {operative.weapons && operative.weapons.length > 0 && (() => {
@@ -40,43 +42,45 @@ export default function OperativeCard({ operative }) {
         return (
           <div className="operative-weapons">
             <strong>Weapons:</strong>
-            <table className="weapons-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>ATK</th>
-                  <th>HIT</th>
-                  <th>DMG</th>
-                  <th>Special Rules</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sortedWeapons.map((weapon, idx) => {
-                  // Determine weapon type symbol
-                  const weaponSymbol = weapon.type === 'Ranged Weapon' ? '⌖' : 
-                                      weapon.type === 'Melee Weapon' ? '⚔' : '';
-                  
-                  return (
-                    <tr key={idx}>
-                      <td>
-                        <strong>
-                          {weaponSymbol && <span style={{ marginRight: '0.25rem' }}>{weaponSymbol}</span>}
-                          {weapon.name}
-                        </strong>
-                      </td>
-                      <td>{weapon.atk || '-'}</td>
-                      <td>{weapon.hit || '-'}</td>
-                      <td>{weapon.dmg || '-'}</td>
-                      <td className="muted">
-                        {weapon.specialRules && weapon.specialRules.length > 0 
-                          ? weapon.specialRules.join(', ')
-                          : '-'}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <div className="table-scroll">
+              <table className="weapons-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>ATK</th>
+                    <th>HIT</th>
+                    <th>DMG</th>
+                    <th>Special Rules</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sortedWeapons.map((weapon, idx) => {
+                    // Determine weapon type symbol
+                    const weaponSymbol = weapon.type === 'Ranged Weapon' ? '⌖' : 
+                                        weapon.type === 'Melee Weapon' ? '⚔' : '';
+                    
+                    return (
+                      <tr key={idx}>
+                        <td>
+                          <strong>
+                            {weaponSymbol && <span style={{ marginRight: '0.25rem' }}>{weaponSymbol}</span>}
+                            {weapon.name}
+                          </strong>
+                        </td>
+                        <td>{weapon.atk || '-'}</td>
+                        <td>{weapon.hit || '-'}</td>
+                        <td>{weapon.dmg || '-'}</td>
+                        <td className="muted">
+                          {weapon.specialRules && weapon.specialRules.length > 0 
+                            ? weapon.specialRules.join(', ')
+                            : '-'}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         );
       })()}

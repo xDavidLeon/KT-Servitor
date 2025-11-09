@@ -7,7 +7,21 @@ a{color:var(--accent);text-decoration:none}
 .header-sticky{position:sticky;top:0;z-index:100;margin-bottom:0.5rem}
 .faction-selector-sticky{position:sticky;top:80px;z-index:90;margin-bottom:0.5rem}
 input,select,button{background:#0e1016;color:var(--text);border:1px solid #262a36;border-radius:10px;padding:0.6rem 0.8rem}
-.row{display:flex;gap:0.5rem;flex-wrap:wrap}
+.nav-links{
+  width:100%;
+}
+.nav-links-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:0.5rem;
+  margin-top:0.25rem;
+}
+.nav-links-row .pill{
+  padding:0.4rem 0.9rem;
+  text-align:center;
+}
 .pill{display:inline-block;padding:.2rem .5rem;border:1px solid #2a2f3f;border-radius:999px;font-size:.8rem;color:var(--muted)}
 table{width:100%;border-collapse:collapse}
 th,td{padding:.4rem;border-bottom:1px solid #2a2f3f;text-align:left}
@@ -65,25 +79,37 @@ th{position:sticky;top:0;background:#121521}
   .operative-stats {
     margin: 0.75rem 0;
   }
-  .stats-table {
-    width: 100%;
-    font-size: 0.9rem;
-  }
-  .stats-table th {
-    background: #1a1f2b;
-    color: var(--muted);
-    font-weight: 600;
-    text-align: center;
-    padding: 0.4rem 0.3rem;
-    font-size: 0.85rem;
-    border-bottom: 1px solid #2a2f3f;
-  }
-  .stats-table td {
-    text-align: center;
-    padding: 0.5rem 0.3rem;
-    font-weight: 500;
-    border-bottom: 1px solid #2a2f3f;
-  }
+.table-scroll {
+  margin: 0.5rem 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table-scroll table {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+}
+.stats-table {
+  font-size: 0.9rem;
+  table-layout: fixed;
+}
+.stats-table th {
+  background: #1a1f2b;
+  color: var(--muted);
+  font-weight: 600;
+  text-align: center;
+  padding: 0.4rem 0.3rem;
+  font-size: 0.85rem;
+  border-bottom: 1px solid #2a2f3f;
+  word-break: break-word;
+}
+.stats-table td {
+  text-align: center;
+  padding: 0.5rem 0.3rem;
+  font-weight: 500;
+  border-bottom: 1px solid #2a2f3f;
+  word-break: break-word;
+}
   .operative-weapons,
   .operative-abilities {
     margin-top: 0.75rem;
@@ -117,10 +143,11 @@ th{position:sticky;top:0;background:#121521}
     font-size: 0.8rem;
     border-bottom: 1px solid #2a2f3f;
   }
-  .weapons-table td {
+.weapons-table td {
     padding: 0.5rem;
     border-bottom: 1px solid #2a2f3f;
     vertical-align: top;
+  word-break: break-word;
   }
   .weapons-table tr:last-child td {
     border-bottom: none;
@@ -134,4 +161,40 @@ th{position:sticky;top:0;background:#121521}
   .operative-special-actions strong {
     color: var(--accent);
   }
+
+@media (min-width: 640px) {
+  .operatives-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0.75rem;
+  }
+  .card {
+    padding: 0.85rem;
+    border-radius: 14px;
+  }
+  .operative-card {
+    padding: 0.85rem;
+  }
+  .operative-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+    .table-scroll {
+    margin: 0.5rem 0;
+    padding: 0.25rem;
+    border-radius: 12px;
+    border: 1px solid #1a1f2b;
+    background: #10131a;
+  }
+  .table-scroll table {
+    min-width: 100%;
+  }
+  .nav-links-row .pill{
+    flex:1 1 calc(50% - 0.5rem);
+  }
+}
   
