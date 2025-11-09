@@ -1,0 +1,138 @@
+{
+  "id": "fac_wrecka_krew",
+  "name": "Wrecka Krew",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.1",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_wrecka_krew_op_wrecka_boss_nob",
+      "name": "Wrecka Boss Nob",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 14,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wrecka_krew_op_tankbusta_gunner",
+      "name": "Tankbusta Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Rokkit launcha",
+          "atk": "6",
+          "hit": "5+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Blast 1\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wrecka_krew_op_tankbusta_rokkiteer",
+      "name": "Tankbusta Rokkiteer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Rokkit launcha",
+          "atk": "6",
+          "hit": "5+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Blast 1\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wrecka_krew_op_wrecka_bomb_squig",
+      "name": "Wrecka Bomb Squig",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 5,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wrecka_krew_op_breaka_boy_demolisha",
+      "name": "Breaka Boy Demolisha",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 12,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wrecka_krew_op_breaka_boy_fighter",
+      "name": "Breaka Boy Fighter",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 12,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wrecka_krew_op_breaka_boy_krusha",
+      "name": "Breaka Boy Krusha",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 12,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

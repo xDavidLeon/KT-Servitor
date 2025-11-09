@@ -1,0 +1,296 @@
+{
+  "id": "fac_blooded",
+  "name": "Blooded",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_blooded_op_traitor_chieftain",
+      "name": "Traitor Chieftain",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_brimstone_grenadier",
+      "name": "Traitor Brimstone Grenadier",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_gunner",
+      "name": "Traitor Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_trooper",
+      "name": "Traitor Trooper",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_trench_sweeper",
+      "name": "Traitor Trench Sweeper",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_sharpshooter",
+      "name": "Traitor Sharpshooter",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_ogryn",
+      "name": "Traitor Ogryn",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 16,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_flenser",
+      "name": "Traitor Flenser",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_enforcer",
+      "name": "Traitor Enforcer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_corpseman",
+      "name": "Traitor Corpseman",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_commsman",
+      "name": "Traitor Commsman",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_butcher",
+      "name": "Traitor Butcher",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_thug",
+      "name": "Traitor Thug",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_trooper",
+      "name": "Traitor Trooper",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

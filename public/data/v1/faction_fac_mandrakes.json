@@ -1,0 +1,178 @@
+{
+  "id": "fac_mandrakes",
+  "name": "Mandrakes",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_mandrakes_op_mandrake_nightfiend",
+      "name": "Mandrake Nightfiend",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Baleblast",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Soulstrike*"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_mandrakes_op_mandrake_abyssal",
+      "name": "Mandrake Abyssal",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Glimmersteel blade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_mandrakes_op_mandrake_chooser_of_the_flesh",
+      "name": "Mandrake Chooser of the Flesh",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Baleblast",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Soulstrike*"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_mandrakes_op_mandrake_dirgemaw",
+      "name": "Mandrake Dirgemaw",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Baleblast",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Soulstrike*"
+          ]
+        },
+        {
+          "name": "Glimmersteel blade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_mandrakes_op_mandrake_shadeweaver",
+      "name": "Mandrake Shadeweaver",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Baleblast",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Soulstrike*"
+          ]
+        },
+        {
+          "name": "Glimmersteel blade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_mandrakes_op_mandrake_warrior",
+      "name": "Mandrake Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Baleblast",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Soulstrike*"
+          ]
+        },
+        {
+          "name": "Glimmersteel blade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

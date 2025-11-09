@@ -1,0 +1,310 @@
+{
+  "id": "fac_hearthkyn_salvagers",
+  "name": "Hearthkyn Salvagers",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.1",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_hearthkyn_salvagers_op_theyn",
+      "name": "Theyn",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Autoch-pattern bolt pistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Accurate 1"
+          ]
+        },
+        {
+          "name": "Autoch-pattern bolter",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Accurate 1"
+          ]
+        },
+        {
+          "name": "Bolt revolver",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Ion blaster",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Plasma weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hearthkyn_salvagers_op_d_zr",
+      "name": "Dôzr",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Autoch-pattern bolt pistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Accurate 1"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hearthkyn_salvagers_op_field_medic",
+      "name": "Field Medic",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Bolt revolver",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hearthkyn_salvagers_op_grenadier",
+      "name": "Grenadier",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Autoch-pattern bolt pistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Accurate 1"
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hearthkyn_salvagers_op_gunner",
+      "name": "Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hearthkyn_salvagers_op_jump_pack_warrior",
+      "name": "Jump Pack Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Autoch-pattern bolt pistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Accurate 1"
+          ]
+        },
+        {
+          "name": "Plasma weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hearthkyn_salvagers_op_kinlynk",
+      "name": "Kinlynk",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hearthkyn_salvagers_op_kognit_ar",
+      "name": "Kognitâar",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hearthkyn_salvagers_op_loc_tr",
+      "name": "Locâtr",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hearthkyn_salvagers_op_lugger",
+      "name": "Lugger",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hearthkyn_salvagers_op_warrior",
+      "name": "Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

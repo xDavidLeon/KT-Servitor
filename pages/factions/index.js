@@ -26,7 +26,7 @@ export default function Factions(){
         <h2 style={{marginTop:0}}>Factions</h2>
         {factions.map(f=> (
           <div key={f.id} className="card" style={{margin:'.5rem 0'}}>
-            <div className="heading"><strong>{f.title}</strong><span className="pill">{f.season}</span></div>
+            <div className="heading"><strong>{f.title}</strong></div>
             <div className="muted">{f.body}</div>
             <div style={{marginTop:'.5rem'}}>
               <Link href={`/factions/${f.id}`}>Open faction →</Link>

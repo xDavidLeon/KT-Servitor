@@ -1,0 +1,250 @@
+{
+  "id": "fac_farstalker_kinband",
+  "name": "Farstalker Kinband",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.2",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_farstalker_kinband_op_kroot_kill_broker",
+      "name": "Kroot Kill-Broker",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Kroot Rifle",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_farstalker_kinband_op_kroot_bow_hunter",
+      "name": "Kroot Bow-Hunter",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Blade",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_farstalker_kinband_op_kroot_cold_blood",
+      "name": "Kroot Cold-Blood",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Kroot Rifle",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Blade",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_farstalker_kinband_op_kroot_cut_skin",
+      "name": "Kroot Cut-Skin",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_farstalker_kinband_op_kroot_heavy_gunner",
+      "name": "Kroot Heavy Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Blade",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_farstalker_kinband_op_kroot_hound",
+      "name": "Kroot Hound",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "8\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_farstalker_kinband_op_kroot_long_sight",
+      "name": "Kroot Long-Sight",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Blade",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_farstalker_kinband_op_kroot_pistolier",
+      "name": "Kroot Pistolier",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Blade",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_farstalker_kinband_op_kroot_stalker",
+      "name": "Kroot Stalker",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_farstalker_kinband_op_kroot_tracker",
+      "name": "Kroot Tracker",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Kroot Rifle",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Blade",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_farstalker_kinband_op_kroot_warrior",
+      "name": "Kroot Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Blade",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Kroot Scattergun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\""
+          ]
+        },
+        {
+          "name": "Kroot Rifle",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

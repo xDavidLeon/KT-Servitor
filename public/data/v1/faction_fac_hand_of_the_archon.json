@@ -1,0 +1,207 @@
+{
+  "id": "fac_hand_of_the_archon",
+  "name": "Hand of the Archon",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.1",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_hand_of_the_archon_op_archsybarite",
+      "name": "Archsybarite",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_agent",
+      "name": "Agent",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Splinter rifle",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Array of blades",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_disciple_of_yaelindra",
+      "name": "Disciple of Yaelindra",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Array of blades",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_crimson_duellist",
+      "name": "Crimson Duellist",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Splinter pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Range 8\"",
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_elixicant",
+      "name": "Elixicant",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Splinter rifle",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Array of blades",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_flayer",
+      "name": "Flayer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_gunner",
+      "name": "Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Array of blades",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_heavy_gunner",
+      "name": "Heavy Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Array of blades",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_skysplinter_assassin",
+      "name": "Skysplinter Assassin",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Array of blades",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

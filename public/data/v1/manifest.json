@@ -1,11 +1,194 @@
 {
-  "version": "1.0.4",
-  "generated": "2025-11-08",
+  "version": "1.0.1762648414027",
+  "generated": "2025-11-09",
   "files": [
-    { "name": "rules.json", "sha256": "" },
-    { "name": "units.json", "sha256": "" },
-    { "name": "sequence.json", "sha256": "" },
-    { "name": "factions.json", "sha256": "" },
-    { "name": "faction_fac_intercession.json", "sha256": "" }
+    {
+      "name": "rules.json",
+      "sha256": ""
+    },
+    {
+      "name": "units.json",
+      "sha256": ""
+    },
+    {
+      "name": "sequence.json",
+      "sha256": ""
+    },
+    {
+      "name": "factions.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_angels_of_death.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_battleclade.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_blades_of_khaine.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_blooded.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_brood_brothers.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_canoptek_circle.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_chaos_cult.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_corsair_voidscarred.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_death_korps.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_deathwatch.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_elucidian_starstriders.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_exaction_squad.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_farstalker_kinband.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_fellgor_ravagers.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_gellerpox_infected.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_goremonger.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_hand_of_the_archon.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_hearthkyn_salvagers.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_hernkyn_yaegirs.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_hierotek_circle.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_hunter_clade.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_imperial_navy_breachers.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_inquisitorial_agents.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_kasrkin.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_kommandos.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_legionaries.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_mandrakes.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_nemesis_claw.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_non_player_operatives.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_novitiates.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_pathfinders.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_phobos_strike_team.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_plague_marines.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_ratling.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_raveners.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_sanctifier.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_scout_squad.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_tempestus_aquilons.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_vespid_stingwings.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_void_dancer_troupe.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_warpcoven.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_wrecka_krew.json",
+      "sha256": ""
+    },
+    {
+      "name": "faction_fac_wyrmblade.json",
+      "sha256": ""
+    }
   ]
 }

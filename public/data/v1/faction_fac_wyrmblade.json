@@ -1,0 +1,194 @@
+{
+  "id": "fac_wyrmblade",
+  "name": "Wyrmblade",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.0",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_wyrmblade_op_neophyte_warrior",
+      "name": "Neophyte Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Autogun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Shotgun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wyrmblade_op_kelermorph",
+      "name": "Kelermorph",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wyrmblade_op_neophyte_leader",
+      "name": "Neophyte Leader",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wyrmblade_op_neophyte_gunner",
+      "name": "Neophyte Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wyrmblade_op_neophyte_heavy_gunner",
+      "name": "Neophyte Heavy Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wyrmblade_op_neophyte_icon_bearer",
+      "name": "Neophyte Icon Bearer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Autogun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Shotgun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wyrmblade_op_locus",
+      "name": "Locus",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wyrmblade_op_sanctus_sniper",
+      "name": "Sanctus Sniper",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_wyrmblade_op_sanctus_talon",
+      "name": "Sanctus Talon",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

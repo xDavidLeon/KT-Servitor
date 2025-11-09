@@ -25,3 +25,111 @@ th{position:sticky;top:0;background:#121521}
   .menu button:hover { background: #0f1320; }
   .menu .sep { height: 1px; background: #2a2f3f; margin: .25rem 0; }
   
+  /* Operative Cards */
+  .operatives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .operative-card {
+    background: #0e1016;
+    border: 1px solid #262a36;
+    border-radius: 12px;
+    padding: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .operative-card:hover {
+    border-color: #3a4050;
+    box-shadow: 0 2px 12px rgba(0,0,0,.3);
+  }
+  .operative-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+  }
+  .operative-header h4 {
+    color: var(--text);
+    font-size: 1.1rem;
+    flex: 1;
+  }
+  .operative-tags {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+  }
+  .operative-stats {
+    margin: 0.75rem 0;
+  }
+  .stats-table {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .stats-table th {
+    background: #1a1f2b;
+    color: var(--muted);
+    font-weight: 600;
+    text-align: center;
+    padding: 0.4rem 0.3rem;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #2a2f3f;
+  }
+  .stats-table td {
+    text-align: center;
+    padding: 0.5rem 0.3rem;
+    font-weight: 500;
+    border-bottom: 1px solid #2a2f3f;
+  }
+  .operative-weapons,
+  .operative-abilities {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+  }
+  .operative-weapons strong,
+  .operative-abilities strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .operative-weapons ul,
+  .operative-abilities ul {
+    list-style-type: disc;
+  }
+  .operative-weapons li,
+  .operative-abilities li {
+    margin: 0.25rem 0;
+    line-height: 1.4;
+  }
+  .weapons-table {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+  }
+  .weapons-table th {
+    background: #1a1f2b;
+    color: var(--muted);
+    font-weight: 600;
+    text-align: left;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.8rem;
+    border-bottom: 1px solid #2a2f3f;
+  }
+  .weapons-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #2a2f3f;
+    vertical-align: top;
+  }
+  .weapons-table tr:last-child td {
+    border-bottom: none;
+  }
+  .operative-special-rules,
+  .operative-special-actions {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+  }
+  .operative-special-rules strong,
+  .operative-special-actions strong {
+    color: var(--accent);
+  }
+  

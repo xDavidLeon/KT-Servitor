@@ -1,0 +1,273 @@
+{
+  "id": "fac_deathwatch",
+  "name": "Deathwatch",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_deathwatch_op_watch_sergeant",
+      "name": "Watch Sergeant",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 15,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_deathwatch_op_aegis_veteran",
+      "name": "Aegis Veteran",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "2+",
+      "wounds": 15,
+      "weapons": [
+        {
+          "name": "Bolt Pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_deathwatch_op_blademaster_veteran",
+      "name": "Blademaster Veteran",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 15,
+      "weapons": [
+        {
+          "name": "Special issue bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_deathwatch_op_bombard_veteran",
+      "name": "Bombard Veteran",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 18,
+      "weapons": [
+        {
+          "name": "Bolt Pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_deathwatch_op_breacher_veteran",
+      "name": "Breacher Veteran",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 18,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_deathwatch_op_demolisher_veteran",
+      "name": "Demolisher Veteran",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 15,
+      "weapons": [
+        {
+          "name": "Bolt Pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_deathwatch_op_disruptor_veteran",
+      "name": "Disruptor Veteran",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 13,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_deathwatch_op_gunner_veteran",
+      "name": "Gunner Veteran",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 15,
+      "weapons": [
+        {
+          "name": "Bolt Pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_deathwatch_op_headtaker_veteran",
+      "name": "Headtaker Veteran",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 13,
+      "weapons": [
+        {
+          "name": "Special issue bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_deathwatch_op_horde_slayer_veteran",
+      "name": "Horde-slayer Veteran",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 18,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Bolt Pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_deathwatch_op_marksman_veteran",
+      "name": "Marksman Veteran",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 15,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

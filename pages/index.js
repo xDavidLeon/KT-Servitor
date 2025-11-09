@@ -44,8 +44,6 @@ export default function Home() {
       }
     })()
   }, [q])
-  
-  
 
   return (
     <div className="container">
@@ -53,7 +51,7 @@ export default function Home() {
       <SearchBox q={q} setQ={setQ} />
       <Results results={res} loading={loading} />
       <div className="card muted">
-        This demo ships structured data and short summaries only; no copyrighted rule text.
+        This free web-based app is a rules reference for Kill Team 2024 and features publicly available data; no copyrighted rule text. It is not affiliated with Games Workshop Ltd. This app is not a replacement for the official Kill Team 2024 rulebook.
       </div>
     </div>
   )

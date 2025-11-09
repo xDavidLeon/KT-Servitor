@@ -2,7 +2,6 @@
   {
     "id": "rule_lethal5",
     "title": "Lethal 5+",
-    "season": "Octarius",
     "tags": ["Critical", "Ranged", "Melee"],
     "abbr": "L5+",
     "body": "Each time you make a shooting or fighting attack, a Critical Hit is scored on an unmodified 5+. This rule applies only when stated on a weapon profile."
@@ -10,7 +9,6 @@
   {
     "id": "rule_balanced",
     "title": "Balanced",
-    "season": "Octarius",
     "tags": ["Ranged", "Reroll"],
     "abbr": "BAL",
     "body": "When making a shooting attack, you can reroll one of your attack dice."
@@ -18,7 +16,6 @@
   {
     "id": "rule_stun",
     "title": "Stun",
-    "season": "Octarius",
     "tags": ["Melee", "Debuff"],
     "abbr": "STN",
     "body": "On a critical hit, the target loses 1 APL (to a minimum of 1)."
@@ -26,7 +23,6 @@
   {
     "id": "rule_ce",
     "title": "Conceal / Engage",
-    "season": "Core",
     "tags": ["Order", "Visibility"],
     "abbr": "C/E",
     "body": "Each operative has an Order: Conceal or Engage. Conceal limits visibility and targeting, while Engage allows shooting and fighting."

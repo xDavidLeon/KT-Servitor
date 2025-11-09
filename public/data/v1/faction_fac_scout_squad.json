@@ -1,0 +1,157 @@
+{
+  "id": "fac_scout_squad",
+  "name": "Scout Squad",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.3",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_scout_squad_op_scout_sergeant",
+      "name": "Scout Sergeant",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 11,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_scout_squad_op_scout_heavy_gunner",
+      "name": "Scout Heavy Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_scout_squad_op_scout_hunter",
+      "name": "Scout Hunter",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Combat blade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_scout_squad_op_scout_sniper",
+      "name": "Scout Sniper",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_scout_squad_op_scout_tracker",
+      "name": "Scout Tracker",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Boltgun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_scout_squad_op_scout_warrior",
+      "name": "Scout Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 10,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

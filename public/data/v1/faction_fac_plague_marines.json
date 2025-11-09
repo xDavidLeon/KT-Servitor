@@ -1,0 +1,156 @@
+{
+  "id": "fac_plague_marines",
+  "name": "Plague Marines",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.2",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_plague_marines_op_plague_marine_champion",
+      "name": "Plague Marine Champion",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 15,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_plague_marines_op_malignant_plaguecaster",
+      "name": "Malignant Plaguecaster",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_plague_marines_op_plague_marine_bombardier",
+      "name": "Plague Marine Bombardier",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Boltgun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_plague_marines_op_plague_marine_fighter",
+      "name": "Plague Marine Fighter",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_plague_marines_op_plague_marine_icon_bearer",
+      "name": "Plague Marine Icon Bearer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Plague knife",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Severe",
+            "Poison*"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_plague_marines_op_plague_marine_warrior",
+      "name": "Plague Marine Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Plague knife",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Severe",
+            "Poison*"
+          ]
+        },
+        {
+          "name": "Boltgun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_plague_marines_op_plague_marine_heavy_gunner",
+      "name": "Plague Marine Heavy Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

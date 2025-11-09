@@ -1,0 +1,216 @@
+{
+  "id": "fac_nemesis_claw",
+  "name": "Nemesis Claw",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "July '25",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_nemesis_claw_op_visionary",
+      "name": "Visionary",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 15,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_nemesis_claw_op_fearmonger",
+      "name": "Fearmonger",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_nemesis_claw_op_heavy_gunner",
+      "name": "Heavy Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_nemesis_claw_op_gunner",
+      "name": "Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_nemesis_claw_op_screecher",
+      "name": "Screecher",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_nemesis_claw_op_skinthief",
+      "name": "Skinthief",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_nemesis_claw_op_ventriloquar",
+      "name": "Ventriloquar",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Chainsword",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_nemesis_claw_op_warrior_with_bolt_pistol_chainsword",
+      "name": "Warrior with bolt pistol; chainsword",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Chainsword",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_nemesis_claw_op_warrior_with_boltgun_fists",
+      "name": "Warrior with boltgun; fists",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

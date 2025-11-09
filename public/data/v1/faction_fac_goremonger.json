@@ -1,0 +1,160 @@
+{
+  "id": "fac_goremonger",
+  "name": "Goremonger",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "July '25",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [
+    {
+      "id": "fac_goremonger_eq_sanguavitae_reference",
+      "name": "Sanguavitae Reference",
+      "description": ""
+    }
+  ],
+  "operatives": [
+    {
+      "id": "fac_goremonger_op_blood_herald",
+      "name": "Blood Herald",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 11,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_goremonger_op_aspirant",
+      "name": "Aspirant",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Autopistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_goremonger_op_bloodtaker",
+      "name": "Bloodtaker",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Autopistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_goremonger_op_impaler",
+      "name": "Impaler",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Autopistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_goremonger_op_inciter",
+      "name": "Inciter",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 10,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_goremonger_op_skullclaimer",
+      "name": "Skullclaimer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Autopistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_goremonger_op_stalker",
+      "name": "Stalker",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Autopistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

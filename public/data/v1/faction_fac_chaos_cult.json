@@ -1,0 +1,154 @@
+{
+  "id": "fac_chaos_cult",
+  "name": "Chaos Cult",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "July '25",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [
+    {
+      "id": "fac_chaos_cult_eq_accursed_gifts_reference",
+      "name": "Accursed Gifts Reference",
+      "description": ""
+    }
+  ],
+  "operatives": [
+    {
+      "id": "fac_chaos_cult_op_cult_demagogue",
+      "name": "Cult Demagogue",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Pistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_chaos_cult_op_blessed_blade",
+      "name": "Blessed Blade",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_chaos_cult_op_iconarch",
+      "name": "Iconarch",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Pistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Crude melee weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_chaos_cult_op_mindwitch",
+      "name": "Mindwitch",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_chaos_cult_op_chaos_devotee",
+      "name": "Chaos Devotee",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Crude melee weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Pistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_chaos_cult_op_chaos_mutant",
+      "name": "Chaos Mutant",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_chaos_cult_op_chaos_torment",
+      "name": "Chaos Torment",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 13,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

@@ -1,0 +1,592 @@
+{
+  "id": "fac_hunter_clade",
+  "name": "Hunter Clade",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "July '25",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [
+    {
+      "id": "fac_hunter_clade_eq_reference_doctrina_imperatives",
+      "name": "Reference - Doctrina Imperatives",
+      "description": ""
+    }
+  ],
+  "operatives": [
+    {
+      "id": "fac_hunter_clade_op_sicarian_ruststalker_princeps",
+      "name": "Sicarian Ruststalker Princeps",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 11,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_sicarian_infiltrator_princeps",
+      "name": "Sicarian Infiltrator Princeps",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 11,
+      "weapons": [
+        {
+          "name": "Flechette blaster",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "2/2",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Stubcarbine",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Ceaseless"
+          ]
+        },
+        {
+          "name": "Power weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Taser goad",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Lethal 5+",
+            "Shock"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_skitarii_ranger_alpha",
+      "name": "Skitarii Ranger Alpha",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Arc pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1",
+            "Stun"
+          ]
+        },
+        {
+          "name": "Phosphor blast pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Blast 1\"",
+            "Severe"
+          ]
+        },
+        {
+          "name": "Arc maul",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Shock"
+          ]
+        },
+        {
+          "name": "Taser goad",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Lethal 5+",
+            "Shock"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_skitarii_vanguard_alpha",
+      "name": "Skitarii Vanguard Alpha",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Arc pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1",
+            "Stun"
+          ]
+        },
+        {
+          "name": "Phosphor blast pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Blast 1\"",
+            "Severe"
+          ]
+        },
+        {
+          "name": "Arc maul",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Shock"
+          ]
+        },
+        {
+          "name": "Taser goad",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Lethal 5+",
+            "Shock"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_skitarii_vanguard_gunner",
+      "name": "Skitarii Vanguard Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Arc rifle",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1",
+            "Stun"
+          ]
+        },
+        {
+          "name": "Transuranic arquebus (mobile)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/3",
+          "specialRules": [
+            "Devastating 2",
+            "Heavy (Dash only)",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Transuranic arquebus (stationary)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "4/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy",
+            "Piercing 1",
+            "Severe"
+          ]
+        },
+        {
+          "name": "Plasma caliver - Supercharge",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma caliver - Standard",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_sicarian_infiltrator_warrior",
+      "name": "Sicarian Infiltrator Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Flechette blaster",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "2/2",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Stubcarbine",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Ceaseless"
+          ]
+        },
+        {
+          "name": "Power weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Taser goad",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Lethal 5+",
+            "Shock"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_skitarii_ranger_warrior",
+      "name": "Skitarii Ranger Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Galvanic rifle",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Heavy (Reposition only)",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_sicarian_ruststalker_warrior",
+      "name": "Sicarian Ruststalker Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 10,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_skitarii_vanguard_surveyor",
+      "name": "Skitarii Vanguard Surveyor",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Radium carbine",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Rending"
+          ]
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_skitarii_vanguard_diktat",
+      "name": "Skitarii Vanguard Diktat",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Radium carbine",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Rending"
+          ]
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_skitarii_ranger_gunner",
+      "name": "Skitarii Ranger Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Arc rifle",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1",
+            "Stun"
+          ]
+        },
+        {
+          "name": "Transuranic arquebus (mobile)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/3",
+          "specialRules": [
+            "Devastating 2",
+            "Heavy (Dash only)",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Transuranic arquebus (stationary)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "4/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy",
+            "Piercing 1",
+            "Severe"
+          ]
+        },
+        {
+          "name": "Plasma caliver - Supercharge",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma caliver - Standard",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_skitarii_ranger_surveyor",
+      "name": "Skitarii Ranger Surveyor",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Galvanic rifle",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Heavy (Reposition only)",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_skitarii_vanguard_warrior",
+      "name": "Skitarii Vanguard Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Radium carbine",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Rending"
+          ]
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hunter_clade_op_skitarii_ranger_diktat",
+      "name": "Skitarii Ranger Diktat",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Galvanic rifle",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Heavy (Reposition only)",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

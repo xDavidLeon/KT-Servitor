@@ -1,0 +1,26 @@
+{
+  "id": "fac_exaction_squad",
+  "name": "Exaction Squad",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.2",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_exaction_squad_op_arbites_proctor_exactant",
+      "name": "Arbites Proctor-Exactant",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

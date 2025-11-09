@@ -1,0 +1,32 @@
+{
+  "id": "fac_death_korps",
+  "name": "Death Korps",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.2",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [
+    {
+      "id": "fac_death_korps_eq_guardsman_orders_reference",
+      "name": "Guardsman Orders Reference",
+      "description": ""
+    }
+  ],
+  "operatives": [
+    {
+      "id": "fac_death_korps_op_death_korps_watchmaster",
+      "name": "Death Korps Watchmaster",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

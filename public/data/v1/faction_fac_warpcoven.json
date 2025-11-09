@@ -1,0 +1,327 @@
+{
+  "id": "fac_warpcoven",
+  "name": "Warpcoven",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "July '25",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_warpcoven_op_sorcerer_of_destiny",
+      "name": "Sorcerer of Destiny",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 15,
+      "weapons": [
+        {
+          "name": "Force stave",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "PSYCHIC",
+            "Shock"
+          ]
+        },
+        {
+          "name": "Inferno bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Prosperine kopesh",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Balanced",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Warpflame pistol",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\"",
+            "Piercing 1",
+            "Torrent 1\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_warpcoven_op_sorcerer_of_tempyrion",
+      "name": "Sorcerer of Tempyrion",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 15,
+      "weapons": [
+        {
+          "name": "Force stave",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "PSYCHIC",
+            "Shock"
+          ]
+        },
+        {
+          "name": "Inferno bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Prosperine kopesh",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Balanced",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Warpflame pistol",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\"",
+            "Piercing 1",
+            "Torrent 1\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_warpcoven_op_sorcerer_of_warpfire",
+      "name": "Sorcerer of Warpfire",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 15,
+      "weapons": [
+        {
+          "name": "Force stave",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "PSYCHIC",
+            "Shock"
+          ]
+        },
+        {
+          "name": "Inferno bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Prosperine kopesh",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Balanced",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Warpflame pistol",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\"",
+            "Piercing 1",
+            "Torrent 1\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_warpcoven_op_rubric_marine_gunner",
+      "name": "Rubric Marine Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_warpcoven_op_rubric_marine_icon_bearer",
+      "name": "Rubric Marine Icon Bearer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Inferno boltgun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_warpcoven_op_rubric_marine_warrior",
+      "name": "Rubric Marine Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [
+        {
+          "name": "Inferno boltgun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_warpcoven_op_tzaangor_champion",
+      "name": "Tzaangor Champion",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 10,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_warpcoven_op_tzaangor_horn_bearer",
+      "name": "Tzaangor Horn Bearer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Dagger",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_warpcoven_op_tzaangor_icon_bearer",
+      "name": "Tzaangor Icon Bearer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Dagger",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_warpcoven_op_tzaangor_warrior",
+      "name": "Tzaangor Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 9,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "id": "fac_vespid_stingwings",
+  "name": "Vespid Stingwings",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.2",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_vespid_stingwings_op_vespid_skyblast",
+      "name": "Vespid Skyblast",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Claws",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_vespid_stingwings_op_vespid_swarmguard",
+      "name": "Vespid Swarmguard",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Claws",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_vespid_stingwings_op_vespid_warrior",
+      "name": "Vespid Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Claws",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Neutron blaster",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 2"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_vespid_stingwings_op_vespid_strain_leader",
+      "name": "Vespid Strain Leader",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Neutron blaster",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 2"
+          ]
+        },
+        {
+          "name": "Claws",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_vespid_stingwings_op_oversight_drone",
+      "name": "Oversight Drone",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "8\"",
+      "save": "2+",
+      "wounds": 5,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_vespid_stingwings_op_vespid_longsting",
+      "name": "Vespid Longsting",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Claws",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_vespid_stingwings_op_vespid_shadestrain",
+      "name": "Vespid Shadestrain",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Claws",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

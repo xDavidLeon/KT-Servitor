@@ -1,0 +1,380 @@
+{
+  "id": "fac_ratling",
+  "name": "Ratling",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.1",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_ratling_op_ratling_fixer",
+      "name": "Ratling Fixer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "1/2",
+          "specialRules": []
+        },
+        {
+          "name": "Battle rifle",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_ratling_battlemutt",
+      "name": "Ratling Battlemutt",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 4,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_bullgryn",
+      "name": "Bullgryn",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 16,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_ratling_big_shot",
+      "name": "Ratling Big Shot",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "5+",
+      "wounds": 6,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "1/2",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_ratling_bomber",
+      "name": "Ratling Bomber",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "4+",
+      "wounds": 6,
+      "weapons": [
+        {
+          "name": "Sniper rifle (mobile)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Sniper rifle (stationary)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_ratling_hardbit",
+      "name": "Ratling Hardbit",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "5+",
+      "wounds": 6,
+      "weapons": [
+        {
+          "name": "Battle rifle",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_ratling_raider",
+      "name": "Ratling Raider",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "5+",
+      "wounds": 6,
+      "weapons": [
+        {
+          "name": "Suppressed sniper rifle (mobile)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Silent"
+          ]
+        },
+        {
+          "name": "Suppressed sniper rifle (stationary)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 2",
+            "Heavy",
+            "Silent"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_ratling_sneak",
+      "name": "Ratling Sneak",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "5+",
+      "wounds": 6,
+      "weapons": [
+        {
+          "name": "Suppressed sniper rifle (mobile)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Silent"
+          ]
+        },
+        {
+          "name": "Suppressed sniper rifle (stationary)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 2",
+            "Heavy",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "1/2",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_ogryn",
+      "name": "Ogryn",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 16,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_ratling_sniper",
+      "name": "Ratling Sniper",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "5+",
+      "wounds": 6,
+      "weapons": [
+        {
+          "name": "Sniper rifle (mobile)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Sniper rifle (stationary)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy"
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "1/2",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_ratling_spotter",
+      "name": "Ratling Spotter",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "5+",
+      "wounds": 6,
+      "weapons": [
+        {
+          "name": "Sniper rifle (mobile)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Sniper rifle (stationary)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy"
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "1/2",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_ratling_stashmaster",
+      "name": "Ratling Stashmaster",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "5+",
+      "wounds": 6,
+      "weapons": [
+        {
+          "name": "Sniper rifle (mobile)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Sniper rifle (stationary)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy"
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "1/2",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_ratling_op_ratling_vox_thief",
+      "name": "Ratling Vox-thief",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "5+",
+      "wounds": 6,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "1/2",
+          "specialRules": []
+        },
+        {
+          "name": "Sniper rifle (mobile)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Sniper rifle (stationary)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

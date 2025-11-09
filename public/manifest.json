@@ -1,6 +1,6 @@
 {
-  "name": "Kill Team Rules (Demo)",
-  "short_name": "KT Demo",
+  "name": "KT Servitor",
+  "short_name": "KTS",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#111111",

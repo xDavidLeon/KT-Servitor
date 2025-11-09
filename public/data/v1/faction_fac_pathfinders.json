@@ -1,0 +1,389 @@
+{
+  "id": "fac_pathfinders",
+  "name": "Pathfinders",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "July '25",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [
+    {
+      "id": "fac_pathfinders_eq_reference_markerlights",
+      "name": "Reference - Markerlights",
+      "description": ""
+    }
+  ],
+  "operatives": [
+    {
+      "id": "fac_pathfinders_op_shas_ui_pathfinder",
+      "name": "Shas'Ui Pathfinder",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Pulse carbine",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_blooded_pathfinder",
+      "name": "Blooded Pathfinder",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_transpectral_interference_pathfinder",
+      "name": "Transpectral Interference Pathfinder",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Pulse carbine",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": []
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_weapons_expert_pathfinder",
+      "name": "Weapons Expert Pathfinder",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_assault_grenadier_pathfinder",
+      "name": "Assault Grenadier Pathfinder",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Pulse carbine",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": []
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_marksman_pathfinder",
+      "name": "Marksman Pathfinder",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_comms_specialist_pathfinder",
+      "name": "Comms Specialist Pathfinder",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Pulse carbine",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_medical_technician_pathfinder",
+      "name": "Medical Technician Pathfinder",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Pulse carbine",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": []
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_drone_controller_pathfinder",
+      "name": "Drone Controller Pathfinder",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Pulse carbine",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": []
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_shas_la_pathfinder",
+      "name": "Shas'La Pathfinder",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Pulse carbine",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": []
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_mb3_recon_drone",
+      "name": "MB3 Recon Drone",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Ram",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_mv1_gun_drone",
+      "name": "MV1 Gun Drone",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Ram",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_mv4_shield_drone",
+      "name": "MV4 Shield Drone",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Ram",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_mv7_marker_drone",
+      "name": "MV7 Marker Drone",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Ram",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_mv31_pulse_accelerator_drone",
+      "name": "MV31 Pulse Accelerator Drone",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Ram",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_pathfinders_op_mv33_grav_inhibiter_drone",
+      "name": "MV33 Grav-Inhibiter Drone",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Ram",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

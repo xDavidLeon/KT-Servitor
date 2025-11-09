@@ -1,0 +1,160 @@
+{
+  "id": "fac_elucidian_starstriders",
+  "name": "Elucidian Starstriders",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.2",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [
+    {
+      "id": "fac_elucidian_starstriders_eq_warrant_of_trade",
+      "name": "Warrant of Trade",
+      "description": ""
+    },
+    {
+      "id": "fac_elucidian_starstriders_eq_privateer_support_assets",
+      "name": "Privateer Support Assets",
+      "description": ""
+    }
+  ],
+  "operatives": [
+    {
+      "id": "fac_elucidian_starstriders_op_elucia_vayne",
+      "name": "Elucia Vayne",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_elucidian_starstriders_op_canid",
+      "name": "Canid",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "8\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_elucidian_starstriders_op_death_cult_executioner",
+      "name": "Death Cult Executioner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_elucidian_starstriders_op_lectro_maester",
+      "name": "Lectro-maester",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_elucidian_starstriders_op_rejuvenat_adept",
+      "name": "Rejuvenat Adept",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_elucidian_starstriders_op_voidmaster",
+      "name": "Voidmaster",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_elucidian_starstriders_op_voidsman_with_lasgun",
+      "name": "Voidsman with lasgun",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": null,
+      "move": null,
+      "save": null,
+      "wounds": null,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_elucidian_starstriders_op_voidsman_with_rotor_cannon",
+      "name": "Voidsman with rotor cannon",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": null,
+      "move": null,
+      "save": null,
+      "wounds": null,
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

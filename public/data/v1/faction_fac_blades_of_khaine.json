@@ -1,0 +1,18 @@
+{
+  "id": "fac_blades_of_khaine",
+  "name": "Blades of Khaine",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.2",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [
+    {
+      "id": "fac_blades_of_khaine_eq_aspect_techniques_reference",
+      "name": "Aspect Techniques Reference",
+      "description": ""
+    }
+  ],
+  "operatives": []
+}

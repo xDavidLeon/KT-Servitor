@@ -1,9 +1,0 @@
-[
-    {"id":"fac_intercession_rule_atsknf","type":"faction_rule","factionId":"fac_intercession","title":"And They Shall Know No Fear","body":"Ignore certain modifiers to APL loss; reroll a single defense die in specific cases."},
-    {"id":"fac_intercession_op_leader","type":"operative","factionId":"fac_intercession","title":"Intercession Sergeant","body":"M6\" WS3+ BS3+ A4 W15 Sv3+. Weapons: bolt rifle or chainsword."},
-    {"id":"fac_intercession_op_gunner","type":"operative","factionId":"fac_intercession","title":"Intercession Gunner","body":"M6\" WS3+ BS3+ A3 W14 Sv3+. Bolt rifle (4/5, L5+)."},
-    {"id":"fac_intercession_tacop_1","type":"tacop","factionId":"fac_intercession","title":"Shock and Awe","body":"Score at the end of the Turning Point if you control objectives after eliminating enemy nearby."},
-    {"id":"fac_intercession_ploy_strat1","type":"ploy","factionId":"fac_intercession","title":"Oath of the Moment (Strategic)","body":"Choose a target; gain rerolls against it this Turning Point."},
-    {"id":"fac_intercession_eq_amulet","type":"equipment","factionId":"fac_intercession","title":"Astartes Amulet","body":"One operative only; improve defense in specific situations."}
-  ]
-  

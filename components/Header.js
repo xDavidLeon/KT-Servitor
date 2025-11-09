@@ -50,7 +50,7 @@ export default function Header({ version, status }) {
   }
 
   function handleAbout() {
-    alert("Kill Team Reference (Demo)\n\nNext.js PWA + Dexie + MiniSearch\n– Offline-first demo\n– Structured data only (no copyrighted text)\n\n© You, for your personal project.");
+    alert("KT Servitor is a personal project by @xdavidleon.\n\nThis free web-based app is a rules reference for Kill Team 2024 and features publicly available data; no copyrighted rule text. It is not affiliated with Games Workshop Ltd. This app is not a replacement for the official Kill Team 2024 rulebook.");
     setOpen(false);
   }
 
@@ -63,9 +63,9 @@ export default function Header({ version, status }) {
     >
       <div className="heading">
         <h1 style={{ margin: 0 }}>
-          Kill Team Reference <span className="badge">Demo</span>
+          KT Servitor
         </h1>
-        {version && <span className="pill">Data v{version}</span>}
+        {version && <span className="pill">v{version}</span>}
       </div>
 
       <div

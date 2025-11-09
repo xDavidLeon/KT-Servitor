@@ -1,0 +1,168 @@
+{
+  "id": "fac_raveners",
+  "name": "Raveners",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_raveners_op_ravener_prime",
+      "name": "Ravener Prime",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 21,
+      "weapons": [
+        {
+          "name": "Scything talons & rending claws",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_raveners_op_felltalon",
+      "name": "Felltalon",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 20,
+      "weapons": [
+        {
+          "name": "Pincer tail",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 3\"",
+            "Silent"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_raveners_op_venomspitter",
+      "name": "Venomspitter",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 20,
+      "weapons": [
+        {
+          "name": "Pincer tail",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 3\"",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Scything talons",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_raveners_op_warrior",
+      "name": "Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 20,
+      "weapons": [
+        {
+          "name": "Pincer tail",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 3\"",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Scything talons",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_raveners_op_wrecker",
+      "name": "Wrecker",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 20,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_raveners_op_tremorscythe",
+      "name": "Tremorscythe",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 20,
+      "weapons": [
+        {
+          "name": "Pincer tail",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 3\"",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Scything talons & rending claws",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

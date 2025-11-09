@@ -1,0 +1,26 @@
+{
+  "id": "fac_imperial_navy_breachers",
+  "name": "Imperial Navy Breachers",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "July '25",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_imperial_navy_breachers_op_navis_sergeant_at_arms",
+      "name": "Navis Sergeant-At-Arms",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

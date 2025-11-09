@@ -1,0 +1,94 @@
+{
+  "id": "fac_canoptek_circle",
+  "name": "Canoptek Circle",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_canoptek_circle_op_macrocyte_reanimator",
+      "name": "Macrocyte Reanimator",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Claws & tail",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_canoptek_circle_op_tomb_crawler",
+      "name": "Tomb Crawler",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 21,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_canoptek_circle_op_macrocyte_accelerator",
+      "name": "Macrocyte Accelerator",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_canoptek_circle_op_macrocyte_warrior",
+      "name": "Macrocyte Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Claws & tail",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_canoptek_circle_op_geomancer",
+      "name": "Geomancer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

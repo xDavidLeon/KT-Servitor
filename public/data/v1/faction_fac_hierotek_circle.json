@@ -1,0 +1,198 @@
+{
+  "id": "fac_hierotek_circle",
+  "name": "Hierotek Circle",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "July '25",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_hierotek_circle_op_psychomancer",
+      "name": "Psychomancer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hierotek_circle_op_apprentek",
+      "name": "Apprentek",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 11,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hierotek_circle_op_technomancer",
+      "name": "Technomancer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hierotek_circle_op_chronomancer",
+      "name": "Chronomancer",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 3,
+      "move": "6\"",
+      "save": "3+",
+      "wounds": 14,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hierotek_circle_op_plasmacyte_accelerator",
+      "name": "Plasmacyte Accelerator",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 5,
+      "weapons": [
+        {
+          "name": "Claws",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "1/2",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hierotek_circle_op_plasmacyte_reanimator",
+      "name": "Plasmacyte Reanimator",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 5,
+      "weapons": [
+        {
+          "name": "Claws",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "1/2",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hierotek_circle_op_immortal_guardian",
+      "name": "Immortal Guardian",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Bayonet",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Gauss Blaster",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Tesla carbine",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "2\" Devastating 1"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hierotek_circle_op_deathmark",
+      "name": "Deathmark",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 10,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hierotek_circle_op_immortal_despotek",
+      "name": "Immortal Despotek",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "3+",
+      "wounds": 11,
+      "weapons": [
+        {
+          "name": "Bayonet",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Gauss Blaster",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Tesla carbine",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "2\" Devastating 1"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

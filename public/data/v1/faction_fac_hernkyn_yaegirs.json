@@ -1,0 +1,186 @@
+{
+  "id": "fac_hernkyn_yaegirs",
+  "name": "Hernkyn Yaegirs",
+  "factionKeyword": "UNKNOWN",
+  "archetypes": [],
+  "summary": "Update 1.1",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_hernkyn_yaegirs_op_theyn",
+      "name": "Theyn",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Bolt revolver",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Bolt shotgun (short range)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Bolt shotgun (long range)",
+          "atk": "4",
+          "hit": "5+",
+          "dmg": "2/2",
+          "specialRules": []
+        },
+        {
+          "name": "Plasma knife",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hernkyn_yaegirs_op_bladekyn",
+      "name": "Bladekyn",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hernkyn_yaegirs_op_bombast",
+      "name": "Bombast",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hernkyn_yaegirs_op_gunner",
+      "name": "Gunner",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hernkyn_yaegirs_op_ironbraek",
+      "name": "Ironbraek",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Bolt revolver",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hernkyn_yaegirs_op_riflekyn",
+      "name": "Riflekyn",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hernkyn_yaegirs_op_tracker",
+      "name": "Tracker",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hernkyn_yaegirs_op_warrior",
+      "name": "Warrior",
+      "factionKeyword": "UNKNOWN",
+      "keywords": [],
+      "apl": 2,
+      "move": "5\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

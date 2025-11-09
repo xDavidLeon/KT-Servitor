@@ -18,7 +18,6 @@ export default function ItemPage(){
     <div className="container">
       <div className="card">
         <div className="heading"><h2 style={{margin:0}}>{item.title}</h2><span className="pill">{item.type}</span></div>
-        <div className="muted">Season: {item.season}</div>
         <p style={{whiteSpace:'pre-wrap'}}>{item.body}</p>
         <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
           {(item.tags||[]).map(t=> <span key={t} className="pill">{t}</span>)}

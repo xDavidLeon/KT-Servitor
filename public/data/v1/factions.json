@@ -1,5 +1,303 @@
 [
-    {"id":"fac_intercession","name":"Intercession Squad","season":"Octarius","tags":["Astartes"],"summary":"Elite Space Marines. Durable operatives with versatile bolters and chainswords."},
-    {"id":"fac_phobos","name":"Phobos Strike Team","season":"Chalnath","tags":["Astartes","Phobos"],"summary":"Stealth specialists with scouting tricks and precise shooting."}
-  ]
-  
+  {
+    "id": "fac_angels_of_death",
+    "name": "Angels of Death",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_battleclade",
+    "name": "Battleclade",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": ""
+  },
+  {
+    "id": "fac_blades_of_khaine",
+    "name": "Blades of Khaine",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.2"
+  },
+  {
+    "id": "fac_blooded",
+    "name": "Blooded",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": ""
+  },
+  {
+    "id": "fac_brood_brothers",
+    "name": "Brood Brothers",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_canoptek_circle",
+    "name": "Canoptek Circle",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": ""
+  },
+  {
+    "id": "fac_chaos_cult",
+    "name": "Chaos Cult",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_corsair_voidscarred",
+    "name": "Corsair Voidscarred",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.2"
+  },
+  {
+    "id": "fac_death_korps",
+    "name": "Death Korps",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.2"
+  },
+  {
+    "id": "fac_deathwatch",
+    "name": "Deathwatch",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": ""
+  },
+  {
+    "id": "fac_elucidian_starstriders",
+    "name": "Elucidian Starstriders",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.2"
+  },
+  {
+    "id": "fac_exaction_squad",
+    "name": "Exaction Squad",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.2"
+  },
+  {
+    "id": "fac_farstalker_kinband",
+    "name": "Farstalker Kinband",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.2"
+  },
+  {
+    "id": "fac_fellgor_ravagers",
+    "name": "Fellgor Ravagers",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.2"
+  },
+  {
+    "id": "fac_gellerpox_infected",
+    "name": "Gellerpox Infected",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.3"
+  },
+  {
+    "id": "fac_goremonger",
+    "name": "Goremonger",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_hand_of_the_archon",
+    "name": "Hand of the Archon",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.1"
+  },
+  {
+    "id": "fac_hearthkyn_salvagers",
+    "name": "Hearthkyn Salvagers",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.1"
+  },
+  {
+    "id": "fac_hernkyn_yaegirs",
+    "name": "Hernkyn Yaegirs",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.1"
+  },
+  {
+    "id": "fac_hierotek_circle",
+    "name": "Hierotek Circle",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_hunter_clade",
+    "name": "Hunter Clade",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_imperial_navy_breachers",
+    "name": "Imperial Navy Breachers",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_inquisitorial_agents",
+    "name": "Inquisitorial Agents",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.3"
+  },
+  {
+    "id": "fac_kasrkin",
+    "name": "Kasrkin",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.2"
+  },
+  {
+    "id": "fac_kommandos",
+    "name": "Kommandos",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.1"
+  },
+  {
+    "id": "fac_legionaries",
+    "name": "Legionaries",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_mandrakes",
+    "name": "Mandrakes",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": ""
+  },
+  {
+    "id": "fac_nemesis_claw",
+    "name": "Nemesis Claw",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_non_player_operatives",
+    "name": "Non-player Operatives",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": ""
+  },
+  {
+    "id": "fac_novitiates",
+    "name": "Novitiates",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": ""
+  },
+  {
+    "id": "fac_pathfinders",
+    "name": "Pathfinders",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_phobos_strike_team",
+    "name": "Phobos Strike Team",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_plague_marines",
+    "name": "Plague Marines",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.2"
+  },
+  {
+    "id": "fac_ratling",
+    "name": "Ratling",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.1"
+  },
+  {
+    "id": "fac_raveners",
+    "name": "Raveners",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": ""
+  },
+  {
+    "id": "fac_sanctifier",
+    "name": "Sanctifier",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_scout_squad",
+    "name": "Scout Squad",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.3"
+  },
+  {
+    "id": "fac_tempestus_aquilons",
+    "name": "Tempestus Aquilons",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.2"
+  },
+  {
+    "id": "fac_vespid_stingwings",
+    "name": "Vespid Stingwings",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.2"
+  },
+  {
+    "id": "fac_void_dancer_troupe",
+    "name": "Void-dancer Troupe",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.3"
+  },
+  {
+    "id": "fac_warpcoven",
+    "name": "Warpcoven",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "July '25"
+  },
+  {
+    "id": "fac_wrecka_krew",
+    "name": "Wrecka Krew",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.1"
+  },
+  {
+    "id": "fac_wyrmblade",
+    "name": "Wyrmblade",
+    "factionKeyword": "UNKNOWN",
+    "archetypes": [],
+    "summary": "Update 1.0"
+  }
+]
