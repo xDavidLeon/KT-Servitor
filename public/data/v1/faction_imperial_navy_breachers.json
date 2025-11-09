@@ -56,7 +56,8 @@
           "description": "Whenever you would use the Attack Order or Defence Order strategy ploy, if this operative is in the killzone, it costs you 0CP. Once during each of this operative’s activations, before or after it performs an action, if your Attack Order or Defence Order marker is in the killzone (see relevant strategy ploy), you can either:\r\n- Remove that marker and place it again.\r\n- Change the selected ploy to the other (e.g. your Attack Order becomes a Defence Order).\r\n\r\n\r\nYou cannot do both, and you don’t need to spend any CP to change the ploy."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_imperial_navy_breachers_op_navis_armsman",
@@ -105,7 +106,8 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly **IMPERIAL NAVY BREACHER ARMSMAN** operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule). Ignore this rule when you are using the Breach and Clear faction rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_imperial_navy_breachers_op_navis_hatchcutter",
@@ -153,7 +155,8 @@
           "name": "Breach Point (1AP)",
           "description": "▶ Place one of your Breach markers within this operative’s control range as close as possible to a terrain feature within control range of it. Whenever an operative is within 1\" of that marker, it treats parts of that terrain feature that are no more than 1\" thick as Accessible terrain.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a terrain feature isn’t within its control range."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_imperial_navy_breachers_op_navis_void_jammer",
@@ -217,7 +220,8 @@
           "name": "Interference Pulse (1AP)",
           "description": "▶ Select one enemy operative visible to and within 8\" of a friendly GHEISTSKULL operative. Roll one D6, adding 1 to the result if that enemy operative is a valid target for that friendly GHEISTSKULL operative: on a 3+, subtract 1 from that enemy operative’s APL stat until the end of its next activation.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a friendly GHEISTSKULL operative isn’t in the killzone."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_imperial_navy_breachers_op_navis_gunner",
@@ -302,7 +306,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_imperial_navy_breachers_op_navis_grenadier",
@@ -366,7 +371,8 @@
           "description": "This operative can use frag, krak and stun grenades (see universal equipment). Doing so doesn’t count towards any limited uses you have (i.e. if you also select those grenades from equipment for other operatives). Whenever this operative is using a frag or krak grenade, improve the Hit stat of that weapon by 1."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_imperial_navy_breachers_op_navis_gheistskull",
@@ -397,7 +403,8 @@
           "name": "Navis Gheistskull",
           "description": "▶ Until the end of the activation, add 6\" to this operative’s Move stat.\r\n◆ This operative can only perform this action once per battle, and cannot perform it during the first turning point."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_imperial_navy_breachers_op_navis_endurant",
@@ -456,7 +463,8 @@
           "description": "This operative can perform the **Fall Back** action for 1 less AP."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_imperial_navy_breachers_op_navis_c_a_t_unit",
@@ -487,7 +495,8 @@
           "name": "Spot (1AP)",
           "description": "▶ Select one enemy operative visible to this operative. Until the end of the turning point, until that enemy operative is no longer visible to this operative or until this operative performs this action again (whichever comes first), whenever a friendly IMPERIAL NAVY BREACHER operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative’s ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_imperial_navy_breachers_op_navis_axejack",
@@ -530,7 +539,8 @@
           "description": "Whenever an attack dice inflicts damage of 3 or more on this operative during a turning point in which it performed the **Charge** action, roll one D6: on a 5+, subtract 1 from that inflicted damage."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_imperial_navy_breachers_op_navis_surveyor",
@@ -583,7 +593,18 @@
           "name": "Remote Control (1AP)",
           "description": "▶ Select one friendly **IMPERIAL NAVY BREACHER C.A.T. UNIT** operative. That operative can immediately perform one free action, but it cannot move more than 3\" during that action.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a friendly **IMPERIAL NAVY BREACHER C.A.T. UNIT** operative isn’t in the killzone."
         }
-      ]
+      ],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 1,
+      "max": 1
+    },
+    "operatives": {
+      "min": 10,
+      "max": 10
+    }
+  }
 }

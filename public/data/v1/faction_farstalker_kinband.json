@@ -90,7 +90,8 @@
           "description": "Whenever your mark is incapacitated, you can select one friendly **FARSTALKER KINBAND** operative within 6\" of this operative. Until the end of the battle, that operative’s weapons have the Balanced weapon rule. Each friendly operative can only be selected for this rule once per battle."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_bow_hunter",
@@ -152,7 +153,8 @@
           "name": "Energise (1AP)",
           "description": "▶ Until the end of the turning point or until this operative has shot with its accelerator bow (whichever comes first), all profiles of its accelerator bow have the Lethal 5+ weapon rule.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_cold_blood",
@@ -196,7 +198,8 @@
           "description": "Whenever this operative is shooting against, fighting against or retaliating against a wounded enemy operative, this operative’s weapons have the Lethal 5+ weapon rule; if that enemy operative is also injured, this operative’s weapons also have the Rending weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_cut_skin",
@@ -235,7 +238,8 @@
           "description": "The first time this operative performs the **Fight** action during each of its activations, if neither it nor the enemy operative in that sequence is incapacitated, this operative can immediately perform a free **Fight** action afterwards, but it can only fight against that enemy operative (and only if it’s still valid to fight against). This takes precedence over action restrictions."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_heavy_gunner",
@@ -287,7 +291,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_hound",
@@ -330,7 +335,8 @@
           "name": "Gather (1AP)",
           "description": "▶ Perform a free **Dash** or **Reposition** action with this operative. During that move, you can perform a free **Pick Up Marker** or **Place Marker** action with this operative (you can determine control during that action to do so), and any remaining move distance it had from the **Dash** or **Reposition** action can be used after it does so."
         }
-      ]
+      ],
+      "maxSelections": 2
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_long_sight",
@@ -396,7 +402,8 @@
           "name": "Long-Sight (1AP)",
           "description": "▶ Until the start of this operative’s next activation:\r\n- The concealed and stationary profiles of its Kroot hunting rifle have the Lethal 5+ weapon rule.\r\n- Whenever it’s shooting with its Kroot hunting rifle, enemy operatives cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_pistolier",
@@ -451,7 +458,8 @@
           "description": "Once per turning point, when an enemy operative is performing the **Shoot** action and this operative is selected as the valid target (or if it will be a secondary target from the Blast weapon rule), if this operative is ready, you can interrupt that action to use this rule. If you do, this operative can immediately perform a free **Shoot** action with its dual Kroot pistols (focused) against that enemy operative (you can change its order to Engage to do so), but that enemy operative must be a valid target."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_stalker",
@@ -501,7 +509,8 @@
           "name": "Kroot Stalker",
           "description": "▶ Perform a free **Charge** action with this operative, but don’t exceed its Move stat (i.e. don’t add 2\"). Then immediately perform a free Fight action with this operative. The first time you strike during that action, you can immediately resolve another of your successes as a strike (before your opponent).\r\n◆ This operative cannot perform this action while it has an Engage order, while within control range of an enemy operative, or if it isn’t within 1\" of Light or Heavy terrain."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_tracker",
@@ -545,7 +554,8 @@
           "name": "Marked for the Hunt (1AP)",
           "description": "▶ Remove your Pech’ra marker from the killzone (if any). Then place your Pech’ra marker visible to this operative, or on Vantage terrain of a terrain feature that’s visible to this operative. Whenever a friendly **FARSTALKER KINBAND** operative is shooting an enemy operative that has that marker within its control range, that friendly operative’s ranged weapons have the Seek Light weapon rule.\r\n▶ At the start of this operative’s next activation or if it’s removed from the killzone (whichever comes first), remove your Pech’ra marker from the killzone.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_warrior",
@@ -595,7 +605,18 @@
           "description": "Once per turning point, during a friendly **WARRIOR** operative’s activation, you can use the Meat, Piercing Shot or Toxin Shot rule (see faction equipment) for that operative. Doing so doesn’t count for its once per turning point limit."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 11,
+      "max": 11
+    }
+  }
 }

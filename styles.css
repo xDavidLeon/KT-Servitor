@@ -1,9 +1,11 @@
-:root { --bg:#0f1115; --panel:#151822; --text:#e6e6e6; --muted:#9aa0aa; --accent:#4ade80; }
+:root { --bg:#0f1115; --panel:#151822; --text:#e6e6e6; --muted:#9aa0aa; --accent:#fb923c; }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial}
 a{color:var(--accent);text-decoration:none}
 .container{max-width:900px;margin:0 auto;padding:1rem}
 .card{background:var(--panel);border-radius:16px;padding:1rem;margin:0.5rem 0;box-shadow:0 4px 24px rgba(0,0,0,.25)}
+.header-sticky{position:sticky;top:0;z-index:100;margin-bottom:0.5rem}
+.faction-selector-sticky{position:sticky;top:80px;z-index:90;margin-bottom:0.5rem}
 input,select,button{background:#0e1016;color:var(--text);border:1px solid #262a36;border-radius:10px;padding:0.6rem 0.8rem}
 .row{display:flex;gap:0.5rem;flex-wrap:wrap}
 .pill{display:inline-block;padding:.2rem .5rem;border:1px solid #2a2f3f;border-radius:999px;font-size:.8rem;color:var(--muted)}
@@ -12,7 +14,7 @@ th,td{padding:.4rem;border-bottom:1px solid #2a2f3f;text-align:left}
 th{position:sticky;top:0;background:#121521}
 .muted{color:var(--muted)}
 .heading{display:flex;align-items:baseline;gap:.5rem}
-.badge{background:#1a1f2b;border:1px solid #2a3142;color:#a8ffcb;padding:.15rem .45rem;border-radius:8px;font-size:.75rem}
+.badge{background:#1a1f2b;border:1px solid #2a3142;color:#fed7aa;padding:.15rem .45rem;border-radius:8px;font-size:.75rem}
 .menu {
     position: absolute; right: 1rem; top: 3.25rem;
     background: var(--panel); border: 1px solid #2a2f3f; border-radius: 12px;

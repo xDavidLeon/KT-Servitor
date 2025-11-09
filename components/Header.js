@@ -56,9 +56,9 @@ export default function Header({ version, status }) {
 
   return (
     <div
-      className="card"
+      className="card header-sticky"
       style={{
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative'
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center'
       }}
     >
       <div className="heading">

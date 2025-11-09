@@ -70,7 +70,8 @@
           "description": "In the Gambit step of each Strategy phase, if you pass at the first opportunity, you gain 1CP. Ignore each STRATEGIC GAMBIT from the mission pack (if any) when determining this."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hand_of_the_archon_op_agent",
@@ -112,7 +113,8 @@
           "description": "Once per turning point, when a friendly HAND OF THE ARCHON operative gains one of your Pain tokens, one friendly HAND OF THE ARCHON **AGENT** operative that doesn’t have one of your Pain tokens can also gain one."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 8
     },
     {
       "id": "fac_hand_of_the_archon_op_disciple_of_yaelindra",
@@ -156,7 +158,8 @@
           "name": "Torment Grenade (1AP)",
           "description": "▶ Select one enemy operative visible to and within 6\" of this operative. That operative and each other operative within 1\" of it takes a poison test. For an operative to take a poison test, roll one D6, adding 1 to the result if that operative has a Save stat of 4+ or worse: on a 3+, inflict D3 damage on that operative and it gains one of your Poison tokens (if it doesn’t already have one).\r\n▶ Whenever an operative that has one of your Poison tokens is activated, inflict D3 damage on it.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_hand_of_the_archon_op_crimson_duellist",
@@ -206,7 +209,8 @@
           "description": "This operative can perform two **Fight** actions during its activation."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hand_of_the_archon_op_elixicant",
@@ -265,7 +269,8 @@
           "name": "Administer Drug (1AP)",
           "description": "▶ Select one friendly HAND OF THE ARCHON operative visible to and within 3\" of this operative, then select one of the following for that friendly operative:\r\n- It regains 2D3 lost wounds. \r\n- Select a different COMBAT DRUG rule for it to have for the battle (this replaces its previous one).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_hand_of_the_archon_op_flayer",
@@ -295,7 +300,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hand_of_the_archon_op_gunner",
@@ -343,7 +349,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hand_of_the_archon_op_heavy_gunner",
@@ -404,7 +411,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hand_of_the_archon_op_skysplinter_assassin",
@@ -468,7 +476,18 @@
           "name": "Mark (1AP)",
           "description": "▶ Select one enemy operative visible to this operative. Until the end of the turning point, whenever this operative is shooting that enemy operative you can use this effect. If you do: \r\n- This operative’s ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 8,
+      "max": 8
+    }
+  }
 }

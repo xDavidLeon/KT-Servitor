@@ -99,7 +99,8 @@
           "description": "Whenever an enemy operative that has one of your Poison tokens loses one or more wounds within 7\" of this operative, this operative regains up to an equal number of lost wounds (to a maximum of 3 lost wounds per turning point, and only if this operative isn’t incapacitated)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_plague_marines_op_malignant_plaguecaster",
@@ -170,7 +171,8 @@
           "name": "Putrescent Vitality (1AP)",
           "description": "▶ PSYCHIC. Select one friendly operative visible to and within 3\" of this operative, then roll 2D6: if the result is 7, the selected operative regains 7 lost wounds; otherwise, the selected operative regains lost wounds equal to the highest D6.\r\n◆ An operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_plague_marines_op_plague_marine_bombardier",
@@ -210,7 +212,8 @@
           "description": "This operative can use blight and krak grenades (see faction and universal equipment). Doing so doesn’t count towards any limited uses you have (i.e. if you also select those grenades from equipment for other operatives). Whenever it’s doing so, improve the Hit stat of that weapon by 1 and blight grenades have the Toxic weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_plague_marines_op_plague_marine_fighter",
@@ -246,7 +249,8 @@
           "name": "Flail (1AP)",
           "description": "▶ Inflict D3+2 damage on each other operative that’s both visible to and within 2\" of this operative. Roll separately for each: if it’s an enemy operative, on a 3, that enemy operative also gains one of your Poison tokens (if it doesn’t already have one).\r\n◆ This operative cannot perform this action while it has a Conceal order, or during an activation in which it has performed more than one **Fight** action, and it cannot perform more than one **Fight** action during an activation in which it performs this action."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_plague_marines_op_plague_marine_icon_bearer",
@@ -295,7 +299,8 @@
           "description": "Whenever this operative is within your opponent's territory, the Contagion strategy ploy costs you 0CP."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_plague_marines_op_plague_marine_warrior",
@@ -338,7 +343,8 @@
           "description": "Whenever an operative is shooting this operative, defence dice results of 5+ are critical successes."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_plague_marines_op_plague_marine_heavy_gunner",
@@ -379,7 +385,18 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 5,
+      "max": 5
+    }
+  }
 }

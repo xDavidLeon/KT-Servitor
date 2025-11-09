@@ -121,7 +121,8 @@
           "name": "Ravage Destiny (1AP)",
           "description": "▶ **PSYCHIC**. Select one enemy operative visible to and within 9\" of this operative. Until the start of this operative’s next activation, until it's incapacitated or until this action is performed again by a friendly operative (whichever comes first), whenever that enemy operative is shooting, fighting or retaliating, your opponent must re-roll their attack dice results of 6, and whenever determining control of a marker, treat that enemy operative’s APL stat as 1 lower. Note this isn't a change to its APL stat, so any changes are cumulative with this.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_warpcoven_op_sorcerer_of_tempyrion",
@@ -208,7 +209,8 @@
           "name": "Reconstitution Ritual",
           "description": "▶ **PSYCHIC**. Select one friendly **WARPCOVEN** operative visible to and within 6\" of this operative. That operative regains up to 2D3 lost wounds\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_warpcoven_op_sorcerer_of_warpfire",
@@ -306,7 +308,8 @@
           "name": "Alight (1AP)",
           "description": "▶ **PSYCHIC**. Select one enemy operative visible to this operative. Until the start of this operative’s next activation, until it's incapacitated or until this action is performed again by a friendly operative (whichever comes first), that enemy operative gains one of your Alight tokens (if it doesn’t already have one). Whenever a friendly **WARPCOVEN** operative is shooting against, fighting against or retaliating against an enemy operative that has one of your Alight tokens, that friendly operative’s weapons have the Ceaseless weapon rule.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_warpcoven_op_rubric_marine_gunner",
@@ -368,7 +371,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_warpcoven_op_rubric_marine_icon_bearer",
@@ -411,7 +415,8 @@
           "description": "Whenever determining control of a marker, treat this operative’s APL stat as 1 higher. Note this isn’t a change to its APL stat, so any changes are cumulative with this."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_warpcoven_op_rubric_marine_warrior",
@@ -454,7 +459,8 @@
           "description": "Whenever this operative is shooting, if it hasn’t performed the **Charge** or **Reposition** action during the activation, or if it's a counteraction, its ranged weapons have the Ceaseless weapon rule. Note this operative isn’t restricted from performing these actions after shooting."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_warpcoven_op_tzaangor_champion",
@@ -500,7 +506,8 @@
           "description": "The first time this operative performs the **Fight** action during each of its activations, if it isn’t incapacitated, it can immediately perform a free **Fight** action afterwards (you don't have to select the same enemy operative to fight against). This takes precedence over action restrictions."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_warpcoven_op_tzaangor_horn_bearer",
@@ -532,7 +539,8 @@
           "name": "Brayhorn (0AP)",
           "description": "▶ Until the Ready step of the next Strategy phase, add 1\" to the Move stat of friendly **WARPCOVEN TZAANGOR** operatives.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_warpcoven_op_tzaangor_icon_bearer",
@@ -568,7 +576,8 @@
           "description": "Whenever determining control of a marker, treat this operative’s APL stat as 1 higher. Note this isn't a change to its APL stat, so any changes are cumulative with this."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_warpcoven_op_tzaangor_warrior",
@@ -632,7 +641,18 @@
           "description": "Once per battle, one friendly WARPCOVEN TZAANGOR WARRIOR can perform the Pick Up Marker, Place Marker or a mission action for 1 less AP if that friendly operative is within your opponent's territory."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 12,
+      "max": 12
+    }
+  }
 }

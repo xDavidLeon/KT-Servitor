@@ -59,7 +59,8 @@
           "description": "Whenever a friendly **HUNTER CLADE RUSTSTALKER** operative within 3\" of this operative is fighting, the first time you strike with a critical success during that sequence, inflict 1 additional damage."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hunter_clade_op_sicarian_infiltrator_princeps",
@@ -127,7 +128,8 @@
           "description": "Whenever a friendly **HUNTER CLADE INFILTRATOR** operative is within 3\" of this operative, has a Conceal order and is in cover, that friendly operative cannot be selected as a valid target, taking precedence over all other rules (e.g. Seek, Vantage terrain) except being within 2\"."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_alpha",
@@ -192,7 +194,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_alpha",
@@ -262,7 +265,8 @@
           "description": "Whenever an enemy operative is within 3\" of this operative, if it's under the effects of the Rad-Saturation rule, also subtract 1 from the Atk stat of that enemy operative’s weapons."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_gunner",
@@ -349,7 +353,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 6
     },
     {
       "id": "fac_hunter_clade_op_sicarian_infiltrator_warrior",
@@ -413,7 +418,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 6
     },
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_warrior",
@@ -452,7 +458,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 9
     },
     {
       "id": "fac_hunter_clade_op_sicarian_ruststalker_warrior",
@@ -498,7 +505,8 @@
           "description": "Whenever an operative is shooting this operative, if you can retain any cover saves, you can retain one additional cover save, or you can retain one cover save as a critical success instead. This isn’t cumulative with improved cover saves from Vantage terrain."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 9
     },
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_surveyor",
@@ -536,7 +544,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_diktat",
@@ -574,7 +583,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_gunner",
@@ -661,7 +671,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 6
     },
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_surveyor",
@@ -700,7 +711,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_warrior",
@@ -738,7 +750,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 9
     },
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_diktat",
@@ -777,7 +790,18 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 9,
+      "max": 9
+    }
+  }
 }

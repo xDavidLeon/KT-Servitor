@@ -69,7 +69,8 @@
           "description": "At the end of the Select Operatives step, if this operative is selected for deployment, select up to two of the following improvements or weapon rules for this weapon to have for the battle: Add 1 to the Normal Dmg stat, add 1 to the Critical Dmg stat, Balanced, Brutal, Lethal 5+, Rending."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_gellerpox_infected_op_bloatspawn",
@@ -128,7 +129,8 @@
           "description": "Whenever this operative performs the **Fight** action and you select this weapon profile, if it isn't incapacitated, it can immediately perform a free **Fight** action afterwards, but you must select this weapon profile and it can only fight against each enemy operative within its control range once per activation or counteraction using this weapon profile. This takes precedence over action restrictions, and you can continue to perform free Fight actions until this operative is incapacitated or has fought against every enemy operative within its control range."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_gellerpox_infected_op_fleshscreamer",
@@ -172,7 +174,8 @@
           "description": "Whenever an enemy operative is within 3\" of this operative, your opponent must spend 1 additional AP for that enemy operative to perform the **Pick Up Marker** and mission actions. Whenever determining control of a marker, treat the total APL stat of enemy operatives that contest it as 1 lower if at least one of those enemy operatives is within 3\" of this operative. Note this isn’t a change to the APL stat, so any changes are cumulative with this."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_gellerpox_infected_op_lumberghast",
@@ -206,7 +209,8 @@
           "description": "Whenever this operative finishes moving during the **Charge** action, you can inflict D3 damage on each enemy operative within its control range (roll separately for each)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_gellerpox_infected_op_mutant_w_heavy_axe",
@@ -247,7 +251,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_gellerpox_infected_op_mutant_w_improvised_weapon",
@@ -288,7 +293,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 2
     },
     {
       "id": "fac_gellerpox_infected_op_cursemite",
@@ -327,7 +333,8 @@
           "description": "Whenever this operative is using this weapon against a wounded operative, add 1 to the Atk stat of this weapon and it has the Lethal 5+ weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_gellerpox_infected_op_eyestinger_swarm",
@@ -367,7 +374,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_gellerpox_infected_op_glitchling",
@@ -418,7 +426,8 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly GELLERPOX INFECTED **GLITCHLING** operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 4
     },
     {
       "id": "fac_gellerpox_infected_op_sludge_grub",
@@ -464,7 +473,14 @@
           "description": "When this operative is incapacitated, roll one D6 separately for each enemy operative visible to and within 2\" of it: on a 4+, inflict 1 damage on that operative."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    }
+  }
 }

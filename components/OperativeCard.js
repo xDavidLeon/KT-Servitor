@@ -3,14 +3,6 @@ export default function OperativeCard({ operative }) {
     <div className="operative-card">
       <div className="operative-header">
         <h4 style={{ margin: 0 }}>{operative.name || operative.title}</h4>
-        <div className="operative-tags">
-          {operative.factionKeyword && operative.factionKeyword !== 'UNKNOWN' && (
-            <span className="pill">{operative.factionKeyword}</span>
-          )}
-          {operative.keywords && operative.keywords.map(keyword => (
-            <span key={keyword} className="pill">{keyword}</span>
-          ))}
-        </div>
       </div>
       
       <div className="operative-stats">
@@ -119,8 +111,7 @@ export default function OperativeCard({ operative }) {
       
       {/* Keywords section at the bottom */}
       {(operative.factionKeyword || (operative.keywords && operative.keywords.length > 0)) && (
-        <div className="operative-keywords" style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid #ddd' }}>
-          <strong>Keywords:</strong>
+        <div className="operative-keywords" style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px' }}>
           <div style={{ marginTop: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.25rem' }}>
             {operative.factionKeyword && operative.factionKeyword !== 'UNKNOWN' && (
               <span className="pill" key="faction-keyword">{operative.factionKeyword}</span>

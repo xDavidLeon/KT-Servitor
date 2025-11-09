@@ -75,7 +75,8 @@
           "description": "The first time this operative incapacitates an enemy operative during the battle, you can either gain 1 additional CP or use an additional WARRANT OF TRADE rule (up to four uses per battle, instead of three). Note that you still cannot use the same WARRANT OF TRADE rule more than once per battle."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_elucidian_starstriders_op_canid",
@@ -117,7 +118,8 @@
           "name": "Gather (1AP)",
           "description": "▶ Perform a free **Dash** or **Reposition** action with this operative. During that move, you can perform a free **Pick Up Marker** or **Place Marker* action with this operative (you can determine control during that action to do so), and any remaining move distance it had from the **Dash** or **Reposition** action can be used after it does so."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_elucidian_starstriders_op_death_cult_executioner",
@@ -176,7 +178,8 @@
           "name": "Trained Assassin (1AP)",
           "description": "▶ Change this operative’s order.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_elucidian_starstriders_op_lectro_maester",
@@ -228,7 +231,8 @@
           "name": "Calibrate Voltagheist (0AP)",
           "description": "▶ Select one of the following effects to last until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first): \r\n- Charge: This operative’s voltaic pistol has the Lethal 4+ weapon rule. \r\n- Field: Whenever an enemy operative ends the **Charge**, **Dash**, **Fall Back** or **Reposition** action visible to and within 4\" of this operative, inflict D6 damage on that enemy operative.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_elucidian_starstriders_op_rejuvenat_adept",
@@ -281,7 +285,8 @@
           "name": "Healing Serum (1AP)",
           "description": "▶ Select one friendly ELUCIDIAN STARSTRIDER operative within this operative’s control range to regain up to D3+3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_elucidian_starstriders_op_voidmaster",
@@ -353,7 +358,8 @@
           "name": "Uncompromising Fire (1AP)",
           "description": "▶ Perform two free **Shoot** actions with this operative (this takes precedence over action restrictions). You must select its relic laspistol for one action and its artificer shotgun (close range) for the other (in any order).\r\n◆ This operative cannot perform this action while it has a Conceal order, or during an activation in which it performed the **Shoot** action (or vice versa)."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_elucidian_starstriders_op_voidsman_with_lasgun",
@@ -390,7 +396,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 3
     },
     {
       "id": "fac_elucidian_starstriders_op_voidsman_with_rotor_cannon",
@@ -440,7 +447,14 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    }
+  }
 }

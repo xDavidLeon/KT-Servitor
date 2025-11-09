@@ -60,7 +60,8 @@
           "description": "**Art of War**: Once per battle **STRATEGIC GAMBIT**. Select one of the following and apply its rules until the end of the turning point: \r\n- **Mont’ka**: Add 1\" to the Move stat of friendly **PATHFINDER** operatives. \r\n- **Kauyon**: Friendly **PATHFINDER** operatives can perform a free **Markerlight** action during their activation if they have a Conceal order."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_blooded_pathfinder",
@@ -103,7 +104,8 @@
           "description": "During a turning point in which you have used a friendly **SHAS’UI** operative’s Art of War **STRATEGIC GAMBIT** and you selected Mont’ka, this operative can use Kauyon instead during its activation (and vice versa)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_transpectral_interference_pathfinder",
@@ -146,7 +148,8 @@
           "name": "System Jam (1 AP)",
           "description": "▶ Select one enemy operative visible to this operative. Until the end of that operative’s next activation, subtract 1 from its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_weapons_expert_pathfinder",
@@ -206,7 +209,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_assault_grenadier_pathfinder",
@@ -258,7 +262,8 @@
           "description": "This operative can use frag and krak grenades (see universal equipment). Doing so doesn’t count towards any limited uses you have (i.e. if you also select those grenades from equipment for other operatives). Whenever it’s doing so, improve the Hit stat of that weapon by 1."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_marksman_pathfinder",
@@ -312,7 +317,8 @@
           "description": "You can ignore any changes to the Hit stat of this operative’s marksman rail rifle."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_comms_specialist_pathfinder",
@@ -353,7 +359,8 @@
           "name": "Signal (1 AP)",
           "description": "▶ **SUPPORT**. Select one other friendly **PATHFINDER** operative visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_medical_technician_pathfinder",
@@ -398,7 +405,8 @@
           "name": "Medikit (1 AP)",
           "description": "▶ Select one friendly **PATHFINDER** operative (excluding **DRONE**) within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_drone_controller_pathfinder",
@@ -442,7 +450,8 @@
           "name": "Remote Pilot (1 AP)",
           "description": "▶ One friendly **PATHFINDER DRONE** operative can immediately perform one free action, but it cannot move more than 2\" during that action. That action can be one that’s normally restricted by its drone rule (this takes precedence over that rule). \r\n◆ This operative cannot perform this action while within control range of an enemy operative. This operative can perform this action more than once during its activation, but if it does, the same **DRONE** operative cannot perform the same free action more than once per activation."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_shas_la_pathfinder",
@@ -485,7 +494,8 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly **PATHFINDER SHAS’LA** operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_mb3_recon_drone",
@@ -542,7 +552,8 @@
           "description": "Whenever this operative performs the **Markerlight** action, each other enemy operative that’s both visible to this operative and within 3\" of the enemy operative you selected for that action also gains one of your Markerlight tokens."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_mv1_gun_drone",
@@ -579,7 +590,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_mv4_shield_drone",
@@ -610,7 +622,8 @@
           "description": "- This operative ignores the Piercing weapon rule.\r\n- Once per turning point, when an attack dice inflicts Normal Dmg on this operative, you can ignore that inflicted damage.\r\n- You can use the Saviour Protocols firefight ploy for 0CP if this is the specified **DRONE** operative."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_mv7_marker_drone",
@@ -642,7 +655,8 @@
           "description": "Whenever this operative performs the **Markerlight** action, the selected enemy operative gains two of your Markerlight tokens (instead of one)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_mv31_pulse_accelerator_drone",
@@ -674,7 +688,8 @@
           "name": "Pulse Accelerator (1 AP)",
           "description": "▶ Until the start of this operative’s next activation or until it's incapacitated (whichever comes first), whenever another friendly PATHFINDER operative is shooting with a pulse weapon within 3\" of this operative, that weapon has the Lethal 5+ and Severe weapon rules."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_pathfinders_op_mv33_grav_inhibiter_drone",
@@ -706,7 +721,18 @@
           "description": "- Whenever an enemy operative performs an action in which it moves (excluding **Dash**), if it would move visible to and within 6\" of this operative, treat the distance as an additional 2\" and ignore the additional distances from the Obstructing and Accessible terrain rules. Note this isn’t a change to the Move stat. \r\n- Whenever an enemy operative is fighting or retaliating while visible to and within 6\" of this operative, worsen the Hit stat of that enemy operative’s melee weapons by 1. This is cumulative with being injured."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 11,
+      "max": 11
+    }
+  }
 }

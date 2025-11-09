@@ -2,6 +2,8 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import OperativeCard from '../../components/OperativeCard'
+import FactionSelector from '../../components/FactionSelector'
+import SectionNavigator from '../../components/SectionNavigator'
 import { db } from '../../lib/db'
 import { ensureIndex } from '../../lib/search'
 
@@ -58,6 +60,12 @@ export default function FactionPage(){
     return (
       <div className="container">
         <Header/>
+        <div className="card faction-selector-sticky">
+          <FactionSelector currentFactionId={id} />
+          <div style={{ marginTop: '0.5rem' }}>
+            <SectionNavigator factionData={factionData} />
+          </div>
+        </div>
         <div className="card">
           <h2 style={{marginTop:0}}>{factionData.name}</h2>
           {factionData.factionKeyword && factionData.factionKeyword !== 'UNKNOWN' && (
@@ -79,7 +87,71 @@ export default function FactionPage(){
           )}
           <p>{factionData.summary}</p>
 
-          <div className="card" style={{marginTop: '1rem'}}>
+          {factionData.operativeSelection && factionData.operatives && (
+            <div id="operative-selection" className="card" style={{marginTop: '1rem'}}>
+              <h3 style={{marginTop:0}}>Operative Selection</h3>
+              <div style={{marginBottom: '0.5rem'}}>
+                {factionData.operativeSelection.leader && (() => {
+                  // Find operatives with Leader keyword
+                  const leaderOperatives = factionData.operatives.filter(op => 
+                    op.keywords && op.keywords.includes('Leader')
+                  );
+                  
+                  return (
+                    <div>
+                      <strong>Leader:</strong> {factionData.operativeSelection.leader.min === 0 ? '' : `${factionData.operativeSelection.leader.min} - `}
+                      {factionData.operativeSelection.leader.max || 1} operative{factionData.operativeSelection.leader.max !== 1 ? 's' : ''} with the <strong>Leader</strong> keyword
+                      {leaderOperatives.length > 0 && (
+                        <ul style={{marginTop: '0.5rem', marginLeft: '1.5rem', fontSize: '0.9rem', listStyle: 'disc'}}>
+                          {leaderOperatives.map(op => (
+                            <li key={op.id} className="muted">
+                              {op.name || op.title}
+                              {op.maxSelections !== null && op.maxSelections !== undefined && (
+                                <span> (max {op.maxSelections})</span>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  );
+                })()}
+                {factionData.operativeSelection.operatives && (() => {
+                  // Find operatives without Leader keyword (or all operatives if leaders can also be selected as operatives)
+                  const regularOperatives = factionData.operatives.filter(op => 
+                    !op.keywords || !op.keywords.includes('Leader')
+                  );
+                  
+                  return (
+                    <div style={{marginTop: '0.5rem'}}>
+                      <strong>Operatives:</strong> {factionData.operativeSelection.operatives.min || 0}
+                      {factionData.operativeSelection.operatives.max !== null && 
+                        factionData.operativeSelection.operatives.max !== factionData.operativeSelection.operatives.min
+                        ? ` - ${factionData.operativeSelection.operatives.max}` 
+                        : ''} operative{(factionData.operativeSelection.operatives.max === 1 || (factionData.operativeSelection.operatives.max === null && factionData.operativeSelection.operatives.min === 1)) ? '' : 's'}
+                      {regularOperatives.length > 0 && (
+                        <ul style={{marginTop: '0.5rem', marginLeft: '1.5rem', fontSize: '0.9rem', listStyle: 'disc'}}>
+                          {regularOperatives.map(op => (
+                            <li key={op.id} className="muted">
+                              {op.name || op.title}
+                              {op.maxSelections !== null && op.maxSelections !== undefined && (
+                                <span> (max {op.maxSelections})</span>
+                              )}
+                              {op.maxSelections === null && (
+                                <span> (unlimited)</span>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  );
+                })()}
+              </div>
+            </div>
+          )}
+
+          <div id="faction-rules" className="card" style={{marginTop: '1rem'}}>
             <h3 style={{marginTop:0}}>Faction Rules</h3>
             {factionData.rules && factionData.rules.length > 0 ? (
               factionData.rules.map(rule => (
@@ -93,7 +165,7 @@ export default function FactionPage(){
             )}
           </div>
 
-          <div className="card" style={{marginTop: '1rem'}}>
+          <div id="datacards" className="card" style={{marginTop: '1rem'}}>
             <h3 style={{marginTop:0}}>Datacards</h3>
             {factionData.operatives && factionData.operatives.length > 0 ? (
               <div className="operatives-grid">
@@ -106,7 +178,7 @@ export default function FactionPage(){
             )}
           </div>
 
-          <div className="card" style={{marginTop: '1rem'}}>
+          <div id="strategic-ploys" className="card" style={{marginTop: '1rem'}}>
             <h3 style={{marginTop:0}}>Strategic Ploys</h3>
             {factionData.strategicPloys && factionData.strategicPloys.length > 0 ? (
               factionData.strategicPloys.map(ploy => (
@@ -120,7 +192,7 @@ export default function FactionPage(){
             )}
           </div>
 
-          <div className="card" style={{marginTop: '1rem'}}>
+          <div id="tactical-ploys" className="card" style={{marginTop: '1rem'}}>
             <h3 style={{marginTop:0}}>Tactical Ploys</h3>
             {factionData.tacticalPloys && factionData.tacticalPloys.length > 0 ? (
               factionData.tacticalPloys.map(ploy => (
@@ -134,7 +206,7 @@ export default function FactionPage(){
             )}
           </div>
 
-          <div className="card" style={{marginTop: '1rem'}}>
+          <div id="equipment" className="card" style={{marginTop: '1rem'}}>
             <h3 style={{marginTop:0}}>Equipment</h3>
             {factionData.equipment && factionData.equipment.length > 0 ? (
               factionData.equipment.map(eq => (
@@ -149,7 +221,7 @@ export default function FactionPage(){
           </div>
 
           {factionData.tacops && factionData.tacops.length > 0 && (
-            <div className="card" style={{marginTop: '1rem'}}>
+            <div id="tac-ops" className="card" style={{marginTop: '1rem'}}>
               <h3 style={{marginTop:0}}>Tac Ops</h3>
               {factionData.tacops.map(tacop => (
                 <div key={tacop.id} style={{marginBottom: '0.75rem'}}>
@@ -170,6 +242,9 @@ export default function FactionPage(){
   return (
     <div className="container">
       <Header/>
+      <div className="card faction-selector-sticky">
+        <FactionSelector currentFactionId={id} />
+      </div>
       <div className="card">
         <h2 style={{marginTop:0}}>{faction?.title}</h2>
         <p>{faction?.body}</p>

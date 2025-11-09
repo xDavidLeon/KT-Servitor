@@ -95,7 +95,8 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly WYRMBLADE WARRIOR operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_wyrmblade_op_kelermorph",
@@ -174,7 +175,8 @@
           "description": "Whenever a friendly WYRMBLADE NEOPHYTE operative visible to and within 3\" of this operative is shooting, fighting or retaliating, if this operative has incapacitated an enemy operative during this turning point, that friendly operative’s weapons have the Severe weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_wyrmblade_op_neophyte_leader",
@@ -261,7 +263,8 @@
           "description": "Once per turning point, you can use the Slink Into Darkness or Coiled Serpent firefight ploy for 0CP if the specified friendly WYRMBLADE operative is a NEOPHYTE visible to this operative."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_wyrmblade_op_neophyte_gunner",
@@ -333,7 +336,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 2
     },
     {
       "id": "fac_wyrmblade_op_neophyte_heavy_gunner",
@@ -423,7 +427,8 @@
           "description": "Whenever this operative is shooting with a weapon from its datacard, if it hasn’t moved during the activation, or if it’s a counteraction, that weapon has the Ceaseless weapon rule; if the weapon already has that weapon rule (i.e. from the Cult Ambush faction rule), it has the Relentless weapon rule. Note this operative isn’t restricted from moving after shooting."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 2
     },
     {
       "id": "fac_wyrmblade_op_neophyte_icon_bearer",
@@ -478,7 +483,8 @@
           "description": "Once per turning point, when a ready friendly WYRMBLADE NEOPHYTE operative is incapacitated while visible to and within 6\" of this operative, you can use this rule. If you do, before that operative is removed from the killzone, it can either perform one free **Shoot** action (you can change its order to do so), or you can use the A Plan Generations in the Making firefight ploy for 0CP if that incapacitated operative is the specified friendly WYRMBLADE NEOPHYTE operative. It's then removed from the killzone as normal."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_wyrmblade_op_locus",
@@ -532,7 +538,8 @@
           "description": "Once per turning point, after an enemy operative performs an action in which it moves or is set up, you can interrupt that activation/ counteraction to use this rule. If you do, this operative can immediately perform a free **Charge** action (you can change its order to do so), but it cannot move more than 3\", and it must end that move within control range of that enemy operative. If this isn’t possible, the interruption is cancelled and this rule hasn’t been used."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_wyrmblade_op_sanctus_sniper",
@@ -594,7 +601,8 @@
           "name": "Familiar's Soulsight (1AP)",
           "description": "▶ Select one enemy operative visible to this operative. Until the end of the battle, or until this action is performed again by a friendly operative (whichever comes first), that enemy operative gains one of your Soulsight tokens. Whenever this operative is shooting an enemy operative that has one of your Soulsight tokens, all profiles of this operative's Sanctus sniper rifle have the Saturate weapon rule and that enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_wyrmblade_op_sanctus_talon",
@@ -640,7 +648,18 @@
           "name": "Familiar's Soulsight (1AP)",
           "description": "▶ Select one enemy operative visible to this operative. Until the end of the battle, or until this action is performed again by a friendly operative (whichever comes first), that enemy operative gains one of your Soulsight tokens. Whenever this operative is fighting or retaliating against an enemy operative that has one of your Soulsight tokens,its Sanctus bio-dagger has the Brutal and Balanced weapon rules.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 13,
+      "max": 13
+    }
+  }
 }

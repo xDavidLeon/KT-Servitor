@@ -99,7 +99,8 @@
           "name": "Incite Urgency (1AP)",
           "description": "▶ SUPPORT. One other friendly CHAOS CULT operative visible to and within 9\" of this operative can immediately perform a free **Charge** or **Dash** action (for the former, it cannot move more than 3\").\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_chaos_cult_op_blessed_blade",
@@ -137,7 +138,8 @@
           "description": "Whenever this operative is activated, you can activate another ready friendly BLESSED BLADE operative within 6\" of it at the same time. Complete their activations action by action in any order."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 2
     },
     {
       "id": "fac_chaos_cult_op_iconarch",
@@ -197,7 +199,8 @@
           "name": "Ruinous Icon (1AP)",
           "description": "▶ PSYCHIC. Select one of the following effects to last until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first):\r\n- **Invigoration**: PSYCHIC. Whenever a friendly CHAOS CULT operative is within 4\" of this operative, Normal and Critical Dmg of 4 or more inflicts 1 less damage on that operative.\r\n- **Deterioration**: PSYCHIC. Whenever an enemy operative is within 4\" of this operative, Normal and Critical Dmg inflicts 1 more damage on that operative.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_chaos_cult_op_mindwitch",
@@ -249,7 +252,8 @@
           "name": "Malefic Vortex (1AP)",
           "description": "PSYCHIC. Remove your Malefic Vortex marker from the killzone (if any). Then place your Malefic Vortex marker visible to this operative, or on Vantage terrain of a terrain feature that’s visible to this operative. Inflict 1 damage on each enemy operative within 2\" of that marker. In addition, in the Ready step of each Strategy phase, inflict 1 damage on each enemy operative within 2\" of that marker.\r\nThis operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_chaos_cult_op_chaos_devotee",
@@ -290,7 +294,8 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly CHAOS CULT DEVOTEE operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 9
     },
     {
       "id": "fac_chaos_cult_op_chaos_mutant",
@@ -324,7 +329,8 @@
           "description": "This operative cannot perform unique actions. You must spend 1 additional AP for this operative to perform the **Pick Up Marker** and mission actions (excluding **Operate Hatch**)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_chaos_cult_op_chaos_torment",
@@ -362,7 +368,14 @@
           "description": "Whenever your opponent is selecting a valid target, if this operative has a Conceal order, it cannot use Light terrain for cover. While this can allow this operative to be targeted (assuming it’s visible), it doesn’t remove its cover save (if any)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    }
+  }
 }

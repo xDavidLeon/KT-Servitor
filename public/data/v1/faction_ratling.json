@@ -99,7 +99,8 @@
           "description": "STRATEGIC GAMBIT. Select one enemy operative visible to this operative. Until the end of the turning point, whenever a friendly RATLING operative is shooting that enemy operative with a rifle, that weapon has the Lethal 5+ weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_ratling_battlemutt",
@@ -137,7 +138,8 @@
           "description": "This operative cannot perform any actions other than **Charge**, **Dash**, **Fall Back**, **Fight** and **Reposition**. It cannot use any weapons that aren't on its datacard."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_bullgryn",
@@ -202,7 +204,8 @@
           "description": "If this operative has a slabshield, it has a 3+ Save stat; if it has a brute shield, whenever it's fighting or retaliating, each of your blocks can be allocated to block two unresolved successes (instead of one)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_ratling_big_shot",
@@ -254,7 +257,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_ratling_bomber",
@@ -316,7 +320,8 @@
           "description": "Mines you select from universal equipment inflict 2D3+3 damage instead, and friendly RATLING operatives (excluding OGRYN and BULLGRYN) are ignored for its effects (i.e. they can't trigger it or take damage from it). This takes precedence over the normal mines rules."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_ratling_hardbit",
@@ -362,7 +367,8 @@
           "description": "This operative can perform the **Charge** action while it has a Conceal order. If it does so during its activation, until the end of that activation, add 1 to the Atk stat of its combat knife and that melee weapon has the Brutal weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_ratling_raider",
@@ -423,7 +429,8 @@
           "name": "Slingshot (1AP)",
           "description": "▶ Select a point on a terrain feature; that point must be visible to and within 6\" of this operative. Remove this operative from the killzone and set it back up wholly within 6\" horizontally of that point, not within control range of an enemy operative, and with that point visible to it.\r\n◆ This action is treated as a **Reposition** action. This operative cannot perform this action while within control range of an enemy operative, or during an activation in which it performed the **Charge**, **Fall Back**, or **Shoot** action (or vice versa)."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_ratling_sneak",
@@ -482,7 +489,8 @@
           "name": "Optics (1AP)",
           "description": "▶ Until the start of this operative's next activation, whenever it's shooting, enemy operatives cannot be obscured and the stationary profile of this operative's suppressed sniper rifle has the Lethal 5+ weapon rule.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_ogryn",
@@ -528,7 +536,8 @@
           "description": "Whenever this operative finishes moving during the **Charge** action, you can inflict D3+1 damage on one enemy operative within its control range."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_ratling_sniper",
@@ -574,7 +583,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_ratling_spotter",
@@ -625,7 +635,8 @@
           "name": "Spot (1AP)",
           "description": "▶ SUPPORT. Select one enemy operative visible to this operative. Once during this turning point, when a friendly RATLING operative within 3\" of this operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative's ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative is not obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_ratling_stashmaster",
@@ -680,7 +691,8 @@
           "description": "If you select an Ammo Cache from universal equipment, you can set up an additional Ammo Cache marker."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_ratling_op_ratling_vox_thief",
@@ -731,7 +743,18 @@
           "name": "Intercept Communications (1AP)",
           "description": "▶ SUPPORT. Select one other friendly RATLING operative visible to and within 6\" of this operative. Until the end of its next activation, add 1 to that operative's APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 7,
+      "max": 10
+    }
+  }
 }

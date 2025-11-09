@@ -56,7 +56,8 @@
           "description": "If this operative doesn’t issue a **GUARDSMAN ORDER** as a **STRATEGIC GAMBIT**, you can use the Inspirational Leadership firefight ploy for 0CP during this operative’s activation."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_death_korps_op_death_korps_bruiser",
@@ -98,7 +99,8 @@
           "description": "Once per turning point, when this operative is fighting or retaliating, in the Resolve Attack Dice step, you can ignore the damage inflicted on it from one normal success."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_death_korps_op_death_korps_confidant",
@@ -125,7 +127,8 @@
           "description": "Whenever this operative is activated, if you haven’t used the Second in Command rule during the battle, you can select one other ready friendly **DEATH KORPS** operative visible to and within 6\" of it. When this operative is expended, activate that other friendly operative before your opponent activates (if that operative is a **TROOPER**, ignore its Group Activation rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_death_korps_op_death_korps_gunner",
@@ -218,7 +221,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_death_korps_op_death_korps_sniper",
@@ -279,7 +283,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_death_korps_op_death_korps_zealot",
@@ -323,7 +328,8 @@
           "description": "**SUPPORT**. Whenever a friendly **DEATH KORPS** operative is within 3\" of this operative, that friendly operative’s weapons have the Severe weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_death_korps_op_death_korps_vox_operator",
@@ -368,7 +374,8 @@
           "name": "Signal (1AP)",
           "description": "▶ **SUPPORT**. Select one other friendly **DEATH KORPS** operative visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_death_korps_op_death_korps_veteran",
@@ -414,7 +421,8 @@
           "description": "Normal Dmg of 3 or more inflicts 1 less damage on this operative."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_death_korps_op_death_korps_spotter",
@@ -466,7 +474,8 @@
           "name": "Spot (1AP)",
           "description": "▶ **SUPPORT**. Select one enemy operative visible to this operative. Once during this turning point, when a friendly **DEATH KORPS** operative within 3\" of this operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative’s ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_death_korps_op_death_korps_sapper",
@@ -520,7 +529,8 @@
           "description": "This operative is carrying your Mine marker. It can perform the **Pick Up Marker** action on that marker, and whenever it performs the **Place Marker** action on that marker, it can immediately perform a free **Dash** action."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_death_korps_op_death_korps_medic",
@@ -565,7 +575,8 @@
           "name": "Death Korps Medic",
           "description": "▶ Select one friendly **DEATH KORPS** operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_death_korps_op_death_korps_trooper",
@@ -604,7 +615,18 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly **DEATH KORPS TROOPER** operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 1,
+      "max": 1
+    },
+    "operatives": {
+      "min": 9,
+      "max": 9
+    }
+  }
 }

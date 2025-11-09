@@ -110,7 +110,8 @@
           "description": "STRATEGIC GAMBIT. Select one enemy operative to gain one of your Crossfire tokens."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_agitator",
@@ -148,7 +149,8 @@
           "description": "Whenever a friendly BROOD BROTHER operative is shooting against, fighting against or retaliating against an enemy operative within 6\" of this operative, you can re-roll one of your attack dice."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_gunner",
@@ -241,7 +243,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 3
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_iconward",
@@ -279,7 +282,8 @@
           "description": "Once per turning point, when a ready friendly BROOD BROTHER BROODGUARD operative is incapacitated while visible and within 6\" of this operative, you can use this rule. If you do, before that operative is removed from the killzone, it can perform a 1AP action for free (excluding **Fight** and **Explosives**), and you can change its order to do so. It’s then removed from the killzone as normal. You cannot use this rule and the Medic! rule (see MEDIC) on the same operative at the same time."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_knife_fighter",
@@ -318,7 +322,8 @@
           "description": "Whenever this operative is fighting or retaliating, whenever your opponent resolves a normal success, inflict 1 damage on the enemy operative in that sequence"
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_medic",
@@ -374,7 +379,8 @@
           "name": "Medikit (1AP)",
           "description": "▶ Select one friendly BROOD BROTHER operative (excluding PATRIARCH) within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_sapper",
@@ -430,7 +436,8 @@
           "name": "Explosives (1AP)",
           "description": "▶ The first time this operative performs this action during the battle, place your Explosives marker within its control range. The second time this operative performs this action during the battle, inflict 2D6 damage on each operative within 2\" of that marker (roll separately for each) unless Heavy terrain is wholly intervening between that operative and that marker.\r\n◆ This operative cannot perform this action more than twice per battle, while within control range of an enemy operative, or during the same activation in which it performed the **Charge**, **Dash** or **Fall Back** action (or vice versa)."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_sniper",
@@ -493,7 +500,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_trooper",
@@ -533,7 +541,8 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly BROOD BROTHER TROOPER operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_veteran",
@@ -591,7 +600,8 @@
           "description": "You can use the Unquestioning Loyalty firefight ploy for 0CP if this is the specified friendly BROODGUARD operative."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_vox_operator",
@@ -635,7 +645,8 @@
           "name": "Jam (2AP)",
           "description": "▶ Select one ready enemy operative that’s a valid target for this operative, or visible to this operative instead if you spend 1 additional AP. Roll one D6. Until the end of the turning point, that enemy operative cannot be activated or perform actions until it’s the last enemy operative to be activated, or until your opponent has activated a number of enemy operatives after this action equal to the result of the D6 (whichever comes first).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_trooper",
@@ -675,7 +686,8 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly BROOD BROTHER TROOPER operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_brood_brothers_op_psychic_familiar",
@@ -717,7 +729,8 @@
           "description": "This operative can perform mission actions while within control range of an enemy operative (taking precedence over those actions’ normal conditions). It can move through enemy operatives, move within control range of them, and during the **Charge** action can leave their control range (it must still end the move following all requirements for that move)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_brood_brothers_op_magus",
@@ -782,7 +795,8 @@
           "name": "Mental Onslaught (1AP)",
           "description": "▶ PSYCHIC. Select one enemy operative that’s a valid target for this operative. Inflict 2 damage on it, or 4 damage instead if it’s within 6\" of this operative. Then roll one D6: if the result is higher than that enemy operative’s APL stat, inflict an additional 2 damage on it, or 4 damage instead if it’s within 6\" of this operative. Keep rolling one D6 in this manner until you roll equal to or less than that enemy operative’s APL stat, until it’s incapacitated, or until you inflict 8 damage on it during this action (whichever comes first).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_brood_brothers_op_patriarch",
@@ -832,7 +846,8 @@
           "name": "Into Shadow (1AP)",
           "description": "▶ Change this operative’s order.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_brood_brothers_op_primus",
@@ -898,7 +913,18 @@
           "name": "Conspire",
           "description": "▶ You gain 1CP.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or more than once per turning point."
         }
-      ]
+      ],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 9,
+      "max": 9
+    }
+  }
 }

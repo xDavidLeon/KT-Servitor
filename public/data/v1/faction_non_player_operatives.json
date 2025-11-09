@@ -33,7 +33,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_trooper_marksman",
@@ -80,7 +81,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_tough_brawler",
@@ -106,7 +108,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_warrior_marksman",
@@ -143,7 +146,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_heavy_brawler",
@@ -174,7 +178,8 @@
           "description": "This operative can perform two **Fight** actions during its activation."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_heavy_marksman",
@@ -216,7 +221,8 @@
           "description": "This operative can perform two **Shoot** actions during its activation."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_hormagaunt",
@@ -242,7 +248,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_ripper_swarm",
@@ -273,7 +280,8 @@
           "description": "Whenever this operative has a Conceal order and is in cover, it cannot be selected as a valid target, taking precedence over all other rules (e.g. Vantage terrain)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_barbgaunt",
@@ -321,7 +329,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_ravener",
@@ -347,7 +356,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_termagant",
@@ -383,7 +393,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_von_ryan_s_leaper",
@@ -409,7 +420,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_flayed_one",
@@ -441,7 +453,8 @@
           "description": "Whenever this NPO incapacitates a player operative while fighting or retaliating, select one other player operative visible to and within 3\" of either this NPO or the incapacitated player operative and roll one D6; on a 3+, subptract 1 from that other player operative's APL stat until the end of its next activation."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_skorpekh_destroyer",
@@ -474,7 +487,8 @@
           "description": "Whenever player(s) are selecting a valid target, if this NPO has a Conceal order, it cannot use Light terrain for cover. While this can allow this NPO to be targeted (assuming it's visible), it doesn't remove its cover save (if any)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_hexmark_destroyer",
@@ -533,7 +547,8 @@
           "description": "Whenever a player operative within 8\" of this NPO is shooting it, keep track of each attack dice that's discarded as a fail. After the action, before incapacitated operatives are removed (including this one, if relevant), this NPO can perform a free **Shoot** action (you can change its order to Engage to do so), but it can only target that player operative with its enmitic disintegrator pistols (focused), and you only roll a number of attack dice equal to the opponent's discarded attack dice plus one (to a maximum of four)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_royal_warden",
@@ -575,7 +590,8 @@
           "description": "Whenever an NPO is within 6\" of this NPO, you can ignore any changes to that NPO's stats from being injured (including its weapons' stats)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_lychguard",
@@ -617,7 +633,8 @@
           "description": "Whenever a player operative is performing a **Shoot** action, if this NPO has an Engage order, the player(s) cannot select a Royal Warden NPO within this NPO's control range as a valid target."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_canoptek_scarab_swarm",
@@ -643,7 +660,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_necron_warrior",
@@ -690,7 +708,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_canoptek_tomb_crawler",
@@ -758,7 +777,8 @@
           "description": "Whenever determining control of a marker, you can treat this operative's APL stat as 3. If you do, this takes precedence over all other rules, meaning any changes to its APL stat are ignored for this."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_non_player_operatives_op_canoptek_macrocyte",
@@ -819,7 +839,9 @@
           "description": "If this operative is incapacitated by an enemy operative within 2\" of it, roll one D3; on a 2+, inflict damage on that enemy operative equal to the result."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": null
 }

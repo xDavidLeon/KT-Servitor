@@ -63,7 +63,8 @@
           "description": "STRATEGIC GAMBIT and/or when this operative is activated. Select one of the following INQUISITORIAL TOME rules for this operative to have, and one for a friendly INQUISITORIAL AGENT TOME-SKULL operative to have (they can be the same, and ignore the rule you didn’t select for each operative): \r\n- **Denunciation**: Whenever a friendly INQUISITORIAL AGENT operative is shooting against, fighting against or retaliating against an enemy operative within 2\" of friendly operatives with this rule, add 1 to the Atk stat of that friendly operative’s weapons.\r\n\r\n- **Sanctification**: Whenever an enemy operative is shooting against, fighting against or retaliating against a friendly INQUISITORIAL AGENT operative within 2\" of friendly operatives with this rule, subtract 1 from the Atk stat of that enemy operative’s weapons."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_tome_skull",
@@ -99,7 +100,8 @@
           "description": "- This operative cannot perform any actions other than **Charge**, **Dash**, **Fall Back** and **Reposition**.\r\n- It cannot retaliate or assist in a fight.\r\n Whenever determining control of a marker, treat this operative’s APL stat as 1 lower. Note this isn’t a change to its APL stat, so any changes are cumulative with this.\r\n- Whenever this operative has a Conceal order and is in cover, it cannot be selected as a valid target, taking precedence over all other rules (e.g. Seek, Vantage terrain) except being within 2\"."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_autosavant",
@@ -142,7 +144,8 @@
           "description": "This operative cannot use any weapons that aren’t on its datacard, or perform unique actions."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_questkeeper",
@@ -191,7 +194,8 @@
           "description": "Whenever an attack dice inflicts damage of 3 or more on this operative, roll one D6: on a 5+, subtract 1 from that inflicted damage."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_death_world_veteran",
@@ -250,7 +254,8 @@
           "description": "Once per turning point, when this operative is fighting or retaliating, in the Resolve Attack Dice step, you can ignore the damage inflicted on it from one normal success."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_enlightener",
@@ -300,7 +305,8 @@
           "description": "Whenever an enemy operative is incapacitated within this operative’s control range, you gain 1CP."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_requisitioned_gun_servitor",
@@ -396,7 +402,8 @@
           "description": "Whenever this operative is activated, if it’s visible to and within 3\" of another friendly INQUISITORIAL AGENT operative (excluding GUN SERVITOR) or vice versa, add 1 to this operative’s APL stat until the end of that activation."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_mystic",
@@ -448,7 +455,8 @@
           "name": "Scry (1AP)",
           "description": "▶ PSYCHIC. Select one friendly INQUISITORIAL AGENT operative within 6\" of this operative, then select one of the following effects to last until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first): \r\n- Guidance: PSYCHIC. Whenever the selected operative is shooting, fighting or retaliating, in the Roll Attack Dice step, you can retain one of your fails as a normal success instead of discarding it, or retain one of your normal successes as a critical success instead. \r\n- Protection: PSYCHIC. Whenever an operative is shooting the selected operative, in the Roll Defence Dice step, you can retain one of your fails as a normal success instead of discarding it, or retain one of your normal successes as a critical success instead.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_hexorcist",
@@ -496,7 +504,8 @@
           "name": "Chasten (1AP)",
           "description": "▶ Select one enemy operative that's a valid target for this operative and within 6\" of it, then select one additional rule (including a unique action) that enemy operative has on its datacard (excluding a weapon rule). Until the end of that enemy operative’s next activation, it’s treated as not having that additional rule.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_penal_legionnaire",
@@ -547,7 +556,8 @@
           "description": "Whenever this operative is shooting against, fighting against or retaliating against a wounded enemy operative, this operative’s weapons have the Relentless weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_pistolier",
@@ -620,7 +630,8 @@
           "name": "Pistol Barrage (1AP)",
           "description": "▶ Perform two free Shoot actions with this operative (this takes precedence over action restrictions). You must select a profile of its scoped plasma pistol for one action and its suppressed autopistol for the other (in any order).\r\n◆ This operative cannot perform this action while it has a Conceal order, or during an activation in which it performed the Shoot action (or vice versa)."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_sister_of_silence_vigilator",
@@ -651,7 +662,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_sister_of_silence_prosecutor",
@@ -690,7 +702,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_sister_of_silence_witchseeker",
@@ -731,7 +744,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_tempestus_scion_vox_operator",
@@ -773,7 +787,8 @@
           "name": "Signal (1AP)",
           "description": "▶ SUPPORT. Select one other friendly INQUISITORIAL AGENT operative in the killzone. Until the end of that operative’s next activation, add 1 to its APL stat. \r\n◆ This operative can perform this action twice during its activation, but cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_tempestus_scion_gunner",
@@ -894,7 +909,8 @@
           "description": "You can do each of the following once per turning point: \r\n- One friendly INQUISITORIAL AGENT TEMPESTUS SCION TROOPER operative can perform the Smoke Grenade action.\r\n- One friendly INQUISITORIAL AGENT TEMPESTUS SCION TROOPER operative can perform the Stun Grenade action. \r\nThe rules for these actions are found in universal equipment. Performing these actions using this rule doesn’t count towards their action limits (i.e. if you also select those grenades from equipment)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_tempestus_scion_medic",
@@ -941,7 +957,8 @@
           "name": "Medikit (1AP)",
           "description": "▶ Select one friendly INQUISITORIAL AGENT operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_tempestus_scion_trooper",
@@ -983,7 +1000,8 @@
           "description": "You can do each of the following once per turning point: \r\n- One friendly INQUISITORIAL AGENT TEMPESTUS SCION TROOPER operative can perform the Smoke Grenade action.\r\n- One friendly INQUISITORIAL AGENT TEMPESTUS SCION TROOPER operative can perform the Stun Grenade action. \r\nThe rules for these actions are found in universal equipment. Performing these actions using this rule doesn’t count towards their action limits (i.e. if you also select those grenades from equipment)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_armsman",
@@ -1007,7 +1025,8 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly **INQUISITORIAL AGENT BREACHER ARMSMAN** operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule). Ignore this rule when you are using the Breach and Clear faction rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_axejack",
@@ -1031,7 +1050,8 @@
           "description": "Whenever an attack dice inflicts damage of 3 or more on this operative during a turning point in which it performed the **Charge** action, roll one D6: on a 5+, subtract 1 from that inflicted damage."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_c_a_t_unit",
@@ -1064,7 +1084,8 @@
           "name": "Spot (1AP)",
           "description": "▶ Select one enemy operative visible to this operative. Until the end of the turning point, until that enemy operative is no longer visible to this operative or until this operative performs this action again (whichever comes first), whenever a friendly INQUISITORIAL AGENT BREACHER operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative’s ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_endurant",
@@ -1125,7 +1146,8 @@
           "description": "This operative can perform the **Fall Back** action for 1 less AP."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_gheistskull",
@@ -1158,7 +1180,8 @@
           "name": "Navis Gheistskull",
           "description": "▶ Until the end of the activation, add 6\" to this operative’s Move stat.\r\n◆ This operative can only perform this action once per battle, and cannot perform it during the first turning point."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_grenadier",
@@ -1198,7 +1221,8 @@
           "description": "This operative can use frag, krak and stun grenades (see universal equipment). Doing so doesn’t count towards any limited uses you have (i.e. if you also select those grenades from equipment for other operatives). Whenever this operative is using a frag or krak grenade, improve the Hit stat of that weapon by 1."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_gunner",
@@ -1286,7 +1310,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_hatchcutter",
@@ -1326,7 +1351,8 @@
           "name": "Breach Point (1AP)",
           "description": "▶ Place one of your Breach markers within this operative’s control range as close as possible to a terrain feature within control range of it. Whenever an operative is within 1\" of that marker, it treats parts of that terrain feature that are no more than 1\" thick as Accessible terrain.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a terrain feature isn’t within its control range."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_surveyor",
@@ -1354,7 +1380,8 @@
           "name": "Remote Control (1AP)",
           "description": "▶ Select one friendly **INQUISITORIAL AGENT C.A.T. UNIT** operative. That operative can immediately perform one free action, but it cannot move more than 3\" during that action.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a friendly **INQUISITORIAL AGENT C.A.T. UNIT** operative isn’t in the killzone."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_void_jammer",
@@ -1394,7 +1421,8 @@
           "name": "Interference Pulse (1AP)",
           "description": "▶ Select one enemy operative visible to and within 8\" of a friendly GHEISTSKULL operative. Roll one D6, adding 1 to the result if that enemy operative is a valid target for that friendly GHEISTSKULL operative: on a 3+, subtract 1 from that enemy operative’s APL stat until the end of its next activation.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a friendly GHEISTSKULL operative isn’t in the killzone."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_combat_medic",
@@ -1425,7 +1453,8 @@
           "name": "Medikit (0AP)",
           "description": "▶ Select one friendly INQUISITORIAL AGENT operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point. \r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_demo_trooper",
@@ -1458,7 +1487,8 @@
           "description": "Whenever an operative is shooting this operative with a weapon that has the Blast or Torrent weapon rule (excluding weapons that have a sweeping profile), you can re-roll one of your defence dice. In addition, this operative isn’t affected by the x\" Devastating x weapon rule (i.e. Devastating with a distance) unless they are the target during that sequence."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_recon_trooper",
@@ -1488,7 +1518,8 @@
           "name": "Auspex Scan (1AP)",
           "description": "▶ Until the start of this operative’s next activation or until it’s incapacitated (whichever comes first), whenever an enemy operative within 8\" of this operative, that enemy operative is being scanned. When a friendly KASRKIN operative is shooting an enemy operative that's being scanned, that enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_sharpshooter",
@@ -1558,7 +1589,8 @@
           "name": "Auspex Scan (1AP)",
           "description": "▶ Until the start of this operative’s next activation or until it’s incapacitated (whichever comes first), whenever a friendly INQUISITORIAL AGENT operative is shooting an enemy operative within 8\" of this operative, that enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_trooper",
@@ -1583,7 +1615,8 @@
           "description": "You can do each of the following once per turning point: \r\n- One friendly INQUISITORIAL AGENT TROOPER operative can perform the Smoke Grenade action. \r\n- One friendly INQUISITORIAL AGENT TROOPER operative can perform the Stun Grenade action. \r\nThe rules for these actions are found in universal equipment. Performing these actions using this rule doesn’t count towards their action limits (i.e. if you also select those grenades from equipment)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_vox_trooper",
@@ -1608,7 +1641,8 @@
           "name": "Battle Comms (1AP)",
           "description": "▶ Select one other friendly INQUISITORIAL AGENT operative. Until the end of that operative’s next activation, add 1 to its APL stat (to a maximum of 3 after all APL stat changes have been totalled).\r\n◆ This operative can perform this action twice during its activation, but cannot perform this action while within control range of an enemy operative"
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_gunner",
@@ -1717,7 +1751,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_bruiser",
@@ -1753,7 +1788,8 @@
           "description": "Once per turning point, when this operative is fighting or retaliating, in the Resolve Attack Dice step, you can ignore the damage inflicted on it from one normal success."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_confidant",
@@ -1782,7 +1818,8 @@
           "description": "Whenever this operative is activated, if you haven’t used the Second in Command rule during the battle, you can select one other ready friendly **INQUISITORIAL AGENT** operative visible to and within 6\" of it. When this operative is expended, activate that other friendly operative before your opponent activates (if that operative is a **TROOPER**, ignore its Group Activation rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_gunner",
@@ -1869,7 +1906,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_medic",
@@ -1899,7 +1937,8 @@
           "name": "Death Korps Medic",
           "description": "▶ Select one friendly **INQUISITORIAL AGENT** operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_sniper",
@@ -1954,7 +1993,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_sapper",
@@ -1994,7 +2034,8 @@
           "description": "This operative is carrying your Mine marker. It can perform the **Pick Up Marker** action on that marker, and whenever it performs the **Place Marker** action on that marker, it can immediately perform a free **Dash** action."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_trooper",
@@ -2019,7 +2060,8 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly **INQUISITORIAL AGENT TROOPER** operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_veteran",
@@ -2059,7 +2101,8 @@
           "description": "Normal Dmg of 3 or more inflicts 1 less damage on this operative."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_vox_operator",
@@ -2089,7 +2132,8 @@
           "name": "Signal (1AP)",
           "description": "▶ **SUPPORT**. Select one other friendly **INQUISITORIAL AGENT** operative visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_zealot",
@@ -2118,7 +2162,8 @@
           "description": "**SUPPORT**. Whenever a friendly **INQUISITORIAL AGENT** operative is within 3\" of this operative, that friendly operative’s weapons have the Severe weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_castigator",
@@ -2163,7 +2208,8 @@
           "description": "Whenever an enemy operative is within control range of this operative, if no other enemy operatives are within this operative’s control range, that enemy operative cannot perform the **Fall Back** action."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_chirurgant",
@@ -2194,7 +2240,8 @@
           "name": "Medikit (1AP)",
           "description": "▶ Select one friendly INQUISITORIAL AGENT operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_gunner",
@@ -2258,7 +2305,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_leashmaster",
@@ -2292,7 +2340,8 @@
           "name": "R-VR Command (0AP)",
           "description": "▶ Select one friendly **INQUISITORIAL AGENT R-VR CYBER-MASTIFF** operative and change its attack pattern."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_malocator",
@@ -2322,7 +2371,8 @@
           "name": "Veriscant (1AP)",
           "description": "▶ Select one enemy operative visible to this operative. Until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first), whenever a friendly **INQUISITORIAL AGENT** operative is shooting against, fighting against or retaliating against that enemy operative, that friendly operative’s weapons have the Lathal 5+ and  Severe weapon rules.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_marksman",
@@ -2382,7 +2432,8 @@
           "name": "Optics (1AP)",
           "description": "▶ Until the start of this operative’s next activation:\r\n- The concealed and stationary profiles of its executioner shotgun have the Lethal 5+ weapon rule.\r\n- Whenever it’s shooting with its executioner shotgun, enemy operatives cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_revelatum",
@@ -2434,7 +2485,8 @@
           "name": "Spot (1AP)",
           "description": "▶ **SUPPORT**. Select one enemy operative visible to this operative. Until the end of the turning point, whenever a friendly **INQUISITORIAL AGENT** operative within 3\" of this operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative’s ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_subductor",
@@ -2471,7 +2523,8 @@
           "description": "You can ignore any changes to the Hit stat of this operative’s melee weapons."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_r_vr_cyber_mastiff",
@@ -2512,7 +2565,8 @@
           "name": "Apprehend",
           "description": "▶ Select one enemy operative within this operative’s control range. Until that enemy operative is no longer within this operative’s control range, or until this operative performs this action again (whichever comes first), worsen the Hit stat of that enemy operative’s weapons by 1 (this isn’t cumulative with being injured); in addition, that enemy operative cannot perform the **Fall Back** action.\r\n◆ This operative cannot perform this action unless an enemy operative is within its control range."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_vigilant",
@@ -2537,7 +2591,8 @@
           "description": "This operative can perform the **Shoot** action (excluding **Guard**) while within control range of an enemy operative, but only if it hasn’t performed the **Charge** action during the activation, or if it’s a counteraction. Note this operative isn’t restricted from performing the **Charge** action after performing the **Shoot** action."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_vox_signifier",
@@ -2562,7 +2617,18 @@
           "name": "Signal (1AP)",
           "description": "▶ **SUPPORT**. Select one other friendly **INQUISITORIAL AGENT** operative visible to this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 11,
+      "max": 11
+    }
+  }
 }

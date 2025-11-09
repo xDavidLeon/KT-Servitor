@@ -93,7 +93,8 @@
           "description": "Whenever this operative is readied, or if this operative incapacitates an enemy operative with its huskblade, its oubliex becomes active. Whenever its oubliex is active and an attack dice would inflict damage on this operative, you can roll one D6: on a 5+, ignore the damage inflicted from that attack dice and its oubliex is no longer active."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_mandrakes_op_mandrake_abyssal",
@@ -154,7 +155,8 @@
           "name": "Wreathe in Balefire (1AP)",
           "description": "▶ Select one operative visible to this operative that doesn’t have one of your Balefire tokens. Until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first), that selected operative gains one of your Balefire tokens.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_mandrakes_op_mandrake_chooser_of_the_flesh",
@@ -203,7 +205,8 @@
           "description": "Whenever an enemy operative performs the **Fall Back** action while within control range of this operative, you can use this rule. If you do, inflict 2D3 damage on that enemy operative before it moves."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_mandrakes_op_mandrake_dirgemaw",
@@ -266,7 +269,8 @@
           "name": "Pareidolic Projection (1AP)",
           "description": "▶ Select one enemy operative that’s a valid target for this operative or is **WITHIN SHADOW**. Until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first), worsen the Hit stat of that enemy operative’s weapons by 1 and subtract 2\" from its Move stat (these aren’t cumulative with being injured); in addition, that enemy operative’s APL stat cannot be added to (remove all positive APL stat changes it has).\r\n◆ This operative cannot perform this action while within control range of an enemy operative, unless the only enemy operative it’s within control range of is selected for this action."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_mandrakes_op_mandrake_shadeweaver",
@@ -314,7 +318,8 @@
           "name": "Weave Darkness (1AP)",
           "description": "▶ Remove your Weave Darkness marker from the killzone (if any). Then place your Weave Darkness marker visible to this operative, or on Vantage terrain of a terrain feature visible to this operative. That marker creates an area of smoke with the same size and effects of a smoke grenade, except you don’t remove it during the following turning point. If this operative is incapacitated, remove your Weave Darkness marker from the killzone.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_mandrakes_op_mandrake_warrior",
@@ -358,7 +363,18 @@
           "description": "Whenever this operative is **WITHIN SHADOW**, add 1 to the Critical Dmg stat of its glimmersteel blade."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 8,
+      "max": 8
+    }
+  }
 }

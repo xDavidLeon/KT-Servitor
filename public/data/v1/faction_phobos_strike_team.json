@@ -87,7 +87,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_phobos_strike_team_op_infiltrator_sergeant",
@@ -125,7 +126,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_phobos_strike_team_op_reiver_sergeant",
@@ -144,7 +146,8 @@
       "wounds": 13,
       "weapons": [],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_phobos_strike_team_op_incursor_sergeant",
@@ -182,7 +185,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_phobos_strike_team_op_infiltrator_helix_adept",
@@ -231,7 +235,8 @@
           "name": "Helix Gauntlet (1AP)",
           "description": "▶ Select one friendly PHOBOS STRIKE TEAM operative within this operative’s control range to regain up to D3+3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_phobos_strike_team_op_infiltrator_warrior",
@@ -269,7 +274,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_phobos_strike_team_op_infiltrator_voxbreaker",
@@ -317,7 +323,8 @@
           "name": "Auspex Scan (1AP)",
           "description": "Until the start of this operative’s next activation or until it’s incapacitated (whichever comes first), whenever a friendly PHOBOS STRIKE TEAM operative is shooting an enemy operative within 8\" of this operative, that enemy operative cannot be obscured; if that friendly operative is an INCURSOR, its ranged weapons also have the Seek Light weapon rule.\r\nThis operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_phobos_strike_team_op_infiltrator_saboteur",
@@ -374,7 +381,8 @@
           "description": "This operative is carrying your Explosives marker. It can perform the **Pick Up Marker** action on that marker, and whenever it performs the **Place Marker** action on that marker, it can immediately perform a free **Dash** action."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_phobos_strike_team_op_infiltrator_commsman",
@@ -421,7 +429,8 @@
           "description": "Once per turning point, during a friendly PHOBOS STRIKE TEAM operative’s activation or counteraction, before or after it performs an action, if this operative is in the killzone, you can change one strategy ploy you’ve used this turning point (it doesn’t cost you any CP to do so)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_phobos_strike_team_op_incursor_warrior",
@@ -459,7 +468,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_phobos_strike_team_op_incursor_marksman",
@@ -503,7 +513,8 @@
           "description": "This operative can perform the **Guard** action (see close quarters rules, Kill Team Core Book) in any killzone. It can perform the **Guard** action while it has a Conceal order, but when you perform the free **Shoot** or **Fight** action during the interruption, you must change its order to Engage."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_phobos_strike_team_op_incursor_minelayer",
@@ -550,7 +561,8 @@
           "description": "The first time your Haywire Mine marker is within another operative’s control range, remove that marker, subtract 1 from that operative’s APL stat until the end of its next activation, and inflict 2D3+3 damage on it; if it isn’t incapacitated, end its action (if any), even if that action’s effects aren’t fulfilled. If it cannot be placed, move it the minimum amount to do so. Note that this operative is ignored for these effects (i.e. it cannot set it off or take damage from that marker)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_phobos_strike_team_op_reiver_warrior",
@@ -569,7 +581,18 @@
       "wounds": 12,
       "weapons": [],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 5,
+      "max": 5
+    }
+  }
 }

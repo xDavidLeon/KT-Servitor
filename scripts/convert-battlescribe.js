@@ -797,6 +797,220 @@ async function parseCatalogue(filePath) {
     }
   }
   
+  // Extract operative selection constraints from forceEntries
+  let operativeSelection = null;
+  // Normalize forceEntries structure (handle xml2js with explicitArray: true)
+  let forceEntriesArray = [];
+  if (catalogue.forceEntries) {
+    if (Array.isArray(catalogue.forceEntries)) {
+      catalogue.forceEntries.forEach(item => {
+        if (item && typeof item === 'object') {
+          if (item.forceEntry) {
+            const entries = Array.isArray(item.forceEntry) ? item.forceEntry : [item.forceEntry];
+            forceEntriesArray.push(...entries);
+          } else {
+            forceEntriesArray.push(item);
+          }
+        }
+      });
+    } else if (catalogue.forceEntries.forceEntry) {
+      forceEntriesArray = Array.isArray(catalogue.forceEntries.forceEntry)
+        ? catalogue.forceEntries.forceEntry
+        : [catalogue.forceEntries.forceEntry];
+    } else {
+      forceEntriesArray = [catalogue.forceEntries];
+    }
+  }
+  
+  for (const forceEntry of forceEntriesArray) {
+    if (!forceEntry) continue;
+    const categoryLinks = forceEntry.categoryLinks || [];
+    
+    // Find Leader and Operative categoryLinks
+    let leaderMin = null;
+    let leaderMax = null;
+    let operativeMin = null;
+    let operativeMax = null;
+    
+    // Handle xml2js structure - categoryLinks might be array or object
+    // With explicitArray: true, categoryLinks is an array: [ { categoryLink: [...] } ]
+    let categoryLinksArray = [];
+    if (Array.isArray(categoryLinks)) {
+      categoryLinks.forEach(item => {
+        if (item && typeof item === 'object') {
+          if (item.categoryLink) {
+            const links = Array.isArray(item.categoryLink) ? item.categoryLink : [item.categoryLink];
+            categoryLinksArray.push(...links);
+          } else {
+            categoryLinksArray.push(item);
+          }
+        }
+      });
+    } else if (categoryLinks && typeof categoryLinks === 'object') {
+      if (categoryLinks.categoryLink) {
+        categoryLinksArray = Array.isArray(categoryLinks.categoryLink)
+          ? categoryLinks.categoryLink
+          : [categoryLinks.categoryLink];
+      } else {
+        categoryLinksArray = [categoryLinks];
+      }
+    }
+    
+    for (const catLink of categoryLinksArray) {
+      if (!catLink) continue;
+      // Handle both attribute and property access for name
+      // With explicitArray: true, name can be an array
+      let catName = null;
+      if (catLink.name) {
+        // Check if it's an array first (explicitArray: true)
+        if (Array.isArray(catLink.name)) {
+          catName = catLink.name[0];
+        } else if (typeof catLink.name === 'string') {
+          catName = catLink.name;
+        } else {
+          // Try getText for nested structures
+          catName = getText(catLink.name);
+        }
+      }
+      // Fallback to getAttr
+      if (!catName) catName = getAttr(catLink, 'name');
+      // Final fallback to $ attributes
+      if (!catName && catLink.$ && catLink.$.name) {
+        catName = catLink.$.name;
+      }
+      if (!catName) continue;
+      
+      // Normalize constraints array structure
+      // With explicitArray: true, constraints is an array: [ { constraint: [...] } ]
+      let constraintsArray = [];
+      if (catLink.constraints) {
+        if (Array.isArray(catLink.constraints)) {
+          catLink.constraints.forEach(item => {
+            if (item && typeof item === 'object') {
+              if (item.constraint) {
+                // item.constraint is an array of constraint objects
+                const constraints = Array.isArray(item.constraint) ? item.constraint : [item.constraint];
+                constraintsArray.push(...constraints);
+              } else if (item.type || (Array.isArray(item.type) && item.type[0])) {
+                // It's a constraint object directly
+                constraintsArray.push(item);
+              }
+            }
+          });
+        } else if (catLink.constraints.constraint) {
+          constraintsArray = Array.isArray(catLink.constraints.constraint)
+            ? catLink.constraints.constraint
+            : [catLink.constraints.constraint];
+        } else if (catLink.constraints.type || (Array.isArray(catLink.constraints.type) && catLink.constraints.type[0])) {
+          // It's a single constraint object
+          constraintsArray = [catLink.constraints];
+        }
+      }
+      
+      // Extract min/max from constraints
+      for (const constraint of constraintsArray) {
+        if (!constraint) continue;
+        // With explicitArray: true and mergeAttrs: true, type/value/field can be arrays or properties
+        let constraintType = constraint.type;
+        let constraintValue = constraint.value;
+        let constraintField = constraint.field;
+        
+        // Handle array values (explicitArray: true)
+        if (Array.isArray(constraintType)) constraintType = constraintType[0];
+        if (Array.isArray(constraintValue)) constraintValue = constraintValue[0];
+        if (Array.isArray(constraintField)) constraintField = constraintField[0];
+        
+        // Fallback to getAttr if not found as property
+        if (!constraintType) constraintType = getAttr(constraint, 'type');
+        if (!constraintValue) constraintValue = getAttr(constraint, 'value');
+        if (!constraintField) constraintField = getAttr(constraint, 'field');
+        
+        if (constraintField === 'selections' && constraintValue) {
+          const value = parseInt(String(constraintValue), 10);
+          if (!isNaN(value)) {
+            if (catName === 'Leader') {
+              if (constraintType === 'min') {
+                leaderMin = value;
+              } else if (constraintType === 'max') {
+                // Handle -1 as "unlimited" but typically means 1 for leaders
+                leaderMax = value === -1 ? 1 : value;
+              }
+            } else if (catName === 'Operative') {
+              if (constraintType === 'min') {
+                operativeMin = value;
+              } else if (constraintType === 'max') {
+                operativeMax = value;
+              }
+            }
+          }
+        }
+      }
+      
+      // Check modifiers for Leader max (sometimes max is set via modifier)
+      if (catName === 'Leader' && catLink.modifiers) {
+        let modifiersArray = [];
+        if (Array.isArray(catLink.modifiers)) {
+          catLink.modifiers.forEach(item => {
+            if (item && typeof item === 'object') {
+              if (item.modifier) {
+                const mods = Array.isArray(item.modifier) ? item.modifier : [item.modifier];
+                modifiersArray.push(...mods);
+              } else {
+                modifiersArray.push(item);
+              }
+            }
+          });
+        } else if (catLink.modifiers.modifier) {
+          modifiersArray = Array.isArray(catLink.modifiers.modifier)
+            ? catLink.modifiers.modifier
+            : [catLink.modifiers.modifier];
+        } else {
+          modifiersArray = [catLink.modifiers];
+        }
+        
+        for (const modifier of modifiersArray) {
+          if (!modifier) continue;
+          const modifierType = getAttr(modifier, 'type');
+          const modifierValue = getAttr(modifier, 'value');
+          const modifierField = getAttr(modifier, 'field');
+          
+          if (modifierType === 'set' && modifierField && modifierValue) {
+            const value = parseInt(modifierValue, 10);
+            if (!isNaN(value) && value > 0) {
+              leaderMax = value;
+            }
+          }
+        }
+      }
+    }
+    
+    // Set defaults if not found
+    if (leaderMax === null) leaderMax = 1; // Default to 1 leader
+    if (leaderMin === null) leaderMin = 0;
+    if (operativeMax === null && operativeMin !== null) operativeMax = operativeMin; // If only min is set, use it as max
+    if (operativeMin === null && operativeMax !== null) operativeMin = 0;
+    
+    // Only create selection object if we found meaningful constraints
+    // Always create it if we have leader info, and add operatives if we found them
+    if (leaderMax !== null || operativeMin !== null || operativeMax !== null) {
+      operativeSelection = {
+        leader: {
+          min: leaderMin || 0,
+          max: leaderMax || 1
+        }
+      };
+      
+      if (operativeMin !== null || operativeMax !== null) {
+        operativeSelection.operatives = {
+          min: operativeMin || 0,
+          max: operativeMax !== null ? operativeMax : null
+        };
+      }
+      
+      break; // Use first forceEntry found
+    }
+  }
+  
   // Extract faction info
   const faction = {
     id: `fac_${catalogueId}`,
@@ -808,7 +1022,8 @@ async function parseCatalogue(filePath) {
     strategicPloys: [],
     tacticalPloys: [],
     equipment: [],
-    operatives: []
+    operatives: [],
+    operativeSelection: operativeSelection
   };
   
   // Extract operatives and other content
@@ -1421,6 +1636,185 @@ async function parseCatalogue(filePath) {
         }
       });
       
+      // Extract selection constraints (max times this operative can be selected)
+      let maxSelections = null; // null means unlimited
+      if (entry.constraints) {
+        // Normalize constraints array structure
+        // With explicitArray: true, constraints is: [ { constraint: [...] } ]
+        let constraintsArray = [];
+        if (Array.isArray(entry.constraints)) {
+          entry.constraints.forEach(item => {
+            if (item && typeof item === 'object') {
+              if (item.constraint) {
+                // item.constraint is an array of constraint objects
+                const constraints = Array.isArray(item.constraint) ? item.constraint : [item.constraint];
+                constraintsArray.push(...constraints);
+              } else if (item.type || (Array.isArray(item.type) && item.type[0])) {
+                // It's a constraint object directly
+                constraintsArray.push(item);
+              }
+            }
+          });
+        } else if (entry.constraints.constraint) {
+          constraintsArray = Array.isArray(entry.constraints.constraint)
+            ? entry.constraints.constraint
+            : [entry.constraints.constraint];
+        } else if (entry.constraints.type || (Array.isArray(entry.constraints.type) && entry.constraints.type[0])) {
+          // It's a single constraint object
+          constraintsArray = [entry.constraints];
+        }
+        
+        // Find constraint with scope="force" and field="selections"
+        let constraintId = null;
+        for (const constraint of constraintsArray) {
+          if (!constraint) continue;
+          let constraintType = constraint.type;
+          let constraintValue = constraint.value;
+          let constraintField = constraint.field;
+          let constraintScope = constraint.scope;
+          let constraintIdAttr = getAttr(constraint, 'id');
+          
+          // Handle array values (explicitArray: true)
+          if (Array.isArray(constraintType)) constraintType = constraintType[0];
+          if (Array.isArray(constraintValue)) constraintValue = constraintValue[0];
+          if (Array.isArray(constraintField)) constraintField = constraintField[0];
+          if (Array.isArray(constraintScope)) constraintScope = constraintScope[0];
+          if (Array.isArray(constraintIdAttr)) constraintIdAttr = constraintIdAttr[0];
+          
+          // Fallback to getAttr if not found as property
+          if (!constraintType) constraintType = getAttr(constraint, 'type');
+          if (!constraintValue) constraintValue = getAttr(constraint, 'value');
+          if (!constraintField) constraintField = getAttr(constraint, 'field');
+          if (!constraintScope) constraintScope = getAttr(constraint, 'scope');
+          if (!constraintIdAttr) constraintIdAttr = getAttr(constraint, 'id');
+          
+          // Also handle if id is in the $ attributes
+          if (!constraintIdAttr && constraint.$ && constraint.$.id) {
+            constraintIdAttr = constraint.$.id;
+          }
+          
+          if (constraintField === 'selections' && constraintScope === 'force' && constraintType === 'max') {
+            const value = parseInt(String(constraintValue), 10);
+            if (!isNaN(value)) {
+              maxSelections = value === -1 ? null : value; // -1 means unlimited
+              constraintId = constraintIdAttr; // Store the constraint ID for modifier matching
+            }
+          }
+        }
+        
+        // Check modifiers that might change the max value
+        // Modifiers reference constraints by their ID (modifier.field = constraint.id)
+        if (entry.modifiers && constraintId) {
+          let modifiersArray = [];
+          if (Array.isArray(entry.modifiers)) {
+            entry.modifiers.forEach(item => {
+              if (item && typeof item === 'object') {
+                if (item.modifier) {
+                  const mods = Array.isArray(item.modifier) ? item.modifier : [item.modifier];
+                  modifiersArray.push(...mods);
+                } else {
+                  modifiersArray.push(item);
+                }
+              }
+            });
+          } else if (entry.modifiers.modifier) {
+            modifiersArray = Array.isArray(entry.modifiers.modifier)
+              ? entry.modifiers.modifier
+              : [entry.modifiers.modifier];
+          } else {
+            modifiersArray = [entry.modifiers];
+          }
+          
+          // Collect all matching modifiers and prioritize unconditional ones
+          const matchingModifiers = [];
+          for (const modifier of modifiersArray) {
+            if (!modifier) continue;
+            let modifierType = modifier.type;
+            let modifierValue = modifier.value;
+            let modifierField = modifier.field;
+            
+            // Handle array values
+            if (Array.isArray(modifierType)) modifierType = modifierType[0];
+            if (Array.isArray(modifierValue)) modifierValue = modifierValue[0];
+            if (Array.isArray(modifierField)) modifierField = modifierField[0];
+            
+            // Fallback to getAttr
+            if (!modifierType) modifierType = getAttr(modifier, 'type');
+            if (!modifierValue) modifierValue = getAttr(modifier, 'value');
+            if (!modifierField) modifierField = getAttr(modifier, 'field');
+            
+            // Check if this modifier sets the constraint we found (modifier.field = constraint.id)
+            // modifierField might be an array, so normalize it
+            const normalizedModifierField = Array.isArray(modifierField) ? modifierField[0] : modifierField;
+            const normalizedConstraintId = Array.isArray(constraintId) ? constraintId[0] : constraintId;
+            
+            if (modifierType === 'set' && normalizedModifierField === normalizedConstraintId && modifierValue) {
+              const value = parseInt(String(modifierValue), 10);
+              if (!isNaN(value) && value >= 0) {
+                // Check if this modifier applies unconditionally or with conditions
+                let appliesUnconditionally = true;
+                let hasConditionGroups = false;
+                
+                // Check for conditions
+                if (modifier.conditions || modifier.conditionGroups) {
+                  appliesUnconditionally = false;
+                  
+                  // Check if conditions are just "notInstanceOf default-force" (which is always true in normal play)
+                  const conditions = modifier.conditions;
+                  const conditionGroups = modifier.conditionGroups;
+                  
+                  if (conditionGroups) {
+                    hasConditionGroups = true;
+                  }
+                  
+                  if (conditions) {
+                    let condsArray = [];
+                    if (Array.isArray(conditions)) {
+                      condsArray = conditions;
+                    } else if (conditions.condition) {
+                      condsArray = Array.isArray(conditions.condition) ? conditions.condition : [conditions.condition];
+                    } else {
+                      condsArray = [conditions];
+                    }
+                    
+                    if (condsArray.length === 1) {
+                      const cond = condsArray[0];
+                      const condType = Array.isArray(cond.type) ? cond.type[0] : (cond.type || getAttr(cond, 'type'));
+                      if (condType === 'notInstanceOf') {
+                        // This is typically always true, so the modifier applies
+                        appliesUnconditionally = true;
+                      }
+                    }
+                  }
+                }
+                
+                matchingModifiers.push({
+                  value: value === 0 ? 0 : (value > 0 ? value : null),
+                  appliesUnconditionally: appliesUnconditionally,
+                  hasConditionGroups: hasConditionGroups
+                });
+              }
+            }
+          }
+          
+          // Prioritize unconditional modifiers, then modifiers without condition groups
+          if (matchingModifiers.length > 0) {
+            const unconditional = matchingModifiers.find(m => m.appliesUnconditionally);
+            if (unconditional) {
+              maxSelections = unconditional.value;
+            } else {
+              // If no unconditional modifier, use the first one without condition groups, or the first one
+              const withoutGroups = matchingModifiers.find(m => !m.hasConditionGroups);
+              if (withoutGroups) {
+                maxSelections = withoutGroups.value;
+              } else {
+                maxSelections = matchingModifiers[0].value;
+              }
+            }
+          }
+        }
+      }
+      
       // Only add if we have at least some data (name is required)
       if (entryName && entryName !== 'Unnamed') {
         const operative = {
@@ -1434,7 +1828,8 @@ async function parseCatalogue(filePath) {
           wounds: stats.wounds,
           weapons: weapons,
           specialRules: specialRules,
-          specialActions: specialActions
+          specialActions: specialActions,
+          maxSelections: maxSelections // null means unlimited, number means max times
         };
         
         operatives.push(operative);

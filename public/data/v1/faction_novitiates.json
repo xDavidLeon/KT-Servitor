@@ -93,7 +93,8 @@
           "description": "Whenever this operative incapacitates an enemy operative, you gain 1 Faith point, or 2 Faith points if that enemy operative had a Wounds stat of 12 or more. This rule has no effect when using the Glorious Martyrdom firefight ploy."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_novitiates_op_condemnor",
@@ -137,7 +138,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_novitiates_op_dialogus",
@@ -186,7 +188,8 @@
           "name": "Auto-broadcaster (0AP)",
           "description": "▶ If your Auto-broadcaster marker isn’t in the killzone, place it within 8\" horizontally of this operative; otherwise, move your Auto-broadcaster marker up to 8\" horizontally. If this operative is removed from the killzone, remove your Auto-broadcaster marker from the killzone. \r\n▶ Whenever an enemy operative within 3\" of your Auto-broadcaster marker is shooting, fighting or retaliating, your opponent cannot re-roll their attack dice.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_novitiates_op_duellist",
@@ -232,7 +235,8 @@
           "description": "Whenever you block with a critical success, you can also inflict damage equal to the weapon’s Critical Dmg stat on the enemy operative in that sequence."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_novitiates_op_exactor",
@@ -280,7 +284,8 @@
           "name": "Whip Into Frenzy (1AP)",
           "description": "▶ Select one other friendly **NOVITIATE** operative (excluding **SUPERIOR**) visible to and within 3\" of this operative that isn’t currently benefitting from the effects of this action. Until the end of that operative’s next activation, add 1\" to its Move stat, it can perform two Fight actions during its next activation, and one of them can be free. \r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_novitiates_op_hospitaller",
@@ -332,7 +337,8 @@
           "name": "Chirurgeon's Tools (1AP)",
           "description": "▶ Select one friendly **NOVITIATE** operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point. \r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_novitiates_op_penitent",
@@ -382,7 +388,8 @@
           "description": "Whenever this operative is fighting with this weapon, it has the Ceaseless weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_novitiates_op_preceptor",
@@ -422,7 +429,8 @@
           "description": "**SUPPORT**. Whenever a friendly **NOVITIATE** operative is within 3\" of this operative, that friendly operative’s weapons have the Severe weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_novitiates_op_pronatus",
@@ -469,7 +477,8 @@
           "description": "Once per turning point, when this operative performs a mission action that requires it to control an objective or mission marker, you gain a number of Faith points equal to the turning point number."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_novitiates_op_purgatus",
@@ -514,7 +523,8 @@
           "description": "Once per turning point, you can use the Inferno firefight ploy for 0CP if this is the specified friendly **NOVITIATE** operative."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_novitiates_op_reliquarius",
@@ -562,7 +572,8 @@
           "name": "Raise Icon (1AP)",
           "description": "▶ You gain 1 Faith point. If this operative controls an objective marker, you also gain a number of Faith points equal to the turning point number.\r\n◆ This operative can only perform this action once per turning point, and cannot perform it while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_novitiates_op_militant",
@@ -607,7 +618,18 @@
           "description": "Whenever this operative is shooting, fighting or retaliating, if you use an ACT OF FAITH during that sequence and an enemy operative is incapacitated, the Faith points spent on that ACT OF FAITH are refunded. If you use the Icon of Faith equipment, Faith points are only refunded for one of those ACTS OF FAITH (your choice)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 9,
+      "max": 9
+    }
+  }
 }

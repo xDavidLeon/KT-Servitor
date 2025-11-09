@@ -79,7 +79,8 @@
           "description": "Once per battle, after an enemy operative performs an action during its activation, if this operative is ready, you can use this rule. If you do, roll one D6: if the result is higher than that enemy operative’s APL stat, you can interrupt that activation and immediately perform either a free **Shoot** or a free **Fight** action with this operative, but other enemy operatives cannot be selected as a valid target or to fight against during that action (note that secondary targets from the Blast weapon rule can still be targeted). After you perform that action, subtract 1 from this operative’s APL stat until the end of its next activation."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_fate_dealer",
@@ -144,7 +145,8 @@
           "description": "Whenever an operative is shooting this operative:\r\n- Ignore the Saturate weapon rule.\r\n- If you can retain any cover saves, you can retain one additional cover save, or you can retain one cover save as a critical success instead. This isn’t cumulative with improved cover saves from Vantage terrain."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_gunner",
@@ -203,7 +205,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_heavy_gunner",
@@ -276,7 +279,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_kurnathi",
@@ -326,7 +330,8 @@
           "description": "Whenever this operative is fighting or retaliating, you can resolve one of your successes before the normal order. If you do, that success must be used to block."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_kurnite_hunter",
@@ -388,7 +393,8 @@
           "description": "**STRATEGIC GAMBIT**. Select one enemy operative within 9\" of this operative. Once during this turning point, after that enemy operative performs an action in which it moves during its activation, you can interrupt that activation to use this rule. If you do, this operative can immediately perform either a free **Reposition** action (it cannot end that move further from that enemy operative), or a free **Charge** action (you can change its order to do so, and it must end that move within control range of that enemy operative)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_shade_runner",
@@ -449,7 +455,8 @@
           "description": "Whenever this operative performs the **Reposition** action with a warp jump (see Blink Pack), you can use this rule. If you do, after it moves, draw an imaginary line 1mm in diameter and up to 7\" long between it and its previous location. Note this doesn’t have to be a straight line. Inflict D3+2 damage on one enemy operative that line crosses. You cannot inflict damage on an enemy operative that was not visible to this operative at the start of that action. A 28mm round marker can be temporarily placed underneath this operative before it moves to help determine this."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_soul_weaver",
@@ -500,7 +507,8 @@
           "name": "Soul Heal (1AP)",
           "description": "▶ **PSYCHIC**. Select one friendly **CORSAIR VOIDSCARRED** operative visible to and within 6\" of this operative. That operative regains 2D3 lost wounds.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_starstorm_duellist",
@@ -560,7 +568,8 @@
           "name": "Pistol Barrage (1AP)",
           "description": "▶ Perform two free **Shoot** actions with this operative (this takes precedence over action restrictions). You must select its fusion pistol for one action and its shuriken pistol for the other (in any order).\r\n◆ This operative cannot perform this action while it has a Conceal order, or during an activation in which it performed the **Shoot** action (or vice versa)."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_warrior",
@@ -583,7 +592,8 @@
           "description": "You can use the Capricious Flight and Light Fingers firefight ploys for 0CP each if a friendly **WARRIOR** operative is the specified **CORSAIR VOIDSCARRED** operative."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_way_seeker",
@@ -658,7 +668,18 @@
           "name": "Warding Shield (1AP)",
           "description": "▶ **PSYCHIC**. Select one friendly **CORSAIR VOIDSCARRED** operative visible to and within 6\" of this operative. Until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first), the first time an attack dice inflicts Normal Dmg on that friendly operative, ignore that inflicted damage.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 1,
+      "max": 1
+    },
+    "operatives": {
+      "min": 8,
+      "max": 8
+    }
+  }
 }

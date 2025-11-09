@@ -101,7 +101,8 @@
           "name": "Premonition (1AP)",
           "description": "▶  PSYCHIC. Spend 1 of your Prescience points to gain 1CP. \r\n◆ This operative cannot perform this action while within control range of an enemy operative, or more than once per turning point."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_nemesis_claw_op_fearmonger",
@@ -180,7 +181,8 @@
           "name": "Poison Objective (1AP)",
           "description": "▶ Select one objective marker this operative controls to gain one of your Terrorchem tokens. It cannot be an objective marker within control range of an enemy operative, or one that already has one of your Terrorchem tokens. The first time that objective marker is within control range of an enemy operative that doesn’t have one of your Terrorchem tokens, that operative gains that Terrorchem token, then inflict 2D3 damage on it (if it’s during an action, at the end of that action).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_nemesis_claw_op_heavy_gunner",
@@ -262,7 +264,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_nemesis_claw_op_gunner",
@@ -345,7 +348,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_nemesis_claw_op_screecher",
@@ -383,7 +387,8 @@
           "description": "Whenever this operative is fighting against a wounded enemy operative, this operative’s lightning claws have the Lethal 4+ weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_nemesis_claw_op_skinthief",
@@ -431,7 +436,8 @@
           "description": "Whenever this operative is fighting or retaliating, Normal and Critical Dmg of 3 or more inflicts 1 less damage on it."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_nemesis_claw_op_ventriloquar",
@@ -479,7 +485,8 @@
           "name": "Disconcerting Mimicry (1AP)",
           "description": "▶ PSYCHIC. Select one enemy operative within 6\" of this operative, then select one of the following for that enemy operative (you can only select each option once per battle): \r\n- Until the end of its next activation, subtract 1 from its APL stat. \r\n- Change its order.\r\n- Perform a free **Dash** action with it (specify the location for your opponent to move it to).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_nemesis_claw_op_warrior_with_bolt_pistol_chainsword",
@@ -521,7 +528,8 @@
           "description": "Whenever this operative is shooting against, fighting against or retaliating against an injured enemy operative, or an enemy operative that has a Wounds stat of 7 or less, this operative’s weapons have the Lethal 5+ weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 5
     },
     {
       "id": "fac_nemesis_claw_op_warrior_with_boltgun_fists",
@@ -563,7 +571,18 @@
           "description": "Whenever this operative is shooting against, fighting against or retaliating against an injured enemy operative, or an enemy operative that has a Wounds stat of 7 or less, this operative’s weapons have the Lethal 5+ weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 5
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 5,
+      "max": 5
+    }
+  }
 }

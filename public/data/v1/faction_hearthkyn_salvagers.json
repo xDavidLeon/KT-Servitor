@@ -124,7 +124,8 @@
           "description": "Once per battle, when an attack dice inflicts Normal Dmg on this operative, you can ignore that inflicted damage."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hearthkyn_salvagers_op_d_zr",
@@ -175,7 +176,8 @@
           "name": "Knux Smash (1AP)",
           "description": "▶ Select one enemy operative within this operative’s control range. You can move that enemy operative up to 3\" to a location it can be placed. Then inflict D3+1 damage on it (even if you don’t move it); if the D3 result is a 3, also subtract 1 from that enemy operative’s APL stat until the end of its next activation. This operative can then immediately perform a free Charge action (even if it’s already performed the Charge action during that activation), but cannot move more than 3\" during that action. \r\n◆ This operative cannot perform this action unless an enemy operative is within its control range."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_hearthkyn_salvagers_op_field_medic",
@@ -224,7 +226,8 @@
           "name": "Medikit (1AP)",
           "description": "▶ Select one friendly HEARTHKYN SALVAGER operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point. \r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_hearthkyn_salvagers_op_grenadier",
@@ -285,7 +288,8 @@
           "name": "Vâyr-3 Utility Grenade ",
           "description": "▶  Place one of your Utility Grenade markers within 6\" of this operative. It must be visible to this operative, or on Vantage terrain of a terrain feature that’s visible to this operative. Whenever an operative is within 3\" of that Utility Grenade marker, its controlling player must spend 1 additional AP for that operative to perform the Pick Up Marker and mission actions.\r\n▶  In the Ready step of the next Strategy phase, roll one D3. Remove that Utility Grenade marker after a number of activations equal to the result have been completed, or at the end of the turning point (whichever comes first).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_hearthkyn_salvagers_op_gunner",
@@ -390,7 +394,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 3
     },
     {
       "id": "fac_hearthkyn_salvagers_op_jump_pack_warrior",
@@ -434,7 +439,8 @@
           "description": "Whenever this operative performs an action in which it moves, it can FLY. If it does, don’t move it. Instead, remove it from the killzone and set it back up wholly within a distance equal to its Move stat (or 3\" if it was a Dash) of its original location, measuring the horizontal distance only (in a killzone that uses the close quarters rules, e.g. Killzone: Gallowdark, this distance cannot be measured over or through Wall terrain, and that operative cannot be set up on the other side of an access point – in other words it cannot FLY through an open hatchway). Note that it gains no additional distance when performing the Charge action. It must be set up in a location it can be placed, and unless it’s the Charge action, it cannot be set up within control range of an enemy operative."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hearthkyn_salvagers_op_kinlynk",
@@ -469,7 +475,8 @@
           "name": "System Jam (1AP)",
           "description": "▶ Select one enemy operative that’s a valid target for this operative and that doesn’t have one of your System Jam tokens; it gains one. Until the end of the battle, whenever an enemy operative has one of your System Jam tokens, it cannot be activated until each enemy operative without one is expended. When an enemy operative that has one of your System Jam tokens is activated, remove that token.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_hearthkyn_salvagers_op_kognit_ar",
@@ -505,7 +512,8 @@
           "name": "Accelerated Appraisal (1AP)",
           "description": "▶ If your Attack or Defence marker is in the killzone, remove it. \r\n▶ Place your Attack or Defence marker in the killzone.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_hearthkyn_salvagers_op_loc_tr",
@@ -540,7 +548,8 @@
           "name": "Pan Spectral Scan (1AP)",
           "description": "▶ Place your Pan Spectral Scan marker in the killzone. Whenever a friendly HEARTHKYN SALVAGER operative is shooting an enemy operative that’s within 3\" of that marker, that friendly operative’s ranged weapons have the Accurate 1 and Saturate weapon rules. When this operative is next activated, is incapacitated or performs this action again (whichever comes first), remove that marker.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_hearthkyn_salvagers_op_lugger",
@@ -575,7 +584,8 @@
           "description": "Once during each of this operative’s activations, it can perform a mission action for 1 less AP."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hearthkyn_salvagers_op_warrior",
@@ -606,7 +616,18 @@
           "description": "Whenever an enemy operative is shooting against, fighting against or retaliating against this operative, if this operative contests an objective marker or one of your mission markers, in the Resolve Attack Dice step, you can subtract 1 from the damage inflicted on it from one success."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 9
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 9,
+      "max": 9
+    }
+  }
 }

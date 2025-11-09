@@ -95,7 +95,8 @@
           "description": "STRATEGIC GAMBIT if this operative isn't incapacitated. Roll one D6 and compare the result to the number of the current turning point; if the result is:\r\n- Twice as high or higher: you gain 1CP.\r\n- Less: inflict damage on this operative equal to the result.\r\n- Any other result, nothing happens."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_raveners_op_felltalon",
@@ -155,7 +156,8 @@
           "name": "Toxic lunge (1AP)",
           "description": "▶ Select one enemy operative within 2\" of this operative. Alternatively, if this operative is underground, select one enemy operative on your TUNNEL. Inflict D3+2 damage on that enemy operative and it gains one of your Poison tokens (if it doesn't already have one).\r\n◆ This operative can perform this action while underground (this takes precedence over the normal Burrow rules)."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_raveners_op_venomspitter",
@@ -223,7 +225,8 @@
           "name": "Distend Dorsal Sac (1AP)",
           "description": "▶ Until this operative has shot with its venom bolt, until it performs this action again or until it performs the **Burrow** action (whichever comes first), all profiles of its venom bolt have the Lethal 5+ weapon rule, have 1 added to their Atk stat, and the Range 8\" weapon rule removed."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_raveners_op_warrior",
@@ -262,7 +265,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_raveners_op_wrecker",
@@ -309,7 +313,8 @@
           "description": "Normal and Critical Dmg of 4 or more inflicts 1 less damage on this operative."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_raveners_op_tremorscythe",
@@ -359,7 +364,18 @@
           "description": "This operative can perform the **Charge** action while it has a Conceal order if it performed the **Burrow** action during the same activation/counteraction."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 4,
+      "max": 4
+    }
+  }
 }

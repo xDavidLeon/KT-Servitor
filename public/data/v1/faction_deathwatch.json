@@ -102,7 +102,8 @@
           "description": "You can do each of the following once per battle if this operative is in the killzone:\r\n- Use a DEATHWATCH strategy ploy for 0CP.\r\n- Use a DEATHWATCH firefight ploy for 0CP."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_deathwatch_op_aegis_veteran",
@@ -147,7 +148,8 @@
           "description": "Whenever an operative is shooting this operative, worsen the x of the Piercing weapon rule by 1 (if any). Note that Piercing 1 would therefore be ignored."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_deathwatch_op_blademaster_veteran",
@@ -205,7 +207,8 @@
           "description": "You can ignore any changes to the Hit stat of this operative's xenophase blade. Whenever this operative is fighting or retaliating, you can resolve one of your successes before the normal order. If you do, that success must be used to block."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_deathwatch_op_bombard_veteran",
@@ -263,7 +266,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_deathwatch_op_breacher_veteran",
@@ -335,7 +339,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_deathwatch_op_demolisher_veteran",
@@ -384,7 +389,8 @@
           "description": "Whenever this operative is fighting, its heavy thunder hammer has the Brutal weapon rule. Whenever this operative performs the **Charge** action, its heavy thunder hammer has the Ceaseless weapon rule until the end of the activation/counteraction."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_deathwatch_op_disruptor_veteran",
@@ -430,7 +436,8 @@
           "description": "The Advanced Auspex Scan firefight ploy costs you 0CP when the following are true:\r\n- This operative isn't within control range of enemy operatives.\r\n- The target of that **Shoot** action (primary target, if relevant) is visible to this operative.\r\n\r\n\r\nNote that it doesn't have to be this operative performing the **Shoot** action."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_deathwatch_op_gunner_veteran",
@@ -489,7 +496,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_deathwatch_op_headtaker_veteran",
@@ -538,7 +546,8 @@
           "description": "This operative can perform the **Charge** action while it has a Conceal order. Whenever this operative is fighting against an operative it wasn't visible to at the start of the activation/counteraction, the first time you strike during that sequence, you can immediately resolve another of your successes as a strike (before your opponent)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_deathwatch_op_horde_slayer_veteran",
@@ -609,7 +618,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_deathwatch_op_marksman_veteran",
@@ -663,7 +673,18 @@
           "description": "This operative can perform the **Guard** action (see close quarters rules) in any killzone.\r\n\r\n\r\nWhen using the close quarters rules, once per turning point, after this operative performs a free **Shoot** action on guard, it can immediately perform a free **Guard** action. However, if it does, it cannot counteract (nor **Guard** twice if it's counteracted)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 5,
+      "max": 5
+    }
+  }
 }

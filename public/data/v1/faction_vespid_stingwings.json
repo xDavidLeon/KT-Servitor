@@ -87,7 +87,8 @@
           "description": "Once during each enemy operative’s activation, as soon as it’s within 2\" of one of your Neutron Fallout markers, inflict D3 damage on it (multiple markers are not cumulative)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_vespid_stingwings_op_vespid_swarmguard",
@@ -142,7 +143,8 @@
           "name": "Skytorch Assault (2AP)",
           "description": "▶ Perform a free **Reposition** action with this operative. During that action, it must **FLY** and can move an additional 2\". Then perform a free **Shoot** action. You can only select a flamer (skytorch) for that **Shoot** action.\r\n◆ This operative cannot perform this action while it has a Conceal order, or while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_vespid_stingwings_op_vespid_warrior",
@@ -183,7 +185,8 @@
           "description": "Whenever this operative is shooting, if you don’t spend Communion points during that sequence, its neutron blaster has the Accurate 1 weapon rule until the end of that sequence."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_vespid_stingwings_op_vespid_strain_leader",
@@ -228,7 +231,8 @@
           "description": "When selecting your operatives for the battle, also select one **VESPID STINGWING** strategy ploy. Whenever this operative is in the killzone and not within control range of an enemy operative, that ploy costs you 0CP."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_vespid_stingwings_op_oversight_drone",
@@ -267,7 +271,8 @@
           "name": "Aerial Guidance (1AP)",
           "description": "▶ **SUPPORT**. Until the start of this operative's next activation, whenever another friendly **VESPID STINGWING** operative within 6\" of this operative is shooting an enemy operative visible to this operative, that friendly operative's ranged weapons have the Lethal 5+ and Saturate weapon rules. This has no effect while this operative is within control range of an enemy operative.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_vespid_stingwings_op_vespid_longsting",
@@ -317,7 +322,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_vespid_stingwings_op_vespid_shadestrain",
@@ -377,7 +383,18 @@
           "description": "Whenever an operative is shooting this operative, ignore the Piercing weapon rule and all cover saves are retained as critical successes. This rule has no effect if this operative is not selected as the valid target, e.g. if it's a secondary target from the Blast weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 1,
+      "max": 1
+    },
+    "operatives": {
+      "min": 9,
+      "max": 9
+    }
+  }
 }

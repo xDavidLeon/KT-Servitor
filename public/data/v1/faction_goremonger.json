@@ -97,7 +97,8 @@
           "description": "Once per battle when an attack dice inflicts Normal Dmg on this operative, you can ignore that inflicted damage."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_goremonger_op_aspirant",
@@ -140,7 +141,8 @@
           "description": "Once during each of this operative's activations, when this operative ends the **Fight** action, if it's no longer within control range of enemy operatives, you can use this rule. If you do, it can immediately perform a free **Charge** action (even if it's already performed the **Charge** action during that activation), but cannot move more than 2\" during that action. Doing so doesn't prevent it from performing the **Charge**, **Dash** or **Reposition** action afterwards during that activation."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_goremonger_op_bloodtaker",
@@ -183,7 +185,8 @@
           "name": "Transfusion Ritual (1AP)",
           "description": "▶ Decrease this operative's GORE TANK. Instead of using a SANGUAVITAE rule, you can increase the GORE TANK of one other friendly GOREMONGER operative within 8\" of this operative.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if its GORE TANK is empty."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_goremonger_op_impaler",
@@ -234,7 +237,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_goremonger_op_inciter",
@@ -286,7 +290,8 @@
           "name": "Dash and Spray (1AP)",
           "description": "▶ Perform a free **Dash** action and a free **Shoot** action with this operative in any order. You can only select dual autopistols (focused) for that **Shoot** action.\r\n◆ This operative cannot perform this action while it has a Conceal order, or while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_goremonger_op_skullclaimer",
@@ -333,7 +338,8 @@
           "description": "Once per turning point, if this operative incapacitates an enemy operative with its great chainaxe, you gain 1CP."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_goremonger_op_stalker",
@@ -380,7 +386,18 @@
           "description": "Whenever this operative is fighting during an activation in which it dropped from Vantage terrain, or whenever this operative is fighting against an enemy operative that's on Vantage terrain, this operative's melee weapons have the Relentless weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 7,
+      "max": 7
+    }
+  }
 }

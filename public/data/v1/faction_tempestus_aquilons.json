@@ -82,7 +82,8 @@
           "description": "When this operative lands, you can set it up within 4\" of one of your Drop markers (measuring horizontal distance only), taking precedence over the normal distance requirement."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_tempestus_aquilons_op_aquilon_tempestor",
@@ -141,7 +142,8 @@
           "name": "Command (1AP)",
           "description": "▶ **SUPPORT**. Select one other friendly **TEMPESTUS AQUILON** operative (excluding **SERVO-SENTRY**) visible to and within 6\" of this operative. Until the end of that operative's next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_tempestus_aquilons_op_aquilon_grenadier",
@@ -196,7 +198,8 @@
           "description": "This operative can use frag, krak, smoke, and stun grenades (see universal equipment). Doing so doesn't count towards any limited uses you have (i.e. if you also select those grenades from equipment for other operatives). Whenever this operative is using a frag or krak grenade, improve the Hit stat of that weapon by 1."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_tempestus_aquilons_op_aquilon_gunfighter",
@@ -252,7 +255,8 @@
           "description": "Whenever an enemy operative within 8\" of this operative shoots this operative, keep track of each attack dice that's discarded as a fail. After the action, before incapacitated operatives are removed (including this one, if relevant), this operative can perform a free **Shoot** action (change its order to Engage to do so), but it can only target that enemy operative with its hot-shot laspistols (focused), and you only roll a number of attack dice equal to the opponent's discarded attack dice plus one (to a maximum of four)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_tempestus_aquilons_op_aquilon_gunner",
@@ -312,7 +316,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_tempestus_aquilons_op_aquilon_marksman",
@@ -377,7 +382,8 @@
           "description": "Whenever this operative is on Vantage terrain and is shooting an operative that has an Engage order and is at least 2\" lower than it, all profiles of its hot‑shot long‑las have the Severe weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_tempestus_aquilons_op_aquilon_precursor",
@@ -425,7 +431,8 @@
           "description": "Whenever this operative performs the **Fight** or **Shoot** action, it can immediately perform a free **Dash** action afterwards. It can do so even if it performed the **Charge** action during this activation, but can only use the remaining distance it had from that **Charge** action (to a maximum of 3\")."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_tempestus_aquilons_op_aquilon_servo_sentry",
@@ -504,7 +511,18 @@
           "description": "This operative can perform two **Shoot** actions during its activation."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 1,
+      "max": 1
+    },
+    "operatives": {
+      "min": 10,
+      "max": 10
+    }
+  }
 }

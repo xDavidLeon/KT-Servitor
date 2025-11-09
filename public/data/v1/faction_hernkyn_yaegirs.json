@@ -83,7 +83,8 @@
           "description": "The first time this operative would be incapacitated during the battle, it’s not incapacitated, has 1 wound remaining and cannot be incapacitated for the remainder of the action. All remaining attack dice are discarded (including yours if this operative is fighting or retaliating)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hernkyn_yaegirs_op_bladekyn",
@@ -134,7 +135,8 @@
           "description": "If this operative is incapacitated during the Fight action, you can strike the enemy operative in that sequence with one of your unresolved successes before this operative is removed from the killzone."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hernkyn_yaegirs_op_bombast",
@@ -181,7 +183,8 @@
           "description": "Whenever this operative incapacitates an enemy operative with its wroughtlock revolvers, roll one D6 separately for each other enemy operative visible to and within 2\" of that enemy operative: if the result is higher than that other enemy operative’s APL stat, subtract 1 from its APL stat until the end of its next activation."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hernkyn_yaegirs_op_gunner",
@@ -248,7 +251,8 @@
           "description": "Whenever this operative is shooting with this weapon, if it hasn’t moved during the activation, or if it’s a counteraction, this weapon has the Ceaseless weapon rule. Note this operative isn’t restricted from moving after shooting."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hernkyn_yaegirs_op_ironbraek",
@@ -295,7 +299,8 @@
           "description": "Whenever one of your reverse-side down Minefield markers is both within an enemy operative’s control range and not within a friendly HERNKYN YAEGIR operative’s control range, flip the marker over. If it’s a blank, there’s no effect. If it’s a HY-Pex mine, inflict 3 damage on that enemy operative and roll one D6: if the result is less than that enemy operative’s Save stat, inflict additional damage on it equal to the dice result; regardless of the result, if it isn’t incapacitated, end its action (if any), even if that action’s effects aren’t fulfilled. If it cannot be placed, move it the minimum amount to do so. Regardless, that marker isn’t removed."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hernkyn_yaegirs_op_riflekyn",
@@ -367,7 +372,8 @@
           "description": "This operative can only use this weapon the first time it’s performing the **Shoot** action during the battle"
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hernkyn_yaegirs_op_tracker",
@@ -427,7 +433,8 @@
           "description": "Whenever this operative is shooting against or fighting against an expended operative within 6\" of it, this operative’s weapons have the Punishing weapon rule."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_hernkyn_yaegirs_op_warrior",
@@ -449,7 +456,18 @@
           "description": "Whenever you spend a Resourceful point for this operative, the following take precedence: \r\n- If you add 1 to its APL stat, it lasts until the start of its next activation instead. \r\n- If it regains lost wounds, it regains 4 instead."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 9
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 9,
+      "max": 9
+    }
+  }
 }

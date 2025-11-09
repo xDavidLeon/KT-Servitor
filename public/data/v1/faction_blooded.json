@@ -99,7 +99,8 @@
           "description": "Whenever this operative has one of your Blooded tokens or is wholly within your opponent’s territory, treat it as if it’s under the GAZE OF THE GODS."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_blooded_op_traitor_brimstone_grenadier",
@@ -158,7 +159,8 @@
           "description": "If this operative is incapacitated, before it's removed from the killzone, roll two D6, or one D6 if this operative is within control range of an enemy operative. If any result is a 4+, inflict D3+2 damage on each operative visible to and within 2\" of this operative. If this operative hasn’t used its diabolyk bomb during the battle, inflict D6+2 damage instead."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_blooded_op_traitor_gunner",
@@ -250,7 +252,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 3
     },
     {
       "id": "fac_blooded_op_traitor_trooper",
@@ -289,7 +292,8 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly BLOODED TROOPER operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_blooded_op_traitor_trench_sweeper",
@@ -332,7 +336,8 @@
           "description": "Whenever this operative is activated, you can use this rule. If you do, until the start of this operative’s next activation:\r\n- Subtract 2\" from its Move stat.\r\n- Whenever an operative is shooting this operative, you can re-roll any of your defence dice."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_blooded_op_traitor_sharpshooter",
@@ -389,7 +394,8 @@
           "description": "STRATEGIC GAMBIT in the first turning point. Select one enemy operative. Whenever this operative is shooting that enemy operative, treat this operative as if it has one of your Blooded tokens and is under the GAZE OF THE GODS."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_blooded_op_traitor_ogryn",
@@ -435,7 +441,8 @@
           "description": "You must spend 1 additional AP for this operative to perform the **Pick Up Marker** and mission actions (excluding **Operate Hatch**)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_blooded_op_traitor_flenser",
@@ -469,7 +476,8 @@
           "description": "This operative can perform the **Charge** action while it has a Conceal order. If this operative is incapacitated during the **Fight** action, you can strike the enemy operative in that sequence with one of your unresolved successes before it’s removed from the killzone."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_blooded_op_traitor_enforcer",
@@ -517,7 +525,8 @@
           "name": "Enforce (1AP)",
           "description": "▶ Select one other friendly BLOODED operative visible to and within 3\" of this operative. That operative can immediately perform a 1AP action for free, but it cannot move more than 2\" during that action. If the selected friendly operative is a COMMSMAN, it cannot perform the Sacrilegious Actuation or Signal actions.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_blooded_op_traitor_corpseman",
@@ -571,7 +580,8 @@
           "name": "STIMMs (1AP)",
           "description": "▶ Select one friendly BLOODED operative within this operative’s control range, then select the Rejuvenated STIMM rule, or one other STIMM rule for that operative to have for the battle. You cannot select each STIMM rule for each operative more than once per battle.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_blooded_op_traitor_commsman",
@@ -614,7 +624,8 @@
           "name": "Sacrilegious Actuation (1AP)",
           "description": "▶ You gain one Blooded token.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if it doesn’t have one of your Blooded tokens."
         }
-      ]
+      ],
+      "maxSelections": 1
     },
     {
       "id": "fac_blooded_op_traitor_butcher",
@@ -649,7 +660,8 @@
           "description": "Whenever this operative is fighting or retaliating, if it incapacitates the enemy operative in that sequence, it regains D3 lost wounds. This is cumulative with the Symbols of Bloody Worship equipment."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_blooded_op_traitor_thug",
@@ -682,7 +694,8 @@
           "description": "Whenever this operative is fighting or retaliating, or an operative is shooting it, Normal Dmg of 3 or more inflicts 1 less damage on it."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": 1
     },
     {
       "id": "fac_blooded_op_traitor_trooper",
@@ -721,7 +734,18 @@
           "description": "Whenever this operative is expended, you must then activate one other ready friendly BLOODED TROOPER operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 9,
+      "max": 9
+    }
+  }
 }

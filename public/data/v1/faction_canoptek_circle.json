@@ -83,7 +83,8 @@
           "name": "Nanoscarab Beam (1AP)",
           "description": "▶ Select one friendly CANOPTEK CIRCLE operative visible to and within 6\" of this operative. Alternatively, if this operative is within your **OBELISK NODE MATRIX**, you can select one other friendly CANOPTEK CIRCLE operative within your **OBELISK NODE MATRIX**. The selected operative regains up to 3D3 lost wounds. It cannot be an operative that the Reanimate rule was used on during this turning point.\r\n\r\n\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or more than once per turning point."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_canoptek_circle_op_tomb_crawler",
@@ -154,7 +155,8 @@
           "description": "Whenever determining control of a marker, you can treat this operative's APL stat as 3. If you do, this takes precedence over all other rules, meaning any changes to its APL stat are ignored for this."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_canoptek_circle_op_macrocyte_accelerator",
@@ -205,7 +207,8 @@
           "name": "Cranial Overload (1AP)",
           "description": "▶ Select one enemy operative visible to and within 3\" of this operative. Alternatively, if this operative is within your **OBELISK NODE MATRIX**, you can select one enemy operative within your **OBELISK NODE MATRIX**. Until the end of that enemy operative's next activation, subtract 1 from its APL stat.\r\n\r\n\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_canoptek_circle_op_macrocyte_warrior",
@@ -276,7 +279,8 @@
           "description": "If this operative is incapacitated by an enemy operative within 2\" of it, roll one D3; on a 2+, inflict damage on that enemy operative equal to the result."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_canoptek_circle_op_geomancer",
@@ -348,7 +352,18 @@
           "name": "Geomantic Disturbance (1AP)",
           "description": "▶ **SUPPORT**. Select a point on a terrain feature; that point must be visible to and within 8\" of this operative. Separately roll 2D6 for each operative within 2\" of that point. If the result is higher than that operative's remaining wounds, inflict damage on it equal to the difference.\r\n\r\n\r\n◆ This operative cannot perform this action while it has a Conceal order, or while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 0,
+      "max": 1
+    },
+    "operatives": {
+      "min": 7,
+      "max": 7
+    }
+  }
 }

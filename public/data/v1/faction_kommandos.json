@@ -86,7 +86,8 @@
           "name": "Dakka Dash (1AP)",
           "description": "▶ Perform a free **Dash** action and a free **Shoot** action with this operative in any order. You can only select a dakka shoota for that **Shoot** action.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or while it has a Conceal order."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_kommandos_op_kommando_boss_nob",
@@ -145,7 +146,8 @@
           "name": "Get It Dun! (1AP)",
           "description": "▶ **SUPPORT**. Select one other friendly **KOMMANDO** operative (excluding **BOMB SQUIG**) visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or while counteracting."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_kommandos_op_bomb_squig",
@@ -198,7 +200,8 @@
           "description": "This operative is ignored for your opponent’s kill/elimination op (when it’s incapacitated, and when determining your starting number of operatives). It’s also ignored for victory conditions and scoring VPS if either require operatives to ‘escape’, ‘survive’ or be incapacitated by enemy operatives (if it escapes/survives/is incapacitated, determining how many operatives must escape/survive/be incapacitated, etc.)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_kommandos_op_kommando_boy",
@@ -241,7 +244,8 @@
           "description": "You can do each of the following once per turning point:\r\n- One friendly **KOMMANDO BOY** operative can perform the **Smoke\r\nGrenade** action.\r\n- One friendly **KOMMANDO BOY** operative can perform the **Stun\r\nGrenade** action.\r\nThe rules for these actions are found in universal equipment. Performing these actions using this rule doesn’t count towards their action limits (i.e. if you also select those grenades from equipment)."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_kommandos_op_kommando_breacha_boy",
@@ -286,7 +290,8 @@
           "name": "Breach (1AP)",
           "description": "▶ Place one of your Breach markers within this operative’s control range as close as possible to a terrain feature within control range of it. Whenever an operative is within 1\" of that marker, it treats parts of that terrain feature that are no more than 1\" thick as Accessible terrain.\r\n▶ This operative can perform this action during the **Charge** or **Reposition** action, and it can do so for 1 less AP during those actions. Any remaining move distance can be used after it does so.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a terrain feature isn’t within its control range."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_kommandos_op_kommando_burna_boy",
@@ -337,7 +342,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_kommandos_op_kommando_comms_boy",
@@ -386,7 +392,8 @@
           "name": "Listen In (1AP)",
           "description": "▶ **SUPPORT**. Select one other friendly **KOMMANDO** operative (excluding **BOMB SQUIG**) visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_kommandos_op_kommando_grot",
@@ -424,7 +431,8 @@
           "name": "Grappling Hook (1AP)",
           "description": "▶ Select a visible point on a terrain feature for this operative. Remove this operative from the killzone and set it back up within 1\" horizontally of that point in a location it can be placed, not within control range of enemy operatives, and with that point visible to it. This operative cannot perform the **Operate Hatch** action during this action.\r\n◆ This action is treated as a **Reposition** action. This operative cannot perform this action while within control range of an enemy operative, or during an activation in which it performed the **Charge** or **Fall Back** action (or vice versa)."
         }
-      ]
+      ],
+      "maxSelections": null
     },
     {
       "id": "fac_kommandos_op_kommando_rokkit_boy",
@@ -472,7 +480,8 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_kommandos_op_kommando_slasha_boy",
@@ -517,7 +526,8 @@
           "description": "After this operative fights or retaliates, if it wasn’t incapacitated, you can inflict D3 damage on the enemy operative in that sequence."
         }
       ],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     },
     {
       "id": "fac_kommandos_op_kommando_snipa_boy",
@@ -578,7 +588,18 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [],
+      "maxSelections": null
     }
-  ]
+  ],
+  "operativeSelection": {
+    "leader": {
+      "min": 1,
+      "max": 1
+    },
+    "operatives": {
+      "min": 9,
+      "max": 9
+    }
+  }
 }
