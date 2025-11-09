@@ -1,10 +1,16 @@
 {
   "id": "fac_inquisitorial_agents",
   "name": "Inquisitorial Agents",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "REQUISITIONED",
   "archetypes": [],
   "summary": "Update 1.3",
-  "rules": [],
+  "rules": [
+    {
+      "id": "fac_inquisitorial_agents_rule_inquisitorial_requisition",
+      "name": "Inquisitorial Requisition",
+      "description": "REQUISITIONED operatives can be taken from one of the following groups to supplement an INQUISITORIAL AGENT kill team, as specified in this kill team’s selection rules:\r\n\r\n\r\n- DEATH KORPS\r\n- EXACTION SQUAD\r\n- IMPERIAL NAVY BREACHER\r\n- KASRKIN\r\n- SISTER OF SILENCE\r\n- TEMPESTUS SCION \r\n\r\n\r\nThese operatives have their faction keyword replaced in all instances on their datacards with INQUISITORIAL AGENT (unless they already have it). You cannot use ploys and equipment associated with a REQUISITIONED operative’s former faction keyword, and you cannot use a REQUISITIONED operative’s former faction rules unless specified on their team selection list (it only applies to those REQUISITIONED operatives). Note that with their new faction keyword, REQUISITIONED operatives can interact with the INQUISITORIAL AGENT rules. For example, a REQUISITIONED VOX-OPERATOR operative from the DEATH KORPS group would have its DEATH KORPS keyword replaced in all instances on its datacard with INQUISITORIAL AGENT . This allows you to select any other friendly INQUISITORIAL AGENT operative for its Signal unique action. However, the Guardsman Orders faction rule isn’t permitted, so its Relay Orders additional rule would be ignored. It would now also be a valid operative for the INQUISITORIAL AGENT MYSTIC operative’s Scry unique action."
+    }
+  ],
   "strategicPloys": [],
   "tacticalPloys": [],
   "equipment": [
@@ -18,13 +24,23 @@
     {
       "id": "fac_inquisitorial_agents_op_interrogator",
       "name": "Interrogator",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Extended stock relic autopistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Range 12\"",
+            "Lethal 5+"
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -33,45 +49,99 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Inquisitorial Tomes",
+          "description": "STRATEGIC GAMBIT and/or when this operative is activated. Select one of the following INQUISITORIAL TOME rules for this operative to have, and one for a friendly INQUISITORIAL AGENT TOME-SKULL operative to have (they can be the same, and ignore the rule you didn’t select for each operative): \r\n- **Denunciation**: Whenever a friendly INQUISITORIAL AGENT operative is shooting against, fighting against or retaliating against an enemy operative within 2\" of friendly operatives with this rule, add 1 to the Atk stat of that friendly operative’s weapons.\r\n\r\n- **Sanctification**: Whenever an enemy operative is shooting against, fighting against or retaliating against a friendly INQUISITORIAL AGENT operative within 2\" of friendly operatives with this rule, subtract 1 from the Atk stat of that enemy operative’s weapons."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_tome_skull",
       "name": "Tome-skull",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 5,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Consecrated Tome",
+          "description": "This operative can have an INQUISITORIAL TOME rule (see INTERROGATOR). Note it keeps that rule even if that friendly INTERROGATOR operative is removed from the killzone."
+        },
+        {
+          "name": "Expendable",
+          "description": "This operative is ignored for your opponent’s kill/elimination op (when it’s incapacitated, and when determining your starting number of operatives). It’s also ignored for victory conditions and scoring VPs if either require operatives to ‘escape’, ‘survive’ or be incapacitated by enemy operatives (if it escapes/survives/is incapacitated, determining how many operatives must escape/survive/be incapacitated, etc.)."
+        },
+        {
+          "name": "Group Activation",
+          "description": "Whenever this operative is expended, you must then activate a ready friendly INQUISITORIAL AGENT INTERROGATOR operative (if able) before your opponent activates. The same is true in reverse (INTERROGATOR followed by TOME-SKULL). When that other operative is expended, your opponent then activates as normal."
+        },
+        {
+          "name": "Machine",
+          "description": "- This operative cannot perform any actions other than **Charge**, **Dash**, **Fall Back** and **Reposition**.\r\n- It cannot retaliate or assist in a fight.\r\n Whenever determining control of a marker, treat this operative’s APL stat as 1 lower. Note this isn’t a change to its APL stat, so any changes are cumulative with this.\r\n- Whenever this operative has a Conceal order and is in cover, it cannot be selected as a valid target, taking precedence over all other rules (e.g. Seek, Vantage terrain) except being within 2\"."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_autosavant",
       "name": "Autosavant",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 7,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Mechanical appendages",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "1/2",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Scrivener",
+          "description": "Each subsequent time your opponent uses each ploy during the battle (excluding Command Re-roll), you gain 1CP (to a maximum of 2CP per turning point)."
+        },
+        {
+          "name": "Irrefutable Report",
+          "description": "Whenever this operative contests an objective marker or one of your mission markers, it always controls that marker. This takes precedence over all other rules"
+        },
+        {
+          "name": "Lightly Armed",
+          "description": "This operative cannot use any weapons that aren’t on its datacard, or perform unique actions."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_questkeeper",
       "name": "Questkeeper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Eviscerator",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Brutal"
+          ]
+        },
         {
           "name": "Autopistol",
           "atk": "4",
@@ -82,19 +152,46 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Irrepressible Purpose",
+          "description": "If this operative is incapacitated while fighting or retaliating, you can strike the enemy operative in that sequence with one of your unresolved successes before it’s removed from the killzone."
+        },
+        {
+          "name": "Zealot",
+          "description": "Whenever an attack dice inflicts damage of 3 or more on this operative, roll one D6: on a 5+, subtract 1 from that inflicted damage."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_death_world_veteran",
       "name": "Death World Veteran",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Knife",
+          "atk": "1",
+          "hit": "2+",
+          "dmg": "5/7",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Polearm",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        },
         {
           "name": "Autopistol",
           "atk": "4",
@@ -105,19 +202,38 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Hunter",
+          "description": "This operative can perform the Charge action while it has a Conceal order."
+        },
+        {
+          "name": "Weathered",
+          "description": "Once per turning point, when this operative is fighting or retaliating, in the Resolve Attack Dice step, you can ignore the damage inflicted on it from one normal success."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_enlightener",
       "name": "Enlightener",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Paired blades",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Balanced",
+            "Rending"
+          ]
+        },
         {
           "name": "Autopistol",
           "atk": "4",
@@ -128,26 +244,50 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "No Escape",
+          "description": "Whenever an enemy operative would perform the **Fall Back** action while within control range of this operative, you can use this rule. If you do, roll one D6, subtracting 1 from the result if that enemy operative has a higher Wounds stat than this operative, and adding 1 if that enemy operative is wounded: on a 4+, that enemy operative cannot perform that action during that activation/counteraction (the AP spent on it isn’t refunded)."
+        },
+        {
+          "name": "Extract Information",
+          "description": "Whenever an enemy operative is incapacitated within this operative’s control range, you gain 1CP."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_requisitioned_gun_servitor",
       "name": "Requisitioned Gun Servitor",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 1,
       "move": "5\"",
       "save": "4+",
       "wounds": 11,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Servo-claw",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Lobotomised",
+          "description": "Whenever this operative is activated, if it’s visible to and within 3\" of another friendly INQUISITORIAL AGENT operative (excluding GUN SERVITOR) or vice versa, add 1 to this operative’s APL stat until the end of that activation."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_mystic",
       "name": "Mystic",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -171,19 +311,42 @@
           ]
         }
       ],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Icon Bearer",
+          "description": "Whenever determining control of a marker, treat this operative’s APL stat as 1 higher. Note this isn’t a change to its APL stat, so any changes are cumulative with this."
+        },
+        {
+          "name": "Lightly Armed",
+          "description": "This operative cannot use any weapons that aren’t on its datacard."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Scry (1AP)",
+          "description": "▶ PSYCHIC. Select one friendly INQUISITORIAL AGENT operative within 6\" of this operative, then select one of the following effects to last until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first): \r\n- Guidance: PSYCHIC. Whenever the selected operative is shooting, fighting or retaliating, in the Roll Attack Dice step, you can retain one of your fails as a normal success instead of discarding it, or retain one of your normal successes as a critical success instead. \r\n- Protection: PSYCHIC. Whenever an operative is shooting the selected operative, in the Roll Defence Dice step, you can retain one of your fails as a normal success instead of discarding it, or retain one of your normal successes as a critical success instead.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_hexorcist",
       "name": "Hexorcist",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Shotgun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\""
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -192,32 +355,104 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Hexorcise",
+          "description": "Whenever an enemy operative is visible to and within 6\" of this operative, your opponent cannot re-roll their attack or defence dice for that operative."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Chasten (1AP)",
+          "description": "▶ Select one enemy operative that's a valid target for this operative and within 6\" of it, then select one additional rule (including a unique action) that enemy operative has on its datacard (excluding a weapon rule). Until the end of that enemy operative’s next activation, it’s treated as not having that additional rule.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_penal_legionnaire",
       "name": "Penal Legionnaire",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Hand flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\"",
+            "Saturate",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Chainsword",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Chem-mask",
+          "description": "You can ignore any changes to this operative’s APL stat, and any changes to its stats from being injured. This operative isn’t affected by enemy operatives’ Shock and Stun weapon rules."
+        },
+        {
+          "name": "Cruel",
+          "description": "Whenever this operative is shooting against, fighting against or retaliating against a wounded enemy operative, this operative’s weapons have the Relentless weapon rule."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_pistolier",
       "name": "Pistolier",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Scoped plasma pistol (standard)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 12\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Scoped plasma pistol (supercharge)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 12\"",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Suppressed autopistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\"",
+            "Silent"
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -226,32 +461,61 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Pistolier",
+          "description": "You can ignore any changes to the Hit stat of this operative’s ranged weapons."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Pistol Barrage (1AP)",
+          "description": "▶ Perform two free Shoot actions with this operative (this takes precedence over action restrictions). You must select a profile of its scoped plasma pistol for one action and its suppressed autopistol for the other (in any order).\r\n◆ This operative cannot perform this action while it has a Conceal order, or during an activation in which it performed the Shoot action (or vice versa)."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_sister_of_silence_vigilator",
       "name": "Sister of Silence Vigilator",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "3+",
       "wounds": 8,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Executioner greatblade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
       "specialRules": [],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_sister_of_silence_prosecutor",
       "name": "Sister of Silence Prosecutor",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "3+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Boltgun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
         {
           "name": "Gun butt",
           "atk": "4",
@@ -266,13 +530,24 @@
     {
       "id": "fac_inquisitorial_agents_op_sister_of_silence_witchseeker",
       "name": "Sister of Silence Witchseeker",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "3+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
         {
           "name": "Gun butt",
           "atk": "4",
@@ -287,7 +562,7 @@
     {
       "id": "fac_inquisitorial_agents_op_tempestus_scion_vox_operator",
       "name": "Tempestus Scion Vox-Operator",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -310,12 +585,17 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Signal (1AP)",
+          "description": "▶ SUPPORT. Select one other friendly INQUISITORIAL AGENT operative in the killzone. Until the end of that operative’s next activation, add 1 to its APL stat. \r\n◆ This operative can perform this action twice during its activation, but cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_tempestus_scion_gunner",
       "name": "Tempestus Scion Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -330,13 +610,18 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Adaptive Equipment",
+          "description": "You can do each of the following once per turning point: \r\n- One friendly INQUISITORIAL AGENT TEMPESTUS SCION TROOPER operative can perform the Smoke Grenade action.\r\n- One friendly INQUISITORIAL AGENT TEMPESTUS SCION TROOPER operative can perform the Stun Grenade action. \r\nThe rules for these actions are found in universal equipment. Performing these actions using this rule doesn’t count towards their action limits (i.e. if you also select those grenades from equipment)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_tempestus_scion_medic",
       "name": "Tempestus Scion Medic",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -358,13 +643,23 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Medic!",
+          "description": "The first time during each turning point that another friendly INQUISITORIAL AGENT operative would be incapacitated while visible to and within 3\" of this operative, you can use this rule, providing neither this nor that operative is within control range of an enemy operative. If you do, that friendly operative isn’t incapacitated and has 1 wound remaining and cannot be incapacitated for the remainder of the action. After that action, that friendly operative can immediately perform a free **Dash** action, but must end that move within this operative’s control range. Subtract 1 from this and that operative’s APL stats until the end of their next activations respectively, and if this rule was used during that friendly operative’s activation, that activation ends. You cannot use this rule if this operative is incapacitated, or if it's a **Shoot** action and this operative would be a primary or secondary target."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Medikit (1AP)",
+          "description": "▶ Select one friendly INQUISITORIAL AGENT operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_tempestus_scion_trooper",
       "name": "Tempestus Scion Trooper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -386,117 +681,249 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Adaptive Equipment",
+          "description": "You can do each of the following once per turning point: \r\n- One friendly INQUISITORIAL AGENT TEMPESTUS SCION TROOPER operative can perform the Smoke Grenade action.\r\n- One friendly INQUISITORIAL AGENT TEMPESTUS SCION TROOPER operative can perform the Stun Grenade action. \r\nThe rules for these actions are found in universal equipment. Performing these actions using this rule doesn’t count towards their action limits (i.e. if you also select those grenades from equipment)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_armsman",
       "name": "Navis Armsman",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Group Activation",
+          "description": "Whenever this operative is expended, you must then activate one other ready friendly **INQUISITORIAL AGENT BREACHER ARMSMAN** operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule). Ignore this rule when you are using the Breach and Clear faction rule."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_axejack",
       "name": "Navis Axejack",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Emboldened",
+          "description": "Whenever an attack dice inflicts damage of 3 or more on this operative during a turning point in which it performed the **Charge** action, roll one D6: on a 5+, subtract 1 from that inflicted damage."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_c_a_t_unit",
       "name": "Navis C.A.T. Unit",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "8\"",
       "save": "5+",
       "wounds": 5,
       "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Machine",
+          "description": "- This operative cannot be activated or perform actions if it’s within control range of an enemy operative, or if a friendly **INQUISITORIAL AGENT SURVEYOR** operative has been incapacitated. The turning point can end even if this operative is still ready.\r\n- This operative cannot perform any actions other than **Charge**, **Dash**, **Fall Back**, **Reposition** and **Spot**.\r\n- It cannot retaliate, assist in a fight, climb or jump.\r\n- Whenever determining control of a marker, treat this operative’s APL stat as 1 lower. Note this isn’t a change to its APL stat, so any changes are cumulative with this.\r\n- Whenever this operative has a Conceal order and is in cover, it cannot be selected as a valid target, taking precedence over all other rules (e.g. Vantage terrain).\r\n- Whenever determining what’s visible to this operative, draw the line from any part of the miniature."
+        },
+        {
+          "name": "Expendable",
+          "description": "This operative is ignored for your opponent’s kill/elimination op (when it’s incapacitated, and when determining your starting number of operatives). It’s also ignored for victory conditions and scoring VPs if either require operatives to ‘escape’, ‘survive’ or be incapacitated by enemy operatives (if it escapes/survives/is incapacitated, determining how many operatives must escape/survive/be incapacitated, etc.)."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Spot (1AP)",
+          "description": "▶ Select one enemy operative visible to this operative. Until the end of the turning point, until that enemy operative is no longer visible to this operative or until this operative performs this action again (whichever comes first), whenever a friendly INQUISITORIAL AGENT BREACHER operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative’s ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_endurant",
       "name": "Navis Endurant",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "4\"",
       "save": "2+",
       "wounds": 11,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Navis heavy shotgun (close range)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\"",
+            "Relentless"
+          ]
+        },
+        {
+          "name": "Navis heavy shotgun (long range)",
+          "atk": "4",
+          "hit": "5+",
+          "dmg": "1/2",
+          "specialRules": [
+            "Relentless"
+          ]
+        },
+        {
+          "name": "Shield bash",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "1/2",
+          "specialRules": [
+            "Brutal",
+            "Shield*"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Breachwall",
+          "description": "Whenever your opponent is selecting a valid target, they cannot select another friendly **INQUISITORIAL AGENT** operative whose base is touching this operative’s if this operative has an Engage order and is intervening. This rule has no effect if more than one other friendly operative’s base is touching this operative’s."
+        },
+        {
+          "name": "Disengage",
+          "description": "This operative can perform the **Fall Back** action for 1 less AP."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_gheistskull",
       "name": "Navis Gheistskull",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "8\"",
       "save": "5+",
       "wounds": 5,
       "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Expendable",
+          "description": "This operative is ignored for your opponent’s kill/elimination op (when it’s incapacitated, and when determining your starting number of operatives). It’s also ignored for victory conditions and scoring VPs if either require operatives to ‘escape’, ‘survive’ or be incapacitated by enemy operatives (if it escapes/survives/is incapacitated, determining how many operatives must escape/survive/be incapacitated, etc.)."
+        },
+        {
+          "name": "Machine",
+          "description": "- This operative cannot perform any actions other than **Boost**, **Charge**, **Dash**, **Fall Back** and **Reposition**.\r\n- It cannot retaliate or assist in a fight.\r\n- Whenever determining control of a marker, treat this operative’s APL stat as 1 lower. Note this isn’t a change to its APL stat, so any changes are cumulative with this.\r\n- Whenever this operative has a Conceal order and is in cover, it cannot be selected as a valid target, taking precedence over all other rules (e.g. Vantage terrain)."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Navis Gheistskull",
+          "description": "▶ Until the end of the activation, add 6\" to this operative’s Move stat.\r\n◆ This operative can only perform this action once per battle, and cannot perform it during the first turning point."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_grenadier",
       "name": "Navis Grenadier",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Demolition charge",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Range 3\"",
+            "Blast 2\"",
+            "Heavy (Reposition only)",
+            "Limited 1",
+            "Piercing 1",
+            "Saturate"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Grenadier",
+          "description": "This operative can use frag, krak and stun grenades (see universal equipment). Doing so doesn’t count towards any limited uses you have (i.e. if you also select those grenades from equipment for other operatives). Whenever this operative is using a frag or krak grenade, improve the Hit stat of that weapon by 1."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_gunner",
       "name": "Navis Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 9,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
       "specialRules": [],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_hatchcutter",
       "name": "Navis Hatchcutter",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Chainfist",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Brutal",
+            "Rending"
+          ]
+        }
+      ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Weld Shut (1AP)",
+          "description": "▶ Select a closed hatchway (e.g. Killzone: Gallowdark) within this operative’s control range. 1 additional AP must be spent for other operatives to perform the **Operate Hatch** action to open that hatchway. This effect ends when that hatchway is opened. Note this operative isn’t affected by this effect.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if it isn’t within 1\" of a closed hatchway."
+        },
+        {
+          "name": "Breach Point (1AP)",
+          "description": "▶ Place one of your Breach markers within this operative’s control range as close as possible to a terrain feature within control range of it. Whenever an operative is within 1\" of that marker, it treats parts of that terrain feature that are no more than 1\" thick as Accessible terrain.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a terrain feature isn’t within its control range."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_surveyor",
       "name": "Navis Surveyor",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -504,90 +931,203 @@
       "wounds": 8,
       "weapons": [],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Wayfind (1AP)",
+          "description": "▶ **SUPPORT**. Select one other friendly **INQUISITORIAL AGENT** operative (excluding **C.A.T. UNIT** or **GHEISTSKULL**) visible to and within 6\" of this operative, or visible to and within 6\" of a friendly **INQUISITORIAL AGENT C.A.T. UNIT** operative. Until the end of that operative’s next activation, add 1 to its APL stat. For the purposes of the Comms Device universal equipment, the operative the distance is being determined from must control that marker.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        },
+        {
+          "name": "Remote Control (1AP)",
+          "description": "▶ Select one friendly **INQUISITORIAL AGENT C.A.T. UNIT** operative. That operative can immediately perform one free action, but it cannot move more than 3\" during that action.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a friendly **INQUISITORIAL AGENT C.A.T. UNIT** operative isn’t in the killzone."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_navis_void_jammer",
       "name": "Navis Void-Jammer",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Gheistskull detonator",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Blast 1\"",
+            "Lethal 5+",
+            "Limited 1",
+            "Silent",
+            "Stun",
+            "Detonate*"
+          ]
+        }
+      ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Interference Pulse (1AP)",
+          "description": "▶ Select one enemy operative visible to and within 8\" of a friendly GHEISTSKULL operative. Roll one D6, adding 1 to the result if that enemy operative is a valid target for that friendly GHEISTSKULL operative: on a 3+, subtract 1 from that enemy operative’s APL stat until the end of its next activation.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a friendly GHEISTSKULL operative isn’t in the killzone."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_combat_medic",
       "name": "Kasrkin Combat Medic",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Medic!",
+          "description": "The first time during each turning point that another friendly INQUISITORIAL AGENT operative would be incapacitated while visible to and within 3\" of this operative, you can use this rule, providing neither this nor that operative is within control range of an enemy operative. If you do, that friendly operative isn’t incapacitated and has 1 wound remaining and cannot be incapacitated for the remainder of the action. After that action, that friendly operative can immediately perform a free **Dash** action, but must end that move within this operative’s control range. Subtract 1 from this and that operative’s APL stats until the end of their next activations respectively, and if this rule was used during that friendly operative’s activation, that activation ends. You cannot use this rule if this operative is incapacitated, or if it's a **Shoot** action and this operative would be a primary or secondary target."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Medikit (0AP)",
+          "description": "▶ Select one friendly INQUISITORIAL AGENT operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point. \r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_demo_trooper",
       "name": "Kasrkin Demo-Trooper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Melta Mine",
+          "description": "This operative is carrying your Melta Mine marker. It can perform the **Pick Up Marker** action on that marker, and whenever it performs the **Place Marker** action on that marker, it can immediately perform a free **Dash** action. That marker cannot be placed within an enemy operative’s control range (if this operative is incapacitated while carrying that marker and that marker cannot be placed, it’s removed with this operative)."
+        },
+        {
+          "name": "Proximity Mine",
+          "description": "The first time your Melta Mine marker is within another operative’s control range, remove that marker and inflict 2D6+3 damage on that operative; if it isn’t incapacitated, end its action (if any), even if that action’s effects aren’t fulfilled. If it cannot be placed, move it the minimum amount to do so. Note that this operative is ignored for these effects (i.e. it cannot set it off or take damage from that marker."
+        },
+        {
+          "name": "Blast Padding",
+          "description": "Whenever an operative is shooting this operative with a weapon that has the Blast or Torrent weapon rule (excluding weapons that have a sweeping profile), you can re-roll one of your defence dice. In addition, this operative isn’t affected by the x\" Devastating x weapon rule (i.e. Devastating with a distance) unless they are the target during that sequence."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_recon_trooper",
       "name": "Kasrkin Recon-Trooper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Reconnoitre Killzone",
+          "description": "The Relocate strategy ploy costs you 0CP if this operative is the selected friendly KASRKIN operative. If this operative is in an INQUISITORIAL AGENT kill team, you can still use this rule (replace KASRKIN on that ploy with INQUISITORIAL AGENT ). This takes precedence over the restriction in the Inquisitorial Requisition rule, and you cannot use that ploy with an INQUISITORIAL AGENT kill team unless this operative is selected."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Auspex Scan (1AP)",
+          "description": "▶ Until the start of this operative’s next activation or until it’s incapacitated (whichever comes first), whenever an enemy operative within 8\" of this operative, that enemy operative is being scanned. When a friendly KASRKIN operative is shooting an enemy operative that's being scanned, that enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_sharpshooter",
       "name": "Kasrkin Sharpshooter",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Hot-shot marksman rifle (concealed)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy",
+            "Silent",
+            "Concealed Position*"
+          ]
+        },
+        {
+          "name": "Hot-shot marksman rifle (mobile)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Hot-shot marksman rifle (stationary)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Camo Cloak",
+          "description": "Whenever an operative is shooting this operative: \r\n\r\n\r\n- Ignore the Saturate weapon rule. \r\n- If you can retain any cover saves, you can retain one additional cover save, or you can retain one cover save as a critical success instead. This isn’t cumulative with improved cover saves from Vantage terrain."
+        },
+        {
+          "name": "*Concealed Position",
+          "description": "This operative can only use this weapon the first time it’s performing the Shoot action during the battle."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Auspex Scan (1AP)",
+          "description": "▶ Until the start of this operative’s next activation or until it’s incapacitated (whichever comes first), whenever a friendly INQUISITORIAL AGENT operative is shooting an enemy operative within 8\" of this operative, that enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_trooper",
       "name": "Kasrkin Trooper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Adaptive Equipment",
+          "description": "You can do each of the following once per turning point: \r\n- One friendly INQUISITORIAL AGENT TROOPER operative can perform the Smoke Grenade action. \r\n- One friendly INQUISITORIAL AGENT TROOPER operative can perform the Stun Grenade action. \r\nThe rules for these actions are found in universal equipment. Performing these actions using this rule doesn’t count towards their action limits (i.e. if you also select those grenades from equipment)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_vox_trooper",
       "name": "Kasrkin Vox-Trooper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -595,12 +1135,17 @@
       "wounds": 8,
       "weapons": [],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Battle Comms (1AP)",
+          "description": "▶ Select one other friendly INQUISITORIAL AGENT operative. Until the end of that operative’s next activation, add 1 to its APL stat (to a maximum of 3 after all APL stat changes have been totalled).\r\n◆ This operative can perform this action twice during its activation, but cannot perform this action while within control range of an enemy operative"
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_kasrkin_gunner",
       "name": "Kasrkin Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -613,33 +1158,57 @@
     {
       "id": "fac_inquisitorial_agents_op_death_korps_bruiser",
       "name": "Death Korps Bruiser",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Trench club",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Shock"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Bruiser",
+          "description": "Once per turning point, when this operative is fighting or retaliating, in the Resolve Attack Dice step, you can ignore the damage inflicted on it from one normal success."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_confidant",
       "name": "Death Korps Confidant",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Second in Command",
+          "description": "If a friendly **WATCHMASTER** operative is incapacitated and removed from the killzone, you can use this rule. If you do, until the end of the battle, this operative can issue a **GUARDSMAN ORDER** as a **STRATEGIC GAMBIT** (even though it’s not a **WATCHMASTER** operative)."
+        },
+        {
+          "name": "Directive",
+          "description": "Whenever this operative is activated, if you haven’t used the Second in Command rule during the battle, you can select one other ready friendly **INQUISITORIAL AGENT** operative visible to and within 6\" of it. When this operative is expended, activate that other friendly operative before your opponent activates (if that operative is a **TROOPER**, ignore its Group Activation rule)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_gunner",
       "name": "Death Korps Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -652,124 +1221,262 @@
     {
       "id": "fac_inquisitorial_agents_op_death_korps_medic",
       "name": "Death Korps Medic",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Medic!",
+          "description": "The first time during each turning point that another friendly **INQUISITORIAL AGENT** operative would be incapacitated while visible to and within 3\" of this operative, you can use this rule, providing neither this nor that operative is within control range of an enemy operative. If you do, that friendly operative isn’t incapacitated and has 1 wound remaining and cannot be incapacitated for the remainder of the action. After that action, that friendly operative can immediately perform a free **Dash** action, but must end that move within this operative’s control range. Subtract 1 from this and that operative’s APL stats until the end of their next activations respectively, and if this rule was used during that friendly operative’s activation, that activation ends. You cannot use this rule if this operative is incapacitated, or if it's a **Shoot** action and this operative would be a primary or secondary target."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Death Korps Medic",
+          "description": "▶ Select one friendly **INQUISITORIAL AGENT** operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_sniper",
       "name": "Death Korps Sniper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Long-las (concealed)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy",
+            "Silent",
+            "Concealed Position*"
+          ]
+        },
+        {
+          "name": "Long-las (mobile)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Long-las (stationary)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy"
+          ]
+        }
+      ],
       "specialRules": [],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_sapper",
       "name": "Death Korps Sapper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Remote detonator",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Limited 1",
+            "Piercing 1",
+            "Silent",
+            "Detonate*"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Mine Layer",
+          "description": "This operative is carrying your Mine marker. It can perform the **Pick Up Marker** action on that marker, and whenever it performs the **Place Marker** action on that marker, it can immediately perform a free **Dash** action."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_trooper",
       "name": "Death Korps Trooper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Group Activation",
+          "description": "Whenever this operative is expended, you must then activate one other ready friendly **INQUISITORIAL AGENT TROOPER** operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_veteran",
       "name": "Death Korps Veteran",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Bionic arm",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Veteran Guardsman",
+          "description": "Whenever this operative is activated, it can receive one **GUARDSMAN ORDER**."
+        },
+        {
+          "name": "Bionics",
+          "description": "Normal Dmg of 3 or more inflicts 1 less damage on this operative."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_vox_operator",
       "name": "Death Korps Vox-Operator",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Relay Orders",
+          "description": "Once per turning point, when this operative receives a **GUARDSMAN ORDER**, if it’s not within control range of enemy operatives, it can relay that order. Whenever an order is relayed, all friendly **INQUISITORIAL AGENT** operatives in the killzone receive that order, then subtract 1 from this operative’s APL stat until the end of its next activation."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Signal (1AP)",
+          "description": "▶ **SUPPORT**. Select one other friendly **INQUISITORIAL AGENT** operative visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_death_korps_zealot",
       "name": "Death Korps Zealot",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "The Emperor Protects",
+          "description": "Whenever an operative is shooting this operative, you can re-roll any of your defence dice."
+        },
+        {
+          "name": "Uplifting Primer",
+          "description": "**SUPPORT**. Whenever a friendly **INQUISITORIAL AGENT** operative is within 3\" of this operative, that friendly operative’s weapons have the Severe weapon rule."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_castigator",
       "name": "Arbites Castigator",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Excruciator maul",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/5",
+          "specialRules": [
+            "Rending",
+            "Shock"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Engendered Focus",
+          "description": "You can ignore any changes to this operative’s stats (including its weapons’ stats, but excluding its Save stat)."
+        },
+        {
+          "name": "Zealous Dedication",
+          "description": "Whenever an attack dice inflicts damage of 3 or more on this operative, roll one D6: on a 5+, subtract 1 from that inflicted damage."
+        },
+        {
+          "name": "Castigator's Arrest",
+          "description": "Whenever an enemy operative is within control range of this operative, if no other enemy operatives are within this operative’s control range, that enemy operative cannot perform the **Fall Back** action."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_chirurgant",
       "name": "Arbites Chirurgant",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Medic!",
+          "description": "The first time during each turning point that another friendly **EXACTION SQUAD** operative would be incapacitated while visible to and within 3\" of this operative, you can use this rule, providing neither this nor that operative is within control range of an enemy operative. If you do, that friendly operative isn’t incapacitated and has 1 wound remaining and cannot be incapacitated for the remainder of the action. After that action, that friendly operative can immediately perform a free **Dash** action, but must end that move within this operative’s control range. Subtract 1 from this and that operative’s APL stats until the end of their next activations respectively, and if this rule was used during that friendly operative’s activation, that activation ends. You cannot use this rule if this operative is incapacitated, or if it's a **Shoot** action and this operative would be a primary or secondary target."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Medikit (1AP)",
+          "description": "▶ Select one friendly INQUISITORIAL AGENT operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_gunner",
       "name": "Arbites Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -782,98 +1489,230 @@
     {
       "id": "fac_inquisitorial_agents_op_arbites_leashmaster",
       "name": "Arbites Leashmaster",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Handler",
+          "description": "Whenever this operative is activated, you can activate a ready friendly **INQUISITORIAL AGENT R-VR CYBER-MASTIFF** operative at the same time. Complete their activations action by action in any order."
+        },
+        {
+          "name": "Attack Pattern",
+          "description": "**STRATEGIC GAMBIT** in the first turning point. Select one of the following attack patterns for a friendly **INQUISITORIAL AGENT R-VR CYBER-MASTIFF** operative to have for the battle:\r\n- Aggressive: Its melee weapons have the Relentless weapon rule.\r\n- Swift: Add 2\" to its Move stat.\r\n- Defensive: Improve its Save stat by 1."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "R-VR Command (0AP)",
+          "description": "▶ Select one friendly **INQUISITORIAL AGENT R-VR CYBER-MASTIFF** operative and change its attack pattern."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_malocator",
       "name": "Arbites Malocator",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Acute Focus",
+          "description": "Once during each of this operative’s activations, it can perform the **Pick Up Marker**, **Place Marker**, **Veriscant** or a mission action for 1 less AP."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Veriscant (1AP)",
+          "description": "▶ Select one enemy operative visible to this operative. Until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first), whenever a friendly **INQUISITORIAL AGENT** operative is shooting against, fighting against or retaliating against that enemy operative, that friendly operative’s weapons have the Lathal 5+ and  Severe weapon rules.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_marksman",
       "name": "Arbites Marksman",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Executioner shotgun (concealed)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "4/0",
+          "specialRules": [
+            "Devastating 4",
+            "Heavy",
+            "Silent",
+            "Concealed Position*"
+          ]
+        },
+        {
+          "name": "Executioner shotgun (mobile)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Executioner shotgun (stationary)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "4/0",
+          "specialRules": [
+            "Devastating 4",
+            "Heavy"
+          ]
+        }
+      ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Optics (1AP)",
+          "description": "▶ Until the start of this operative’s next activation:\r\n- The concealed and stationary profiles of its executioner shotgun have the Lethal 5+ weapon rule.\r\n- Whenever it’s shooting with its executioner shotgun, enemy operatives cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_revelatum",
       "name": "Arbites Revelatum",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Scoped shotpistol (short range)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Scoped shotpistol (long range)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "First in the Field",
+          "description": "**STRATEGIC GAMBIT** in the first turning point. If this operative is wholly within your drop zone, it can immediately perform a free **Reposition** action."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Spot (1AP)",
+          "description": "▶ **SUPPORT**. Select one enemy operative visible to this operative. Until the end of the turning point, whenever a friendly **INQUISITORIAL AGENT** operative within 3\" of this operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative’s ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_subductor",
       "name": "Arbites Subductor",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "3+",
       "wounds": 8,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Shock maul & assault shield",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Shock",
+            "Repress*"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Stubborn Subjugator",
+          "description": "You can ignore any changes to the Hit stat of this operative’s melee weapons."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_r_vr_cyber_mastiff",
       "name": "R-VR Cyber-Mastiff",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Mechanical bite",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Beast",
+          "description": "This operative cannot perform any actions other than **Apprehend**, **Charge**, **Dash**, **Fall Back**, **Fight**, **Guard**, **Reposition**, **Pick Up Marker** and **Place Marker**. It cannot use any weapons that aren’t on its datacard."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Apprehend",
+          "description": "▶ Select one enemy operative within this operative’s control range. Until that enemy operative is no longer within this operative’s control range, or until this operative performs this action again (whichever comes first), worsen the Hit stat of that enemy operative’s weapons by 1 (this isn’t cumulative with being injured); in addition, that enemy operative cannot perform the **Fall Back** action.\r\n◆ This operative cannot perform this action unless an enemy operative is within its control range."
+        }
+      ]
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_vigilant",
       "name": "Arbites Vigilant",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Close Quarters Vigilance",
+          "description": "This operative can perform the **Shoot** action (excluding **Guard**) while within control range of an enemy operative, but only if it hasn’t performed the **Charge** action during the activation, or if it’s a counteraction. Note this operative isn’t restricted from performing the **Charge** action after performing the **Shoot** action."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_inquisitorial_agents_op_arbites_vox_signifier",
       "name": "Arbites Vox-Signifier",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "REQUISITIONED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -881,7 +1720,12 @@
       "wounds": 8,
       "weapons": [],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Signal (1AP)",
+          "description": "▶ **SUPPORT**. Select one other friendly **INQUISITORIAL AGENT** operative visible to this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     }
   ]
 }

@@ -1,10 +1,16 @@
 {
   "id": "fac_hunter_clade",
   "name": "Hunter Clade",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "DOCTRINA",
   "archetypes": [],
   "summary": "July '25",
-  "rules": [],
+  "rules": [
+    {
+      "id": "fac_hunter_clade_rule_doctrina_imperatives",
+      "name": "Doctrina Imperatives",
+      "description": "At the end of the Select Operatives step, select one **DOCTRINA IMPERATIVE** to be a Primary Mode for your kill team until the end of the battle (note that selecting a Primary Mode doesn’t automatically give you the effects of that **DOCTRINA IMPERATIVE** for the battle; you must still select it as a **STRATEGIC GAMBIT**, as below).\r\n\r\n\r\n**STRATEGIC GAMBIT**. Select a **DOCTRINA IMPERATIVE** for friendly **HUNTER CLADE** operatives to have until the Ready step of the next Strategy phase. Each **DOCTRINA IMPERATIVE** has both an Optimisation and a Deprecation rule. Both are in effect while your kill team has that **DOCTRINA IMPERATIVE**. Once per battle, when you select the **DOCTRINA IMPERATIVE** that’s your kill team’s Primary Mode, you can ignore its Deprecation rule."
+    }
+  ],
   "strategicPloys": [],
   "tacticalPloys": [],
   "equipment": [
@@ -18,20 +24,40 @@
     {
       "id": "fac_hunter_clade_op_sicarian_ruststalker_princeps",
       "name": "Sicarian Ruststalker Princeps",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 11,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Chordclaw and transonic blades",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Balanced",
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Wasteland Stalker",
+          "description": "Whenever an operative is shooting this operative, if you can retain any cover saves, you can retain one additional cover save, or you can retain one cover save as a critical success instead. This isn’t cumulative with improved cover saves from Vantage terrain."
+        },
+        {
+          "name": "Canticle of Destruction",
+          "description": "Whenever a friendly **HUNTER CLADE RUSTSTALKER** operative within 3\" of this operative is fighting, the first time you strike with a critical success during that sequence, inflict 1 additional damage."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_hunter_clade_op_sicarian_infiltrator_princeps",
       "name": "Sicarian Infiltrator Princeps",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -78,13 +104,18 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Canticle of Shroudpsalm",
+          "description": "Whenever a friendly **HUNTER CLADE INFILTRATOR** operative is within 3\" of this operative, has a Conceal order and is in cover, that friendly operative cannot be selected as a valid target, taking precedence over all other rules (e.g. Seek, Vantage terrain) except being within 2\"."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_alpha",
       "name": "Skitarii Ranger Alpha",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -139,7 +170,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_alpha",
       "name": "Skitarii Vanguard Alpha",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -188,13 +219,18 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Canticle of the Glow",
+          "description": "Whenever an enemy operative is within 3\" of this operative, if it's under the effects of the Rad-Saturation rule, also subtract 1 from the Atk stat of that enemy operative’s weapons."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_gunner",
       "name": "Skitarii Vanguard Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -268,7 +304,7 @@
     {
       "id": "fac_hunter_clade_op_sicarian_infiltrator_warrior",
       "name": "Sicarian Infiltrator Warrior",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -321,7 +357,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_warrior",
       "name": "Skitarii Ranger Warrior",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -352,20 +388,25 @@
     {
       "id": "fac_hunter_clade_op_sicarian_ruststalker_warrior",
       "name": "Sicarian Ruststalker Warrior",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 10,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Wasteland Stalker",
+          "description": "Whenever an operative is shooting this operative, if you can retain any cover saves, you can retain one additional cover save, or you can retain one cover save as a critical success instead. This isn’t cumulative with improved cover saves from Vantage terrain."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_surveyor",
       "name": "Skitarii Vanguard Surveyor",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -395,7 +436,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_diktat",
       "name": "Skitarii Vanguard Diktat",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -425,7 +466,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_gunner",
       "name": "Skitarii Ranger Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -499,7 +540,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_surveyor",
       "name": "Skitarii Ranger Surveyor",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -530,7 +571,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_warrior",
       "name": "Skitarii Vanguard Warrior",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -560,7 +601,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_diktat",
       "name": "Skitarii Ranger Diktat",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DOCTRINA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",

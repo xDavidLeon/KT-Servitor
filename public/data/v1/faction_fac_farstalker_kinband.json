@@ -1,10 +1,16 @@
 {
   "id": "fac_farstalker_kinband",
   "name": "Farstalker Kinband",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "FARSTALKER",
   "archetypes": [],
   "summary": "Update 1.2",
-  "rules": [],
+  "rules": [
+    {
+      "id": "fac_farstalker_kinband_rule_farstalker",
+      "name": "Farstalker",
+      "description": "In the Ready step of each Strategy phase, you can change the order of up to three friendly **FARSTALKER KINBAND** operatives that are not within control range of enemy operatives.\r\nWhenever it’s your turn to counteract, you can change the order of one friendly **FARSTALKER KINBAND** operative that’s not within control range of enemy operatives instead. This still counts as you counteracting (so activation alternates back to your opponent afterwards), but doesn’t count as that friendly operative’s counteraction for this turning point."
+    }
+  ],
   "strategicPloys": [],
   "tacticalPloys": [],
   "equipment": [],
@@ -12,13 +18,22 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_kill_broker",
       "name": "Kroot Kill-Broker",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FARSTALKER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 9,
       "weapons": [
+        {
+          "name": "Ritual blade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        },
         {
           "name": "Kroot Rifle",
           "atk": "4",
@@ -27,19 +42,55 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Call The Kill",
+          "description": "**STRATEGIC GAMBIT**. Select one enemy operative to be your mark for the turning point. Whenever a friendly **FARSTALKER KINBAND** operative is shooting against, fighting against or retaliating against your mark, that friendly operative’s weapons have the Balanced weapon rule. Whenever your mark is incapacitated, you can select a new enemy operative to be your mark for the turning point (and can continue to do so during this turning point)."
+        },
+        {
+          "name": "Victory Shriek",
+          "description": "Whenever your mark is incapacitated, you can select one friendly **FARSTALKER KINBAND** operative within 6\" of this operative. Until the end of the battle, that operative’s weapons have the Balanced weapon rule. Each friendly operative can only be selected for this rule once per battle."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_bow_hunter",
       "name": "Kroot Bow-Hunter",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FARSTALKER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Accelerator bow (fused arrow)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Accelerator bow (glide arrow)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Silent"
+          ]
+        },
+        {
+          "name": "Accelerator bow (voltaic arrow)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Blast 1\""
+          ]
+        },
         {
           "name": "Blade",
           "atk": "3",
@@ -49,12 +100,17 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Energise (1AP)",
+          "description": "▶ Until the end of the turning point or until this operative has shot with its accelerator bow (whichever comes first), all profiles of its accelerator bow have the Lethal 5+ weapon rule.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_cold_blood",
       "name": "Kroot Cold-Blood",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FARSTALKER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -76,26 +132,55 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Hardy",
+          "description": "Whenever an attack dice would inflict Critical Dmg on this operative, you can choose for that attack dice to inflict Normal Dmg instead."
+        },
+        {
+          "name": "Cold-blooded",
+          "description": "Whenever this operative is shooting against, fighting against or retaliating against a wounded enemy operative, this operative’s weapons have the Lethal 5+ weapon rule; if that enemy operative is also injured, this operative’s weapons also have the Rending weapon rule."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_cut_skin",
       "name": "Kroot Cut-Skin",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FARSTALKER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Cut-skin's blades",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Ceaseless",
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Vicious Duellist",
+          "description": "Whenever this operative is fighting or retaliating, for each attack dice your opponent discards as a fail, inflict 1 damage on the enemy operative in that sequence."
+        },
+        {
+          "name": "Savage Assault",
+          "description": "The first time this operative performs the **Fight** action during each of its activations, if neither it nor the enemy operative in that sequence is incapacitated, this operative can immediately perform a free **Fight** action afterwards, but it can only fight against that enemy operative (and only if it’s still valid to fight against). This takes precedence over action restrictions."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_heavy_gunner",
       "name": "Kroot Heavy Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FARSTALKER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -116,26 +201,81 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_hound",
       "name": "Kroot Hound",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FARSTALKER",
       "keywords": [],
       "apl": 2,
       "move": "8\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Ripping fangs",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Beast",
+          "description": "This operative cannot perform any actions other than **Charge**, **Dash**, **Fall Back**, **Fight**, **Gather**, **Guard**, **Reposition**, **Pick Up Marker** and **Place Marker**. It cannot use any weapons that aren’t on its datacard."
+        },
+        {
+          "name": "Bad-tempered",
+          "description": "Whenever an enemy operative performs the **Fight** action, if this operative is a valid operative to fight against, you can force them to select this operative to fight against instead. Whenever an enemy operative ends the **Charge** action within control range of another friendly **FARSTALKER KINBAND** operative within 3\" of this operative, if this operative isn’t within control range of enemy operatives, this operative can immediately perform a free **Charge** action, but must end that move within control range of that enemy operative."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Gather (1AP)",
+          "description": "▶ Perform a free **Dash** or **Reposition** action with this operative. During that move, you can perform a free **Pick Up Marker** or **Place Marker** action with this operative (you can determine control during that action to do so), and any remaining move distance it had from the **Dash** or **Reposition** action can be used after it does so."
+        }
+      ]
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_long_sight",
       "name": "Kroot Long-Sight",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FARSTALKER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Kroot hunting rifle (concealed)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Heavy",
+            "Devastating 3",
+            "Silent",
+            "Concealed Position*"
+          ]
+        },
+        {
+          "name": "Kroot hunting rifle (mobile)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Kroot hunting rifle (stationary)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Heavy",
+            "Devastating 3"
+          ]
+        },
         {
           "name": "Blade",
           "atk": "3",
@@ -145,18 +285,44 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Long-Sight (1AP)",
+          "description": "▶ Until the start of this operative’s next activation:\r\n- The concealed and stationary profiles of its Kroot hunting rifle have the Lethal 5+ weapon rule.\r\n- Whenever it’s shooting with its Kroot hunting rifle, enemy operatives cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_pistolier",
       "name": "Kroot Pistolier",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FARSTALKER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Dual Kroot pistols (focused)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Ceaseless",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Dual Kroot pistols (salvo)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Salvo*"
+          ]
+        },
         {
           "name": "Blade",
           "atk": "3",
@@ -165,26 +331,61 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Quick Draw",
+          "description": "Once per turning point, when an enemy operative is performing the **Shoot** action and this operative is selected as the valid target (or if it will be a secondary target from the Blast weapon rule), if this operative is ready, you can interrupt that action to use this rule. If you do, this operative can immediately perform a free **Shoot** action with its dual Kroot pistols (focused) against that enemy operative (you can change its order to Engage to do so), but that enemy operative must be a valid target."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_stalker",
       "name": "Kroot Stalker",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FARSTALKER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Kroot scattergun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\""
+          ]
+        },
+        {
+          "name": "Stalker's blade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Balanced",
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Stalker",
+          "description": "This operative can perform the **Charge** action while it has a Conceal order."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Kroot Stalker",
+          "description": "▶ Perform a free **Charge** action with this operative, but don’t exceed its Move stat (i.e. don’t add 2\"). Then immediately perform a free Fight action with this operative. The first time you strike during that action, you can immediately resolve another of your successes as a strike (before your opponent).\r\n◆ This operative cannot perform this action while it has an Engage order, while within control range of an enemy operative, or if it isn’t within 1\" of Light or Heavy terrain."
+        }
+      ]
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_tracker",
       "name": "Kroot Tracker",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FARSTALKER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -207,12 +408,21 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "From the Eye Above (1AP)",
+          "description": "▶ **SUPPORT**. Select one other friendly **FARSTALKER KINBAND** operative visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        },
+        {
+          "name": "Marked for the Hunt (1AP)",
+          "description": "▶ Remove your Pech’ra marker from the killzone (if any). Then place your Pech’ra marker visible to this operative, or on Vantage terrain of a terrain feature that’s visible to this operative. Whenever a friendly **FARSTALKER KINBAND** operative is shooting an enemy operative that has that marker within its control range, that friendly operative’s ranged weapons have the Seek Light weapon rule.\r\n▶ At the start of this operative’s next activation or if it’s removed from the killzone (whichever comes first), remove your Pech’ra marker from the killzone.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_farstalker_kinband_op_kroot_warrior",
       "name": "Kroot Warrior",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FARSTALKER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -243,7 +453,12 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Ready for Anything",
+          "description": "Once per turning point, during a friendly **WARRIOR** operative’s activation, you can use the Meat, Piercing Shot or Toxin Shot rule (see faction equipment) for that operative. Doing so doesn’t count for its once per turning point limit."
+        }
+      ],
       "specialActions": []
     }
   ]

@@ -25,7 +25,12 @@
       "save": "5+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Adaptive Orders",
+          "description": "If this operative doesn’t issue a **GUARDSMAN ORDER** as a **STRATEGIC GAMBIT**, you can use the Inspirational Leadership firefight ploy for 0CP during this operative’s activation."
+        }
+      ],
       "specialActions": []
     }
   ]

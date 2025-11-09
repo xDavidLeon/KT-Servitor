@@ -1,10 +1,16 @@
 {
   "id": "fac_imperial_navy_breachers",
   "name": "Imperial Navy Breachers",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "IMPERIAL",
   "archetypes": [],
   "summary": "July '25",
-  "rules": [],
+  "rules": [
+    {
+      "id": "fac_imperial_navy_breachers_rule_breach_and_clear",
+      "name": "Breach and Clear",
+      "description": "Once per turning point, when a ready friendly **IMPERIAL NAVY BREACHER** operative is activated, you can use this rule. If you do, select one other ready friendly **IMPERIAL NAVY BREACHER** operative visible to and within 3\" of that operative. When that first friendly operative is expended, you can activate that other friendly operative before your opponent activates. When that other operative is  expended, your opponent then activates as normal."
+    }
+  ],
   "strategicPloys": [],
   "tacticalPloys": [],
   "equipment": [],
@@ -12,14 +18,19 @@
     {
       "id": "fac_imperial_navy_breachers_op_navis_sergeant_at_arms",
       "name": "Navis Sergeant-At-Arms",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "IMPERIAL",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 9,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Command Breach",
+          "description": "Whenever you would use the Attack Order or Defence Order strategy ploy, if this operative is in the killzone, it costs you 0CP. Once during each of this operative’s activations, before or after it performs an action, if your Attack Order or Defence Order marker is in the killzone (see relevant strategy ploy), you can either:\r\n- Remove that marker and place it again.\r\n- Change the selected ploy to the other (e.g. your Attack Order becomes a Defence Order).\r\n\r\n\r\nYou cannot do both, and you don’t need to spend any CP to change the ploy."
+        }
+      ],
       "specialActions": []
     }
   ]

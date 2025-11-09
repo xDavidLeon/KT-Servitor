@@ -1,10 +1,26 @@
 {
   "id": "fac_goremonger",
   "name": "Goremonger",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "GOREMONGER",
   "archetypes": [],
   "summary": "July '25",
-  "rules": [],
+  "rules": [
+    {
+      "id": "fac_goremonger_rule_runes_of_khorne",
+      "name": "Runes of Khorne",
+      "description": "Each friendly GOREMONGER operative cannot lose more than 8 wounds per **Shoot** action."
+    },
+    {
+      "id": "fac_goremonger_rule_gore_tanks",
+      "name": "Gore Tanks",
+      "description": "Each friendly GOREMONGER operative has a GORE TANK that has three levels: full, half, and empty. They start the battle at half. Whenever a GORE TANK increases, it goes up one level; whenever it decreases, it goes down one level. A GORE TANK cannot increase when it's already full, or decrease when it's already empty.\r\n\r\n\r\nWhenever a friendly GOREMONGER operative incapacitates an operative within its control range, or visible to and within 2\" of it, you can increase its GORE TANK.\r\n\r\n\r\nWhenever a friendly GOREMONGER operative uses a SANGUAVITAE rule, you must decrease its GORE TANK)."
+    },
+    {
+      "id": "fac_goremonger_rule_sanguavitae",
+      "name": "Sanguavitae",
+      "description": "Each SANGUAVITAE rule specifies when it can be used, and you must decrease the operative's GORE TANK to do so. You cannot use the same SANGUAVITAE rule more than once per activation or counteraction, and you cannot use more than two SANGUAVITAE rules per activation or counteraction. You cannot use Mania and Fury during the same activation."
+    }
+  ],
   "strategicPloys": [],
   "tacticalPloys": [],
   "equipment": [
@@ -18,26 +34,64 @@
     {
       "id": "fac_goremonger_op_blood_herald",
       "name": "Blood Herald",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "GOREMONGER",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "5+",
       "wounds": 11,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Icon of Khorne",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate"
+          ]
+        },
+        {
+          "name": "Chainblade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Khorne's Favour",
+          "description": "Once during each of this operative's activations, if its GORE TANK is empty, you can increase its GORE TANK."
+        },
+        {
+          "name": "Impending Apotheosis",
+          "description": "Once per battle when an attack dice inflicts Normal Dmg on this operative, you can ignore that inflicted damage."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_goremonger_op_aspirant",
       "name": "Aspirant",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "GOREMONGER",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "5+",
       "wounds": 10,
       "weapons": [
+        {
+          "name": "Chainglaive",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        },
         {
           "name": "Autopistol",
           "atk": "4",
@@ -48,19 +102,33 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Obsessive Bloodlust",
+          "description": "Once during each of this operative's activations, when this operative ends the **Fight** action, if it's no longer within control range of enemy operatives, you can use this rule. If you do, it can immediately perform a free **Charge** action (even if it's already performed the **Charge** action during that activation), but cannot move more than 2\" during that action. Doing so doesn't prevent it from performing the **Charge**, **Dash** or **Reposition** action afterwards during that activation."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_goremonger_op_bloodtaker",
       "name": "Bloodtaker",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "GOREMONGER",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "5+",
       "wounds": 10,
       "weapons": [
+        {
+          "name": "Ritual blade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Ritual*"
+          ]
+        },
         {
           "name": "Autopistol",
           "atk": "4",
@@ -72,18 +140,44 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Transfusion Ritual (1AP)",
+          "description": "▶ Decrease this operative's GORE TANK. Instead of using a SANGUAVITAE rule, you can increase the GORE TANK of one other friendly GOREMONGER operative within 8\" of this operative.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if its GORE TANK is empty."
+        }
+      ]
     },
     {
       "id": "fac_goremonger_op_impaler",
       "name": "Impaler",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "GOREMONGER",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "5+",
       "wounds": 10,
       "weapons": [
+        {
+          "name": "Fleshskewer (ranged)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Stun",
+            "Drag*",
+            "Prey*"
+          ]
+        },
+        {
+          "name": "Fleshskewer (stab)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
         {
           "name": "Autopistol",
           "atk": "4",
@@ -100,26 +194,68 @@
     {
       "id": "fac_goremonger_op_inciter",
       "name": "Inciter",
-      "factionKeyword": "UNKNOWN",
-      "keywords": [],
-      "apl": 2,
-      "move": "7\"",
-      "save": "5+",
-      "wounds": 10,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
-    },
-    {
-      "id": "fac_goremonger_op_skullclaimer",
-      "name": "Skullclaimer",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "GOREMONGER",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "5+",
       "wounds": 10,
       "weapons": [
+        {
+          "name": "Dual autopistols (point-blank)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Ceaseless",
+            "Rending"
+          ]
+        },
+        {
+          "name": "Dual autopistols (focused)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/2",
+          "specialRules": [
+            "Range 8\"",
+            "Ceaseless",
+            "Devastating 1",
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Incite the Hunt",
+          "description": "Whenever this operative incapacitates an enemy operative from more than 2\" away, before that enemy operative is removed from the killzone, you can increase the GORE TANK of one friendly GOREMONGER operative within 8\" of that enemy operative.\r\n\r\n\r\nWhenever this operative inflicts damage on an enemy operative with either profile of its dual autopistols but doesn't incapacitate it, that enemy operative gains a Bleeding token (if it doesn't already have one). During a friendly GOREMONGER operative's activation or counteraction, before or after it performs an action, if it's within 8\" of an enemy operative that has a Bleeding token, you can remove that token and increase that friendly operative's GORE TANK."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Dash and Spray (1AP)",
+          "description": "▶ Perform a free **Dash** action and a free **Shoot** action with this operative in any order. You can only select dual autopistols (focused) for that **Shoot** action.\r\n◆ This operative cannot perform this action while it has a Conceal order, or while within control range of an enemy operative."
+        }
+      ]
+    },
+    {
+      "id": "fac_goremonger_op_skullclaimer",
+      "name": "Skullclaimer",
+      "factionKeyword": "GOREMONGER",
+      "keywords": [],
+      "apl": 2,
+      "move": "7\"",
+      "save": "5+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Great chainaxe",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Brutal"
+          ]
+        },
         {
           "name": "Autopistol",
           "atk": "4",
@@ -130,19 +266,37 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Brutish",
+          "description": "Whenever an attack dice would inflict Critical Dmg on this operative, you can choose for that attack dice to inflict Normal Dmg instead."
+        },
+        {
+          "name": "Claim Skull",
+          "description": "Once per turning point, if this operative incapacitates an enemy operative with its great chainaxe, you gain 1CP."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_goremonger_op_stalker",
       "name": "Stalker",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "GOREMONGER",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "5+",
       "wounds": 10,
       "weapons": [
+        {
+          "name": "Pickrippers",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        },
         {
           "name": "Autopistol",
           "atk": "4",
@@ -153,7 +307,16 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Climbing Picks",
+          "description": "Whenever this operative is climbing, treat the vertical distance as 2\" (regardless of how far the operative actually moves vertically)."
+        },
+        {
+          "name": "Rooftop Stalker",
+          "description": "Whenever this operative is fighting during an activation in which it dropped from Vantage terrain, or whenever this operative is fighting against an enemy operative that's on Vantage terrain, this operative's melee weapons have the Relentless weapon rule."
+        }
+      ],
       "specialActions": []
     }
   ]

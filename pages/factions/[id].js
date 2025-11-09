@@ -58,7 +58,7 @@ export default function FactionPage(){
         <Header/>
         <div className="card">
           <h2 style={{marginTop:0}}>{factionData.name}</h2>
-          {factionData.factionKeyword && (
+          {factionData.factionKeyword && factionData.factionKeyword !== 'UNKNOWN' && (
             <div style={{marginBottom: '0.5rem'}}>
               <span className="pill" style={{fontSize: '0.9rem', fontWeight: 'bold'}}>
                 {factionData.factionKeyword}

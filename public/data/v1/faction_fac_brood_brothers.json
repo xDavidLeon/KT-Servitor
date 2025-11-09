@@ -1,10 +1,16 @@
 {
   "id": "fac_brood_brothers",
   "name": "Brood Brothers",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "BROOD",
   "archetypes": [],
   "summary": "July '25",
-  "rules": [],
+  "rules": [
+    {
+      "id": "fac_brood_brothers_rule_crossfire",
+      "name": "Crossfire",
+      "description": "Whenever a friendly BROOD BROTHER operative is shooting against or fighting against an enemy operative, after resolving all of your attack dice, if that enemy operative isn’t incapacitated it gains one of your Crossfire tokens.\r\nWhenever a friendly BROOD BROTHER operative is shooting against, fighting against or retaliating against an enemy operative that has any of your Crossfire tokens, you can remove any of those tokens. For each that you do, you can re- roll one of your attack dice."
+    }
+  ],
   "strategicPloys": [],
   "tacticalPloys": [],
   "equipment": [],
@@ -12,33 +18,57 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_commander",
       "name": "Brood Brother Commander",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Coordinate",
+          "description": "STRATEGIC GAMBIT. Select one enemy operative to gain one of your Crossfire tokens."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_agitator",
       "name": "Brood Brother Agitator",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Shock maul",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Shock"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Devoted",
+          "description": "Once per turning point, when this operative is fighting or retaliating, in the Resolve Attack Dice step, you can ignore the damage inflicted on it from one normal success."
+        },
+        {
+          "name": "Psiren Caster",
+          "description": "Whenever a friendly BROOD BROTHER operative is shooting against, fighting against or retaliating against an enemy operative within 6\" of this operative, you can re-roll one of your attack dice."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_gunner",
       "name": "Brood Brother Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -59,39 +89,88 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_iconward",
       "name": "Brood Brother Iconward",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Large knife",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Cult Icon",
+          "description": "Whenever determining control of a marker within 4\" of this operative, treat the total APL stat of friendly BROOD BROTHER operatives that contest it as 1 higher if at least one friendly BROOD BROTHER operative contests that marker. Note this isn’t a change to the APL stat, so any changes are cumulative with this."
+        },
+        {
+          "name": "Broodmind Devotion",
+          "description": "Once per turning point, when a ready friendly BROOD BROTHER BROODGUARD operative is incapacitated while visible and within 6\" of this operative, you can use this rule. If you do, before that operative is removed from the killzone, it can perform a 1AP action for free (excluding **Fight** and **Explosives**), and you can change its order to do so. It’s then removed from the killzone as normal. You cannot use this rule and the Medic! rule (see MEDIC) on the same operative at the same time."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_knife_fighter",
       "name": "Brood Brother Knife Fighter",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Poisoned fighting knives",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Ceaseless",
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Assassin",
+          "description": "This operative can perform the **Charge** action while it has a Conceal order."
+        },
+        {
+          "name": "Counterattack",
+          "description": "Whenever this operative is fighting or retaliating, whenever your opponent resolves a normal success, inflict 1 damage on the enemy operative in that sequence"
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_medic",
       "name": "Brood Brother Medic",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Gene-needler",
+          "atk": "1",
+          "hit": "4+",
+          "dmg": "5/7",
+          "specialRules": [
+            "Lethal 5+",
+            "Limited 1"
+          ]
+        },
         {
           "name": "Bayonet",
           "atk": "3",
@@ -107,19 +186,43 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Medic!",
+          "description": "The first time during each turning point that another friendly BROOD BROTHER operative (excluding PATRIARCH) would be removed from the killzone as incapacitated while visible to and within 3\" of this operative, you can use this rule, providing neither this nor that operative is within control range of an enemy operative. If you do, that friendly operative isn’t incapacitated and has 1 wound remaining. That friendly operative can then immediately perform a free **Dash** action, but must end that move within this operative's control range. Subtract 1 from this and that operative’s APL stats until the end of their next activations respectively, and if this rule was used during that friendly operative’s activation, that activation ends. You cannot use this rule if this operative is incapacitated."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Medikit (1AP)",
+          "description": "▶ Select one friendly BROOD BROTHER operative (excluding PATRIARCH) within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_sapper",
       "name": "Brood Brother Sapper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Demolition charge",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Range 3\"",
+            "Blast 2\"",
+            "Heavy (Reposition only)",
+            "Limited 1",
+            "Piercing 1",
+            "Saturate"
+          ]
+        },
         {
           "name": "Bayonet",
           "atk": "3",
@@ -128,26 +231,81 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Final Defiance",
+          "description": "If this operative is incapacitated, it can perform a free **Explosives** unique action before it’s removed from the killzone."
+        },
+        {
+          "name": "Grenadier",
+          "description": "This operative can use frag and krak grenades (see universal equipment). Doing so doesn’t count towards any limited uses you have (i.e. if you also select those grenades from equipment for other operatives). Whenever it’s doing so, improve the Hit stat of that weapon by 1."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Explosives (1AP)",
+          "description": "▶ The first time this operative performs this action during the battle, place your Explosives marker within its control range. The second time this operative performs this action during the battle, inflict 2D6 damage on each operative within 2\" of that marker (roll separately for each) unless Heavy terrain is wholly intervening between that operative and that marker.\r\n◆ This operative cannot perform this action more than twice per battle, while within control range of an enemy operative, or during the same activation in which it performed the **Charge**, **Dash** or **Fall Back** action (or vice versa)."
+        }
+      ]
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_sniper",
       "name": "Brood Brother Sniper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Sniper rifle (concealed)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy",
+            "Silent",
+            "Concealed Position*"
+          ]
+        },
+        {
+          "name": "Sniper rifle (mobile)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Sniper rifle (stationary)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy"
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
       "specialRules": [],
       "specialActions": []
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_trooper",
       "name": "Brood Brother Trooper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -169,26 +327,68 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Group Activation",
+          "description": "Whenever this operative is expended, you must then activate one other ready friendly BROOD BROTHER TROOPER operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_veteran",
       "name": "Brood Brother Veteran",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Balanced"
+          ]
+        },
+        {
+          "name": "Combat shotgun (close range)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Range 6\""
+          ]
+        },
+        {
+          "name": "Combat shotgun (long range)",
+          "atk": "4",
+          "hit": "5+",
+          "dmg": "2/2",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Resilient",
+          "description": "Normal Dmg of 3 or more inflicts 1 less damage on this operative."
+        },
+        {
+          "name": "Bodyguard",
+          "description": "You can use the Unquestioning Loyalty firefight ploy for 0CP if this is the specified friendly BROODGUARD operative."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_vox_operator",
       "name": "Brood Brother Vox-Operator",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -211,12 +411,21 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Signal (1AP)",
+          "description": "▶ SUPPORT. Select one other friendly BROOD BROTHER BROODGUARD operative visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        },
+        {
+          "name": "Jam (2AP)",
+          "description": "▶ Select one ready enemy operative that’s a valid target for this operative, or visible to this operative instead if you spend 1 additional AP. Roll one D6. Until the end of the turning point, that enemy operative cannot be activated or perform actions until it’s the last enemy operative to be activated, or until your opponent has activated a number of enemy operatives after this action equal to the result of the D6 (whichever comes first).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_brood_brothers_op_brood_brother_trooper",
       "name": "Brood Brother Trooper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -238,60 +447,205 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Group Activation",
+          "description": "Whenever this operative is expended, you must then activate one other ready friendly BROOD BROTHER TROOPER operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_brood_brothers_op_psychic_familiar",
       "name": "Psychic Familiar",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 3,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Claws",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Small",
+          "description": "This operative cannot use any weapons that aren’t on its datacard, or perform unique actions. Whenever this operative is in Cover, it cannot be selected as a valid target, taking precedence over all other rules (e.g. Seek, Vantage terrain) except being within 2\". This operative can perform the **Fall Back** action for 1 less AP."
+        },
+        {
+          "name": "Group Activation",
+          "description": "Whenever this operative is expended, you must then activate one other ready friendly BROOD BROTHER PSYCHIC FAMILIAR operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal."
+        },
+        {
+          "name": "Elusive",
+          "description": "This operative can perform mission actions while within control range of an enemy operative (taking precedence over those actions’ normal conditions). It can move through enemy operatives, move within control range of them, and during the **Charge** action can leave their control range (it must still end the move following all requirements for that move)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_brood_brothers_op_magus",
       "name": "Magus",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "4+",
       "wounds": 9,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Autopistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Bio dagger",
+          "atk": "2",
+          "hit": "4+",
+          "dmg": "3/6",
+          "specialRules": [
+            "Lethal 4+"
+          ]
+        },
+        {
+          "name": "Force stave",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/6",
+          "specialRules": [
+            "PSYCHIC",
+            "Shock"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Spiritual Leader",
+          "description": "STRATEGIC GAMBIT if this operative is in the killzone. Select one of the following for friendly BROOD BROTHER operatives to have until the end of the turning point or until this operative is incapacitated (whichever comes first):\r\n- Whenever an operative is shooting a friendly BROOD BROTHER operative, ignore the Piercing weapon rule.\r\n- You can ignore any changes to friendly BROOD BROTHER operatives’ stats from being injured (including their weapons’ stats).\r\n- You can ignore any changes to the APL stats of friendly BROOD BROTHER operatives."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Telepathic Overload (1AP)",
+          "description": "▶ PSYCHIC. Select one enemy operative visible to this operative. Until the end of that operative’s next activation, subtract 1 from its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        },
+        {
+          "name": "Mental Onslaught (1AP)",
+          "description": "▶ PSYCHIC. Select one enemy operative that’s a valid target for this operative. Inflict 2 damage on it, or 4 damage instead if it’s within 6\" of this operative. Then roll one D6: if the result is higher than that enemy operative’s APL stat, inflict an additional 2 damage on it, or 4 damage instead if it’s within 6\" of this operative. Keep rolling one D6 in this manner until you roll equal to or less than that enemy operative’s APL stat, until it’s incapacitated, or until you inflict 8 damage on it during this action (whichever comes first).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_brood_brothers_op_patriarch",
       "name": "Patriarch",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 4,
       "move": "6\"",
       "save": "4+",
       "wounds": 21,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Claws",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Relentless",
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Alpha Predator",
+          "description": "Whenever an operative is shooting this operative, ignore the Piercing weapon rule. You can activate this operative twice during the turning point as long as it has AP to spend (it stays ready while it can still be activated a second time). Per turning point, it cannot move more than 9\" and you cannot spend more than 4AP in total for it."
+        },
+        {
+          "name": "Monster",
+          "description": "This operative cannot use any weapons that aren’t on its datacard, or perform unique actions (excluding **Into Shadow** and **Mind Control**). Whenever your opponent is selecting a valid target, if this operative has a Conceal order, it cannot use Light terrain for cover. While this can allow this operative to be targeted (assuming it’s visible), it doesn’t remove its cover save (if any)."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Mind Control (2AP)",
+          "description": "▶ PSYCHIC. Select one enemy operative visible to and within 2\" of this operative. Both players roll one D6 and add their respective operative’s APL stat to the total. If your total is higher than your opponent’s, you can resolve this action’s second effect.\r\n▶ Until the end of the activation, that enemy operative is a friendly operative (an enemy operative for your opponent), you can change its order, and it can immediately perform one free action. It cannot perform an action in which it moves other than Dash (in which case specify the location for your opponent to move the operative to). You can only resolve this action’s second effect once per battle.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, unless the only enemy operative it’s within control range of is selected for this action."
+        },
+        {
+          "name": "Into Shadow (1AP)",
+          "description": "▶ Change this operative’s order.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_brood_brothers_op_primus",
       "name": "Primus",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BROOD",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "4+",
       "wounds": 9,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Scoped needle pistol (short range)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Range 8\"",
+            "Lethal 5+",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Scoped needle pistol (long range)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Silent"
+          ]
+        },
+        {
+          "name": "Bonesword & toxin injector claw",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Lethal 5+",
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Fist of the Patriarch",
+          "description": "This operative can either perform two **Shoot** or two **Fight** actions during its activation."
+        },
+        {
+          "name": "Mastermind",
+          "description": "Once per turning point, after rolling off to decide initiative, if this operative is in the killzone, you can do one of the following (you cannot select each option more than once per battle):\r\n- Add 1 to your dice result.\r\n- If you didn’t have initiative in the previous turning point, re-roll your dice."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Conspire",
+          "description": "▶ You gain 1CP.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or more than once per turning point."
+        }
+      ]
     }
   ]
 }

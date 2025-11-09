@@ -1,10 +1,21 @@
 {
   "id": "fac_wrecka_krew",
   "name": "Wrecka Krew",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "WRECKA",
   "archetypes": [],
   "summary": "Update 1.1",
-  "rules": [],
+  "rules": [
+    {
+      "id": "fac_wrecka_krew_rule_wrecka_rampage",
+      "name": "Wrecka Rampage",
+      "description": "Whenever a friendly WRECKA KREW operative is shooting, fighting or retaliating, in the Roll Attack Dice step:\r\n- For each attack dice result of 6 you retain, you gain one Wrecka point.\r\n- You can spend up to 3 of your Wrecka points (unless it's a BOMB SQUIG). For each point you spend this way, retain one of your fails as a normal success instead of discarding it.\r\nYou cannot have more than 6 Wrecka points at once. You can gain and spend Wrecka points during the same action and can do so in an order of your choice, unless you started the action with 6, in which case you can only spend them."
+    },
+    {
+      "id": "fac_wrecka_krew_rule_tanked_up",
+      "name": "Tanked Up",
+      "description": "The first time a friendly WRECKA CREW operative (excluding BOMB SQUIG) that has an Engage order performs either the **Charge**, **Shoot** or **Fight** action (excluding **Guard**) during each of its activations/counteractions, add 1 to its APL stat until the start of its next activation."
+    }
+  ],
   "strategicPloys": [],
   "tacticalPloys": [],
   "equipment": [],
@@ -12,20 +23,25 @@
     {
       "id": "fac_wrecka_krew_op_wrecka_boss_nob",
       "name": "Wrecka Boss Nob",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WRECKA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 14,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Wrecka Boss",
+          "description": "Whenever this operative performs a **Fight** or **Shoot** action (excluding **Guard**), you gain 1 Wrecka point."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_wrecka_krew_op_tankbusta_gunner",
       "name": "Tankbusta Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WRECKA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -49,13 +65,18 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Kometitiva Streak",
+          "description": "Once per **Shoot** action, if this operative shoots an enemy operative that another friendly operative has already shot during this turning point, you gain 1 Wrecka point. Determine this when you select a valid target, but you can include any secondary targets when doing so (e.g. from the Blast weapon rule)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_wrecka_krew_op_tankbusta_rokkiteer",
       "name": "Tankbusta Rokkiteer",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WRECKA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -79,59 +100,156 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Shokkwave",
+          "description": "Whenever an operative is within x\" of your Pulsa marker (see *Pulsa), worsen the Hit stat of its weapons by 1 and subtract 2\" from its Move stat. This is cumulative with being injured. X is that marker's Pulsa points. In the ready step of each Strategy phase, subtract 1 from your Pulsa marker's points. If a Pulsa marker ever has 0 points, remove it."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_wrecka_krew_op_wrecka_bomb_squig",
       "name": "Wrecka Bomb Squig",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WRECKA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 5,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Explosives",
+          "atk": "6",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Blast 1\"",
+            "Limited 1",
+            "Explosive*"
+          ]
+        },
+        {
+          "name": "Bite",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Stoopid",
+          "description": "During the Firefight phase, whenever you determine this operative's order, you cannot select Conceal. This operative cannot perform any actions other than **Charge**, **Dash**, **Fight**, **Reposition** and **Shoot**, or use any weapons that aren't on its datacard."
+        },
+        {
+          "name": "Boom!",
+          "description": "Whenever this operative is incapacitated during a battle in which it hasn't used its explosives, roll one D6, or two D6 if you wish.If any result is a 4+, this operative performs a free **Shoot** action with its explosives before it's removed from the killzone."
+        },
+        {
+          "name": "Expendable",
+          "description": "This operative is ignored for your opponent's kill/elimination op (when it's incapacitated, and when determining your starting number of operatives). It's also ignored for victory conditions and scoring VPs if either require operatives to 'escape', 'survive' or be incapacitated by enemy operatives (if it escapes/survives/is incapacitated, determining how many operatives must escape/survive/be incapacitated, etc.)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_wrecka_krew_op_breaka_boy_demolisha",
       "name": "Breaka Boy Demolisha",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WRECKA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 12,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Tankhammer (bash)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Tankhammer (detonate)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "*",
+          "specialRules": [
+            "Lethal 5+",
+            "Limited 1",
+            "Detonate*"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Reckless Temperament",
+          "description": "Normal Dmg of 4 or more inflicts 1 less damage on this operative; if this operative has an Engage order, Critical Dmg of 4 or more also inflicts 1 less damage on this operative."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_wrecka_krew_op_breaka_boy_fighter",
       "name": "Breaka Boy Fighter",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WRECKA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 12,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Smash hammer",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Brutal"
+          ]
+        }
+      ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Break Stuff (1AP)",
+          "description": "▶ Select a terrain feature within this operative's control range. If it's equipment terrain, remove it. Otherwise, place one of your Breach markers within this operative's control range as close as possible to that terrain. Whenever an operative is within 1\" of that marker, it treats parts of that terrain feature that are no more than 1\" thick as Accessible terrain.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if a terrain feature isn't within its control range."
+        }
+      ]
     },
     {
       "id": "fac_wrecka_krew_op_breaka_boy_krusha",
       "name": "Breaka Boy Krusha",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WRECKA",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 12,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Knuclebustas",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Brutal",
+            "Shock",
+            "Smash*"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Armoured Up",
+          "description": "Whenever an enemy operative is shooting this operative, or this operative is fighting or retaliating, you opponent cannot retain attack dice results of less than 6 as critical successes (e.g. as a result of the Lethal, Rending or Severe weapon rules)."
+        }
+      ],
       "specialActions": []
     }
   ]

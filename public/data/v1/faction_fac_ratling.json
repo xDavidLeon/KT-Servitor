@@ -1,10 +1,16 @@
 {
   "id": "fac_ratling",
   "name": "Ratling",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "RATLING",
   "archetypes": [],
   "summary": "Update 1.1",
-  "rules": [],
+  "rules": [
+    {
+      "id": "fac_ratling_rule_scarper",
+      "name": "Scarper",
+      "description": "After each enemy operative's activation, before the next operative is activated, you can perform a free **Dash** action with one friendly RATLING operating (excluding BULLGRYN, OGRYN, and SNEAK), but it cannot finish that move within 3\" of an enemy operative unless it's not visible to every enemy operative when it finishes that move.\r\nEach friendly operative can only do this once per turning point, and cannot do so after the final activation of the turning point."
+    }
+  ],
   "strategicPloys": [],
   "tacticalPloys": [],
   "equipment": [],
@@ -12,7 +18,7 @@
     {
       "id": "fac_ratling_op_ratling_fixer",
       "name": "Ratling Fixer",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -34,45 +40,101 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Munitorum Contacts",
+          "description": "You can select one additional equipment option."
+        },
+        {
+          "name": "Target Designation",
+          "description": "STRATEGIC GAMBIT. Select one enemy operative visible to this operative. Until the end of the turning point, whenever a friendly RATLING operative is shooting that enemy operative with a rifle, that weapon has the Lethal 5+ weapon rule."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_ratling_op_ratling_battlemutt",
       "name": "Ratling Battlemutt",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 4,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Bite",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Early Warning",
+          "description": "Once per turning point, after an enemy operative performs an action in which it moves, you can interrupt that activation (or counteraction) to use this rule. If you do, each friendly RATLING operative (excluding OGRYN and BULLGRYN) within 6\" of this operative and within 2\" of that enemy operative can perform a free **Dash** action or a free **Fall Back** action, but it cannot move more than 3\". In either case, each one cannot finish that move within 2\" of an enemy operative unless it's not visible to every enemy operative when it finishes that move (if this isn't possible for an operative, it cannot move)."
+        },
+        {
+          "name": "Beast",
+          "description": "This operative cannot perform any actions other than **Charge**, **Dash**, **Fall Back**, **Fight** and **Reposition**. It cannot use any weapons that aren't on its datacard."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_ratling_op_bullgryn",
       "name": "Bullgryn",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 16,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Shield",
+          "description": "If this operative has a slabshield, it has a 3+ Save stat; if it has a brute shield, whenever it's fighting or retaliating, each of your blocks can be allocated to block two unresolved successes (instead of one)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_ratling_op_ratling_big_shot",
       "name": "Ratling Big Shot",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
       "save": "5+",
       "wounds": 6,
       "weapons": [
+        {
+          "name": "Tankstopper rifle (mobile)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Devastating 1",
+            "Heavy (Dash only)",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Tankstopper rifle (stationary)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "4/2",
+          "specialRules": [
+            "Devastating 4",
+            "Heavy",
+            "Piercing 1",
+            "Severe"
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -87,13 +149,27 @@
     {
       "id": "fac_ratling_op_ratling_bomber",
       "name": "Ratling Bomber",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
       "save": "4+",
       "wounds": 6,
       "weapons": [
+        {
+          "name": "Explosive arsenal",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 3\"",
+            "Blast 1\"",
+            "Heavy (Reposition only)",
+            "Limited 1",
+            "Piercing 1",
+            "Saturate"
+          ]
+        },
         {
           "name": "Sniper rifle (mobile)",
           "atk": "4",
@@ -112,19 +188,37 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Tripwire",
+          "description": "When setting up equipment before the battle, you can set up two of your Tripwire markers up wholly within your territory and more than 2\" from other markers, access points and Accessible terrain. The first time that marker is within an enemy operative's control range, end that operative's action (if any), remove that marker and subtract 1 from that operative's APL stat until the end of its next activation."
+        },
+        {
+          "name": "Mine",
+          "description": "Mines you select from universal equipment inflict 2D3+3 damage instead, and friendly RATLING operatives (excluding OGRYN and BULLGRYN) are ignored for its effects (i.e. they can't trigger it or take damage from it). This takes precedence over the normal mines rules."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_ratling_op_ratling_hardbit",
       "name": "Ratling Hardbit",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
       "save": "5+",
       "wounds": 6,
       "weapons": [
+        {
+          "name": "Combat knife",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Balanced"
+          ]
+        },
         {
           "name": "Battle rifle",
           "atk": "4",
@@ -133,19 +227,37 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Lie in Wait",
+          "description": "Whenever this operative is retaliating while Light or Heavy terrain is within its control range, you resolve the first attack dice (i.e. defender instead of attacker)."
+        },
+        {
+          "name": "Hunter",
+          "description": "This operative can perform the **Charge** action while it has a Conceal order. If it does so during its activation, until the end of that activation, add 1 to the Atk stat of its combat knife and that melee weapon has the Brutal weapon rule."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_ratling_op_ratling_raider",
       "name": "Ratling Raider",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
       "save": "5+",
       "wounds": 6,
       "weapons": [
+        {
+          "name": "Dagger",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "-"
+          ]
+        },
         {
           "name": "Suppressed sniper rifle (mobile)",
           "atk": "4",
@@ -167,13 +279,23 @@
           ]
         }
       ],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Grappling Hook",
+          "description": "Whenever this operative is climbing up, you can treat the vertical distance as 2\" (regardless of how far the operative actually moved vertically)."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Slingshot (1AP)",
+          "description": "▶ Select a point on a terrain feature; that point must be visible to and within 6\" of this operative. Remove this operative from the killzone and set it back up wholly within 6\" horizontally of that point, not within control range of an enemy operative, and with that point visible to it.\r\n◆ This action is treated as a **Reposition** action. This operative cannot perform this action while within control range of an enemy operative, or during an activation in which it performed the **Charge**, **Fall Back**, or **Shoot** action (or vice versa)."
+        }
+      ]
     },
     {
       "id": "fac_ratling_op_ratling_sneak",
       "name": "Ratling Sneak",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -208,26 +330,61 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Evade",
+          "description": "Once per turning point, after an enemy operative performs an action, you can interrupt that activation (or counteraction) and perform a free **Dash** action with this operative. Note this operative cannot use the Scarper faction rule (it has this rule instead)."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Optics (1AP)",
+          "description": "▶ Until the start of this operative's next activation, whenever it's shooting, enemy operatives cannot be obscured and the stationary profile of this operative's suppressed sniper rifle has the Lethal 5+ weapon rule.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_ratling_op_ogryn",
       "name": "Ogryn",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 16,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Ripper gun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Punishing"
+          ]
+        },
+        {
+          "name": "Bayonet",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Bayonet Charge",
+          "description": "Whenever this operative finishes moving during the **Charge** action, you can inflict D3+1 damage on one enemy operative within its control range."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_ratling_op_ratling_sniper",
       "name": "Ratling Sniper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -265,7 +422,7 @@
     {
       "id": "fac_ratling_op_ratling_spotter",
       "name": "Ratling Spotter",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -298,12 +455,17 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Spot (1AP)",
+          "description": "▶ SUPPORT. Select one enemy operative visible to this operative. Once during this turning point, when a friendly RATLING operative within 3\" of this operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative's ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative is not obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_ratling_op_ratling_stashmaster",
       "name": "Ratling Stashmaster",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -335,13 +497,22 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Light-fingered",
+          "description": "Once during each of this operative's activations, it can perform the **Place Marker**, **Pick Up Marker** or a mission action for 1 less AP."
+        },
+        {
+          "name": "Well Stocked",
+          "description": "If you select an Ammo Cache from universal equipment, you can set up an additional Ammo Cache marker."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_ratling_op_ratling_vox_thief",
       "name": "Ratling Vox-thief",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "RATLING",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -374,7 +545,12 @@
         }
       ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Intercept Communications (1AP)",
+          "description": "▶ SUPPORT. Select one other friendly RATLING operative visible to and within 6\" of this operative. Until the end of its next activation, add 1 to that operative's APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     }
   ]
 }

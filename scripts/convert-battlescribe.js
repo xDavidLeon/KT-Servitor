@@ -154,14 +154,91 @@ function parseOperativeStats(profiles) {
   return stats;
 }
 
+// Normalize selectionEntries from xml2js structure
+function normalizeSelectionEntries(selectionEntries) {
+  if (!selectionEntries) return [];
+  if (Array.isArray(selectionEntries)) {
+    const normalized = [];
+    selectionEntries.forEach(item => {
+      if (item && typeof item === 'object') {
+        // Check if it has a selectionEntry property (wrapped structure)
+        if (item.selectionEntry) {
+          const entries = Array.isArray(item.selectionEntry) ? item.selectionEntry : [item.selectionEntry];
+          normalized.push(...entries);
+        } else {
+          // It's a direct entry
+          normalized.push(item);
+        }
+      }
+    });
+    return normalized;
+  } else if (selectionEntries.selectionEntry) {
+    // It's an object with selectionEntry array
+    return Array.isArray(selectionEntries.selectionEntry) 
+      ? selectionEntries.selectionEntry 
+      : [selectionEntries.selectionEntry];
+  } else {
+    // It's a single entry object
+    return [selectionEntries];
+  }
+}
+
+// Normalize profiles from xml2js structure
+function normalizeProfiles(profiles) {
+  if (!profiles) return [];
+  if (Array.isArray(profiles)) {
+    const normalized = [];
+    profiles.forEach(item => {
+      if (item && typeof item === 'object') {
+        if (item.profile) {
+          const profs = Array.isArray(item.profile) ? item.profile : [item.profile];
+          normalized.push(...profs);
+        } else {
+          normalized.push(item);
+        }
+      }
+    });
+    return normalized;
+  } else if (profiles.profile) {
+    return Array.isArray(profiles.profile) ? profiles.profile : [profiles.profile];
+  } else {
+    return [profiles];
+  }
+}
+
+// Normalize characteristics from xml2js structure
+function normalizeCharacteristics(characteristics) {
+  if (!characteristics) return [];
+  if (Array.isArray(characteristics)) {
+    const normalized = [];
+    characteristics.forEach(item => {
+      if (item && typeof item === 'object') {
+        if (item.characteristic) {
+          const chars = Array.isArray(item.characteristic) ? item.characteristic : [item.characteristic];
+          normalized.push(...chars);
+        } else {
+          normalized.push(item);
+        }
+      }
+    });
+    return normalized;
+  } else if (characteristics.characteristic) {
+    return Array.isArray(characteristics.characteristic) 
+      ? characteristics.characteristic 
+      : [characteristics.characteristic];
+  } else {
+    return [characteristics];
+  }
+}
+
 // Extract weapons with full details (ATK, HIT, DMG, WR)
 function extractWeaponsDetailed(selectionEntry) {
   const weapons = [];
   if (!selectionEntry) return weapons;
   
   const groups = selectionEntry.selectionEntryGroups || [];
-  const entries = selectionEntry.selectionEntries || [];
-  const profiles = selectionEntry.profiles || [];
+  const entries = normalizeSelectionEntries(selectionEntry.selectionEntries);
+  const profiles = normalizeProfiles(selectionEntry.profiles);
   
   // Process profiles directly on the entry
   profiles.forEach(profile => {
@@ -211,10 +288,10 @@ function extractWeaponsDetailed(selectionEntry) {
     if (!group) return;
     const name = getText(group.name) || getAttr(group, 'name');
     if (name && typeof name === 'string' && (name.toLowerCase().includes('weapon') || name.toLowerCase().includes('wargear'))) {
-      const groupEntries = group.selectionEntries || [];
+      const groupEntries = normalizeSelectionEntries(group.selectionEntries);
       groupEntries.forEach(entry => {
         if (!entry) return;
-        const entryProfiles = entry.profiles || [];
+        const entryProfiles = normalizeProfiles(entry.profiles);
         entryProfiles.forEach(profile => {
           if (!profile) return;
           const typeId = getAttr(profile, 'typeId');
@@ -262,7 +339,7 @@ function extractWeaponsDetailed(selectionEntry) {
   // Also check direct entries
   entries.forEach(entry => {
     if (!entry) return;
-    const entryProfiles = entry.profiles || [];
+    const entryProfiles = normalizeProfiles(entry.profiles);
     entryProfiles.forEach(profile => {
       if (!profile) return;
       const typeId = getAttr(profile, 'typeId');
@@ -278,7 +355,7 @@ function extractWeaponsDetailed(selectionEntry) {
           specialRules: []
         };
         
-        const characteristics = profile.characteristics || [];
+        const characteristics = normalizeCharacteristics(profile.characteristics);
         characteristics.forEach(char => {
           if (!char) return;
           const charName = getAttr(char, 'name');
@@ -319,7 +396,7 @@ function extractWeapons(selectionEntry) {
     if (!group) return;
     const name = getText(group.name) || getAttr(group, 'name');
     if (name && typeof name === 'string' && (name.toLowerCase().includes('weapon') || name.toLowerCase().includes('wargear'))) {
-      const groupEntries = group.selectionEntries || [];
+      const groupEntries = normalizeSelectionEntries(group.selectionEntries);
       groupEntries.forEach(entry => {
         if (!entry) return;
         const weaponName = getText(entry.name) || getAttr(entry, 'name');
@@ -616,6 +693,46 @@ async function parseCatalogue(filePath) {
     });
   });
   
+  // Also try to extract from rule descriptions (e.g., "BATTLECLADE SERVITOR" -> "BATTLECLADE")
+  if (!factionKeyword) {
+    const rulesArray = [];
+    if (catalogue.rules) {
+      if (Array.isArray(catalogue.rules)) {
+        catalogue.rules.forEach(item => {
+          if (item && typeof item === 'object') {
+            if (item.rule) {
+              const ruleItems = Array.isArray(item.rule) ? item.rule : [item.rule];
+              rulesArray.push(...ruleItems);
+            } else {
+              rulesArray.push(item);
+            }
+          }
+        });
+      } else if (catalogue.rules.rule) {
+        rulesArray.push(...(Array.isArray(catalogue.rules.rule) ? catalogue.rules.rule : [catalogue.rules.rule]));
+      } else {
+        rulesArray.push(catalogue.rules);
+      }
+    }
+    
+    // Look for all-caps keywords in rule descriptions
+    for (const rule of rulesArray) {
+      if (!rule) continue;
+      const description = getText(rule.description) || '';
+      // Look for patterns like "BATTLECLADE SERVITOR" or "CORSAIR VOIDSCARRED"
+      const allCapsMatch = description.match(/\b([A-Z]{4,}(?:\s+[A-Z]+)*)\b/);
+      if (allCapsMatch) {
+        const keyword = allCapsMatch[1];
+        // Take the first word if it's a multi-word keyword (e.g., "BATTLECLADE" from "BATTLECLADE SERVITOR")
+        const firstWord = keyword.split(/\s+/)[0];
+        if (firstWord.length > 3) {
+          factionKeyword = firstWord;
+          break;
+        }
+      }
+    }
+  }
+  
   // Extract faction info
   const faction = {
     id: `fac_${catalogueId}`,
@@ -637,6 +754,48 @@ async function parseCatalogue(filePath) {
   const strategicPloys = [];
   const tacticalPloys = [];
   const tacops = [];
+  
+  // Extract faction rules from catalogue.rules
+  // Handle xml2js structure: rules can be an array, object with rule property, or single rule
+  let rulesArray = [];
+  if (catalogue.rules) {
+    if (Array.isArray(catalogue.rules)) {
+      // It's an array - could be direct rules or wrapped
+      catalogue.rules.forEach(item => {
+        if (item && typeof item === 'object') {
+          // Check if it has a rule property (wrapped structure)
+          if (item.rule) {
+            const ruleItems = Array.isArray(item.rule) ? item.rule : [item.rule];
+            rulesArray.push(...ruleItems);
+          } else {
+            // It's a direct rule
+            rulesArray.push(item);
+          }
+        }
+      });
+    } else if (catalogue.rules.rule) {
+      // It's an object with rule array
+      rulesArray = Array.isArray(catalogue.rules.rule) 
+        ? catalogue.rules.rule 
+        : [catalogue.rules.rule];
+    } else {
+      // It's a single rule object
+      rulesArray = [catalogue.rules];
+    }
+  }
+  
+  rulesArray.forEach(rule => {
+    if (!rule) return;
+    const ruleName = getText(rule.name) || getAttr(rule, 'name');
+    const ruleDescription = getText(rule.description) || '';
+    if (ruleName) {
+      rules.push({
+        id: `fac_${catalogueId}_rule_${sanitizeId(ruleName)}`,
+        name: ruleName,
+        description: ruleDescription
+      });
+    }
+  });
   
   // Build a map of shared weapons from sharedSelectionEntries
   const sharedWeaponsMap = {};
@@ -800,7 +959,7 @@ async function parseCatalogue(filePath) {
     const entryId = sanitizeId(entryName);
     
     // Check if this is an operative (usually has profiles with stats)
-    const profiles = entry.profiles || [];
+    const profiles = normalizeProfiles(entry.profiles);
     const hasStats = profiles.some(p => {
       if (!p) return false;
       const typeId = getAttr(p, 'typeId');
@@ -928,36 +1087,83 @@ async function parseCatalogue(filePath) {
       // Extract keywords from categoryLinks
       const entryCategoryLinks = entry.categoryLinks || [];
       const operativeKeywords = [];
+      let operativeFactionKeyword = null;
       entryCategoryLinks.forEach(catLink => {
         const catName = getText(catLink.name) || getAttr(catLink, 'name');
-        if (catName && catName !== faction.factionKeyword) {
-          operativeKeywords.push(catName);
+        if (catName) {
+          // Check if this is a faction keyword (all caps, longer than 3 chars)
+          if (catName === catName.toUpperCase() && catName.length > 3) {
+            operativeFactionKeyword = catName;
+          } else if (catName !== faction.factionKeyword) {
+            operativeKeywords.push(catName);
+          }
         }
       });
       
-      // Extract special rules and actions from profiles with typeName="Abilities"
+      // Update faction keyword if found on operative and not already set
+      if (operativeFactionKeyword && (!factionKeyword || factionKeyword === 'UNKNOWN')) {
+        factionKeyword = operativeFactionKeyword;
+        faction.factionKeyword = operativeFactionKeyword;
+      }
+      
+      // Extract special rules and actions from profiles with typeName="Abilities" or "Unique Actions"
       const specialRules = [];
       const specialActions = [];
-      profiles.forEach(profile => {
+      
+      // Helper function to extract ability/action from a profile
+      function extractFromProfile(profile) {
         if (!profile) return;
         const typeName = getText(profile.typeName) || getAttr(profile, 'typeName');
+        const profileName = getText(profile.name) || getAttr(profile, 'name');
+        
         if (typeName === 'Abilities') {
-          const abilityName = getText(profile.name) || getAttr(profile, 'name');
-          const characteristics = profile.characteristics || [];
+          const characteristics = normalizeCharacteristics(profile.characteristics);
           let abilityDescription = '';
           characteristics.forEach(char => {
+            if (!char) return;
             const charName = getAttr(char, 'name');
             if (charName === 'Ability') {
               abilityDescription = getText(char);
             }
           });
-          if (abilityName && abilityDescription) {
+          if (profileName && abilityDescription) {
             specialRules.push({
-              name: abilityName,
+              name: profileName,
               description: abilityDescription
             });
           }
+        } else if (typeName === 'Unique Actions') {
+          const characteristics = normalizeCharacteristics(profile.characteristics);
+          let actionDescription = '';
+          characteristics.forEach(char => {
+            if (!char) return;
+            const charName = getAttr(char, 'name');
+            if (charName === 'Unique Action') {
+              actionDescription = getText(char);
+            }
+          });
+          if (profileName && actionDescription) {
+            specialActions.push({
+              name: profileName,
+              description: actionDescription
+            });
+          }
         }
+      }
+      
+      // Check profiles directly on the entry
+      profiles.forEach(profile => {
+        extractFromProfile(profile);
+      });
+      
+      // Also check nested selectionEntries for abilities and unique actions
+      const entries = normalizeSelectionEntries(entry.selectionEntries);
+      entries.forEach(nestedEntry => {
+        if (!nestedEntry) return;
+        const nestedProfiles = normalizeProfiles(nestedEntry.profiles);
+        nestedProfiles.forEach(profile => {
+          extractFromProfile(profile);
+        });
       });
       
       // Also check infoLinks
@@ -988,7 +1194,7 @@ async function parseCatalogue(filePath) {
         const operative = {
           id: `fac_${catalogueId}_op_${entryId}`,
           name: entryName,
-          factionKeyword: faction.factionKeyword,
+          factionKeyword: operativeFactionKeyword || faction.factionKeyword,
           keywords: operativeKeywords,
           apl: stats.apl,
           move: stats.move,

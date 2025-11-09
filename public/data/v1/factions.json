@@ -9,7 +9,7 @@
   {
     "id": "fac_battleclade",
     "name": "Battleclade",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "BATTLECLADE",
     "archetypes": [],
     "summary": ""
   },
@@ -30,28 +30,28 @@
   {
     "id": "fac_brood_brothers",
     "name": "Brood Brothers",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "BROOD",
     "archetypes": [],
     "summary": "July '25"
   },
   {
     "id": "fac_canoptek_circle",
     "name": "Canoptek Circle",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "STRATEGIC",
     "archetypes": [],
     "summary": ""
   },
   {
     "id": "fac_chaos_cult",
     "name": "Chaos Cult",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "CHAOS",
     "archetypes": [],
     "summary": "July '25"
   },
   {
     "id": "fac_corsair_voidscarred",
     "name": "Corsair Voidscarred",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "CORSAIR",
     "archetypes": [],
     "summary": "Update 1.2"
   },
@@ -65,7 +65,7 @@
   {
     "id": "fac_deathwatch",
     "name": "Deathwatch",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "DEATHWATCH",
     "archetypes": [],
     "summary": ""
   },
@@ -79,14 +79,14 @@
   {
     "id": "fac_exaction_squad",
     "name": "Exaction Squad",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "STRATEGIC",
     "archetypes": [],
     "summary": "Update 1.2"
   },
   {
     "id": "fac_farstalker_kinband",
     "name": "Farstalker Kinband",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "FARSTALKER",
     "archetypes": [],
     "summary": "Update 1.2"
   },
@@ -107,84 +107,84 @@
   {
     "id": "fac_goremonger",
     "name": "Goremonger",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "GOREMONGER",
     "archetypes": [],
     "summary": "July '25"
   },
   {
     "id": "fac_hand_of_the_archon",
     "name": "Hand of the Archon",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "HAND",
     "archetypes": [],
     "summary": "Update 1.1"
   },
   {
     "id": "fac_hearthkyn_salvagers",
     "name": "Hearthkyn Salvagers",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "HEARTHKYN",
     "archetypes": [],
     "summary": "Update 1.1"
   },
   {
     "id": "fac_hernkyn_yaegirs",
     "name": "Hernkyn Yaegirs",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "HERNKYN",
     "archetypes": [],
     "summary": "Update 1.1"
   },
   {
     "id": "fac_hierotek_circle",
     "name": "Hierotek Circle",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "HIEROTEK",
     "archetypes": [],
     "summary": "July '25"
   },
   {
     "id": "fac_hunter_clade",
     "name": "Hunter Clade",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "DOCTRINA",
     "archetypes": [],
     "summary": "July '25"
   },
   {
     "id": "fac_imperial_navy_breachers",
     "name": "Imperial Navy Breachers",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "IMPERIAL",
     "archetypes": [],
     "summary": "July '25"
   },
   {
     "id": "fac_inquisitorial_agents",
     "name": "Inquisitorial Agents",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "REQUISITIONED",
     "archetypes": [],
     "summary": "Update 1.3"
   },
   {
     "id": "fac_kasrkin",
     "name": "Kasrkin",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "STRATEGIC",
     "archetypes": [],
     "summary": "Update 1.2"
   },
   {
     "id": "fac_kommandos",
     "name": "Kommandos",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "KOMMANDO",
     "archetypes": [],
     "summary": "Update 1.1"
   },
   {
     "id": "fac_legionaries",
     "name": "Legionaries",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "LEGIONARY",
     "archetypes": [],
     "summary": "July '25"
   },
   {
     "id": "fac_mandrakes",
     "name": "Mandrakes",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "MANDRAKE",
     "archetypes": [],
     "summary": ""
   },
@@ -205,49 +205,49 @@
   {
     "id": "fac_novitiates",
     "name": "Novitiates",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "NOVITIATE",
     "archetypes": [],
     "summary": ""
   },
   {
     "id": "fac_pathfinders",
     "name": "Pathfinders",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "PATHFINDER",
     "archetypes": [],
     "summary": "July '25"
   },
   {
     "id": "fac_phobos_strike_team",
     "name": "Phobos Strike Team",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "STRATEGIC",
     "archetypes": [],
     "summary": "July '25"
   },
   {
     "id": "fac_plague_marines",
     "name": "Plague Marines",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "PLAGUE",
     "archetypes": [],
     "summary": "Update 1.2"
   },
   {
     "id": "fac_ratling",
     "name": "Ratling",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "RATLING",
     "archetypes": [],
     "summary": "Update 1.1"
   },
   {
     "id": "fac_raveners",
     "name": "Raveners",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "RAVENER",
     "archetypes": [],
     "summary": ""
   },
   {
     "id": "fac_sanctifier",
     "name": "Sanctifier",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "STRATEGIC",
     "archetypes": [],
     "summary": "July '25"
   },
@@ -261,42 +261,42 @@
   {
     "id": "fac_tempestus_aquilons",
     "name": "Tempestus Aquilons",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "TEMPESTUS",
     "archetypes": [],
     "summary": "Update 1.2"
   },
   {
     "id": "fac_vespid_stingwings",
     "name": "Vespid Stingwings",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "VESPID",
     "archetypes": [],
     "summary": "Update 1.2"
   },
   {
     "id": "fac_void_dancer_troupe",
     "name": "Void-dancer Troupe",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "STRATEGIC",
     "archetypes": [],
     "summary": "Update 1.3"
   },
   {
     "id": "fac_warpcoven",
     "name": "Warpcoven",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "WARPCOVEN",
     "archetypes": [],
     "summary": "July '25"
   },
   {
     "id": "fac_wrecka_krew",
     "name": "Wrecka Krew",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "WRECKA",
     "archetypes": [],
     "summary": "Update 1.1"
   },
   {
     "id": "fac_wyrmblade",
     "name": "Wyrmblade",
-    "factionKeyword": "UNKNOWN",
+    "factionKeyword": "WYRMBLADE",
     "archetypes": [],
     "summary": "Update 1.0"
   }

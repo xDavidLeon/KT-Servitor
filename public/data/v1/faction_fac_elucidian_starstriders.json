@@ -29,8 +29,46 @@
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Heirloom relic pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing Crits 1",
+            "Seek Light"
+          ]
+        },
+        {
+          "name": "Monomolecular cane rapier",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Disruption Field",
+          "description": "Whenever an operative is shooting this operative, ignore the Piercing weapon rule."
+        },
+        {
+          "name": "Digital Lasers",
+          "description": "Whenever this operative performs the **Fight** action, at the start of the Roll Attack Dice step, you can use this rule. If you do, inflict 1 damage on the enemy operative in that sequence."
+        },
+        {
+          "name": "Merciless",
+          "description": "Whenever this operative is shooting against, fighting against or retaliating against an enemy operative that was already wounded when the action started, this operative's weapons have the Balanced weapon rule; if the weapon already has that weapon rule, it has the Ceaseless weapon rule instead of Balanced."
+        },
+        {
+          "name": "Reputation to Maintain",
+          "description": "The first time this operative incapacitates an enemy operative during the battle, you can either gain 1 additional CP or use an additional WARRANT OF TRADE rule (up to four uses per battle, instead of three). Note that you still cannot use the same WARRANT OF TRADE rule more than once per battle."
+        }
+      ],
       "specialActions": []
     },
     {
@@ -42,9 +80,33 @@
       "move": "8\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Vicious bite",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Beast",
+          "description": "This operative cannot perform any actions other than **Charge**, **Dash**, **Fall Back**, **Fight**, **Gather**, **Guard**, **Reposition**, **Pick Up Marker** and **Place Marker**. It cannot use any weapons that aren’t on its datacard."
+        },
+        {
+          "name": "Loyal Companion",
+          "description": "Whenever an enemy operative performs the **Fight** action, if this operative is a valid operative to fight against, you can force them to select this operative to fight against instead. Whenever an enemy operative ends the **Charge** action within control range of another friendly ELUCIDIAN STARSTRIDER operative within 3\" of this operative, if this operative isn’t within control range of enemy operatives, this operative can immediately perform a free **Charge** action, but must end that move within control range of that enemy operative."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Gather (1AP)",
+          "description": "▶ Perform a free **Dash** or **Reposition** action with this operative. During that move, you can perform a free **Pick Up Marker** or **Place Marker* action with this operative (you can determine control during that action to do so), and any remaining move distance it had from the **Dash** or **Reposition** action can be used after it does so."
+        }
+      ]
     },
     {
       "id": "fac_elucidian_starstriders_op_death_cult_executioner",
@@ -55,9 +117,49 @@
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Dartmask",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "1/1",
+          "specialRules": [
+            "Range 6\"",
+            "Lethal 5+",
+            "Silent",
+            "Stun"
+          ]
+        },
+        {
+          "name": "Power weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Rapid Reflexes",
+          "description": "Whenever an operative is shooting this operative, ignore the Piercing weapon rule."
+        },
+        {
+          "name": "Bladed Stance",
+          "description": "Whenever this operative is fighting or retaliating, you can resolve one of your successes before the normal order. If you do, that success must be used to block."
+        },
+        {
+          "name": "Zealot",
+          "description": "If this operative is incapacitated during the **Fight** action, you can strike the enemy operative in that sequence with one of your unresolved successes before this operative is removed from the killzone."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Trained Assassin (1AP)",
+          "description": "▶ Change this operative’s order.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_elucidian_starstriders_op_lectro_maester",
@@ -70,6 +172,17 @@
       "wounds": 8,
       "weapons": [
         {
+          "name": "Voltaic pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Range 8\"",
+            "Devastating 1",
+            "Rending"
+          ]
+        },
+        {
           "name": "Gun butt",
           "atk": "3",
           "hit": "4+",
@@ -77,8 +190,22 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Missionary of the Martian Creed",
+          "description": "Once during each of this operative’s activations, it can perform the **Pick Up Marker**, **Place Marker** or a mission action for 1 less AP."
+        },
+        {
+          "name": "Voltaghiest Array",
+          "description": "Whenever an operative is shooting a friendly ELUCIDIAN STARSTRIDER operative that’s within 4\" of this operative, you can re-roll one of your defence dice."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Calibrate Voltagheist (0AP)",
+          "description": "▶ Select one of the following effects to last until the start of this operative’s next activation, until it’s incapacitated or until it performs this action again (whichever comes first): \r\n- Charge: This operative’s voltaic pistol has the Lethal 4+ weapon rule. \r\n- Field: Whenever an enemy operative ends the **Charge**, **Dash**, **Fall Back** or **Reposition** action visible to and within 4\" of this operative, inflict D6 damage on that enemy operative.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_elucidian_starstriders_op_rejuvenat_adept",
@@ -89,9 +216,42 @@
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Laspistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Scalpel claw",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Medic!",
+          "description": "The first time during each turning point that another friendly ELUCIDIAN STARSTRIDER operative would be incapacitated while visible to and within 3\" of this operative, you can use this rule, providing neither this nor that operative is within control range of an enemy operative. If you do, that friendly operative isn’t incapacitated and has 1 wound remaining and cannot be incapacitated for the remainder of the action. After that action, that friendly operative can immediately perform a free **Dash** action, but must end that move within this operative’s control range. Subtract 1 from this and that operative’s APL stats until the end of their next activations respectively, and if this rule was used during that friendly operative’s activation, that activation ends. You cannot use this rule if this operative is incapacitated, or if it's a **Shoot** action and this operative would be a primary or secondary target."
+        },
+        {
+          "name": "Normaliser Helm",
+          "description": "Whenever a friendly ELUCIDIAN STARSTRIDER operative is within 6\" of this operative, you can ignore any changes to that operative’s stats from being injured (including its weapons’ stats)."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Healing Serum (1AP)",
+          "description": "▶ Select one friendly ELUCIDIAN STARSTRIDER operative within this operative’s control range to regain up to D3+3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_elucidian_starstriders_op_voidmaster",
@@ -104,6 +264,34 @@
       "wounds": 8,
       "weapons": [
         {
+          "name": "Relic laspistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Range 8\"",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Artificer shotgun (close range)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Range 6\""
+          ]
+        },
+        {
+          "name": "Artificer shotgun (long range)",
+          "atk": "4",
+          "hit": "5+",
+          "dmg": "2/2",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
           "name": "Gun butt",
           "atk": "3",
           "hit": "4+",
@@ -111,8 +299,22 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Disciplinarian",
+          "description": "SUPPORT. Whenever another friendly NAVIS operative is within 3\" of this operative, that friendly operative’s ranged weapons (excluding PRIVATEER SUPPORT ASSET weapons) have the Balanced weapon rule; if the weapon already has that weapon rule, it has the Ceaseless weapon rule instead of Balanced."
+        },
+        {
+          "name": "Hardy",
+          "description": "Once per battle, when an attack dice inflicts Normal Dmg on this operative, you can ignore that inflicted damage."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Uncompromising Fire (1AP)",
+          "description": "▶ Perform two free **Shoot** actions with this operative (this takes precedence over action restrictions). You must select its relic laspistol for one action and its artificer shotgun (close range) for the other (in any order).\r\n◆ This operative cannot perform this action while it has a Conceal order, or during an activation in which it performed the **Shoot** action (or vice versa)."
+        }
+      ]
     },
     {
       "id": "fac_elucidian_starstriders_op_voidsman_with_lasgun",
@@ -124,6 +326,15 @@
       "save": null,
       "wounds": null,
       "weapons": [
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "-"
+          ]
+        },
         {
           "name": "Gun butt",
           "atk": "3",
@@ -145,6 +356,27 @@
       "save": null,
       "wounds": null,
       "weapons": [
+        {
+          "name": "Rotor cannon (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Rending"
+          ]
+        },
+        {
+          "name": "Rotor cannon (sweeping)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Rending",
+            "Torrent 1\""
+          ]
+        },
         {
           "name": "Gun butt",
           "atk": "3",

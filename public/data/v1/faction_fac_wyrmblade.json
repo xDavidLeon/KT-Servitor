@@ -1,10 +1,26 @@
 {
   "id": "fac_wyrmblade",
   "name": "Wyrmblade",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "WYRMBLADE",
   "archetypes": [],
   "summary": "Update 1.0",
-  "rules": [],
+  "rules": [
+    {
+      "id": "fac_wyrmblade_rule_familiar_territory",
+      "name": "Familiar Territory",
+      "description": "When setting up a WYRMBLADE kill team before the battle, one third of your kill team can be set up in HIDING: place them to one side instead of in the killzone. CULT AGENT operatives cannot be set up in HIDING.\r\nIn the Firefight phase, friendly WYRMBLADE operatives setup in HIDING are activated as normal. When you do, you can either expend that operative or have it emerge. If it emerges, set it up in the killzone in a location it can be placed as follows (it’s no longer set up in HIDING):\r\n- Wholly within 6\" of your drop zone.\r\n- More than 6\" from enemy operatives.\r\n- With an order of your choice.\r\nThe operative is treated as performing the Reposition action (spend the AP accordingly), then continue its activation as normal. If the operative is a WARRIOR, ignore its **Group Activation** rule. Friendly operatives still in HIDING at the end of the second turning point are incapacitated."
+    },
+    {
+      "id": "fac_wyrmblade_rule_cult_agent",
+      "name": "Cult Agent",
+      "description": "Whenever an operative is shooting a friendly WYRMBLADE CULT AGENT operative:\r\n- Ignore the Piercing and Saturate weapon rules.\r\n- If you can retain any cover saves, you can retain one additional cover save, or you can retain one cover save as a critical success instead. This isn’t cumulative with improved cover saves from Vantage terrain."
+    },
+    {
+      "id": "fac_wyrmblade_rule_cult_ambush",
+      "name": "Cult Ambush",
+      "description": "Whenever a friendly WYRMBLADE operative is shooting or fighting during its activation, if its order was changed from Conceal to Engage at the start of that activation, or it wasn’t visible to enemy operatives at the start of that activation, that friendly operative's weapons have the Ceaseless weapon rule."
+    }
+  ],
   "strategicPloys": [],
   "tacticalPloys": [],
   "equipment": [],
@@ -12,7 +28,7 @@
     {
       "id": "fac_wyrmblade_op_neophyte_warrior",
       "name": "Neophyte Warrior",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WYRMBLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -43,39 +59,105 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Group Activation",
+          "description": "Whenever this operative is expended, you must then activate one other ready friendly WYRMBLADE WARRIOR operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_wyrmblade_op_kelermorph",
       "name": "Kelermorph",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WYRMBLADE",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "4+",
       "wounds": 9,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Liberator autostubs (hypersense)",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 6\"",
+            "Saturate",
+            "Seek Light",
+            "Hypersense*"
+          ]
+        },
+        {
+          "name": "Liberator autostubs (long range)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing Crits 1",
+            "Rending"
+          ]
+        },
+        {
+          "name": "Liberator autostubs (short range)",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1",
+            "Rending"
+          ]
+        },
+        {
+          "name": "Kelermorph knife",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Expert Gunslinger",
+          "description": "This operative can perform two **Shoot** actions during its activation."
+        },
+        {
+          "name": "Heroic Inspiration",
+          "description": "Whenever a friendly WYRMBLADE NEOPHYTE operative visible to and within 3\" of this operative is shooting, fighting or retaliating, if this operative has incapacitated an enemy operative during this turning point, that friendly operative’s weapons have the Severe weapon rule."
+        },
+        {
+          "name": "Heroic Inspiration",
+          "description": "Whenever a friendly WYRMBLADE NEOPHYTE operative visible to and within 3\" of this operative is shooting, fighting or retaliating, if this operative has incapacitated an enemy operative during this turning point, that friendly operative’s weapons have the Severe weapon rule."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_wyrmblade_op_neophyte_leader",
       "name": "Neophyte Leader",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WYRMBLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Shadow Vector",
+          "description": "Once per turning point, you can use the Slink Into Darkness or Coiled Serpent firefight ploy for 0CP if the specified friendly WYRMBLADE operative is a NEOPHYTE visible to this operative."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_wyrmblade_op_neophyte_gunner",
       "name": "Neophyte Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WYRMBLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -96,7 +178,7 @@
     {
       "id": "fac_wyrmblade_op_neophyte_heavy_gunner",
       "name": "Neophyte Heavy Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WYRMBLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -111,13 +193,18 @@
           "specialRules": []
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Heavy Weapon Bipod",
+          "description": "Whenever this operative is shooting with a weapon from its datacard, if it hasn’t moved during the activation, or if it’s a counteraction, that weapon has the Ceaseless weapon rule; if the weapon already has that weapon rule (i.e. from the Cult Ambush faction rule), it has the Relentless weapon rule. Note this operative isn’t restricted from moving after shooting."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_wyrmblade_op_neophyte_icon_bearer",
       "name": "Neophyte Icon Bearer",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WYRMBLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -148,47 +235,153 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Icon Bearer",
+          "description": "Whenever determining control of a marker, treat this operative’s APL stat as 1 higher. Note this isn't a change to its APL stat, so any changes are cumulative with this"
+        },
+        {
+          "name": "Overthrow the Oppressors",
+          "description": "Once per turning point, when a ready friendly WYRMBLADE NEOPHYTE operative is incapacitated while visible to and within 6\" of this operative, you can use this rule. If you do, before that operative is removed from the killzone, it can either perform one free **Shoot** action (you can change its order to do so), or you can use the A Plan Generations in the Making firefight ploy for 0CP if that incapacitated operative is the specified friendly WYRMBLADE NEOPHYTE operative. It's then removed from the killzone as normal."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_wyrmblade_op_locus",
       "name": "Locus",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WYRMBLADE",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "4+",
       "wounds": 9,
-      "weapons": [],
-      "specialRules": [],
+      "weapons": [
+        {
+          "name": "Barbed tail",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 3\"",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Locus blades",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Expert Swordsman",
+          "description": "This operative can perform two **Fight** actions during its activation. Whenever this operative ends the **Fight** action, if it’s no longer within control range of enemy operatives, it can immediately perform a free **Charge** action (even if it’s already performed the **Charge** action during that activation), but it cannot move more than 3\" during that action. Doing so doesn’t prevent it from performing the **Dash** action afterwards during that activation."
+        },
+        {
+          "name": "Bladed Stance",
+          "description": "Whenever this operative is fighting or retaliating, you can resolve one of your successes before the normal order. If you do, that success must be used to block."
+        },
+        {
+          "name": "Quicksilver Strike",
+          "description": "Once per turning point, after an enemy operative performs an action in which it moves or is set up, you can interrupt that activation/ counteraction to use this rule. If you do, this operative can immediately perform a free **Charge** action (you can change its order to do so), but it cannot move more than 3\", and it must end that move within control range of that enemy operative. If this isn’t possible, the interruption is cancelled and this rule hasn’t been used."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_wyrmblade_op_sanctus_sniper",
       "name": "Sanctus Sniper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WYRMBLADE",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "4+",
       "wounds": 9,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Sanctus sniper rifle (mobile)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Sanctus sniper rifle (stationary)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy (Dash only)",
+            "Silent"
+          ]
+        }
+      ],
       "specialRules": [],
-      "specialActions": []
+      "specialActions": [
+        {
+          "name": "Target Vulnerability (1AP)",
+          "description": "▶ Until the end of this operative’s activation, the stationary profile of its Sanctus sniper rifle has the Lethal 5+ weapon rule.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        },
+        {
+          "name": "Familiar's Soulsight (1AP)",
+          "description": "▶ Select one enemy operative visible to this operative. Until the end of the battle, or until this action is performed again by a friendly operative (whichever comes first), that enemy operative gains one of your Soulsight tokens. Whenever this operative is shooting an enemy operative that has one of your Soulsight tokens, all profiles of this operative's Sanctus sniper rifle have the Saturate weapon rule and that enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_wyrmblade_op_sanctus_talon",
       "name": "Sanctus Talon",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "WYRMBLADE",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "4+",
       "wounds": 9,
-      "weapons": [],
-      "specialRules": [],
-      "specialActions": []
+      "weapons": [
+        {
+          "name": "Sanctus bio-dagger",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/6",
+          "specialRules": [
+            "Lethal 4+",
+            "Shock"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Creeping Shadow",
+          "description": "This operative can perform the **Charge** action while it has a **Conceal** order. Whenever this operative performs the **Fight** action, it can immediately perform a free **Dash** or **Fall Back** action afterwards (for the latter, it cannot move more than 3\"), even if it’s performed an action that prevents it from performing those actions."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Assassinate (2AP)",
+          "description": "▶ Select one enemy operative this operative isn’t visible to. Perform a free **Charge** action with this operative, but don't exceed its Move stat (i.e. don't add 2\"), and it must end that move within control range of that enemy operative. Then immediately perform a free **Fight** action with this operative against that enemy operative. The first time you strike during that action, you can immediately resolve another of your successes as a strike (before your opponent).\r\n◆ This operative cannot perform this action while it has an Engage order, or while within control range of an enemy operative."
+        },
+        {
+          "name": "Familiar's Soulsight (1AP)",
+          "description": "▶ Select one enemy operative visible to this operative. Until the end of the battle, or until this action is performed again by a friendly operative (whichever comes first), that enemy operative gains one of your Soulsight tokens. Whenever this operative is fighting or retaliating against an enemy operative that has one of your Soulsight tokens,its Sanctus bio-dagger has the Brutal and Balanced weapon rules.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
     }
   ]
 }

@@ -1,10 +1,16 @@
 {
   "id": "fac_legionaries",
   "name": "Legionaries",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "LEGIONARY",
   "archetypes": [],
   "summary": "July '25",
-  "rules": [],
+  "rules": [
+    {
+      "id": "fac_legionaries_rule_astartes",
+      "name": "Astartes",
+      "description": "During each friendly LEGIONARY operative’s activation, it can perform either two **Shoot** actions or two **Fight** actions. If it’s two **Shoot** actions, a bolt pistol, boltgun or tainted bolt pistol must be selected for at least one of them.\r\nEach friendly LEGIONARY operative can counteract regardless of its order."
+    }
+  ],
   "strategicPloys": [],
   "tacticalPloys": [],
   "equipment": [],
@@ -12,7 +18,7 @@
     {
       "id": "fac_legionaries_op_legionary_aspiring_champion",
       "name": "Legionary Aspiring Champion",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "LEGIONARY",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -52,19 +58,33 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "In the Eyes of the Gods",
+          "description": "Once during each of this operative’s activations, if it incapacitates an enemy operative, add 1 to its APL stat until the end of that activation."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_legionaries_op_legionary_chosen",
       "name": "Legionary Chosen",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "LEGIONARY",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "3+",
       "wounds": 15,
       "weapons": [
+        {
+          "name": "Daemon blade",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/7",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
         {
           "name": "Plasma pistol (standard)",
           "atk": "4",
@@ -98,19 +118,37 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Daemonic Aura",
+          "description": "Whenever an enemy operative performs the **Fall Back** action while within control range of this operative, you can use this rule. If you do, roll one D6: on a 3+, that enemy operative cannot perform that action during that activation/counteraction (the AP spent on it is refunded)."
+        },
+        {
+          "name": "Soul Gorge",
+          "description": "After this operative fights or retaliates, if it isn’t incapacitated, but it incapacitated an enemy operative during that sequence, it regains D3+3 lost wounds."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_legionaries_op_legionary_anointed",
       "name": "Legionary Anointed",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "LEGIONARY",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "3+",
       "wounds": 14,
       "weapons": [
+        {
+          "name": "Daemonic claw",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        },
         {
           "name": "Bolt pistol",
           "atk": "4",
@@ -121,19 +159,58 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Unleash Daemon",
+          "description": "Once per battle, when this operative is activated, you can use this rule. If you do, until the end of the battle:\r\n- This operative cannot perform the **Pick Up Marker** or mission actions (excluding **Operate Hatch**). If it’s carrying a marker, it must immediately perform the **Place Marker** action for 0AP (this takes precedence over all other rules). If this operative has the NURGLE keyword, you cannot reduce the damage of an attack dice by more than 1. In other words, you cannot use both rules to reduce Normal Dmg of 4 or more by 2.\r\n- Normal and Critical Dmg of 4 or more inflicts 1 less damage on this operative.\r\n- Its daemonic claw has the Ceaseless and Lethal 5+ weapon rules."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_legionaries_op_legionary_balefire_acolyte",
       "name": "Legionary Balefire Acolyte",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "LEGIONARY",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "3+",
       "wounds": 14,
       "weapons": [
+        {
+          "name": "Fireblast",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "PSYCHIC",
+            "Blast 2\"",
+            "1\" Devastating 1",
+            "Saturate"
+          ]
+        },
+        {
+          "name": "Life siphon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "PSYCHIC",
+            "Saturate",
+            "Siphon Life*"
+          ]
+        },
+        {
+          "name": "Fell dagger",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "PSYCHIC",
+            "Rending",
+            "Siphon Life*"
+          ]
+        },
         {
           "name": "Bolt pistol",
           "atk": "4",
@@ -150,13 +227,22 @@
     {
       "id": "fac_legionaries_op_legionary_butcher",
       "name": "Legionary Butcher",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "LEGIONARY",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "3+",
       "wounds": 14,
       "weapons": [
+        {
+          "name": "Double-handed chainaxe",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "5/7",
+          "specialRules": [
+            "Brutal"
+          ]
+        },
         {
           "name": "Bolt pistol",
           "atk": "4",
@@ -167,13 +253,18 @@
           ]
         }
       ],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Devastating Onslaught",
+          "description": "- Whenever this operative is fighting or retaliating, enemy operatives cannot assist.\r\n- At the end of each enemy operative’s activation or counteraction, you can select an enemy operative within 2\" of this operative. This operative can perform a free **Charge** action (you can change its order to Engage to do so), but it cannot move more than 2\" and must end that move within control range of that selected operative."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_legionaries_op_legionary_gunner",
       "name": "Legionary Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "LEGIONARY",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -203,7 +294,7 @@
     {
       "id": "fac_legionaries_op_legionary_heavy_gunner",
       "name": "Legionary Heavy Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "LEGIONARY",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -233,26 +324,44 @@
     {
       "id": "fac_legionaries_op_legionary_icon_bearer",
       "name": "Legionary Icon Bearer",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "LEGIONARY",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "3+",
       "wounds": 14,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Icon Bearer",
+          "description": "Whenever determining control of a marker, treat this operative’s APL stat as 1 higher. Note this isn’t a change to its APL stat, so any changes are cumulative with this."
+        },
+        {
+          "name": "Favoured of the Dark Gods",
+          "description": "In the Ready step of each Strategy phase, if this operative controls an objective marker that isn't tainted, that objective marker is tainted for the battle and you gain 1CP. Note that if any operative (including enemy operatives) has tainted an objective marker, you cannot taint that objective marker."
+        }
+      ],
       "specialActions": []
     },
     {
       "id": "fac_legionaries_op_legionary_shrivetalon",
       "name": "Legionary Shrivetalon",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "LEGIONARY",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "3+",
       "wounds": 14,
       "weapons": [
+        {
+          "name": "Flensing blades",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
         {
           "name": "Bolt pistol",
           "atk": "4",
@@ -263,20 +372,39 @@
           ]
         }
       ],
-      "specialRules": [],
-      "specialActions": []
+      "specialRules": [
+        {
+          "name": "Vicious Reflexes",
+          "description": "Whenever this operative is retaliating, you resolve the first attack dice (i.e. defender instead of attacker)."
+        },
+        {
+          "name": "Horrifying Dismemberment",
+          "description": "Whenever this operative incapacitates an enemy operative while fighting or retaliating, select one other enemy operative visible to and within 3\" of either this operative or the incapacitated enemy operative. Subtract 1 from that enemy operative’s APL stat until the end of its next activation."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Grisly Mark (2AP)",
+          "description": "▶ Place your Grisly marker within this operative’s control range.\r\n- Whenever an enemy operative is within 3\" of your Grisly marker, your opponent must spend 1 additional AP for that enemy operative to perform the **Pick Up Marker** and mission actions.\r\n- Whenever determining control of a marker, treat the total APL stat of enemy operatives that contest it as 1 lower if at least one of those enemy operatives is within 3\" of your Grisly Marker. Note this isn’t a change to the APL stat, so any changes are cumulative with this.\r\n◆ This operative can only perform this action once per battle, and cannot perform it while within control range of an enemy operative."
+        }
+      ]
     },
     {
       "id": "fac_legionaries_op_legionary_warrior",
       "name": "Legionary Warrior",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "LEGIONARY",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "3+",
       "wounds": 14,
       "weapons": [],
-      "specialRules": [],
+      "specialRules": [
+        {
+          "name": "Infernal Pact",
+          "description": "Once per battle, when a friendly LEGIONARY WARRIOR operative is activated, you can use this rule. If you do, change that operative's Marks of Chaos keyword."
+        }
+      ],
       "specialActions": []
     }
   ]
