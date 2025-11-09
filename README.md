@@ -41,7 +41,35 @@ netlify deploy
 The `netlify.toml` file is already configured with:
 - Build command: `npm run build`
 - Next.js plugin: `@netlify/plugin-nextjs` (handles Next.js routing automatically)
-- Node version: 18
+- Node version: 20
+
+## Custom Domain Setup
+
+To use a custom domain (e.g., `ktservitor.xdavidleon.com`):
+
+1. **In Netlify Dashboard:**
+   - Go to your site → **Site configuration** → **Domain management**
+   - Click **Add custom domain**
+   - Enter your domain: `ktservitor.xdavidleon.com`
+   - Click **Verify**
+
+2. **Configure DNS:**
+   - Netlify will provide DNS records to add
+   - For a subdomain, add a **CNAME** record:
+     - **Name/Host**: `ktservitor`
+     - **Value/Target**: `your-site-name.netlify.app` (or the provided Netlify domain)
+     - **TTL**: 3600 (or default)
+   - Alternatively, use Netlify's nameservers if managing the entire domain
+
+3. **SSL Certificate:**
+   - Netlify automatically provisions a free SSL certificate via Let's Encrypt
+   - This usually completes within a few minutes after DNS propagation
+
+4. **Verify:**
+   - Once DNS propagates (can take up to 48 hours, usually much faster)
+   - Your site will be accessible at `https://ktservitor.xdavidleon.com`
+
+**Note:** The app uses relative paths, so it works automatically with any domain without code changes.
 
 ## Update data
 
