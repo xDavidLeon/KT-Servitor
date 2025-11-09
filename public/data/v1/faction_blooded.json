@@ -1,0 +1,727 @@
+{
+  "id": "fac_blooded",
+  "name": "Blooded",
+  "factionKeyword": "BLOODED TROOPER",
+  "archetypes": [],
+  "summary": "",
+  "rules": [],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [
+    {
+      "id": "fac_blooded_eq_chaos_sigil",
+      "name": "Chaos Sigil",
+      "description": "The Reward Earned firefight ploy costs you 0CP."
+    },
+    {
+      "id": "fac_blooded_eq_sinister_trophies",
+      "name": "Sinister Trophies",
+      "description": "Whenever an enemy operative is shooting against, fighting against or retaliating against a friendly BLOODED operative that has one of your Blooded tokens and is within 2\" of it, your opponent cannot re-roll their attack dice results of 1."
+    },
+    {
+      "id": "fac_blooded_eq_symbols_of_bloody_worship",
+      "name": "Symbols of Bloody Worship",
+      "description": "Whenever a friendly BLOODED operative ends an action, if it wasn’t incapacitated but inflicted damage on any enemy operatives during that action, it regains 1 lost wound."
+    },
+    {
+      "id": "fac_blooded_eq_wicked_blades",
+      "name": "Wicked Blades",
+      "description": "Add 1 to both Dmg stats of each friendly BLOODED operative’s bayonet, bayonet & shield and improvised blade for the battle."
+    }
+  ],
+  "operatives": [
+    {
+      "id": "fac_blooded_op_traitor_chieftain",
+      "name": "Traitor Chieftain",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Chaos",
+        "Chieftain",
+        "Leader"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Boltgun",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Plasma pistol (standard)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma pistol (supercharge)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Improvised blade",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/3",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Blooded Icon",
+          "description": "Once per turning point, when a friendly BLOODED operative that has one of your Blooded tokens is incapacitated, if this operative is within 6\" of it, you can regain that token."
+        },
+        {
+          "name": "Lead With Strength",
+          "description": "Whenever this operative has one of your Blooded tokens or is wholly within your opponent’s territory, treat it as if it’s under the GAZE OF THE GODS."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_brimstone_grenadier",
+      "name": "Traitor Brimstone Grenadier",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Chaos",
+        "Brimstone Grenadier"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Diabolyk bomb",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/3",
+          "specialRules": [
+            "Range 6\"",
+            "Blast 2\"",
+            "Devastating 2",
+            "Limited 1",
+            "Heavy (Reposition only)",
+            "Piercing 1",
+            "Saturate"
+          ]
+        },
+        {
+          "name": "Lasgun",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Grenadier",
+          "description": "This operative can use frag and krak grenades (see universal equipment). Doing so doesn’t count towards any limited uses you have (i.e. if you also select those grenades from equipment for other operatives). Whenever it’s doing so, improve the Hit stat of that weapon by 1."
+        },
+        {
+          "name": "Explosive Demise",
+          "description": "If this operative is incapacitated, before it's removed from the killzone, roll two D6, or one D6 if this operative is within control range of an enemy operative. If any result is a 4+, inflict D3+2 damage on each operative visible to and within 2\" of this operative. If this operative hasn’t used its diabolyk bomb during the battle, inflict D6+2 damage instead."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_gunner",
+      "name": "Traitor Gunner",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Gunner",
+        "Chaos"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Flamer",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (frag)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (krak)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (standard)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Meltagun",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Bayonet",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_trooper",
+      "name": "Traitor Trooper",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Chaos",
+        "Trooper"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Lasgun",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Group Activation",
+          "description": "Whenever this operative is expended, you must then activate one other ready friendly BLOODED TROOPER operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_trench_sweeper",
+      "name": "Traitor Trench Sweeper",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Chaos",
+        "Trench Sweeper"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Shotgun",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\""
+          ]
+        },
+        {
+          "name": "Bayonet & shield",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Shield*"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Shielding",
+          "description": "Whenever this operative is activated, you can use this rule. If you do, until the start of this operative’s next activation:\r\n- Subtract 2\" from its Move stat.\r\n- Whenever an operative is shooting this operative, you can re-roll any of your defence dice."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_sharpshooter",
+      "name": "Traitor Sharpshooter",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Chaos",
+        "Sharpshooter"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Long-las (mobile)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Long-las (stationary)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 1",
+            "Heavy (Dash only)",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Bayonet",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Camo Cloak",
+          "description": "Whenever an operative is shooting this operative, if you can retain any cover saves, you can retain one additional cover save. This isn’t cumulative with improved cover saves from Vantage terrain."
+        },
+        {
+          "name": "A Name Whispered In Blood",
+          "description": "STRATEGIC GAMBIT in the first turning point. Select one enemy operative. Whenever this operative is shooting that enemy operative, treat this operative as if it has one of your Blooded tokens and is under the GAZE OF THE GODS."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_ogryn",
+      "name": "Traitor Ogryn",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Chaos",
+        "Ogryn"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 16,
+      "weapons": [
+        {
+          "name": "Power maul & mutant claw",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Rending",
+            "Shock"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Avalanche of Muscle",
+          "description": "Whenever this operative ends its move during the **Charge** action, you can inflict D3 damage on one enemy operative within its control range."
+        },
+        {
+          "name": "Chem-enhanced",
+          "description": "You can ignore any changes to this operative’s APL stat and it’s not affected by enemy operatives’ Shock and Stun weapon rules."
+        },
+        {
+          "name": "Brute",
+          "description": "Whenever your opponent is selecting a valid target, if this operative has a Conceal order, it cannot use Light terrain for cover. Whilst this can allow this operative to be targeted (assuming it’s visible), it doesn’t remove its cover save (if any)."
+        },
+        {
+          "name": "Slow-witted",
+          "description": "You must spend 1 additional AP for this operative to perform the **Pick Up Marker** and mission actions (excluding **Operate Hatch**)."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_flenser",
+      "name": "Traitor Flenser",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Chaos",
+        "Flenser"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Skinning blades",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Ceaseless",
+            "Stalk*"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Wretched",
+          "description": "This operative can perform the **Charge** action while it has a Conceal order. If this operative is incapacitated during the **Fight** action, you can strike the enemy operative in that sequence with one of your unresolved successes before it’s removed from the killzone."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_enforcer",
+      "name": "Traitor Enforcer",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Chaos",
+        "Enforcer"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Power fist",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/7",
+          "specialRules": [
+            "Brutal"
+          ]
+        },
+        {
+          "name": "Bolt pistol",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Gruelling Disciplinarian",
+          "description": "- Whenever a friendly BLOODED operative is within 6\" of this operative, you can ignore any changes to that operative's stats from being injured (including its weapons' stats).\r\n- Whenever a friendly BLOODED operative is activated within 6\" of this operative, you can ignore any changes to that operative's stats from being injured until the end of its activation (including its weapons' stats)."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Enforce (1AP)",
+          "description": "▶ Select one other friendly BLOODED operative visible to and within 3\" of this operative. That operative can immediately perform a 1AP action for free, but it cannot move more than 2\" during that action. If the selected friendly operative is a COMMSMAN, it cannot perform the Sacrilegious Actuation or Signal actions.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
+    },
+    {
+      "id": "fac_blooded_op_traitor_corpseman",
+      "name": "Traitor Corpseman",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Chaos",
+        "Corpseman"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Stimm needle",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "5+",
+          "dmg": "1/4",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Lasgun",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Regular Dosage",
+          "description": "At the end of the Select Operatives step, if this operative is selected for deployment, you can select one other friendly BLOODED operative to gain a STIMM rule for the battle (excluding Rejuvenated)."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "STIMMs (1AP)",
+          "description": "▶ Select one friendly BLOODED operative within this operative’s control range, then select the Rejuvenated STIMM rule, or one other STIMM rule for that operative to have for the battle. You cannot select each STIMM rule for each operative more than once per battle.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
+    },
+    {
+      "id": "fac_blooded_op_traitor_commsman",
+      "name": "Traitor Commsman",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Chaos",
+        "Commsman"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Lasgun",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": [
+        {
+          "name": "Signal (1AP)",
+          "description": "▶ SUPPORT. Select one other friendly BLOODED operative (excluding OGRYN) visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        },
+        {
+          "name": "Sacrilegious Actuation (1AP)",
+          "description": "▶ You gain one Blooded token.\r\n◆ This operative cannot perform this action while within control range of an enemy operative, or if it doesn’t have one of your Blooded tokens."
+        }
+      ]
+    },
+    {
+      "id": "fac_blooded_op_traitor_butcher",
+      "name": "Traitor Butcher",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Chaos",
+        "Butcher"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Power weapon & cleaver",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Ceaseless",
+            "Lethal 5+",
+            "Blood Offering*"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Unholy Sustenance",
+          "description": "Whenever this operative is fighting or retaliating, if it incapacitates the enemy operative in that sequence, it regains D3 lost wounds. This is cumulative with the Symbols of Bloody Worship equipment."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_thug",
+      "name": "Traitor Thug",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Operative",
+        "Chaos",
+        "Thug"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Heavy club",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Brutal"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Tough",
+          "description": "Whenever this operative is fighting or retaliating, or an operative is shooting it, Normal Dmg of 3 or more inflicts 1 less damage on it."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blooded_op_traitor_trooper",
+      "name": "Traitor Trooper",
+      "factionKeyword": "BLOODED",
+      "keywords": [
+        "Chaos",
+        "Trooper",
+        "Four of"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Lasgun",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Group Activation",
+          "description": "Whenever this operative is expended, you must then activate one other ready friendly BLOODED TROOPER operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
+        }
+      ],
+      "specialActions": []
+    }
+  ]
+}

@@ -14,8 +14,10 @@ export default function FactionPage(){
     await ensureIndex()
     
     // Try to load new structure first (faction_*.json file)
+    // Remove 'fac_' prefix from id if present for filename
+    const fileId = id.startsWith('fac_') ? id.substring(4) : id;
     try {
-      const res = await fetch(`/data/v1/faction_${id}.json`)
+      const res = await fetch(`/data/v1/faction_${fileId}.json`)
       if (res.ok) {
         const data = await res.json()
         // Check if it's the new structure (has operatives array, even if empty)
@@ -29,7 +31,7 @@ export default function FactionPage(){
           return
         }
       } else {
-        console.log(`Faction file not found: faction_${id}.json (${res.status})`)
+        console.log(`Faction file not found: faction_${fileId}.json (${res.status})`)
       }
     } catch (e) {
       console.log('Error loading new structure:', e.message)
@@ -92,7 +94,7 @@ export default function FactionPage(){
           </div>
 
           <div className="card" style={{marginTop: '1rem'}}>
-            <h3 style={{marginTop:0}}>Operatives</h3>
+            <h3 style={{marginTop:0}}>Datacards</h3>
             {factionData.operatives && factionData.operatives.length > 0 ? (
               <div className="operatives-grid">
                 {factionData.operatives.map(op => (
@@ -100,7 +102,7 @@ export default function FactionPage(){
                 ))}
               </div>
             ) : (
-              <div className="muted">No operatives found. The conversion script may need to be run, or the BattleScribe file may not contain operative data.</div>
+              <div className="muted">No datacards found. The conversion script may need to be run, or the BattleScribe file may not contain operative data.</div>
             )}
           </div>
 
@@ -174,7 +176,7 @@ export default function FactionPage(){
 
         {Object.entries(groups).map(([k,arr])=> (
           <div key={k} className="card">
-            <h3 style={{marginTop:0,textTransform:'capitalize'}}>{k}</h3>
+            <h3 style={{marginTop:0,textTransform:'capitalize'}}>{k === 'operatives' ? 'Datacards' : k}</h3>
             {arr.length===0 && <div className="muted">No items.</div>}
             {k === 'operatives' ? (
               <div className="operatives-grid">

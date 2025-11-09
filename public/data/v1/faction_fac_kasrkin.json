@@ -2,7 +2,9 @@
   "id": "fac_kasrkin",
   "name": "Kasrkin",
   "factionKeyword": "STRATEGIC",
-  "archetypes": [],
+  "archetypes": [
+    "Recon"
+  ],
   "summary": "Update 1.2",
   "rules": [
     {
@@ -24,7 +26,48 @@
       "move": "6\"",
       "save": "4+",
       "wounds": 9,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Plasma pistol (standard)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma pistol (supercharge)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Chainsword",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
       "specialRules": [],
       "specialActions": [
         {

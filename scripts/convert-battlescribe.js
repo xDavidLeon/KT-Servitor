@@ -232,31 +232,65 @@ function normalizeCharacteristics(characteristics) {
 }
 
 // Extract weapons with full details (ATK, HIT, DMG, WR)
-function extractWeaponsDetailed(selectionEntry) {
+// This function is recursive to handle deeply nested weapon structures
+function extractWeaponsDetailed(selectionEntry, depth = 0, parentGroupName = null) {
   const weapons = [];
-  if (!selectionEntry) return weapons;
+  if (!selectionEntry || depth > 10) return weapons; // Prevent infinite recursion
   
-  const groups = selectionEntry.selectionEntryGroups || [];
+  // Normalize selectionEntryGroups
+  let groups = [];
+  if (selectionEntry.selectionEntryGroups) {
+    if (Array.isArray(selectionEntry.selectionEntryGroups)) {
+      selectionEntry.selectionEntryGroups.forEach(item => {
+        if (item && typeof item === 'object') {
+          if (item.selectionEntryGroup) {
+            const groupItems = Array.isArray(item.selectionEntryGroup) ? item.selectionEntryGroup : [item.selectionEntryGroup];
+            groups.push(...groupItems);
+          } else {
+            groups.push(item);
+          }
+        }
+      });
+    } else if (selectionEntry.selectionEntryGroups.selectionEntryGroup) {
+      groups = Array.isArray(selectionEntry.selectionEntryGroups.selectionEntryGroup) 
+        ? selectionEntry.selectionEntryGroups.selectionEntryGroup 
+        : [selectionEntry.selectionEntryGroups.selectionEntryGroup];
+    } else {
+      groups = [selectionEntry.selectionEntryGroups];
+    }
+  }
+  
   const entries = normalizeSelectionEntries(selectionEntry.selectionEntries);
   const profiles = normalizeProfiles(selectionEntry.profiles);
   
-  // Process profiles directly on the entry
-  profiles.forEach(profile => {
-    if (!profile) return;
+  // Helper function to extract weapon from a profile
+  function extractWeaponFromProfile(profile, entryName = null, weaponTypeHint = null) {
+    if (!profile) return null;
     const typeId = getAttr(profile, 'typeId');
     const typeName = getText(profile.typeName) || getAttr(profile, 'typeName');
     const profileName = getText(profile.name) || getAttr(profile, 'name');
     
     if (typeId === 'battlescribe-weapon' || typeName === 'Weapons' || profileName?.includes('⌖') || profileName?.includes('⚔')) {
+      // Determine weapon type from symbols or group name
+      let weaponType = weaponTypeHint;
+      if (!weaponType) {
+        if (profileName?.includes('⌖')) {
+          weaponType = 'Ranged Weapon';
+        } else if (profileName?.includes('⚔')) {
+          weaponType = 'Melee Weapon';
+        }
+      }
+      
       const weapon = {
-        name: profileName?.replace(/[⌖⚔]/g, '').trim() || 'Weapon',
+        name: profileName?.replace(/[⌖⚔]/g, '').trim() || entryName || 'Weapon',
+        type: weaponType || null, // Store weapon type
         atk: null,
         hit: null,
         dmg: null,
         specialRules: []
       };
       
-      const characteristics = profile.characteristics || [];
+      const characteristics = normalizeCharacteristics(profile.characteristics);
       characteristics.forEach(char => {
         if (!char) return;
         const charName = getAttr(char, 'name');
@@ -273,114 +307,107 @@ function extractWeaponsDetailed(selectionEntry) {
             // Parse special rules from WR field
             const rules = charValue.split(',').map(r => r.trim()).filter(r => r);
             weapon.specialRules.push(...rules);
+            
+            // If weapon type not yet determined, check WR field for "Range" indicator
+            if (!weapon.type && charValue.toLowerCase().includes('range')) {
+              weapon.type = 'Ranged Weapon';
+            }
           }
         }
       });
+      
+      // Final fallback: if still no type determined and we have special rules, check for Range
+      if (!weapon.type && weapon.specialRules.length > 0) {
+        const hasRange = weapon.specialRules.some(rule => rule.toLowerCase().includes('range'));
+        if (hasRange) {
+          weapon.type = 'Ranged Weapon';
+        } else {
+          // If no range indicator, assume melee (most weapons without range are melee)
+          weapon.type = 'Melee Weapon';
+        }
+      }
+      
+      // Ensure type is set (final safety check)
+      if (!weapon.type) {
+        // Default to melee if we can't determine (most weapons are melee)
+        weapon.type = 'Melee Weapon';
+      }
       
       if (weapon.name && (weapon.atk || weapon.hit || weapon.dmg)) {
-        weapons.push(weapon);
+        return weapon;
       }
     }
+    return null;
+  }
+  
+  // Determine weapon type from parent group name if available
+  let weaponTypeFromGroup = null;
+  if (parentGroupName) {
+    const groupNameLower = parentGroupName.toLowerCase();
+    if (groupNameLower.includes('ranged weapon')) {
+      weaponTypeFromGroup = 'Ranged Weapon';
+    } else if (groupNameLower.includes('melee weapon')) {
+      weaponTypeFromGroup = 'Melee Weapon';
+    }
+  }
+  
+  // Process profiles directly on the entry
+  profiles.forEach(profile => {
+    const weapon = extractWeaponFromProfile(profile, null, weaponTypeFromGroup);
+    if (weapon) weapons.push(weapon);
   });
   
-  // Look for weapon groups
+  // Look for weapon groups (recursively process nested groups)
   groups.forEach(group => {
     if (!group) return;
-    const name = getText(group.name) || getAttr(group, 'name');
-    if (name && typeof name === 'string' && (name.toLowerCase().includes('weapon') || name.toLowerCase().includes('wargear'))) {
-      const groupEntries = normalizeSelectionEntries(group.selectionEntries);
-      groupEntries.forEach(entry => {
-        if (!entry) return;
-        const entryProfiles = normalizeProfiles(entry.profiles);
-        entryProfiles.forEach(profile => {
-          if (!profile) return;
-          const typeId = getAttr(profile, 'typeId');
-          const typeName = getText(profile.typeName) || getAttr(profile, 'typeName');
-          const profileName = getText(profile.name) || getAttr(profile, 'name');
-          
-          if (typeId === 'battlescribe-weapon' || typeName === 'Weapons' || profileName?.includes('⌖') || profileName?.includes('⚔')) {
-            const weapon = {
-              name: profileName?.replace(/[⌖⚔]/g, '').trim() || getText(entry.name) || 'Weapon',
-              atk: null,
-              hit: null,
-              dmg: null,
-              specialRules: []
-            };
-            
-            const characteristics = profile.characteristics || [];
-            characteristics.forEach(char => {
-              if (!char) return;
-              const charName = getAttr(char, 'name');
-              const charValue = getText(char);
-              if (charName && charValue) {
-                const nameUpper = charName.toUpperCase();
-                if (nameUpper === 'ATK' || nameUpper === 'ATTACKS') {
-                  weapon.atk = charValue;
-                } else if (nameUpper === 'HIT') {
-                  weapon.hit = charValue;
-                } else if (nameUpper === 'DMG' || nameUpper === 'DAMAGE') {
-                  weapon.dmg = charValue;
-                } else if (nameUpper === 'WR' || nameUpper === 'WEAPON RULES' || nameUpper === 'SPECIAL') {
-                  const rules = charValue.split(',').map(r => r.trim()).filter(r => r);
-                  weapon.specialRules.push(...rules);
-                }
-              }
-            });
-            
-            if (weapon.name && (weapon.atk || weapon.hit || weapon.dmg)) {
-              weapons.push(weapon);
-            }
-          }
-        });
-      });
-    }
-  });
-  
-  // Also check direct entries
-  entries.forEach(entry => {
-    if (!entry) return;
-    const entryProfiles = normalizeProfiles(entry.profiles);
-    entryProfiles.forEach(profile => {
-      if (!profile) return;
-      const typeId = getAttr(profile, 'typeId');
-      const typeName = getText(profile.typeName) || getAttr(profile, 'typeName');
-      const profileName = getText(profile.name) || getAttr(profile, 'name');
-      
-      if (typeId === 'battlescribe-weapon' || typeName === 'Weapons' || profileName?.includes('⌖') || profileName?.includes('⚔')) {
-        const weapon = {
-          name: profileName?.replace(/[⌖⚔]/g, '').trim() || getText(entry.name) || 'Weapon',
-          atk: null,
-          hit: null,
-          dmg: null,
-          specialRules: []
-        };
-        
-        const characteristics = normalizeCharacteristics(profile.characteristics);
-        characteristics.forEach(char => {
-          if (!char) return;
-          const charName = getAttr(char, 'name');
-          const charValue = getText(char);
-          if (charName && charValue) {
-            const nameUpper = charName.toUpperCase();
-            if (nameUpper === 'ATK' || nameUpper === 'ATTACKS') {
-              weapon.atk = charValue;
-            } else if (nameUpper === 'HIT') {
-              weapon.hit = charValue;
-            } else if (nameUpper === 'DMG' || nameUpper === 'DAMAGE') {
-              weapon.dmg = charValue;
-            } else if (nameUpper === 'WR' || nameUpper === 'WEAPON RULES' || nameUpper === 'SPECIAL') {
-              const rules = charValue.split(',').map(r => r.trim()).filter(r => r);
-              weapon.specialRules.push(...rules);
-            }
-          }
-        });
-        
-        if (weapon.name && (weapon.atk || weapon.hit || weapon.dmg)) {
-          weapons.push(weapon);
-        }
-      }
+    const groupName = getText(group.name) || getAttr(group, 'name');
+    // Process all groups, not just those with "weapon" in the name, to catch nested structures
+    const groupEntries = normalizeSelectionEntries(group.selectionEntries);
+    groupEntries.forEach(entry => {
+      if (!entry) return;
+      // Recursively extract weapons from nested entries, passing group name for context
+      const nestedWeapons = extractWeaponsDetailed(entry, depth + 1, groupName);
+      weapons.push(...nestedWeapons);
     });
   });
+  
+  // Also check direct entries (recursively)
+  entries.forEach(entry => {
+    if (!entry) return;
+    // Recursively extract weapons from nested entries
+    const nestedWeapons = extractWeaponsDetailed(entry, depth + 1, parentGroupName);
+    weapons.push(...nestedWeapons);
+  });
+  
+  // Also check entryLinks for weapon references
+  if (selectionEntry.entryLinks) {
+    let entryLinksArray = [];
+    if (Array.isArray(selectionEntry.entryLinks)) {
+      selectionEntry.entryLinks.forEach(item => {
+        if (item && typeof item === 'object') {
+          if (item.entryLink) {
+            const links = Array.isArray(item.entryLink) ? item.entryLink : [item.entryLink];
+            entryLinksArray.push(...links);
+          } else {
+            entryLinksArray.push(item);
+          }
+        }
+      });
+    } else if (selectionEntry.entryLinks.entryLink) {
+      entryLinksArray = Array.isArray(selectionEntry.entryLinks.entryLink) 
+        ? selectionEntry.entryLinks.entryLink 
+        : [selectionEntry.entryLinks.entryLink];
+    } else {
+      entryLinksArray = [selectionEntry.entryLinks];
+    }
+    
+    entryLinksArray.forEach(link => {
+      if (!link) return;
+      const targetId = getAttr(link, 'targetId');
+      // Note: entryLinks reference other entries by targetId, but we can't resolve them here
+      // They should be handled by the sharedWeaponsMap in the main processing
+    });
+  }
   
   return weapons;
 }
@@ -657,18 +684,48 @@ async function parseCatalogue(filePath) {
   console.log(`Parsing catalogue: ${catalogueName}`);
   
   // Extract faction keyword from categoryEntries
-  const categoryEntries = catalogue.categoryEntries || [];
+  // Handle xml2js structure: categoryEntries can be an array or object with categoryEntry array
+  let categoryEntriesArray = [];
+  if (catalogue.categoryEntries) {
+    if (Array.isArray(catalogue.categoryEntries)) {
+      catalogue.categoryEntries.forEach(item => {
+        if (item && typeof item === 'object') {
+          if (item.categoryEntry) {
+            const entries = Array.isArray(item.categoryEntry) ? item.categoryEntry : [item.categoryEntry];
+            categoryEntriesArray.push(...entries);
+          } else {
+            categoryEntriesArray.push(item);
+          }
+        }
+      });
+    } else if (catalogue.categoryEntries.categoryEntry) {
+      categoryEntriesArray = Array.isArray(catalogue.categoryEntries.categoryEntry) 
+        ? catalogue.categoryEntries.categoryEntry 
+        : [catalogue.categoryEntries.categoryEntry];
+    } else {
+      categoryEntriesArray = [catalogue.categoryEntries];
+    }
+  }
+  
   let factionKeyword = null;
   const archetypes = [];
   const allKeywords = [];
   
-  categoryEntries.forEach(catEntry => {
+  categoryEntriesArray.forEach(catEntry => {
     const catName = getText(catEntry.name) || getAttr(catEntry, 'name');
     if (catName) {
       allKeywords.push(catName);
+      // Prioritize categoryEntry that matches the faction name (case-insensitive)
+      if (catName.toLowerCase() === catalogueName.toLowerCase() && !factionKeyword) {
+        factionKeyword = catName.toUpperCase(); // Use all caps for faction keywords
+      }
       // Look for faction keyword (usually all caps or specific pattern)
-      if (catName === catName.toUpperCase() && catName.length > 3 && !factionKeyword) {
-        factionKeyword = catName;
+      // But skip if it's a single word that might be a role (like "Exarch", "Warrior")
+      else if (catName === catName.toUpperCase() && catName.length > 3 && !factionKeyword) {
+        // Prefer multi-word keywords over single words
+        if (catName.includes(' ') || catName.length > 6) {
+          factionKeyword = catName;
+        }
       }
       // Look for archetypes
       const archetypeNames = ['Seek & Destroy', 'Security', 'Infiltration', 'Recon'];
@@ -694,40 +751,47 @@ async function parseCatalogue(filePath) {
   });
   
   // Also try to extract from rule descriptions (e.g., "BATTLECLADE SERVITOR" -> "BATTLECLADE")
-  if (!factionKeyword) {
-    const rulesArray = [];
-    if (catalogue.rules) {
-      if (Array.isArray(catalogue.rules)) {
-        catalogue.rules.forEach(item => {
-          if (item && typeof item === 'object') {
-            if (item.rule) {
-              const ruleItems = Array.isArray(item.rule) ? item.rule : [item.rule];
-              rulesArray.push(...ruleItems);
-            } else {
-              rulesArray.push(item);
-            }
+  // Check rule descriptions even if we have a keyword, to find better multi-word matches
+  const rulesArrayForKeyword = [];
+  if (catalogue.rules) {
+    if (Array.isArray(catalogue.rules)) {
+      catalogue.rules.forEach(item => {
+        if (item && typeof item === 'object') {
+          if (item.rule) {
+            const ruleItems = Array.isArray(item.rule) ? item.rule : [item.rule];
+            rulesArrayForKeyword.push(...ruleItems);
+          } else {
+            rulesArrayForKeyword.push(item);
           }
-        });
-      } else if (catalogue.rules.rule) {
-        rulesArray.push(...(Array.isArray(catalogue.rules.rule) ? catalogue.rules.rule : [catalogue.rules.rule]));
-      } else {
-        rulesArray.push(catalogue.rules);
-      }
+        }
+      });
+    } else if (catalogue.rules.rule) {
+      rulesArrayForKeyword.push(...(Array.isArray(catalogue.rules.rule) ? catalogue.rules.rule : [catalogue.rules.rule]));
+    } else {
+      rulesArrayForKeyword.push(catalogue.rules);
     }
-    
-    // Look for all-caps keywords in rule descriptions
-    for (const rule of rulesArray) {
-      if (!rule) continue;
-      const description = getText(rule.description) || '';
-      // Look for patterns like "BATTLECLADE SERVITOR" or "CORSAIR VOIDSCARRED"
-      const allCapsMatch = description.match(/\b([A-Z]{4,}(?:\s+[A-Z]+)*)\b/);
-      if (allCapsMatch) {
-        const keyword = allCapsMatch[1];
-        // Take the first word if it's a multi-word keyword (e.g., "BATTLECLADE" from "BATTLECLADE SERVITOR")
+  }
+  
+  // Look for all-caps keywords in rule descriptions
+  for (const rule of rulesArrayForKeyword) {
+    if (!rule) continue;
+    const description = getText(rule.description) || '';
+    // Look for patterns like "BATTLECLADE SERVITOR" or "BLADES OF KHAINE"
+    const allCapsMatch = description.match(/\b([A-Z]{4,}(?:\s+[A-Z]+)*)\b/);
+    if (allCapsMatch) {
+      const keyword = allCapsMatch[1];
+      // Prefer multi-word keywords that match the faction name
+      const keywordLower = keyword.toLowerCase();
+      const factionNameLower = catalogueName.toLowerCase();
+      if (keywordLower === factionNameLower || keywordLower.includes(factionNameLower) || factionNameLower.includes(keywordLower.split(/\s+/)[0])) {
+        factionKeyword = keyword;
+        break;
+      }
+      // Also check if it's a better match than what we have (multi-word vs single word)
+      else if (!factionKeyword || (keyword.includes(' ') && !factionKeyword.includes(' '))) {
         const firstWord = keyword.split(/\s+/)[0];
         if (firstWord.length > 3) {
           factionKeyword = firstWord;
-          break;
         }
       }
     }
@@ -858,8 +922,17 @@ async function parseCatalogue(filePath) {
       const profileName = getText(profile.name) || getAttr(profile, 'name');
       
       if (typeName === 'Weapons' || profileName?.includes('⌖') || profileName?.includes('⚔')) {
+        // Determine weapon type from symbols
+        let weaponType = null;
+        if (profileName?.includes('⌖')) {
+          weaponType = 'Ranged Weapon';
+        } else if (profileName?.includes('⚔')) {
+          weaponType = 'Melee Weapon';
+        }
+        
         const weapon = {
           name: profileName?.replace(/[⌖⚔]/g, '').trim() || sharedName || 'Weapon',
+          type: weaponType || null,
           atk: null,
           hit: null,
           dmg: null,
@@ -904,9 +977,31 @@ async function parseCatalogue(filePath) {
             } else if (nameUpper === 'WR' || nameUpper === 'WEAPON RULES' || nameUpper === 'SPECIAL') {
               const rules = charValue.split(',').map(r => r.trim()).filter(r => r && r !== '-');
               weapon.specialRules.push(...rules);
+              
+              // If weapon type not yet determined, check WR field for "Range" indicator
+              if (!weapon.type && charValue.toLowerCase().includes('range')) {
+                weapon.type = 'Ranged Weapon';
+              }
             }
           }
         });
+        
+        // Final fallback: if still no type determined and we have special rules, check for Range
+        if (!weapon.type && weapon.specialRules.length > 0) {
+          const hasRange = weapon.specialRules.some(rule => rule.toLowerCase().includes('range'));
+          if (hasRange) {
+            weapon.type = 'Ranged Weapon';
+          } else {
+            // If no range indicator, assume melee (most weapons without range are melee)
+            weapon.type = 'Melee Weapon';
+          }
+        }
+        
+        // Ensure type is set (final safety check)
+        if (!weapon.type) {
+          // Default to melee if we can't determine (most weapons are melee)
+          weapon.type = 'Melee Weapon';
+        }
         
         if (weapon.name && (weapon.atk || weapon.hit || weapon.dmg)) {
           if (!sharedWeaponsMap[sharedId]) {
@@ -920,30 +1015,105 @@ async function parseCatalogue(filePath) {
   
   console.log(`  Built shared weapons map with ${Object.keys(sharedWeaponsMap).length} weapon entries`);
   
-  // Handle xml2js structure: selectionEntries can be an array containing objects with selectionEntry arrays
-  let selectionEntries = [];
-  if (catalogue.selectionEntries) {
-    if (Array.isArray(catalogue.selectionEntries)) {
-      // It's an array - could be direct entries or wrapped
-      catalogue.selectionEntries.forEach(item => {
+  // Process sharedSelectionEntryGroups for equipment
+  // Handle xml2js structure: sharedSelectionEntryGroups can be an array or object
+  let sharedGroupsArray = [];
+  if (catalogue.sharedSelectionEntryGroups) {
+    if (Array.isArray(catalogue.sharedSelectionEntryGroups)) {
+      catalogue.sharedSelectionEntryGroups.forEach(item => {
         if (item && typeof item === 'object') {
-          // Check if it has a selectionEntry property (wrapped structure)
-          if (item.selectionEntry) {
-            const entries = Array.isArray(item.selectionEntry) ? item.selectionEntry : [item.selectionEntry];
-            selectionEntries.push(...entries);
+          if (item.selectionEntryGroup) {
+            const groups = Array.isArray(item.selectionEntryGroup) ? item.selectionEntryGroup : [item.selectionEntryGroup];
+            sharedGroupsArray.push(...groups);
           } else {
-            // It's a direct entry
-            selectionEntries.push(item);
+            sharedGroupsArray.push(item);
           }
         }
       });
+    } else if (catalogue.sharedSelectionEntryGroups.selectionEntryGroup) {
+      sharedGroupsArray = Array.isArray(catalogue.sharedSelectionEntryGroups.selectionEntryGroup) 
+        ? catalogue.sharedSelectionEntryGroups.selectionEntryGroup 
+        : [catalogue.sharedSelectionEntryGroups.selectionEntryGroup];
+    } else {
+      sharedGroupsArray = [catalogue.sharedSelectionEntryGroups];
+    }
+  }
+  
+  // Process each sharedSelectionEntryGroup
+  sharedGroupsArray.forEach(group => {
+    if (!group) return;
+    const groupName = getText(group.name) || getAttr(group, 'name') || '';
+    
+    // Check if this is an equipment group
+    if (groupName.toLowerCase().includes('equipment')) {
+      const groupEntries = normalizeSelectionEntries(group.selectionEntries);
+      groupEntries.forEach(entry => {
+        if (!entry) return;
+        const entryName = getText(entry.name) || getAttr(entry, 'name') || 'Unnamed';
+        const entryId = sanitizeId(entryName);
+        const entryType = getAttr(entry, 'type');
+        
+        // Extract equipment description from profiles
+        let description = '';
+        const profiles = normalizeProfiles(entry.profiles);
+        profiles.forEach(profile => {
+          if (!profile) return;
+          const typeName = getText(profile.typeName) || getAttr(profile, 'typeName');
+          if (typeName === 'Equipment') {
+            const characteristics = normalizeCharacteristics(profile.characteristics);
+            characteristics.forEach(char => {
+              if (!char) return;
+              const charName = getAttr(char, 'name');
+              const charValue = getText(char);
+              if (charName && charName.toLowerCase() === 'equipment' && charValue) {
+                description = charValue;
+              }
+            });
+          }
+        });
+        
+        // If no description from profile, try entry description
+        if (!description) {
+          description = getText(entry.description) || getText(entry.rules) || '';
+        }
+        
+        if (entryName && entryName !== 'Unnamed') {
+          equipment.push({
+            id: `fac_${catalogueId}_eq_${entryId}`,
+            name: entryName,
+            description: description
+          });
+        }
+      });
+    }
+  });
+  
+  // Handle xml2js structure: selectionEntries can be an array containing objects with selectionEntry arrays
+  // xml2js with explicitArray: true will make selectionEntries an array even if there's only one
+  // But it can also be a single object with a selectionEntry array
+  let selectionEntries = [];
+  if (catalogue.selectionEntries) {
+    // Check if it's an array (xml2js with explicitArray: true)
+    if (Array.isArray(catalogue.selectionEntries)) {
+      // Process each selectionEntries block
+      catalogue.selectionEntries.forEach(block => {
+        if (!block) return;
+        // Each block might have a selectionEntry array
+        if (block.selectionEntry) {
+          const entries = Array.isArray(block.selectionEntry) ? block.selectionEntry : [block.selectionEntry];
+          selectionEntries.push(...entries);
+        } else if (block && typeof block === 'object') {
+          // It might be a direct entry
+          selectionEntries.push(block);
+        }
+      });
     } else if (catalogue.selectionEntries.selectionEntry) {
-      // It's an object with selectionEntry array
+      // It's an object with selectionEntry array - this is the most common case
       const entries = Array.isArray(catalogue.selectionEntries.selectionEntry) 
         ? catalogue.selectionEntries.selectionEntry 
         : [catalogue.selectionEntries.selectionEntry];
       selectionEntries = entries;
-    } else {
+    } else if (catalogue.selectionEntries && typeof catalogue.selectionEntries === 'object') {
       // It's a single entry object
       selectionEntries = [catalogue.selectionEntries];
     }
@@ -951,6 +1121,340 @@ async function parseCatalogue(filePath) {
   
   console.log(`  Found ${selectionEntries.length} selection entries to process`);
   
+  // Recursive function to process entries and nested entries as operatives
+  function processEntryAsOperative(entry) {
+    if (!entry) return;
+    
+    const entryName = getText(entry.name) || getAttr(entry, 'name') || 'Unnamed';
+    const entryType = getAttr(entry, 'type');
+    const entryId = sanitizeId(entryName);
+    
+    // Check if this is an operative (usually has profiles with stats)
+    const profiles = normalizeProfiles(entry.profiles);
+    const hasStats = profiles.some(p => {
+      if (!p) return false;
+      const typeId = getAttr(p, 'typeId');
+      const typeName = getText(p.typeName) || getAttr(p, 'typeName');
+      // BattleScribe uses various typeIds for operatives - check both typeId and typeName
+      return typeId === 'battlescribe-stats' || 
+             typeName === 'Operative' || 
+             typeName === 'Stats';
+    });
+    
+    // An entry is an operative if:
+    // 1. It has type="model" or type="unit"
+    // 2. OR it has a profile with typeName="Operative" or typeId="battlescribe-stats"
+    const isOperative = entryType === 'model' || entryType === 'unit' || hasStats;
+    
+    // Also check nested selectionEntries for operatives (recursively)
+    const nestedEntries = normalizeSelectionEntries(entry.selectionEntries);
+    nestedEntries.forEach(nestedEntry => {
+      processEntryAsOperative(nestedEntry);
+    });
+    
+    if (isOperative) {
+      // This is an operative - use new structure
+      const stats = parseOperativeStats(profiles);
+      let weapons = extractWeaponsDetailed(entry);
+      
+      // Also extract weapons from entryLinks (they reference sharedSelectionEntries)
+      // Handle xml2js array structure for entryLinks
+      let entryLinksArray = [];
+      if (entry.entryLinks) {
+        if (Array.isArray(entry.entryLinks)) {
+          entry.entryLinks.forEach(item => {
+            if (item && typeof item === 'object') {
+              if (item.entryLink) {
+                const links = Array.isArray(item.entryLink) ? item.entryLink : [item.entryLink];
+                entryLinksArray.push(...links);
+              } else {
+                entryLinksArray.push(item);
+              }
+            }
+          });
+        } else if (entry.entryLinks.entryLink) {
+          entryLinksArray = Array.isArray(entry.entryLinks.entryLink) 
+            ? entry.entryLinks.entryLink 
+            : [entry.entryLinks.entryLink];
+        } else {
+          entryLinksArray = [entry.entryLinks];
+        }
+      }
+      
+      entryLinksArray.forEach(link => {
+        if (!link) return;
+        const targetId = getAttr(link, 'targetId');
+        if (targetId && sharedWeaponsMap[targetId]) {
+          // Found a weapon reference - add all weapon profiles for this target
+          weapons.push(...sharedWeaponsMap[targetId]);
+        }
+      });
+      
+      // Also check selectionEntryGroups for entryLinks
+      let groupsArray = [];
+      if (entry.selectionEntryGroups) {
+        if (Array.isArray(entry.selectionEntryGroups)) {
+          entry.selectionEntryGroups.forEach(item => {
+            if (item && typeof item === 'object') {
+              if (item.selectionEntryGroup) {
+                const groups = Array.isArray(item.selectionEntryGroup) ? item.selectionEntryGroup : [item.selectionEntryGroup];
+                groupsArray.push(...groups);
+              } else {
+                groupsArray.push(item);
+              }
+            }
+          });
+        } else if (entry.selectionEntryGroups.selectionEntryGroup) {
+          groupsArray = Array.isArray(entry.selectionEntryGroups.selectionEntryGroup) 
+            ? entry.selectionEntryGroups.selectionEntryGroup 
+            : [entry.selectionEntryGroups.selectionEntryGroup];
+        } else {
+          groupsArray = [entry.selectionEntryGroups];
+        }
+      }
+      
+      groupsArray.forEach(group => {
+        if (!group || !group.entryLinks) return;
+        let groupEntryLinksArray = [];
+        if (Array.isArray(group.entryLinks)) {
+          group.entryLinks.forEach(item => {
+            if (item && typeof item === 'object') {
+              if (item.entryLink) {
+                const links = Array.isArray(item.entryLink) ? item.entryLink : [item.entryLink];
+                groupEntryLinksArray.push(...links);
+              } else {
+                groupEntryLinksArray.push(item);
+              }
+            }
+          });
+        } else if (group.entryLinks.entryLink) {
+          groupEntryLinksArray = Array.isArray(group.entryLinks.entryLink) 
+            ? group.entryLinks.entryLink 
+            : [group.entryLinks.entryLink];
+        } else {
+          groupEntryLinksArray = [group.entryLinks];
+        }
+        
+        groupEntryLinksArray.forEach(link => {
+          if (!link) return;
+          const targetId = getAttr(link, 'targetId');
+          if (targetId && sharedWeaponsMap[targetId]) {
+            weapons.push(...sharedWeaponsMap[targetId]);
+          }
+        });
+      });
+      
+      const abilities = extractAbilities(entry);
+      
+      // Extract keywords from categoryLinks
+      // Normalize categoryLinks array structure (similar to entryLinks)
+      let entryCategoryLinks = [];
+      if (entry.categoryLinks) {
+        if (Array.isArray(entry.categoryLinks)) {
+          entry.categoryLinks.forEach(item => {
+            if (item && typeof item === 'object') {
+              if (item.categoryLink) {
+                const links = Array.isArray(item.categoryLink) ? item.categoryLink : [item.categoryLink];
+                entryCategoryLinks.push(...links);
+              } else {
+                entryCategoryLinks.push(item);
+              }
+            }
+          });
+        } else if (entry.categoryLinks.categoryLink) {
+          entryCategoryLinks = Array.isArray(entry.categoryLinks.categoryLink) 
+            ? entry.categoryLinks.categoryLink 
+            : [entry.categoryLinks.categoryLink];
+        } else {
+          entryCategoryLinks = [entry.categoryLinks];
+        }
+      }
+      
+      const operativeKeywords = [];
+      let operativeFactionKeyword = null;
+      const factionNameLower = catalogueName.toLowerCase();
+      
+      entryCategoryLinks.forEach(catLink => {
+        const catName = getText(catLink.name) || getAttr(catLink, 'name');
+        if (catName) {
+          // Check if this is a faction keyword (all caps, longer than 3 chars)
+          if (catName === catName.toUpperCase() && catName.length > 3) {
+            operativeFactionKeyword = catName;
+          } 
+          // Check if categoryLink name matches the faction name (case-insensitive)
+          else if (catName.toLowerCase() === factionNameLower) {
+            operativeFactionKeyword = catName; // Use the exact case from the categoryLink
+          }
+          // Add all other keywords (excluding the faction keyword to avoid duplication)
+          else if (catName !== faction.factionKeyword && catName !== operativeFactionKeyword) {
+            operativeKeywords.push(catName);
+          }
+        }
+      });
+      
+      // Update faction keyword if found on operative and not already set
+      if (operativeFactionKeyword && (!factionKeyword || factionKeyword === 'UNKNOWN')) {
+        factionKeyword = operativeFactionKeyword;
+        faction.factionKeyword = operativeFactionKeyword;
+      }
+      
+      // Extract special rules and actions from profiles with typeName="Abilities" or "Unique Actions"
+      const specialRules = [];
+      const specialActions = [];
+      
+      profiles.forEach(profile => {
+        if (!profile) return;
+        const profileTypeName = getText(profile.typeName) || getAttr(profile, 'typeName');
+        const profileTypeId = getAttr(profile, 'typeId');
+        
+        if (profileTypeName === 'Abilities' || profileTypeId === 'f887-5881-0e6d-755c') {
+          // This is an ability
+          const abilityName = getText(profile.name) || getAttr(profile, 'name') || 'Ability';
+          const characteristics = normalizeCharacteristics(profile.characteristics);
+          let abilityDescription = '';
+          characteristics.forEach(char => {
+            if (!char) return;
+            const charName = getAttr(char, 'name');
+            const charValue = getText(char);
+            if (charName && (charName.toLowerCase() === 'ability' || charName.toLowerCase().includes('ability'))) {
+              abilityDescription = charValue || '';
+            }
+          });
+          if (abilityName && abilityDescription) {
+            specialRules.push({
+              name: abilityName,
+              description: abilityDescription
+            });
+          }
+        } else if (profileTypeName === 'Unique Actions' || profileTypeId === '8f2a-d3d6-1a0c-7fa3') {
+          // This is a unique action
+          const actionName = getText(profile.name) || getAttr(profile, 'name') || 'Action';
+          const characteristics = normalizeCharacteristics(profile.characteristics);
+          let actionDescription = '';
+          characteristics.forEach(char => {
+            if (!char) return;
+            const charName = getAttr(char, 'name');
+            const charValue = getText(char);
+            if (charName && (charName.toLowerCase().includes('action') || charName.toLowerCase().includes('unique'))) {
+              actionDescription = charValue || '';
+            }
+          });
+          if (actionName && actionDescription) {
+            specialActions.push({
+              name: actionName,
+              description: actionDescription
+            });
+          }
+        }
+      });
+      
+      // Also check nested selectionEntries for abilities and unique actions
+      const nestedEntriesForAbilities = normalizeSelectionEntries(entry.selectionEntries);
+      nestedEntriesForAbilities.forEach(nestedEntry => {
+        if (!nestedEntry) return;
+        const nestedProfiles = normalizeProfiles(nestedEntry.profiles);
+        nestedProfiles.forEach(profile => {
+          if (!profile) return;
+          const profileTypeName = getText(profile.typeName) || getAttr(profile, 'typeName');
+          const profileTypeId = getAttr(profile, 'typeId');
+          
+          if (profileTypeName === 'Abilities' || profileTypeId === 'f887-5881-0e6d-755c') {
+            const abilityName = getText(profile.name) || getAttr(profile, 'name') || 'Ability';
+            const characteristics = normalizeCharacteristics(profile.characteristics);
+            let abilityDescription = '';
+            characteristics.forEach(char => {
+              if (!char) return;
+              const charName = getAttr(char, 'name');
+              const charValue = getText(char);
+              if (charName && (charName.toLowerCase() === 'ability' || charName.toLowerCase().includes('ability'))) {
+                abilityDescription = charValue || '';
+              }
+            });
+            if (abilityName && abilityDescription) {
+              specialRules.push({
+              name: abilityName,
+              description: abilityDescription
+            });
+            }
+          } else if (profileTypeName === 'Unique Actions' || profileTypeId === '8f2a-d3d6-1a0c-7fa3') {
+            const actionName = getText(profile.name) || getAttr(profile, 'name') || 'Action';
+            const characteristics = normalizeCharacteristics(profile.characteristics);
+            let actionDescription = '';
+            characteristics.forEach(char => {
+              if (!char) return;
+              const charName = getAttr(char, 'name');
+              const charValue = getText(char);
+              if (charName && (charName.toLowerCase().includes('action') || charName.toLowerCase().includes('unique'))) {
+                actionDescription = charValue || '';
+              }
+            });
+            if (actionName && actionDescription) {
+              specialActions.push({
+              name: actionName,
+              description: actionDescription
+            });
+            }
+          }
+        });
+      });
+      
+      // Also check infoLinks
+      const infoLinks = entry.infoLinks || [];
+      infoLinks.forEach(link => {
+        if (!link) return;
+        const linkName = getText(link.name) || getAttr(link, 'name');
+        const linkDescription = getText(link.description) || getText(link.hiddenNotes);
+        const linkType = getAttr(link, 'type');
+        
+        if (linkName || linkDescription) {
+          if (linkType === 'ability' || linkName?.toLowerCase().includes('action')) {
+            specialActions.push({
+              name: linkName || 'Action',
+              description: linkDescription || ''
+            });
+          } else {
+            specialRules.push({
+              name: linkName || 'Rule',
+              description: linkDescription || ''
+            });
+          }
+        }
+      });
+      
+      // Only add if we have at least some data (name is required)
+      if (entryName && entryName !== 'Unnamed') {
+        const operative = {
+          id: `fac_${catalogueId}_op_${entryId}`,
+          name: entryName,
+          factionKeyword: operativeFactionKeyword || faction.factionKeyword,
+          keywords: operativeKeywords,
+          apl: stats.apl,
+          move: stats.move,
+          save: stats.save,
+          wounds: stats.wounds,
+          weapons: weapons,
+          specialRules: specialRules,
+          specialActions: specialActions
+        };
+        
+        operatives.push(operative);
+        console.log(`    ✓ Added operative: ${entryName} (APL: ${stats.apl}, Move: ${stats.move}, Save: ${stats.save}, Wounds: ${stats.wounds}, Weapons: ${weapons.length})`);
+      } else {
+        console.log(`    ⚠ Skipped entry with no name`);
+      }
+    }
+  }
+  
+  selectionEntries.forEach(entry => {
+    processEntryAsOperative(entry);
+  });
+  
+  // Also process sharedSelectionEntries for operatives
+  sharedEntriesArray.forEach(entry => {
+    processEntryAsOperative(entry);
+  });
+  
+  // Continue processing non-operative entries (equipment, ploys, etc.)
   selectionEntries.forEach(entry => {
     if (!entry) return; // Skip null/undefined entries
     
@@ -986,6 +1490,17 @@ async function parseCatalogue(filePath) {
     // 1. It has type="model" or type="unit"
     // 2. OR it has a profile with typeName="Operative" or typeId="battlescribe-stats"
     const isOperative = entryType === 'model' || entryType === 'unit' || hasStats;
+    
+    // Skip operatives - already processed above
+    if (isOperative) {
+      return;
+    }
+    
+    // Also check nested selectionEntries for operatives (recursively)
+    const nestedEntries = normalizeSelectionEntries(entry.selectionEntries);
+    nestedEntries.forEach(nestedEntry => {
+      processEntryAsOperative(nestedEntry);
+    });
     
     if (isOperative) {
       // This is an operative - use new structure
@@ -1085,16 +1600,46 @@ async function parseCatalogue(filePath) {
       const abilities = extractAbilities(entry);
       
       // Extract keywords from categoryLinks
-      const entryCategoryLinks = entry.categoryLinks || [];
+      // Normalize categoryLinks array structure (similar to entryLinks)
+      let entryCategoryLinks = [];
+      if (entry.categoryLinks) {
+        if (Array.isArray(entry.categoryLinks)) {
+          entry.categoryLinks.forEach(item => {
+            if (item && typeof item === 'object') {
+              if (item.categoryLink) {
+                const links = Array.isArray(item.categoryLink) ? item.categoryLink : [item.categoryLink];
+                entryCategoryLinks.push(...links);
+              } else {
+                entryCategoryLinks.push(item);
+              }
+            }
+          });
+        } else if (entry.categoryLinks.categoryLink) {
+          entryCategoryLinks = Array.isArray(entry.categoryLinks.categoryLink) 
+            ? entry.categoryLinks.categoryLink 
+            : [entry.categoryLinks.categoryLink];
+        } else {
+          entryCategoryLinks = [entry.categoryLinks];
+        }
+      }
+      
       const operativeKeywords = [];
       let operativeFactionKeyword = null;
+      const factionNameLower = catalogueName.toLowerCase();
+      
       entryCategoryLinks.forEach(catLink => {
         const catName = getText(catLink.name) || getAttr(catLink, 'name');
         if (catName) {
           // Check if this is a faction keyword (all caps, longer than 3 chars)
           if (catName === catName.toUpperCase() && catName.length > 3) {
             operativeFactionKeyword = catName;
-          } else if (catName !== faction.factionKeyword) {
+          } 
+          // Check if categoryLink name matches the faction name (case-insensitive)
+          else if (catName.toLowerCase() === factionNameLower) {
+            operativeFactionKeyword = catName; // Use the exact case from the categoryLink
+          }
+          // Add all other keywords (excluding the faction keyword to avoid duplication)
+          else if (catName !== faction.factionKeyword && catName !== operativeFactionKeyword) {
             operativeKeywords.push(catName);
           }
         }
@@ -1265,6 +1810,7 @@ async function parseCatalogue(filePath) {
   });
   
   // Update faction keyword from operatives if not found yet
+  // Check categoryLinks on operatives for faction name matches
   if (!factionKeyword || factionKeyword === 'UNKNOWN') {
     for (const op of operatives) {
       if (op.factionKeyword && op.factionKeyword !== 'UNKNOWN') {
@@ -1275,6 +1821,58 @@ async function parseCatalogue(filePath) {
     if (factionKeyword && factionKeyword !== 'UNKNOWN') {
       faction.factionKeyword = factionKeyword;
     }
+  }
+  
+  // Also check ability descriptions for faction keywords (e.g., "BLADES OF KHAINE" in ability text)
+  // This happens after operatives are processed so we can check their specialRules
+  if (factionKeyword && !factionKeyword.includes(' ') && factionKeyword.length < 8) {
+    // If we have a single-word keyword that might be wrong, check for better matches
+    const factionNameLower = catalogueName.toLowerCase();
+    for (const op of operatives) {
+      if (op.specialRules && Array.isArray(op.specialRules)) {
+        for (const rule of op.specialRules) {
+          if (rule.description) {
+            const allCapsMatch = rule.description.match(/\b([A-Z]{4,}(?:\s+[A-Z]+)*)\b/);
+            if (allCapsMatch) {
+              const keyword = allCapsMatch[1];
+              const keywordLower = keyword.toLowerCase();
+              if (keywordLower === factionNameLower || keywordLower.includes(factionNameLower) || factionNameLower.includes(keywordLower.split(/\s+/)[0])) {
+                factionKeyword = keyword;
+                break;
+              }
+            }
+          }
+        }
+        if (factionKeyword.includes(' ')) break;
+      }
+    }
+  }
+  
+  // Final fallback: use faction name if still not found
+  if (!factionKeyword || factionKeyword === 'UNKNOWN') {
+    // Check if faction name matches any categoryLink on operatives
+    const factionNameLower = catalogueName.toLowerCase();
+    for (const op of operatives) {
+      if (op.keywords && Array.isArray(op.keywords)) {
+        for (const keyword of op.keywords) {
+          if (keyword && keyword.toLowerCase() === factionNameLower) {
+            factionKeyword = keyword.toUpperCase();
+            break;
+          }
+        }
+        if (factionKeyword) break;
+      }
+    }
+    
+    // If still not found, use the faction name itself
+    if (!factionKeyword || factionKeyword === 'UNKNOWN') {
+      factionKeyword = catalogueName.toUpperCase();
+    }
+    
+    faction.factionKeyword = factionKeyword;
+  } else {
+    // Update faction keyword if we found a better match
+    faction.factionKeyword = factionKeyword;
   }
   
   // Build final faction object with new structure
@@ -1412,7 +2010,9 @@ async function convertBattleScribeFiles() {
     const faction = data.faction;
     
     if (faction) {
-      const fileName = `faction_${factionId}.json`;
+      // Remove 'fac_' prefix from filename if present
+      const fileId = factionId.startsWith('fac_') ? factionId.substring(4) : factionId;
+      const fileName = `faction_${fileId}.json`;
       fs.writeFileSync(
         path.join(OUTPUT_DIR, fileName),
         JSON.stringify(faction, null, 2)
@@ -1433,8 +2033,10 @@ async function convertBattleScribeFiles() {
   ];
   
   for (const factionId of Object.keys(allFactionData)) {
+    // Remove 'fac_' prefix from filename if present
+    const fileId = factionId.startsWith('fac_') ? factionId.substring(4) : factionId;
     manifestFiles.push({
-      name: `faction_${factionId}.json`,
+      name: `faction_${fileId}.json`,
       sha256: ''
     });
   }
@@ -1454,7 +2056,9 @@ async function convertBattleScribeFiles() {
   console.log('\nConversion complete!');
   console.log(`\nGenerated ${allFactions.length} faction JSON file(s):`);
   for (const f of allFactions) {
-    console.log(`  - faction_${f.id}.json (${f.name})`);
+    // Remove 'fac_' prefix from filename if present
+    const fileId = f.id.startsWith('fac_') ? f.id.substring(4) : f.id;
+    console.log(`  - faction_${fileId}.json (${f.name})`);
   }
   console.log(`\nTotal data extracted:`);
   let totalOps = 0, totalRules = 0, totalEq = 0, totalStrategic = 0, totalTactical = 0;

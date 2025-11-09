@@ -1,7 +1,7 @@
 {
   "id": "fac_hernkyn_yaegirs",
   "name": "Hernkyn Yaegirs",
-  "factionKeyword": "HERNKYN",
+  "factionKeyword": "HERNKYN YAEGIR",
   "archetypes": [],
   "summary": "Update 1.1",
   "rules": [
@@ -23,7 +23,7 @@
     {
       "id": "fac_hernkyn_yaegirs_op_theyn",
       "name": "Theyn",
-      "factionKeyword": "HERNKYN",
+      "factionKeyword": "HERNKYN YAEGIR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -80,7 +80,7 @@
     {
       "id": "fac_hernkyn_yaegirs_op_bladekyn",
       "name": "Bladekyn",
-      "factionKeyword": "HERNKYN",
+      "factionKeyword": "HERNKYN YAEGIR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -125,7 +125,7 @@
     {
       "id": "fac_hernkyn_yaegirs_op_bombast",
       "name": "Bombast",
-      "factionKeyword": "HERNKYN",
+      "factionKeyword": "HERNKYN YAEGIR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -166,7 +166,7 @@
     {
       "id": "fac_hernkyn_yaegirs_op_gunner",
       "name": "Gunner",
-      "factionKeyword": "HERNKYN",
+      "factionKeyword": "HERNKYN YAEGIR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -225,7 +225,7 @@
     {
       "id": "fac_hernkyn_yaegirs_op_ironbraek",
       "name": "Ironbraek",
-      "factionKeyword": "HERNKYN",
+      "factionKeyword": "HERNKYN YAEGIR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -266,7 +266,7 @@
     {
       "id": "fac_hernkyn_yaegirs_op_riflekyn",
       "name": "Riflekyn",
-      "factionKeyword": "HERNKYN",
+      "factionKeyword": "HERNKYN YAEGIR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -330,7 +330,7 @@
     {
       "id": "fac_hernkyn_yaegirs_op_tracker",
       "name": "Tracker",
-      "factionKeyword": "HERNKYN",
+      "factionKeyword": "HERNKYN YAEGIR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -383,7 +383,7 @@
     {
       "id": "fac_hernkyn_yaegirs_op_warrior",
       "name": "Warrior",
-      "factionKeyword": "HERNKYN",
+      "factionKeyword": "HERNKYN YAEGIR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",

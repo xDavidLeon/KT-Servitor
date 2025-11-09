@@ -1,18 +1,39 @@
 {
   "id": "fac_angels_of_death",
   "name": "Angels of Death",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "ANGEL OF DEATH",
   "archetypes": [],
   "summary": "July '25",
   "rules": [],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_angels_of_death_eq_purity_seals",
+      "name": "Purity Seals",
+      "description": "Once per turning point, when a friendly **ANGEL OF DEATH** operative is shooting, fighting or retaliating, if you roll two or more fails, you can discard one of them to retain another as a normal success instead."
+    },
+    {
+      "id": "fac_angels_of_death_eq_chapter_reliquaries",
+      "name": "Chapter Reliquaries",
+      "description": "You can use the Wrath of Vengeance firefight ploy for 0CP if the specified friendly operative has an Engage order."
+    },
+    {
+      "id": "fac_angels_of_death_eq_tilting_shields",
+      "name": "Tilting Shields",
+      "description": "Once per turning point, when a friendly **ANGEL OF DEATH** operative is fighting or retaliating, after your opponent rolls their attack dice, you can use this rule. If you do, your opponent cannot retain attack dice results of less than 6 as critical successes during that sequence (e.g. as a result of the Lethal, Rending or Severe weapon rules)."
+    },
+    {
+      "id": "fac_angels_of_death_eq_auspex",
+      "name": "Auspex",
+      "description": "Once per turning point, when a friendly **ANGEL OF DEATH** operative performs the Shoot action and you’re selecting a valid target, you can use this rule. If you do, until the end of the activation/counteraction, enemy operatives within 8\" of that friendly operative cannot be obscured."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_angels_of_death_op_space_marine_captain",
       "name": "Space Marine Captain",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "ANGEL OF DEATH",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -66,13 +87,24 @@
     {
       "id": "fac_angels_of_death_op_assault_intercessor_sergeant",
       "name": "Assault Intercessor Sergeant",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "ANGEL OF DEATH",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "3+",
       "wounds": 15,
       "weapons": [
+        {
+          "name": "Hand Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\"",
+            "Saturate",
+            "Torrent 1\""
+          ]
+        },
         {
           "name": "Chainsword",
           "atk": "5",
@@ -156,7 +188,7 @@
     {
       "id": "fac_angels_of_death_op_intercessor_sergeant",
       "name": "Intercessor Sergeant",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "ANGEL OF DEATH",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -257,7 +289,7 @@
     {
       "id": "fac_angels_of_death_op_assault_intercessor_grenadier",
       "name": "Assault Intercessor Grenadier",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "ANGEL OF DEATH",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -293,7 +325,7 @@
     {
       "id": "fac_angels_of_death_op_assault_intercessor_warrior",
       "name": "Assault Intercessor Warrior",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "ANGEL OF DEATH",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -324,7 +356,7 @@
     {
       "id": "fac_angels_of_death_op_eliminator_sniper",
       "name": "Eliminator Sniper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "ANGEL OF DEATH",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -399,7 +431,7 @@
     {
       "id": "fac_angels_of_death_op_heavy_intercessor_gunner",
       "name": "Heavy Intercessor Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "ANGEL OF DEATH",
       "keywords": [],
       "apl": 3,
       "move": "5\"",
@@ -439,7 +471,7 @@
     {
       "id": "fac_angels_of_death_op_intercessor_gunner",
       "name": "Intercessor Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "ANGEL OF DEATH",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -514,7 +546,7 @@
     {
       "id": "fac_angels_of_death_op_intercessor_warrior",
       "name": "Intercessor Warrior",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "ANGEL OF DEATH",
       "keywords": [],
       "apl": 3,
       "move": "6\"",

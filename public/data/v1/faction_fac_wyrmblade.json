@@ -23,7 +23,28 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_wyrmblade_eq_blasting_charges",
+      "name": "Blasting Charges",
+      "description": "Once per turning point, a friendly WYRMBLADE NEOPHYTE operative can use the Blasting charge ranged weapon."
+    },
+    {
+      "id": "fac_wyrmblade_eq_cult_knives",
+      "name": "Cult Knives",
+      "description": "Friendly WYRMBLADE NEOPHYTE operatives have the Cult knife melee weapon."
+    },
+    {
+      "id": "fac_wyrmblade_eq_explosive_traps",
+      "name": "Explosive Traps",
+      "description": "This equipment allows you to select two mines (see universal equipment). You cannot also select that equipment as normal (i.e. to give you three), and friendly WYRMBLADE operatives are ignored for your mines’ effects (i.e. they cannot trigger or take damage from them). This takes precedence over the normal mines rules."
+    },
+    {
+      "id": "fac_wyrmblade_eq_spotlights",
+      "name": "Spotlights",
+      "description": "Whenever a friendly WYRMBLADE operative is shooting, the target cannot be obscured if it's visible to and within 6\" of a friendly WYRMBLADE NEOPHYTE operative that isn't within control range of enemy operatives."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_wyrmblade_op_neophyte_warrior",
@@ -145,7 +166,65 @@
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Master-crafted autopistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Rang 8\"",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Web pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 6\"",
+            "Severe",
+            "Stun"
+          ]
+        },
+        {
+          "name": "Chainsword",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Power maul",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Shock"
+          ]
+        },
+        {
+          "name": "Power pick",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Shadow Vector",
@@ -164,6 +243,46 @@
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (frag)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (krak)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Webber",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 12\"",
+            "Severe",
+            "Stun"
+          ]
+        },
         {
           "name": "Gun butt",
           "atk": "3",
@@ -185,6 +304,58 @@
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Heavy stubber (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)"
+          ]
+        },
+        {
+          "name": "Heavy stubber (sweeping)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Mining laser",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Seismic cannon (long-wave)",
+          "atk": "6",
+          "hit": "4+",
+          "dmg": "2/2",
+          "specialRules": [
+            "Blast 1\"",
+            "Heavy (Dash only)",
+            "Stun"
+          ]
+        },
+        {
+          "name": "Seismic cannon (short-wave)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Range 6\"",
+            "Heavy (Dash only)",
+            "Piercing Crits 1",
+            "Stun"
+          ]
+        },
         {
           "name": "Gun butt",
           "atk": "3",

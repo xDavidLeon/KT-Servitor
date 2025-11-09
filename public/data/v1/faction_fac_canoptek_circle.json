@@ -1,7 +1,7 @@
 {
   "id": "fac_canoptek_circle",
   "name": "Canoptek Circle",
-  "factionKeyword": "STRATEGIC",
+  "factionKeyword": "CANOPTEK CIRCLE",
   "archetypes": [],
   "summary": "",
   "rules": [
@@ -13,12 +13,33 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_canoptek_circle_eq_nanoscarab_caskets",
+      "name": "Nanoscarab Caskets",
+      "description": "Whenever a friendly CANOPTEK CIRCLE operative is activated, it regains D3 lost wounds."
+    },
+    {
+      "id": "fac_canoptek_circle_eq_matrix_manipulator",
+      "name": "Matrix Manipulator",
+      "description": "Once per battle, during a friendly CANOPTEK CIRCLE operative's activation or counteraction, you can use this rule. If you do, until the end of that activation/counteraction, a friendly CANOPTEK CIRCLE GEOMANCER operative is treated as your fourth **OBELISK NODE** marker."
+    },
+    {
+      "id": "fac_canoptek_circle_eq_awakened_obelisk_nodes",
+      "name": "Awakened Obelisk Nodes",
+      "description": "After revealing this equipment option, roll one D3. You can use the Animate Obelisk Nodes firefight ploy for 0CP a number of times during the battle equal to the result."
+    },
+    {
+      "id": "fac_canoptek_circle_eq_phase_shifter",
+      "name": "Phase Shifter",
+      "description": "Once per turning point, when an operative is shooting a friendly CANOPTEK CIRCLE GEOMANCER operative, at the start of the Roll Defence Dice step, you can use this rule. If you do, worsen the x of the Piercing weapon rule by 1 (if any) until the end of that sequence. Note that Piercing 1 would therefore be ignored."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_canoptek_circle_op_macrocyte_reanimator",
       "name": "Macrocyte Reanimator",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "CANOPTEK CIRCLE",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -59,13 +80,43 @@
     {
       "id": "fac_canoptek_circle_op_tomb_crawler",
       "name": "Tomb Crawler",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "CANOPTEK CIRCLE",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
       "save": "3+",
       "wounds": 21,
       "weapons": [
+        {
+          "name": "Twin gauss reapers (sweeping)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1",
+            "Severe",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Twin gauss reapers (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1",
+            "Severe"
+          ]
+        },
+        {
+          "name": "Transdimensional isolator",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Dimensional Banishment*"
+          ]
+        },
         {
           "name": "Claws",
           "atk": "4",
@@ -91,7 +142,7 @@
     {
       "id": "fac_canoptek_circle_op_macrocyte_accelerator",
       "name": "Macrocyte Accelerator",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "CANOPTEK CIRCLE",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -134,13 +185,40 @@
     {
       "id": "fac_canoptek_circle_op_macrocyte_warrior",
       "name": "Macrocyte Warrior",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "CANOPTEK CIRCLE",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "4+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Gauss scalpel",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Tesla caster (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Tesla caster (living lightning)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
         {
           "name": "Claws & tail",
           "atk": "4",
@@ -168,7 +246,7 @@
     {
       "id": "fac_canoptek_circle_op_geomancer",
       "name": "Geomancer",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "CANOPTEK CIRCLE",
       "keywords": [],
       "apl": 3,
       "move": "6\"",

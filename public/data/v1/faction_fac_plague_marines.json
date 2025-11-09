@@ -1,7 +1,7 @@
 {
   "id": "fac_plague_marines",
   "name": "Plague Marines",
-  "factionKeyword": "PLAGUE",
+  "factionKeyword": "PLAGUE MARINE",
   "archetypes": [],
   "summary": "Update 1.2",
   "rules": [
@@ -18,12 +18,33 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_plague_marines_eq_plague_bells",
+      "name": "Plague bells",
+      "description": "You can ignore any changes to the stats of friendly PLAGUE MARINE operatives from being injured (including their weapons’ stats)."
+    },
+    {
+      "id": "fac_plague_marines_eq_poison_vents",
+      "name": "Poison Vents",
+      "description": "Whenever an enemy operative that has one of your Poison tokens is activated within 3\" of a friendly PLAGUE MARINE operative, inflict D3 damage on it (instead of the normal 1)."
+    },
+    {
+      "id": "fac_plague_marines_eq_plague_rounds",
+      "name": "Plague Rounds",
+      "description": "Friendly PLAGUE MARINE operatives’ boltguns and bolt pistols have the Poison and Severe weapon rules."
+    },
+    {
+      "id": "fac_plague_marines_eq_blight_grenades",
+      "name": "Blight Grenades",
+      "description": "Friendly PLAGUE MARINE operatives have the Blight grenade ranged weapon (you cannot select it for use more than twice during the battle)"
+    }
+  ],
   "operatives": [
     {
       "id": "fac_plague_marines_op_plague_marine_champion",
       "name": "Plague Marine Champion",
-      "factionKeyword": "PLAGUE",
+      "factionKeyword": "PLAGUE MARINE",
       "keywords": [],
       "apl": 3,
       "move": "5\"",
@@ -75,7 +96,7 @@
     {
       "id": "fac_plague_marines_op_malignant_plaguecaster",
       "name": "Malignant Plaguecaster",
-      "factionKeyword": "PLAGUE",
+      "factionKeyword": "PLAGUE MARINE",
       "keywords": [],
       "apl": 3,
       "move": "5\"",
@@ -137,7 +158,7 @@
     {
       "id": "fac_plague_marines_op_plague_marine_bombardier",
       "name": "Plague Marine Bombardier",
-      "factionKeyword": "PLAGUE",
+      "factionKeyword": "PLAGUE MARINE",
       "keywords": [],
       "apl": 3,
       "move": "5\"",
@@ -170,7 +191,7 @@
     {
       "id": "fac_plague_marines_op_plague_marine_fighter",
       "name": "Plague Marine Fighter",
-      "factionKeyword": "PLAGUE",
+      "factionKeyword": "PLAGUE MARINE",
       "keywords": [],
       "apl": 3,
       "move": "5\"",
@@ -200,7 +221,7 @@
     {
       "id": "fac_plague_marines_op_plague_marine_icon_bearer",
       "name": "Plague Marine Icon Bearer",
-      "factionKeyword": "PLAGUE",
+      "factionKeyword": "PLAGUE MARINE",
       "keywords": [],
       "apl": 3,
       "move": "5\"",
@@ -242,7 +263,7 @@
     {
       "id": "fac_plague_marines_op_plague_marine_warrior",
       "name": "Plague Marine Warrior",
-      "factionKeyword": "PLAGUE",
+      "factionKeyword": "PLAGUE MARINE",
       "keywords": [],
       "apl": 3,
       "move": "5\"",
@@ -278,7 +299,7 @@
     {
       "id": "fac_plague_marines_op_plague_marine_heavy_gunner",
       "name": "Plague Marine Heavy Gunner",
-      "factionKeyword": "PLAGUE",
+      "factionKeyword": "PLAGUE MARINE",
       "keywords": [],
       "apl": 3,
       "move": "5\"",

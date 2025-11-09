@@ -1,7 +1,7 @@
 {
   "id": "fac_hunter_clade",
   "name": "Hunter Clade",
-  "factionKeyword": "DOCTRINA",
+  "factionKeyword": "HUNTER CLADE",
   "archetypes": [],
   "summary": "July '25",
   "rules": [
@@ -24,7 +24,7 @@
     {
       "id": "fac_hunter_clade_op_sicarian_ruststalker_princeps",
       "name": "Sicarian Ruststalker Princeps",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -57,7 +57,7 @@
     {
       "id": "fac_hunter_clade_op_sicarian_infiltrator_princeps",
       "name": "Sicarian Infiltrator Princeps",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -115,7 +115,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_alpha",
       "name": "Skitarii Ranger Alpha",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -170,7 +170,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_alpha",
       "name": "Skitarii Vanguard Alpha",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -230,7 +230,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_gunner",
       "name": "Skitarii Vanguard Gunner",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -304,7 +304,7 @@
     {
       "id": "fac_hunter_clade_op_sicarian_infiltrator_warrior",
       "name": "Sicarian Infiltrator Warrior",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -357,7 +357,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_warrior",
       "name": "Skitarii Ranger Warrior",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -388,13 +388,32 @@
     {
       "id": "fac_hunter_clade_op_sicarian_ruststalker_warrior",
       "name": "Sicarian Ruststalker Warrior",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 10,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Chordclaw & transonic razor",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Balanced"
+          ]
+        },
+        {
+          "name": "Transonic blades",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Wasteland Stalker",
@@ -406,7 +425,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_surveyor",
       "name": "Skitarii Vanguard Surveyor",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -436,7 +455,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_diktat",
       "name": "Skitarii Vanguard Diktat",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -466,7 +485,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_gunner",
       "name": "Skitarii Ranger Gunner",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -540,7 +559,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_surveyor",
       "name": "Skitarii Ranger Surveyor",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -571,7 +590,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_vanguard_warrior",
       "name": "Skitarii Vanguard Warrior",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -601,7 +620,7 @@
     {
       "id": "fac_hunter_clade_op_skitarii_ranger_diktat",
       "name": "Skitarii Ranger Diktat",
-      "factionKeyword": "DOCTRINA",
+      "factionKeyword": "HUNTER CLADE",
       "keywords": [],
       "apl": 2,
       "move": "6\"",

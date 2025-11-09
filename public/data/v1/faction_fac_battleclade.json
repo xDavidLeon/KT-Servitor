@@ -1,7 +1,7 @@
 {
   "id": "fac_battleclade",
   "name": "Battleclade",
-  "factionKeyword": "BATTLECLADE",
+  "factionKeyword": "BATTLECLADE SERVITOR",
   "archetypes": [],
   "summary": "",
   "rules": [
@@ -13,12 +13,33 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_battleclade_eq_covert_guises",
+      "name": "Covert Guises",
+      "description": "After revealing this equipment option, roll one D3. As a STRATEGIC GAMBIT in the first turning point, a number of friendly BATTLECLADE operatives equal to the result that are wholly within your drop zone can immediately perform a free **Reposition** action, but must end that move wholly within 3\" of your drop zone. Your TECHNOARCHEOLOGIST operative cannot perform more than one **Reposition** action in the strategy phase of the first turning point (i.e. as a result of the Seeker of Divine Arcana rule as well)."
+    },
+    {
+      "id": "fac_battleclade_eq_electromantic_capacitors",
+      "name": "Electromantic Capacitors",
+      "description": "Friendly BATTLECLADE operatives' melee weapons have the Shock weapon rule. Whenever a ready friendly BATTLECLADE operative is retaliating, its melee weapons also have the Severe weapon rule."
+    },
+    {
+      "id": "fac_battleclade_eq_concealed_apparatus",
+      "name": "Concealed Apparatus",
+      "description": "STRATEGIC GAMBIT in the second turning point. You can swap the locations of any number of friendly BATTLECLADE SERVITOR operatives with each other (excluding GUN SERVITOR), and you can swap the locations of friendly BATTLECLADE GUN SERVITOR operatives with each other (remove them from the killzone and set them back up again). You cannot swap any operatives that have done any of the following during the battle:\r\n- Used any weapons on their datacard.\r\n- Performed any actions on their datacard.\r\n- Used the Mechanosuture Array rule (see TECHNOMEDIC)."
+    },
+    {
+      "id": "fac_battleclade_eq_neurocyclic_reserve_cells",
+      "name": "Neurocyclic Reserve Cells",
+      "description": "After revealing this equipment option, roll one D3. A number of times during the battle equal to the result, whenever you TRANSFER POWER, you can use this rule. If you do, don't subtract 1 from the operative's APL stat, but it cannot perform **Fight** or **Shoot** actions during that activation (this takes precedence over the normal Noospheric Network rules)."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_battleclade_op_technoarcheologist",
       "name": "Technoarcheologist",
-      "factionKeyword": "BATTLECLADE",
+      "factionKeyword": "BATTLECLADE SERVITOR",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -63,7 +84,7 @@
     {
       "id": "fac_battleclade_op_auto_proxy_servitor",
       "name": "Auto-proxy Servitor",
-      "factionKeyword": "BATTLECLADE",
+      "factionKeyword": "BATTLECLADE SERVITOR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -97,7 +118,7 @@
     {
       "id": "fac_battleclade_op_breacher_servitor",
       "name": "Breacher Servitor",
-      "factionKeyword": "BATTLECLADE",
+      "factionKeyword": "BATTLECLADE SERVITOR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -146,13 +167,44 @@
     {
       "id": "fac_battleclade_op_combat_servitor",
       "name": "Combat Servitor",
-      "factionKeyword": "BATTLECLADE",
+      "factionKeyword": "BATTLECLADE SERVITOR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Meltagun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Incendine igniter",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Range 6\"",
+            "Saturate",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Phosphor blaster",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Severe"
+          ]
+        },
         {
           "name": "Servo-claw",
           "atk": "3",
@@ -169,13 +221,45 @@
     {
       "id": "fac_battleclade_op_gun_servitor",
       "name": "Gun Servitor",
-      "factionKeyword": "BATTLECLADE",
+      "factionKeyword": "BATTLECLADE SERVITOR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
       "save": "4+",
       "wounds": 11,
       "weapons": [
+        {
+          "name": "Heavy arc rifle",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Piercing 1",
+            "Stun"
+          ]
+        },
+        {
+          "name": "Heavy bolter (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Heavy bolter (sweeping)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Piercing Crits 1",
+            "Torrent 1\""
+          ]
+        },
         {
           "name": "Augmetic claw",
           "atk": "3",
@@ -192,7 +276,7 @@
     {
       "id": "fac_battleclade_op_technomedic_servitor",
       "name": "Technomedic Servitor",
-      "factionKeyword": "BATTLECLADE",
+      "factionKeyword": "BATTLECLADE SERVITOR",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -225,7 +309,7 @@
     {
       "id": "fac_battleclade_op_servitor_underseer",
       "name": "Servitor Underseer",
-      "factionKeyword": "BATTLECLADE",
+      "factionKeyword": "BATTLECLADE SERVITOR",
       "keywords": [],
       "apl": 3,
       "move": "6\"",

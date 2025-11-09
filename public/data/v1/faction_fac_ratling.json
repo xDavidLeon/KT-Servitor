@@ -13,7 +13,28 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_ratling_eq_purloined_rations",
+      "name": "Purloined Rations",
+      "description": "Once per turning point, when a friendly RATLING operative is shooting with a rifle and you’ve rolled your attack dice, you can use this rule if you haven’t used the Lucky Round equipment during this activation. If you do, improve the Hit stat of its rifle by 1 until the end of that sequence."
+    },
+    {
+      "id": "fac_ratling_eq_stolen_goods",
+      "name": "Stolen Goods",
+      "description": "At the end of the Select Operatives step, roll one D3. If the result is:\r\n- 1, you lose 1CP.\r\n- 2, you gain 1 CP.\r\n- 3, your opponent loses 1CP."
+    },
+    {
+      "id": "fac_ratling_eq_improvised_armour",
+      "name": "Improvised Armour",
+      "description": "Whenever an operative is shooting a friendly RATLING BULLGRYN or friendly RATLING OGRYN operative, defence dice results of 5+ are critical successes."
+    },
+    {
+      "id": "fac_ratling_eq_lucky_round",
+      "name": "Lucky Round",
+      "description": "Once per turning point, whenever a friendly RATLING operative is shooting with a rifle and you've rolled you attack dice, you can use this rule if you haven't used the Purloined Rations equipment this activation. If you do, that weapon has the Severe weapon rule for that sequence."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_ratling_op_ratling_fixer",
@@ -25,6 +46,25 @@
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Sniper rifle (mobile)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Sniper rifle (stationary)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy"
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -93,7 +133,44 @@
       "move": "6\"",
       "save": "4+",
       "wounds": 16,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Grenadier gauntlet",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "Power maul",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Shock"
+          ]
+        },
+        {
+          "name": "Brute shield",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Slabshield",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Shield",

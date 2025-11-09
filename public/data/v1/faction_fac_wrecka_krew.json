@@ -1,7 +1,7 @@
 {
   "id": "fac_wrecka_krew",
   "name": "Wrecka Krew",
-  "factionKeyword": "WRECKA",
+  "factionKeyword": "WRECKA KREW",
   "archetypes": [],
   "summary": "Update 1.1",
   "rules": [
@@ -18,18 +18,90 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_wrecka_krew_eq_drill_rokkits",
+      "name": "Drill Rokkits",
+      "description": "Once per turning point, whenever a friendly WRECKA KREW operative is performing the **Shoot** action and you select a rokkit launcha or 'eavy rokkit launcha, you can use this rule. If you do, until the end of that action, that weapon loses the Blast weapon rule but has the Piercing 1 weapon rule."
+    },
+    {
+      "id": "fac_wrecka_krew_eq_extra_armour",
+      "name": "Extra Armour",
+      "description": "Subtract 1\" from the Move stat of friendly WRECKA KREW operatives and improve their Save stat by 1. This excludes BOMB SQUIG operatives and isn't cumulative with the Protective rule of a Portable Barricade from universal equipment."
+    },
+    {
+      "id": "fac_wrecka_krew_eq_engine_oil",
+      "name": "Engine Oil",
+      "description": "Once per turning point, whenever a friendly WRECKA KREW operative (excluding BOMB SQUIG) is activated, you can use this rule. If you do, until the end of that activation, you can ignore any changes to that operative's stats from being injured (including its weapons' stats)."
+    },
+    {
+      "id": "fac_wrecka_krew_eq_glyphs",
+      "name": "Glyphs",
+      "description": "When this item of equipment is selected, also select the Waaagh! or Destruction strategy ploy. The first time you would use that ploy during the battle, it costs 0CP; whenever you would use it thereafter, it costs 0CP if you have any Wrecka points."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_wrecka_krew_op_wrecka_boss_nob",
       "name": "Wrecka Boss Nob",
-      "factionKeyword": "WRECKA",
+      "factionKeyword": "WRECKA KREW",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 14,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Rokkit pistol",
+          "atk": "6",
+          "hit": "5+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Blast 1\""
+          ]
+        },
+        {
+          "name": "Smash hammer",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Brutal"
+          ]
+        },
+        {
+          "name": "Two rokkit pistols (salvo)",
+          "atk": "6",
+          "hit": "5+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Blast 1\"",
+            "Salvo*"
+          ]
+        },
+        {
+          "name": "Two rokkit pistols (focused)",
+          "atk": "6",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Blast 1\"",
+            "Ceaseless"
+          ]
+        },
+        {
+          "name": "Choppa",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Wrecka Boss",
@@ -41,13 +113,23 @@
     {
       "id": "fac_wrecka_krew_op_tankbusta_gunner",
       "name": "Tankbusta Gunner",
-      "factionKeyword": "WRECKA",
+      "factionKeyword": "WRECKA KREW",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 12,
       "weapons": [
+        {
+          "name": "'Eavy rokkit launcha",
+          "atk": "6",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Blast 1\"",
+            "Heavy (Dash only)"
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -76,13 +158,36 @@
     {
       "id": "fac_wrecka_krew_op_tankbusta_rokkiteer",
       "name": "Tankbusta Rokkiteer",
-      "factionKeyword": "WRECKA",
+      "factionKeyword": "WRECKA KREW",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 12,
       "weapons": [
+        {
+          "name": "Pulsa rokkit",
+          "atk": "6",
+          "hit": "5+",
+          "dmg": "-",
+          "specialRules": [
+            "Heavy (Reposition only)",
+            "Limited 1",
+            "Pulsa*"
+          ]
+        },
+        {
+          "name": "Rokkit rack",
+          "atk": "6",
+          "hit": "5+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Blast 2\"",
+            "Heavy (Reposition only)",
+            "Limited 1",
+            "Relentless"
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -111,7 +216,7 @@
     {
       "id": "fac_wrecka_krew_op_wrecka_bomb_squig",
       "name": "Wrecka Bomb Squig",
-      "factionKeyword": "WRECKA",
+      "factionKeyword": "WRECKA KREW",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -158,7 +263,7 @@
     {
       "id": "fac_wrecka_krew_op_breaka_boy_demolisha",
       "name": "Breaka Boy Demolisha",
-      "factionKeyword": "WRECKA",
+      "factionKeyword": "WRECKA KREW",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -197,7 +302,7 @@
     {
       "id": "fac_wrecka_krew_op_breaka_boy_fighter",
       "name": "Breaka Boy Fighter",
-      "factionKeyword": "WRECKA",
+      "factionKeyword": "WRECKA KREW",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -225,7 +330,7 @@
     {
       "id": "fac_wrecka_krew_op_breaka_boy_krusha",
       "name": "Breaka Boy Krusha",
-      "factionKeyword": "WRECKA",
+      "factionKeyword": "WRECKA KREW",
       "keywords": [],
       "apl": 2,
       "move": "6\"",

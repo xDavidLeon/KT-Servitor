@@ -1,24 +1,86 @@
 {
   "id": "fac_blooded",
   "name": "Blooded",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "BLOODED TROOPER",
   "archetypes": [],
   "summary": "",
   "rules": [],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_blooded_eq_chaos_sigil",
+      "name": "Chaos Sigil",
+      "description": "The Reward Earned firefight ploy costs you 0CP."
+    },
+    {
+      "id": "fac_blooded_eq_sinister_trophies",
+      "name": "Sinister Trophies",
+      "description": "Whenever an enemy operative is shooting against, fighting against or retaliating against a friendly BLOODED operative that has one of your Blooded tokens and is within 2\" of it, your opponent cannot re-roll their attack dice results of 1."
+    },
+    {
+      "id": "fac_blooded_eq_symbols_of_bloody_worship",
+      "name": "Symbols of Bloody Worship",
+      "description": "Whenever a friendly BLOODED operative ends an action, if it wasn’t incapacitated but inflicted damage on any enemy operatives during that action, it regains 1 lost wound."
+    },
+    {
+      "id": "fac_blooded_eq_wicked_blades",
+      "name": "Wicked Blades",
+      "description": "Add 1 to both Dmg stats of each friendly BLOODED operative’s bayonet, bayonet & shield and improvised blade for the battle."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_blooded_op_traitor_chieftain",
       "name": "Traitor Chieftain",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Boltgun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Plasma pistol (standard)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma pistol (supercharge)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Improvised blade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/3",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Blooded Icon",
@@ -34,7 +96,7 @@
     {
       "id": "fac_blooded_op_traitor_brimstone_grenadier",
       "name": "Traitor Brimstone Grenadier",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -86,13 +148,73 @@
     {
       "id": "fac_blooded_op_traitor_gunner",
       "name": "Traitor Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (frag)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (krak)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (standard)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Meltagun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
         {
           "name": "Bayonet",
           "atk": "3",
@@ -107,7 +229,7 @@
     {
       "id": "fac_blooded_op_traitor_trooper",
       "name": "Traitor Trooper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -140,7 +262,7 @@
     {
       "id": "fac_blooded_op_traitor_trench_sweeper",
       "name": "Traitor Trench Sweeper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -177,7 +299,7 @@
     {
       "id": "fac_blooded_op_traitor_sharpshooter",
       "name": "Traitor Sharpshooter",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -227,7 +349,7 @@
     {
       "id": "fac_blooded_op_traitor_ogryn",
       "name": "Traitor Ogryn",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -268,7 +390,7 @@
     {
       "id": "fac_blooded_op_traitor_flenser",
       "name": "Traitor Flenser",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -297,7 +419,7 @@
     {
       "id": "fac_blooded_op_traitor_enforcer",
       "name": "Traitor Enforcer",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -339,7 +461,7 @@
     {
       "id": "fac_blooded_op_traitor_corpseman",
       "name": "Traitor Corpseman",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -386,7 +508,7 @@
     {
       "id": "fac_blooded_op_traitor_commsman",
       "name": "Traitor Commsman",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -423,7 +545,7 @@
     {
       "id": "fac_blooded_op_traitor_butcher",
       "name": "Traitor Butcher",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -453,7 +575,7 @@
     {
       "id": "fac_blooded_op_traitor_thug",
       "name": "Traitor Thug",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -481,7 +603,7 @@
     {
       "id": "fac_blooded_op_traitor_trooper",
       "name": "Traitor Trooper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "BLOODED",
       "keywords": [],
       "apl": 2,
       "move": "6\"",

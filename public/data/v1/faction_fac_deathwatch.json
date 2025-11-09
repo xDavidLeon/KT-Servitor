@@ -18,7 +18,28 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_deathwatch_eq_ammunition_reserve",
+      "name": "Ammunition Reserve",
+      "description": "Once per battle, you can use the Special Issue Ammunition faction rule for up to two **Shoot** actions during one turning point, but you must select different weapon rules for both uses. This takes precedence over the normal Special Issue Ammunition rules."
+    },
+    {
+      "id": "fac_deathwatch_eq_sanctus_v_bioscryer_cuffs",
+      "name": "Sanctus-V Bioscryer Cuffs",
+      "description": "Once during each friendly DEATHWATCH operative's activation, before or after it performs an action, if it's not within control range of enemy operatives, you can use this rule. If you do, select one of the following:\r\n- That friendly operative regains D3 lost wounds.\r\n- Remove any changes to that friendly operative's APL stat.\r\n- Remove one of the following tokens that friendly operative has (before that token's activation effects are resolved, if relevant): Neutron Fragment, Poison, Terrorchem."
+    },
+    {
+      "id": "fac_deathwatch_eq_scrutavore_servo_thrall",
+      "name": "Scrutavore Servo-Thrall",
+      "description": "Once per turning point, during a friendly DEATHWATCH operative's activation, you can use this rule. If you do, during that activation, that operative can perform a mission action for 1 less AP.\r\n\r\n\r\nHaving an enemy operative within its control range doesn't prevent that operative from performing that mission action. However, in such an instance, after it does so, you can your opponent roll-off. If your opponent wins, you cannot use this equipment for the rest of the battle."
+    },
+    {
+      "id": "fac_deathwatch_eq_digital_weapons",
+      "name": "Digital Weapons",
+      "description": "Once per turning point, when a friendly DEATHWATCH operative performs the **Fight** action, at the start of the Roll Attack Dice step, you can use this rule. If you do, inflict 1 damage on the enemy operative in that sequence."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_deathwatch_op_watch_sergeant",

@@ -1,0 +1,510 @@
+{
+  "id": "fac_tempestus_aquilons",
+  "name": "Tempestus Aquilons",
+  "factionKeyword": "TEMPESTUS AQUILON",
+  "archetypes": [],
+  "summary": "Update 1.2",
+  "rules": [
+    {
+      "id": "fac_tempestus_aquilons_rule_drop_insertion",
+      "name": "Drop Insertion",
+      "description": "When setting up a **TEMPESTUS AQUILON** kill team before the battle, the first third of your kill team must be set up as normal. Each third thereafter can be set up above: place them to one side instead of in the killzone. For each third that’s set up above, you must set up the whole third in this way (not some of them), then place one of your Drop markers wholly within your drop zone.\r\nAs a **STRATEGIC GAMBIT** in the first and second turning point, you can move your Drop markers up to 4\", measuring the horizontal distance only. In a killzone that uses the close quarters rules (e.g. Killzone: Gallowdark), this can be measured and moved through Wall terrain.\r\nDuring the Firefight phase, friendly **TEMPESTUS AQUILON** operatives set up above are activated as normal. When you do, you can either expend or land that operative. If it lands, set it up in the killzone in a location it can be placed as follows (it’s no longer set up above):\r\n- Within 3\" of one of your Drop markers, measuring the horizontal distance only, or wholly within your drop zone.\r\n- Not within control range of enemy operatives (unless you’re setting up a **PRECURSOR** operative, which can be set up within control range of an enemy operative).\r\n- With no part of its base underneath Vantage terrain.\r\n- With an order of your choice.\r\nThe operative is treated as performing the **Reposition** action (spend the AP accordingly), then continue its activation as normal. It’s obscured until the end of the next activation or the end of the turning point (whichever comes first).\r\nLess than half of your operatives can be set up above by the end of the first turning point. In other words, by the end of the first turning point, more than half of your operatives must have been set up in the killzone during the battle.\r\nWhen readying your operatives during the second and third turning points, remove one of your Drop markers. This means operatives still set up above are incapacitated at the end of the second turning point."
+    },
+    {
+      "id": "fac_tempestus_aquilons_rule_grav_chute",
+      "name": "Grav-Chute",
+      "description": "Whenever a friendly **TEMPESTUS AQUILON** operative is dropping, ignore the vertical distance."
+    }
+  ],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [
+    {
+      "id": "fac_tempestus_aquilons_eq_drop_augury",
+      "name": "Drop Augury",
+      "description": "Once during the battle, when a friendly **TEMPESTUS AQUILON** operative that's set up above is activated, before expending or landing that operative, you can move one of your Drop markers again. However, it cannot be moved closer to your opponent's drop zone."
+    },
+    {
+      "id": "fac_tempestus_aquilons_eq_remote_overseer",
+      "name": "Remote Overseer",
+      "description": "Once during the battle, when rolling-off to decide initiative, you can re-roll your D6."
+    },
+    {
+      "id": "fac_tempestus_aquilons_eq_tempestus_daggers",
+      "name": "Tempestus Daggers",
+      "description": ""
+    },
+    {
+      "id": "fac_tempestus_aquilons_eq_combat_stimms",
+      "name": "Combat Stimms",
+      "description": "You can ignore any changes to the Move stat of friendly **TEMPESTUS AQUILON** operatives from being injured."
+    }
+  ],
+  "operatives": [
+    {
+      "id": "fac_tempestus_aquilons_op_aquilon_trooper",
+      "name": "Aquilon Trooper",
+      "factionKeyword": "TEMPESTUS AQUILON",
+      "keywords": [
+        "Imperium",
+        "Trooper",
+        "Operative"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Hot-shot lascarbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Rapid Insertion",
+          "description": "**STRATEGIC GAMBIT** in the first Strategy phase. Each friendly **TEMPESTUS AQUILON TROOPER** operative wholly within your drop zone can immediately perform a free **Reposition** action, but must finish that action wholly within 3\" of your drop zone."
+        },
+        {
+          "name": "Swift Landing",
+          "description": "When this operative lands, you can set it up within 4\" of one of your Drop markers (measuring horizontal distance only), taking precedence over the normal distance requirement."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_tempestus_aquilons_op_aquilon_tempestor",
+      "name": "Aquilon Tempestor",
+      "factionKeyword": "TEMPESTUS AQUILON",
+      "keywords": [
+        "Leader",
+        "Tempestor",
+        "Imperium"
+      ],
+      "apl": 3,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Power weapon",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Relic bolt pistol",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Chainsword",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Tempestus Veteran",
+          "description": "Once per battle, you can either use a firefight ploy for 0CP if this is the specified **TEMPESTUS AQUILON** operative, or the Command Re-roll firefight ploy for 0CP if this is the operative the attack or defence dice was rolled for."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Command (1AP)",
+          "description": "▶ **SUPPORT**. Select one other friendly **TEMPESTUS AQUILON** operative (excluding **SERVO-SENTRY**) visible to and within 6\" of this operative. Until the end of that operative's next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
+    },
+    {
+      "id": "fac_tempestus_aquilons_op_aquilon_grenadier",
+      "name": "Aquilon Grenadier",
+      "factionKeyword": "TEMPESTUS AQUILON",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Grenadier"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Melta bomb",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/3",
+          "specialRules": [
+            "Range 3\"",
+            "Devastating 3",
+            "Heavy (Reposition only)",
+            "Limited 1",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Hot-shot laspistol",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Grenadier",
+          "description": "This operative can use frag, krak, smoke, and stun grenades (see universal equipment). Doing so doesn't count towards any limited uses you have (i.e. if you also select those grenades from equipment for other operatives). Whenever this operative is using a frag or krak grenade, improve the Hit stat of that weapon by 1."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_tempestus_aquilons_op_aquilon_gunfighter",
+      "name": "Aquilon Gunfighter",
+      "factionKeyword": "TEMPESTUS AQUILON",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Gunfighter"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Hot-shot laspistols (focused)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Ceaseless",
+            "Rending"
+          ]
+        },
+        {
+          "name": "Hot-shot laspistols (salvo)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Salvo*"
+          ]
+        },
+        {
+          "name": "Hot-shot laspistols (point-blank)",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Ceaseless"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Gunfight",
+          "description": "Whenever an enemy operative within 8\" of this operative shoots this operative, keep track of each attack dice that's discarded as a fail. After the action, before incapacitated operatives are removed (including this one, if relevant), this operative can perform a free **Shoot** action (change its order to Engage to do so), but it can only target that enemy operative with its hot-shot laspistols (focused), and you only roll a number of attack dice equal to the opponent's discarded attack dice plus one (to a maximum of four)."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_tempestus_aquilons_op_aquilon_gunner",
+      "name": "Aquilon Gunner",
+      "factionKeyword": "TEMPESTUS AQUILON",
+      "keywords": [
+        "Operative",
+        "Gunner",
+        "Imperium"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Melta carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Plasma carbine (standard)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma carbine (supercharge)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_tempestus_aquilons_op_aquilon_marksman",
+      "name": "Aquilon Marksman",
+      "factionKeyword": "TEMPESTUS AQUILON",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Marksman"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Hot-shot long-las (concealed)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy",
+            "Silent",
+            "Concealed Position*"
+          ]
+        },
+        {
+          "name": "Hot-shot long-las (mobile)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Hot-shot long-las (stationary)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy"
+          ]
+        },
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Sniper's Vantage",
+          "description": "Whenever this operative is on Vantage terrain and is shooting an operative that has an Engage order and is at least 2\" lower than it, all profiles of its hot‑shot long‑las have the Severe weapon rule."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_tempestus_aquilons_op_aquilon_precursor",
+      "name": "Aquilon Precursor",
+      "factionKeyword": "TEMPESTUS AQUILON",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Precursor"
+      ],
+      "apl": 2,
+      "move": "6\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Tempestus dagger",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Ceaseless",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Hot-shot laspistol",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Vicious Knife Fighter",
+          "description": "Whenever this operative is fighting, after resolving your first attack dice, you can immediately resolve another (before your opponent)."
+        },
+        {
+          "name": "Dynamic",
+          "description": "Whenever this operative performs the **Fight** or **Shoot** action, it can immediately perform a free **Dash** action afterwards. It can do so even if it performed the **Charge** action during this activation, but can only use the remaining distance it had from that **Charge** action (to a maximum of 3\")."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_tempestus_aquilons_op_aquilon_servo_sentry",
+      "name": "Aquilon Servo-sentry",
+      "factionKeyword": "TEMPESTUS AQUILON",
+      "keywords": [
+        "Operative",
+        "Servo-sentry"
+      ],
+      "apl": 2,
+      "move": "4\"",
+      "save": "3+",
+      "wounds": 10,
+      "weapons": [
+        {
+          "name": "Flamer",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (frag)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (krak)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Hot-shot volley gun (focused)",
+          "type": "Ranged Weapon",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Hot-shot volley gun (sweeping)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing Crits 1",
+            "Torrent 1\""
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Machine",
+          "description": "This operative cannot perform any actions other than **Dash**, **Fall Back**, **Reposition** and **Shoot**. It cannot retaliate, assist in a fight or use any weapons that aren’t on its datacard."
+        },
+        {
+          "name": "Turret",
+          "description": "This operative can perform two **Shoot** actions during its activation."
+        }
+      ],
+      "specialActions": []
+    }
+  ]
+}

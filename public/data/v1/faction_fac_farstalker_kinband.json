@@ -1,7 +1,7 @@
 {
   "id": "fac_farstalker_kinband",
   "name": "Farstalker Kinband",
-  "factionKeyword": "FARSTALKER",
+  "factionKeyword": "FARSTALKER KINBAND",
   "archetypes": [],
   "summary": "Update 1.2",
   "rules": [
@@ -13,18 +13,48 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_farstalker_kinband_eq_piercing_shot",
+      "name": "Piercing Shot",
+      "description": "Once per turning point, when a friendly **FARSTALKER KINBAND** operative is performing the **Shoot** action and you select a Kroot rifle, Kroot scattergun or dual Kroot pistols (focused), you can use this rule. If you do, until the end of that action, that weapon has the Piercing 1 weapon rule. You cannot use the Piercing Shot and Toxin Shot rule during the same action."
+    },
+    {
+      "id": "fac_farstalker_kinband_eq_trophy",
+      "name": "Trophy",
+      "description": "Once per battle, during a friendly **FARSTALKER KINBAND** operative's acrivation (excluding **HOUND**), before or after it performs an action, if it’s not within control range of enemy operatives, you can use this rule. If you do, add 1 to that friendly operative’s APL stat until the end of its activation."
+    },
+    {
+      "id": "fac_farstalker_kinband_eq_meat",
+      "name": "Meat",
+      "description": "Once per turning point, when a friendly **FARSTALKER KINBAND** operative (excluding **HOUND**) is activated, if it’s not within control range of enemy operatives, you can use this rule. If you do, that friendly operative regains D3+1 lost wounds."
+    },
+    {
+      "id": "fac_farstalker_kinband_eq_toxin_shot",
+      "name": "Toxin Shot",
+      "description": "Once per turning point, when a friendly **FARSTALKER KINBAND** operative is performing the **Shoot** action and you select a Kroot rifle, Kroot scattergun or dual Kroot pistols (focused), you can use this rule. If you do, until the end of that action, that weapon has the Lethal 5+ and Stun weapon rules.  You cannot use the Piercing Shot and Toxin Shot rule during the same action."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_farstalker_kinband_op_kroot_kill_broker",
       "name": "Kroot Kill-Broker",
-      "factionKeyword": "FARSTALKER",
+      "factionKeyword": "FARSTALKER KINBAND",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 9,
       "weapons": [
+        {
+          "name": "Pulse weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        },
         {
           "name": "Ritual blade",
           "atk": "4",
@@ -57,7 +87,7 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_bow_hunter",
       "name": "Kroot Bow-Hunter",
-      "factionKeyword": "FARSTALKER",
+      "factionKeyword": "FARSTALKER KINBAND",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -110,7 +140,7 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_cold_blood",
       "name": "Kroot Cold-Blood",
-      "factionKeyword": "FARSTALKER",
+      "factionKeyword": "FARSTALKER KINBAND",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -147,7 +177,7 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_cut_skin",
       "name": "Kroot Cut-Skin",
-      "factionKeyword": "FARSTALKER",
+      "factionKeyword": "FARSTALKER KINBAND",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -180,13 +210,36 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_heavy_gunner",
       "name": "Kroot Heavy Gunner",
-      "factionKeyword": "FARSTALKER",
+      "factionKeyword": "FARSTALKER KINBAND",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Dvorgite skinner",
+          "atk": "5",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 6\"",
+            "Heavy (Reposition only)",
+            "Piercing 2",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Londaxi tribalest",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Reposition only)",
+            "Piercing 1",
+            "Rending"
+          ]
+        },
         {
           "name": "Blade",
           "atk": "3",
@@ -201,7 +254,7 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_hound",
       "name": "Kroot Hound",
-      "factionKeyword": "FARSTALKER",
+      "factionKeyword": "FARSTALKER KINBAND",
       "keywords": [],
       "apl": 2,
       "move": "8\"",
@@ -238,7 +291,7 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_long_sight",
       "name": "Kroot Long-Sight",
-      "factionKeyword": "FARSTALKER",
+      "factionKeyword": "FARSTALKER KINBAND",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -295,7 +348,7 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_pistolier",
       "name": "Kroot Pistolier",
-      "factionKeyword": "FARSTALKER",
+      "factionKeyword": "FARSTALKER KINBAND",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -342,7 +395,7 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_stalker",
       "name": "Kroot Stalker",
-      "factionKeyword": "FARSTALKER",
+      "factionKeyword": "FARSTALKER KINBAND",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -385,7 +438,7 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_tracker",
       "name": "Kroot Tracker",
-      "factionKeyword": "FARSTALKER",
+      "factionKeyword": "FARSTALKER KINBAND",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -422,7 +475,7 @@
     {
       "id": "fac_farstalker_kinband_op_kroot_warrior",
       "name": "Kroot Warrior",
-      "factionKeyword": "FARSTALKER",
+      "factionKeyword": "FARSTALKER KINBAND",
       "keywords": [],
       "apl": 2,
       "move": "6\"",

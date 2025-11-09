@@ -1,7 +1,7 @@
 {
   "id": "fac_fellgor_ravagers",
   "name": "Fellgor Ravagers",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "FELLGOR RAVAGERS",
   "archetypes": [],
   "summary": "Update 1.2",
   "rules": [],
@@ -12,13 +12,55 @@
     {
       "id": "fac_fellgor_ravagers_op_ironhorn",
       "name": "Ironhorn",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 11,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Corrupted pistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Rending"
+          ]
+        },
+        {
+          "name": "Corrupted chainsword",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        },
+        {
+          "name": "Plasma pistol (standard)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma pistol (supercharge)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Call the Attack",
@@ -30,7 +72,7 @@
     {
       "id": "fac_fellgor_ravagers_op_gnarlscar",
       "name": "Gnarlscar",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -76,7 +118,7 @@
     {
       "id": "fac_fellgor_ravagers_op_fluxbray",
       "name": "Fluxbray",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -109,7 +151,7 @@
     {
       "id": "fac_fellgor_ravagers_op_herd_goad",
       "name": "Herd-goad",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -163,7 +205,7 @@
     {
       "id": "fac_fellgor_ravagers_op_warrior_with_bludgeon",
       "name": "Warrior with bludgeon",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -200,7 +242,7 @@
     {
       "id": "fac_fellgor_ravagers_op_gorehorn",
       "name": "Gorehorn",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -242,7 +284,7 @@
     {
       "id": "fac_fellgor_ravagers_op_mangler",
       "name": "Mangler",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -279,7 +321,7 @@
     {
       "id": "fac_fellgor_ravagers_op_shaman",
       "name": "Shaman",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -332,7 +374,7 @@
     {
       "id": "fac_fellgor_ravagers_op_toxhorn",
       "name": "Toxhorn",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -371,7 +413,7 @@
     {
       "id": "fac_fellgor_ravagers_op_vandal",
       "name": "Vandal",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -405,7 +447,7 @@
     {
       "id": "fac_fellgor_ravagers_op_deathknell",
       "name": "Deathknell",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -451,7 +493,7 @@
     {
       "id": "fac_fellgor_ravagers_op_warrior_with_cleaver",
       "name": "Warrior with cleaver",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "FELLGOR RAVAGERS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",

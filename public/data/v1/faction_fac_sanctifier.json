@@ -13,7 +13,28 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_sanctifier_eq_sanctification_orbs",
+      "name": "Sanctification Orbs",
+      "description": "Once per turning point, one friendly SANCTIFIER operative (excluding CHERUB, DEATH CULT ASSASSIN, and MIRACULIST) can perform the Sanctification Orb unique action."
+    },
+    {
+      "id": "fac_sanctifier_eq_purity_seals",
+      "name": "Purity Seals",
+      "description": "Once per turning point, when a friendly SANCTIFIER operative is shooting or fighting, if you roll two or more fails, you can discard one of them to retain another as a normal success instead."
+    },
+    {
+      "id": "fac_sanctifier_eq_ecclesiarchy_texts",
+      "name": "Ecclesiarchy Texts",
+      "description": "In the Ready step of each Strategy phase, roll 3D6: if the result is less than the remaining wounds of a friendly ORATOR operative, you gain 1CP. Note that this is done before the Gambit step, so if there isn't a valid ORATOR operative, you cannot use this rule during that turning point (e.g. during the first turning point)."
+    },
+    {
+      "id": "fac_sanctifier_eq_imperial_cult_symbols",
+      "name": "Imperial Cult Symbols",
+      "description": "Once per turning point, when an operative is shooting a friendly SANCTIFIER operative that's benefitting from the SERMON, when you collect your defense dice, you can use this rule. If you do, change one of the attacker's retained critical successes to a normal success (any weapon rules they've already resolved aren't affected, e.g. Piercing Crits)."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_sanctifier_op_confessor",
@@ -288,7 +309,39 @@
       "move": null,
       "save": null,
       "wounds": null,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Meltagun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Plasma gun (standard)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        }
+      ],
       "specialRules": [],
       "specialActions": []
     },

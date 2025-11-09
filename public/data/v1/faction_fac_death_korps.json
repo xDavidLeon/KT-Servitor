@@ -1,13 +1,33 @@
 {
   "id": "fac_death_korps",
   "name": "Death Korps",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "DEATH KORPS",
   "archetypes": [],
   "summary": "Update 1.2",
   "rules": [],
   "strategicPloys": [],
   "tacticalPloys": [],
   "equipment": [
+    {
+      "id": "fac_death_korps_eq_chronometer",
+      "name": "Chronometer",
+      "description": "Once per battle **STRATEGIC GAMBIT** in the first or second turning point. Each friendly **DEATH KORPS** operative wholly within your territory can immediately perform a free **Dash** action in an order of your choice, but each that does so must end that move closer to an opponent’s drop zone or killzone edge.\r\nYou cannot use this **STRATEGIC GAMBIT** and the Regroup strategy ploy during the same turning point."
+    },
+    {
+      "id": "fac_death_korps_eq_comm_beads",
+      "name": "Comm-Beads",
+      "description": "Whenever a friendly **DEATH KORPS WATCHMASTER** or friendly **DEATH KORPS CONFIDANT** operative issues a **GUARDSMAN ORDER**, you can use this rule. If you do, instead of each friendly **DEATH KORPS** operative within 6\" of it receiving that order, you can select one friendly **DEATH KORPS** operative to receive that order."
+    },
+    {
+      "id": "fac_death_korps_eq_hand_axes",
+      "name": "Hand Axes",
+      "description": ""
+    },
+    {
+      "id": "fac_death_korps_eq_gas_bombardment",
+      "name": "Gas Bombardment",
+      "description": "Once per battle **STRATEGIC GAMBIT**. Place your Gas marker in the killzone; it cannot be placed underneath Vantage terrain. Whenever an operative is within 3\" of that marker, subtract 1 from its APL stat. In the Ready step of the next Strategy phase, remove that marker. Note that an operative’s APL stat is only changed while it’s within 3\" of that marker. If it moves more than 3\" from that marker, its APL stat is no longer changed by this rule."
+    },
     {
       "id": "fac_death_korps_eq_guardsman_orders_reference",
       "name": "Guardsman Orders Reference",
@@ -18,7 +38,7 @@
     {
       "id": "fac_death_korps_op_death_korps_watchmaster",
       "name": "Death Korps Watchmaster",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "DEATH KORPS",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -29,6 +49,471 @@
         {
           "name": "Adaptive Orders",
           "description": "If this operative doesn’t issue a **GUARDSMAN ORDER** as a **STRATEGIC GAMBIT**, you can use the Inspirational Leadership firefight ploy for 0CP during this operative’s activation."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_death_korps_op_death_korps_bruiser",
+      "name": "Death Korps Bruiser",
+      "factionKeyword": "DEATH KORPS",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Trench club",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Shock"
+          ]
+        },
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Bruiser",
+          "description": "Once per turning point, when this operative is fighting or retaliating, in the Resolve Attack Dice step, you can ignore the damage inflicted on it from one normal success."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_death_korps_op_death_korps_confidant",
+      "name": "Death Korps Confidant",
+      "factionKeyword": "DEATH KORPS",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [],
+      "specialRules": [
+        {
+          "name": "Second in Command",
+          "description": "If a friendly **WATCHMASTER** operative is incapacitated and removed from the killzone, you can use this rule. If you do, until the end of the battle, this operative can issue a **GUARDSMAN ORDER** as a **STRATEGIC GAMBIT** (even though it’s not a **WATCHMASTER** operative)."
+        },
+        {
+          "name": "Directive",
+          "description": "Whenever this operative is activated, if you haven’t used the Second in Command rule during the battle, you can select one other ready friendly **DEATH KORPS** operative visible to and within 6\" of it. When this operative is expended, activate that other friendly operative before your opponent activates (if that operative is a **TROOPER**, ignore its Group Activation rule)."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_death_korps_op_death_korps_gunner",
+      "name": "Death Korps Gunner",
+      "factionKeyword": "DEATH KORPS",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Grenade launcher (frag)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (krak)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Meltagun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Plasma gun (standard)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_death_korps_op_death_korps_sniper",
+      "name": "Death Korps Sniper",
+      "factionKeyword": "DEATH KORPS",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Long-las (concealed)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy",
+            "Silent",
+            "Concealed Position*"
+          ]
+        },
+        {
+          "name": "Long-las (mobile)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Long-las (stationary)",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy"
+          ]
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_death_korps_op_death_korps_zealot",
+      "name": "Death Korps Zealot",
+      "factionKeyword": "DEATH KORPS",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "The Emperor Protects",
+          "description": "Whenever an operative is shooting this operative, you can re-roll any of your defence dice."
+        },
+        {
+          "name": "Uplifting Primer",
+          "description": "**SUPPORT**. Whenever a friendly **DEATH KORPS** operative is within 3\" of this operative, that friendly operative’s weapons have the Severe weapon rule."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_death_korps_op_death_korps_vox_operator",
+      "name": "Death Korps Vox-Operator",
+      "factionKeyword": "DEATH KORPS",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Relay Orders",
+          "description": "Once per turning point, when this operative receives a **GUARDSMAN ORDER**, if it’s not within control range of enemy operatives, it can relay that order. Whenever an order is relayed, all friendly **DEATH KORPS** operatives in the killzone receive that order, then subtract 1 from this operative’s APL stat until the end of its next activation."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Signal (1AP)",
+          "description": "▶ **SUPPORT**. Select one other friendly **DEATH KORPS** operative visible to and within 6\" of this operative. Until the end of that operative’s next activation, add 1 to its APL stat.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
+    },
+    {
+      "id": "fac_death_korps_op_death_korps_veteran",
+      "name": "Death Korps Veteran",
+      "factionKeyword": "DEATH KORPS",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Bionic arm",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Veteran Guardsman",
+          "description": "Whenever this operative is activated, it can receive one **GUARDSMAN ORDER**."
+        },
+        {
+          "name": "Bionics",
+          "description": "Normal Dmg of 3 or more inflicts 1 less damage on this operative."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_death_korps_op_death_korps_spotter",
+      "name": "Death Korps Spotter",
+      "factionKeyword": "DEATH KORPS",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Mortar barrage",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Blast 2\"",
+            "Heavy (Dash only)",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": [
+        {
+          "name": "Spot (1AP)",
+          "description": "▶ **SUPPORT**. Select one enemy operative visible to this operative. Once during this turning point, when a friendly **DEATH KORPS** operative within 3\" of this operative is shooting that enemy operative, you can use this effect. If you do:\r\n- That friendly operative’s ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
+    },
+    {
+      "id": "fac_death_korps_op_death_korps_sapper",
+      "name": "Death Korps Sapper",
+      "factionKeyword": "DEATH KORPS",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Remote detonator",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Limited 1",
+            "Piercing 1",
+            "Silent",
+            "Detonate*"
+          ]
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Mine Layer",
+          "description": "This operative is carrying your Mine marker. It can perform the **Pick Up Marker** action on that marker, and whenever it performs the **Place Marker** action on that marker, it can immediately perform a free **Dash** action."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_death_korps_op_death_korps_medic",
+      "name": "Death Korps Medic",
+      "factionKeyword": "DEATH KORPS",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Medic!",
+          "description": "The first time during each turning point that another friendly **DEATH KORPS** operative would be incapacitated while visible to and within 3\" of this operative, you can use this rule, providing neither this nor that operative is within control range of an enemy operative. If you do, that friendly operative isn’t incapacitated and has 1 wound remaining and cannot be incapacitated for the remainder of the action. After that action, that friendly operative can immediately perform a free **Dash** action, but must end that move within this operative’s control range. Subtract 1 from this and that operative’s APL stats until the end of their next activations respectively, and if this rule was used during that friendly operative’s activation, that activation ends. You cannot use this rule if this operative is incapacitated, or if it's a **Shoot** action and this operative would be a primary or secondary target."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Death Korps Medic",
+          "description": "▶ Select one friendly **DEATH KORPS** operative within this operative’s control range to regain up to 2D3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
+    },
+    {
+      "id": "fac_death_korps_op_death_korps_trooper",
+      "name": "Death Korps Trooper",
+      "factionKeyword": "DEATH KORPS",
+      "keywords": [],
+      "apl": 2,
+      "move": "6\"",
+      "save": "5+",
+      "wounds": 7,
+      "weapons": [
+        {
+          "name": "Lasgun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        },
+        {
+          "name": "Bayonet",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Group Activation",
+          "description": "Whenever this operative is expended, you must then activate one other ready friendly **DEATH KORPS TROOPER** operative (if able) before your opponent activates. When that other operative is expended, your opponent then activates as normal (in other words, you cannot activate more than two operatives in succession with this rule)."
         }
       ],
       "specialActions": []

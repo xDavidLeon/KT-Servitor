@@ -23,7 +23,28 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_raveners_eq_chromatospore_camouflage",
+      "name": "Chromatospore Camouflage",
+      "description": "Whenever an operative is shooting a friendly RAVENER operative, if you can retain any cover saves, you can retain one additional cover save. This isn't cumulative with improved cover saves from Vantage terrain."
+    },
+    {
+      "id": "fac_raveners_eq_acid_blood",
+      "name": "Acid Blood",
+      "description": "Whenever a friendly RAVENER operative is fighting or retaliating, whenever an attack dice inflicts damage on it, roll one D6; on a 5+, inflict 1 damage on the enemy operative in that sequence."
+    },
+    {
+      "id": "fac_raveners_eq_metamorphic_flesh",
+      "name": "Metamorphic Flesh",
+      "description": "Whenever a friendly RAVENER operative is activated, it regains D3 lost wounds."
+    },
+    {
+      "id": "fac_raveners_eq_heightened_senses",
+      "name": "Heightened Senses",
+      "description": "Once per battle, when rolling off to decide initiative, if a friendly RAVENER operative is underground and an enemy operative is within 5\" of your TUNNEL, you can re-roll your dice."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_raveners_op_ravener_prime",

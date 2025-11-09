@@ -267,6 +267,62 @@
       "wounds": 11,
       "weapons": [
         {
+          "name": "Heavy bolter (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash Only)",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Heavy bolter (sweeping)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash Only)",
+            "Piercing Crits 1",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Multi-melta",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Devastating 4",
+            "Heavy (Dash only)",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Plasma cannon (standard)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Blast 2\"",
+            "Heavy (Dash Only)",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma cannon (supercharge)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Blast 2\"",
+            "Heavy (Dash Only)",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
           "name": "Servo-claw",
           "atk": "3",
           "hit": "4+",
@@ -603,6 +659,85 @@
       "wounds": 8,
       "weapons": [
         {
+          "name": "Grenade launcher (frag)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (krak)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Hot-shot volley gun (focused)",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Hot-shot volley gun (sweeping)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing Crits 1",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Meltagun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Plasma gun (standard)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
           "name": "Gun butt",
           "atk": "4",
           "hit": "4+",
@@ -874,6 +1009,59 @@
       "save": "4+",
       "wounds": 9,
       "weapons": [
+        {
+          "name": "Meltagun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Navis las-volley (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Rending",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Navis las-volley (sweeping)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Rending",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Plasma gun (standard)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
         {
           "name": "Gun butt",
           "atk": "3",
@@ -1151,7 +1339,87 @@
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (frag)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (krak)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Hot-shot volley gun (focused)",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Hot-shot volley gun (sweeping)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing Crits 1",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Meltagun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Plasma gun (standard)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        }
+      ],
       "specialRules": [],
       "specialActions": []
     },
@@ -1214,7 +1482,68 @@
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Grenade launcher (frag)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (krak)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Meltagun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Plasma gun (standard)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        }
+      ],
       "specialRules": [],
       "specialActions": []
     },
@@ -1482,7 +1811,47 @@
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Grenade launcher",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Heavy stubber (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)"
+          ]
+        },
+        {
+          "name": "Heavy stubber (sweeping)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Webber",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 12\"",
+            "Severe",
+            "Stun"
+          ]
+        }
+      ],
       "specialRules": [],
       "specialActions": []
     },

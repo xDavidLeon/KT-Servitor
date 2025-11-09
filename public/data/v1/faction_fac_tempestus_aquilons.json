@@ -1,7 +1,7 @@
 {
   "id": "fac_tempestus_aquilons",
   "name": "Tempestus Aquilons",
-  "factionKeyword": "TEMPESTUS",
+  "factionKeyword": "TEMPESTUS AQUILON",
   "archetypes": [],
   "summary": "Update 1.2",
   "rules": [
@@ -18,12 +18,33 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_tempestus_aquilons_eq_drop_augury",
+      "name": "Drop Augury",
+      "description": "Once during the battle, when a friendly **TEMPESTUS AQUILON** operative that's set up above is activated, before expending or landing that operative, you can move one of your Drop markers again. However, it cannot be moved closer to your opponent's drop zone."
+    },
+    {
+      "id": "fac_tempestus_aquilons_eq_remote_overseer",
+      "name": "Remote Overseer",
+      "description": "Once during the battle, when rolling-off to decide initiative, you can re-roll your D6."
+    },
+    {
+      "id": "fac_tempestus_aquilons_eq_tempestus_daggers",
+      "name": "Tempestus Daggers",
+      "description": ""
+    },
+    {
+      "id": "fac_tempestus_aquilons_eq_combat_stimms",
+      "name": "Combat Stimms",
+      "description": "You can ignore any changes to the Move stat of friendly **TEMPESTUS AQUILON** operatives from being injured."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_tempestus_aquilons_op_aquilon_trooper",
       "name": "Aquilon Trooper",
-      "factionKeyword": "TEMPESTUS",
+      "factionKeyword": "TEMPESTUS AQUILON",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -60,13 +81,42 @@
     {
       "id": "fac_tempestus_aquilons_op_aquilon_tempestor",
       "name": "Aquilon Tempestor",
-      "factionKeyword": "TEMPESTUS",
+      "factionKeyword": "TEMPESTUS AQUILON",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "4+",
       "wounds": 9,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Power weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Relic bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Chainsword",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Tempestus Veteran",
@@ -83,7 +133,7 @@
     {
       "id": "fac_tempestus_aquilons_op_aquilon_grenadier",
       "name": "Aquilon Grenadier",
-      "factionKeyword": "TEMPESTUS",
+      "factionKeyword": "TEMPESTUS AQUILON",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -131,7 +181,7 @@
     {
       "id": "fac_tempestus_aquilons_op_aquilon_gunfighter",
       "name": "Aquilon Gunfighter",
-      "factionKeyword": "TEMPESTUS",
+      "factionKeyword": "TEMPESTUS AQUILON",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -180,13 +230,44 @@
     {
       "id": "fac_tempestus_aquilons_op_aquilon_gunner",
       "name": "Aquilon Gunner",
-      "factionKeyword": "TEMPESTUS",
+      "factionKeyword": "TEMPESTUS AQUILON",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Melta carbine",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Plasma carbine (standard)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma carbine (supercharge)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -201,7 +282,7 @@
     {
       "id": "fac_tempestus_aquilons_op_aquilon_marksman",
       "name": "Aquilon Marksman",
-      "factionKeyword": "TEMPESTUS",
+      "factionKeyword": "TEMPESTUS AQUILON",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -258,7 +339,7 @@
     {
       "id": "fac_tempestus_aquilons_op_aquilon_precursor",
       "name": "Aquilon Precursor",
-      "factionKeyword": "TEMPESTUS",
+      "factionKeyword": "TEMPESTUS AQUILON",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -300,13 +381,62 @@
     {
       "id": "fac_tempestus_aquilons_op_aquilon_servo_sentry",
       "name": "Aquilon Servo-sentry",
-      "factionKeyword": "TEMPESTUS",
+      "factionKeyword": "TEMPESTUS AQUILON",
       "keywords": [],
       "apl": 2,
       "move": "4\"",
       "save": "3+",
       "wounds": 10,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (frag)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (krak)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Hot-shot volley gun (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Hot-shot volley gun (sweeping)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing Crits 1",
+            "Torrent 1\""
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Machine",

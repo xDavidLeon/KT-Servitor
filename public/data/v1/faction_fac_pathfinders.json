@@ -2,7 +2,9 @@
   "id": "fac_pathfinders",
   "name": "Pathfinders",
   "factionKeyword": "PATHFINDER",
-  "archetypes": [],
+  "archetypes": [
+    "Recon"
+  ],
   "summary": "July '25",
   "rules": [
     {
@@ -138,6 +140,37 @@
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Rail rifle",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Devastating 2",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Ion rifle (overcharge)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Ion rifle (standard)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing Crits 1"
+          ]
+        },
         {
           "name": "Gun butt",
           "atk": "3",

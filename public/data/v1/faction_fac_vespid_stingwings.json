@@ -1,7 +1,7 @@
 {
   "id": "fac_vespid_stingwings",
   "name": "Vespid Stingwings",
-  "factionKeyword": "VESPID",
+  "factionKeyword": "VESPID STINGWING",
   "archetypes": [],
   "summary": "Update 1.2",
   "rules": [
@@ -23,12 +23,33 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_vespid_stingwings_eq_convergence_stimulant",
+      "name": "Convergence Stimulant",
+      "description": "Once per turning point, a friendly **VESPID STINGWING** operative can perform the **Pick Up Marker** or a mission action without you spending a Communion point."
+    },
+    {
+      "id": "fac_vespid_stingwings_eq_neurostimulant",
+      "name": "Neurostimulant",
+      "description": "In the Ready step of each Strategy phase, when determining how many Communion points to gain, you can roll two D3 and select one D3 to use."
+    },
+    {
+      "id": "fac_vespid_stingwings_eq_accelerant_stimulant",
+      "name": "Accelerant Stimulant",
+      "description": "Whenever a friendly **VESPID STINGWING** operative (excluding **OVERSIGHT DRONE**) performs the **Charge** or **Dash** action, it can move an additional 1\". If it uses **FLY** for this action, you can set it back up 1\" further away."
+    },
+    {
+      "id": "fac_vespid_stingwings_eq_aggression_stimulant",
+      "name": "Aggression Stimulant",
+      "description": "Whenever a friendly **VESPID STINGWING** (excluding **OVERSIGHT DRONE**) operative is fighting, its melee weapons have the Ceaseless weapon rule."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_vespid_stingwings_op_vespid_skyblast",
       "name": "Vespid Skyblast",
-      "factionKeyword": "VESPID",
+      "factionKeyword": "VESPID STINGWING",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -65,7 +86,7 @@
     {
       "id": "fac_vespid_stingwings_op_vespid_swarmguard",
       "name": "Vespid Swarmguard",
-      "factionKeyword": "VESPID",
+      "factionKeyword": "VESPID STINGWING",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -113,7 +134,7 @@
     {
       "id": "fac_vespid_stingwings_op_vespid_warrior",
       "name": "Vespid Warrior",
-      "factionKeyword": "VESPID",
+      "factionKeyword": "VESPID STINGWING",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -148,7 +169,7 @@
     {
       "id": "fac_vespid_stingwings_op_vespid_strain_leader",
       "name": "Vespid Strain Leader",
-      "factionKeyword": "VESPID",
+      "factionKeyword": "VESPID STINGWING",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -187,7 +208,7 @@
     {
       "id": "fac_vespid_stingwings_op_oversight_drone",
       "name": "Oversight Drone",
-      "factionKeyword": "VESPID",
+      "factionKeyword": "VESPID STINGWING",
       "keywords": [],
       "apl": 2,
       "move": "8\"",
@@ -220,7 +241,7 @@
     {
       "id": "fac_vespid_stingwings_op_vespid_longsting",
       "name": "Vespid Longsting",
-      "factionKeyword": "VESPID",
+      "factionKeyword": "VESPID STINGWING",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -263,7 +284,7 @@
     {
       "id": "fac_vespid_stingwings_op_vespid_shadestrain",
       "name": "Vespid Shadestrain",
-      "factionKeyword": "VESPID",
+      "factionKeyword": "VESPID STINGWING",
       "keywords": [],
       "apl": 2,
       "move": "6\"",

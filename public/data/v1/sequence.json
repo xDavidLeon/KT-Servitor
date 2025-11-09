@@ -1,10 +1,7 @@
 [
-    {"id":"seq_01_setup","order":1,"title":"Set Up the Killzone","body":"Select mission, set up terrain and objectives, place barricades."},
-    {"id":"seq_02_roster","order":2,"title":"Select Kill Teams","body":"Choose a faction and 1 fire team, select operatives & equipment (points)."},
-    {"id":"seq_03_deploy","order":3,"title":"Gather & Deploy","body":"Determine attacker/defender, deploy operatives per mission rules."},
-    {"id":"seq_04_initiative","order":4,"title":"Initiative Phase","body":"Roll for initiative; resolve scouting if applicable."},
-    {"id":"seq_05_strategy","order":5,"title":"Strategy Phase","body":"Gain CP; resolve Strategic Ploys and mission rules."},
-    {"id":"seq_06_firefight","order":6,"title":"Firefight Phase","body":"Alternate activations; perform actions (Move, Shoot, Fight, etc.)."},
-    {"id":"seq_07_end","order":7,"title":"End Phase & Scoring","body":"Resolve Tac Ops scoring and cleanup, check for game end."}
+    {"id":"seq_01_setup","order":1,"title":"Set up the battle","body":"● Select kill team, set up terrain. Determine crit op and set up objective markers.\n● Roll off - the winner decides who has Initiative and selects their drop zone. \n● The other player gains the Re-roll initiative card (explained in step 4)."},
+    {"id":"seq_02_roster","order":2,"title":"Select Operatives","body":"● Select operatives and reveal. Then Select 4 equipment and reveal. ● Start with 2 CP. Secretly select a Tac Op from one of the team’s archetypes."},
+    {"id":"seq_03_deploy","order":3,"title":"Set Operatives","body":"● Alternate setting up equipment, starting with the player with initiative. Note this is item by item, not option by equipment option.\n● Alternate setting up 1/3 operatives (rounded up), starting with Initiative player."},
+    {"id":"seq_04_initiative","order":4,"title":"Play the Battle","body":"● STRATEGIC GAMBIT in first turning point, secretly select op to be Primary Op.\n● To determine Initiative each Turning Point, roll-off (but don’t re-roll ties). Starting with the loser of the roll-off, each player alternates either using an initiative card or passing, until both players pass in succession. Kill team’s rules to affect the roll-off must do so before playing initiative cards, starting with the loser. Finally the winner determines who has the initiative that Turning Point.\n● Each player can score a maximum of 6VP from each op."},
+    {"id":"seq_05_strategy","order":5,"title":"End the Battle","body":"● Battle ends after four turning points. At the end of the battle, reveal primary ops and score additional VP to half of what you scored from that op (rounded up)"}
   ]
-  

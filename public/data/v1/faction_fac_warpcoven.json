@@ -1,7 +1,7 @@
 {
   "id": "fac_warpcoven",
   "name": "Warpcoven",
-  "factionKeyword": "WARPCOVEN",
+  "factionKeyword": "WARPCOVEN HERETIC ASTARTES",
   "archetypes": [],
   "summary": "July '25",
   "rules": [
@@ -13,12 +13,33 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_warpcoven_eq_ensorcelled_rounds",
+      "name": "Ensorcelled Rounds",
+      "description": ""
+    },
+    {
+      "id": "fac_warpcoven_eq_daemonmaw_weapons",
+      "name": "Daemonmaw Weapons",
+      "description": ""
+    },
+    {
+      "id": "fac_warpcoven_eq_arcane_robes",
+      "name": "Arcane Robes",
+      "description": ""
+    },
+    {
+      "id": "fac_warpcoven_eq_sorcerous_scrolls",
+      "name": "Sorcerous Scrolls",
+      "description": ""
+    }
+  ],
   "operatives": [
     {
       "id": "fac_warpcoven_op_sorcerer_of_destiny",
       "name": "Sorcerer of Destiny",
-      "factionKeyword": "WARPCOVEN",
+      "factionKeyword": "WARPCOVEN HERETIC ASTARTES",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -93,7 +114,7 @@
     {
       "id": "fac_warpcoven_op_sorcerer_of_tempyrion",
       "name": "Sorcerer of Tempyrion",
-      "factionKeyword": "WARPCOVEN",
+      "factionKeyword": "WARPCOVEN HERETIC ASTARTES",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -168,7 +189,7 @@
     {
       "id": "fac_warpcoven_op_sorcerer_of_warpfire",
       "name": "Sorcerer of Warpfire",
-      "factionKeyword": "WARPCOVEN",
+      "factionKeyword": "WARPCOVEN HERETIC ASTARTES",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -253,13 +274,44 @@
     {
       "id": "fac_warpcoven_op_rubric_marine_gunner",
       "name": "Rubric Marine Gunner",
-      "factionKeyword": "WARPCOVEN",
+      "factionKeyword": "WARPCOVEN HERETIC ASTARTES",
       "keywords": [],
       "apl": 3,
       "move": "5\"",
       "save": "3+",
       "wounds": 14,
       "weapons": [
+        {
+          "name": "Soulreaper cannon (focused)",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Soulreaper cannon (sweeping)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Warpflamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "4/4",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Piercing 1",
+            "Torrent 2\""
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -274,7 +326,7 @@
     {
       "id": "fac_warpcoven_op_rubric_marine_icon_bearer",
       "name": "Rubric Marine Icon Bearer",
-      "factionKeyword": "WARPCOVEN",
+      "factionKeyword": "WARPCOVEN HERETIC ASTARTES",
       "keywords": [],
       "apl": 3,
       "move": "5\"",
@@ -309,7 +361,7 @@
     {
       "id": "fac_warpcoven_op_rubric_marine_warrior",
       "name": "Rubric Marine Warrior",
-      "factionKeyword": "WARPCOVEN",
+      "factionKeyword": "WARPCOVEN HERETIC ASTARTES",
       "keywords": [],
       "apl": 3,
       "move": "5\"",
@@ -344,13 +396,34 @@
     {
       "id": "fac_warpcoven_op_tzaangor_champion",
       "name": "Tzaangor Champion",
-      "factionKeyword": "WARPCOVEN",
+      "factionKeyword": "WARPCOVEN HERETIC ASTARTES",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 10,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Greataxe",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Brutal",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Greatblade",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Lethal 5+",
+            "Rending"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Savage Brutality",
@@ -362,7 +435,7 @@
     {
       "id": "fac_warpcoven_op_tzaangor_horn_bearer",
       "name": "Tzaangor Horn Bearer",
-      "factionKeyword": "WARPCOVEN",
+      "factionKeyword": "WARPCOVEN HERETIC ASTARTES",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -388,7 +461,7 @@
     {
       "id": "fac_warpcoven_op_tzaangor_icon_bearer",
       "name": "Tzaangor Icon Bearer",
-      "factionKeyword": "WARPCOVEN",
+      "factionKeyword": "WARPCOVEN HERETIC ASTARTES",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -418,13 +491,50 @@
     {
       "id": "fac_warpcoven_op_tzaangor_warrior",
       "name": "Tzaangor Warrior",
-      "factionKeyword": "WARPCOVEN",
+      "factionKeyword": "WARPCOVEN HERETIC ASTARTES",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 9,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Tzaangor blades",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Balanced"
+          ]
+        },
+        {
+          "name": "Tzaangor blade & shield",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Shield*"
+          ]
+        },
+        {
+          "name": "Autopistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Chainsword",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Relic Hunters",

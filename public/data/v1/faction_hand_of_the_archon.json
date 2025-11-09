@@ -1,0 +1,474 @@
+{
+  "id": "fac_hand_of_the_archon",
+  "name": "Hand of the Archon",
+  "factionKeyword": "HAND OF THE ARCHON",
+  "archetypes": [],
+  "summary": "Update 1.1",
+  "rules": [
+    {
+      "id": "fac_hand_of_the_archon_rule_power_from_pain",
+      "name": "Power from Pain",
+      "description": "After a friendly HAND OF THE ARCHON operative performs an action, it gains one of your Pain tokens if: \r\n- An enemy operative was injured during that action, but was not incapacitated.\r\n- An enemy operative was incapacitated during that action. If that enemy operative had a Wounds stat of 12 or more, that friendly operative gains two of your Pain tokens instead. \r\n\r\n\r\nYou can spend friendly operatives’ Pain tokens on the invigorations below when the ‘when’ condition is met. You cannot use more than one invigoration per activation or counteraction, except Stimulated Senses, which can be used in addition to other invigorations. \r\n\r\n\r\n**Dark Animus**\r\nWhen: During the operative’s activation, before or after it performs an action.\r\nEffect: Until the start of the operative’s next activation, add 1 to its APL stat. \r\n\r\n\r\n**Accelerated Rejuvenation**\r\nWhen: During the operative’s activation or counteraction, before or after it performs an action. \r\nEffect: The operative regains D3+1 lost wounds. \r\n\r\n\r\n**Vitalised Surge**\r\nWhen: After the operative incapacitates an enemy operative and that enemy operative is removed from the killzone. \r\nEffect: The operative can immediately perform a free **Dash** action, even if it’s performed an action that prevents it from performing the **Dash** action.\r\n\r\n\r\n**Stimulated Senses**\r\nWhen: After rolling your attack or defence dice for the operative.\r\nEffect: You can re-roll any of your dice results of one result (e.g. results of 2)."
+    }
+  ],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [],
+  "operatives": [
+    {
+      "id": "fac_hand_of_the_archon_op_archsybarite",
+      "name": "Archsybarite",
+      "factionKeyword": "Hand of the Archon",
+      "keywords": [
+        "Aeldari",
+        "Drukhari",
+        "Leader",
+        "Archsybarite"
+      ],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Blast pistol",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Agoniser",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Brutal",
+            "Lethal 5+",
+            "Shock"
+          ]
+        },
+        {
+          "name": "Power weapon",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Cunning",
+          "description": "In the Gambit step of each Strategy phase, if you pass at the first opportunity, you gain 1CP. Ignore each STRATEGIC GAMBIT from the mission pack (if any) when determining this."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_agent",
+      "name": "Agent",
+      "factionKeyword": "Hand of the Archon",
+      "keywords": [
+        "Aeldari",
+        "Drukhari",
+        "Agent",
+        "Operative"
+      ],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Splinter rifle",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Array of blades",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Sadistic Competition",
+          "description": "Once per turning point, when a friendly HAND OF THE ARCHON operative gains one of your Pain tokens, one friendly HAND OF THE ARCHON **AGENT** operative that doesn’t have one of your Pain tokens can also gain one."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_disciple_of_yaelindra",
+      "name": "Disciple of Yaelindra",
+      "factionKeyword": "Hand of the Archon",
+      "keywords": [
+        "Aeldari",
+        "Drukhari",
+        "Disciple of Yaelindra",
+        "Operative"
+      ],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Stinger pistol",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Lethal 5+",
+            "Stinger*"
+          ]
+        },
+        {
+          "name": "Array of blades",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": [
+        {
+          "name": "Torment Grenade (1AP)",
+          "description": "▶ Select one enemy operative visible to and within 6\" of this operative. That operative and each other operative within 1\" of it takes a poison test. For an operative to take a poison test, roll one D6, adding 1 to the result if that operative has a Save stat of 4+ or worse: on a 3+, inflict D3 damage on that operative and it gains one of your Poison tokens (if it doesn’t already have one).\r\n▶ Whenever an operative that has one of your Poison tokens is activated, inflict D3 damage on it.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_crimson_duellist",
+      "name": "Crimson Duellist",
+      "factionKeyword": "Hand of the Archon",
+      "keywords": [
+        "Aeldari",
+        "Drukhari",
+        "Crimson Duellist",
+        "Operative"
+      ],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Razorflail",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Brutal",
+            "Tangle*"
+          ]
+        },
+        {
+          "name": "Splinter pistol",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Range 8\"",
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Brutal Display",
+          "description": "Once per turning point, when this operative incapacitates an enemy operative within its control range, you can select one other enemy operative visible to and within 6\" of either this operative or the incapacitated enemy operative. Until the start of the next turning point, that other enemy operative cannot control markers or perform the Pick Up Marker or mission actions."
+        },
+        {
+          "name": "Crimson Duellist",
+          "description": "This operative can perform two **Fight** actions during its activation."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_elixicant",
+      "name": "Elixicant",
+      "factionKeyword": "Hand of the Archon",
+      "keywords": [
+        "Aeldari",
+        "Drukhari",
+        "Operative",
+        "Elixicant"
+      ],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Stim-needler",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "0/0",
+          "specialRules": [
+            "Range 3\"",
+            "Lethal 3+",
+            "Stun"
+          ]
+        },
+        {
+          "name": "Splinter rifle",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Array of blades",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Combat Drugs",
+          "description": "At the end of the Select Operatives step, if this operative is selected for deployment, select one of the following COMBAT DRUG rules for friendly HAND OF THE ARCHON operatives to have for the battle: \r\n\r\n\r\n- Painbringer: Whenever an attack dice inflicts damage of 3 or more on this operative, roll one D6: on a 6, subtract 1 from that inflicted damage. \r\n- Adrenalight: STRATEGIC GAMBIT. Select one friendly operative that has this COMBAT DRUG to gain one of your Pain tokens.\r\n- Hypex: You can ignore any changes to this operative’s Move stat from being injured."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Administer Drug (1AP)",
+          "description": "▶ Select one friendly HAND OF THE ARCHON operative visible to and within 3\" of this operative, then select one of the following for that friendly operative:\r\n- It regains 2D3 lost wounds. \r\n- Select a different COMBAT DRUG rule for it to have for the battle (this replaces its previous one).\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_flayer",
+      "name": "Flayer",
+      "factionKeyword": "Hand of the Archon",
+      "keywords": [
+        "Aeldari",
+        "Drukhari",
+        "Flayer",
+        "Operative"
+      ],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Pain sculptors",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Ceaseless",
+            "Flay*"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_gunner",
+      "name": "Gunner",
+      "factionKeyword": "Hand of the Archon",
+      "keywords": [
+        "Aeldari",
+        "Drukhari",
+        "Operative",
+        "Gunner"
+      ],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Shredder",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Blaster",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Array of blades",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_heavy_gunner",
+      "name": "Heavy Gunner",
+      "factionKeyword": "Hand of the Archon",
+      "keywords": [
+        "Aeldari",
+        "Drukhari",
+        "Operative",
+        "Heavy Gunner"
+      ],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Splinter cannon (focused)",
+          "type": "Ranged Weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Splinter cannon (sweeping)",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Lethal 5+",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Dark lance",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "6/7",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Array of blades",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_hand_of_the_archon_op_skysplinter_assassin",
+      "name": "Skysplinter Assassin",
+      "factionKeyword": "Hand of the Archon",
+      "keywords": [
+        "Aeldari",
+        "Drukhari",
+        "Skysplinter Assassin",
+        "Operative"
+      ],
+      "apl": 2,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Shardcarbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "2/2",
+          "specialRules": [
+            "Devastating 2",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Razorwing",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "1/2",
+          "specialRules": [
+            "Saturate",
+            "Seek",
+            "Silent"
+          ]
+        },
+        {
+          "name": "Array of blades",
+          "type": "Melee Weapon",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Omen",
+          "description": "In the Select Operatives step, when you’re selecting equipment, you can select one enemy operative or one other friendly HAND OF THE ARCHON operative (reveal your selection when you reveal equipment). Whenever attack or defence dice are rolled for that operative:\r\n- If it’s an enemy operative, your opponent must re-roll their dice results of 6. \r\n- If it’s a friendly operative, you can re-roll any of your dice results of 1"
+        },
+        {
+          "name": "Merciless Hunter",
+          "description": "If this operative doesn’t perform the **Mark** unique action (see right) during its activation, it can perform two **Shoot** actions during its activation, but a razorwing must be selected for one (and only one) of those actions."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Mark (1AP)",
+          "description": "▶ Select one enemy operative visible to this operative. Until the end of the turning point, whenever this operative is shooting that enemy operative you can use this effect. If you do: \r\n- This operative’s ranged weapons have the Seek Light weapon rule.\r\n- That enemy operative cannot be obscured.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
+    }
+  ]
+}

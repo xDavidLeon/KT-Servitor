@@ -1,7 +1,7 @@
 {
   "id": "fac_chaos_cult",
   "name": "Chaos Cult",
-  "factionKeyword": "CHAOS",
+  "factionKeyword": "CHAOS CULT",
   "archetypes": [],
   "summary": "July '25",
   "rules": [
@@ -15,6 +15,26 @@
   "tacticalPloys": [],
   "equipment": [
     {
+      "id": "fac_chaos_cult_eq_baleful_script",
+      "name": "Baleful Script",
+      "description": "Once per battle STRATEGIC GAMBIT. Change one of your ACCURSED GIFTS. Note that if it's an ACCURSED GIFT an operative has from the Abhorrent Mutation firefight ploy, only that operative benefits from this."
+    },
+    {
+      "id": "fac_chaos_cult_eq_covert_guises",
+      "name": "Covert Guises",
+      "description": "After revealing this equipment option, roll one D3. As a STRATEGIC GAMBIT in the first turning point, a number of friendly CHAOS CULT DEVOTEE operatives equal to the result that are wholly within your drop zone can immediately perform a free **Reposition** action, but must end that move wholly within 3\" of your drop zone."
+    },
+    {
+      "id": "fac_chaos_cult_eq_unholy_talisman",
+      "name": "Unholy Talisman",
+      "description": "Once per turning point, when an operative is shooting a friendly CHAOS CULT operative, in the Roll Defence Dice step, you can retain one of your normal successes as a critical success instead."
+    },
+    {
+      "id": "fac_chaos_cult_eq_vile_blessing",
+      "name": "Vile Blessing",
+      "description": "Once per battle, when an attack dice inflicts Normal Dmg on a friendly CHAOS CULT operative (excluding DEVOTEE), you can ignore that inflicted damage. If that friendly operative is a MUTANT or TORMENT operative, you cannot roll for the Unnatural Regeneration rule for that attack dice then decide to use this rule on the same dice – you must use one or the other."
+    },
+    {
       "id": "fac_chaos_cult_eq_accursed_gifts_reference",
       "name": "Accursed Gifts Reference",
       "description": ""
@@ -24,7 +44,7 @@
     {
       "id": "fac_chaos_cult_op_cult_demagogue",
       "name": "Cult Demagogue",
-      "factionKeyword": "CHAOS",
+      "factionKeyword": "CHAOS CULT",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -76,7 +96,7 @@
     {
       "id": "fac_chaos_cult_op_blessed_blade",
       "name": "Blessed Blade",
-      "factionKeyword": "CHAOS",
+      "factionKeyword": "CHAOS CULT",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -108,7 +128,7 @@
     {
       "id": "fac_chaos_cult_op_iconarch",
       "name": "Iconarch",
-      "factionKeyword": "CHAOS",
+      "factionKeyword": "CHAOS CULT",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -159,7 +179,7 @@
     {
       "id": "fac_chaos_cult_op_mindwitch",
       "name": "Mindwitch",
-      "factionKeyword": "CHAOS",
+      "factionKeyword": "CHAOS CULT",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -203,7 +223,7 @@
     {
       "id": "fac_chaos_cult_op_chaos_devotee",
       "name": "Chaos Devotee",
-      "factionKeyword": "CHAOS",
+      "factionKeyword": "CHAOS CULT",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -238,7 +258,7 @@
     {
       "id": "fac_chaos_cult_op_chaos_mutant",
       "name": "Chaos Mutant",
-      "factionKeyword": "CHAOS",
+      "factionKeyword": "CHAOS CULT",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -267,7 +287,7 @@
     {
       "id": "fac_chaos_cult_op_chaos_torment",
       "name": "Chaos Torment",
-      "factionKeyword": "CHAOS",
+      "factionKeyword": "CHAOS CULT",
       "keywords": [],
       "apl": 2,
       "move": "6\"",

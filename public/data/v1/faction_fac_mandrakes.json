@@ -23,7 +23,28 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_mandrakes_eq_chain_snare",
+      "name": "Chain Snare",
+      "description": "Whenever an enemy operative would perform the **Fall Back** action while within control range of a friendly **MANDRAKE** operative, if no other enemy operatives are within that friendly operative’s control range, you can use this rule. If you do, roll two D6, or one D6 if that enemy operative has a higher Wounds stat than that friendly operative. If any result is a 4+, that enemy operative cannot perform that action during that activation/counteraction (no AP are spent on it)."
+    },
+    {
+      "id": "fac_mandrakes_eq_shadow_glyph",
+      "name": "Shadow Glyph",
+      "description": "Once per turning point, when a friendly **MANDRAKE** operative is activated **WITHIN SHADOW**, you can use this rule. If you do, until the start of its next activation, while that operative has a Conceal order and is in cover, it cannot be selected as a valid target, taking precedence over all other rules (e.g. Seek, Vantage terrain) except being within 2\"."
+    },
+    {
+      "id": "fac_mandrakes_eq_soul_gem",
+      "name": "Soul Gem",
+      "description": "Once per turning point, when a friendly **MANDRAKE** operative is performing the **Shoot** action and you select a baleblast, you can use this rule. If you do, until the end of that action, that weapon has the Blast 1\" weapon rule."
+    },
+    {
+      "id": "fac_mandrakes_eq_bone_darts",
+      "name": "Bone Darts",
+      "description": "Once per turning point, a friendly MANDRAKE operative can use the Bone dart ranged weapon."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_mandrakes_op_mandrake_nightfiend",

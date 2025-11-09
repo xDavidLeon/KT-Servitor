@@ -1,7 +1,7 @@
 {
   "id": "fac_corsair_voidscarred",
   "name": "Corsair Voidscarred",
-  "factionKeyword": "CORSAIR",
+  "factionKeyword": "CORSAIR VOIDSCARRED",
   "archetypes": [],
   "summary": "Update 1.2",
   "rules": [
@@ -18,18 +18,51 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_corsair_voidscarred_eq_diuturnal_mantles",
+      "name": "Diuturnal Mantles",
+      "description": "Whenever an operative is shooting a friendly **CORSAIR VOIDSCARRED** operative, if the ranged weapon in that sequence has the Blast or Torrent weapon rule, you can re-roll one of your defence dice. In addition, friendly **CORSAIR VOIDSCARRED** operatives aren’t affected by the x\" Devastating x weapon rule (i.e. Devastating with a distance) unless they are the target during that sequence."
+    },
+    {
+      "id": "fac_corsair_voidscarred_eq_mistfield",
+      "name": "Mistfield",
+      "description": "Once per turning point, when an operative is shooting a friendly **CORSAIR VOIDSCARRED** operative more than 3\" from it, at the start of the Roll Defence Dice step, you can use this rule. If you do, worsen the x of the Piercing weapon rule by 1 (if any) until the end of that sequence. Note that Piercing 1 would therefore be ignored."
+    },
+    {
+      "id": "fac_corsair_voidscarred_eq_runes_of_guidance",
+      "name": "Runes of Guidance",
+      "description": "Once per turning point, when a friendly **CORSAIR VOIDSCARRED WAY SEEKER** or **CORSAIR VOIDSCARRED SOUL WEAVER** operative is performing a **PSYCHIC** unique action (excluding **Warp Fold**), you can use this rule. If you do, until the end of that action, add 3\" to its distance requirement. Note this has no effect on **PSYCHIC** weapons (e.g. the Devastating distance requirement of lightning strike)."
+    },
+    {
+      "id": "fac_corsair_voidscarred_eq_star_charts",
+      "name": "Star Charts",
+      "description": "**STRATEGIC GAMBIT**. Roll one D3: if the result is higher than the number of the current turning point, you gain 1CP and cannot use this **STRATEGIC GAMBIT** for the rest of the battle."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_felarch",
       "name": "Voidscarred Felarch",
-      "factionKeyword": "CORSAIR",
+      "factionKeyword": "CORSAIR VOIDSCARRED",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "4+",
       "wounds": 9,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Neuro disruptor",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1",
+            "Stun"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Veteran Raider",
@@ -45,7 +78,7 @@
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_fate_dealer",
       "name": "Voidscarred Fate Dealer",
-      "factionKeyword": "CORSAIR",
+      "factionKeyword": "CORSAIR VOIDSCARRED",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -101,13 +134,32 @@
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_gunner",
       "name": "Voidscarred Gunner",
-      "factionKeyword": "CORSAIR",
+      "factionKeyword": "CORSAIR VOIDSCARRED",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Blaster",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Shredder",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending",
+            "Torrent 2\""
+          ]
+        },
         {
           "name": "Shuriken pistol",
           "atk": "4",
@@ -132,13 +184,45 @@
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_heavy_gunner",
       "name": "Voidscarred Heavy Gunner",
-      "factionKeyword": "CORSAIR",
+      "factionKeyword": "CORSAIR VOIDSCARRED",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Shuriken cannon (focused)",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Rending"
+          ]
+        },
+        {
+          "name": "Shuriken cannon (sweeping)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Rending",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Wraithcannon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Devastating 4",
+            "Heavy (Dash only)",
+            "Piercing 2"
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -163,7 +247,7 @@
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_kurnathi",
       "name": "Voidscarred Kurnathi",
-      "factionKeyword": "CORSAIR",
+      "factionKeyword": "CORSAIR VOIDSCARRED",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -206,7 +290,7 @@
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_kurnite_hunter",
       "name": "Voidscarred Kurnite Hunter",
-      "factionKeyword": "CORSAIR",
+      "factionKeyword": "CORSAIR VOIDSCARRED",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -260,7 +344,7 @@
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_shade_runner",
       "name": "Voidscarred Shade Runner",
-      "factionKeyword": "CORSAIR",
+      "factionKeyword": "CORSAIR VOIDSCARRED",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -313,7 +397,7 @@
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_soul_weaver",
       "name": "Voidscarred Soul Weaver",
-      "factionKeyword": "CORSAIR",
+      "factionKeyword": "CORSAIR VOIDSCARRED",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -355,7 +439,7 @@
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_starstorm_duellist",
       "name": "Voidscarred Starstorm Duellist",
-      "factionKeyword": "CORSAIR",
+      "factionKeyword": "CORSAIR VOIDSCARRED",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -407,7 +491,7 @@
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_warrior",
       "name": "Voidscarred Warrior",
-      "factionKeyword": "CORSAIR",
+      "factionKeyword": "CORSAIR VOIDSCARRED",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -425,7 +509,7 @@
     {
       "id": "fac_corsair_voidscarred_op_voidscarred_way_seeker",
       "name": "Voidscarred Way Seeker",
-      "factionKeyword": "CORSAIR",
+      "factionKeyword": "CORSAIR VOIDSCARRED",
       "keywords": [],
       "apl": 2,
       "move": "7\"",

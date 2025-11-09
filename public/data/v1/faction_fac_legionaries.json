@@ -13,7 +13,28 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_legionaries_eq_warded_armour",
+      "name": "Warded Armour",
+      "description": "STRATEGIC GAMBIT. Select one friendly LEGIONARY operative. Until the Ready step of the next Strategy phase, change that operative’s Save stat to 2+."
+    },
+    {
+      "id": "fac_legionaries_eq_tainted_rounds",
+      "name": "Tainted Rounds",
+      "description": "Once per turning point, when a friendly LEGIONARY operative is performing the **Shoot** action and you select a bolt pistol or boltgun, you can use this rule. If you do, until the end of that action, that weapon has the Rending weapon rule."
+    },
+    {
+      "id": "fac_legionaries_eq_chaos_talismans",
+      "name": "Chaos Talismans",
+      "description": "STRATEGIC GAMBIT. Select one Marks of Chaos keyword. Once during each of their activations, when a friendly LEGIONARY operative that has that keyword is shooting, fighting or retaliating, if you roll two or more fails, you can inflict D3 damage on that friendly operative to discard one of them and retain the other as a normal success instead. Note that if it’s the **Shoot** action and that damage incapacitates that friendly operative, the action doesn’t end (continue the sequence with your successful attack dice)."
+    },
+    {
+      "id": "fac_legionaries_eq_malefic_blades",
+      "name": "Malefic Blades",
+      "description": "Friendly LEGIONARY operatives have the Malefic blade melee weapon for the battle."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_legionaries_op_legionary_aspiring_champion",
@@ -25,6 +46,42 @@
       "save": "3+",
       "wounds": 15,
       "weapons": [
+        {
+          "name": "Power fist",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "5/7",
+          "specialRules": [
+            "Brutal"
+          ]
+        },
+        {
+          "name": "Power maul",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Shock"
+          ]
+        },
+        {
+          "name": "Power weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Tainted chainsword",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        },
         {
           "name": "Plasma pistol (standard)",
           "atk": "4",
@@ -272,6 +329,48 @@
       "wounds": 14,
       "weapons": [
         {
+          "name": "Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Meltagun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Plasma gun (standard)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
           "name": "Bolt pistol",
           "atk": "4",
           "hit": "3+",
@@ -301,6 +400,70 @@
       "save": "3+",
       "wounds": 14,
       "weapons": [
+        {
+          "name": "Heavy bolter (focused)",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Reposition only)",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Heavy bolter (sweeping)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Reposition only)",
+            "Piercing Crits 1",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Missile launcher (frag)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Blast 2\"",
+            "Heavy (Reposition only)"
+          ]
+        },
+        {
+          "name": "Missile launcher (krak)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/7",
+          "specialRules": [
+            "Heavy (Reposition only)",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Reaper chaincannon (focused)",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Ceaseless",
+            "Heavy (Reposition only)",
+            "Punishing"
+          ]
+        },
+        {
+          "name": "Reaper chaincannon (sweeping)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Ceaseless",
+            "Heavy (Reposition only)",
+            "Punishing",
+            "Torrent 2\""
+          ]
+        },
         {
           "name": "Bolt pistol",
           "atk": "4",

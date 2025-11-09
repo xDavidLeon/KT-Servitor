@@ -1,7 +1,7 @@
 {
   "id": "fac_brood_brothers",
   "name": "Brood Brothers",
-  "factionKeyword": "BROOD",
+  "factionKeyword": "BROOD BROTHER",
   "archetypes": [],
   "summary": "July '25",
   "rules": [
@@ -13,18 +13,87 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_brood_brothers_eq_cult_talisman",
+      "name": "Cult Talisman",
+      "description": "Once per turning point, when an operative is shooting a friendly BROOD BROTHER operative (excluding PATRIARCH), in the Roll Defence Dice step, you can retain one of your normal successes as a critical success instead."
+    },
+    {
+      "id": "fac_brood_brothers_eq_covert_guises",
+      "name": "Covert Guises",
+      "description": "After revealing this equipment option, roll one D3. As a STRATEGIC GAMBIT in the first turning point, a number of friendly BROOD BROTHER BROODGUARD operatives equal to the result that are wholly within your drop zone can immediately perform a free **Reposition** action, but must end that move wholly within 3\" of your drop zone."
+    },
+    {
+      "id": "fac_brood_brothers_eq_cult_knives",
+      "name": "Cult Knives",
+      "description": "Friendly BROOD BROTHER BROODGUARD operatives have the cult knife melee weapon."
+    },
+    {
+      "id": "fac_brood_brothers_eq_lookout",
+      "name": "Lookout",
+      "description": "STRATEGIC GAMBIT. Select one enemy operative visible to a friendly BROOD BROTHER operative to gain one of your Crossfire tokens."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_brood_brothers_op_brood_brother_commander",
       "name": "Brood Brother Commander",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 8,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Boltpistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Chainsword & claw",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Balanced",
+            "Rending"
+          ]
+        },
+        {
+          "name": "Drum-fed autogun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Ceaseless"
+          ]
+        },
+        {
+          "name": "Laspistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Range 8\""
+          ]
+        },
+        {
+          "name": "Power weapon & claw",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Balanced",
+            "Lethal 5+"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Coordinate",
@@ -36,7 +105,7 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_agitator",
       "name": "Brood Brother Agitator",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -68,13 +137,73 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_gunner",
       "name": "Brood Brother Gunner",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "5+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (frag)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/4",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "Grenade launcher (krak)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (standard)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Meltagun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
         {
           "name": "Bayonet",
           "atk": "3",
@@ -89,7 +218,7 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_iconward",
       "name": "Brood Brother Iconward",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -121,7 +250,7 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_knife_fighter",
       "name": "Brood Brother Knife Fighter",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -154,7 +283,7 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_medic",
       "name": "Brood Brother Medic",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -202,7 +331,7 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_sapper",
       "name": "Brood Brother Sapper",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -251,7 +380,7 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_sniper",
       "name": "Brood Brother Sniper",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -305,7 +434,7 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_trooper",
       "name": "Brood Brother Trooper",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -338,7 +467,7 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_veteran",
       "name": "Brood Brother Veteran",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -388,7 +517,7 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_vox_operator",
       "name": "Brood Brother Vox-Operator",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -425,7 +554,7 @@
     {
       "id": "fac_brood_brothers_op_brood_brother_trooper",
       "name": "Brood Brother Trooper",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -458,7 +587,7 @@
     {
       "id": "fac_brood_brothers_op_psychic_familiar",
       "name": "Psychic Familiar",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -494,7 +623,7 @@
     {
       "id": "fac_brood_brothers_op_magus",
       "name": "Magus",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -550,7 +679,7 @@
     {
       "id": "fac_brood_brothers_op_patriarch",
       "name": "Patriarch",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 4,
       "move": "6\"",
@@ -592,7 +721,7 @@
     {
       "id": "fac_brood_brothers_op_primus",
       "name": "Primus",
-      "factionKeyword": "BROOD",
+      "factionKeyword": "BROOD BROTHER",
       "keywords": [],
       "apl": 3,
       "move": "6\"",

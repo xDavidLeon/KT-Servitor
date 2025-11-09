@@ -24,7 +24,58 @@
       "move": "6\"",
       "save": "3+",
       "wounds": 9,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Plasma pistol (standard)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma pistol (supercharge)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Relic boltgun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Gun butt",
+          "atk": "3",
+          "hit": "3+",
+          "dmg": "2/3",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Relic bolt pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Lethal 5+"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Inspirational Example",
@@ -431,7 +482,26 @@
       "move": "6\"",
       "save": "4+",
       "wounds": 7,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Novitiate blade",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Autogun",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Militant Faith",

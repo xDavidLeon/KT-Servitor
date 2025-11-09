@@ -1,7 +1,7 @@
 {
   "id": "fac_nemesis_claw",
   "name": "Nemesis Claw",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "NEMESIS CLAW",
   "archetypes": [],
   "summary": "July '25",
   "rules": [],
@@ -12,13 +12,72 @@
     {
       "id": "fac_nemesis_claw_op_visionary",
       "name": "Visionary",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "NEMESIS CLAW",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "3+",
       "wounds": 15,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Power fist",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "5/7",
+          "specialRules": [
+            "Brutal"
+          ]
+        },
+        {
+          "name": "Power maul",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Shock"
+          ]
+        },
+        {
+          "name": "Power weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Plasma pistol (standard)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma pistol (supercharge)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Range 8\"",
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Nostraman chainblade",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Prescience",
@@ -35,7 +94,7 @@
     {
       "id": "fac_nemesis_claw_op_fearmonger",
       "name": "Fearmonger",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "NEMESIS CLAW",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -105,13 +164,54 @@
     {
       "id": "fac_nemesis_claw_op_heavy_gunner",
       "name": "Heavy Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "NEMESIS CLAW",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "3+",
       "wounds": 14,
       "weapons": [
+        {
+          "name": "Missile launcher (frag)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Blast 2\"",
+            "Heavy (Reposition only)"
+          ]
+        },
+        {
+          "name": "Missile launcher (krak)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/7",
+          "specialRules": [
+            "Heavy (Reposition only)",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Heavy bolter (focused)",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Reposition only)",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Heavy bolter (sweeping)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Reposition only)",
+            "Piercing Crits 1",
+            "Torrent 1\""
+          ]
+        },
         {
           "name": "Bolt pistol",
           "atk": "4",
@@ -135,13 +235,55 @@
     {
       "id": "fac_nemesis_claw_op_gunner",
       "name": "Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "NEMESIS CLAW",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "3+",
       "wounds": 14,
       "weapons": [
+        {
+          "name": "Flamer",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/3",
+          "specialRules": [
+            "Range 8\"",
+            "Saturate",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Plasma gun (standard)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Plasma gun (supercharge)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Hot",
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Meltagun",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "6/3",
+          "specialRules": [
+            "Range 6\"",
+            "Devastating 4",
+            "Piercing 2"
+          ]
+        },
         {
           "name": "Bolt pistol",
           "atk": "4",
@@ -165,7 +307,7 @@
     {
       "id": "fac_nemesis_claw_op_screecher",
       "name": "Screecher",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "NEMESIS CLAW",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -197,7 +339,7 @@
     {
       "id": "fac_nemesis_claw_op_skinthief",
       "name": "Skinthief",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "NEMESIS CLAW",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -238,7 +380,7 @@
     {
       "id": "fac_nemesis_claw_op_ventriloquar",
       "name": "Ventriloquar",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "NEMESIS CLAW",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -278,7 +420,7 @@
     {
       "id": "fac_nemesis_claw_op_warrior_with_bolt_pistol_chainsword",
       "name": "Warrior with bolt pistol; chainsword",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "NEMESIS CLAW",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -313,7 +455,7 @@
     {
       "id": "fac_nemesis_claw_op_warrior_with_boltgun_fists",
       "name": "Warrior with boltgun; fists",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "NEMESIS CLAW",
       "keywords": [],
       "apl": 3,
       "move": "6\"",

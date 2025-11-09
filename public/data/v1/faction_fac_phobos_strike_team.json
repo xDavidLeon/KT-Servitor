@@ -1,7 +1,7 @@
 {
   "id": "fac_phobos_strike_team",
   "name": "Phobos Strike Team",
-  "factionKeyword": "STRATEGIC",
+  "factionKeyword": "PHOBOS STRIKE TEAM",
   "archetypes": [],
   "summary": "July '25",
   "rules": [
@@ -28,12 +28,33 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_phobos_strike_team_eq_combat_blades",
+      "name": "Combat blades",
+      "description": "Friendly PHOBOS STRIKE TEAM operatives have the Combat blade melee weapon."
+    },
+    {
+      "id": "fac_phobos_strike_team_eq_special_issue_ammunition",
+      "name": "Special Issue Ammunition",
+      "description": "Once per turning point, when a friendly PHOBOS STRIKE TEAM operative is performing the **Shoot** action and you select a bolt carbine, marksman bolt carbine or occulus bolt carbine, you can use this rule. If you do, until the end of the turning point, that weapon has the Piercing 1 weapon rule."
+    },
+    {
+      "id": "fac_phobos_strike_team_eq_additional_utility_grenades",
+      "name": "Additional Utility Grenades",
+      "description": "This equipment allows you to select four utility grenades from the utility grenades equipment (see universal equipment). You cannot also select that equipment as normal (i.e. to give you six)."
+    },
+    {
+      "id": "fac_phobos_strike_team_eq_purity_seals",
+      "name": "Purity Seals",
+      "description": "Once per turning point, when a friendly PHOBOS STRIKE TEAM operative is shooting, fighting or retaliating, if you roll two or more fails, you can discard one of them to retain another as a normal success instead."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_phobos_strike_team_op_infiltrator_veteran",
       "name": "Infiltrator Veteran",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -63,7 +84,7 @@
     {
       "id": "fac_phobos_strike_team_op_infiltrator_sergeant",
       "name": "Infiltrator Sergeant",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -93,7 +114,7 @@
     {
       "id": "fac_phobos_strike_team_op_reiver_sergeant",
       "name": "Reiver Sergeant",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -106,7 +127,7 @@
     {
       "id": "fac_phobos_strike_team_op_incursor_sergeant",
       "name": "Incursor Sergeant",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -136,7 +157,7 @@
     {
       "id": "fac_phobos_strike_team_op_infiltrator_helix_adept",
       "name": "Infiltrator Helix Adept",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -176,7 +197,7 @@
     {
       "id": "fac_phobos_strike_team_op_infiltrator_warrior",
       "name": "Infiltrator Warrior",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -206,7 +227,7 @@
     {
       "id": "fac_phobos_strike_team_op_infiltrator_voxbreaker",
       "name": "Infiltrator Voxbreaker",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -246,7 +267,7 @@
     {
       "id": "fac_phobos_strike_team_op_infiltrator_saboteur",
       "name": "Infiltrator Saboteur",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -294,7 +315,7 @@
     {
       "id": "fac_phobos_strike_team_op_infiltrator_commsman",
       "name": "Infiltrator Commsman",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -333,7 +354,7 @@
     {
       "id": "fac_phobos_strike_team_op_incursor_warrior",
       "name": "Incursor Warrior",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -363,7 +384,7 @@
     {
       "id": "fac_phobos_strike_team_op_incursor_marksman",
       "name": "Incursor Marksman",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -399,7 +420,7 @@
     {
       "id": "fac_phobos_strike_team_op_incursor_minelayer",
       "name": "Incursor Minelayer",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -438,7 +459,7 @@
     {
       "id": "fac_phobos_strike_team_op_reiver_warrior",
       "name": "Reiver Warrior",
-      "factionKeyword": "STRATEGIC",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
       "keywords": [],
       "apl": 3,
       "move": "7\"",

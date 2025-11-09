@@ -1,7 +1,7 @@
 {
   "id": "fac_scout_squad",
   "name": "Scout Squad",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "SCOUT SQUAD",
   "archetypes": [],
   "summary": "Update 1.3",
   "rules": [
@@ -13,18 +13,49 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_scout_squad_eq_camo_cloak",
+      "name": "Camo Cloak",
+      "description": ""
+    },
+    {
+      "id": "fac_scout_squad_eq_combat_blade",
+      "name": "Combat Blade",
+      "description": "Friendly SCOUT SQUAD operatives have the Combat blade melee weapon. Note that some operatives already have this weapon but with better stats; in that instance, use the better version."
+    },
+    {
+      "id": "fac_scout_squad_eq_heavy_weapon_bipod",
+      "name": "Heavy Weapon Bipod",
+      "description": "Whenever a friendly **SCOUT SQUAD HEAVY GUNNER** operative is shooting with a heavy bolter or missile launcher, if it hasn’t moved during the activation, or if it’s a counteraction, that weapon has the Ceaseless weapon rule; if the weapon already has that weapon rule, it has the Relentless weapon rule. Note that operative isn’t restricted from moving after shooting."
+    },
+    {
+      "id": "fac_scout_squad_eq_targeting_oculars",
+      "name": "Targeting Oculars",
+      "description": "Up to twice per turning point, when a friendly **SCOUT SQUAD** operative is performing the **Shoot** action and you’re selecting a valid target, you can use this rule. If you do, until the end of that action, that friendly operative’s ranged weapons have the Lethal 5+ Saturate weapon rules."
+    }
+  ],
   "operatives": [
     {
       "id": "fac_scout_squad_op_scout_sergeant",
       "name": "Scout Sergeant",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "SCOUT SQUAD",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
       "save": "4+",
       "wounds": 11,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Chainsword",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "-"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Guidance and Experience",
@@ -40,13 +71,54 @@
     {
       "id": "fac_scout_squad_op_scout_heavy_gunner",
       "name": "Scout Heavy Gunner",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "SCOUT SQUAD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
       "save": "4+",
       "wounds": 10,
       "weapons": [
+        {
+          "name": "Heavy bolter (focused)",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Heavy bolter (sweeping)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Piercing Crits 1",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Missile launcher (frag)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Blast 2\"",
+            "Heavy (Dash only)"
+          ]
+        },
+        {
+          "name": "Missile launcher (krak)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/7",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Piercing 1"
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -70,7 +142,7 @@
     {
       "id": "fac_scout_squad_op_scout_hunter",
       "name": "Scout Hunter",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "SCOUT SQUAD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -109,7 +181,7 @@
     {
       "id": "fac_scout_squad_op_scout_sniper",
       "name": "Scout Sniper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "SCOUT SQUAD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -169,7 +241,7 @@
     {
       "id": "fac_scout_squad_op_scout_tracker",
       "name": "Scout Tracker",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "SCOUT SQUAD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -206,7 +278,7 @@
     {
       "id": "fac_scout_squad_op_scout_warrior",
       "name": "Scout Warrior",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "SCOUT SQUAD",
       "keywords": [],
       "apl": 2,
       "move": "6\"",

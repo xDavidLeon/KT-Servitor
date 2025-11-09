@@ -1,7 +1,7 @@
 {
   "id": "fac_blades_of_khaine",
   "name": "Blades of Khaine",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "BLADES OF KHAINE",
   "archetypes": [],
   "summary": "Update 1.2",
   "rules": [],
@@ -14,5 +14,259 @@
       "description": ""
     }
   ],
-  "operatives": []
+  "operatives": [
+    {
+      "id": "fac_blades_of_khaine_op_dire_avenger_exarch",
+      "name": "Dire Avenger Exarch",
+      "factionKeyword": "BLADES OF KHAINE",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Twin shuriken catapult",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Ceaseless",
+            "Rending"
+          ]
+        },
+        {
+          "name": "Gun butts",
+          "atk": "3",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Power weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Diresword",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Lethal 5+",
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blades_of_khaine_op_dire_avenger_warrior",
+      "name": "Dire Avenger Warrior",
+      "factionKeyword": "BLADES OF KHAINE",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Shuriken catapult",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Rending"
+          ]
+        },
+        {
+          "name": "Fists",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "2/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blades_of_khaine_op_striking_scorpion_exarch",
+      "name": "Striking Scorpion Exarch",
+      "factionKeyword": "BLADES OF KHAINE",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Biting blade",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Rending"
+          ]
+        },
+        {
+          "name": "Scorpion's claw and chainsword",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Brutal",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Twin chainswords",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Ceaseless",
+            "Rending"
+          ]
+        },
+        {
+          "name": "Twin shuriken pistols",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Ceaseless",
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blades_of_khaine_op_striking_scorpion_warrior",
+      "name": "Striking Scorpion Warrior",
+      "factionKeyword": "BLADES OF KHAINE",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Chainsword",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending"
+          ]
+        },
+        {
+          "name": "Shuriken pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blades_of_khaine_op_howling_banshee_warrior",
+      "name": "Howling Banshee Warrior",
+      "factionKeyword": "BLADES OF KHAINE",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "4+",
+      "wounds": 8,
+      "weapons": [
+        {
+          "name": "Power weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Shuriken pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Rending"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_blades_of_khaine_op_howling_banshee_exarch",
+      "name": "Howling Banshee Exarch",
+      "factionKeyword": "BLADES OF KHAINE",
+      "keywords": [],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 9,
+      "weapons": [
+        {
+          "name": "Mirrorswords",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Ceaseless",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Executioner",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/7",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Power weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Power weapon",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
 }

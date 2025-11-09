@@ -1,0 +1,575 @@
+{
+  "id": "fac_phobos_strike_team",
+  "name": "Phobos Strike Team",
+  "factionKeyword": "PHOBOS STRIKE TEAM",
+  "archetypes": [],
+  "summary": "July '25",
+  "rules": [
+    {
+      "id": "fac_phobos_strike_team_rule_omni_scrambler",
+      "name": "Omni-Scrambler",
+      "description": "STRATEGIC GAMBIT if a friendly INFILTRATOR operative is in the killzone. Select one enemy operative visible to a friendly INFILTRATOR operative, or within 6\" of a friendly VOXBREAKER operative. In the following Firefight phase, that enemy operative cannot be activated or perform actions until one of the following is true:\r\n- Your opponent has activated a number of enemy operatives equal to the number of friendly INFILTRATOR operatives in the killzone when this STRATEGIC GAMBIT was used.\r\n- It’s the last enemy operative to be activated."
+    },
+    {
+      "id": "fac_phobos_strike_team_rule_terror",
+      "name": "Terror",
+      "description": "Whenever an enemy operative is within 3\" of friendly REIVER operatives, your opponent must spend 1 additional AP for that enemy operative to perform the Pick Up Marker and mission actions.\r\nWhenever determining control of a marker, treat the total APL stat of enemy operatives that contest it as 1 lower if at least one of those enemy operatives is within 3\" of friendly REIVER operatives. Note this isn’t a change to the APL stat, so any changes are cumulative with this."
+    },
+    {
+      "id": "fac_phobos_strike_team_rule_astartes",
+      "name": "Astartes",
+      "description": "During each friendly PHOBOS STRIKE TEAM operative’s activation, it can perform either two **Shoot** actions or two **Fight** actions. If it’s two **Shoot** actions, a bolt weapon must be selected for at least one of them. A bolt weapon is any ranged weapon that includes ‘bolt’ in its name, e.g. marksman bolt carbine, special issue bolt pistol, etc."
+    },
+    {
+      "id": "fac_phobos_strike_team_rule_multi_spectrum_array",
+      "name": "Multi-Spectrum Array",
+      "description": "Whenever a friendly INCURSOR operative is shooting, enemy operatives cannot be obscured."
+    }
+  ],
+  "strategicPloys": [],
+  "tacticalPloys": [],
+  "equipment": [
+    {
+      "id": "fac_phobos_strike_team_eq_combat_blades",
+      "name": "Combat blades",
+      "description": "Friendly PHOBOS STRIKE TEAM operatives have the Combat blade melee weapon."
+    },
+    {
+      "id": "fac_phobos_strike_team_eq_special_issue_ammunition",
+      "name": "Special Issue Ammunition",
+      "description": "Once per turning point, when a friendly PHOBOS STRIKE TEAM operative is performing the **Shoot** action and you select a bolt carbine, marksman bolt carbine or occulus bolt carbine, you can use this rule. If you do, until the end of the turning point, that weapon has the Piercing 1 weapon rule."
+    },
+    {
+      "id": "fac_phobos_strike_team_eq_additional_utility_grenades",
+      "name": "Additional Utility Grenades",
+      "description": "This equipment allows you to select four utility grenades from the utility grenades equipment (see universal equipment). You cannot also select that equipment as normal (i.e. to give you six)."
+    },
+    {
+      "id": "fac_phobos_strike_team_eq_purity_seals",
+      "name": "Purity Seals",
+      "description": "Once per turning point, when a friendly PHOBOS STRIKE TEAM operative is shooting, fighting or retaliating, if you roll two or more fails, you can discard one of them to retain another as a normal success instead."
+    }
+  ],
+  "operatives": [
+    {
+      "id": "fac_phobos_strike_team_op_infiltrator_veteran",
+      "name": "Infiltrator Veteran",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Adeptus Astartes",
+        "Infiltrator",
+        "Veteran"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Custom bolt carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Custom*"
+          ]
+        },
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_phobos_strike_team_op_infiltrator_sergeant",
+      "name": "Infiltrator Sergeant",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Imperium",
+        "Adeptus Astartes",
+        "Sergeant",
+        "Leader",
+        "Infiltrator"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 13,
+      "weapons": [
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Marksman bolt carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_phobos_strike_team_op_reiver_sergeant",
+      "name": "Reiver Sergeant",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Imperium",
+        "Adeptus Astartes",
+        "Sergeant",
+        "Leader",
+        "Reiver"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 13,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_phobos_strike_team_op_incursor_sergeant",
+      "name": "Incursor Sergeant",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Imperium",
+        "Adeptus Astartes",
+        "Sergeant",
+        "Leader",
+        "Incursor"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 13,
+      "weapons": [
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Oculus bolt carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Saturate"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_phobos_strike_team_op_infiltrator_helix_adept",
+      "name": "Infiltrator Helix Adept",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Adeptus Astartes",
+        "Infiltrator",
+        "Medic",
+        "Helix Adept"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Marksman bolt carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Medic!",
+          "description": "The first time during each turning point that another friendly PHOBOS STRIKE TEAM operative would be incapacitated while visible to and within 3\" of this operative, you can use this rule, providing neither this nor that operative is within control range of an enemy operative. If you do, that friendly operative isn’t incapacitated and has 1 wound remaining and cannot be incapacitated for the remainder of the action. After that action, that friendly operative can immediately perform a free **Dash** action, but must end that move within this operative’s control range. Subtract 1 from this and that operative’s APL stats until the end of their next activations respectively, and if this rule was used during that friendly operative’s activation, that activation ends. You cannot use this rule if this operative is incapacitated, or if it's a **Shoot** action and this operative would be a primary or secondary target."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Helix Gauntlet (1AP)",
+          "description": "▶ Select one friendly PHOBOS STRIKE TEAM operative within this operative’s control range to regain up to D3+3 lost wounds. It cannot be an operative that the Medic! rule was used on during this turning point.\r\n◆ This operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
+    },
+    {
+      "id": "fac_phobos_strike_team_op_infiltrator_warrior",
+      "name": "Infiltrator Warrior",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Adeptus Astartes",
+        "Infiltrator",
+        "Warrior"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Marksman bolt carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_phobos_strike_team_op_infiltrator_voxbreaker",
+      "name": "Infiltrator Voxbreaker",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Adeptus Astartes",
+        "Infiltrator",
+        "Voxbreaker"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Marksman bolt carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Voxbreak",
+          "description": "Whenever an enemy operative is within 6\" of this operative, your opponent cannot re-roll their attack or defence dice for that operative."
+        }
+      ],
+      "specialActions": [
+        {
+          "name": "Auspex Scan (1AP)",
+          "description": "Until the start of this operative’s next activation or until it’s incapacitated (whichever comes first), whenever a friendly PHOBOS STRIKE TEAM operative is shooting an enemy operative within 8\" of this operative, that enemy operative cannot be obscured; if that friendly operative is an INCURSOR, its ranged weapons also have the Seek Light weapon rule.\r\nThis operative cannot perform this action while within control range of an enemy operative."
+        }
+      ]
+    },
+    {
+      "id": "fac_phobos_strike_team_op_infiltrator_saboteur",
+      "name": "Infiltrator Saboteur",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Adeptus Astartes",
+        "Saboteur",
+        "Infiltrator"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Remote detonator",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Limited 1",
+            "Piercing 1",
+            "Silent",
+            "Detonate*"
+          ]
+        },
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Marksman bolt carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Plant Explosives",
+          "description": "This operative is carrying your Explosives marker. It can perform the **Pick Up Marker** action on that marker, and whenever it performs the **Place Marker** action on that marker, it can immediately perform a free **Dash** action."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_phobos_strike_team_op_infiltrator_commsman",
+      "name": "Infiltrator Commsman",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Adeptus Astartes",
+        "Infiltrator",
+        "Commsman"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Marksman bolt carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Strategic Oversight",
+          "description": "In the Ready step of each Strategy phase, when you gain CP, if this operative is in the killzone and not within control range of enemy operatives, you can use this rule. If you do, roll one D6: on a 4+, you gain one additional CP."
+        },
+        {
+          "name": "Comms Array",
+          "description": "Once per turning point, during a friendly PHOBOS STRIKE TEAM operative’s activation or counteraction, before or after it performs an action, if this operative is in the killzone, you can change one strategy ploy you’ve used this turning point (it doesn’t cost you any CP to do so)."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_phobos_strike_team_op_incursor_warrior",
+      "name": "Incursor Warrior",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Adeptus Astartes",
+        "Incursor",
+        "Warrior"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Oculus bolt carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Saturate"
+          ]
+        }
+      ],
+      "specialRules": [],
+      "specialActions": []
+    },
+    {
+      "id": "fac_phobos_strike_team_op_incursor_marksman",
+      "name": "Incursor Marksman",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Adeptus Astartes",
+        "Incursor",
+        "Marksman"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Stalker marksman bolt carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "2+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Lethal 5+",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Track Target",
+          "description": "This operative can perform the **Guard** action (see close quarters rules, Kill Team Core Book) in any killzone. It can perform the **Guard** action while it has a Conceal order, but when you perform the free **Shoot** or **Fight** action during the interruption, you must change its order to Engage."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_phobos_strike_team_op_incursor_minelayer",
+      "name": "Incursor Minelayer",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Adeptus Astartes",
+        "Incursor",
+        "Minelayer"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 12,
+      "weapons": [
+        {
+          "name": "Fists",
+          "type": "Melee Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": []
+        },
+        {
+          "name": "Oculus bolt carbine",
+          "type": "Ranged Weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Saturate"
+          ]
+        }
+      ],
+      "specialRules": [
+        {
+          "name": "Haywire Mine",
+          "description": "This operative is carrying your Haywire Mine marker. It can perform the **Pick Up Marker** action on that marker, but that marker cannot be placed within an enemy operative’s control range (if this operative is incapacitated while carrying that marker and that marker cannot be placed, it’s removed with this operative)."
+        },
+        {
+          "name": "Proximity Mine",
+          "description": "The first time your Haywire Mine marker is within another operative’s control range, remove that marker, subtract 1 from that operative’s APL stat until the end of its next activation, and inflict 2D3+3 damage on it; if it isn’t incapacitated, end its action (if any), even if that action’s effects aren’t fulfilled. If it cannot be placed, move it the minimum amount to do so. Note that this operative is ignored for these effects (i.e. it cannot set it off or take damage from that marker)."
+        }
+      ],
+      "specialActions": []
+    },
+    {
+      "id": "fac_phobos_strike_team_op_reiver_warrior",
+      "name": "Reiver Warrior",
+      "factionKeyword": "PHOBOS STRIKE TEAM",
+      "keywords": [
+        "Operative",
+        "Imperium",
+        "Adeptus Astartes",
+        "Reiver",
+        "Warrior"
+      ],
+      "apl": 3,
+      "move": "7\"",
+      "save": "3+",
+      "wounds": 12,
+      "weapons": [],
+      "specialRules": [],
+      "specialActions": []
+    }
+  ]
+}

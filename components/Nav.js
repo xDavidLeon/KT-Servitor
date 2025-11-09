@@ -22,7 +22,7 @@ export default function Nav(){
     <div className="row" style={{marginTop:'.5rem'}}>
       <Item href="/" label="Home"/>
       <Item href="/sequence" label="Game Sequence"/>
-      <Item href="/factions" label="Factions"/>
+      <Item href="/factions" label="Faction Rules"/>
       <Item href="/rules" label="Game Rules"/>
     </div>
   )

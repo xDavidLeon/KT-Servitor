@@ -1,7 +1,7 @@
 {
   "id": "fac_non_player_operatives",
   "name": "Non-player Operatives",
-  "factionKeyword": "UNKNOWN",
+  "factionKeyword": "Brawler",
   "archetypes": [],
   "summary": "",
   "rules": [],
@@ -12,7 +12,7 @@
     {
       "id": "fac_non_player_operatives_op_trooper_brawler",
       "name": "Trooper (Brawler)",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -35,7 +35,7 @@
     {
       "id": "fac_non_player_operatives_op_trooper_marksman",
       "name": "Trooper (Marksman)",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -76,7 +76,7 @@
     {
       "id": "fac_non_player_operatives_op_tough_brawler",
       "name": "Tough (Brawler)",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -99,7 +99,7 @@
     {
       "id": "fac_non_player_operatives_op_warrior_marksman",
       "name": "Warrior (Marksman)",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -131,7 +131,7 @@
     {
       "id": "fac_non_player_operatives_op_heavy_brawler",
       "name": "Heavy (Brawler)",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -159,7 +159,7 @@
     {
       "id": "fac_non_player_operatives_op_heavy_marksman",
       "name": "Heavy (Marksman)",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 3,
       "move": "6\"",
@@ -196,7 +196,7 @@
     {
       "id": "fac_non_player_operatives_op_hormagaunt",
       "name": "Hormagaunt",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -219,7 +219,7 @@
     {
       "id": "fac_non_player_operatives_op_ripper_swarm",
       "name": "Ripper Swarm",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -247,7 +247,7 @@
     {
       "id": "fac_non_player_operatives_op_barbgaunt",
       "name": "Barbgaunt",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -290,7 +290,7 @@
     {
       "id": "fac_non_player_operatives_op_ravener",
       "name": "Ravener",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -313,7 +313,7 @@
     {
       "id": "fac_non_player_operatives_op_termagant",
       "name": "Termagant",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -345,7 +345,7 @@
     {
       "id": "fac_non_player_operatives_op_von_ryan_s_leaper",
       "name": "Von Ryan's Leaper",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 3,
       "move": "7\"",
@@ -368,7 +368,7 @@
     {
       "id": "fac_non_player_operatives_op_flayed_one",
       "name": "Flayed One",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -397,7 +397,7 @@
     {
       "id": "fac_non_player_operatives_op_skorpekh_destroyer",
       "name": "Skorpekh Destroyer",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -427,7 +427,7 @@
     {
       "id": "fac_non_player_operatives_op_hexmark_destroyer",
       "name": "Hexmark Destroyer",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -481,7 +481,7 @@
     {
       "id": "fac_non_player_operatives_op_royal_warden",
       "name": "Royal Warden",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 3,
       "move": "5\"",
@@ -519,7 +519,7 @@
     {
       "id": "fac_non_player_operatives_op_lychguard",
       "name": "Lychguard",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -557,7 +557,7 @@
     {
       "id": "fac_non_player_operatives_op_canoptek_scarab_swarm",
       "name": "Canoptek Scarab Swarm",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "6\"",
@@ -580,13 +580,32 @@
     {
       "id": "fac_non_player_operatives_op_necron_warrior",
       "name": "Necron Warrior",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
       "save": "4+",
       "wounds": 9,
       "weapons": [
+        {
+          "name": "Gauss flayer",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Gauss reaper",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
         {
           "name": "Combat attachment",
           "atk": "3",
@@ -603,13 +622,43 @@
     {
       "id": "fac_non_player_operatives_op_canoptek_tomb_crawler",
       "name": "Canoptek Tomb Crawler",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
       "save": "3+",
       "wounds": 21,
       "weapons": [
+        {
+          "name": "Twin gauss reapers (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1",
+            "Punishing"
+          ]
+        },
+        {
+          "name": "Twin gauss reapers (sweeping)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 1",
+            "Punishing",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Transdimensional isolator",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Dimensional Banishment*"
+          ]
+        },
         {
           "name": "Claws",
           "atk": "4",
@@ -635,13 +684,40 @@
     {
       "id": "fac_non_player_operatives_op_canoptek_macrocyte",
       "name": "Canoptek Macrocyte",
-      "factionKeyword": "UNKNOWN",
+      "factionKeyword": "Brawler",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "4+",
       "wounds": 7,
       "weapons": [
+        {
+          "name": "Gauss scalpel",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Tesla caster (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Tesla caster (living lightning)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "2/3",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
         {
           "name": "Claws & tail",
           "atk": "4",

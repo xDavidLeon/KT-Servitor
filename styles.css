@@ -28,7 +28,7 @@ th{position:sticky;top:0;background:#121521}
   /* Operative Cards */
   .operatives-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1rem;
     margin-top: 0.5rem;
   }

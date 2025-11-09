@@ -1,7 +1,7 @@
 {
   "id": "fac_hand_of_the_archon",
   "name": "Hand of the Archon",
-  "factionKeyword": "HAND",
+  "factionKeyword": "HAND OF THE ARCHON",
   "archetypes": [],
   "summary": "Update 1.1",
   "rules": [
@@ -18,13 +18,44 @@
     {
       "id": "fac_hand_of_the_archon_op_archsybarite",
       "name": "Archsybarite",
-      "factionKeyword": "HAND",
+      "factionKeyword": "HAND OF THE ARCHON",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "4+",
       "wounds": 9,
-      "weapons": [],
+      "weapons": [
+        {
+          "name": "Blast pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 2"
+          ]
+        },
+        {
+          "name": "Agoniser",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Brutal",
+            "Lethal 5+",
+            "Shock"
+          ]
+        },
+        {
+          "name": "Power weapon",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/6",
+          "specialRules": [
+            "Lethal 5+"
+          ]
+        }
+      ],
       "specialRules": [
         {
           "name": "Cunning",
@@ -36,7 +67,7 @@
     {
       "id": "fac_hand_of_the_archon_op_agent",
       "name": "Agent",
-      "factionKeyword": "HAND",
+      "factionKeyword": "HAND OF THE ARCHON",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -71,7 +102,7 @@
     {
       "id": "fac_hand_of_the_archon_op_disciple_of_yaelindra",
       "name": "Disciple of Yaelindra",
-      "factionKeyword": "HAND",
+      "factionKeyword": "HAND OF THE ARCHON",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -108,7 +139,7 @@
     {
       "id": "fac_hand_of_the_archon_op_crimson_duellist",
       "name": "Crimson Duellist",
-      "factionKeyword": "HAND",
+      "factionKeyword": "HAND OF THE ARCHON",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -151,7 +182,7 @@
     {
       "id": "fac_hand_of_the_archon_op_elixicant",
       "name": "Elixicant",
-      "factionKeyword": "HAND",
+      "factionKeyword": "HAND OF THE ARCHON",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -202,7 +233,7 @@
     {
       "id": "fac_hand_of_the_archon_op_flayer",
       "name": "Flayer",
-      "factionKeyword": "HAND",
+      "factionKeyword": "HAND OF THE ARCHON",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -226,13 +257,32 @@
     {
       "id": "fac_hand_of_the_archon_op_gunner",
       "name": "Gunner",
-      "factionKeyword": "HAND",
+      "factionKeyword": "HAND OF THE ARCHON",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Shredder",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Rending",
+            "Torrent 2\""
+          ]
+        },
+        {
+          "name": "Blaster",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Piercing 2"
+          ]
+        },
         {
           "name": "Array of blades",
           "atk": "3",
@@ -247,13 +297,44 @@
     {
       "id": "fac_hand_of_the_archon_op_heavy_gunner",
       "name": "Heavy Gunner",
-      "factionKeyword": "HAND",
+      "factionKeyword": "HAND OF THE ARCHON",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
       "save": "4+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "Splinter cannon (focused)",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Lethal 5+"
+          ]
+        },
+        {
+          "name": "Splinter cannon (sweeping)",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Lethal 5+",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "Dark lance",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "6/7",
+          "specialRules": [
+            "Heavy (Dash only)",
+            "Piercing 2"
+          ]
+        },
         {
           "name": "Array of blades",
           "atk": "3",
@@ -268,7 +349,7 @@
     {
       "id": "fac_hand_of_the_archon_op_skysplinter_assassin",
       "name": "Skysplinter Assassin",
-      "factionKeyword": "HAND",
+      "factionKeyword": "HAND OF THE ARCHON",
       "keywords": [],
       "apl": 2,
       "move": "7\"",

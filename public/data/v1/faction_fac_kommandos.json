@@ -13,7 +13,28 @@
   ],
   "strategicPloys": [],
   "tacticalPloys": [],
-  "equipment": [],
+  "equipment": [
+    {
+      "id": "fac_kommandos_eq_choppas",
+      "name": "Choppas",
+      "description": ""
+    },
+    {
+      "id": "fac_kommandos_eq_harpoon",
+      "name": "Harpoon",
+      "description": ""
+    },
+    {
+      "id": "fac_kommandos_eq_dynamite",
+      "name": "Dynamite",
+      "description": ""
+    },
+    {
+      "id": "fac_kommandos_eq_collapsible_stocks",
+      "name": "Collapsible Stocks",
+      "description": "Remove the Range weapon rule from the following ranged weapons that friendly **KOMMANDO** operatives have:\r\n- Shokka pistol\r\n- Slugga"
+    }
+  ],
   "operatives": [
     {
       "id": "fac_kommandos_op_kommando_dakka_boy",
@@ -70,6 +91,25 @@
       "save": "5+",
       "wounds": 14,
       "weapons": [
+        {
+          "name": "Big Choppa",
+          "atk": "5",
+          "hit": "3+",
+          "dmg": "5/6",
+          "specialRules": [
+            "-"
+          ]
+        },
+        {
+          "name": "Power klaw",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "5/7",
+          "specialRules": [
+            "Brutal",
+            "Shock"
+          ]
+        },
         {
           "name": "Slugga",
           "atk": "4",

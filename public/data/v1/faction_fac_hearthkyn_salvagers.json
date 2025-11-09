@@ -1,7 +1,7 @@
 {
   "id": "fac_hearthkyn_salvagers",
   "name": "Hearthkyn Salvagers",
-  "factionKeyword": "HEARTHKYN",
+  "factionKeyword": "HEARTHKYN SALVAGER",
   "archetypes": [],
   "summary": "Update 1.1",
   "rules": [
@@ -18,13 +18,43 @@
     {
       "id": "fac_hearthkyn_salvagers_op_theyn",
       "name": "Theyn",
-      "factionKeyword": "HEARTHKYN",
+      "factionKeyword": "HEARTHKYN SALVAGER",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
       "save": "3+",
       "wounds": 9,
       "weapons": [
+        {
+          "name": "EtaCarn plasma pistol",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Ion pistol",
+          "atk": "4",
+          "hit": "3+",
+          "dmg": "3/4",
+          "specialRules": [
+            "Range 8\"",
+            "Piercing Crits 1"
+          ]
+        },
+        {
+          "name": "Concussion gauntlet",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/7",
+          "specialRules": [
+            "Brutal",
+            "Shock"
+          ]
+        },
         {
           "name": "Autoch-pattern bolt pistol",
           "atk": "4",
@@ -87,7 +117,7 @@
     {
       "id": "fac_hearthkyn_salvagers_op_d_zr",
       "name": "Dôzr",
-      "factionKeyword": "HEARTHKYN",
+      "factionKeyword": "HEARTHKYN SALVAGER",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -132,7 +162,7 @@
     {
       "id": "fac_hearthkyn_salvagers_op_field_medic",
       "name": "Field Medic",
-      "factionKeyword": "HEARTHKYN",
+      "factionKeyword": "HEARTHKYN SALVAGER",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -174,7 +204,7 @@
     {
       "id": "fac_hearthkyn_salvagers_op_grenadier",
       "name": "Grenadier",
-      "factionKeyword": "HEARTHKYN",
+      "factionKeyword": "HEARTHKYN SALVAGER",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -228,13 +258,85 @@
     {
       "id": "fac_hearthkyn_salvagers_op_gunner",
       "name": "Gunner",
-      "factionKeyword": "HEARTHKYN",
+      "factionKeyword": "HEARTHKYN SALVAGER",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
       "save": "3+",
       "wounds": 8,
       "weapons": [
+        {
+          "name": "EtaCarn plasma beamer",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Piercing 1",
+            "Beam*"
+          ]
+        },
+        {
+          "name": "HyLAS auto rifle",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Ceaseless",
+            "Rending"
+          ]
+        },
+        {
+          "name": "HyLAS rotary cannon (sweeping)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Ceaseless",
+            "Heavy (Reposition only)",
+            "Saturate",
+            "Torrent 1\""
+          ]
+        },
+        {
+          "name": "HyLAS rotary cannon (focused)",
+          "atk": "5",
+          "hit": "4+",
+          "dmg": "4/5",
+          "specialRules": [
+            "Ceaseless",
+            "Heavy (Reposition only)",
+            "Saturate"
+          ]
+        },
+        {
+          "name": "L7 missile launcher (blast)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "3/5",
+          "specialRules": [
+            "Blast 2\""
+          ]
+        },
+        {
+          "name": "L7 missile launcher (focused)",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "5/6",
+          "specialRules": [
+            "Piercing 1"
+          ]
+        },
+        {
+          "name": "Magna rail rifle",
+          "atk": "4",
+          "hit": "4+",
+          "dmg": "4/2",
+          "specialRules": [
+            "Devastating 3",
+            "Heavy (Dash only)",
+            "Piercing 2"
+          ]
+        },
         {
           "name": "Fists",
           "atk": "3",
@@ -249,7 +351,7 @@
     {
       "id": "fac_hearthkyn_salvagers_op_jump_pack_warrior",
       "name": "Jump Pack Warrior",
-      "factionKeyword": "HEARTHKYN",
+      "factionKeyword": "HEARTHKYN SALVAGER",
       "keywords": [],
       "apl": 2,
       "move": "7\"",
@@ -287,7 +389,7 @@
     {
       "id": "fac_hearthkyn_salvagers_op_kinlynk",
       "name": "Kinlynk",
-      "factionKeyword": "HEARTHKYN",
+      "factionKeyword": "HEARTHKYN SALVAGER",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -317,7 +419,7 @@
     {
       "id": "fac_hearthkyn_salvagers_op_kognit_ar",
       "name": "Kognitâar",
-      "factionKeyword": "HEARTHKYN",
+      "factionKeyword": "HEARTHKYN SALVAGER",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -348,7 +450,7 @@
     {
       "id": "fac_hearthkyn_salvagers_op_loc_tr",
       "name": "Locâtr",
-      "factionKeyword": "HEARTHKYN",
+      "factionKeyword": "HEARTHKYN SALVAGER",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -378,7 +480,7 @@
     {
       "id": "fac_hearthkyn_salvagers_op_lugger",
       "name": "Lugger",
-      "factionKeyword": "HEARTHKYN",
+      "factionKeyword": "HEARTHKYN SALVAGER",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
@@ -408,7 +510,7 @@
     {
       "id": "fac_hearthkyn_salvagers_op_warrior",
       "name": "Warrior",
-      "factionKeyword": "HEARTHKYN",
+      "factionKeyword": "HEARTHKYN SALVAGER",
       "keywords": [],
       "apl": 2,
       "move": "5\"",
