@@ -151,6 +151,7 @@ export default function FactionPage(){
 
   // New structure
   if (factionData && factionData.operatives && Array.isArray(factionData.operatives)) {
+    const factionAnchorId = factionData.id || canonicalFactionId(id)
     return (
       <div className="container">
         <Header/>
@@ -161,7 +162,7 @@ export default function FactionPage(){
           </div>
         </div>
         <div className="card">
-          <h2 style={{marginTop:0}}>{factionData.name}</h2>
+          <h2 id={factionAnchorId} style={{marginTop:0}}>{factionData.name}</h2>
           {factionData.factionKeyword && factionData.factionKeyword !== 'UNKNOWN' && (
             <div style={{marginBottom: '0.5rem'}}>
               <span className="pill" style={{fontSize: '0.9rem', fontWeight: 'bold'}}>
@@ -332,6 +333,7 @@ export default function FactionPage(){
 
   // Old structure fallback
   const groups = factionData || { rules:[], operatives:[], tacops:[], ploys:[], equipment:[] }
+  const fallbackAnchorId = (factionData && factionData.id) || (faction && faction.id) || canonicalFactionId(id)
 
   return (
     <div className="container">
@@ -340,7 +342,7 @@ export default function FactionPage(){
         <FactionSelector currentFactionId={id} />
       </div>
       <div className="card">
-        <h2 style={{marginTop:0}}>{faction?.title}</h2>
+        <h2 id={fallbackAnchorId} style={{marginTop:0}}>{faction?.title}</h2>
         <p>{faction?.body}</p>
 
         {Object.entries(groups).map(([k,arr]) => (

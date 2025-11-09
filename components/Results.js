@@ -30,6 +30,12 @@ function buildResultHref(result) {
     }
   }
 
+  if (result.type === 'faction') {
+    const slug = normalizeFactionId(result.id)
+    const hash = result.id ? `#${result.id}` : ''
+    return slug ? `/factions/${slug}${hash}` : `/factions/${result.id}${hash}`
+  }
+
   return `/item/${result.id}`
 }
 
