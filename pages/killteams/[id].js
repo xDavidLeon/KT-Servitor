@@ -1070,18 +1070,6 @@ export default function KillteamPage() {
         <div className="container">
           <Header />
           <div className="killteam-page-content">
-            {sections.length > 0 && (
-              <aside className="killteam-section-dropdown-sticky">
-                <KillteamSectionNavigator
-                  sections={sections}
-                  activeSectionId={activeSectionId}
-                  onSectionChange={setActiveSectionId}
-                  showTabs={false}
-                  dropdownVariant="icon"
-                  className="section-navigator-compact"
-                />
-              </aside>
-            )}
             <div className="killteam-page-main">
               <div className="card killteam-selector-sticky">
                 <KillteamSelector currentKillteamId={killteam.killteamId} />
@@ -1098,6 +1086,18 @@ export default function KillteamPage() {
               </div>
               {renderActiveSection()}
             </div>
+            {sections.length > 0 && (
+              <aside className="killteam-section-dropdown-sticky">
+                <KillteamSectionNavigator
+                  sections={sections}
+                  activeSectionId={activeSectionId}
+                  onSectionChange={setActiveSectionId}
+                  showTabs={false}
+                  dropdownVariant="icon"
+                  className="section-navigator-compact"
+                />
+              </aside>
+            )}
           </div>
         </div>
       </>
