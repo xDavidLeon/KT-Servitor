@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../components/Header'
 import KillteamSelector from '../../components/KillteamSelector'
@@ -357,6 +357,8 @@ export default function KillteamPage() {
   const [loading, setLoading] = useState(true)
   const [activeSectionId, setActiveSectionId] = useState(null)
   const [pendingHash, setPendingHash] = useState(null)
+  const selectorCardRef = useRef(null)
+  const [isSelectorVisible, setIsSelectorVisible] = useState(true)
 
   useEffect(() => {
     if (!id) return
@@ -835,6 +837,31 @@ export default function KillteamPage() {
     }
   }, [pendingHash, findSectionForAnchor, activeSectionId])
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (typeof IntersectionObserver === 'undefined') return
+    const element = selectorCardRef.current
+    if (!element) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries || entries.length === 0) return
+        const [entry] = entries
+        setIsSelectorVisible(entry?.isIntersecting ?? false)
+      },
+      {
+        rootMargin: '0px 0px -40% 0px',
+        threshold: [0, 0.1]
+      }
+    )
+
+    observer.observe(element)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   if (loading) {
     return (
       <>
@@ -1069,36 +1096,46 @@ export default function KillteamPage() {
         <Seo title={killteamTitle} description={seoDescription} type="article" />
         <div className="container">
           <Header />
-          <div className="killteam-page-content">
-            <div className="killteam-page-main">
-              <div className="card killteam-selector-sticky">
-                <KillteamSelector currentKillteamId={killteam.killteamId} />
-                {sections.length > 0 && (
-                  <div style={{ marginTop: '0.75rem' }}>
-                    <KillteamSectionNavigator
-                      sections={sections}
-                      activeSectionId={activeSectionId}
-                      onSectionChange={setActiveSectionId}
-                      showDropdown={false}
-                    />
-                  </div>
-                )}
-              </div>
-              {renderActiveSection()}
-            </div>
+          <div ref={selectorCardRef} className="card killteam-selector-sticky">
+            <KillteamSelector
+              currentKillteamId={killteam.killteamId}
+              rightControl={
+                sections.length > 0 ? (
+                  <KillteamSectionNavigator
+                    sections={sections}
+                    activeSectionId={activeSectionId}
+                    onSectionChange={setActiveSectionId}
+                    showTabs={false}
+                    dropdownVariant="icon"
+                    className="section-navigator-compact"
+                  />
+                ) : null
+              }
+            />
             {sections.length > 0 && (
-              <aside className="killteam-section-dropdown-sticky">
+              <div style={{ marginTop: '0.75rem' }}>
                 <KillteamSectionNavigator
                   sections={sections}
                   activeSectionId={activeSectionId}
                   onSectionChange={setActiveSectionId}
-                  showTabs={false}
-                  dropdownVariant="icon"
-                  className="section-navigator-compact"
+                  showDropdown={false}
                 />
-              </aside>
+              </div>
             )}
           </div>
+          {sections.length > 0 && !isSelectorVisible && (
+            <div className="section-navigator-floating">
+              <KillteamSectionNavigator
+                sections={sections}
+                activeSectionId={activeSectionId}
+                onSectionChange={setActiveSectionId}
+                showTabs={false}
+                dropdownVariant="icon"
+                className="section-navigator-compact"
+              />
+            </div>
+          )}
+          {renderActiveSection()}
         </div>
       </>
     )
