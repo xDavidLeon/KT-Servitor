@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 
 const SECTIONS = [
   { id: 'killteam-overview', label: 'Overview' },
-  { id: 'killteam-composition', label: 'Composition' },
   { id: 'faction-rules', label: 'Faction Rules' },
   { id: 'operative-types', label: 'Operative Types' },
   { id: 'strategic-ploys', label: 'Strategic Ploys' },
@@ -69,10 +68,6 @@ export default function KillteamSectionNavigator({ killteam, factionRules = [] }
     }
 
     addSection('killteam-overview')
-
-    if (killteam.composition) {
-      addSection('killteam-composition')
-    }
 
     if (Array.isArray(factionRules) && factionRules.length) {
       const ruleChildren = buildChildren(

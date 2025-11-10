@@ -675,14 +675,13 @@ export default function KillteamPage() {
               )}
             </div>
             {killteam.description && <RichText className="muted" text={killteam.description} />}
+            {killteam.composition && (
+              <div id="killteam-composition" style={{ marginTop: '1.5rem' }}>
+                <h3 style={{ marginTop: 0 }}>Composition</h3>
+                <RichText className="muted" text={killteam.composition} />
+              </div>
+            )}
           </section>
-
-          {killteam.composition && (
-            <section id="killteam-composition" className="card" style={{ marginTop: '1rem' }}>
-              <h3 style={{ marginTop: 0 }}>Composition</h3>
-              <RichText className="muted" text={killteam.composition} />
-            </section>
-          )}
 
           {factionRules.length > 0 && (
             <section id="faction-rules" className="card" style={{ marginTop: '1rem' }}>
