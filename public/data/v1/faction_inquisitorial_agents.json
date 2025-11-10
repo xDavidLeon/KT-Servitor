@@ -2684,7 +2684,284 @@
     },
     "operatives": {
       "min": 11,
-      "max": 11
+      "max": 11,
+      "details": [
+        {
+          "name": "Tome-skull",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Autosavant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Questkeeper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death World Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Enlightener",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Requisitioned Gun Servitor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Mystic",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Hexorcist",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Penal Legionnaire",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Pistolier",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Sister of Silence Vigilator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Sister of Silence Prosecutor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Sister of Silence Witchseeker",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tempestus Scion Vox-Operator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tempestus Scion Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tempestus Scion Medic",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tempestus Scion Trooper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Armsman",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Axejack",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis C.A.T. Unit",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Endurant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Gheistskull",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Grenadier",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Hatchcutter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Surveyor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Void-Jammer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kasrkin Combat Medic",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kasrkin Demo-Trooper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kasrkin Recon-Trooper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kasrkin Sharpshooter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kasrkin Trooper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kasrkin Vox-Trooper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kasrkin Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Bruiser",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Confidant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Medic",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Sniper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Sapper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Trooper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Vox-Operator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Zealot",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Castigator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Chirurgant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Leashmaster",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Malocator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Marksman",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Revelatum",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Subductor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "R-VR Cyber-Mastiff",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Vigilant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Vox-Signifier",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

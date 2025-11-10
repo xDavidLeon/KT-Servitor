@@ -732,6 +732,11 @@
           "name": "Legionary Shrivetalon",
           "min": null,
           "max": 1
+        },
+        {
+          "name": "Legionary Warrior",
+          "min": null,
+          "max": null
         }
       ]
     }

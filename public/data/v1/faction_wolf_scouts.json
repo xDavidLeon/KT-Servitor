@@ -520,7 +520,44 @@
     },
     "operatives": {
       "min": 6,
-      "max": 6
+      "max": 6,
+      "details": [
+        {
+          "name": "Fenrisian Wolf",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Fangbearer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Frosteye",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Trapmaster",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Hunter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Rune Priest Skjald",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

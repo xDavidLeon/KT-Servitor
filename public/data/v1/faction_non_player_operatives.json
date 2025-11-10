@@ -871,7 +871,114 @@
     },
     "operatives": {
       "min": 0,
-      "max": null
+      "max": null,
+      "details": [
+        {
+          "name": "Trooper (Brawler)",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Trooper (Marksman)",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tough (Brawler)",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Warrior (Marksman)",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Heavy (Brawler)",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Heavy (Marksman)",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Hormagaunt",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ripper Swarm",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Barbgaunt",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ravener",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Termagant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Von Ryan's Leaper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Flayed One",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Skorpekh Destroyer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Hexmark Destroyer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Royal Warden",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Lychguard",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Canoptek Scarab Swarm",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Necron Warrior",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Canoptek Tomb Crawler",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Canoptek Macrocyte",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

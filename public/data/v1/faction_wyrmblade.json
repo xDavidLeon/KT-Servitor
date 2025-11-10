@@ -675,7 +675,7 @@
     },
     "operatives": {
       "min": 13,
-      "max": 9,
+      "max": 13,
       "details": [
         {
           "name": "Kelermorph",
@@ -711,6 +711,11 @@
           "name": "Sanctus Talon",
           "min": null,
           "max": 1
+        },
+        {
+          "name": "Neophyte Warrior",
+          "min": null,
+          "max": null
         }
       ]
     }

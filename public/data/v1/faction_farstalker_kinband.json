@@ -634,7 +634,7 @@
     },
     "operatives": {
       "min": 11,
-      "max": 10,
+      "max": 11,
       "details": [
         {
           "name": "Kroot Bow-Hunter",
@@ -680,6 +680,11 @@
           "name": "Kroot Tracker",
           "min": null,
           "max": 1
+        },
+        {
+          "name": "Kroot Warrior",
+          "min": null,
+          "max": null
         }
       ]
     }

@@ -628,7 +628,64 @@
     },
     "operatives": {
       "min": 10,
-      "max": 10
+      "max": 10,
+      "details": [
+        {
+          "name": "Cherub",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Conflagrator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Cult Assassin",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Drill Abbot",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Miraculist",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Missionary",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Reliquant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Preacher",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Persecutor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Missionary with flamer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Salvationist",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

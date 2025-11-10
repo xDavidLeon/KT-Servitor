@@ -403,7 +403,39 @@
     },
     "operatives": {
       "min": 5,
-      "max": 5
+      "max": 5,
+      "details": [
+        {
+          "name": "Malignant Plaguecaster",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Plague Marine Bombardier",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Plague Marine Fighter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Plague Marine Icon Bearer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Plague Marine Warrior",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Plague Marine Heavy Gunner",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

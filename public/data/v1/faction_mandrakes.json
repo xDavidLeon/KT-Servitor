@@ -380,7 +380,7 @@
     },
     "operatives": {
       "min": 8,
-      "max": 4,
+      "max": 8,
       "details": [
         {
           "name": "Mandrake Abyssal",
@@ -401,6 +401,11 @@
           "name": "Mandrake Shadeweaver",
           "min": null,
           "max": 1
+        },
+        {
+          "name": "Mandrake Warrior",
+          "min": null,
+          "max": null
         }
       ]
     }

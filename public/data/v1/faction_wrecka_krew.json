@@ -430,7 +430,39 @@
     },
     "operatives": {
       "min": 7,
-      "max": 7
+      "max": 7,
+      "details": [
+        {
+          "name": "Tankbusta Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tankbusta Rokkiteer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Wrecka Bomb Squig",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Breaka Boy Demolisha",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Breaka Boy Fighter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Breaka Boy Krusha",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

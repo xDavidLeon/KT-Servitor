@@ -357,7 +357,34 @@
     },
     "operatives": {
       "min": 8,
-      "max": 8
+      "max": 8,
+      "details": [
+        {
+          "name": "Scout Heavy Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Scout Hunter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Scout Sniper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Scout Tracker",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Scout Warrior",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

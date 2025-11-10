@@ -404,7 +404,39 @@
     },
     "operatives": {
       "min": 7,
-      "max": 7
+      "max": 7,
+      "details": [
+        {
+          "name": "Aspirant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Bloodtaker",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Impaler",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Inciter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Skullclaimer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Stalker",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

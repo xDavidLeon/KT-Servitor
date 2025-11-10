@@ -641,7 +641,64 @@
     },
     "operatives": {
       "min": 9,
-      "max": 9
+      "max": 9,
+      "details": [
+        {
+          "name": "Condemnor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Dialogus",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Duellist",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Exactor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Hospitaller",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Penitent",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Preceptor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Pronatus",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Purgatus",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Reliquarius",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Militant",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

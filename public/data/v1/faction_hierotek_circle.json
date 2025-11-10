@@ -514,7 +514,39 @@
     },
     "operatives": {
       "min": 7,
-      "max": 7
+      "max": 7,
+      "details": [
+        {
+          "name": "Apprentek",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Plasmacyte Accelerator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Plasmacyte Reanimator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Immortal Guardian",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Deathmark",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Immortal Despotek",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

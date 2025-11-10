@@ -431,7 +431,39 @@
     },
     "operatives": {
       "min": 9,
-      "max": 9
+      "max": 9,
+      "details": [
+        {
+          "name": "Auto-proxy Servitor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Breacher Servitor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Combat Servitor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Gun Servitor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Technomedic Servitor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Servitor Underseer",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

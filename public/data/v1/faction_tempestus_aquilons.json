@@ -530,7 +530,44 @@
     },
     "operatives": {
       "min": 10,
-      "max": 10
+      "max": 10,
+      "details": [
+        {
+          "name": "Aquilon Trooper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Aquilon Grenadier",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Aquilon Gunfighter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Aquilon Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Aquilon Marksman",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Aquilon Precursor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Aquilon Servo-sentry",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

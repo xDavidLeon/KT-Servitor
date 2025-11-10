@@ -728,7 +728,64 @@
     },
     "operatives": {
       "min": 10,
-      "max": 10
+      "max": 10,
+      "details": [
+        {
+          "name": "Arbites Vox-Signifier",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Vigilant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Subductor",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Revelatum",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Marksman",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Malocator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Castigator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Chirurgant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Arbites Leashmaster",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "R-VR Cyber-Mastiff",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

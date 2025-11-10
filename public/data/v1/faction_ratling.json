@@ -767,7 +767,69 @@
     },
     "operatives": {
       "min": 7,
-      "max": 10
+      "max": 10,
+      "details": [
+        {
+          "name": "Ratling Battlemutt",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Bullgryn",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ratling Big Shot",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ratling Bomber",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ratling Hardbit",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ratling Raider",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ratling Sneak",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ogryn",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ratling Sniper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ratling Spotter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ratling Stashmaster",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Ratling Vox-thief",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

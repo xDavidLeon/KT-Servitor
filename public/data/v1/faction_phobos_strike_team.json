@@ -658,6 +658,21 @@
           "name": "Incursor Minelayer",
           "min": null,
           "max": 1
+        },
+        {
+          "name": "Infiltrator Warrior",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Incursor Warrior",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Reiver Warrior",
+          "min": null,
+          "max": null
         }
       ]
     }

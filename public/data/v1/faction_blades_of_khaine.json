@@ -342,7 +342,24 @@
     },
     "operatives": {
       "min": 7,
-      "max": 7
+      "max": 7,
+      "details": [
+        {
+          "name": "Dire Avenger Warrior",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Striking Scorpion Warrior",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Howling Banshee Warrior",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

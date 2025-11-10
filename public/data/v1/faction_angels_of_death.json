@@ -723,7 +723,7 @@
     },
     "operatives": {
       "min": 5,
-      "max": 4,
+      "max": 5,
       "details": [
         {
           "name": "Assault Intercessor Grenadier",
@@ -744,6 +744,16 @@
           "name": "Intercessor Gunner",
           "min": null,
           "max": 1
+        },
+        {
+          "name": "Assault Intercessor Warrior",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Intercessor Warrior",
+          "min": null,
+          "max": null
         }
       ]
     }

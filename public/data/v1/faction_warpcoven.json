@@ -662,7 +662,59 @@
     },
     "operatives": {
       "min": 12,
-      "max": 12
+      "max": 12,
+      "details": [
+        {
+          "name": "Sorcerer of Destiny",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Sorcerer of Tempyrion",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Sorcerer of Warpfire",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Rubric Marine Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Rubric Marine Icon Bearer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Rubric Marine Warrior",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tzaangor Champion",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tzaangor Horn Bearer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tzaangor Icon Bearer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tzaangor Warrior",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

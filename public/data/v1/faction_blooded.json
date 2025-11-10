@@ -812,6 +812,26 @@
           "name": "Traitor Thug",
           "min": null,
           "max": 1
+        },
+        {
+          "name": "Traitor Trooper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Traitor Ogryn",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Traitor Enforcer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Traitor Trooper",
+          "min": null,
+          "max": null
         }
       ]
     }

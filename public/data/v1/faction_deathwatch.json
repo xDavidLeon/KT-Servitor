@@ -695,7 +695,59 @@
     },
     "operatives": {
       "min": 5,
-      "max": 5
+      "max": 5,
+      "details": [
+        {
+          "name": "Aegis Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Blademaster Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Bombard Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Breacher Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Demolisher Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Disruptor Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Gunner Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Headtaker Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Horde-slayer Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Marksman Veteran",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

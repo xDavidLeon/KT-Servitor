@@ -615,7 +615,59 @@
     },
     "operatives": {
       "min": 10,
-      "max": 10
+      "max": 10,
+      "details": [
+        {
+          "name": "Navis Armsman",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Hatchcutter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Void-Jammer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Grenadier",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Gheistskull",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Endurant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis C.A.T. Unit",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Axejack",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Navis Surveyor",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

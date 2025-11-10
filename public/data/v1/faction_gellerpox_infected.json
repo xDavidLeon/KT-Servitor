@@ -532,6 +532,21 @@
           "name": "Glitchling",
           "min": 4,
           "max": 4
+        },
+        {
+          "name": "Cursemite",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Eyestinger Swarm",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Sludge-grub",
+          "min": null,
+          "max": null
         }
       ]
     }

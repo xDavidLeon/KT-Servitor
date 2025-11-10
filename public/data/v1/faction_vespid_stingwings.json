@@ -401,7 +401,39 @@
     },
     "operatives": {
       "min": 9,
-      "max": 9
+      "max": 9,
+      "details": [
+        {
+          "name": "Vespid Skyblast",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Vespid Swarmguard",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Vespid Warrior",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Oversight Drone",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Vespid Longsting",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Vespid Shadestrain",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

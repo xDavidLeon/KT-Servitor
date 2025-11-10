@@ -610,7 +610,59 @@
     },
     "operatives": {
       "min": 9,
-      "max": 9
+      "max": 9,
+      "details": [
+        {
+          "name": "Kommando Dakka Boy",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Bomb Squig",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kommando Boy",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kommando Breacha Boy",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kommando Burna Boy",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kommando Comms Boy",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kommando Grot",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kommando Rokkit Boy",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kommando Slasha Boy",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Kommando Snipa Boy",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

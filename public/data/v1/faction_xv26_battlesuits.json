@@ -357,7 +357,44 @@
     },
     "operatives": {
       "min": 6,
-      "max": 6
+      "max": 6,
+      "details": [
+        {
+          "name": "XV26 Designator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "XV26 Infiltrator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "XV26 Neutraliser",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "XV26 Lodestar",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "XV26 Liberator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "MV15 Gun Drone",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "MV75 Marker Drone",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

@@ -748,7 +748,84 @@
     },
     "operatives": {
       "min": 11,
-      "max": 11
+      "max": 11,
+      "details": [
+        {
+          "name": "Blooded Pathfinder",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Transpectral Interference Pathfinder",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Weapons Expert Pathfinder",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Assault Grenadier Pathfinder",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Marksman Pathfinder",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Comms Specialist Pathfinder",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Medical Technician Pathfinder",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Drone Controller Pathfinder",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Shas'La Pathfinder",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "MB3 Recon Drone",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "MV1 Gun Drone",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "MV4 Shield Drone",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "MV7 Marker Drone",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "MV31 Pulse Accelerator Drone",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "MV33 Grav-Inhibiter Drone",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

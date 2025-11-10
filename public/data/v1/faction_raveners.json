@@ -381,7 +381,34 @@
     },
     "operatives": {
       "min": 4,
-      "max": 4
+      "max": 4,
+      "details": [
+        {
+          "name": "Felltalon",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Venomspitter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Warrior",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Wrecker",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tremorscythe",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

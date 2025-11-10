@@ -946,7 +946,7 @@
       ]
     },
     "operatives": {
-      "min": 2,
+      "min": 9,
       "max": null,
       "details": [
         {
@@ -997,6 +997,16 @@
         {
           "name": "Psychic Familiar",
           "min": 2,
+          "max": null
+        },
+        {
+          "name": "Brood Brother Trooper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Brood Brother Trooper",
+          "min": null,
           "max": null
         }
       ]

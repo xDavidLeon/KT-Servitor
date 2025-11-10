@@ -368,7 +368,29 @@
     },
     "operatives": {
       "min": 7,
-      "max": 7
+      "max": 7,
+      "details": [
+        {
+          "name": "Macrocyte Reanimator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Tomb Crawler",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Macrocyte Accelerator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Macrocyte Warrior",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

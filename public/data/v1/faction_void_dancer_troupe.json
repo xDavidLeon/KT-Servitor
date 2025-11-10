@@ -190,7 +190,24 @@
     },
     "operatives": {
       "min": 7,
-      "max": 7
+      "max": 7,
+      "details": [
+        {
+          "name": "Player",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Jester",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Shadowseer",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

@@ -690,7 +690,59 @@
     },
     "operatives": {
       "min": 8,
-      "max": 8
+      "max": 8,
+      "details": [
+        {
+          "name": "Voidscarred Fate Dealer",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Voidscarred Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Voidscarred Heavy Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Voidscarred Kurnathi",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Voidscarred Kurnite Hunter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Voidscarred Shade Runner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Voidscarred Soul Weaver",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Voidscarred Starstorm Duellist",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Voidscarred Warrior",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Voidscarred Way Seeker",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }

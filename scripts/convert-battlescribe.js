@@ -2341,21 +2341,50 @@ async function parseCatalogue(filePath) {
       faction.operativeSelection.leader.details = leaderDetails;
     }
 
-    const operativeDetails = nonLeaderOperativesForDetails
+    const constrainedOperativeDetails = nonLeaderOperativesForDetails
       .filter(op => (op.minSelections !== null && op.minSelections !== undefined && op.minSelections > 0) || (op.maxSelections !== null && op.maxSelections !== undefined && op.maxSelections > 0))
       .map(op => ({ name: op.name, min: op.minSelections, max: op.maxSelections }));
+
+    const detailNames = new Set(constrainedOperativeDetails.map(detail => detail.name));
+    const additionalOperativeDetails = nonLeaderOperativesForDetails
+      .filter(op => !detailNames.has(op.name))
+      .map(op => ({
+        name: op.name,
+        min: (op.minSelections !== undefined && op.minSelections !== null) ? op.minSelections : null,
+        max: (op.maxSelections !== undefined && op.maxSelections !== null) ? op.maxSelections : null
+      }));
+
+    const operativeDetails = [...constrainedOperativeDetails, ...additionalOperativeDetails];
 
     if (operativeDetails.length > 0) {
       faction.operativeSelection.operatives = faction.operativeSelection.operatives || { min: 0, max: null };
 
-      const totalOperativeMin = operativeDetails.reduce((sum, detail) => sum + (detail.min || 0), 0);
-      const hasUnlimitedOperative = operativeDetails.some(detail => detail.max === null || detail.max === undefined);
-      const totalOperativeMax = operativeDetails.reduce((sum, detail) => sum + (detail.max || 0), 0);
+      const totalOperativeMin = constrainedOperativeDetails.reduce((sum, detail) => sum + ((detail.min !== undefined && detail.min !== null) ? detail.min : 0), 0);
+      const hasUnlimitedOperative = constrainedOperativeDetails.some(detail => detail.max === null || detail.max === undefined);
+      const totalOperativeMax = constrainedOperativeDetails.reduce((sum, detail) => sum + ((detail.max !== undefined && detail.max !== null) ? detail.max : 0), 0);
 
+      const currentMin = faction.operativeSelection.operatives.min;
       if (totalOperativeMin > 0) {
-        faction.operativeSelection.operatives.min = totalOperativeMin;
+        if (currentMin === null || currentMin === undefined || currentMin === 0) {
+          faction.operativeSelection.operatives.min = totalOperativeMin;
+        } else {
+          faction.operativeSelection.operatives.min = Math.max(currentMin, totalOperativeMin);
+        }
       }
-      faction.operativeSelection.operatives.max = hasUnlimitedOperative ? null : (totalOperativeMax > 0 ? totalOperativeMax : faction.operativeSelection.operatives.max);
+
+      const currentMax = faction.operativeSelection.operatives.max;
+      if (hasUnlimitedOperative) {
+        faction.operativeSelection.operatives.max = null;
+      } else if (totalOperativeMax > 0) {
+        if (currentMax === null || currentMax === undefined) {
+          faction.operativeSelection.operatives.max = totalOperativeMax;
+        } else if (currentMax === 0) {
+          faction.operativeSelection.operatives.max = totalOperativeMax;
+        } else {
+          faction.operativeSelection.operatives.max = Math.max(currentMax, totalOperativeMax);
+        }
+      }
+
       faction.operativeSelection.operatives.details = operativeDetails;
     }
   }

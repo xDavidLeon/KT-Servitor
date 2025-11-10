@@ -638,7 +638,64 @@
     },
     "operatives": {
       "min": 9,
-      "max": 9
+      "max": 9,
+      "details": [
+        {
+          "name": "Death Korps Bruiser",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Confidant",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Gunner",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Sniper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Zealot",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Vox-Operator",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Veteran",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Spotter",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Sapper",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Medic",
+          "min": null,
+          "max": null
+        },
+        {
+          "name": "Death Korps Trooper",
+          "min": null,
+          "max": null
+        }
+      ]
     }
   }
 }
