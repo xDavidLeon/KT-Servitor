@@ -839,9 +839,19 @@ export default function KillteamPage() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return
-    if (typeof IntersectionObserver === 'undefined') return
     const element = selectorCardRef.current
     if (!element) return
+
+    if (typeof IntersectionObserver === 'undefined') {
+      const handleScroll = () => {
+        const rect = element.getBoundingClientRect()
+        const isVisible = rect.bottom > 0 && rect.top < window.innerHeight
+        setIsSelectorVisible(isVisible)
+      }
+      handleScroll()
+      window.addEventListener('scroll', handleScroll, { passive: true })
+      return () => window.removeEventListener('scroll', handleScroll)
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -850,17 +860,15 @@ export default function KillteamPage() {
         setIsSelectorVisible(entry?.isIntersecting ?? false)
       },
       {
-        rootMargin: '0px 0px -40% 0px',
+        rootMargin: '0px 0px -25% 0px',
         threshold: [0, 0.1]
       }
     )
 
     observer.observe(element)
 
-    return () => {
-      observer.disconnect()
-    }
-  }, [])
+    return () => observer.disconnect()
+  }, [killteam, sections.length])
 
   if (loading) {
     return (
