@@ -88,8 +88,12 @@ export default function Header({ version, status }) {
 
   async function handleExport() {
     const { db } = await import('../lib/db');
-    const all = await db.articles.toArray();
-    download(`ktdata-${new Date().toISOString().slice(0,10)}.json`, JSON.stringify(all, null, 2));
+    const [articles, killteams] = await Promise.all([
+      db.articles.toArray(),
+      db.killteams.toArray()
+    ]);
+    const payload = { generatedAt: new Date().toISOString(), articles, killteams };
+    download(`ktdata-${new Date().toISOString().slice(0,10)}.json`, JSON.stringify(payload, null, 2));
     setOpen(false);
   }
 

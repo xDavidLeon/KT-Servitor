@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import SearchBox from '../components/SearchBox'
 import Results from '../components/Results'
-import { ensureIndex } from '../lib/search'
+import { ensureIndex, getAllIndexedDocuments } from '../lib/search'
 import { checkForUpdates } from '../lib/update'
-import { db } from '../lib/db'
 
 
 function rankResults(results, query) {
@@ -54,32 +53,35 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       const upd = await checkForUpdates()
-      if (upd.error) setStatus('Offline (using cached data)')
-      else setStatus(upd.updated ? 'Data updated' : 'Up to date')
+        if (upd.error) setStatus('Offline (using cached data)')
+        else if (upd.warning) setStatus('Partial data update')
+        else setStatus(upd.updated ? 'Data updated' : 'Up to date')
       if (upd.version) setVersion(upd.version)
   
       const idx = await ensureIndex()
       setLoading(false)
   
       // if no search query, show all items
-      if (!q.trim()) {
-        const all = await db.articles.orderBy('title').toArray()
-        setRes(all)
-      } else {
-        setRes(rankResults(idx.search(q, { prefix: true, fuzzy: 0.2 }), q))
-      }
+        if (!q.trim()) {
+          const allDocs = await getAllIndexedDocuments()
+          const sorted = [...allDocs].sort((a, b) => (a.title || '').localeCompare(b.title || ''))
+          setRes(sorted)
+        } else {
+          setRes(rankResults(idx.search(q, { prefix: true, fuzzy: 0.2 }), q))
+        }
     })()
   }, [])
   
   useEffect(() => {
     (async () => {
       const idx = await ensureIndex()
-      if (!q.trim()) {
-        const all = await db.articles.orderBy('title').toArray()
-        setRes(all)
-      } else {
-        setRes(rankResults(idx.search(q, { prefix: true, fuzzy: 0.2 }), q))
-      }
+        if (!q.trim()) {
+          const allDocs = await getAllIndexedDocuments()
+          const sorted = [...allDocs].sort((a, b) => (a.title || '').localeCompare(b.title || ''))
+          setRes(sorted)
+        } else {
+          setRes(rankResults(idx.search(q, { prefix: true, fuzzy: 0.2 }), q))
+        }
     })()
   }, [q])
 

@@ -1,27 +1,9 @@
 // components/Nav.js
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
 
 export default function Nav(){
   const r = useRouter()
-  const [firstFactionId, setFirstFactionId] = useState(null)
-  
-  useEffect(() => {
-    // Load factions and get the first one
-    fetch('/data/v1/factions.json')
-      .then(res => res.json())
-      .then(factions => {
-        // Sort alphabetically and get the first one
-        const sorted = factions.sort((a, b) => a.name.localeCompare(b.name))
-        if (sorted.length > 0) {
-          // Remove 'fac_' prefix if present for the URL
-          const id = sorted[0].id.startsWith('fac_') ? sorted[0].id.substring(4) : sorted[0].id
-          setFirstFactionId(id)
-        }
-      })
-      .catch(err => console.error('Error loading factions:', err))
-  }, [])
   
   const Item = ({href,label,isActive}) => {
     const currentPath = r.asPath?.split('?')[0] || r.pathname
@@ -41,13 +23,10 @@ export default function Nav(){
     )
   }
   
-  // Use first faction if available, otherwise fallback to /factions
-  const factionRulesHref = firstFactionId ? `/factions/${firstFactionId}` : '/factions'
-  
   const navItems = [
     { key: 'home', href: '/', label: 'Home', isActive: (path) => path === '/' },
     { key: 'sequence', href: '/sequence', label: 'Game Sequence', isActive: (path) => path === '/sequence' || path.startsWith('/sequence/') },
-    { key: 'factions', href: factionRulesHref, label: 'Faction Rules', isActive: (path) => path === '/factions' || path.startsWith('/factions/') },
+    { key: 'killteams', href: '/killteams', label: 'Kill Teams', isActive: (path) => path === '/killteams' || path.startsWith('/killteams/') },
     { key: 'rules', href: '/rules', label: 'Game Rules', isActive: (path) => path === '/rules' || path.startsWith('/rules/') }
   ]
 

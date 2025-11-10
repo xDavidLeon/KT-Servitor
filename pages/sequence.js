@@ -10,15 +10,15 @@ export default function Sequence(){
   const [version,setVersion] = useState(null)
   const [status,setStatus] = useState('')
 
-  useEffect(()=>{ (async()=>{
-    const upd = await checkForUpdates()
-    setStatus(upd.error ? 'Offline' : 'Up to date')
-    if (upd.version) setVersion(upd.version)
-    await ensureIndex()
-    const rows = await db.articles.where('type').equals('sequence_step').toArray()
-    rows.sort((a,b)=> (a.order||0) - (b.order||0))
-    setSteps(rows)
-  })() },[])
+    useEffect(()=>{ (async()=>{
+      const upd = await checkForUpdates()
+      setStatus(upd.error ? 'Offline' : (upd.warning ? 'Partial update' : 'Up to date'))
+      if (upd.version) setVersion(upd.version)
+      await ensureIndex()
+      const rows = await db.articles.where('type').equals('sequence_step').toArray()
+      rows.sort((a,b)=> (a.order||0) - (b.order||0))
+      setSteps(rows)
+    })() },[])
 
   return (
     <div className="container">
