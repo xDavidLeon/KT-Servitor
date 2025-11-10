@@ -48,16 +48,20 @@ export default function Results({ results, loading }) {
     setPage(0)
   }, [results])
 
-  if (loading) return <div className="card">Building index…</div>
-  if (!results) return null
-  if (results.length === 0) return <div className="card">No results.</div>
-
-  const totalPages = Math.max(1, Math.ceil(results.length / PAGE_SIZE))
+  const safeResults = Array.isArray(results) ? results : []
+  const totalPages = Math.max(1, Math.ceil(safeResults.length / PAGE_SIZE))
   const clampedPage = Math.min(page, totalPages - 1)
   const start = clampedPage * PAGE_SIZE
-  const end = Math.min(start + PAGE_SIZE, results.length)
+  const end = Math.min(start + PAGE_SIZE, safeResults.length)
 
-  const pageResults = useMemo(() => results.slice(start, end), [results, start, end])
+  const pageResults = useMemo(
+    () => safeResults.slice(start, end),
+    [safeResults, start, end]
+  )
+
+  if (loading) return <div className="card">Building index…</div>
+  if (!results) return null
+  if (safeResults.length === 0) return <div className="card">No results.</div>
 
   const canPrev = clampedPage > 0
   const canNext = clampedPage < totalPages - 1
@@ -74,7 +78,7 @@ export default function Results({ results, loading }) {
     <div className="card">
       <div className="results-summary">
         <span>
-          Showing <strong>{start + 1}</strong>–<strong>{end}</strong> of {results.length} results
+            Showing <strong>{start + 1}</strong>–<strong>{end}</strong> of {safeResults.length} results
         </span>
         <div className="results-pagination">
           <button
