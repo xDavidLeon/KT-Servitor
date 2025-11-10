@@ -8,10 +8,10 @@ const MAX_RECENT = 3
 const FACTION_LABELS = {
   IMP: 'Imperium',
   CHAOS: 'Chaos',
-  SPEC: 'Other',
-  HBR: 'Other'
+  SPEC: 'Spec Ops',
+  HBR: 'Homebrew'
 }
-const FACTION_ORDER = ['Imperium', 'Chaos', 'Other', 'Xenos']
+const FACTION_ORDER = ['Imperium', 'Chaos', 'Spec Ops', 'Homebrew', 'Xenos']
 
 function getRecentKillteams() {
   if (typeof window === 'undefined') return []
