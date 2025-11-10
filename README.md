@@ -1,6 +1,10 @@
 # KT Servitor
 KT Servitor is a free web-based app for running your Kill Team 2024 games, review game and faction rules and check operative stats.
 
+A live website is available at [https://ktservitor.xdavidleon.com/](https://ktservitor.xdavidleon.com/).
+
+You can deploy your own version of the site by downloading this repository and following these instructions.
+
 ## Run
 ```bash
 npm i
@@ -45,12 +49,12 @@ The `netlify.toml` file is already configured with:
 
 ## Custom Domain Setup
 
-To use a custom domain (e.g., `ktservitor.xdavidleon.com`):
+To use a custom domain (e.g., `ktservitor.your-domain.com`):
 
 1. **In Netlify Dashboard:**
    - Go to your site → **Site configuration** → **Domain management**
    - Click **Add custom domain**
-   - Enter your domain: `ktservitor.xdavidleon.com`
+   - Enter your domain: `ktservitor.your-domain.com`
    - Click **Verify**
 
 2. **Configure DNS:**
