@@ -85,7 +85,7 @@ export default function Home() {
   useEffect(() => {
     let cancelled = false
 
-    (async () => {
+    const run = async () => {
       try {
         await checkForUpdates()
       } catch (err) {
@@ -100,7 +100,9 @@ export default function Home() {
       if (!cancelled) {
         setRes(results)
       }
-    })()
+    }
+
+    run()
 
     return () => {
       cancelled = true

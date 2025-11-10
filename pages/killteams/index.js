@@ -24,7 +24,7 @@ export default function Killteams() {
   useEffect(() => {
     let cancelled = false
 
-    (async () => {
+    const run = async () => {
       try {
         await checkForUpdates()
       } catch (err) {
@@ -37,7 +37,9 @@ export default function Killteams() {
       if (!cancelled) {
         setKillteams(rows)
       }
-    })()
+    }
+
+    run()
 
     return () => {
       cancelled = true

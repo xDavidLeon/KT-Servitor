@@ -9,9 +9,10 @@ import Seo from '../components/Seo'
 export default function Sequence(){
   const [steps,setSteps] = useState([])
 
-  useEffect(()=>{ 
+  useEffect(() => { 
     let cancelled = false
-    (async()=>{
+
+    const run = async () => {
       try {
         await checkForUpdates()
       } catch (err) {
@@ -23,7 +24,10 @@ export default function Sequence(){
       if (!cancelled) {
         setSteps(rows)
       }
-    })()
+    }
+
+    run()
+
     return () => { cancelled = true }
   },[])
 
