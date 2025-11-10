@@ -37,7 +37,12 @@ export function scrollToKillteamSection(sectionId) {
 export default function KillteamSectionNavigator({
   sections = [],
   activeSectionId,
-  onSectionChange
+  onSectionChange,
+  showTabs = true,
+  showDropdown = true,
+  dropdownVariant = 'default',
+  className = '',
+  style = {}
 }) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -76,6 +81,61 @@ export default function KillteamSectionNavigator({
   const dropdownItems = Array.isArray(activeSection.items) ? activeSection.items : []
   const hasDropdownItems = dropdownItems.length > 0
 
+  const dropdownLabel = hasDropdownItems
+    ? `Jump within ${activeSection?.label}...`
+    : 'No subsections available'
+
+  const toggleDropdown = () => {
+    if (!hasDropdownItems) return
+    setIsOpen(prev => !prev)
+  }
+
+  const containerClassName = ['section-navigator']
+  if (className) {
+    containerClassName.push(className)
+  }
+
+  const containerStyle = {
+    position: 'relative',
+    ...style
+  }
+
+  const renderDropdownTrigger = () => {
+    if (!showDropdown) return null
+
+    if (dropdownVariant === 'icon') {
+      return (
+        <button
+          type="button"
+          className="section-dropdown-trigger icon"
+          onClick={toggleDropdown}
+          disabled={!hasDropdownItems}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+          aria-label={dropdownLabel}
+        >
+          <span aria-hidden="true">⋮</span>
+        </button>
+      )
+    }
+
+    return (
+      <button
+        type="button"
+        className="section-dropdown-trigger"
+        onClick={toggleDropdown}
+        disabled={!hasDropdownItems}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+      >
+        <span>
+          {dropdownLabel}
+        </span>
+        <span className="section-dropdown-caret">{hasDropdownItems ? (isOpen ? '▲' : '▼') : ''}</span>
+      </button>
+    )
+  }
+
   const handleTabSelect = (sectionId) => {
     if (!sectionId || sectionId === activeSection.id) return
     onSectionChange?.(sectionId)
@@ -92,40 +152,30 @@ export default function KillteamSectionNavigator({
   }
 
   return (
-    <div className="section-navigator" style={{ position: 'relative' }}>
-      <div className="killteam-tabs" role="tablist" aria-label="Kill team sections">
-        {sections.map(section => {
-          const isActive = section.id === activeSection.id
-          return (
-            <button
-              key={section.id}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              className={`killteam-tab${isActive ? ' active' : ''}`}
-              onClick={() => handleTabSelect(section.id)}
-            >
-              {section.label}
-            </button>
-          )
-        })}
-      </div>
+    <div className={containerClassName.join(' ')} style={containerStyle}>
+      {showTabs && (
+        <div className="killteam-tabs" role="tablist" aria-label="Kill team sections">
+          {sections.map(section => {
+            const isActive = section.id === activeSection.id
+            return (
+              <button
+                key={section.id}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                className={`killteam-tab${isActive ? ' active' : ''}`}
+                onClick={() => handleTabSelect(section.id)}
+              >
+                {section.label}
+              </button>
+            )
+          })}
+        </div>
+      )}
 
-      <button
-        type="button"
-        className="section-dropdown-trigger"
-        onClick={() => hasDropdownItems && setIsOpen(!isOpen)}
-        disabled={!hasDropdownItems}
-      >
-        <span>
-          {hasDropdownItems
-            ? `Jump within ${activeSection.label}...`
-            : 'No subsections available'}
-        </span>
-        <span className="section-dropdown-caret">{hasDropdownItems ? (isOpen ? '▲' : '▼') : ''}</span>
-      </button>
+      {showDropdown && renderDropdownTrigger()}
 
-      {isOpen && hasDropdownItems && (
+      {showDropdown && isOpen && hasDropdownItems && (
         <div className="section-dropdown">
           {dropdownItems.map(item => {
             const isHeading = item?.type === 'heading'
