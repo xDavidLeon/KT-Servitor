@@ -23,12 +23,11 @@ export default function Nav(){
     )
   }
   
-  const navItems = [
-    { key: 'home', href: '/', label: 'Home', isActive: (path) => path === '/' },
-    { key: 'sequence', href: '/sequence', label: 'Game Sequence', isActive: (path) => path === '/sequence' || path.startsWith('/sequence/') },
-    { key: 'killteams', href: '/killteams', label: 'Kill Teams', isActive: (path) => path === '/killteams' || path.startsWith('/killteams/') },
-    { key: 'rules', href: '/rules', label: 'Game Rules', isActive: (path) => path === '/rules' || path.startsWith('/rules/') }
-  ]
+    const navItems = [
+      { key: 'home', href: '/', label: 'Home', isActive: (path) => path === '/' },
+      { key: 'sequence', href: '/sequence', label: 'Game Sequence', isActive: (path) => path === '/sequence' || path.startsWith('/sequence/') },
+      { key: 'killteams', href: '/killteams', label: 'Kill Teams', isActive: (path) => path === '/killteams' || path.startsWith('/killteams/') }
+    ]
 
   return (
     <nav className="nav-links" aria-label="Primary navigation">
