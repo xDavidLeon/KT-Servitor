@@ -4,9 +4,8 @@ import { useState, useEffect } from 'react'
 const SECTIONS = [
   { id: 'killteam-overview', label: 'Overview' },
   { id: 'faction-rules', label: 'Faction Rules' },
-  { id: 'operative-types', label: 'Operative Types' },
-  { id: 'strategic-ploys', label: 'Strategic Ploys' },
-  { id: 'firefight-ploys', label: 'Firefight Ploys' },
+  { id: 'operatives', label: 'Operatives' },
+  { id: 'ploys', label: 'Ploys' },
   { id: 'equipment', label: 'Equipment' }
 ]
 
@@ -67,45 +66,56 @@ export default function KillteamSectionNavigator({ killteam, factionRules = [] }
         .filter(Boolean)
     }
 
-    addSection('killteam-overview')
+      addSection('killteam-overview')
 
-    if (Array.isArray(factionRules) && factionRules.length) {
-      const ruleChildren = buildChildren(
-        factionRules,
-        (rule, index) => rule?.anchorId || (rule?.name ? `faction-rule-${index + 1}` : null),
-        (rule, index) => rule?.name || `Faction Rule ${index + 1}`
-      )
-      addSection('faction-rules', ruleChildren)
-    }
+      if (Array.isArray(factionRules) && factionRules.length) {
+        const ruleChildren = buildChildren(
+          factionRules,
+          (rule, index) => rule?.anchorId || (rule?.name ? `faction-rule-${index + 1}` : null),
+          (rule, index) => rule?.name || `Faction Rule ${index + 1}`
+        )
+        addSection('faction-rules', ruleChildren)
+      }
 
-    if (Array.isArray(killteam.opTypes) && killteam.opTypes.length) {
-      const operativeChildren = buildChildren(
-        killteam.opTypes,
-        (op) => op?.opTypeId ? `operative-${op.opTypeId}` : null,
-        (op, index) => op?.opTypeName || op?.opName || `Operative ${index + 1}`
-      )
-      addSection('operative-types', operativeChildren)
-    }
+      if (Array.isArray(killteam.opTypes) && killteam.opTypes.length) {
+        const operativeChildren = buildChildren(
+          killteam.opTypes,
+          (op) => op?.opTypeId ? `operative-${op.opTypeId}` : null,
+          (op, index) => op?.opTypeName || op?.opName || `Operative ${index + 1}`
+        )
+        addSection('operatives', operativeChildren)
+      }
 
-    const strategicPloys = (killteam.ploys || []).filter(ploy => ploy?.ployType === 'S')
-    if (strategicPloys.length) {
-      const strategicChildren = buildChildren(
-        strategicPloys,
+      const strategyPloys = (killteam.ploys || []).filter(ploy => ploy?.ployType === 'S')
+      const firefightPloys = (killteam.ploys || []).filter(ploy => ploy?.ployType && ploy.ployType !== 'S')
+
+      const strategyChildren = buildChildren(
+        strategyPloys,
         (ploy) => ploy?.ployId ? `ploy-${ploy.ployId}` : null,
-        (ploy, index) => ploy?.ployName || `Strategic Ploy ${index + 1}`
+        (ploy, index) => ploy?.ployName || `Strategy Ploy ${index + 1}`
       )
-      addSection('strategic-ploys', strategicChildren)
-    }
 
-    const firefightPloys = (killteam.ploys || []).filter(ploy => ploy?.ployType && ploy.ployType !== 'S')
-    if (firefightPloys.length) {
       const firefightChildren = buildChildren(
         firefightPloys,
         (ploy) => ploy?.ployId ? `ploy-${ploy.ployId}` : null,
         (ploy, index) => ploy?.ployName || `Firefight Ploy ${index + 1}`
       )
-      addSection('firefight-ploys', firefightChildren)
-    }
+
+      if (strategyChildren.length || firefightChildren.length) {
+        const ployChildren = []
+
+        if (strategyChildren.length) {
+          ployChildren.push({ id: 'strategy-ploys', label: 'Strategy Ploys' })
+          ployChildren.push(...strategyChildren)
+        }
+
+        if (firefightChildren.length) {
+          ployChildren.push({ id: 'firefight-ploys', label: 'Firefight Ploys' })
+          ployChildren.push(...firefightChildren)
+        }
+
+        addSection('ploys', ployChildren)
+      }
 
     if (Array.isArray(killteam.equipments) && killteam.equipments.length) {
       const equipmentChildren = buildChildren(
