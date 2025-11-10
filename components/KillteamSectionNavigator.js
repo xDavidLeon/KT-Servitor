@@ -5,6 +5,7 @@ const SECTIONS = [
   { id: 'killteam-overview', label: 'Overview' },
   { id: 'killteam-composition', label: 'Composition' },
   { id: 'team-abilities', label: 'Team Abilities' },
+  { id: 'team-options', label: 'Team Options' },
   { id: 'operative-types', label: 'Operative Types' },
   { id: 'strategic-ploys', label: 'Strategic Ploys' },
   { id: 'firefight-ploys', label: 'Firefight Ploys' },
@@ -34,7 +35,7 @@ function scrollToSection(sectionId) {
   })
 }
 
-export default function KillteamSectionNavigator({ killteam, teamAbilities = [] }) {
+export default function KillteamSectionNavigator({ killteam, teamAbilities = [], teamOptions = [] }) {
   const [isOpen, setIsOpen] = useState(false)
   const [availableSections, setAvailableSections] = useState([])
 
@@ -76,6 +77,15 @@ export default function KillteamSectionNavigator({ killteam, teamAbilities = [] 
       addSection('team-abilities', abilityChildren)
     }
 
+    if (Array.isArray(teamOptions) && teamOptions.length) {
+      const optionChildren = buildChildren(
+        teamOptions,
+        (option, index) => option?.anchorId || (option?.name ? `team-option-${index + 1}` : null),
+        (option, index) => option?.name || `Team Option ${index + 1}`
+      )
+      addSection('team-options', optionChildren)
+    }
+
     if (Array.isArray(killteam.opTypes) && killteam.opTypes.length) {
       const operativeChildren = buildChildren(
         killteam.opTypes,
@@ -115,7 +125,7 @@ export default function KillteamSectionNavigator({ killteam, teamAbilities = [] 
     }
 
     setAvailableSections(sections)
-  }, [killteam, teamAbilities])
+  }, [killteam, teamAbilities, teamOptions])
 
   useEffect(() => {
     const handleClickOutside = (e) => {
