@@ -11,7 +11,7 @@ const FACTION_LABELS = {
   SPEC: 'Spec Ops',
   HBR: 'Homebrew'
 }
-const FACTION_ORDER = ['Imperium', 'Chaos', 'Spec Ops', 'Homebrew', 'Xenos']
+const FACTION_ORDER = ['Imperium', 'Chaos', 'Xenos', 'Spec Ops', 'Homebrew']
 
 function getRecentKillteams() {
   if (typeof window === 'undefined') return []
