@@ -1072,7 +1072,7 @@ export default function KillteamPage() {
         <div className="card killteam-selector-sticky">
             <KillteamSelector
               currentKillteamId={killteam.killteamId}
-              leftControl={
+              rightControl={
                 sections.length > 0 ? (
                   <KillteamSectionNavigator
                     sections={sections}

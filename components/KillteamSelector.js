@@ -38,7 +38,7 @@ function sortKillteams(list) {
   })
 }
 
-export default function KillteamSelector({ currentKillteamId, leftControl = null }) {
+export default function KillteamSelector({ currentKillteamId, leftControl = null, rightControl = null }) {
   const [killteams, setKillteams] = useState([])
   const [recentIds, setRecentIds] = useState([])
   const [isOpen, setIsOpen] = useState(false)
@@ -225,6 +225,16 @@ export default function KillteamSelector({ currentKillteamId, leftControl = null
             {isOpen ? '▲' : '▼'}
           </span>
         </button>
+        {rightControl && (
+          <div
+            style={{
+              display: 'inline-flex',
+              flexShrink: 0
+            }}
+          >
+            {rightControl}
+          </div>
+        )}
       </div>
 
       {isOpen && (
