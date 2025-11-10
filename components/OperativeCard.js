@@ -2,11 +2,21 @@ import RichText from './RichText'
 
 export default function OperativeCard({ operative }) {
   const anchorId = operative?.id ? `operative-${operative.id}` : undefined
+  const baseSizeText = (() => {
+    const value = operative?.baseSize
+    if (value === null || value === undefined || value === '') return null
+    const stringValue = String(value).trim()
+    if (!stringValue) return null
+    return stringValue.toLowerCase().endsWith('mm') ? stringValue : `${stringValue}mm`
+  })()
 
   return (
     <div id={anchorId} className="operative-card">
       <div className="operative-header">
         <h4 style={{ margin: 0 }}>{operative.name || operative.title}</h4>
+        {baseSizeText && (
+          <span className="operative-base-size">{baseSizeText}</span>
+        )}
       </div>
       
       <div className="operative-stats">
