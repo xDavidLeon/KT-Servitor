@@ -51,6 +51,39 @@ export default function Home() {
   const [version, setVersion] = useState(null)
   const [status, setStatus] = useState('Checking for data updates…')
 
+  const runSearch = async (query, idx) => {
+    const mini = idx || await ensureIndex()
+    const trimmed = query.trim()
+    if (!trimmed) {
+      const allDocs = await getAllIndexedDocuments()
+      return [...allDocs].sort((a, b) => (a.title || '').localeCompare(b.title || ''))
+    }
+
+    const primary = mini.search(trimmed, { prefix: true, fuzzy: 0.2 })
+    if (primary.length) {
+      return rankResults(primary, trimmed)
+    }
+
+    const norm = trimmed.toLowerCase()
+    const allDocs = await getAllIndexedDocuments()
+    const fallbackCandidates = allDocs.filter(doc => {
+      const fields = [
+        doc.title,
+        doc.killteamName,
+        doc.killteamDisplayName,
+        ...(Array.isArray(doc.tags) ? doc.tags : []),
+        doc.body
+      ]
+
+      return fields.some(value => {
+        if (!value) return false
+        return value.toString().toLowerCase().includes(norm)
+      })
+    })
+
+    return rankResults(fallbackCandidates, trimmed)
+  }
+
   useEffect(() => {
     (async () => {
       const upd = await checkForUpdates()
@@ -62,27 +95,16 @@ export default function Home() {
       const idx = await ensureIndex()
       setLoading(false)
   
-      // if no search query, show all items
-        if (!q.trim()) {
-          const allDocs = await getAllIndexedDocuments()
-          const sorted = [...allDocs].sort((a, b) => (a.title || '').localeCompare(b.title || ''))
-          setRes(sorted)
-        } else {
-          setRes(rankResults(idx.search(q, { prefix: true, fuzzy: 0.2 }), q))
-        }
+      const results = await runSearch(q, idx)
+      setRes(results)
     })()
   }, [])
   
   useEffect(() => {
     (async () => {
       const idx = await ensureIndex()
-        if (!q.trim()) {
-          const allDocs = await getAllIndexedDocuments()
-          const sorted = [...allDocs].sort((a, b) => (a.title || '').localeCompare(b.title || ''))
-          setRes(sorted)
-        } else {
-          setRes(rankResults(idx.search(q, { prefix: true, fuzzy: 0.2 }), q))
-        }
+      const results = await runSearch(q, idx)
+      setRes(results)
     })()
   }, [q])
 
