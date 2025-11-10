@@ -110,59 +110,71 @@ export default function Header({ version, status }) {
 
   return (
     <div className="card header-sticky">
-      <div
-        className="header-top-row"
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: '0.75rem',
-          flexWrap: 'wrap'
-        }}
-      >
-          <div className="heading">
-          <h1 style={{ margin: 0 }}>
-            KT Servitor
-          </h1>
-        </div>
-
         <div
-          className="muted"
-          style={{ fontSize: '.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+          className="header-top-row"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr auto 1fr',
+            alignItems: 'center',
+            gap: '0.75rem'
+          }}
         >
-            {displayStatus}
-          <button
-            id="hdr-gear"
-            onClick={() => setOpen(v => !v)}
-            title="Menu"
+          <div className="heading" style={{ gridColumn: 2, justifySelf: 'center', textAlign: 'center' }}>
+            <h1
+              style={{
+                margin: 0,
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em'
+              }}
+            >
+              KT SERVITOR
+            </h1>
+          </div>
+
+          <div
+            className="muted"
             style={{
-              background: 'none',
-              border: '1px solid #333',
-              borderRadius: '50%',
-              width: '1.9rem',
-              height: '1.9rem',
-              color: 'var(--muted)',
-              fontSize: '1.1rem',
-              cursor: 'pointer',
-              transition: '0.2s',
+              gridColumn: 3,
+              justifySelf: 'end',
+              fontSize: '.9rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem'
             }}
-            onMouseOver={(e) => (e.target.style.color = 'var(--accent)')}
-            onMouseOut={(e) => (e.target.style.color = 'var(--muted)')}
           >
-            ⚙️
-          </button>
-          {open && (
-            <div className="menu" id="hdr-gear">
-              <button onClick={handleForceUpdate}>Force update</button>
-              <div className="sep"></div>
-              <button onClick={handleExport}>Export data (JSON)</button>
-              <div className="sep"></div>
-              <button onClick={handleReset}>Reset data</button>
-              <div className="sep"></div>
-              <button onClick={handleAbout}>About</button>
-            </div>
-          )}
-        </div>
+            {displayStatus}
+            <button
+              id="hdr-gear"
+              onClick={() => setOpen(v => !v)}
+              title="Menu"
+              style={{
+                background: 'none',
+                border: '1px solid #333',
+                borderRadius: '50%',
+                width: '1.9rem',
+                height: '1.9rem',
+                color: 'var(--muted)',
+                fontSize: '1.1rem',
+                cursor: 'pointer',
+                transition: '0.2s'
+              }}
+              onMouseOver={(e) => (e.target.style.color = 'var(--accent)')}
+              onMouseOut={(e) => (e.target.style.color = 'var(--muted)')}
+            >
+              ⚙️
+            </button>
+            {open && (
+              <div className="menu" id="hdr-gear">
+                <button onClick={handleForceUpdate}>Force update</button>
+                <div className="sep"></div>
+                <button onClick={handleExport}>Export data (JSON)</button>
+                <div className="sep"></div>
+                <button onClick={handleReset}>Reset data</button>
+                <div className="sep"></div>
+                <button onClick={handleAbout}>About</button>
+              </div>
+            )}
+          </div>
       </div>
 
       <div style={{ marginTop: '0.5rem' }}>
