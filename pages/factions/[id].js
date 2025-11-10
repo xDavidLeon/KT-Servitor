@@ -88,7 +88,8 @@ function buildFactionFromArticles(baseRecord, relatedArticles, canonicalId) {
 }
 
 export default function FactionPage(){
-  const { query:{id} } = useRouter()
+  const router = useRouter()
+  const { id } = router.query
   const [faction,setFaction] = useState(null)
   const [factionData,setFactionData] = useState(null) // New structure: complete faction object
 
@@ -147,6 +148,35 @@ export default function FactionPage(){
     setFaction(baseRecord)
     setFactionData(null)
   })() },[id])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const rawHash = window.location.hash
+    if (!rawHash) return
+
+    const hash = decodeURIComponent(rawHash.replace(/^#/, ''))
+    if (!hash) return
+
+    const attemptScroll = () => {
+      const target = document.getElementById(hash)
+      if (!target) return false
+      target.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+      return true
+    }
+
+    if (attemptScroll()) return
+
+    let attempts = 0
+    const timer = window.setInterval(() => {
+      attempts += 1
+      if (attemptScroll() || attempts >= 10) {
+        window.clearInterval(timer)
+      }
+    }, 100)
+
+    return () => window.clearInterval(timer)
+  }, [factionData, faction, router.asPath])
 
   if (!faction && !factionData) return <div className="container"><Header/><div className="card">Loading…</div></div>
 
