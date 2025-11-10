@@ -4,6 +4,7 @@ import SearchBox from '../components/SearchBox'
 import Results from '../components/Results'
 import { ensureIndex, getAllIndexedDocuments } from '../lib/search'
 import { checkForUpdates } from '../lib/update'
+import Seo from '../components/Seo'
 
 
 function rankResults(results, query) {
@@ -108,10 +109,13 @@ export default function Home() {
   }, [q])
 
   return (
-    <div className="container">
-      <Header version={version} status={status} />
-      <SearchBox q={q} setQ={setQ} />
-      <Results results={res} loading={loading} />
-    </div>
+    <>
+      <Seo description="Search and browse Kill Team factions, operatives, rules, and equipment with a fast, offline-ready reference companion." />
+      <div className="container">
+        <Header version={version} status={status} />
+        <SearchBox q={q} setQ={setQ} />
+        <Results results={res} loading={loading} />
+      </div>
+    </>
   )
 }
