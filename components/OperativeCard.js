@@ -2,34 +2,39 @@ import RichText from './RichText'
 
 export default function OperativeCard({ operative }) {
   const anchorId = operative?.id ? `operative-${operative.id}` : undefined
+  const baseSizeText = (() => {
+    const value = operative?.baseSize
+    if (value === null || value === undefined || value === '') return null
+    const stringValue = String(value).trim()
+    if (!stringValue) return null
+    return stringValue.toLowerCase().endsWith('mm') ? stringValue : `${stringValue}mm`
+  })()
+  const keywords = Array.isArray(operative?.keywords) ? operative.keywords : []
+  const hasKeywords =
+    (operative?.factionKeyword && operative.factionKeyword !== 'UNKNOWN') ||
+    keywords.length > 0
+  const showKeywordSection = hasKeywords || !!baseSizeText
+  const headerStats = [
+    { label: 'APL', value: operative?.apl },
+    { label: 'MOVE', value: operative?.move },
+    { label: 'SAVE', value: operative?.save },
+    { label: 'WOUNDS', value: operative?.wounds }
+  ].filter(stat => stat.value !== null && stat.value !== undefined && stat.value !== '')
 
   return (
     <div id={anchorId} className="operative-card">
       <div className="operative-header">
         <h4 style={{ margin: 0 }}>{operative.name || operative.title}</h4>
-      </div>
-      
-      <div className="operative-stats">
-        <div className="table-scroll">
-          <table className="stats-table">
-            <thead>
-              <tr>
-                {operative.apl !== null && operative.apl !== undefined && <th>APL</th>}
-                {operative.move && <th>MOVE</th>}
-                {operative.save && <th>SAVE</th>}
-                {operative.wounds !== null && operative.wounds !== undefined && <th>WOUNDS</th>}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {operative.apl !== null && operative.apl !== undefined && <td>{operative.apl}</td>}
-                {operative.move && <td>{operative.move}</td>}
-                {operative.save && <td>{operative.save}</td>}
-                {operative.wounds !== null && operative.wounds !== undefined && <td>{operative.wounds}</td>}
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        {headerStats.length > 0 && (
+          <div className="operative-header-stats">
+            {headerStats.map(stat => (
+              <div key={stat.label} className="operative-header-stat">
+                <span className="label">{stat.label}</span>
+                <span className="value">{stat.value}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       
       {operative.weapons && operative.weapons.length > 0 && (() => {
@@ -118,15 +123,20 @@ export default function OperativeCard({ operative }) {
       )}
       
       {/* Keywords section at the bottom */}
-      {(operative.factionKeyword || (operative.keywords && operative.keywords.length > 0)) && (
-        <div className="operative-keywords" style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px' }}>
-          <div style={{ marginTop: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.25rem' }}>
-            {operative.factionKeyword && operative.factionKeyword !== 'UNKNOWN' && (
-              <span className="pill" key="faction-keyword">{operative.factionKeyword}</span>
+      {showKeywordSection && (
+        <div className="operative-keywords">
+          <div className="operative-keywords-row">
+            <div className="operative-keywords-list">
+              {operative.factionKeyword && operative.factionKeyword !== 'UNKNOWN' && (
+                <span className="pill" key="faction-keyword">{operative.factionKeyword}</span>
+              )}
+              {keywords.map((keyword, idx) => (
+                <span key={idx} className="pill">{keyword}</span>
+              ))}
+            </div>
+            {baseSizeText && (
+              <span className="operative-base-size">{baseSizeText}</span>
             )}
-            {operative.keywords && operative.keywords.map((keyword, idx) => (
-              <span key={idx} className="pill">{keyword}</span>
-            ))}
           </div>
         </div>
       )}

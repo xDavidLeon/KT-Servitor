@@ -72,6 +72,7 @@ function normaliseOperative(opType) {
     move: opType.MOVE || '',
     save: opType.SAVE || '',
     wounds: opType.WOUNDS ?? null,
+    baseSize: opType.basesize ?? null,
     keywords: splitKeywords(opType.keywords),
     specialRules: (opType.abilities || []).map(ability => ({
       name: ability.abilityName,
