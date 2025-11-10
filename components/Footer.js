@@ -251,6 +251,9 @@ export default function Footer() {
                 onClick={() => setMenuOpen((v) => !v)}
                 title="Menu"
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   background: 'none',
                   border: '1px solid #333',
                   borderRadius: '50%',
@@ -258,6 +261,7 @@ export default function Footer() {
                   height: '1.9rem',
                   color: 'var(--muted)',
                   fontSize: '1.1rem',
+                  lineHeight: 1,
                   cursor: 'pointer',
                   transition: '0.2s'
                 }}
@@ -270,7 +274,13 @@ export default function Footer() {
                 <div
                   className="menu"
                   id="footer-gear"
-                  style={{ top: '2.75rem', left: '50%', transform: 'translateX(-50%)', right: 'auto' }}
+                  style={{
+                    top: 'auto',
+                    bottom: 'calc(100% + 0.75rem)',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    right: 'auto'
+                  }}
                 >
                   <button onClick={handleForceUpdate}>Force update</button>
                   <div className="sep"></div>
