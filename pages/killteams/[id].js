@@ -573,7 +573,7 @@ export default function KillteamPage() {
     })
   }, [rawOperatives, teamAbilitySignatures, teamOptionSignatures])
 
-  const strategicPloys = useMemo(() => {
+  const strategyPloys = useMemo(() => {
     return (killteam?.ploys || [])
       .filter(ploy => ploy?.ployType === 'S')
       .map(normalisePloy)
@@ -706,8 +706,8 @@ export default function KillteamPage() {
             </section>
           )}
 
-          <section id="operative-types" className="card" style={{ marginTop: '1rem' }}>
-            <h3 style={{ marginTop: 0 }}>Operative Types</h3>
+          <section id="operatives" className="card" style={{ marginTop: '1rem' }}>
+            <h3 style={{ marginTop: 0 }}>Operatives</h3>
             {operatives.length ? (
               <div className="operatives-grid">
                 {operatives.map(operative => (
@@ -719,41 +719,61 @@ export default function KillteamPage() {
             )}
           </section>
 
-          <section id="strategic-ploys" className="card" style={{ marginTop: '1rem' }}>
-            <h3 style={{ marginTop: 0 }}>Strategic Ploys</h3>
-            {strategicPloys.length ? (
-              <div className="card-section-list">
-                {strategicPloys.map((ploy, idx) => (
-                  <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card">
-                    <div className="ability-card-header">
-                      <h4 className="ability-card-title">{ploy.name}</h4>
-                      {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
+          <section id="ploys" className="card" style={{ marginTop: '1rem' }}>
+            <h3 style={{ marginTop: 0 }}>Ploys</h3>
+            {strategyPloys.length || firefightPloys.length ? (
+              <>
+                {strategyPloys.length > 0 && (
+                  <>
+                    <h4
+                      id="strategy-ploys"
+                      className="muted"
+                      style={{ margin: 0, marginBottom: '0.5rem' }}
+                    >
+                      Strategy Ploys
+                    </h4>
+                    <div className="card-section-list">
+                      {strategyPloys.map((ploy, idx) => (
+                        <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card">
+                          <div className="ability-card-header">
+                            <h4 className="ability-card-title">{ploy.name}</h4>
+                            {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
+                          </div>
+                          {ploy.description && <RichText className="ability-card-body" text={ploy.description} />}
+                        </div>
+                      ))}
                     </div>
-                    {ploy.description && <RichText className="ability-card-body" text={ploy.description} />}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="muted">No strategic ploys available.</div>
-            )}
-          </section>
+                  </>
+                )}
 
-          <section id="firefight-ploys" className="card" style={{ marginTop: '1rem' }}>
-            <h3 style={{ marginTop: 0 }}>Firefight Ploys</h3>
-            {firefightPloys.length ? (
-              <div className="card-section-list">
-                {firefightPloys.map((ploy, idx) => (
-                  <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card">
-                    <div className="ability-card-header">
-                      <h4 className="ability-card-title">{ploy.name}</h4>
-                      {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
+                {firefightPloys.length > 0 && (
+                  <>
+                    <h4
+                      id="firefight-ploys"
+                      className="muted"
+                      style={{
+                        marginTop: strategyPloys.length > 0 ? '1rem' : 0,
+                        marginBottom: '0.5rem'
+                      }}
+                    >
+                      Firefight Ploys
+                    </h4>
+                    <div className="card-section-list">
+                      {firefightPloys.map((ploy, idx) => (
+                        <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card">
+                          <div className="ability-card-header">
+                            <h4 className="ability-card-title">{ploy.name}</h4>
+                            {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
+                          </div>
+                          {ploy.description && <RichText className="ability-card-body" text={ploy.description} />}
+                        </div>
+                      ))}
                     </div>
-                    {ploy.description && <RichText className="ability-card-body" text={ploy.description} />}
-                  </div>
-                ))}
-              </div>
+                  </>
+                )}
+              </>
             ) : (
-              <div className="muted">No firefight ploys available.</div>
+              <div className="muted">No ploys available.</div>
             )}
           </section>
 

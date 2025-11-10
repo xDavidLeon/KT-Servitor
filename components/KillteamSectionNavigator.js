@@ -4,9 +4,8 @@ import { useState, useEffect } from 'react'
 const SECTIONS = [
   { id: 'killteam-overview', label: 'Overview' },
   { id: 'faction-rules', label: 'Faction Rules' },
-  { id: 'operative-types', label: 'Operative Types' },
-  { id: 'strategic-ploys', label: 'Strategic Ploys' },
-  { id: 'firefight-ploys', label: 'Firefight Ploys' },
+  { id: 'operatives', label: 'Operatives' },
+  { id: 'ploys', label: 'Ploys' },
   { id: 'equipment', label: 'Equipment' }
 ]
 
@@ -84,27 +83,44 @@ export default function KillteamSectionNavigator({ killteam, factionRules = [] }
         (op) => op?.opTypeId ? `operative-${op.opTypeId}` : null,
         (op, index) => op?.opTypeName || op?.opName || `Operative ${index + 1}`
       )
-      addSection('operative-types', operativeChildren)
+      addSection('operatives', operativeChildren)
     }
 
-    const strategicPloys = (killteam.ploys || []).filter(ploy => ploy?.ployType === 'S')
-    if (strategicPloys.length) {
-      const strategicChildren = buildChildren(
-        strategicPloys,
-        (ploy) => ploy?.ployId ? `ploy-${ploy.ployId}` : null,
-        (ploy, index) => ploy?.ployName || `Strategic Ploy ${index + 1}`
-      )
-      addSection('strategic-ploys', strategicChildren)
-    }
-
+    const strategyPloys = (killteam.ploys || []).filter(ploy => ploy?.ployType === 'S')
     const firefightPloys = (killteam.ploys || []).filter(ploy => ploy?.ployType && ploy.ployType !== 'S')
-    if (firefightPloys.length) {
-      const firefightChildren = buildChildren(
-        firefightPloys,
-        (ploy) => ploy?.ployId ? `ploy-${ploy.ployId}` : null,
-        (ploy, index) => ploy?.ployName || `Firefight Ploy ${index + 1}`
-      )
-      addSection('firefight-ploys', firefightChildren)
+
+    const strategyChildren = buildChildren(
+      strategyPloys,
+      (ploy) => ploy?.ployId ? `ploy-${ploy.ployId}` : null,
+      (ploy, index) => ploy?.ployName || `Strategy Ploy ${index + 1}`
+    )
+
+    const firefightChildren = buildChildren(
+      firefightPloys,
+      (ploy) => ploy?.ployId ? `ploy-${ploy.ployId}` : null,
+      (ploy, index) => ploy?.ployName || `Firefight Ploy ${index + 1}`
+    )
+
+    if (strategyChildren.length || firefightChildren.length) {
+      const ployChildren = []
+
+      if (strategyChildren.length) {
+        ployChildren.push({
+          id: 'strategy-ploys',
+          label: 'Strategy Ploys',
+          children: strategyChildren
+        })
+      }
+
+      if (firefightChildren.length) {
+        ployChildren.push({
+          id: 'firefight-ploys',
+          label: 'Firefight Ploys',
+          children: firefightChildren
+        })
+      }
+
+      addSection('ploys', ployChildren)
     }
 
     if (Array.isArray(killteam.equipments) && killteam.equipments.length) {
@@ -132,6 +148,53 @@ export default function KillteamSectionNavigator({ killteam, factionRules = [] }
   }, [isOpen])
 
   if (availableSections.length === 0) return null
+
+  const renderChildItems = (items = [], depth = 1) => {
+    if (!Array.isArray(items) || items.length === 0) return null
+
+    return items.map(child => {
+      const hasChildren = Array.isArray(child.children) && child.children.length > 0
+      const paddingLeft = `${1 + depth * 1.5}rem`
+      const hoverColor = depth === 1 ? '#12162a' : '#161b33'
+
+      return (
+        <div key={child.id}>
+          <button
+            onClick={() => {
+              scrollToSection(child.id)
+              setIsOpen(false)
+            }}
+            style={{
+              display: 'block',
+              width: '100%',
+              padding: '0.45rem 1rem',
+              paddingLeft,
+              background: 'transparent',
+              border: 'none',
+              color: hasChildren ? 'var(--text)' : 'var(--muted)',
+              textAlign: 'left',
+              cursor: 'pointer',
+              fontSize: depth === 1 ? '0.85rem' : '0.8rem',
+              transition: 'background 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = hoverColor
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = 'transparent'
+            }}
+          >
+            {child.label}
+          </button>
+          {hasChildren && (
+            <div>
+              {renderChildItems(child.children, depth + 1)}
+            </div>
+          )}
+        </div>
+      )
+    })
+  }
 
   return (
     <div className="section-navigator" style={{ position: 'relative' }}>
@@ -206,37 +269,9 @@ export default function KillteamSectionNavigator({ killteam, factionRules = [] }
               </button>
 
               {section.children && section.children.length > 0 && (
-                <div>
-                  {section.children.map(child => (
-                    <button
-                      key={child.id}
-                      onClick={() => {
-                        scrollToSection(child.id)
-                        setIsOpen(false)
-                      }}
-                      style={{
-                        display: 'block',
-                        width: '100%',
-                        padding: '0.45rem 1rem 0.45rem 2.5rem',
-                        background: 'transparent',
-                        border: 'none',
-                        color: 'var(--muted)',
-                        textAlign: 'left',
-                        cursor: 'pointer',
-                        fontSize: '0.85rem',
-                        transition: 'background 0.2s'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.background = '#12162a'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.background = 'transparent'
-                      }}
-                    >
-                      {child.label}
-                    </button>
-                  ))}
-                </div>
+                  <div>
+                    {renderChildItems(section.children)}
+                  </div>
               )}
             </div>
           ))}
