@@ -469,16 +469,27 @@ export default function KillteamPage() {
         </div>
       </div>
 
-      <div className="card">
-        <section id="killteam-overview">
-          <h2 style={{ marginTop: 0 }}>{killteam.killteamName}</h2>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '0.75rem' }}>
-            <span className="pill">{killteam.killteamId}</span>
-            {killteam.factionId && <span className="pill muted">Faction: {killteam.factionId}</span>}
-            {archetypes.map(archetype => (
-              <span key={archetype} className="pill">{archetype}</span>
-            ))}
-          </div>
+        <div className="card">
+          <section id="killteam-overview">
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                gap: '1rem',
+                marginBottom: '0.75rem'
+              }}
+            >
+              <h2 style={{ margin: 0 }}>{killteam.killteamName}</h2>
+              {archetypes.length > 0 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'flex-end' }}>
+                  {archetypes.map(archetype => (
+                    <span key={archetype} className="pill">{archetype}</span>
+                  ))}
+                </div>
+              )}
+            </div>
           {killteam.description && <RichText className="muted" text={killteam.description} />}
         </section>
 
