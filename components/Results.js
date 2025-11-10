@@ -51,7 +51,7 @@ export default function Results({results, loading}){
             <tr>
               <th>Title</th>
               <th>Type</th>
-              <th>Tags</th>
+                <th>Team</th>
             </tr>
           </thead>
           <tbody>
@@ -59,7 +59,11 @@ export default function Results({results, loading}){
               <tr key={r.id}>
                 <td><Link href={buildResultHref(r)}>{r.title}</Link></td>
                   <td className="muted">{formatType(r.type)}</td>
-                <td>{(r.tags || []).slice(0, 4).map(t => <span className="pill" key={t}>{t}</span>)}</td>
+                  <td>
+                    {r.killteamDisplayName
+                      ? <Link href={`/killteams/${encodeURIComponent(r.killteamId || deriveKillteamId(r) || '')}`}>{r.killteamDisplayName}</Link>
+                      : (r.killteamName || '—')}
+                  </td>
               </tr>
             ))}
           </tbody>
