@@ -558,18 +558,6 @@ export default function KillteamPage() {
           <div className="muted">No equipment listed.</div>
         )}
         </section>
-
-        {killteam.defaultRoster && (
-          <section id="default-roster" className="card" style={{ marginTop: '1rem' }}>
-            <h3 style={{ marginTop: 0 }}>Default Roster</h3>
-            <div className="heading" style={{ marginBottom: '0.5rem' }}>
-              <strong>{killteam.defaultRoster.rosterName}</strong>
-              <span className="pill muted">CP: {killteam.defaultRoster.CP ?? 0}</span>
-              <span className="pill muted">Turn: {killteam.defaultRoster.turn ?? 1}</span>
-            </div>
-            {killteam.defaultRoster.description && <RichText className="muted" text={killteam.defaultRoster.description} />}
-          </section>
-        )}
         </div>
     </div>
   )
