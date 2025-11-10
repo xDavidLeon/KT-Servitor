@@ -1,4 +1,48 @@
+import { useEffect, useState } from 'react'
+
+function formatVersion(version) {
+  if (!version) return null
+  const [manifestPart, hashPart] = String(version).split('+')
+  if (manifestPart && hashPart) {
+    return `Data v${manifestPart} · ${hashPart.slice(0, 6)}`
+  }
+  return `Data v${manifestPart || version}`
+}
+
 export default function Footer() {
+  const [versionLabel, setVersionLabel] = useState(null)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    let cancelled = false
+
+    async function loadVersion() {
+      try {
+        const { getMeta } = await import('../lib/db')
+        const stored = await getMeta('dataset_version')
+        if (!cancelled) {
+          setVersionLabel(formatVersion(stored))
+        }
+      } catch (err) {
+        console.warn('Failed to read dataset version', err)
+      }
+    }
+
+    const handleVersionUpdate = (event) => {
+      if (cancelled) return
+      const detail = event?.detail ?? null
+      setVersionLabel(formatVersion(detail))
+    }
+
+    loadVersion()
+    window.addEventListener('kt-version-updated', handleVersionUpdate)
+
+    return () => {
+      cancelled = true
+      window.removeEventListener('kt-version-updated', handleVersionUpdate)
+    }
+  }, [])
+
   return (
     <footer className="app-footer">
       <div className="container app-footer-inner">
@@ -39,6 +83,12 @@ export default function Footer() {
             <span>GitHub</span>
           </a>
         </div>
+
+        {versionLabel && (
+          <div style={{ marginTop: '1.5rem', textAlign: 'center', width: '100%', fontSize: '0.85rem', color: 'var(--muted)' }}>
+            {versionLabel}
+          </div>
+        )}
       </div>
     </footer>
   )

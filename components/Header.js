@@ -56,8 +56,14 @@ export default function Header({ version, status }) {
     };
   }, [shouldFetchStatus]);
 
-  const displayVersion = version ?? internalVersion;
   const displayStatus = status ?? internalStatus;
+  const displayVersion = version ?? internalVersion;
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (!displayVersion) return;
+    window.dispatchEvent(new CustomEvent('kt-version-updated', { detail: displayVersion }));
+  }, [displayVersion]);
 
   React.useEffect(() => {
     const onDoc = (e) => { if (!e.target.closest?.('#hdr-gear')) setOpen(false); };
@@ -118,7 +124,6 @@ export default function Header({ version, status }) {
           <h1 style={{ margin: 0 }}>
             KT Servitor
           </h1>
-            {displayVersion && <span className="pill">v{displayVersion}</span>}
         </div>
 
         <div
