@@ -153,7 +153,6 @@ export default function KillteamSelector({ currentKillteamId }) {
       >
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <span>{kt.killteamName}</span>
-          <span className="muted" style={{ fontSize: '0.75rem' }}>{kt.killteamId}</span>
         </div>
       </Link>
     )
