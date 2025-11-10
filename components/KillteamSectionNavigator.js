@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 const SECTIONS = [
   { id: 'killteam-overview', label: 'Overview' },
   { id: 'killteam-composition', label: 'Composition' },
+  { id: 'team-abilities', label: 'Team Abilities' },
   { id: 'operative-types', label: 'Operative Types' },
   { id: 'strategic-ploys', label: 'Strategic Ploys' },
   { id: 'firefight-ploys', label: 'Firefight Ploys' },
@@ -33,7 +34,7 @@ function scrollToSection(sectionId) {
   })
 }
 
-export default function KillteamSectionNavigator({ killteam }) {
+export default function KillteamSectionNavigator({ killteam, teamAbilities = [] }) {
   const [isOpen, setIsOpen] = useState(false)
   const [availableSections, setAvailableSections] = useState([])
 
@@ -64,6 +65,15 @@ export default function KillteamSectionNavigator({ killteam }) {
 
     if (killteam.composition) {
       addSection('killteam-composition')
+    }
+
+    if (Array.isArray(teamAbilities) && teamAbilities.length) {
+      const abilityChildren = buildChildren(
+        teamAbilities,
+        (ability, index) => ability?.anchorId || (ability?.name ? `team-ability-${index + 1}` : null),
+        (ability, index) => ability?.name || `Team Ability ${index + 1}`
+      )
+      addSection('team-abilities', abilityChildren)
     }
 
     if (Array.isArray(killteam.opTypes) && killteam.opTypes.length) {
@@ -105,7 +115,7 @@ export default function KillteamSectionNavigator({ killteam }) {
     }
 
     setAvailableSections(sections)
-  }, [killteam])
+  }, [killteam, teamAbilities])
 
   useEffect(() => {
     const handleClickOutside = (e) => {

@@ -172,6 +172,34 @@ function normaliseOption(option) {
   }
 }
 
+function normaliseTextForSignature(value) {
+  if (value === null || value === undefined) return ''
+  return String(value)
+    .replace(/\r\n/g, '\n')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .toLowerCase()
+}
+
+function abilitySignature(ability) {
+  if (!ability) return ''
+  const name = normaliseTextForSignature(ability?.name)
+  const description = normaliseTextForSignature(ability?.description)
+  const apCost = normaliseTextForSignature(ability?.apCost)
+  if (!name && !description && !apCost) {
+    return ''
+  }
+  return `${name}||${description}||${apCost}`
+}
+
+function buildTeamAbilityAnchor(name, index) {
+  const slug = normaliseTextForSignature(name)
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+  const base = slug ? `team-ability-${slug}` : 'team-ability'
+  return `${base}-${index + 1}`
+}
+
 function normalisePloy(ploy) {
   if (!ploy) return null
 
@@ -411,12 +439,78 @@ export default function KillteamPage() {
     return () => window.clearInterval(timer)
   }, [killteam])
 
-  const operatives = useMemo(() => {
+  const rawOperatives = useMemo(() => {
     if (!killteam?.opTypes) return []
     return killteam.opTypes
       .map(normaliseOperative)
       .filter(Boolean)
   }, [killteam])
+
+  const teamAbilities = useMemo(() => {
+    if (!rawOperatives.length) return []
+
+    const abilityLists = rawOperatives.map(op => {
+      if (!Array.isArray(op.specialRules)) return []
+      return op.specialRules.filter(Boolean)
+    })
+
+    if (!abilityLists.length) return []
+
+    const [firstList, ...otherLists] = abilityLists
+    if (!firstList.length) return []
+
+    const commonMap = new Map()
+
+    for (const ability of firstList) {
+      const signature = abilitySignature(ability)
+      if (!signature || commonMap.has(signature)) continue
+
+      const isCommon = otherLists.every(list =>
+        list.some(item => abilitySignature(item) === signature)
+      )
+
+      if (isCommon) {
+        commonMap.set(signature, ability)
+      }
+    }
+
+    if (!commonMap.size) return []
+
+    return Array.from(commonMap.values()).map((ability, index) => ({
+      ...ability,
+      anchorId: buildTeamAbilityAnchor(ability?.name, index)
+    }))
+  }, [rawOperatives])
+
+  const teamAbilitySignatures = useMemo(() => {
+    if (!teamAbilities.length) return null
+    const signatures = teamAbilities
+      .map(abilitySignature)
+      .filter(Boolean)
+    return signatures.length ? new Set(signatures) : null
+  }, [teamAbilities])
+
+  const operatives = useMemo(() => {
+    if (!rawOperatives.length) return []
+    if (!teamAbilitySignatures || teamAbilitySignatures.size === 0) {
+      return rawOperatives
+    }
+
+    return rawOperatives.map(operative => {
+      const abilities = Array.isArray(operative.specialRules) ? operative.specialRules : []
+      if (!abilities.length) return operative
+
+      const filtered = abilities.filter(ability => !teamAbilitySignatures.has(abilitySignature(ability)))
+      if (filtered.length === abilities.length) {
+        return operative
+      }
+
+      return {
+        ...operative,
+        specialRules: filtered
+      }
+    })
+  }, [rawOperatives, teamAbilitySignatures])
 
   const strategicPloys = useMemo(() => {
     return (killteam?.ploys || [])
@@ -462,10 +556,10 @@ export default function KillteamPage() {
   return (
     <div className="container">
       <Header />
-      <div className="card killteam-selector-sticky">
-        <KillteamSelector currentKillteamId={killteam.killteamId} />
+        <div className="card killteam-selector-sticky">
+          <KillteamSelector currentKillteamId={killteam.killteamId} />
         <div style={{ marginTop: '0.5rem' }}>
-          <KillteamSectionNavigator killteam={killteam} />
+            <KillteamSectionNavigator killteam={killteam} teamAbilities={teamAbilities} />
         </div>
       </div>
 
@@ -497,6 +591,29 @@ export default function KillteamPage() {
           <section id="killteam-composition" className="card" style={{ marginTop: '1rem' }}>
             <h3 style={{ marginTop: 0 }}>Composition</h3>
             <RichText className="muted" text={killteam.composition} />
+          </section>
+        )}
+
+        {teamAbilities.length > 0 && (
+          <section id="team-abilities" className="card" style={{ marginTop: '1rem' }}>
+            <h3 style={{ marginTop: 0 }}>Team Abilities</h3>
+            <div className="card-section-list">
+              {teamAbilities.map((ability, idx) => (
+                <div
+                  key={ability.anchorId || ability.name || idx}
+                  id={ability.anchorId}
+                  className="ability-card"
+                >
+                  <div className="ability-card-header">
+                    <h4 className="ability-card-title">{ability.name || 'Ability'}</h4>
+                    {ability.apCost && <span className="ability-card-ap">{ability.apCost}</span>}
+                  </div>
+                  {ability.description && (
+                    <RichText className="ability-card-body" text={ability.description} />
+                  )}
+                </div>
+              ))}
+            </div>
           </section>
         )}
 
