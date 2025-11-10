@@ -411,4 +411,110 @@ th{position:sticky;top:0;background:#121521}
     flex:1 1 calc(50% - 0.5rem);
   }
 }
+
+.killteam-tabs{
+  display:flex;
+  align-items:center;
+  gap:0.4rem;
+  flex-wrap:wrap;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:0.25rem;
+}
+
+.killteam-tab{
+  border:1px solid #2a2f3f;
+  border-radius:999px;
+  padding:0.35rem 0.85rem;
+  background:#0e1016;
+  color:var(--muted);
+  cursor:pointer;
+  font-size:0.85rem;
+  font-weight:500;
+  transition:background 0.2s,color 0.2s,border-color 0.2s;
+}
+
+.killteam-tab:hover{
+  color:var(--text);
+  border-color:#3a4050;
+}
+
+.killteam-tab.active{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#0f1115;
+  font-weight:600;
+}
+
+.section-dropdown-trigger{
+  margin-top:0.75rem;
+  width:100%;
+  background:var(--panel);
+  border:1px solid #2a2f3f;
+  border-radius:8px;
+  padding:0.55rem 1rem;
+  color:var(--text);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  font-size:0.9rem;
+  transition:border-color 0.2s,background 0.2s,color 0.2s;
+}
+
+.section-dropdown-trigger:hover:not(:disabled){
+  border-color:#3a4050;
+  background:#111520;
+}
+
+.section-dropdown-trigger:disabled{
+  opacity:0.5;
+  cursor:not-allowed;
+}
+
+.section-dropdown-caret{
+  font-size:0.8rem;
+  color:var(--muted);
+}
+
+.section-dropdown{
+  position:absolute;
+  top:calc(100% + 0.25rem);
+  left:0;
+  right:0;
+  background:var(--panel);
+  border:1px solid #2a2f3f;
+  border-radius:8px;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);
+  z-index:200;
+  max-height:70vh;
+  overflow-y:auto;
+}
+
+.section-dropdown-item{
+  display:block;
+  width:100%;
+  padding:0.65rem 1rem;
+  background:transparent;
+  border:none;
+  color:var(--text);
+  text-align:left;
+  cursor:pointer;
+  font-size:0.9rem;
+  transition:background 0.2s,color 0.2s;
+}
+
+.section-dropdown-item:hover:not(:disabled){
+  background:#0f1320;
+}
+
+.section-dropdown-item:disabled{
+  cursor:default;
+  opacity:0.6;
+}
+
+.section-dropdown-item.heading{
+  color:var(--accent);
+  font-weight:600;
+}
   

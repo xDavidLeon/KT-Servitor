@@ -1,17 +1,10 @@
-// components/KillteamSectionNavigator.js
-import { useState, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
-const SECTIONS = [
-  { id: 'killteam-overview', label: 'Overview' },
-  { id: 'faction-rules', label: 'Faction Rules' },
-  { id: 'operatives', label: 'Operatives' },
-  { id: 'ploys', label: 'Ploys' },
-  { id: 'equipment', label: 'Equipment' }
-]
+export function scrollToKillteamSection(sectionId) {
+  if (typeof document === 'undefined' || !sectionId) return false
 
-function scrollToSection(sectionId) {
   const element = document.getElementById(sectionId)
-  if (!element) return
+  if (!element) return false
 
   const mainHeader = document.querySelector('.header-sticky')
   const selectorCard = document.querySelector('.killteam-selector-sticky')
@@ -37,244 +30,119 @@ function scrollToSection(sectionId) {
     top: offsetPosition,
     behavior: 'smooth'
   })
+
+  return true
 }
 
-export default function KillteamSectionNavigator({ killteam, factionRules = [] }) {
+export default function KillteamSectionNavigator({
+  sections = [],
+  activeSectionId,
+  onSectionChange
+}) {
   const [isOpen, setIsOpen] = useState(false)
-  const [availableSections, setAvailableSections] = useState([])
+
+  const activeSection = useMemo(() => {
+    if (!Array.isArray(sections) || sections.length === 0) return null
+    return sections.find(section => section.id === activeSectionId) || sections[0]
+  }, [sections, activeSectionId])
 
   useEffect(() => {
-    if (!killteam) return
-
-    const sections = []
-
-    const addSection = (id, children = []) => {
-      const base = SECTIONS.find(s => s.id === id)
-      if (!base) return
-      sections.push({ ...base, children })
+    if (!activeSection && Array.isArray(sections) && sections.length > 0) {
+      onSectionChange?.(sections[0].id)
     }
-
-    const buildChildren = (items = [], getId, getLabel) => {
-      if (!Array.isArray(items)) return []
-      return items
-        .map((item, index) => {
-          const id = getId(item, index)
-          const label = getLabel(item, index)
-          if (!id || !label) return null
-          return { id, label }
-        })
-        .filter(Boolean)
-    }
-
-    addSection('killteam-overview')
-
-    if (Array.isArray(factionRules) && factionRules.length) {
-      const ruleChildren = buildChildren(
-        factionRules,
-        (rule, index) => rule?.anchorId || (rule?.name ? `faction-rule-${index + 1}` : null),
-        (rule, index) => rule?.name || `Faction Rule ${index + 1}`
-      )
-      addSection('faction-rules', ruleChildren)
-    }
-
-    if (Array.isArray(killteam.opTypes) && killteam.opTypes.length) {
-      const operativeChildren = buildChildren(
-        killteam.opTypes,
-        (op) => op?.opTypeId ? `operative-${op.opTypeId}` : null,
-        (op, index) => op?.opTypeName || op?.opName || `Operative ${index + 1}`
-      )
-      addSection('operatives', operativeChildren)
-    }
-
-    const strategyPloys = (killteam.ploys || []).filter(ploy => ploy?.ployType === 'S')
-    const firefightPloys = (killteam.ploys || []).filter(ploy => ploy?.ployType && ploy.ployType !== 'S')
-
-    const strategyChildren = buildChildren(
-      strategyPloys,
-      (ploy) => ploy?.ployId ? `ploy-${ploy.ployId}` : null,
-      (ploy, index) => ploy?.ployName || `Strategy Ploy ${index + 1}`
-    )
-
-    const firefightChildren = buildChildren(
-      firefightPloys,
-      (ploy) => ploy?.ployId ? `ploy-${ploy.ployId}` : null,
-      (ploy, index) => ploy?.ployName || `Firefight Ploy ${index + 1}`
-    )
-
-    if (strategyChildren.length || firefightChildren.length) {
-      const ployChildren = []
-
-      if (strategyChildren.length) {
-        ployChildren.push({
-          id: 'strategy-ploys',
-          label: 'Strategy Ploys',
-          children: strategyChildren
-        })
-      }
-
-      if (firefightChildren.length) {
-        ployChildren.push({
-          id: 'firefight-ploys',
-          label: 'Firefight Ploys',
-          children: firefightChildren
-        })
-      }
-
-      addSection('ploys', ployChildren)
-    }
-
-    if (Array.isArray(killteam.equipments) && killteam.equipments.length) {
-      const equipmentChildren = buildChildren(
-        killteam.equipments,
-        (eq) => eq?.eqId ? `equipment-${eq.eqId}` : null,
-        (eq, index) => eq?.eqName || `Equipment ${index + 1}`
-      )
-      addSection('equipment', equipmentChildren)
-    }
-
-    setAvailableSections(sections)
-  }, [killteam, factionRules])
+  }, [activeSection, sections, onSectionChange])
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.closest('.section-navigator')) {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.section-navigator')) {
         setIsOpen(false)
       }
     }
+
     if (isOpen) {
       document.addEventListener('click', handleClickOutside)
       return () => document.removeEventListener('click', handleClickOutside)
     }
   }, [isOpen])
 
-  if (availableSections.length === 0) return null
+  useEffect(() => {
+    setIsOpen(false)
+  }, [activeSection?.id])
 
-  const renderChildItems = (items = [], depth = 1) => {
-    if (!Array.isArray(items) || items.length === 0) return null
+  if (!Array.isArray(sections) || sections.length === 0 || !activeSection) {
+    return null
+  }
 
-    return items.map(child => {
-      const hasChildren = Array.isArray(child.children) && child.children.length > 0
-      const paddingLeft = `${1 + depth * 1.5}rem`
-      const hoverColor = depth === 1 ? '#12162a' : '#161b33'
+  const dropdownItems = Array.isArray(activeSection.items) ? activeSection.items : []
+  const hasDropdownItems = dropdownItems.length > 0
 
-      return (
-        <div key={child.id}>
-          <button
-            onClick={() => {
-              scrollToSection(child.id)
-              setIsOpen(false)
-            }}
-            style={{
-              display: 'block',
-              width: '100%',
-              padding: '0.45rem 1rem',
-              paddingLeft,
-              background: 'transparent',
-              border: 'none',
-              color: hasChildren ? 'var(--text)' : 'var(--muted)',
-              textAlign: 'left',
-              cursor: 'pointer',
-              fontSize: depth === 1 ? '0.85rem' : '0.8rem',
-              transition: 'background 0.2s'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.background = hoverColor
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.background = 'transparent'
-            }}
-          >
-            {child.label}
-          </button>
-          {hasChildren && (
-            <div>
-              {renderChildItems(child.children, depth + 1)}
-            </div>
-          )}
-        </div>
-      )
+  const handleTabSelect = (sectionId) => {
+    if (!sectionId || sectionId === activeSection.id) return
+    onSectionChange?.(sectionId)
+    requestAnimationFrame(() => {
+      scrollToKillteamSection(sectionId)
     })
+  }
+
+  const handleItemSelect = (targetId) => {
+    if (!targetId) return
+    const didScroll = scrollToKillteamSection(targetId)
+    if (!didScroll) return
+    setIsOpen(false)
   }
 
   return (
     <div className="section-navigator" style={{ position: 'relative' }}>
+      <div className="killteam-tabs" role="tablist" aria-label="Kill team sections">
+        {sections.map(section => {
+          const isActive = section.id === activeSection.id
+          return (
+            <button
+              key={section.id}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              className={`killteam-tab${isActive ? ' active' : ''}`}
+              onClick={() => handleTabSelect(section.id)}
+            >
+              {section.label}
+            </button>
+          )
+        })}
+      </div>
+
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        style={{
-          background: 'var(--panel)',
-          border: '1px solid #2a2f3f',
-          borderRadius: '8px',
-          padding: '0.5rem 1rem',
-          color: 'var(--text)',
-          cursor: 'pointer',
-          width: '100%',
-          textAlign: 'left',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          fontSize: '0.9rem'
-        }}
+        type="button"
+        className="section-dropdown-trigger"
+        onClick={() => hasDropdownItems && setIsOpen(!isOpen)}
+        disabled={!hasDropdownItems}
       >
-        <span>Jump to Section...</span>
-        <span style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>
-          {isOpen ? '▲' : '▼'}
+        <span>
+          {hasDropdownItems
+            ? `Jump within ${activeSection.label}...`
+            : 'No subsections available'}
         </span>
+        <span className="section-dropdown-caret">{hasDropdownItems ? (isOpen ? '▲' : '▼') : ''}</span>
       </button>
 
-        {isOpen && (
-        <div
-          className="section-dropdown"
-          style={{
-            position: 'absolute',
-            top: '100%',
-            left: 0,
-            right: 0,
-            marginTop: '0.25rem',
-            background: 'var(--panel)',
-            border: '1px solid #2a2f3f',
-            borderRadius: '8px',
-            boxShadow: '0 8px 24px rgba(0,0,0,.4)',
-            zIndex: 200,
-              maxHeight: '70vh',
-              overflowY: 'auto'
-          }}
-        >
-          {availableSections.map(section => (
-            <div key={section.id}>
-              <button
-                onClick={() => {
-                  scrollToSection(section.id)
-                  setIsOpen(false)
-                }}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '0.65rem 1rem',
-                  background: 'transparent',
-                  border: 'none',
-                  color: 'var(--text)',
-                  textAlign: 'left',
-                  cursor: 'pointer',
-                  fontSize: '0.9rem',
-                  transition: 'background 0.2s'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = '#0f1320'
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = 'transparent'
-                }}
-              >
-                {section.label}
-              </button>
+      {isOpen && hasDropdownItems && (
+        <div className="section-dropdown">
+          {dropdownItems.map(item => {
+            const isHeading = item?.type === 'heading'
+            const isDisabled = !item?.id
 
-              {section.children && section.children.length > 0 && (
-                  <div>
-                    {renderChildItems(section.children)}
-                  </div>
-              )}
-            </div>
-          ))}
+            return (
+              <button
+                key={`${item?.id || item?.label}`}
+                type="button"
+                className={`section-dropdown-item${isHeading ? ' heading' : ''}`}
+                onClick={() => !isDisabled && handleItemSelect(item.id)}
+                disabled={isDisabled}
+              >
+                {item?.label}
+              </button>
+            )
+          })}
         </div>
       )}
     </div>
