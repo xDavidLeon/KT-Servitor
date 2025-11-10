@@ -289,7 +289,9 @@ function normaliseEquipment(equipment) {
     anchorId: identifier ? `equipment-${identifier}` : undefined,
     name: cleanName || rawName,
     description: equipment.description || '',
-    cost: cost || null
+    cost: cost || null,
+    killteamId: equipment.killteamId ?? null,
+    isUniversal: equipment.killteamId === null
   }
 }
 
@@ -535,6 +537,35 @@ export default function KillteamPage() {
     return signatures.length ? new Set(signatures) : null
   }, [teamOptions])
 
+  const factionRules = useMemo(() => {
+    const combined = []
+
+    if (Array.isArray(teamAbilities) && teamAbilities.length) {
+      for (const ability of teamAbilities) {
+        if (!ability) continue
+        combined.push({
+          ...ability,
+          sourceType: 'ability'
+        })
+      }
+    }
+
+    if (Array.isArray(teamOptions) && teamOptions.length) {
+      for (const option of teamOptions) {
+        if (!option) continue
+        combined.push({
+          ...option,
+          sourceType: 'option'
+        })
+      }
+    }
+
+    return combined.map((rule, index) => ({
+      ...rule,
+      anchorId: buildTeamAnchor('faction-rule', rule?.name, index)
+    }))
+  }, [teamAbilities, teamOptions])
+
   const operatives = useMemo(() => {
     if (!rawOperatives.length) return []
     if (
@@ -586,6 +617,14 @@ export default function KillteamPage() {
     return (killteam?.equipments || []).map(normaliseEquipment).filter(Boolean)
   }, [killteam])
 
+  const factionEquipment = useMemo(() => {
+    return equipment.filter(item => !item.isUniversal)
+  }, [equipment])
+
+  const universalEquipment = useMemo(() => {
+    return equipment.filter(item => item.isUniversal)
+  }, [equipment])
+
   if (loading) {
     return (
       <>
@@ -635,8 +674,7 @@ export default function KillteamPage() {
           <div style={{ marginTop: '0.5rem' }}>
             <KillteamSectionNavigator
               killteam={killteam}
-              teamAbilities={teamAbilities}
-              teamOptions={teamOptions}
+              factionRules={factionRules}
             />
           </div>
         </div>
@@ -672,45 +710,22 @@ export default function KillteamPage() {
             </section>
           )}
 
-          {teamAbilities.length > 0 && (
-            <section id="team-abilities" className="card" style={{ marginTop: '1rem' }}>
-              <h3 style={{ marginTop: 0 }}>Team Abilities</h3>
+          {factionRules.length > 0 && (
+            <section id="faction-rules" className="card" style={{ marginTop: '1rem' }}>
+              <h3 style={{ marginTop: 0 }}>Faction Rules</h3>
               <div className="card-section-list">
-                {teamAbilities.map((ability, idx) => (
+                {factionRules.map((rule, idx) => (
                   <div
-                    key={ability.anchorId || ability.name || idx}
-                    id={ability.anchorId}
+                    key={rule.anchorId || rule.name || idx}
+                    id={rule.anchorId}
                     className="ability-card"
                   >
                     <div className="ability-card-header">
-                      <h4 className="ability-card-title">{ability.name || 'Ability'}</h4>
-                      {ability.apCost && <span className="ability-card-ap">{ability.apCost}</span>}
+                      <h4 className="ability-card-title">{rule.name || 'Rule'}</h4>
+                      {rule.apCost && <span className="ability-card-ap">{rule.apCost}</span>}
                     </div>
-                    {ability.description && (
-                      <RichText className="ability-card-body" text={ability.description} />
-                    )}
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {teamOptions.length > 0 && (
-            <section id="team-options" className="card" style={{ marginTop: '1rem' }}>
-              <h3 style={{ marginTop: 0 }}>Team Options</h3>
-              <div className="card-section-list">
-                {teamOptions.map((option, idx) => (
-                  <div
-                    key={option.anchorId || option.name || idx}
-                    id={option.anchorId}
-                    className="ability-card"
-                  >
-                    <div className="ability-card-header">
-                      <h4 className="ability-card-title">{option.name || 'Option'}</h4>
-                      {option.apCost && <span className="ability-card-ap">{option.apCost}</span>}
-                    </div>
-                    {option.description && (
-                      <RichText className="ability-card-body" text={option.description} />
+                    {rule.description && (
+                      <RichText className="ability-card-body" text={rule.description} />
                     )}
                   </div>
                 ))}
@@ -772,17 +787,48 @@ export default function KillteamPage() {
           <section id="equipment" className="card" style={{ marginTop: '1rem' }}>
             <h3 style={{ marginTop: 0 }}>Equipment</h3>
             {equipment.length ? (
-              <div className="card-section-list">
-                {equipment.map((item, idx) => (
-                  <div key={item.id || idx} id={item.anchorId} className="ability-card">
-                    <div className="ability-card-header">
-                      <h4 className="ability-card-title">{item.name}</h4>
-                      {item.cost && <span className="ability-card-ap">{item.cost}</span>}
+              <>
+                {factionEquipment.length > 0 && (
+                  <>
+                    <h4 className="muted" style={{ margin: 0, marginBottom: '0.5rem' }}>
+                      Faction Equipment
+                    </h4>
+                    <div className="card-section-list">
+                      {factionEquipment.map((item, idx) => (
+                        <div key={item.id || idx} id={item.anchorId} className="ability-card">
+                          <div className="ability-card-header">
+                            <h4 className="ability-card-title">{item.name}</h4>
+                            {item.cost && <span className="ability-card-ap">{item.cost}</span>}
+                          </div>
+                          {item.description && <RichText className="ability-card-body" text={item.description} />}
+                        </div>
+                      ))}
                     </div>
-                    {item.description && <RichText className="ability-card-body" text={item.description} />}
-                  </div>
-                ))}
-              </div>
+                  </>
+                )}
+
+                {universalEquipment.length > 0 && (
+                  <>
+                    <h4
+                      className="muted"
+                      style={{ marginTop: factionEquipment.length > 0 ? '1rem' : 0, marginBottom: '0.5rem' }}
+                    >
+                      Universal Equipment
+                    </h4>
+                    <div className="card-section-list">
+                      {universalEquipment.map((item, idx) => (
+                        <div key={item.id || idx} id={item.anchorId} className="ability-card">
+                          <div className="ability-card-header">
+                            <h4 className="ability-card-title">{item.name}</h4>
+                            {item.cost && <span className="ability-card-ap">{item.cost}</span>}
+                          </div>
+                          {item.description && <RichText className="ability-card-body" text={item.description} />}
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </>
             ) : (
               <div className="muted">No equipment listed.</div>
             )}
