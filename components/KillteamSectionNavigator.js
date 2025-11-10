@@ -7,8 +7,7 @@ const SECTIONS = [
   { id: 'operative-types', label: 'Operative Types' },
   { id: 'strategic-ploys', label: 'Strategic Ploys' },
   { id: 'firefight-ploys', label: 'Firefight Ploys' },
-  { id: 'equipment', label: 'Equipment' },
-  { id: 'default-roster', label: 'Default Roster' }
+  { id: 'equipment', label: 'Equipment' }
 ]
 
 function scrollToSection(sectionId) {
@@ -103,10 +102,6 @@ export default function KillteamSectionNavigator({ killteam }) {
         (eq, index) => eq?.eqName || `Equipment ${index + 1}`
       )
       addSection('equipment', equipmentChildren)
-    }
-
-    if (killteam.defaultRoster) {
-      addSection('default-roster')
     }
 
     setAvailableSections(sections)
