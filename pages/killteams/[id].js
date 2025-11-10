@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../components/Header'
 import KillteamSelector from '../../components/KillteamSelector'
@@ -356,32 +356,6 @@ export default function KillteamPage() {
   const [killteam, setKillteam] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  const setHeaderOffset = useCallback(() => {
-    if (typeof window === 'undefined') return
-    const header = document.querySelector('.header-sticky')
-    if (!header) return
-    const offset = Math.ceil(header.getBoundingClientRect().height) + 16
-    document.documentElement.style.setProperty('--kt-header-offset', `${offset}px`)
-  }, [])
-
-  useEffect(() => {
-    setHeaderOffset()
-    if (typeof window === 'undefined') return
-
-    window.addEventListener('resize', setHeaderOffset)
-    window.addEventListener('orientationchange', setHeaderOffset)
-
-    return () => {
-      window.removeEventListener('resize', setHeaderOffset)
-      window.removeEventListener('orientationchange', setHeaderOffset)
-      document.documentElement.style.removeProperty('--kt-header-offset')
-    }
-  }, [setHeaderOffset])
-
-  useEffect(() => {
-    setHeaderOffset()
-  }, [setHeaderOffset, killteam])
-
   useEffect(() => {
     if (!id) return
 
@@ -701,14 +675,13 @@ export default function KillteamPage() {
               )}
             </div>
             {killteam.description && <RichText className="muted" text={killteam.description} />}
+            {killteam.composition && (
+              <div id="killteam-composition" style={{ marginTop: '1.5rem' }}>
+                <h3 style={{ marginTop: 0 }}>Composition</h3>
+                <RichText className="muted" text={killteam.composition} />
+              </div>
+            )}
           </section>
-
-          {killteam.composition && (
-            <section id="killteam-composition" className="card" style={{ marginTop: '1rem' }}>
-              <h3 style={{ marginTop: 0 }}>Composition</h3>
-              <RichText className="muted" text={killteam.composition} />
-            </section>
-          )}
 
           {factionRules.length > 0 && (
             <section id="faction-rules" className="card" style={{ marginTop: '1rem' }}>
