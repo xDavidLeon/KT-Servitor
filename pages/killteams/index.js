@@ -20,20 +20,28 @@ function parseArchetypes(value) {
 
 export default function Killteams() {
   const [killteams, setKillteams] = useState([])
-  const [version, setVersion] = useState(null)
-  const [status, setStatus] = useState('')
 
   useEffect(() => {
+    let cancelled = false
+
     (async () => {
-      const upd = await checkForUpdates()
-      setStatus(upd.error ? 'Offline' : (upd.warning ? 'Partial update' : 'Up to date'))
-      if (upd.version) setVersion(upd.version)
+      try {
+        await checkForUpdates()
+      } catch (err) {
+        console.warn('Update check failed', err)
+      }
 
       await ensureIndex()
       const rows = await db.killteams.orderBy('killteamName').toArray()
       rows.sort((a, b) => (a.killteamName || '').localeCompare(b.killteamName || ''))
-      setKillteams(rows)
+      if (!cancelled) {
+        setKillteams(rows)
+      }
     })()
+
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   const groupedKillteams = useMemo(() => {
@@ -58,7 +66,7 @@ export default function Killteams() {
         description="Browse every Kill Team faction, see their archetypes at a glance, and jump straight into detailed operative, ploy, and equipment profiles."
       />
       <div className="container">
-        <Header version={version} status={status}/>
+        <Header />
         <div className="card">
           <h2 style={{ marginTop: 0 }}>Kill Teams</h2>
           <div style={{ marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
