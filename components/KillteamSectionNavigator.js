@@ -151,7 +151,7 @@ export default function KillteamSectionNavigator({ killteam }) {
         </span>
       </button>
 
-      {isOpen && (
+        {isOpen && (
         <div
           className="section-dropdown"
           style={{
@@ -165,7 +165,8 @@ export default function KillteamSectionNavigator({ killteam }) {
             borderRadius: '8px',
             boxShadow: '0 8px 24px rgba(0,0,0,.4)',
             zIndex: 200,
-            overflow: 'hidden'
+              maxHeight: '70vh',
+              overflowY: 'auto'
           }}
         >
           {availableSections.map(section => (
