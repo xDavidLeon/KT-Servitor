@@ -5,6 +5,7 @@ import KillteamSelector from '../../components/KillteamSelector'
 import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
 import OperativeCard from '../../components/OperativeCard'
 import RichText from '../../components/RichText'
+import Disclaimer from '../../components/Disclaimer'
 import { db } from '../../lib/db'
 import { ensureIndex } from '../../lib/search'
 
@@ -184,6 +185,7 @@ export default function KillteamPage() {
           <h2 style={{ marginTop: 0 }}>Kill Team not found</h2>
           <p className="muted">We couldn’t find data for <code>{id}</code>. Try refreshing your data from the menu.</p>
         </div>
+          <Disclaimer />
       </div>
     )
   }
@@ -275,6 +277,7 @@ export default function KillteamPage() {
           </section>
         )}
       </div>
+      <Disclaimer />
     </div>
   )
 }
