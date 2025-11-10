@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../components/Header'
 import KillteamSelector from '../../components/KillteamSelector'
-import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
+import KillteamSectionNavigator, { scrollToKillteamSection } from '../../components/KillteamSectionNavigator'
 import OperativeCard from '../../components/OperativeCard'
 import RichText from '../../components/RichText'
 import { db } from '../../lib/db'
@@ -355,6 +355,8 @@ export default function KillteamPage() {
 
   const [killteam, setKillteam] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [activeSectionId, setActiveSectionId] = useState(null)
+  const [pendingHash, setPendingHash] = useState(null)
 
   useEffect(() => {
     if (!id) return
@@ -599,6 +601,240 @@ export default function KillteamPage() {
     return equipment.filter(item => item.isUniversal)
   }, [equipment])
 
+  const killteamTitle = useMemo(() => {
+    if (!killteam) {
+      return 'Kill Team'
+    }
+    return (
+      killteam.killteamName ||
+      killteam.killteamDisplayName ||
+      killteam.killteamId ||
+      'Kill Team'
+    )
+  }, [killteam])
+
+  const archetypes = useMemo(() => parseArchetypes(killteam?.archetypes), [killteam])
+
+  const sections = useMemo(() => {
+    if (!killteam) return []
+
+    const result = []
+
+    const overviewItems = [
+      {
+        id: 'killteam-overview',
+        label: killteamTitle
+      }
+    ]
+
+    if (killteam?.composition) {
+      overviewItems.push({
+        id: 'killteam-composition',
+        label: 'Composition'
+      })
+    }
+
+    result.push({
+      id: 'killteam-overview',
+      label: 'Overview',
+      items: overviewItems
+    })
+
+    if (Array.isArray(factionRules) && factionRules.length > 0) {
+      result.push({
+        id: 'faction-rules',
+        label: 'Faction Rules',
+        items: factionRules.map((rule, index) => ({
+          id: rule?.anchorId || (rule?.name ? `faction-rule-${index + 1}` : `faction-rule-${index + 1}`),
+          label: rule?.name || `Faction Rule ${index + 1}`
+        }))
+      })
+    }
+
+    result.push({
+      id: 'operatives',
+      label: 'Operatives',
+      items: operatives.map((operative, index) => ({
+        id: operative?.id ? `operative-${operative.id}` : `operative-${index + 1}`,
+        label: operative?.name || `Operative ${index + 1}`
+      }))
+    })
+
+    const ployItems = []
+    if (strategyPloys.length) {
+      ployItems.push({
+        id: 'strategy-ploys',
+        label: 'Strategy Ploys',
+        type: 'heading'
+      })
+      strategyPloys.forEach((ploy, index) => {
+        ployItems.push({
+          id: ploy?.anchorId || (ploy?.id ? `ploy-${ploy.id}` : `strategy-ploy-${index + 1}`),
+          label: ploy?.name || `Strategy Ploy ${index + 1}`
+        })
+      })
+    }
+    if (firefightPloys.length) {
+      ployItems.push({
+        id: 'firefight-ploys',
+        label: 'Firefight Ploys',
+        type: 'heading'
+      })
+      firefightPloys.forEach((ploy, index) => {
+        ployItems.push({
+          id: ploy?.anchorId || (ploy?.id ? `ploy-${ploy.id}` : `firefight-ploy-${index + 1}`),
+          label: ploy?.name || `Firefight Ploy ${index + 1}`
+        })
+      })
+    }
+
+    result.push({
+      id: 'ploys',
+      label: 'Ploys',
+      items: ployItems
+    })
+
+    const equipmentItems = []
+    if (factionEquipment.length) {
+      equipmentItems.push({
+        id: 'faction-equipment',
+        label: 'Faction Equipment',
+        type: 'heading'
+      })
+      factionEquipment.forEach((item, index) => {
+        equipmentItems.push({
+          id: item?.anchorId || (item?.id ? `equipment-${item.id}` : `faction-equipment-${index + 1}`),
+          label: item?.name || `Equipment ${index + 1}`
+        })
+      })
+    }
+    if (universalEquipment.length) {
+      equipmentItems.push({
+        id: 'universal-equipment',
+        label: 'Universal Equipment',
+        type: 'heading'
+      })
+      universalEquipment.forEach((item, index) => {
+        equipmentItems.push({
+          id: item?.anchorId || (item?.id ? `equipment-${item.id}` : `universal-equipment-${index + 1}`),
+          label: item?.name || `Equipment ${index + 1}`
+        })
+      })
+    }
+
+    result.push({
+      id: 'equipment',
+      label: 'Equipment',
+      items: equipmentItems
+    })
+
+    return result
+  }, [
+    killteam,
+    killteamTitle,
+    factionRules,
+    operatives,
+    strategyPloys,
+    firefightPloys,
+    factionEquipment,
+    universalEquipment
+  ])
+
+  const findSectionForAnchor = useCallback((anchor) => {
+    if (!anchor) return null
+    return (
+      sections.find(section => {
+        if (section.id === anchor) return true
+        return Array.isArray(section.items) && section.items.some(item => item?.id === anchor)
+      }) || null
+    )
+  }, [sections])
+
+  useEffect(() => {
+    if (!sections.length) return
+    if (!activeSectionId || !sections.some(section => section.id === activeSectionId)) {
+      setActiveSectionId(sections[0].id)
+    }
+  }, [sections, activeSectionId])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (!sections.length) return
+
+    const hash = window.location.hash?.replace('#', '')
+    if (!hash) return
+
+    const sectionForHash = findSectionForAnchor(hash)
+    if (!sectionForHash) return
+
+    if (sectionForHash.id !== activeSectionId) {
+      setActiveSectionId(sectionForHash.id)
+    }
+
+    setPendingHash(prev => (prev === hash ? prev : hash))
+  }, [sections, findSectionForAnchor, activeSectionId])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (!sections.length) return
+
+    const handleHashChange = () => {
+      const hashValue = window.location.hash?.replace('#', '')
+      if (!hashValue) return
+
+      const sectionForHash = findSectionForAnchor(hashValue)
+      if (!sectionForHash) return
+
+      if (sectionForHash.id !== activeSectionId) {
+        setActiveSectionId(sectionForHash.id)
+      }
+
+      setPendingHash(prev => (prev === hashValue ? prev : hashValue))
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [sections, findSectionForAnchor, activeSectionId])
+
+  useEffect(() => {
+    if (!pendingHash) return
+    if (!sections.length) return
+
+    const sectionForHash = findSectionForAnchor(pendingHash)
+
+    if (!sectionForHash) {
+      setPendingHash(null)
+      return
+    }
+
+    if (sectionForHash.id !== activeSectionId) return
+
+    let attempts = 0
+    let timerId = null
+
+    const attemptScroll = () => {
+      const success = scrollToKillteamSection(pendingHash)
+      if (success) {
+        setPendingHash(null)
+        return
+      }
+      attempts += 1
+      if (attempts >= 10) {
+        setPendingHash(null)
+        return
+      }
+      timerId = window.setTimeout(attemptScroll, 100)
+    }
+
+    attemptScroll()
+
+    return () => {
+      if (timerId) {
+        window.clearTimeout(timerId)
+      }
+    }
+  }, [pendingHash, findSectionForAnchor, activeSectionId])
+
   if (loading) {
     return (
       <>
@@ -620,7 +856,7 @@ export default function KillteamPage() {
         />
         <div className="container">
           <Header />
-            <div className="card">
+          <div className="card">
             <h2 style={{ marginTop: 0 }}>Kill Team not found</h2>
             <p className="muted">We couldn’t find data for <code>{id}</code>. Try refreshing your data from the menu.</p>
           </div>
@@ -629,32 +865,17 @@ export default function KillteamPage() {
     )
   }
 
-  const archetypes = parseArchetypes(killteam.archetypes)
-  const killteamTitle =
-    killteam.killteamName ||
-    killteam.killteamDisplayName ||
-    killteam.killteamId ||
-    'Kill Team'
   const fallbackDescription = `Review ${killteamTitle} operatives, ploys, equipment, and abilities for Kill Team 2024.`
   const seoDescription = killteam.description || fallbackDescription
 
-  return (
-    <>
-      <Seo title={killteamTitle} description={seoDescription} type="article" />
-      <div className="container">
-        <Header />
-        <div className="card killteam-selector-sticky">
-          <KillteamSelector currentKillteamId={killteam.killteamId} />
-          <div style={{ marginTop: '0.5rem' }}>
-            <KillteamSectionNavigator
-              killteam={killteam}
-              factionRules={factionRules}
-            />
-          </div>
-        </div>
+  const activeSection = sections.find(section => section.id === activeSectionId) || sections[0] || null
+  const currentSectionId = activeSection?.id
 
-        <div className="card">
-          <section id="killteam-overview">
+  const renderActiveSection = () => {
+    switch (currentSectionId) {
+      case 'killteam-overview':
+        return (
+          <section id="killteam-overview" className="card killteam-tab-panel">
             <div
               style={{
                 display: 'flex',
@@ -665,7 +886,7 @@ export default function KillteamPage() {
                 marginBottom: '0.75rem'
               }}
             >
-              <h2 style={{ margin: 0 }}>{killteam.killteamName}</h2>
+              <h2 style={{ margin: 0 }}>{killteamTitle}</h2>
               {archetypes.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'flex-end' }}>
                   {archetypes.map(archetype => (
@@ -682,10 +903,12 @@ export default function KillteamPage() {
               </div>
             )}
           </section>
-
-          {factionRules.length > 0 && (
-            <section id="faction-rules" className="card" style={{ marginTop: '1rem' }}>
-              <h3 style={{ marginTop: 0 }}>Faction Rules</h3>
+        )
+      case 'faction-rules':
+        return (
+          <section id="faction-rules" className="card killteam-tab-panel">
+            <h3 style={{ marginTop: 0 }}>Faction Rules</h3>
+            {factionRules.length > 0 ? (
               <div className="card-section-list">
                 {factionRules.map((rule, idx) => (
                   <div
@@ -703,10 +926,14 @@ export default function KillteamPage() {
                   </div>
                 ))}
               </div>
-            </section>
-          )}
-
-          <section id="operatives" className="card" style={{ marginTop: '1rem' }}>
+            ) : (
+              <div className="muted">No faction rules available.</div>
+            )}
+          </section>
+        )
+      case 'operatives':
+        return (
+          <section id="operatives" className="card killteam-tab-panel">
             <h3 style={{ marginTop: 0 }}>Operatives</h3>
             {operatives.length ? (
               <div className="operatives-grid">
@@ -718,8 +945,10 @@ export default function KillteamPage() {
               <div className="muted">No operatives listed for this kill team.</div>
             )}
           </section>
-
-          <section id="ploys" className="card" style={{ marginTop: '1rem' }}>
+        )
+      case 'ploys':
+        return (
+          <section id="ploys" className="card killteam-tab-panel">
             <h3 style={{ marginTop: 0 }}>Ploys</h3>
             {strategyPloys.length || firefightPloys.length ? (
               <>
@@ -776,14 +1005,16 @@ export default function KillteamPage() {
               <div className="muted">No ploys available.</div>
             )}
           </section>
-
-          <section id="equipment" className="card" style={{ marginTop: '1rem' }}>
+        )
+      case 'equipment':
+        return (
+          <section id="equipment" className="card killteam-tab-panel">
             <h3 style={{ marginTop: 0 }}>Equipment</h3>
             {equipment.length ? (
               <>
                 {factionEquipment.length > 0 && (
                   <>
-                    <h4 className="muted" style={{ margin: 0, marginBottom: '0.5rem' }}>
+                    <h4 id="faction-equipment" className="muted" style={{ margin: 0, marginBottom: '0.5rem' }}>
                       Faction Equipment
                     </h4>
                     <div className="card-section-list">
@@ -803,6 +1034,7 @@ export default function KillteamPage() {
                 {universalEquipment.length > 0 && (
                   <>
                     <h4
+                      id="universal-equipment"
                       className="muted"
                       style={{ marginTop: factionEquipment.length > 0 ? '1rem' : 0, marginBottom: '0.5rem' }}
                     >
@@ -826,7 +1058,30 @@ export default function KillteamPage() {
               <div className="muted">No equipment listed.</div>
             )}
           </section>
+        )
+      default:
+        return null
+    }
+  }
+
+  return (
+    <>
+      <Seo title={killteamTitle} description={seoDescription} type="article" />
+      <div className="container">
+        <Header />
+        <div className="card killteam-selector-sticky">
+          <KillteamSelector currentKillteamId={killteam.killteamId} />
+          {sections.length > 0 && (
+            <div style={{ marginTop: '0.75rem' }}>
+              <KillteamSectionNavigator
+                sections={sections}
+                activeSectionId={activeSectionId}
+                onSectionChange={setActiveSectionId}
+              />
+            </div>
+          )}
         </div>
+        {renderActiveSection()}
       </div>
     </>
   )
