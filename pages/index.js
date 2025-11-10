@@ -48,8 +48,6 @@ export default function Home() {
   const [q, setQ] = useState('')
   const [res, setRes] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [version, setVersion] = useState(null)
-  const [status, setStatus] = useState('Checking for data updates…')
 
   const runSearch = async (query, idx) => {
     const mini = idx || await ensureIndex()
@@ -85,19 +83,30 @@ export default function Home() {
   }
 
   useEffect(() => {
-    (async () => {
-      const upd = await checkForUpdates()
-        if (upd.error) setStatus('Offline (using cached data)')
-        else if (upd.warning) setStatus('Partial data update')
-        else setStatus(upd.updated ? 'Data updated' : 'Up to date')
-      if (upd.version) setVersion(upd.version)
-  
+    let cancelled = false
+
+    const run = async () => {
+      try {
+        await checkForUpdates()
+      } catch (err) {
+        console.warn('Update check failed', err)
+      }
+
       const idx = await ensureIndex()
+      if (cancelled) return
       setLoading(false)
-  
+
       const results = await runSearch(q, idx)
-      setRes(results)
-    })()
+      if (!cancelled) {
+        setRes(results)
+      }
+    }
+
+    run()
+
+    return () => {
+      cancelled = true
+    }
   }, [])
   
   useEffect(() => {
@@ -112,7 +121,7 @@ export default function Home() {
     <>
       <Seo description="Search and browse Kill Team factions, operatives, rules, and equipment with a fast, offline-ready reference companion." />
       <div className="container">
-        <Header version={version} status={status} />
+        <Header />
         <SearchBox q={q} setQ={setQ} />
         <Results results={res} loading={loading} />
       </div>
