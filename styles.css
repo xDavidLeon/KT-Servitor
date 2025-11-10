@@ -1,4 +1,4 @@
-:root { --bg:#0f1115; --panel:#151822; --text:#e6e6e6; --muted:#9aa0aa; --accent:#fb923c; --kt-header-offset:6.5rem; }
+:root { --bg:#0f1115; --panel:#151822; --text:#e6e6e6; --muted:#9aa0aa; --accent:#fb923c; }
 *{box-sizing:border-box}
 
 .pre-line{white-space:pre-line;}
@@ -6,8 +6,8 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
 a{color:var(--accent);text-decoration:none}
 .container{max-width:900px;margin:0 auto;padding:1rem}
 .card{background:var(--panel);border-radius:16px;padding:1rem;margin:0.5rem 0;box-shadow:0 4px 24px rgba(0,0,0,.25)}
-.header-sticky{position:sticky;top:0;z-index:100;margin-bottom:0.5rem}
-.killteam-selector-sticky{position:sticky;top:calc(var(--kt-header-offset, 0px) + 0.75rem);z-index:90;margin-bottom:0.5rem}
+.header-sticky{margin-bottom:0.5rem}
+.killteam-selector-sticky{margin-bottom:0.5rem}
 input,select,button{background:#0e1016;color:var(--text);border:1px solid #262a36;border-radius:10px;padding:0.6rem 0.8rem}
 .nav-links{
   width:100%;

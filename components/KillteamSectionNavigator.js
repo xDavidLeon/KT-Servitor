@@ -18,15 +18,22 @@ function scrollToSection(sectionId) {
   const mainHeader = document.querySelector('.header-sticky')
   const selectorCard = document.querySelector('.killteam-selector-sticky')
 
-  let headerOffset = 200
-  if (mainHeader && selectorCard) {
-    const mainHeaderHeight = mainHeader.getBoundingClientRect().height
-    const selectorHeight = selectorCard.getBoundingClientRect().height
-    headerOffset = mainHeaderHeight + selectorHeight + 20
+  let headerOffset = 16
+  if (mainHeader) {
+    const headerStyle = window.getComputedStyle(mainHeader).position
+    if (headerStyle === 'sticky' || headerStyle === 'fixed') {
+      headerOffset += mainHeader.getBoundingClientRect().height
+    }
+  }
+  if (selectorCard) {
+    const selectorStyle = window.getComputedStyle(selectorCard).position
+    if (selectorStyle === 'sticky' || selectorStyle === 'fixed') {
+      headerOffset += selectorCard.getBoundingClientRect().height + 20
+    }
   }
 
   const elementPosition = element.getBoundingClientRect().top
-  const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+  const offsetPosition = Math.max(elementPosition + window.pageYOffset - headerOffset, 0)
 
   window.scrollTo({
     top: offsetPosition,
