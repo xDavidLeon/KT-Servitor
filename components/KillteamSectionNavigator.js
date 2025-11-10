@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 const SECTIONS = [
   { id: 'killteam-overview', label: 'Overview' },
   { id: 'killteam-composition', label: 'Composition' },
+  { id: 'team-abilities', label: 'Team Abilities' },
+  { id: 'team-options', label: 'Team Options' },
   { id: 'operative-types', label: 'Operative Types' },
   { id: 'strategic-ploys', label: 'Strategic Ploys' },
   { id: 'firefight-ploys', label: 'Firefight Ploys' },
@@ -33,7 +35,7 @@ function scrollToSection(sectionId) {
   })
 }
 
-export default function KillteamSectionNavigator({ killteam }) {
+export default function KillteamSectionNavigator({ killteam, teamAbilities = [], teamOptions = [] }) {
   const [isOpen, setIsOpen] = useState(false)
   const [availableSections, setAvailableSections] = useState([])
 
@@ -64,6 +66,24 @@ export default function KillteamSectionNavigator({ killteam }) {
 
     if (killteam.composition) {
       addSection('killteam-composition')
+    }
+
+    if (Array.isArray(teamAbilities) && teamAbilities.length) {
+      const abilityChildren = buildChildren(
+        teamAbilities,
+        (ability, index) => ability?.anchorId || (ability?.name ? `team-ability-${index + 1}` : null),
+        (ability, index) => ability?.name || `Team Ability ${index + 1}`
+      )
+      addSection('team-abilities', abilityChildren)
+    }
+
+    if (Array.isArray(teamOptions) && teamOptions.length) {
+      const optionChildren = buildChildren(
+        teamOptions,
+        (option, index) => option?.anchorId || (option?.name ? `team-option-${index + 1}` : null),
+        (option, index) => option?.name || `Team Option ${index + 1}`
+      )
+      addSection('team-options', optionChildren)
     }
 
     if (Array.isArray(killteam.opTypes) && killteam.opTypes.length) {
@@ -105,7 +125,7 @@ export default function KillteamSectionNavigator({ killteam }) {
     }
 
     setAvailableSections(sections)
-  }, [killteam])
+  }, [killteam, teamAbilities, teamOptions])
 
   useEffect(() => {
     const handleClickOutside = (e) => {

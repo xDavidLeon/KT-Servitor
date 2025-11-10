@@ -172,6 +172,34 @@ function normaliseOption(option) {
   }
 }
 
+function normaliseTextForSignature(value) {
+  if (value === null || value === undefined) return ''
+  return String(value)
+    .replace(/\r\n/g, '\n')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .toLowerCase()
+}
+
+function abilitySignature(ability) {
+  if (!ability) return ''
+  const name = normaliseTextForSignature(ability?.name)
+  const description = normaliseTextForSignature(ability?.description)
+  const apCost = normaliseTextForSignature(ability?.apCost)
+  if (!name && !description && !apCost) {
+    return ''
+  }
+  return `${name}||${description}||${apCost}`
+}
+
+function buildTeamAnchor(prefix, name, index) {
+  const slug = normaliseTextForSignature(name)
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+  const base = slug ? `${prefix}-${slug}` : prefix
+  return `${base}-${index + 1}`
+}
+
 function normalisePloy(ploy) {
   if (!ploy) return null
 
@@ -411,12 +439,133 @@ export default function KillteamPage() {
     return () => window.clearInterval(timer)
   }, [killteam])
 
-  const operatives = useMemo(() => {
+  const rawOperatives = useMemo(() => {
     if (!killteam?.opTypes) return []
     return killteam.opTypes
       .map(normaliseOperative)
       .filter(Boolean)
   }, [killteam])
+
+  const teamAbilities = useMemo(() => {
+    if (!rawOperatives.length) return []
+
+    const abilityLists = rawOperatives.map(op => {
+      if (!Array.isArray(op.specialRules)) return []
+      return op.specialRules.filter(Boolean)
+    })
+
+    if (!abilityLists.length) return []
+
+    const [firstList, ...otherLists] = abilityLists
+    if (!firstList.length) return []
+
+    const commonMap = new Map()
+
+    for (const ability of firstList) {
+      const signature = abilitySignature(ability)
+      if (!signature || commonMap.has(signature)) continue
+
+      const isCommon = otherLists.every(list =>
+        list.some(item => abilitySignature(item) === signature)
+      )
+
+      if (isCommon) {
+        commonMap.set(signature, ability)
+      }
+    }
+
+    if (!commonMap.size) return []
+
+    return Array.from(commonMap.values()).map((ability, index) => ({
+      ...ability,
+      anchorId: buildTeamAnchor('team-ability', ability?.name, index)
+    }))
+  }, [rawOperatives])
+
+  const teamAbilitySignatures = useMemo(() => {
+    if (!teamAbilities.length) return null
+    const signatures = teamAbilities
+      .map(abilitySignature)
+      .filter(Boolean)
+    return signatures.length ? new Set(signatures) : null
+  }, [teamAbilities])
+
+  const teamOptions = useMemo(() => {
+    if (!rawOperatives.length) return []
+
+    const optionLists = rawOperatives.map(op => {
+      if (!Array.isArray(op.specialActions)) return []
+      return op.specialActions.filter(Boolean)
+    })
+
+    if (!optionLists.length) return []
+
+    const [firstList, ...otherLists] = optionLists
+    if (!firstList.length) return []
+
+    const commonMap = new Map()
+
+    for (const option of firstList) {
+      const signature = abilitySignature(option)
+      if (!signature || commonMap.has(signature)) continue
+
+      const isCommon = otherLists.every(list =>
+        list.some(item => abilitySignature(item) === signature)
+      )
+
+      if (isCommon) {
+        commonMap.set(signature, option)
+      }
+    }
+
+    if (!commonMap.size) return []
+
+    return Array.from(commonMap.values()).map((option, index) => ({
+      ...option,
+      anchorId: buildTeamAnchor('team-option', option?.name, index)
+    }))
+  }, [rawOperatives])
+
+  const teamOptionSignatures = useMemo(() => {
+    if (!teamOptions.length) return null
+    const signatures = teamOptions
+      .map(abilitySignature)
+      .filter(Boolean)
+    return signatures.length ? new Set(signatures) : null
+  }, [teamOptions])
+
+  const operatives = useMemo(() => {
+    if (!rawOperatives.length) return []
+    if (
+      (!teamAbilitySignatures || teamAbilitySignatures.size === 0) &&
+      (!teamOptionSignatures || teamOptionSignatures.size === 0)
+    ) {
+      return rawOperatives
+    }
+
+    return rawOperatives.map(operative => {
+      const abilities = Array.isArray(operative.specialRules) ? operative.specialRules : []
+      const options = Array.isArray(operative.specialActions) ? operative.specialActions : []
+
+      const filteredAbilities = !abilities.length || !teamAbilitySignatures
+        ? abilities
+        : abilities.filter(ability => !teamAbilitySignatures.has(abilitySignature(ability)))
+
+      const filteredOptions = !options.length || !teamOptionSignatures
+        ? options
+        : options.filter(option => !teamOptionSignatures.has(abilitySignature(option)))
+
+      if (filteredAbilities.length === abilities.length && filteredOptions.length === options.length) {
+        return operative
+      }
+
+      return {
+        ...operative,
+        specialRules: filteredAbilities,
+        specialActions: filteredOptions
+      }
+    })
+  }, [rawOperatives, teamAbilitySignatures, teamOptionSignatures])
 
   const strategicPloys = useMemo(() => {
     return (killteam?.ploys || [])
@@ -462,10 +611,14 @@ export default function KillteamPage() {
   return (
     <div className="container">
       <Header />
-      <div className="card killteam-selector-sticky">
-        <KillteamSelector currentKillteamId={killteam.killteamId} />
+        <div className="card killteam-selector-sticky">
+          <KillteamSelector currentKillteamId={killteam.killteamId} />
         <div style={{ marginTop: '0.5rem' }}>
-          <KillteamSectionNavigator killteam={killteam} />
+            <KillteamSectionNavigator
+              killteam={killteam}
+              teamAbilities={teamAbilities}
+              teamOptions={teamOptions}
+            />
         </div>
       </div>
 
@@ -497,6 +650,52 @@ export default function KillteamPage() {
           <section id="killteam-composition" className="card" style={{ marginTop: '1rem' }}>
             <h3 style={{ marginTop: 0 }}>Composition</h3>
             <RichText className="muted" text={killteam.composition} />
+          </section>
+        )}
+
+        {teamAbilities.length > 0 && (
+          <section id="team-abilities" className="card" style={{ marginTop: '1rem' }}>
+            <h3 style={{ marginTop: 0 }}>Team Abilities</h3>
+            <div className="card-section-list">
+              {teamAbilities.map((ability, idx) => (
+                <div
+                  key={ability.anchorId || ability.name || idx}
+                  id={ability.anchorId}
+                  className="ability-card"
+                >
+                  <div className="ability-card-header">
+                    <h4 className="ability-card-title">{ability.name || 'Ability'}</h4>
+                    {ability.apCost && <span className="ability-card-ap">{ability.apCost}</span>}
+                  </div>
+                  {ability.description && (
+                    <RichText className="ability-card-body" text={ability.description} />
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {teamOptions.length > 0 && (
+          <section id="team-options" className="card" style={{ marginTop: '1rem' }}>
+            <h3 style={{ marginTop: 0 }}>Team Options</h3>
+            <div className="card-section-list">
+              {teamOptions.map((option, idx) => (
+                <div
+                  key={option.anchorId || option.name || idx}
+                  id={option.anchorId}
+                  className="ability-card"
+                >
+                  <div className="ability-card-header">
+                    <h4 className="ability-card-title">{option.name || 'Option'}</h4>
+                    {option.apCost && <span className="ability-card-ap">{option.apCost}</span>}
+                  </div>
+                  {option.description && (
+                    <RichText className="ability-card-body" text={option.description} />
+                  )}
+                </div>
+              ))}
+            </div>
           </section>
         )}
 
