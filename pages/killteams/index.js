@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Header from '../../components/Header'
 import RichText from '../../components/RichText'
@@ -19,6 +20,8 @@ export default function Killteams() {
   const [killteams, setKillteams] = useState([])
   const [version, setVersion] = useState(null)
   const [status, setStatus] = useState('')
+  const [selectedKillteamId, setSelectedKillteamId] = useState('')
+  const router = useRouter()
 
   useEffect(() => {
     (async () => {
@@ -38,6 +41,29 @@ export default function Killteams() {
       <Header version={version} status={status}/>
       <div className="card">
         <h2 style={{ marginTop: 0 }}>Kill Teams</h2>
+        <div style={{ marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <label htmlFor="killteam-jump" className="muted" style={{ fontSize: '0.9rem' }}>
+            Jump to a kill team:
+          </label>
+          <select
+            id="killteam-jump"
+            value={selectedKillteamId}
+            onChange={(e) => {
+              const value = e.target.value
+              setSelectedKillteamId(value)
+              if (value) {
+                router.push(`/killteams/${value}`)
+              }
+            }}
+          >
+            <option value="">Select a kill team…</option>
+            {killteams.map(kt => (
+              <option key={kt.killteamId} value={kt.killteamId}>
+                {kt.killteamName} ({kt.killteamId})
+              </option>
+            ))}
+          </select>
+        </div>
         {killteams.map(kt => (
           <div key={kt.killteamId} className="card" style={{ margin: '.5rem 0' }}>
             <div className="heading" style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
