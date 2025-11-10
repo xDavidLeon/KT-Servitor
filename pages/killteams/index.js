@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import Header from '../../components/Header'
 import KillteamSelector from '../../components/KillteamSelector'
@@ -6,6 +6,7 @@ import RichText from '../../components/RichText'
 import { db } from '../../lib/db'
 import { ensureIndex } from '../../lib/search'
 import { checkForUpdates } from '../../lib/update'
+import { FACTION_ORDER, getFactionName } from '../../lib/factions'
 
 function parseArchetypes(value) {
   if (!value) return []
@@ -34,6 +35,21 @@ export default function Killteams() {
     })()
   }, [])
 
+  const groupedKillteams = useMemo(() => {
+    const byFaction = killteams.reduce((acc, kt) => {
+      const faction = getFactionName(kt.factionId)
+      if (!acc[faction]) acc[faction] = []
+      acc[faction].push(kt)
+      return acc
+    }, {})
+
+    return FACTION_ORDER.map(label => {
+      const items = byFaction[label] || []
+      const sorted = items.slice().sort((a, b) => (a.killteamName || '').localeCompare(b.killteamName || ''))
+      return { label, items: sorted }
+    }).filter(group => group.items.length > 0)
+  }, [killteams])
+
   return (
     <div className="container">
       <Header version={version} status={status}/>
@@ -45,32 +61,46 @@ export default function Killteams() {
           </span>
           <KillteamSelector />
         </div>
-        {killteams.map(kt => (
-          <div key={kt.killteamId} className="card" style={{ margin: '.5rem 0' }}>
+        {groupedKillteams.map((group, index) => (
+          <div key={group.label} style={{ marginTop: index === 0 ? '0.5rem' : '1.5rem' }}>
             <div
-              className="heading"
               style={{
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                gap: '1rem'
+                padding: '0.3rem 0',
+                fontSize: '0.85rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                color: 'var(--muted)'
               }}
             >
-              <strong>{kt.killteamName}</strong>
-              {kt.archetypes && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'flex-end' }}>
-                  {parseArchetypes(kt.archetypes).map(archetype => (
-                    <span key={archetype} className="pill">{archetype}</span>
-                  ))}
+              {group.label}
+            </div>
+            {group.items.map(kt => {
+              const archetypes = parseArchetypes(kt.archetypes)
+              return (
+                <div key={kt.killteamId} className="card" style={{ margin: '.5rem 0' }}>
+                  <div
+                    className="heading"
+                    style={{ justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}
+                  >
+                    <strong>{kt.killteamName}</strong>
+                    {archetypes.length > 0 && (
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'flex-end' }}>
+                        {archetypes.map(archetype => (
+                          <span key={archetype} className="pill">{archetype}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  {kt.description && <RichText className="muted" text={kt.description} />}
+                  <div style={{ marginTop: '.5rem' }}>
+                    <Link href={`/killteams/${kt.killteamId}`}>Open kill team →</Link>
+                  </div>
                 </div>
-              )}
-            </div>
-            {kt.description && <RichText className="muted" text={kt.description} />}
-            <div style={{ marginTop: '.5rem' }}>
-              <Link href={`/killteams/${kt.killteamId}`}>Open kill team →</Link>
-            </div>
+              )
+            })}
           </div>
         ))}
-        {killteams.length === 0 && (
+        {groupedKillteams.length === 0 && (
           <div className="muted">No kill teams available. Try forcing an update from the menu.</div>
         )}
       </div>

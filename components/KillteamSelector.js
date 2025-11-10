@@ -2,16 +2,10 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { db } from '../lib/db'
+import { FACTION_ORDER, getFactionName } from '../lib/factions'
 
 const RECENT_KILLTEAMS_KEY = 'kt-servitor-recent-killteams'
 const MAX_RECENT = 3
-const FACTION_LABELS = {
-  IMP: 'Imperium',
-  CHAOS: 'Chaos',
-  SPEC: 'Spec Ops',
-  HBR: 'Homebrew'
-}
-const FACTION_ORDER = ['Imperium', 'Chaos', 'Xenos', 'Spec Ops', 'Homebrew']
 
 function getRecentKillteams() {
   if (typeof window === 'undefined') return []
@@ -42,12 +36,6 @@ function sortKillteams(list) {
     const nameB = (b.killteamName || b.killteamId || '').toLowerCase()
     return nameA.localeCompare(nameB)
   })
-}
-
-function getFactionName(factionId) {
-  if (!factionId) return 'Xenos'
-  const normalized = String(factionId).toUpperCase()
-  return FACTION_LABELS[normalized] || 'Xenos'
 }
 
 export default function KillteamSelector({ currentKillteamId }) {
