@@ -14,11 +14,8 @@ export default function OperativeCard({ operative }) {
     <div id={anchorId} className="operative-card">
       <div className="operative-header">
         <h4 style={{ margin: 0 }}>{operative.name || operative.title}</h4>
-        {baseSizeText && (
-          <span className="operative-base-size">{baseSizeText}</span>
-        )}
       </div>
-      
+
       <div className="operative-stats">
         <div className="table-scroll">
           <table className="stats-table">
@@ -138,6 +135,12 @@ export default function OperativeCard({ operative }) {
               <span key={idx} className="pill">{keyword}</span>
             ))}
           </div>
+        </div>
+      )}
+
+      {baseSizeText && (
+        <div className="operative-meta-footer">
+          <span className="operative-base-size">{baseSizeText}</span>
         </div>
       )}
     </div>

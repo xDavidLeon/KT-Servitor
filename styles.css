@@ -161,8 +161,14 @@ th{position:sticky;top:0;background:#121521}
     font-size: 1.1rem;
     flex: 1;
   }
+  .operative-meta-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
   .operative-base-size {
-    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
     padding: 0.2rem 0.6rem;
     border-radius: 999px;
     border: 1px solid #2a2f3f;
@@ -284,10 +290,8 @@ th{position:sticky;top:0;background:#121521}
     flex-direction: column;
     align-items: flex-start;
   }
-  .operative-base-size {
-    margin-left: 0;
-    align-self: flex-end;
-    margin-top: 0.25rem;
+  .operative-meta-footer {
+    margin-top: 0.75rem;
   }
     .table-scroll {
     margin: 0.5rem 0;
