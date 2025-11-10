@@ -82,39 +82,13 @@ To use a custom domain (e.g., `ktservitor.your-domain.com`):
 - Update `version` in `public/data/v1/manifest.json`
 - Optionally compute new SHA-256 for each file (the app checks integrity)
 
-### Using BattleScribe data files
+### Kill Team dataset (preferred)
 
-You can automatically populate factions and operatives from BattleScribe data files:
+The app now consumes the community-maintained dataset from [vjosset/killteamjson](https://github.com/vjosset/killteamjson). On first load the in-browser updater (`lib/update.js`) downloads the latest `kt24_v*.json`, verifies it and stores it locally for search.
 
-1. **Get BattleScribe files:**
-   - **Recommended**: Download `.cat` (catalogue) files from [BSData/wh40k-killteam](https://github.com/BSData/wh40k-killteam)
-     - These contain all faction data, operatives, weapons, etc.
-     - Look for files like `2024 - Intercession Squad.cat` in the repository
-   - **Alternative**: Use `.bsi` (roster) files exported from BattleScribe
-     - Note: Roster files only contain the specific units in your list, not all available options
-     - Some .bsi files may be in compressed/binary format and may not work
+To use a different data source when self-hosting:
+- Host your JSON dataset somewhere reachable over HTTPS.
+- Update `KILLTEAM_JSON_URL` in `lib/update.js` to point to it.
+- Redeploy or rebuild so clients pick up the new URL.
 
-2. **Prepare files:**
-   - Create a `battlescribe` directory in the project root
-   - Place your `.cat` files in that directory
-   - Note: `.catz` files are compressed archives - extract them first (rename to `.zip`, extract, then use the `.cat` file)
-
-3. **Run conversion:**
-   ```bash
-   npm install  # Install xml2js dependency if not already installed
-   npm run convert-battlescribe
-   ```
-
-4. **The script will:**
-   - Parse all `.cat` files in the `battlescribe` directory
-   - Extract factions, operatives (with stats, weapons, abilities), rules, equipment, ploys, and tac ops
-   - Generate JSON files in `public/data/v1/`
-   - Update the manifest.json automatically
-
-The conversion script extracts:
-- **Factions**: Name, tags, and summary
-- **Operatives**: Stats (M, WS, BS, A, W, Sv), weapons with profiles, and special abilities
-- **Rules**: Faction-specific rules
-- **Equipment**: Available equipment items
-- **Ploys**: Strategic and tactical ploys
-- **Tac Ops**: Tactical operations
+> **Legacy note:** The old BattleScribe conversion workflow (`npm run convert-battlescribe`) has been retired and is kept for archival purposes only. It is no longer maintained and may produce incomplete data.
