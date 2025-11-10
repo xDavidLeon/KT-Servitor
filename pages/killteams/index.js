@@ -47,17 +47,23 @@ export default function Killteams() {
         </div>
         {killteams.map(kt => (
           <div key={kt.killteamId} className="card" style={{ margin: '.5rem 0' }}>
-            <div className="heading" style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
+            <div
+              className="heading"
+              style={{
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                gap: '1rem'
+              }}
+            >
               <strong>{kt.killteamName}</strong>
-              <span className="pill">{kt.killteamId}</span>
+              {kt.archetypes && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'flex-end' }}>
+                  {parseArchetypes(kt.archetypes).map(archetype => (
+                    <span key={archetype} className="pill">{archetype}</span>
+                  ))}
+                </div>
+              )}
             </div>
-            {kt.archetypes && (
-              <div style={{ marginBottom: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
-                {parseArchetypes(kt.archetypes).map(archetype => (
-                  <span key={archetype} className="pill">{archetype}</span>
-                ))}
-              </div>
-            )}
             {kt.description && <RichText className="muted" text={kt.description} />}
             <div style={{ marginTop: '.5rem' }}>
               <Link href={`/killteams/${kt.killteamId}`}>Open kill team →</Link>
