@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import SearchBox from '../components/SearchBox'
 import Results from '../components/Results'
-import { ensureIndex } from '../lib/search'
+import Disclaimer from '../components/Disclaimer'
+import { ensureIndex, getAllIndexedDocuments } from '../lib/search'
 import { checkForUpdates } from '../lib/update'
-import { db } from '../lib/db'
 
 
 function rankResults(results, query) {
@@ -51,35 +51,60 @@ export default function Home() {
   const [version, setVersion] = useState(null)
   const [status, setStatus] = useState('Checking for data updates…')
 
+  const runSearch = async (query, idx) => {
+    const mini = idx || await ensureIndex()
+    const trimmed = query.trim()
+    if (!trimmed) {
+      const allDocs = await getAllIndexedDocuments()
+      return [...allDocs].sort((a, b) => (a.title || '').localeCompare(b.title || ''))
+    }
+
+    const primary = mini.search(trimmed, { prefix: true, fuzzy: 0.2 })
+    if (primary.length) {
+      return rankResults(primary, trimmed)
+    }
+
+    const norm = trimmed.toLowerCase()
+    const allDocs = await getAllIndexedDocuments()
+    const fallbackCandidates = allDocs.filter(doc => {
+      const fields = [
+        doc.title,
+        doc.killteamName,
+        doc.killteamDisplayName,
+        ...(Array.isArray(doc.tags) ? doc.tags : []),
+        doc.body
+      ]
+
+      return fields.some(value => {
+        if (!value) return false
+        return value.toString().toLowerCase().includes(norm)
+      })
+    })
+
+    return rankResults(fallbackCandidates, trimmed)
+  }
+
   useEffect(() => {
     (async () => {
       const upd = await checkForUpdates()
-      if (upd.error) setStatus('Offline (using cached data)')
-      else setStatus(upd.updated ? 'Data updated' : 'Up to date')
+        if (upd.error) setStatus('Offline (using cached data)')
+        else if (upd.warning) setStatus('Partial data update')
+        else setStatus(upd.updated ? 'Data updated' : 'Up to date')
       if (upd.version) setVersion(upd.version)
   
       const idx = await ensureIndex()
       setLoading(false)
   
-      // if no search query, show all items
-      if (!q.trim()) {
-        const all = await db.articles.orderBy('title').toArray()
-        setRes(all)
-      } else {
-        setRes(rankResults(idx.search(q, { prefix: true, fuzzy: 0.2 }), q))
-      }
+      const results = await runSearch(q, idx)
+      setRes(results)
     })()
   }, [])
   
   useEffect(() => {
     (async () => {
       const idx = await ensureIndex()
-      if (!q.trim()) {
-        const all = await db.articles.orderBy('title').toArray()
-        setRes(all)
-      } else {
-        setRes(rankResults(idx.search(q, { prefix: true, fuzzy: 0.2 }), q))
-      }
+      const results = await runSearch(q, idx)
+      setRes(results)
     })()
   }, [q])
 
@@ -88,9 +113,7 @@ export default function Home() {
       <Header version={version} status={status} />
       <SearchBox q={q} setQ={setQ} />
       <Results results={res} loading={loading} />
-      <div className="card muted">
-        This free web-based app is a rules reference for Kill Team 2024 and features publicly available data; no copyrighted rule text. It is not affiliated with Games Workshop Ltd. This app is not a replacement for the official Kill Team 2024 rulebook.
-      </div>
+        <Disclaimer />
     </div>
   )
 }

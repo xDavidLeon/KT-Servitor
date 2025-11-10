@@ -1,47 +1,45 @@
-// components/SectionNavigator.js
+// components/KillteamSectionNavigator.js
 import { useState, useEffect } from 'react'
 
 const SECTIONS = [
-  { id: 'operative-selection', label: 'Operative Selection' },
-  { id: 'faction-rules', label: 'Faction Rules' },
-  { id: 'datacards', label: 'Datacards' },
+  { id: 'killteam-overview', label: 'Overview' },
+  { id: 'killteam-composition', label: 'Composition' },
+  { id: 'operative-types', label: 'Operative Types' },
   { id: 'strategic-ploys', label: 'Strategic Ploys' },
-  { id: 'tactical-ploys', label: 'Tactical Ploys' },
+  { id: 'firefight-ploys', label: 'Firefight Ploys' },
   { id: 'equipment', label: 'Equipment' },
-  { id: 'tac-ops', label: 'Tac Ops' }
+  { id: 'default-roster', label: 'Default Roster' }
 ]
 
 function scrollToSection(sectionId) {
   const element = document.getElementById(sectionId)
-  if (element) {
-    // Calculate the height of sticky headers
-    // Main header + faction selector card (which contains both dropdowns)
-    const mainHeader = document.querySelector('.header-sticky')
-    const factionSelectorCard = document.querySelector('.faction-selector-sticky')
-    
-    let headerOffset = 200 // Default offset
-    if (mainHeader && factionSelectorCard) {
-      const mainHeaderHeight = mainHeader.getBoundingClientRect().height
-      const selectorCardHeight = factionSelectorCard.getBoundingClientRect().height
-      headerOffset = mainHeaderHeight + selectorCardHeight + 20 // Add some extra padding
-    }
-    
-    const elementPosition = element.getBoundingClientRect().top
-    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+  if (!element) return
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    })
+  const mainHeader = document.querySelector('.header-sticky')
+  const selectorCard = document.querySelector('.killteam-selector-sticky')
+
+  let headerOffset = 200
+  if (mainHeader && selectorCard) {
+    const mainHeaderHeight = mainHeader.getBoundingClientRect().height
+    const selectorHeight = selectorCard.getBoundingClientRect().height
+    headerOffset = mainHeaderHeight + selectorHeight + 20
   }
+
+  const elementPosition = element.getBoundingClientRect().top
+  const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+  window.scrollTo({
+    top: offsetPosition,
+    behavior: 'smooth'
+  })
 }
 
-export default function SectionNavigator({ factionData }) {
+export default function KillteamSectionNavigator({ killteam }) {
   const [isOpen, setIsOpen] = useState(false)
   const [availableSections, setAvailableSections] = useState([])
 
   useEffect(() => {
-    if (!factionData) return
+    if (!killteam) return
 
     const sections = []
 
@@ -63,63 +61,57 @@ export default function SectionNavigator({ factionData }) {
         .filter(Boolean)
     }
 
-    if (factionData.operativeSelection && factionData.operatives) {
-      addSection('operative-selection')
+    addSection('killteam-overview')
+
+    if (killteam.composition) {
+      addSection('killteam-composition')
     }
 
-    if (factionData.rules && factionData.rules.length > 0) {
-      const ruleChildren = buildChildren(
-        factionData.rules,
-        (rule, index) => rule?.id || (rule?.name ? `rule-${index}` : null),
-        (rule, index) => rule?.name || rule?.title || `Rule ${index + 1}`
+    if (Array.isArray(killteam.opTypes) && killteam.opTypes.length) {
+      const operativeChildren = buildChildren(
+        killteam.opTypes,
+        (op) => op?.opTypeId ? `operative-${op.opTypeId}` : null,
+        (op, index) => op?.opTypeName || op?.opName || `Operative ${index + 1}`
       )
-      addSection('faction-rules', ruleChildren)
+      addSection('operative-types', operativeChildren)
     }
 
-    if (factionData.operatives && factionData.operatives.length > 0) {
-      const datacardChildren = buildChildren(
-        factionData.operatives,
-        (op, index) => (op?.id ? `operative-${op.id}` : null),
-        (op, index) => op?.name || op?.title || `Datacard ${index + 1}`
-      )
-      addSection('datacards', datacardChildren)
-    }
-
-    if (factionData.strategicPloys && factionData.strategicPloys.length > 0) {
+    const strategicPloys = (killteam.ploys || []).filter(ploy => ploy?.ployType === 'S')
+    if (strategicPloys.length) {
       const strategicChildren = buildChildren(
-        factionData.strategicPloys,
-        (ploy, index) => ploy?.id || (ploy?.name ? `strategic-ploy-${index}` : null),
-        (ploy, index) => ploy?.name || ploy?.title || `Strategic Ploy ${index + 1}`
+        strategicPloys,
+        (ploy) => ploy?.ployId ? `ploy-${ploy.ployId}` : null,
+        (ploy, index) => ploy?.ployName || `Strategic Ploy ${index + 1}`
       )
       addSection('strategic-ploys', strategicChildren)
     }
 
-    if (factionData.tacticalPloys && factionData.tacticalPloys.length > 0) {
-      const tacticalChildren = buildChildren(
-        factionData.tacticalPloys,
-        (ploy, index) => ploy?.id || (ploy?.name ? `tactical-ploy-${index}` : null),
-        (ploy, index) => ploy?.name || ploy?.title || `Tactical Ploy ${index + 1}`
+    const firefightPloys = (killteam.ploys || []).filter(ploy => ploy?.ployType && ploy.ployType !== 'S')
+    if (firefightPloys.length) {
+      const firefightChildren = buildChildren(
+        firefightPloys,
+        (ploy) => ploy?.ployId ? `ploy-${ploy.ployId}` : null,
+        (ploy, index) => ploy?.ployName || `Firefight Ploy ${index + 1}`
       )
-      addSection('tactical-ploys', tacticalChildren)
+      addSection('firefight-ploys', firefightChildren)
     }
 
-    if (factionData.equipment && factionData.equipment.length > 0) {
+    if (Array.isArray(killteam.equipments) && killteam.equipments.length) {
       const equipmentChildren = buildChildren(
-        factionData.equipment,
-        (eq, index) => eq?.id || (eq?.name ? `equipment-${index}` : null),
-        (eq, index) => eq?.name || eq?.title || `Equipment ${index + 1}`
+        killteam.equipments,
+        (eq) => eq?.eqId ? `equipment-${eq.eqId}` : null,
+        (eq, index) => eq?.eqName || `Equipment ${index + 1}`
       )
       addSection('equipment', equipmentChildren)
     }
 
-    if (factionData.tacops && factionData.tacops.length > 0) {
-      addSection('tac-ops')
+    if (killteam.defaultRoster) {
+      addSection('default-roster')
     }
 
     setAvailableSections(sections)
-  }, [factionData])
+  }, [killteam])
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!e.target.closest('.section-navigator')) {
@@ -158,8 +150,8 @@ export default function SectionNavigator({ factionData }) {
           {isOpen ? '▲' : '▼'}
         </span>
       </button>
-      
-      {isOpen && (
+
+        {isOpen && (
         <div
           className="section-dropdown"
           style={{
@@ -173,7 +165,8 @@ export default function SectionNavigator({ factionData }) {
             borderRadius: '8px',
             boxShadow: '0 8px 24px rgba(0,0,0,.4)',
             zIndex: 200,
-            overflow: 'hidden'
+              maxHeight: '70vh',
+              overflowY: 'auto'
           }}
         >
           {availableSections.map(section => (
@@ -245,4 +238,3 @@ export default function SectionNavigator({ factionData }) {
     </div>
   )
 }
-
