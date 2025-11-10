@@ -26,6 +26,95 @@ function splitKeywords(value) {
     .filter(Boolean)
 }
 
+function formatApCost(value) {
+  if (value === null || value === undefined) return null
+  if (typeof value === 'number' && !Number.isNaN(value)) {
+    return `${value} AP`
+  }
+  const str = String(value).trim()
+  if (!str) return null
+
+  const numeric = str.match(/^(\d+(?:\.\d+)?)$/)
+  if (numeric) return `${numeric[1]} AP`
+
+  const labelled = str.match(/^(\d+(?:\.\d+)?)\s*AP$/i)
+  if (labelled) return `${labelled[1]} AP`
+
+  if (/AP/i.test(str)) {
+    const collapsed = str.replace(/\s+/g, ' ').toUpperCase()
+    const digits = collapsed.match(/(\d+(?:\.\d+)?)/)
+    if (digits) {
+      return `${digits[1]} AP`
+    }
+    return collapsed
+  }
+
+  return str
+}
+
+function extractApFromName(rawName) {
+  if (!rawName || typeof rawName !== 'string') {
+    return { cleanName: rawName || '', inferredAp: null }
+  }
+
+  const match = rawName.match(/\(([^)]*?\b\d+(?:\.\d+)?\s*AP)\)/i)
+  if (!match) {
+    return { cleanName: rawName.trim(), inferredAp: null }
+  }
+
+  const cleanName = `${rawName.slice(0, match.index)}${rawName.slice(match.index + match[0].length)}`
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+
+  return {
+    cleanName: cleanName || rawName.trim(),
+    inferredAp: match[1]
+  }
+}
+
+function normaliseAbility(ability) {
+  if (!ability) return null
+
+  const rawName = ability.abilityName ?? ability.name ?? ''
+  const { cleanName, inferredAp } = extractApFromName(rawName)
+
+  const candidateKeys = [
+    'apCost',
+    'ap',
+    'AP',
+    'apcost',
+    'ap_cost',
+    'apValue',
+    'ap_value',
+    'actionPointCost',
+    'actionPointCosts',
+    'actionPoints'
+  ]
+
+  let explicitAp = null
+  for (const key of candidateKeys) {
+    if (Object.prototype.hasOwnProperty.call(ability, key)) {
+      const value = ability[key]
+      if (value !== undefined && value !== null && value !== '') {
+        explicitAp = value
+        break
+      }
+    }
+  }
+
+  const apCost = formatApCost(explicitAp ?? inferredAp)
+
+  if (!cleanName && !ability.description) {
+    return null
+  }
+
+  return {
+    name: cleanName || rawName,
+    description: ability.description,
+    apCost: apCost || null
+  }
+}
+
 function normaliseOperative(opType) {
   if (!opType) return null
 
@@ -74,10 +163,7 @@ function normaliseOperative(opType) {
     wounds: opType.WOUNDS ?? null,
     baseSize: opType.basesize ?? null,
     keywords: splitKeywords(opType.keywords),
-    specialRules: (opType.abilities || []).map(ability => ({
-      name: ability.abilityName,
-      description: ability.description
-    })),
+    specialRules: (opType.abilities || []).map(normaliseAbility).filter(Boolean),
     specialActions: (opType.options || []).map(option => ({
       name: option.optionName,
       description: option.description

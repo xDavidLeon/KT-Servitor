@@ -92,22 +92,28 @@ export default function OperativeCard({ operative }) {
             </div>
           </div>
         );
-      })()}
-      
-      {operative.specialRules && operative.specialRules.length > 0 && (
-        <div className="operative-special-rules">
-          <strong>Special Rules:</strong>
-          <ul style={{ margin: '0.5rem 0', paddingLeft: '1.5rem' }}>
-            {operative.specialRules.map((rule, idx) => (
-              <li key={idx}>
-                <strong>{rule.name}:</strong>{' '}
-                <RichText as="span" className="muted" text={rule.description} inline />
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      
+        })()}
+
+        {Array.isArray(operative.specialRules) && operative.specialRules.length > 0 && (
+          <div className="operative-abilities">
+            <strong className="operative-abilities-title">Abilities</strong>
+            <div className="operative-abilities-list">
+              {operative.specialRules.map((ability, idx) => {
+                const key = ability?.name ? `${ability.name}-${idx}` : `ability-${idx}`
+                return (
+                  <div key={key} className="ability-card">
+                    <div className="ability-card-header">
+                      <h5 className="ability-card-title">{ability?.name || 'Ability'}</h5>
+                      {ability?.apCost && <span className="ability-card-ap">{ability.apCost}</span>}
+                    </div>
+                    <RichText className="ability-card-body" text={ability?.description} />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+        
       {operative.specialActions && operative.specialActions.length > 0 && (
         <div className="operative-special-actions">
           <strong>Special Actions:</strong>

@@ -257,26 +257,88 @@ th{position:sticky;top:0;background:#121521}
   border-bottom: 1px solid #2a2f3f;
   word-break: break-word;
 }
-  .operative-weapons,
-  .operative-abilities {
-    margin-top: 0.75rem;
-    font-size: 0.9rem;
-  }
-  .operative-weapons strong,
-  .operative-abilities strong {
-    color: var(--accent);
-    display: block;
-    margin-bottom: 0.25rem;
-  }
-  .operative-weapons ul,
-  .operative-abilities ul {
-    list-style-type: disc;
-  }
-  .operative-weapons li,
-  .operative-abilities li {
-    margin: 0.25rem 0;
-    line-height: 1.4;
-  }
+.operative-weapons {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+.operative-weapons strong {
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.operative-weapons ul {
+  list-style-type: disc;
+}
+.operative-weapons li {
+  margin: 0.25rem 0;
+  line-height: 1.4;
+}
+.operative-abilities {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.operative-abilities-title {
+  color: var(--accent);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.operative-abilities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.ability-card {
+  background: #111520;
+  border: 1px solid #262a36;
+  border-radius: 10px;
+  padding: 0.85rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+.ability-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.ability-card-title {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text);
+  font-weight: 600;
+}
+.ability-card-ap {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(251, 146, 60, 0.35);
+  background: rgba(251, 146, 60, 0.12);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.ability-card-body {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.ability-card-body p {
+  margin: 0.35rem 0;
+}
+.ability-card-body p:first-child {
+  margin-top: 0;
+}
+.ability-card-body ul,
+.ability-card-body ol {
+  margin: 0.35rem 0 0.35rem 1.25rem;
+  padding: 0;
+}
   .weapons-table {
     margin-top: 0.5rem;
     font-size: 0.85rem;
@@ -299,15 +361,13 @@ th{position:sticky;top:0;background:#121521}
   .weapons-table tr:last-child td {
     border-bottom: none;
   }
-  .operative-special-rules,
-  .operative-special-actions {
-    margin-top: 0.75rem;
-    font-size: 0.9rem;
-  }
-  .operative-special-rules strong,
-  .operative-special-actions strong {
-    color: var(--accent);
-  }
+.operative-special-actions {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+.operative-special-actions strong {
+  color: var(--accent);
+}
 
 @media (min-width: 640px) {
   .operatives-grid {
