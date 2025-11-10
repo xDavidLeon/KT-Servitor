@@ -273,19 +273,22 @@ th{position:sticky;top:0;background:#121521}
   margin: 0.25rem 0;
   line-height: 1.4;
 }
-.operative-abilities {
+.operative-abilities,
+.operative-actions {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
-.operative-abilities-title {
+.operative-abilities-title,
+.operative-actions-title {
   color: var(--accent);
   font-size: 0.95rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
-.operative-abilities-list {
+.operative-abilities-list,
+.operative-actions-list {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -361,13 +364,6 @@ th{position:sticky;top:0;background:#121521}
   .weapons-table tr:last-child td {
     border-bottom: none;
   }
-.operative-special-actions {
-  margin-top: 0.75rem;
-  font-size: 0.9rem;
-}
-.operative-special-actions strong {
-  color: var(--accent);
-}
 
 @media (min-width: 640px) {
   .operatives-grid {

@@ -115,6 +115,49 @@ function normaliseAbility(ability) {
   }
 }
 
+function normaliseOption(option) {
+  if (!option) return null
+
+  const rawName = option.optionName ?? option.name ?? ''
+  const { cleanName, inferredAp } = extractApFromName(rawName)
+
+  const candidateKeys = [
+    'apCost',
+    'ap',
+    'AP',
+    'apcost',
+    'ap_cost',
+    'apValue',
+    'ap_value',
+    'actionPointCost',
+    'actionPointCosts',
+    'actionPoints'
+  ]
+
+  let explicitAp = null
+  for (const key of candidateKeys) {
+    if (Object.prototype.hasOwnProperty.call(option, key)) {
+      const value = option[key]
+      if (value !== undefined && value !== null && value !== '') {
+        explicitAp = value
+        break
+      }
+    }
+  }
+
+  const apCost = formatApCost(explicitAp ?? inferredAp)
+
+  if (!cleanName && !option.description) {
+    return null
+  }
+
+  return {
+    name: cleanName || rawName,
+    description: option.description,
+    apCost: apCost || null
+  }
+}
+
 function normaliseOperative(opType) {
   if (!opType) return null
 
@@ -164,10 +207,7 @@ function normaliseOperative(opType) {
     baseSize: opType.basesize ?? null,
     keywords: splitKeywords(opType.keywords),
     specialRules: (opType.abilities || []).map(normaliseAbility).filter(Boolean),
-    specialActions: (opType.options || []).map(option => ({
-      name: option.optionName,
-      description: option.description
-    })),
+    specialActions: (opType.options || []).map(normaliseOption).filter(Boolean),
     weapons: buildWeapons()
   }
 }
