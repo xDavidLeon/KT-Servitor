@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import Header from '../../components/Header'
 import KillteamSelector from '../../components/KillteamSelector'
@@ -357,6 +357,8 @@ export default function KillteamPage() {
   const [loading, setLoading] = useState(true)
   const [activeSectionId, setActiveSectionId] = useState(null)
   const [pendingHash, setPendingHash] = useState(null)
+  const selectorCardRef = useRef(null)
+  const [isSelectorVisible, setIsSelectorVisible] = useState(true)
 
   useEffect(() => {
     if (!id) return
@@ -835,6 +837,39 @@ export default function KillteamPage() {
     }
   }, [pendingHash, findSectionForAnchor, activeSectionId])
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const element = selectorCardRef.current
+    if (!element) return
+
+    if (typeof IntersectionObserver === 'undefined') {
+      const handleScroll = () => {
+        const rect = element.getBoundingClientRect()
+        const isVisible = rect.bottom > 0 && rect.top < window.innerHeight
+        setIsSelectorVisible(isVisible)
+      }
+      handleScroll()
+      window.addEventListener('scroll', handleScroll, { passive: true })
+      return () => window.removeEventListener('scroll', handleScroll)
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries || entries.length === 0) return
+        const [entry] = entries
+        setIsSelectorVisible(entry?.isIntersecting ?? false)
+      },
+      {
+        rootMargin: '0px 0px -25% 0px',
+        threshold: [0, 0.1]
+      }
+    )
+
+    observer.observe(element)
+
+    return () => observer.disconnect()
+  }, [killteam, sections.length])
+
   if (loading) {
     return (
       <>
@@ -1064,12 +1099,12 @@ export default function KillteamPage() {
     }
   }
 
-  return (
-    <>
-      <Seo title={killteamTitle} description={seoDescription} type="article" />
-      <div className="container">
-        <Header />
-        <div className="card killteam-selector-sticky">
+    return (
+      <>
+        <Seo title={killteamTitle} description={seoDescription} type="article" />
+        <div className="container">
+          <Header />
+          <div ref={selectorCardRef} className="card killteam-selector-sticky">
             <KillteamSelector
               currentKillteamId={killteam.killteamId}
               rightControl={
@@ -1095,9 +1130,21 @@ export default function KillteamPage() {
                 />
               </div>
             )}
+          </div>
+          {sections.length > 0 && !isSelectorVisible && (
+            <div className="section-navigator-floating">
+              <KillteamSectionNavigator
+                sections={sections}
+                activeSectionId={activeSectionId}
+                onSectionChange={setActiveSectionId}
+                showTabs={false}
+                dropdownVariant="icon"
+                className="section-navigator-compact"
+              />
+            </div>
+          )}
+          {renderActiveSection()}
         </div>
-        {renderActiveSection()}
-      </div>
-    </>
-  )
+      </>
+    )
 }
