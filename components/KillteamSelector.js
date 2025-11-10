@@ -7,9 +7,11 @@ const RECENT_KILLTEAMS_KEY = 'kt-servitor-recent-killteams'
 const MAX_RECENT = 3
 const FACTION_LABELS = {
   IMP: 'Imperium',
-  CHAOS: 'Chaos'
+  CHAOS: 'Chaos',
+  SPEC: 'Other',
+  HBR: 'Other'
 }
-const FACTION_ORDER = ['Imperium', 'Chaos', 'Xenos']
+const FACTION_ORDER = ['Imperium', 'Chaos', 'Other', 'Xenos']
 
 function getRecentKillteams() {
   if (typeof window === 'undefined') return []
