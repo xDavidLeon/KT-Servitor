@@ -9,6 +9,11 @@ export default function OperativeCard({ operative }) {
     if (!stringValue) return null
     return stringValue.toLowerCase().endsWith('mm') ? stringValue : `${stringValue}mm`
   })()
+  const keywords = Array.isArray(operative?.keywords) ? operative.keywords : []
+  const hasKeywords =
+    (operative?.factionKeyword && operative.factionKeyword !== 'UNKNOWN') ||
+    keywords.length > 0
+  const showKeywordSection = hasKeywords || !!baseSizeText
 
   return (
     <div id={anchorId} className="operative-card">
@@ -125,22 +130,21 @@ export default function OperativeCard({ operative }) {
       )}
       
       {/* Keywords section at the bottom */}
-      {(operative.factionKeyword || (operative.keywords && operative.keywords.length > 0)) && (
-        <div className="operative-keywords" style={{ marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px' }}>
-          <div style={{ marginTop: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '0.25rem' }}>
-            {operative.factionKeyword && operative.factionKeyword !== 'UNKNOWN' && (
-              <span className="pill" key="faction-keyword">{operative.factionKeyword}</span>
+      {showKeywordSection && (
+        <div className="operative-keywords">
+          <div className="operative-keywords-row">
+            <div className="operative-keywords-list">
+              {operative.factionKeyword && operative.factionKeyword !== 'UNKNOWN' && (
+                <span className="pill" key="faction-keyword">{operative.factionKeyword}</span>
+              )}
+              {keywords.map((keyword, idx) => (
+                <span key={idx} className="pill">{keyword}</span>
+              ))}
+            </div>
+            {baseSizeText && (
+              <span className="operative-base-size">{baseSizeText}</span>
             )}
-            {operative.keywords && operative.keywords.map((keyword, idx) => (
-              <span key={idx} className="pill">{keyword}</span>
-            ))}
           </div>
-        </div>
-      )}
-
-      {baseSizeText && (
-        <div className="operative-meta-footer">
-          <span className="operative-base-size">{baseSizeText}</span>
         </div>
       )}
     </div>
