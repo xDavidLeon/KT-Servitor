@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { db } from '../lib/db'
+import { FACTION_ORDER, getFactionName } from '../lib/factions'
 
 const RECENT_KILLTEAMS_KEY = 'kt-servitor-recent-killteams'
 const MAX_RECENT = 3
@@ -98,10 +99,52 @@ export default function KillteamSelector({ currentKillteamId }) {
     return haystack.includes(searchTerm.toLowerCase())
   })
 
+  const groupedKillteams = filteredKillteams.reduce((groups, kt) => {
+    const faction = getFactionName(kt.factionId)
+    if (!groups[faction]) groups[faction] = []
+    groups[faction].push(kt)
+    return groups
+  }, {})
+
+  const orderedGroups = FACTION_ORDER.map(label => ({
+    label,
+    items: groupedKillteams[label] || []
+  })).filter(group => group.items.length > 0)
+
   const recentKillteams = recentIds
     .map(id => killteams.find(kt => kt.killteamId === id))
     .filter(Boolean)
     .filter(kt => kt.killteamId !== currentKillteamId)
+
+  const renderKillteamOption = (kt) => {
+    const isActive = kt.killteamId === currentKillteamId
+    return (
+      <Link
+        key={kt.killteamId}
+        href={`/killteams/${kt.killteamId}`}
+        onClick={() => setIsOpen(false)}
+        style={{
+          display: 'block',
+          padding: '0.65rem 1rem',
+          color: isActive ? 'var(--accent)' : 'var(--text)',
+          textDecoration: 'none',
+          background: isActive ? '#1a1f2b' : 'transparent',
+          borderLeft: isActive ? '3px solid var(--accent)' : '3px solid transparent',
+          transition: 'background 0.2s'
+        }}
+        onMouseEnter={(e) => {
+          if (!isActive) e.target.style.background = '#0f1320'
+        }}
+        onMouseLeave={(e) => {
+          if (!isActive) e.target.style.background = 'transparent'
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <span>{kt.killteamName}</span>
+        </div>
+      </Link>
+    )
+  }
 
   return (
     <div className="killteam-selector" style={{ position: 'relative', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
@@ -195,37 +238,23 @@ export default function KillteamSelector({ currentKillteamId }) {
               maxHeight: '350px'
             }}
           >
-            {filteredKillteams.length > 0 ? (
-              filteredKillteams.map(kt => {
-                const isActive = kt.killteamId === currentKillteamId
-                return (
-                  <Link
-                    key={kt.killteamId}
-                    href={`/killteams/${kt.killteamId}`}
-                    onClick={() => setIsOpen(false)}
-                    style={{
-                      display: 'block',
-                      padding: '0.65rem 1rem',
-                      color: isActive ? 'var(--accent)' : 'var(--text)',
-                      textDecoration: 'none',
-                      background: isActive ? '#1a1f2b' : 'transparent',
-                      borderLeft: isActive ? '3px solid var(--accent)' : '3px solid transparent',
-                      transition: 'background 0.2s'
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!isActive) e.target.style.background = '#0f1320'
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isActive) e.target.style.background = 'transparent'
-                    }}
-                  >
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      <span>{kt.killteamName}</span>
-                      <span className="muted" style={{ fontSize: '0.75rem' }}>{kt.killteamId}</span>
+              {orderedGroups.length > 0 ? (
+                orderedGroups.map(group => (
+                  <div key={group.label} style={{ padding: '0.5rem 0' }}>
+                    <div
+                      style={{
+                        padding: '0.3rem 1rem',
+                        fontSize: '0.75rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        color: 'var(--muted)'
+                      }}
+                    >
+                      {group.label}
                     </div>
-                  </Link>
-                )
-              })
+                    {group.items.map(kt => renderKillteamOption(kt))}
+                  </div>
+                ))
             ) : (
               <div style={{ padding: '1rem', color: 'var(--muted)', textAlign: 'center' }}>
                 No kill teams found
