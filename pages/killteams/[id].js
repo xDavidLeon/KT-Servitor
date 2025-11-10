@@ -5,7 +5,6 @@ import KillteamSelector from '../../components/KillteamSelector'
 import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
 import OperativeCard from '../../components/OperativeCard'
 import RichText from '../../components/RichText'
-import Disclaimer from '../../components/Disclaimer'
 import { db } from '../../lib/db'
 import { ensureIndex } from '../../lib/search'
 
@@ -207,11 +206,10 @@ export default function KillteamPage() {
     return (
       <div className="container">
         <Header />
-        <div className="card">
+          <div className="card">
           <h2 style={{ marginTop: 0 }}>Kill Team not found</h2>
           <p className="muted">We couldn’t find data for <code>{id}</code>. Try refreshing your data from the menu.</p>
         </div>
-          <Disclaimer />
       </div>
     )
   }
@@ -302,8 +300,7 @@ export default function KillteamPage() {
             {killteam.defaultRoster.description && <RichText className="muted" text={killteam.defaultRoster.description} />}
           </section>
         )}
-      </div>
-      <Disclaimer />
+        </div>
     </div>
   )
 }

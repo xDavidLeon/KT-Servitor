@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import SearchBox from '../components/SearchBox'
 import Results from '../components/Results'
-import Disclaimer from '../components/Disclaimer'
 import { ensureIndex, getAllIndexedDocuments } from '../lib/search'
 import { checkForUpdates } from '../lib/update'
 
@@ -113,7 +112,6 @@ export default function Home() {
       <Header version={version} status={status} />
       <SearchBox q={q} setQ={setQ} />
       <Results results={res} loading={loading} />
-        <Disclaimer />
     </div>
   )
 }
