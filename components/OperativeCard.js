@@ -14,34 +14,27 @@ export default function OperativeCard({ operative }) {
     (operative?.factionKeyword && operative.factionKeyword !== 'UNKNOWN') ||
     keywords.length > 0
   const showKeywordSection = hasKeywords || !!baseSizeText
+  const headerStats = [
+    { label: 'APL', value: operative?.apl },
+    { label: 'MOVE', value: operative?.move },
+    { label: 'SAVE', value: operative?.save },
+    { label: 'WOUNDS', value: operative?.wounds }
+  ].filter(stat => stat.value !== null && stat.value !== undefined && stat.value !== '')
 
   return (
     <div id={anchorId} className="operative-card">
       <div className="operative-header">
         <h4 style={{ margin: 0 }}>{operative.name || operative.title}</h4>
-      </div>
-
-      <div className="operative-stats">
-        <div className="table-scroll">
-          <table className="stats-table">
-            <thead>
-              <tr>
-                {operative.apl !== null && operative.apl !== undefined && <th>APL</th>}
-                {operative.move && <th>MOVE</th>}
-                {operative.save && <th>SAVE</th>}
-                {operative.wounds !== null && operative.wounds !== undefined && <th>WOUNDS</th>}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {operative.apl !== null && operative.apl !== undefined && <td>{operative.apl}</td>}
-                {operative.move && <td>{operative.move}</td>}
-                {operative.save && <td>{operative.save}</td>}
-                {operative.wounds !== null && operative.wounds !== undefined && <td>{operative.wounds}</td>}
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        {headerStats.length > 0 && (
+          <div className="operative-header-stats">
+            {headerStats.map(stat => (
+              <div key={stat.label} className="operative-header-stat">
+                <span className="label">{stat.label}</span>
+                <span className="value">{stat.value}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       
       {operative.weapons && operative.weapons.length > 0 && (() => {
