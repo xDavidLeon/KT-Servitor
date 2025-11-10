@@ -90,5 +90,3 @@ To use a different data source when self-hosting:
 - Host your JSON dataset somewhere reachable over HTTPS.
 - Update `KILLTEAM_JSON_URL` in `lib/update.js` to point to it.
 - Redeploy or rebuild so clients pick up the new URL.
-
-> **Legacy note:** The old BattleScribe conversion workflow (`npm run convert-battlescribe`) has been retired and is kept for archival purposes only. It is no longer maintained and may produce incomplete data.
