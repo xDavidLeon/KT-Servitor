@@ -515,7 +515,8 @@ th{position:sticky;top:0;background:#121521}
 }
 
 .section-navigator-compact .section-dropdown{
-  right:auto;
+  left:auto;
+  right:0;
   min-width:240px;
 }
 
