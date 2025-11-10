@@ -147,35 +147,27 @@ export default function KillteamSelector({ currentKillteamId }) {
   }
 
   return (
-    <div className="killteam-selector" style={{ position: 'relative', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        style={{
-          background: 'var(--panel)',
-          border: '1px solid #2a2f3f',
-          borderRadius: '8px',
-          padding: '0.5rem 1rem',
-          color: 'var(--text)',
-          cursor: 'pointer',
-          flex: 1,
-          textAlign: 'left',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          fontSize: '0.9rem'
-        }}
-      >
-        <span>{currentKillteam ? currentKillteam.killteamName : 'Select Kill Team...'}</span>
-        <span style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>
-          {isOpen ? '▲' : '▼'}
-        </span>
-      </button>
+    <div
+      className="killteam-selector"
+      style={{
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.65rem',
+        alignItems: 'stretch'
+      }}
+    >
       {recentKillteams.length > 0 && (
-        <div style={{
-          display: 'flex',
-          gap: '0.5rem',
-          flexWrap: 'wrap'
-        }}>
+        <div
+          className="killteam-selector-recent"
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '0.5rem',
+            width: '100%'
+          }}
+        >
           {recentKillteams.map(kt => (
             <Link
               key={kt.killteamId}
@@ -194,6 +186,28 @@ export default function KillteamSelector({ currentKillteamId }) {
           ))}
         </div>
       )}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        style={{
+          background: 'var(--panel)',
+          border: '1px solid #2a2f3f',
+          borderRadius: '8px',
+          padding: '0.5rem 1rem',
+          color: 'var(--text)',
+          cursor: 'pointer',
+          width: '100%',
+          textAlign: 'left',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          fontSize: '0.9rem'
+        }}
+      >
+        <span>{currentKillteam ? currentKillteam.killteamName : 'Select Kill Team...'}</span>
+        <span style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>
+          {isOpen ? '▲' : '▼'}
+        </span>
+      </button>
 
       {isOpen && (
         <div
