@@ -274,24 +274,30 @@ th{position:sticky;top:0;background:#121521}
   line-height: 1.4;
 }
 .operative-abilities,
-.operative-actions {
+.operative-actions,
+.card-section {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 .operative-abilities-title,
-.operative-actions-title {
+.operative-actions-title,
+.card-section-title {
   color: var(--accent);
   font-size: 0.95rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 .operative-abilities-list,
-.operative-actions-list {
+.operative-actions-list,
+.card-section-list {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+.card-section-list {
+  margin-top: 0.75rem;
 }
 .ability-card {
   background: #111520;
