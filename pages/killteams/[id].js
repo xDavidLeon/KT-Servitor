@@ -295,6 +295,16 @@ function normaliseEquipment(equipment) {
   }
 }
 
+function sortUniversalEquipmentRows(rows) {
+  if (!Array.isArray(rows)) return []
+  return rows.slice().sort((a, b) => {
+    const seqA = typeof a?.seq === 'number' ? a.seq : Number.MAX_SAFE_INTEGER
+    const seqB = typeof b?.seq === 'number' ? b.seq : Number.MAX_SAFE_INTEGER
+    if (seqA !== seqB) return seqA - seqB
+    return (a?.eqName || '').localeCompare(b?.eqName || '')
+  })
+}
+
 function normaliseOperative(opType) {
   if (!opType) return null
 
@@ -354,6 +364,7 @@ export default function KillteamPage() {
   const { id } = router.query
 
   const [killteam, setKillteam] = useState(null)
+  const [universalEquipmentRecords, setUniversalEquipmentRecords] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeSectionId, setActiveSectionId] = useState(null)
   const [pendingHash, setPendingHash] = useState(null)
@@ -382,18 +393,44 @@ export default function KillteamPage() {
   }, [id])
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !id) return
+    let cancelled = false
+
+    const loadUniversalEquipment = async () => {
+      try {
+        const rows = await db.universalEquipment.toArray()
+        if (cancelled) return
+        setUniversalEquipmentRecords(sortUniversalEquipmentRows(rows))
+      } catch (err) {
+        if (cancelled) return
+        console.warn('Failed to load universal equipment dataset', err)
+        setUniversalEquipmentRecords([])
+      }
+    }
+
+    loadUniversalEquipment()
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
 
     const handleUpdate = async () => {
-      const data = await db.killteams.get(id)
-      setKillteam(data || null)
+      try {
+        const rows = await db.universalEquipment.toArray()
+        setUniversalEquipmentRecords(sortUniversalEquipmentRows(rows))
+      } catch (err) {
+        console.warn('Failed to refresh universal equipment dataset', err)
+      }
     }
 
-    window.addEventListener('kt-killteams-updated', handleUpdate)
+    window.addEventListener('kt-universal-equipment-updated', handleUpdate)
     return () => {
-      window.removeEventListener('kt-killteams-updated', handleUpdate)
+      window.removeEventListener('kt-universal-equipment-updated', handleUpdate)
     }
-  }, [id])
+  }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -591,17 +628,19 @@ export default function KillteamPage() {
       .filter(Boolean)
   }, [killteam])
 
-  const equipment = useMemo(() => {
-    return (killteam?.equipments || []).map(normaliseEquipment).filter(Boolean)
+  const factionEquipment = useMemo(() => {
+    return (killteam?.equipments || [])
+      .map(normaliseEquipment)
+      .filter(item => item && !item.isUniversal)
   }, [killteam])
 
-  const factionEquipment = useMemo(() => {
-    return equipment.filter(item => !item.isUniversal)
-  }, [equipment])
-
   const universalEquipment = useMemo(() => {
-    return equipment.filter(item => item.isUniversal)
-  }, [equipment])
+    return (universalEquipmentRecords || [])
+      .map(normaliseEquipment)
+      .filter(Boolean)
+  }, [universalEquipmentRecords])
+
+  const hasEquipment = factionEquipment.length > 0 || universalEquipment.length > 0
 
   const killteamTitle = useMemo(() => {
     if (!killteam) {
@@ -696,39 +735,41 @@ export default function KillteamPage() {
       items: ployItems
     })
 
-    const equipmentItems = []
-    if (factionEquipment.length) {
-      equipmentItems.push({
-        id: 'faction-equipment',
-        label: 'Faction Equipment',
-        type: 'heading'
-      })
-      factionEquipment.forEach((item, index) => {
+    if (hasEquipment) {
+      const equipmentItems = []
+      if (factionEquipment.length) {
         equipmentItems.push({
-          id: item?.anchorId || (item?.id ? `equipment-${item.id}` : `faction-equipment-${index + 1}`),
-          label: item?.name || `Equipment ${index + 1}`
+          id: 'faction-equipment',
+          label: 'Faction Equipment',
+          type: 'heading'
         })
-      })
-    }
-    if (universalEquipment.length) {
-      equipmentItems.push({
-        id: 'universal-equipment',
-        label: 'Universal Equipment',
-        type: 'heading'
-      })
-      universalEquipment.forEach((item, index) => {
+        factionEquipment.forEach((item, index) => {
+          equipmentItems.push({
+            id: item?.anchorId || (item?.id ? `equipment-${item.id}` : `faction-equipment-${index + 1}`),
+            label: item?.name || `Equipment ${index + 1}`
+          })
+        })
+      }
+      if (universalEquipment.length) {
         equipmentItems.push({
-          id: item?.anchorId || (item?.id ? `equipment-${item.id}` : `universal-equipment-${index + 1}`),
-          label: item?.name || `Equipment ${index + 1}`
+          id: 'universal-equipment',
+          label: 'Universal Equipment',
+          type: 'heading'
         })
-      })
-    }
+        universalEquipment.forEach((item, index) => {
+          equipmentItems.push({
+            id: item?.anchorId || (item?.id ? `equipment-${item.id}` : `universal-equipment-${index + 1}`),
+            label: item?.name || `Equipment ${index + 1}`
+          })
+        })
+      }
 
-    result.push({
-      id: 'equipment',
-      label: 'Equipment',
-      items: equipmentItems
-    })
+      result.push({
+        id: 'equipment',
+        label: 'Equipment',
+        items: equipmentItems
+      })
+    }
 
     return result
   }, [
@@ -739,7 +780,8 @@ export default function KillteamPage() {
     strategyPloys,
     firefightPloys,
     factionEquipment,
-    universalEquipment
+    universalEquipment,
+    hasEquipment
   ])
 
   const findSectionForAnchor = useCallback((anchor) => {
@@ -1045,7 +1087,7 @@ export default function KillteamPage() {
         return (
           <section id="equipment" className="card killteam-tab-panel">
             <h3 style={{ marginTop: 0 }}>Equipment</h3>
-            {equipment.length ? (
+            {hasEquipment ? (
               <>
                 {factionEquipment.length > 0 && (
                   <>
