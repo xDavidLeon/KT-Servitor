@@ -4,6 +4,7 @@ import RichText from '../../components/RichText'
 import SearchBox from '../../components/SearchBox'
 import { ensureIndex } from '../../lib/search'
 import { db } from '../../lib/db'
+import Seo from '../../components/Seo'
 
 export default function Rules(){
   const [q,setQ] = useState('')
@@ -21,19 +22,25 @@ export default function Rules(){
   })() },[q])
 
   return (
-    <div className="container">
-      <Header/>
-      <SearchBox q={q} setQ={setQ}/>
-      <div className="card">
-        <h2 style={{marginTop:0}}>Game Rules</h2>
-        {rows.length===0 && <div className="muted">No results.</div>}
-        {rows.map(x=>(
-          <div key={x.id} style={{marginBottom:'.5rem'}}>
-            <strong>{x.title}</strong> <span className="pill">{x.type}</span>
-            <RichText className="muted" text={x.body} />
-          </div>
-        ))}
+    <>
+      <Seo
+        title="Rules"
+        description="Search and read core rules, equipment references, and special actions for Kill Team 2024."
+      />
+      <div className="container">
+        <Header/>
+        <SearchBox q={q} setQ={setQ}/>
+        <div className="card">
+          <h2 style={{marginTop:0}}>Game Rules</h2>
+          {rows.length===0 && <div className="muted">No results.</div>}
+          {rows.map(x=>(
+            <div key={x.id} style={{marginBottom:'.5rem'}}>
+              <strong>{x.title}</strong> <span className="pill">{x.type}</span>
+              <RichText className="muted" text={x.body} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
