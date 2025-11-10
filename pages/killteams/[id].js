@@ -1064,40 +1064,42 @@ export default function KillteamPage() {
     }
   }
 
-  return (
-    <>
-      <Seo title={killteamTitle} description={seoDescription} type="article" />
-      <div className="container">
-        <Header />
-        <div className="card killteam-selector-sticky">
-            <KillteamSelector
-              currentKillteamId={killteam.killteamId}
-              rightControl={
-                sections.length > 0 ? (
-                  <KillteamSectionNavigator
-                    sections={sections}
-                    activeSectionId={activeSectionId}
-                    onSectionChange={setActiveSectionId}
-                    showTabs={false}
-                    dropdownVariant="icon"
-                    className="section-navigator-compact"
-                  />
-                ) : null
-              }
-            />
+    return (
+      <>
+        <Seo title={killteamTitle} description={seoDescription} type="article" />
+        <div className="container">
+          <Header />
+          <div className="killteam-page-content">
             {sections.length > 0 && (
-              <div style={{ marginTop: '0.75rem' }}>
+              <aside className="killteam-section-dropdown-sticky">
                 <KillteamSectionNavigator
                   sections={sections}
                   activeSectionId={activeSectionId}
                   onSectionChange={setActiveSectionId}
-                  showDropdown={false}
+                  showTabs={false}
+                  dropdownVariant="icon"
+                  className="section-navigator-compact"
                 />
-              </div>
+              </aside>
             )}
+            <div className="killteam-page-main">
+              <div className="card killteam-selector-sticky">
+                <KillteamSelector currentKillteamId={killteam.killteamId} />
+                {sections.length > 0 && (
+                  <div style={{ marginTop: '0.75rem' }}>
+                    <KillteamSectionNavigator
+                      sections={sections}
+                      activeSectionId={activeSectionId}
+                      onSectionChange={setActiveSectionId}
+                      showDropdown={false}
+                    />
+                  </div>
+                )}
+              </div>
+              {renderActiveSection()}
+            </div>
+          </div>
         </div>
-        {renderActiveSection()}
-      </div>
-    </>
-  )
+      </>
+    )
 }

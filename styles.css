@@ -546,4 +546,65 @@ th{position:sticky;top:0;background:#121521}
   color:var(--accent);
   font-weight:600;
 }
-  
+
+.killteam-page-content{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  gap:1rem;
+}
+
+.killteam-page-main{
+  flex:1 1 620px;
+  min-width:0;
+  order:1;
+}
+
+.killteam-section-dropdown-sticky{
+  order:2;
+  position:sticky;
+  top:1rem;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:0.75rem;
+  z-index:160;
+}
+
+.killteam-section-dropdown-sticky .section-navigator{
+  margin-top:0;
+}
+
+.killteam-section-dropdown-sticky .section-dropdown-trigger.icon{
+  border-radius:999px;
+  box-shadow:0 8px 24px rgba(0,0,0,.45);
+  backdrop-filter:blur(2px);
+}
+
+.killteam-section-dropdown-sticky .section-dropdown{
+  right:0;
+  left:auto;
+}
+
+@media (max-width: 960px) {
+  .killteam-page-content{
+    flex-direction:column;
+    gap:0.75rem;
+  }
+
+  .killteam-section-dropdown-sticky{
+    order:1;
+    align-self:flex-end;
+    top:0.5rem;
+  }
+
+  .killteam-page-main{
+    order:2;
+  }
+}
+
+@media (max-width: 640px) {
+  .killteam-section-dropdown-sticky{
+    top:0.5rem;
+  }
+}
