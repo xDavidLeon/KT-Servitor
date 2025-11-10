@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "echo \"(no lint)\"",
-    "convert-battlescribe": "node scripts/convert-battlescribe.js"
+    "lint": "echo \"(no lint)\""
   },
   "dependencies": {
     "dexie": "^4.0.8",
@@ -19,7 +18,6 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.14.5",
-    "xml2js": "^0.6.2"
+    "@netlify/plugin-nextjs": "^5.14.5"
   }
 }

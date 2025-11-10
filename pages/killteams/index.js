@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Header from '../../components/Header'
 import RichText from '../../components/RichText'
-import Disclaimer from '../../components/Disclaimer'
 import { db } from '../../lib/db'
 import { ensureIndex } from '../../lib/search'
 import { checkForUpdates } from '../../lib/update'
@@ -88,7 +87,6 @@ export default function Killteams() {
           <div className="muted">No kill teams available. Try forcing an update from the menu.</div>
         )}
       </div>
-      <Disclaimer />
     </div>
   )
 }

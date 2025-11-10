@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 
 function deriveKillteamId(doc) {
@@ -38,32 +39,88 @@ function formatType(type) {
   return TYPE_LABELS[type] || type
 }
 
-export default function Results({results, loading}){
+const PAGE_SIZE = 25
+
+export default function Results({ results, loading }) {
+  const [page, setPage] = useState(0)
+
+  useEffect(() => {
+    setPage(0)
+  }, [results])
+
+  const safeResults = Array.isArray(results) ? results : []
+  const totalPages = Math.max(1, Math.ceil(safeResults.length / PAGE_SIZE))
+  const clampedPage = Math.min(page, totalPages - 1)
+  const start = clampedPage * PAGE_SIZE
+  const end = Math.min(start + PAGE_SIZE, safeResults.length)
+
+  const pageResults = useMemo(
+    () => safeResults.slice(start, end),
+    [safeResults, start, end]
+  )
+
   if (loading) return <div className="card">Building index…</div>
   if (!results) return null
-  if (results.length===0) return <div className="card">No results.</div>
+  if (safeResults.length === 0) return <div className="card">No results.</div>
+
+  const canPrev = clampedPage > 0
+  const canNext = clampedPage < totalPages - 1
+
+  const handlePrev = () => {
+    if (canPrev) setPage(clampedPage - 1)
+  }
+
+  const handleNext = () => {
+    if (canNext) setPage(clampedPage + 1)
+  }
 
   return (
     <div className="card">
+      <div className="results-summary">
+        <span>
+            Showing <strong>{start + 1}</strong>–<strong>{end}</strong> of {safeResults.length} results
+        </span>
+        <div className="results-pagination">
+          <button
+            type="button"
+            className="pill-button"
+            onClick={handlePrev}
+            disabled={!canPrev}
+          >
+            ‹ Prev
+          </button>
+          <span className="muted">
+            Page {clampedPage + 1} of {totalPages}
+          </span>
+          <button
+            type="button"
+            className="pill-button"
+            onClick={handleNext}
+            disabled={!canNext}
+          >
+            Next ›
+          </button>
+        </div>
+      </div>
       <div className="table-scroll">
         <table>
           <thead>
             <tr>
               <th>Title</th>
               <th>Type</th>
-                <th>Team</th>
+              <th>Team</th>
             </tr>
           </thead>
           <tbody>
-            {results.map(r => (
-              <tr key={r.id}>
+            {pageResults.map(r => (
+              <tr key={`${r.id}-${r.anchorId || ''}`}>
                 <td><Link href={buildResultHref(r)}>{r.title}</Link></td>
-                  <td className="muted">{formatType(r.type)}</td>
-                  <td>
-                    {r.killteamDisplayName
-                      ? <Link href={`/killteams/${encodeURIComponent(r.killteamId || deriveKillteamId(r) || '')}`}>{r.killteamDisplayName}</Link>
-                      : (r.killteamName || '—')}
-                  </td>
+                <td className="muted">{formatType(r.type)}</td>
+                <td>
+                  {r.killteamDisplayName
+                    ? <Link href={`/killteams/${encodeURIComponent(r.killteamId || deriveKillteamId(r) || '')}`}>{r.killteamDisplayName}</Link>
+                    : (r.killteamName || '—')}
+                </td>
               </tr>
             ))}
           </tbody>
