@@ -97,6 +97,8 @@ export default function KillteamSectionNavigator({
 
   const containerStyle = {
     position: 'relative',
+    width: '100%',
+    maxWidth: '100%',
     ...style
   }
 

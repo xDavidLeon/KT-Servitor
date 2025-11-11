@@ -4,10 +4,69 @@
 .pre-line{white-space:pre-line;}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial}
 a{color:var(--accent);text-decoration:none}
+.rich-text{
+  width:100%;
+  max-width:100%;
+  color:inherit;
+  font-size:inherit;
+  line-height:1.6;
+  overflow-x:auto;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+.rich-text>*:first-child{margin-top:0}
+.rich-text>*:last-child{margin-bottom:0}
+.rich-text ul,
+.rich-text ol{
+  padding-left:1.25rem;
+  margin:0.5rem 0;
+}
+.rich-text li{margin:0.25rem 0}
+.rich-text table{
+  width:100%;
+  border-collapse:collapse;
+  margin:0.75rem 0;
+}
+.rich-text table th,
+.rich-text table td{
+  padding:0.45rem 0.6rem;
+  border:1px solid #2a2f3f;
+  text-align:left;
+}
+.rich-text pre{
+  margin:0.75rem 0;
+  padding:0.75rem;
+  border-radius:10px;
+  border:1px solid #1d2130;
+  background:#10131a;
+  overflow-x:auto;
+}
+.rich-text code{
+  font-family:ui-monospace,SFMono-Regular,SFMono,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  overflow-wrap:anywhere;
+}
+.rich-text img{
+  max-width:100%;
+  height:auto;
+  display:block;
+  margin:0.5rem auto;
+}
+.rich-text blockquote{
+  margin:0.75rem 0;
+  padding-left:1rem;
+  border-left:3px solid rgba(255,255,255,0.18);
+  color:var(--muted);
+}
+.rich-text a{
+  color:var(--accent);
+  text-decoration:underline;
+}
 .container{max-width:900px;margin:0 auto;padding:1rem}
 .card{background:var(--panel);border-radius:16px;padding:1rem;margin:0.5rem 0;box-shadow:0 4px 24px rgba(0,0,0,.25)}
 .header-sticky{margin-bottom:0.5rem}
 .killteam-selector-sticky{margin-bottom:0.5rem}
+.killteam-selector{width:100%}
+.killteam-dropdown{max-width:calc(100vw - 2rem)}
 input,select,button{background:#0e1016;color:var(--text);border:1px solid #262a36;border-radius:10px;padding:0.6rem 0.8rem}
 .nav-links{
   width:100%;
@@ -520,6 +579,7 @@ th{position:sticky;top:0;background:#121521}
   z-index:200;
   max-height:70vh;
   overflow-y:auto;
+  max-width:calc(100vw - 2rem);
 }
 
 .section-navigator-compact{
@@ -531,6 +591,7 @@ th{position:sticky;top:0;background:#121521}
   left:auto;
   right:0;
   min-width:240px;
+  max-width:calc(100vw - 2rem);
 }
 
 .section-dropdown-item{

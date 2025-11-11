@@ -190,7 +190,9 @@ export default function KillteamSelector({ currentKillteamId, leftControl = null
         style={{
           display: 'flex',
           gap: '0.5rem',
-          alignItems: 'stretch'
+          alignItems: 'stretch',
+          flexWrap: 'wrap',
+          width: '100%'
         }}
       >
         {leftControl && (
@@ -213,15 +215,27 @@ export default function KillteamSelector({ currentKillteamId, leftControl = null
             color: 'var(--text)',
             cursor: 'pointer',
             flex: 1,
+            minWidth: 0,
             textAlign: 'left',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            fontSize: '0.9rem'
+            gap: '0.75rem',
+            fontSize: '0.9rem',
+            lineHeight: 1.35
           }}
         >
-          <span>{currentKillteam ? currentKillteam.killteamName : 'Select Kill Team...'}</span>
-          <span style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>
+          <span
+            style={{
+              flex: 1,
+              minWidth: 0,
+              overflowWrap: 'anywhere',
+              wordBreak: 'break-word'
+            }}
+          >
+            {currentKillteam ? currentKillteam.killteamName : 'Select Kill Team...'}
+          </span>
+          <span style={{ flexShrink: 0, fontSize: '0.8rem', color: 'var(--muted)' }}>
             {isOpen ? '▲' : '▼'}
           </span>
         </button>
@@ -229,7 +243,8 @@ export default function KillteamSelector({ currentKillteamId, leftControl = null
           <div
             style={{
               display: 'inline-flex',
-              flexShrink: 0
+              flexShrink: 0,
+              marginLeft: 'auto'
             }}
           >
             {rightControl}
