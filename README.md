@@ -84,9 +84,9 @@ To use a custom domain (e.g., `ktservitor.your-domain.com`):
 
 ### Kill Team dataset (preferred)
 
-The app now consumes the community-maintained dataset from [vjosset/killteamjson](https://github.com/vjosset/killteamjson). On first load the in-browser updater (`lib/update.js`) downloads the latest `kt24_v*.json`, verifies it and stores it locally for search.
+The app now consumes the community-maintained datasets from [xDavidLeon/killteamjson](https://github.com/xDavidLeon/killteamjson). On first load the in-browser updater (`lib/update.js`) downloads the latest files, verifies and stores them locally for search.
 
 To use a different data source when self-hosting:
 - Host your JSON dataset somewhere reachable over HTTPS.
-- Update `KILLTEAM_JSON_URL` in `lib/update.js` to point to it.
-- Redeploy or rebuild so clients pick up the new URL.
+- Update `KILLTEAM_JSON_URL` and other JSON dataset URLs in `lib/update.js` to point to your datasets.
+- Redeploy or rebuild so clients pick up the new URLs.
