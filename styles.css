@@ -606,6 +606,7 @@ th{position:sticky;top:0;background:#121521}
   cursor:pointer;
   font-size:0.9rem;
   transition:background 0.2s,color 0.2s;
+  position:relative;
 }
 
 .section-dropdown-item:hover:not(:disabled){
@@ -620,6 +621,11 @@ th{position:sticky;top:0;background:#121521}
 .section-dropdown-item.heading{
   color:var(--accent);
   font-weight:600;
+  cursor:pointer;
+}
+
+.section-dropdown-item.indented{
+  padding-left:2rem;
 }
 
 .section-navigator-floating{

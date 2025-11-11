@@ -5,6 +5,8 @@ import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
 import RichText from '../../components/RichText'
 
 const OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/ops_2025.json'
+const UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
+const MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
 
 function normaliseToText(value) {
   if (value === null || value === undefined) return ''
@@ -179,13 +181,37 @@ export default function OpsPage() {
         if (cancelled) return
 
         const actionsList = Array.isArray(json?.actions) ? json.actions : []
+
         const actionMap = new Map()
-        for (const actionDef of actionsList) {
-          const normalisedAction = normaliseActionDefinition(actionDef)
-          if (normalisedAction?.id) {
-            actionMap.set(normalisedAction.id, normalisedAction)
+        const addAction = (actionDef) => {
+          const normalised = normaliseActionDefinition(actionDef)
+          if (normalised?.id) {
+            actionMap.set(normalised.id, normalised)
           }
         }
+
+        for (const actionDef of actionsList) {
+          addAction(actionDef)
+        }
+
+        await Promise.allSettled([
+          fetch(UNIVERSAL_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
+            if (!res.ok) return
+            const json = await res.json()
+            const universalActions = Array.isArray(json?.actions) ? json.actions : []
+            for (const actionDef of universalActions) {
+              addAction(actionDef)
+            }
+          }),
+          fetch(MISSION_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
+            if (!res.ok) return
+            const json = await res.json()
+            const missionActions = Array.isArray(json?.actions) ? json.actions : []
+            for (const actionDef of missionActions) {
+              addAction(actionDef)
+            }
+          })
+        ])
 
         const list = Array.isArray(json?.ops)
           ? json.ops
@@ -197,34 +223,38 @@ export default function OpsPage() {
         const tac = []
 
         for (const op of list) {
-          if (!op || !op.id) continue
-          const normalised = {
-            id: op.id,
-            title: op.title || 'Untitled Operation',
-            type: (op.type || '').toLowerCase(),
-            packs: Array.isArray(op.packs)
-              ? op.packs.filter(Boolean)
-              : op.packs
-                ? [op.packs]
-                : [],
-            reveal: normaliseToText(op.reveal),
-            additionalRules: normaliseToText(op.additionalRules || op.additionalRule),
-            victoryPoints: normaliseToText(op.victoryPoints),
-            actions: Array.isArray(op.actions)
-              ? op.actions
-                  .map(actionRef => {
-                    if (typeof actionRef === 'string') {
-                      return actionMap.get(actionRef) || normaliseActionDefinition(actionRef)
-                    }
-                    return normaliseActionDefinition(actionRef)
-                  })
-                  .filter(Boolean)
+        if (!op || !op.id) continue
+        const normalised = {
+          id: op.id,
+          title: op.title || 'Untitled Operation',
+          type: (op.type || '').toLowerCase(),
+          packs: Array.isArray(op.packs)
+            ? op.packs.filter(Boolean)
+            : op.packs
+              ? [op.packs]
               : [],
-            archetype: op.archetype ?? op.archetypes ?? null,
-            objective: normaliseToText(op.objective),
-            briefing: normaliseToText(op.briefing),
-            restrictions: normaliseToText(op.restrictions)
-          }
+          reveal: normaliseToText(op.reveal),
+          additionalRules: normaliseToText(op.additionalRules || op.additionalRule),
+          victoryPoints: normaliseToText(op.victoryPoints),
+          actions: Array.isArray(op.actions)
+            ? op.actions
+                .map(actionRef => {
+                  if (typeof actionRef === 'string') {
+                    return actionMap.get(actionRef) || normaliseActionDefinition(actionRef)
+                  }
+                  const normalisedAction = normaliseActionDefinition(actionRef)
+                  if (normalisedAction?.id) {
+                    actionMap.set(normalisedAction.id, normalisedAction)
+                  }
+                  return normalisedAction
+                })
+                .filter(Boolean)
+            : [],
+          archetype: op.archetype ?? op.archetypes ?? null,
+          objective: normaliseToText(op.objective),
+          briefing: normaliseToText(op.briefing),
+          restrictions: normaliseToText(op.restrictions)
+        }
 
           if (normalised.type === 'tac-op') {
             tac.push(normalised)
@@ -280,17 +310,20 @@ const sections = useMemo(() => {
 
   const tacSectionItems = Object.keys(groupedTacOps)
     .sort((a, b) => a.localeCompare(b))
-    .map(groupLabel => ({
-      id: `tac-group-${groupLabel}`,
-      label: groupLabel,
-      type: 'heading'
-    }))
-    .concat(
-      tacOps.map(op => ({
-        id: `operation-${op.id}`,
-        label: op.title
-      }))
-    )
+    .flatMap(groupLabel => {
+      const groupOps = groupedTacOps[groupLabel].slice().sort((a, b) => a.id.localeCompare(b.id))
+      return [
+        {
+          id: `section-${groupLabel}`,
+          label: groupLabel,
+          type: 'heading'
+        },
+        ...groupOps.map(op => ({
+          id: `operation-${op.id}`,
+          label: op.title
+        }))
+      ]
+    })
 
   return [
     {
@@ -511,7 +544,7 @@ const sections = useMemo(() => {
       return (
         <div className="card-section-list">
           {sortedGroups.map(groupLabel => (
-            <section key={`group-${groupLabel}`} style={{ marginBottom: '1.5rem' }}>
+            <section key={`group-${groupLabel}`} id={`section-${groupLabel}`} style={{ marginBottom: '1.5rem' }}>
               <h3 style={{ marginTop: 0, marginBottom: '0.5rem' }}>{groupLabel}</h3>
               <div className="card-section-list">
                 {grouped[groupLabel].map(op => renderOpCard(op))}

@@ -178,15 +178,21 @@ export default function KillteamSectionNavigator({
         <div className="section-dropdown">
           {dropdownItems.map(item => {
             const isHeading = item?.type === 'heading'
-            const isDisabled = !item?.id
+            const classNames = ['section-dropdown-item']
+            if (isHeading) classNames.push('heading')
+            if (!isHeading) classNames.push('indented')
+
+            const handleClick = () => {
+              if (!item?.id) return
+              handleItemSelect(item.id)
+            }
 
             return (
               <button
                 key={`${item?.id || item?.label}`}
                 type="button"
-                className={`section-dropdown-item${isHeading ? ' heading' : ''}`}
-                onClick={() => !isDisabled && handleItemSelect(item.id)}
-                disabled={isDisabled}
+                className={classNames.join(' ')}
+                onClick={handleClick}
               >
                 {item?.label}
               </button>
