@@ -9,6 +9,7 @@ import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
 const UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
 const MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
 const WEAPON_RULES_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/weapon_rules.json'
+const OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/ops_2025.json'
 
 const SECTION_DEFINITIONS = [
   { id: 'rules-universal-actions', label: 'Universal Actions' },
@@ -16,6 +17,100 @@ const SECTION_DEFINITIONS = [
   { id: 'rules-weapon-rules', label: 'Weapon Rules' },
   { id: 'rules-universal-equipment', label: 'Universal Equipment' }
 ]
+
+function normaliseToText(value) {
+  if (value === null || value === undefined) return ''
+  if (typeof value === 'string') return value
+  if (Array.isArray(value)) {
+    return value
+      .map(item => normaliseToText(item))
+      .filter(Boolean)
+      .join('\n\n')
+  }
+  if (typeof value === 'object') {
+    return Object.entries(value)
+      .map(([key, val]) => {
+        const text = normaliseToText(val)
+        if (!text) return ''
+        return key ? `${key.toUpperCase()}\n${text}` : text
+      })
+      .filter(Boolean)
+      .join('\n\n')
+  }
+  return String(value)
+}
+
+function normaliseActionDefinition(action) {
+  if (!action) return null
+  if (typeof action === 'string') {
+    return {
+      id: action,
+      name: action,
+      AP: null,
+      description: '',
+      effects: [],
+      conditions: [],
+      packs: [],
+      type: '',
+      seq: null
+    }
+  }
+  const id = action.id || action.name || ''
+  if (!id) return null
+  const name = action.name || id
+  const apValue = action.AP ?? action.ap ?? null
+  const description = normaliseToText(action.description)
+  const effects = Array.isArray(action.effects)
+    ? action.effects.filter(Boolean)
+    : action.effects
+      ? [action.effects]
+      : []
+  const conditions = Array.isArray(action.conditions)
+    ? action.conditions.filter(Boolean)
+    : action.conditions
+      ? [action.conditions]
+      : []
+  const packs = Array.isArray(action.packs)
+    ? action.packs.filter(Boolean)
+    : action.packs
+      ? [action.packs]
+      : []
+  const type = (action.type || '').toLowerCase()
+  const seq = typeof action.seq === 'number' ? action.seq : null
+
+  return {
+    id,
+    name,
+    AP: apValue,
+    description,
+    effects,
+    conditions,
+    packs,
+    type,
+    seq
+  }
+}
+
+function sortActions(list) {
+  return list.slice().sort((a, b) => {
+    const hasPackA = Array.isArray(a.packs) && a.packs.length > 0
+    const hasPackB = Array.isArray(b.packs) && b.packs.length > 0
+    if (hasPackA !== hasPackB) {
+      return hasPackA ? 1 : -1
+    }
+
+    const packA = hasPackA ? a.packs[0].toLowerCase() : ''
+    const packB = hasPackB ? b.packs[0].toLowerCase() : ''
+    const packCompare = packA.localeCompare(packB)
+    if (packCompare !== 0) return packCompare
+
+    const seqA = typeof a.seq === 'number' ? a.seq : Number.POSITIVE_INFINITY
+    const seqB = typeof b.seq === 'number' ? b.seq : Number.POSITIVE_INFINITY
+    if (seqA !== seqB) return seqA - seqB
+
+    return (a.name || '').localeCompare(b.name || '')
+  })
+}
 
 export default function Rules() {
   const [equipment, setEquipment] = useState([])
@@ -75,12 +170,14 @@ export default function Rules() {
         }
         const json = await res.json()
         if (cancelled) return
-        const list = Array.isArray(json?.actions) ? json.actions : []
+        const rawActions = Array.isArray(json?.actions) ? json.actions : []
+        const list = rawActions.map(action => normaliseActionDefinition(action)).filter(Boolean)
+        const sorted = sortActions(list)
         setUniversalActions(
-          list.map(action => ({
-            id: action.id || action.name || '',
-            name: action.name || 'Unnamed action',
-            ap: action.AP ?? action.ap ?? null,
+          sorted.map(action => ({
+            id: action.id,
+            name: action.name,
+            ap: action.AP ?? null,
             description: action.description || '',
             effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
             conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
@@ -109,12 +206,44 @@ export default function Rules() {
         }
         const json = await res.json()
         if (cancelled) return
-        const list = Array.isArray(json?.actions) ? json.actions : []
+        const rawActions = Array.isArray(json?.actions) ? json.actions : []
+        const actionMap = new Map()
+        const addAction = (actionDef) => {
+          const normalised = normaliseActionDefinition(actionDef)
+          if (normalised?.id) {
+            actionMap.set(normalised.id, normalised)
+          }
+        }
+
+        for (const actionDef of rawActions) {
+          addAction(actionDef)
+        }
+
+        try {
+          const opsRes = await fetch(OPS_DATA_URL, { cache: 'no-store' })
+          if (opsRes.ok) {
+            const opsJson = await opsRes.json()
+            const opsActions = Array.isArray(opsJson?.actions) ? opsJson.actions : []
+            for (const actionDef of opsActions) {
+              if ((actionDef?.type || '').toLowerCase() === 'mission') {
+                addAction(actionDef)
+              }
+            }
+          }
+        } catch (opsErr) {
+          console.warn('Failed to load ops actions for mission actions list', opsErr)
+        }
+
+        const finalList = Array.from(actionMap.values())
+          .filter(action => (action.type ? action.type === 'mission' : true))
+          .sort((a, b) => a.id.localeCompare(b.id))
+
+        const sorted = sortActions(finalList)
         setMissionActions(
-          list.map(action => ({
-            id: action.id || action.name || '',
-            name: action.name || 'Unnamed action',
-            ap: action.AP ?? action.ap ?? null,
+          sorted.map(action => ({
+            id: action.id,
+            name: action.name,
+            ap: action.AP ?? null,
             description: action.description || '',
             effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
             conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
@@ -429,6 +558,27 @@ export default function Rules() {
         return (
           <div className="card">
             <h2 style={{ marginTop: 0 }}>Universal Actions</h2>
+            <KillteamSectionNavigator
+              sections={[
+                {
+                  id: 'rules-universal-actions',
+                  label: 'Universal Actions',
+                  items: universalActions.map(action => ({
+                    id: `universal-action-${action.id}`,
+                    label: action.name
+                  }))
+                }
+              ]}
+              activeSectionId="rules-universal-actions"
+              onSectionChange={(targetId) => {
+                if (targetId) {
+                  setPendingAnchor({ id: targetId, nonce: 0 })
+                }
+              }}
+              showTabs={false}
+              showDropdown
+              dropdownVariant="default"
+            />
             {renderUniversalActions()}
           </div>
         )
@@ -436,6 +586,27 @@ export default function Rules() {
         return (
           <div className="card">
             <h2 style={{ marginTop: 0 }}>Mission Actions</h2>
+            <KillteamSectionNavigator
+              sections={[
+                {
+                  id: 'rules-mission-actions',
+                  label: 'Mission Actions',
+                  items: missionActions.map(action => ({
+                    id: `mission-action-${action.id}`,
+                    label: action.name
+                  }))
+                }
+              ]}
+              activeSectionId="rules-mission-actions"
+              onSectionChange={(targetId) => {
+                if (targetId) {
+                  setPendingAnchor({ id: targetId, nonce: 0 })
+                }
+              }}
+              showTabs={false}
+              showDropdown
+              dropdownVariant="default"
+            />
             {renderMissionActions()}
           </div>
         )
@@ -443,6 +614,27 @@ export default function Rules() {
         return (
           <div className="card">
             <h2 style={{ marginTop: 0 }}>Weapon Rules</h2>
+            <KillteamSectionNavigator
+              sections={[
+                {
+                  id: 'rules-weapon-rules',
+                  label: 'Weapon Rules',
+                  items: weaponRules.map(rule => ({
+                    id: `weapon-rule-${rule.id}`,
+                    label: rule.variable ? `${rule.name} (X)` : rule.name
+                  }))
+                }
+              ]}
+              activeSectionId="rules-weapon-rules"
+              onSectionChange={(targetId) => {
+                if (targetId) {
+                  setPendingAnchor({ id: targetId, nonce: 0 })
+                }
+              }}
+              showTabs={false}
+              showDropdown
+              dropdownVariant="default"
+            />
             {renderWeaponRules()}
           </div>
         )
@@ -450,6 +642,27 @@ export default function Rules() {
         return (
           <div className="card">
             <h2 style={{ marginTop: 0 }}>Universal Equipment</h2>
+            <KillteamSectionNavigator
+              sections={[
+                {
+                  id: 'rules-universal-equipment',
+                  label: 'Universal Equipment',
+                  items: equipment.map(item => ({
+                    id: `equipment-${item.eqId}`,
+                    label: item.eqName || item.eqId
+                  }))
+                }
+              ]}
+              activeSectionId="rules-universal-equipment"
+              onSectionChange={(targetId) => {
+                if (targetId) {
+                  setPendingAnchor({ id: targetId, nonce: 0 })
+                }
+              }}
+              showTabs={false}
+              showDropdown
+              dropdownVariant="default"
+            />
             {renderUniversalEquipment()}
           </div>
         )
