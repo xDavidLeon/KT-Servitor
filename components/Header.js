@@ -26,8 +26,8 @@ export default function Header() {
             src="/icons/ktservitor_icon_01.png"
             alt="KT Servitor icon"
             style={{
-              width: '3.25rem',
-              height: '3.25rem',
+              width: '6.5rem',
+              height: '6.5rem',
               borderRadius: '0.9rem',
               boxShadow: '0 0 0.75rem rgba(0, 0, 0, 0.4)'
             }}
