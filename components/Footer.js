@@ -189,8 +189,10 @@ export default function Footer() {
     <footer className="app-footer">
       <div className="container app-footer-inner">
         <p className="app-footer-text">
-          This free web-based app is a community-driven open source rules reference for Kill Team 2024. It is not affiliated with Games Workshop Ltd. This app is not a replacement for the official Kill Team 2024 rulebook. Kill team data courtesy of{' '}
-          <a href="https://github.com/vjosset/killteamjson" target="_blank" rel="noreferrer">killteamjson</a>.
+          This site is a free community project not associated with Games Workshop in any way.
+        </p>
+        <p className="app-footer-text">
+          GW, Games Workshop, Citadel, White Dwarf, Warhammer, Warhammer Kill Team, and all associated logos, illustrations, images, names, creatures, races, locations, weapons, characters, and the distinctive likenesses thereof, are either ® or ™, and/or © Games Workshop Limited, variably registered around the world. All Rights Reserved. Used without permission. No challenge to their status intended.
         </p>
 
         <div className="app-footer-meta">
