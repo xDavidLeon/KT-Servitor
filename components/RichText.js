@@ -20,9 +20,11 @@ export default function RichText({ text, className, as: Component = 'div', inlin
 
   if (!text) return null;
 
+  const combinedClassName = ['rich-text', className].filter(Boolean).join(' ');
+
   return (
     <Component
-      className={className}
+      className={combinedClassName}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );
