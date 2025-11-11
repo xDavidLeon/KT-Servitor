@@ -7,10 +7,12 @@ import Seo from '../../components/Seo'
 import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
 
 const UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
+const MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
 const WEAPON_RULES_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/weapon_rules.json'
 
 const SECTION_DEFINITIONS = [
   { id: 'rules-universal-actions', label: 'Universal Actions' },
+  { id: 'rules-mission-actions', label: 'Mission Actions' },
   { id: 'rules-weapon-rules', label: 'Weapon Rules' },
   { id: 'rules-universal-equipment', label: 'Universal Equipment' }
 ]
@@ -27,6 +29,10 @@ export default function Rules() {
   const [weaponRules, setWeaponRules] = useState([])
   const [weaponRulesLoading, setWeaponRulesLoading] = useState(true)
   const [weaponRulesError, setWeaponRulesError] = useState(null)
+
+  const [missionActions, setMissionActions] = useState([])
+  const [missionActionsLoading, setMissionActionsLoading] = useState(true)
+  const [missionActionsError, setMissionActionsError] = useState(null)
 
   const [activeSectionId, setActiveSectionId] = useState(SECTION_DEFINITIONS[0].id)
   const [pendingAnchor, setPendingAnchor] = useState(null)
@@ -77,7 +83,8 @@ export default function Rules() {
             ap: action.AP ?? action.ap ?? null,
             description: action.description || '',
             effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
-            conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : []
+            conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
+            packs: Array.isArray(action.packs) ? action.packs.filter(Boolean) : []
           }))
         )
         setActionsError(null)
@@ -89,6 +96,40 @@ export default function Rules() {
       } finally {
         if (!cancelled) {
           setActionsLoading(false)
+        }
+      }
+    }
+
+    const loadMissionActions = async () => {
+      setMissionActionsLoading(true)
+      try {
+        const res = await fetch(MISSION_ACTIONS_URL, { cache: 'no-store' })
+        if (!res.ok) {
+          throw new Error(`Failed to load mission actions (${res.status})`)
+        }
+        const json = await res.json()
+        if (cancelled) return
+        const list = Array.isArray(json?.actions) ? json.actions : []
+        setMissionActions(
+          list.map(action => ({
+            id: action.id || action.name || '',
+            name: action.name || 'Unnamed action',
+            ap: action.AP ?? action.ap ?? null,
+            description: action.description || '',
+            effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
+            conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
+            packs: Array.isArray(action.packs) ? action.packs.filter(Boolean) : []
+          }))
+        )
+        setMissionActionsError(null)
+      } catch (err) {
+        if (cancelled) return
+        console.error('Failed to load mission actions', err)
+        setMissionActionsError(err)
+        setMissionActions([])
+      } finally {
+        if (!cancelled) {
+          setMissionActionsLoading(false)
         }
       }
     }
@@ -126,6 +167,7 @@ export default function Rules() {
 
     loadEquipment()
     loadActions()
+    loadMissionActions()
     loadWeaponRules()
 
     return () => {
@@ -140,6 +182,15 @@ export default function Rules() {
           ...def,
           items: universalActions.map(action => ({
             id: `universal-action-${action.id}`,
+            label: action.name
+          }))
+        }
+      }
+      if (def.id === 'rules-mission-actions') {
+        return {
+          ...def,
+          items: missionActions.map(action => ({
+            id: `mission-action-${action.id}`,
             label: action.name
           }))
         }
@@ -161,7 +212,7 @@ export default function Rules() {
         }))
       }
     })
-  }, [equipment, universalActions, weaponRules])
+  }, [equipment, universalActions, missionActions, weaponRules])
 
   const findSectionForAnchor = useCallback((anchor) => {
     if (!anchor) return null
@@ -195,28 +246,28 @@ export default function Rules() {
     return true
   }, [])
 
-  const renderUniversalActions = () => {
-    if (actionsLoading) {
-      return <div className="muted">Loading universal actions…</div>
+  const renderActionCollection = ({ loading, error, actions, anchorPrefix, emptyMessage }) => {
+    if (loading) {
+      return <div className="muted">Loading actions…</div>
     }
-    if (actionsError) {
+    if (error) {
       return (
         <div className="muted">
-          Failed to load universal actions.
+          Failed to load actions.
           {' '}
-          <span style={{ fontSize: '0.85rem' }}>{actionsError.message || String(actionsError)}</span>
+          <span style={{ fontSize: '0.85rem' }}>{error.message || String(error)}</span>
         </div>
       )
     }
-    if (!universalActions.length) {
-      return <div className="muted">No universal actions available.</div>
+    if (!actions.length) {
+      return <div className="muted">{emptyMessage}</div>
     }
     return (
       <div className="card-section-list">
-        {universalActions.map(action => {
+        {actions.map(action => {
           const apLabel = action.ap === null || action.ap === undefined ? null : `${action.ap} AP`
           return (
-            <div key={action.id} id={`universal-action-${action.id}`} className="ability-card">
+            <div key={action.id} id={`${anchorPrefix}-${action.id}`} className="ability-card">
               <div className="ability-card-header">
                 <h4 className="ability-card-title">{action.name.toUpperCase()}</h4>
                 {apLabel && <span className="ability-card-ap">{apLabel}</span>}
@@ -254,12 +305,45 @@ export default function Rules() {
                   )}
                 </div>
               )}
+              {action.packs.length > 0 && (
+                <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '0.35rem',
+                    marginTop: '0.75rem',
+                    justifyContent: 'flex-end'
+                  }}
+                >
+                  {action.packs.map(pack => (
+                    <span key={`${action.id}-pack-${pack}`} className="pill">
+                      {pack}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           )
         })}
       </div>
     )
   }
+
+  const renderUniversalActions = () => renderActionCollection({
+    loading: actionsLoading,
+    error: actionsError,
+    actions: universalActions,
+    anchorPrefix: 'universal-action',
+    emptyMessage: 'No universal actions available.'
+  })
+
+  const renderMissionActions = () => renderActionCollection({
+    loading: missionActionsLoading,
+    error: missionActionsError,
+    actions: missionActions,
+    anchorPrefix: 'mission-action',
+    emptyMessage: 'No mission actions available.'
+  })
 
   const renderWeaponRules = () => {
     if (weaponRulesLoading) {
@@ -346,6 +430,13 @@ export default function Rules() {
           <div className="card">
             <h2 style={{ marginTop: 0 }}>Universal Actions</h2>
             {renderUniversalActions()}
+          </div>
+        )
+      case 'rules-mission-actions':
+        return (
+          <div className="card">
+            <h2 style={{ marginTop: 0 }}>Mission Actions</h2>
+            {renderMissionActions()}
           </div>
         )
       case 'rules-weapon-rules':

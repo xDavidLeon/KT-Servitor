@@ -13,7 +13,7 @@ function deriveKillteamId(doc) {
 function buildResultHref(result) {
   if (!result) return '/'
 
-  if (result.type === 'universal_action' || result.type === 'weapon_rule') {
+  if (result.type === 'universal_action' || result.type === 'mission_action' || result.type === 'weapon_rule') {
     const anchor = result.anchorId ? `#${result.anchorId}` : ''
     return `/rules${anchor}`
   }
@@ -47,6 +47,7 @@ const TYPE_LABELS = {
   tactical_ploy: 'Firefight Ploy',
   equipment: 'Equipment',
   universal_action: 'Action',
+  mission_action: 'Action',
   weapon_rule: 'Weapon Rule'
 }
 
