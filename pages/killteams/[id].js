@@ -369,6 +369,7 @@ export default function KillteamPage() {
   const [activeSectionId, setActiveSectionId] = useState(null)
   const [pendingHash, setPendingHash] = useState(null)
   const selectorCardRef = useRef(null)
+  const hasSyncedInitialHashRef = useRef(false)
   const [isSelectorVisible, setIsSelectorVisible] = useState(true)
 
   useEffect(() => {
@@ -911,6 +912,28 @@ export default function KillteamPage() {
 
     return () => observer.disconnect()
   }, [killteam, sections.length])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (!sections.length) return
+    if (!activeSectionId) return
+    if (pendingHash) return
+
+    if (!hasSyncedInitialHashRef.current) {
+      hasSyncedInitialHashRef.current = true
+      return
+    }
+
+    const currentHash = window.location.hash?.replace('#', '') || ''
+    if (!currentHash) return
+
+    const mappedSection = findSectionForAnchor(currentHash)
+    if (!mappedSection) return
+    if (mappedSection.id === activeSectionId) return
+
+    const { pathname, search } = window.location
+    window.history.replaceState(null, '', `${pathname}${search}#${activeSectionId}`)
+  }, [activeSectionId, sections, pendingHash, findSectionForAnchor])
 
   if (loading) {
     return (
