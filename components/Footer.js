@@ -178,10 +178,10 @@ export default function Footer() {
     setMenuOpen(false)
   }
 
-  function handleAbout() {
-    alert(
-      'KT Servitor is a personal project by @xdavidleon.\n\nThis free web-based app is a community-driven open source rules reference for Kill Team 2024. It is not affiliated with Games Workshop Ltd. This app is not a replacement for the official Kill Team 2024 rulebook.'
-    )
+    function handleAbout() {
+      alert(
+        'KT Servitor is a community-driven open source rules reference for Kill Team 2024.\n\nThis free web-based app is not affiliated with Games Workshop Ltd. This app is not a replacement for the official Kill Team 2024 rulebook.\n\nContact: ktservitor@proton.me.'
+      )
     setMenuOpen(false)
   }
 
@@ -195,38 +195,26 @@ export default function Footer() {
           GW, Games Workshop, Citadel, White Dwarf, Warhammer, Warhammer Kill Team, and all associated logos, illustrations, images, names, creatures, races, locations, weapons, characters, and the distinctive likenesses thereof, are either ® or ™, and/or © Games Workshop Limited, variably registered around the world. All Rights Reserved. Used without permission. No challenge to their status intended.
         </p>
 
-        <div className="app-footer-meta">
-          <span className="app-footer-credit">
-            Crafted by{' '}
+          <div className="app-footer-meta">
             <a
-              href="https://xdavidleon.com"
-              target="_blank"
-              rel="noreferrer"
+              href="mailto:ktservitor@proton.me"
+              className="app-footer-link"
+              aria-label="Email KT Servitor"
             >
-              David León
+              <svg
+                className="app-footer-icon"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  fill="currentColor"
+                  d="M1.5 2.5h13a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12V4a1.5 1.5 0 0 1 1.5-1.5Zm0 1a.5.5 0 0 0-.5.5v.217l7 4.2 7-4.2V4a.5.5 0 0 0-.5-.5h-13Zm13 9a.5.5 0 0 0 .5-.5V6.383l-7.03 4.218a.5.5 0 0 1-.48 0L.5 6.383V12a.5.5 0 0 0 .5.5h13Z"
+                />
+              </svg>
+              <span>Email</span>
             </a>
-          </span>
-          <a
-            href="https://github.com/xDavidLeon/KT-Servitor"
-            target="_blank"
-            rel="noreferrer"
-            className="app-footer-link"
-            aria-label="View KT Servitor on GitHub"
-          >
-            <svg
-              className="app-footer-icon"
-              viewBox="0 0 16 16"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                fill="currentColor"
-                d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
-              />
-            </svg>
-            <span>GitHub</span>
-          </a>
-        </div>
+          </div>
 
           {versionLabel && (
             <div style={{ marginTop: '1.5rem', textAlign: 'center', width: '100%', fontSize: '0.85rem', color: 'var(--muted)' }}>
