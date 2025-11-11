@@ -1,3 +1,6 @@
+
+<img width="192" height="192" alt="icon-192" src="https://github.com/user-attachments/assets/62fd2337-33f7-4535-a297-5d29b923690e" />
+
 # KT Servitor
 KT Servitor is a free web-based app for running your Kill Team 2024 games, review game and faction rules and check operative stats.
 
