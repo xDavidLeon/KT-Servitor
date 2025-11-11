@@ -42,12 +42,48 @@ export default function Sequence(){
         <div className="card">
           <h2 style={{marginTop:0}}>Game Sequence</h2>
           {steps.length===0 && <div className="muted">No steps found.</div>}
-          <ol>
-            {steps.map(s=> (
-              <li key={s.id} style={{marginBottom:'.6rem'}}>
-                <strong>{s.title}</strong><RichText className="muted" text={s.body} />
-              </li>
-            ))}
+          <ol style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            {steps.map((s, index)=> {
+              const iconSequence = ['⚡', '♟', '🔥', '🕒', '🏆', '🔚']
+              const icon = iconSequence[index] || '●'
+              return (
+                <li
+                  key={s.id}
+                  style={{
+                    marginBottom: '.6rem',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '0.4rem'
+                  }}
+                >
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      fontSize: '1rem',
+                      fontWeight: 600,
+                      color: 'var(--muted)',
+                      minWidth: '2rem',
+                      textAlign: 'right'
+                    }}
+                  >
+                    {`${index + 1}.`}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    role="img"
+                    style={{
+                      fontSize: '1.1rem'
+                    }}
+                  >
+                    {icon}
+                  </span>
+                  <div style={{ marginLeft: '0.25rem', flex: 1 }}>
+                    <strong>{s.title}</strong>
+                    <RichText className="muted" text={s.body} />
+                  </div>
+                </li>
+              )
+            })}
           </ol>
         </div>
       </div>

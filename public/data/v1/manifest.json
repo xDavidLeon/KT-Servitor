@@ -3,14 +3,6 @@
   "generated": "2025-11-10",
   "files": [
     {
-      "name": "rules.json",
-      "sha256": ""
-    },
-    {
-      "name": "units.json",
-      "sha256": ""
-    },
-    {
       "name": "sequence.json",
       "sha256": ""
     }

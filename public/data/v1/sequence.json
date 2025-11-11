@@ -1,7 +1,32 @@
 [
-    {"id":"seq_01_setup","order":1,"title":"Set up the battle","body":"● Select kill team, set up terrain. Determine crit op and set up objective markers.\n● Roll off - the winner decides who has Initiative and selects their drop zone. \n● The other player gains the Re-roll initiative card (explained in step 4)."},
-    {"id":"seq_02_roster","order":2,"title":"Select Operatives","body":"● Select operatives and reveal. Then Select 4 equipment and reveal. ● Start with 2 CP. Secretly select a Tac Op from one of the team’s archetypes."},
-    {"id":"seq_03_deploy","order":3,"title":"Set Operatives","body":"● Alternate setting up equipment, starting with the player with initiative. Note this is item by item, not option by equipment option.\n● Alternate setting up 1/3 operatives (rounded up), starting with Initiative player."},
-    {"id":"seq_04_initiative","order":4,"title":"Play the Battle","body":"● STRATEGIC GAMBIT in first turning point, secretly select op to be Primary Op.\n● To determine Initiative each Turning Point, roll-off (but don’t re-roll ties). Starting with the loser of the roll-off, each player alternates either using an initiative card or passing, until both players pass in succession. Kill team’s rules to affect the roll-off must do so before playing initiative cards, starting with the loser. Finally the winner determines who has the initiative that Turning Point.\n● Each player can score a maximum of 6VP from each op."},
-    {"id":"seq_05_strategy","order":5,"title":"End the Battle","body":"● Battle ends after four turning points. At the end of the battle, reveal primary ops and score additional VP to half of what you scored from that op (rounded up)"}
-  ]
+  {
+    "id": "seq_01_setup",
+    "order": 1,
+    "title": "Set up the Battle",
+    "body": "1. Each player selects a kill team for the battle.\n2. Determine the killzone and set up terrain features. Ensure terrain types are specified.\n3. Determine one shared crit op and set up objective markers. Other than in Killzone: Bheta-Decima, all objective markers must be set up on the killzone floor.\n4. **Roll-off:** the winner decides who has initiative.\n5. The player with initiative selects one drop zone. Their opponent has the other drop zone and gains the Re-roll initiative card (explained in step 4)."
+  },
+  {
+    "id": "seq_02_roster",
+    "order": 2,
+    "title": "Select Operatives",
+    "body": "1. Each player secretly selects their operatives for the battle, adhering to the selection requirements in their kill team’s rules. They then reveal their selections simultaneously.\n2. Each player secretly selects up to four equipment options. Each option cannot be selected more than once per player. They then reveal their selections simultaneously.\n3. Each player starts with 2CP.\n4. Each player secretly selects a tac op from one of their kill team’s archetypes (Infiltration, Recon, Security or Seek & Destroy, as specified in their kill team’s rules)."
+  },
+  {
+    "id": "seq_03_deploy",
+    "order": 3,
+    "title": "Set Up Operatives",
+    "body": "1. Each player alternates setting up an item of equipment that’s set up before the battle (ladders, etc.), starting with the player with initiative. Note: it’s item by item, not option by option.\n2. Each player alternates setting up one third of their kill team (rounding up), starting with the player with initiative. When a player sets up an operative, it must be wholly within their drop zone and must be given a Conceal order."
+  },
+  {
+    "id": "seq_04_initiative",
+    "order": 4,
+    "title": "Play the battle",
+    "body": "1. To determine initiative during each turning point (including the first), the players roll off (ties are not re-rolled). Starting with the player that lost the roll-off, each player alternates either using an initiative card to alter the result of their roll or passing, until they both pass in succession.\n2. If player(s) would use their kill team rules to affect the roll-off, they must do so before playing initiative cards, starting with the player that’s losing the roll-off.\n3. The Re-roll initiative card allows the player to re-roll their initiative roll. The remaining initiative cards all change the player’s roll result up or down (this can take it above 6 or below 1).\n4. The winner of the roll-off decides who has initiative. Except during the fourth turning point, the loser of the roll-off gains an initiative card with a value equal to the turning point. If the roll-off is a tie, the player that didn’t have initiative at that time is the winner.\n5. As a **Strategic Gambit** during the first turning point, each player secretly selects one of their three operations (critical, elimination or tactical) as their primary operation. Then, each player places a card with their choice face down, or uses a die or other method to indicate it.\n6. Each player can score a maximum of 6VP for each operation."
+  },
+  {
+    "id": "seq_05_strategy",
+    "order": 5,
+    "title": "End the Battle",
+    "body": "1. The battle ends after four turning points have been completed. If a player has no operatives in the killzone but the battle has not ended, the other player completes the remaining turning points until the battle ends.\n2. At the end of the battle, all players simultaneously reveal their primary operations. They score additional VP equal to half what they scored for that operation (rounding up).\n3. The player with the most VP is the winner. If players are tied, the battle is a draw."
+  }
+]
