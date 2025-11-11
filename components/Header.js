@@ -36,6 +36,10 @@ export default function Header() {
               borderRadius: '0.9rem',
               boxShadow: '0 0 0.75rem rgba(0, 0, 0, 0.4)'
             }}
+            onError={event => {
+              event.currentTarget.onerror = null
+              event.currentTarget.src = '/icons/icon-512.png'
+            }}
           />
           <div
             style={{
