@@ -74,7 +74,7 @@ To use a custom domain (e.g., `ktservitor.your-domain.com`):
 
 4. **Verify:**
    - Once DNS propagates (can take up to 48 hours, usually much faster)
-   - Your site will be accessible at `https://ktservitor.xdavidleon.com`
+   - Your site will be accessible at `https://ktservitor.your-domain.com`
 
 **Note:** The app uses relative paths, so it works automatically with any domain without code changes.
 
