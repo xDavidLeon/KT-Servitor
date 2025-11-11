@@ -113,6 +113,19 @@ th{position:sticky;top:0;background:#121521}
   border-color:var(--accent);
   background:rgba(251,146,60,0.1);
 }
+.killteam-card-link{
+  transition:transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  border:1px solid #2a2f3f;
+}
+.killteam-card-link:hover,
+.killteam-card-link:focus-visible{
+  transform:translateY(-2px);
+  box-shadow:0 12px 32px rgba(0,0,0,0.35);
+  border-color:var(--accent);
+}
+.killteam-card-link:focus-visible{
+  outline:none;
+}
 .app-footer-icon{
   width:1rem;
   height:1rem;
