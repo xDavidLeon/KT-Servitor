@@ -93,12 +93,22 @@ export default function Killteams() {
               {group.items.map(kt => {
                 const archetypes = parseArchetypes(kt.archetypes)
                 return (
-                  <div key={kt.killteamId} className="card" style={{ margin: '.5rem 0' }}>
+                  <Link
+                    key={kt.killteamId}
+                    href={`/killteams/${kt.killteamId}`}
+                    className="card killteam-card-link"
+                    style={{
+                      margin: '.5rem 0',
+                      display: 'block',
+                      textDecoration: 'none',
+                      color: 'inherit'
+                    }}
+                  >
                     <div
                       className="heading"
                       style={{ justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}
                     >
-                      <strong>{kt.killteamName}</strong>
+                      <strong style={{ cursor: 'pointer' }}>{kt.killteamName}</strong>
                       {archetypes.length > 0 && (
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'flex-end' }}>
                           {archetypes.map(archetype => (
@@ -108,10 +118,7 @@ export default function Killteams() {
                       )}
                     </div>
                     {kt.description && <RichText className="muted" text={kt.description} />}
-                    <div style={{ marginTop: '.5rem' }}>
-                      <Link href={`/killteams/${kt.killteamId}`}>Open kill team →</Link>
-                    </div>
-                  </div>
+                  </Link>
                 )
               })}
             </div>
