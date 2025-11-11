@@ -71,10 +71,7 @@ export default function Killteams() {
         <Header />
         <div className="card">
           <h2 style={{ marginTop: 0 }}>Kill Teams</h2>
-          <div style={{ marginBottom: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <span className="muted" style={{ fontSize: '0.9rem' }}>
-              Jump to a kill team:
-            </span>
+          <div style={{ marginBottom: '1rem' }}>
             <KillteamSelector />
           </div>
           {groupedKillteams.map((group, index) => (

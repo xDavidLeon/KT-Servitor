@@ -181,7 +181,8 @@ export default function KillteamSelector({ currentKillteamId, leftControl = null
                 padding: '0.3rem 0.6rem'
               }}
             >
-              {kt.killteamName}
+              <span style={{ marginRight: '0.35rem' }} aria-hidden="true">🕒</span>
+              <span>{kt.killteamName}</span>
             </Link>
           ))}
         </div>
