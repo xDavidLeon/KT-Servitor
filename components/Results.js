@@ -13,6 +13,19 @@ function deriveKillteamId(doc) {
 function buildResultHref(result) {
   if (!result) return '/'
 
+  if (result.type === 'universal_action' || result.type === 'weapon_rule') {
+    const anchor = result.anchorId ? `#${result.anchorId}` : ''
+    return `/rules${anchor}`
+  }
+
+  if (result.type === 'equipment') {
+    const killteamIdForEquipment = deriveKillteamId(result)
+    if (!killteamIdForEquipment) {
+      const anchor = result.anchorId ? `#${result.anchorId}` : ''
+      return `/rules${anchor}`
+    }
+  }
+
   if (result.type === 'killteam') {
     const killteamId = deriveKillteamId(result)
     return killteamId ? `/killteams/${encodeURIComponent(killteamId)}` : '/'
@@ -29,10 +42,12 @@ function buildResultHref(result) {
 
 const TYPE_LABELS = {
   killteam: 'Kill Team',
-  operative: 'Operative Type',
-  strategic_ploy: 'Strategic Ploy',
+  operative: 'Operative',
+  strategic_ploy: 'Strategy Ploy',
   tactical_ploy: 'Firefight Ploy',
-  equipment: 'Equipment'
+  equipment: 'Equipment',
+  universal_action: 'Action',
+  weapon_rule: 'Weapon Rule'
 }
 
 function formatType(type) {
@@ -129,7 +144,7 @@ export default function Results({ results, loading }) {
                     if (r.killteamDisplayName) {
                       return r.killteamDisplayName
                     }
-                    return r.killteamName || '—'
+                    return r.killteamName || ''
                   })()}
                 </td>
               </tr>
