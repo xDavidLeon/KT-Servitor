@@ -18,3 +18,9 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
+[[redirects]]
+  from = "https://ktservitor.xdavidleon.com/*"
+  to = "https://ktservitor.app/:splat"
+  status = 301
+  force = true
+
