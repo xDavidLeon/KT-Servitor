@@ -178,13 +178,6 @@ export default function Footer() {
     setMenuOpen(false)
   }
 
-    function handleAbout() {
-      alert(
-        'KT Servitor is a community-driven open source rules reference for Kill Team 2024.\n\nThis free web-based app is not affiliated with Games Workshop Ltd. This app is not a replacement for the official Kill Team 2024 rulebook.\n\nContact: ktservitor@proton.me.'
-      )
-    setMenuOpen(false)
-  }
-
   return (
     <footer className="app-footer">
       <div className="container app-footer-inner">
@@ -277,8 +270,6 @@ export default function Footer() {
                   <button onClick={handleExport}>Export data (JSON)</button>
                   <div className="sep"></div>
                   <button onClick={handleReset}>Reset data</button>
-                  <div className="sep"></div>
-                  <button onClick={handleAbout}>About</button>
                 </div>
               )}
             </div>
