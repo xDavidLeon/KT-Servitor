@@ -139,9 +139,6 @@ export default function KillteamSectionNavigator({
   const handleTabSelect = (sectionId) => {
     if (!sectionId || sectionId === activeSection.id) return
     onSectionChange?.(sectionId)
-    requestAnimationFrame(() => {
-      scrollToKillteamSection(sectionId)
-    })
   }
 
   const handleItemSelect = (targetId) => {

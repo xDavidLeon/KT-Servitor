@@ -117,9 +117,20 @@ export default function Results({ results, loading }) {
                 <td><Link href={buildResultHref(r)}>{r.title}</Link></td>
                 <td className="muted">{formatType(r.type)}</td>
                 <td>
-                  {r.killteamDisplayName
-                    ? <Link href={`/killteams/${encodeURIComponent(r.killteamId || deriveKillteamId(r) || '')}`}>{r.killteamDisplayName}</Link>
-                    : (r.killteamName || '—')}
+                  {(() => {
+                    const resolvedKillteamId = r.killteamId || deriveKillteamId(r) || null
+                    if (r.killteamDisplayName && resolvedKillteamId) {
+                      return (
+                        <Link href={`/killteams/${encodeURIComponent(resolvedKillteamId)}`}>
+                          {r.killteamDisplayName}
+                        </Link>
+                      )
+                    }
+                    if (r.killteamDisplayName) {
+                      return r.killteamDisplayName
+                    }
+                    return r.killteamName || '—'
+                  })()}
                 </td>
               </tr>
             ))}

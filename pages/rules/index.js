@@ -75,11 +75,18 @@ export default function Rules() {
             {item.description && (
               <RichText className="ability-card-body" text={item.description} />
             )}
-            {item.effects && item.effects.trim() && (
-              <div className="muted" style={{ marginTop: '0.35rem', fontSize: '0.85rem' }}>
-                {item.effects}
-              </div>
-            )}
+            {(() => {
+              const effectsText = Array.isArray(item.effects)
+                ? item.effects.filter(Boolean).join(', ')
+                : (item.effects || '')
+              const trimmed = effectsText.trim()
+              if (!trimmed) return null
+              return (
+                <div className="muted" style={{ marginTop: '0.35rem', fontSize: '0.85rem' }}>
+                  {trimmed}
+                </div>
+              )
+            })()}
           </div>
         ))}
       </div>
