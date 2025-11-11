@@ -646,8 +646,8 @@ th{position:sticky;top:0;background:#121521}
 
 @media (max-width: 640px) {
   .section-navigator-floating{
-    top:auto;
-    bottom:1rem;
-    right:1rem;
+    top:0.75rem;
+    right:0.75rem;
+    bottom:auto;
   }
 }
