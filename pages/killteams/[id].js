@@ -366,6 +366,7 @@ export default function KillteamPage() {
   const [killteam, setKillteam] = useState(null)
   const [universalEquipmentRecords, setUniversalEquipmentRecords] = useState([])
   const [loading, setLoading] = useState(true)
+  const hasLoadedOnceRef = useRef(false)
   const [activeSectionId, setActiveSectionId] = useState(null)
   const [pendingHash, setPendingHash] = useState(null)
   const selectorCardRef = useRef(null)
@@ -378,13 +379,16 @@ export default function KillteamPage() {
     let cancelled = false
 
     ;(async () => {
-      setLoading(true)
+      if (!hasLoadedOnceRef.current) {
+        setLoading(true)
+      }
       await ensureIndex()
 
       const data = await db.killteams.get(id)
       if (!cancelled) {
         setKillteam(data || null)
         setLoading(false)
+        hasLoadedOnceRef.current = true
       }
     })()
 
