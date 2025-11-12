@@ -132,6 +132,7 @@ export default function Rules() {
   const [weaponRulesLoading, setWeaponRulesLoading] = useState(!cachedWeaponRules)
   const [weaponRulesLoaded, setWeaponRulesLoaded] = useState(Boolean(cachedWeaponRules))
   const [weaponRulesError, setWeaponRulesError] = useState(null)
+  const [killteamsMap, setKillteamsMap] = useState(new Map())
 
   const [missionActions, setMissionActions] = useState(cachedMissionActions || [])
   const [missionActionsLoading, setMissionActionsLoading] = useState(!cachedMissionActions)
@@ -299,10 +300,26 @@ export default function Rules() {
           id: rule.id || rule.name || '',
           name: rule.name || 'Unnamed rule',
           description: rule.description || '',
-          variable: Boolean(rule.variable)
+          variable: Boolean(rule.variable),
+          team: rule.team || null
         }))
-        setWeaponRules(mappedWeaponRules)
-        cachedWeaponRules = mappedWeaponRules
+        // Sort: rules with no team first, then alphabetically by name
+        const sortedWeaponRules = mappedWeaponRules.sort((a, b) => {
+          // First, sort by team: null/undefined first, then by team value
+          const teamA = a.team || ''
+          const teamB = b.team || ''
+          if (teamA !== teamB) {
+            // If one is empty/null and the other isn't, empty comes first
+            if (!teamA && teamB) return -1
+            if (teamA && !teamB) return 1
+            // Both have teams, sort alphabetically by team
+            return teamA.localeCompare(teamB)
+          }
+          // Same team status, sort alphabetically by name
+          return (a.name || '').localeCompare(b.name || '')
+        })
+        setWeaponRules(sortedWeaponRules)
+        cachedWeaponRules = sortedWeaponRules
         setWeaponRulesLoaded(true)
         setWeaponRulesError(null)
       } catch (err) {
@@ -320,10 +337,28 @@ export default function Rules() {
       }
     }
 
+    const loadKillteams = async () => {
+      try {
+        await checkForUpdates()
+        const killteams = await db.killteams.toArray()
+        if (cancelled) return
+        const map = new Map()
+        for (const kt of killteams) {
+          if (kt.killteamId && kt.killteamName) {
+            map.set(kt.killteamId, kt.killteamName)
+          }
+        }
+        setKillteamsMap(map)
+      } catch (err) {
+        console.error('Failed to load killteams for weapon rules', err)
+      }
+    }
+
     loadEquipment()
     loadActions()
     loadMissionActions()
     loadWeaponRules()
+    loadKillteams()
 
     return () => {
       cancelled = true
@@ -523,18 +558,36 @@ export default function Rules() {
     }
     return (
       <div className="card-section-list">
-        {weaponRules.map(rule => (
-          <div key={rule.id} id={`weapon-rule-${rule.id}`} className="ability-card">
-            <div className="ability-card-header">
-              <h4 className="ability-card-title">
-                {rule.variable ? `${rule.name} (X)` : rule.name}
-              </h4>
+        {weaponRules.map(rule => {
+          const killteamName = rule.team ? killteamsMap.get(rule.team) : null
+          return (
+            <div key={rule.id} id={`weapon-rule-${rule.id}`} className="ability-card" style={{ position: 'relative' }}>
+              <div className="ability-card-header">
+                <h4 className="ability-card-title">
+                  {rule.variable ? `${rule.name} (X)` : rule.name}
+                </h4>
+              </div>
+              {rule.description && (
+                <p className="ability-card-body" style={{ 
+                  margin: 0,
+                  paddingBottom: killteamName ? '1.75rem' : undefined
+                }}>{rule.description}</p>
+              )}
+              {killteamName && (
+                <div style={{
+                  position: 'absolute',
+                  bottom: '0.5rem',
+                  right: '0.75rem',
+                  fontSize: '0.85rem',
+                  color: 'var(--muted)',
+                  fontStyle: 'italic'
+                }}>
+                  {killteamName}
+                </div>
+              )}
             </div>
-            {rule.description && (
-              <p className="ability-card-body" style={{ margin: 0 }}>{rule.description}</p>
-            )}
-          </div>
-        ))}
+          )
+        })}
       </div>
     )
   }
