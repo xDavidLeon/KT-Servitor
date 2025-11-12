@@ -631,27 +631,33 @@ function normaliseOperative(opType) {
         weapon.wepType === 'E' ? 'Equipment' :
         'Weapon'
 
+      const weaponName = weapon.wepName || weapon.wepId
+      const weaponId = weapon.wepId
+
       if (Array.isArray(weapon.profiles) && weapon.profiles.length) {
-        for (const profile of weapon.profiles) {
-          result.push({
-            id: `${weapon.wepId}-${profile.wepprofileId || profile.seq || 0}`,
-            name: profile.profileName ? `${weapon.wepName} (${profile.profileName})` : (weapon.wepName || weapon.wepId),
-            type,
-            atk: profile.ATK || '-',
-            hit: profile.HIT || '-',
-            dmg: profile.DMG || '-',
-            specialRules: splitKeywords(profile.WR)
-          })
-        }
+        const profiles = weapon.profiles.map(profile => ({
+          id: `${weaponId}-${profile.wepprofileId || profile.seq || 0}`,
+          profileName: profile.profileName || null,
+          atk: profile.ATK || '-',
+          hit: profile.HIT || '-',
+          dmg: profile.DMG || '-',
+          specialRules: splitKeywords(profile.WR)
+        }))
+        
+        result.push({
+          id: weaponId,
+          name: weaponName,
+          type,
+          profiles,
+          hasMultipleProfiles: profiles.length > 1
+        })
       } else {
         result.push({
-          id: weapon.wepId,
-          name: weapon.wepName || weapon.wepId,
+          id: weaponId,
+          name: weaponName,
           type,
-          atk: '-',
-          hit: '-',
-          dmg: '-',
-          specialRules: []
+          profiles: [],
+          hasMultipleProfiles: false
         })
       }
     }

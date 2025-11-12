@@ -434,14 +434,36 @@ th{position:sticky;top:0;background:#121521}
     font-size: 0.8rem;
     border-bottom: 1px solid #2a2f3f;
   }
+  .weapons-table th:nth-child(2),
+  .weapons-table th:nth-child(3),
+  .weapons-table th:nth-child(4) {
+    text-align: center;
+  }
 .weapons-table td {
     padding: 0.5rem;
     border-bottom: 1px solid #2a2f3f;
     vertical-align: top;
   word-break: break-word;
   }
+  .weapons-table td:nth-child(2),
+  .weapons-table td:nth-child(3),
+  .weapons-table td:nth-child(4) {
+    text-align: center;
+  }
   .weapons-table tr:last-child td {
     border-bottom: none;
+  }
+  .weapons-table .weapon-header-row td {
+    background: #1a1f2b;
+    font-weight: 600;
+    padding-top: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #2a2f3f;
+    color: var(--accent);
+  }
+  .weapons-table .weapon-profile-row td:first-child {
+    padding-left: 1.5rem;
+    color: var(--muted);
   }
 
 @media (min-width: 640px) {

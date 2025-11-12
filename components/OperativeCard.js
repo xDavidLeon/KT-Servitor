@@ -1,3 +1,4 @@
+import React from 'react'
 import RichText from './RichText'
 
 export default function OperativeCard({ operative }) {
@@ -48,9 +49,15 @@ export default function OperativeCard({ operative }) {
           return getTypeOrder(a.type) - getTypeOrder(b.type);
         });
         
+        // Determine weapon type symbol
+        const getWeaponSymbol = (type) => {
+          if (type === 'Ranged Weapon') return '⌖';
+          if (type === 'Melee Weapon') return '⚔';
+          return '';
+        };
+        
         return (
           <div className="operative-weapons">
-            <strong>Weapons:</strong>
             <div className="table-scroll">
               <table className="weapons-table">
                 <thead>
@@ -63,27 +70,78 @@ export default function OperativeCard({ operative }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {sortedWeapons.map((weapon, idx) => {
-                    // Determine weapon type symbol
-                    const weaponSymbol = weapon.type === 'Ranged Weapon' ? '⌖' : 
-                                        weapon.type === 'Melee Weapon' ? '⚔' : '';
+                  {sortedWeapons.map((weapon, weaponIdx) => {
+                    const weaponSymbol = getWeaponSymbol(weapon.type);
+                    const hasProfiles = Array.isArray(weapon.profiles) && weapon.profiles.length > 0;
+                    const hasMultipleProfiles = weapon.hasMultipleProfiles || (hasProfiles && weapon.profiles.length > 1);
                     
+                    // If weapon has multiple profiles, show header row + profile rows
+                    if (hasMultipleProfiles) {
+                      return (
+                        <React.Fragment key={weapon.id || weaponIdx}>
+                          {/* Weapon header row */}
+                          <tr className="weapon-header-row">
+                            <td colSpan="5">
+                              {weaponSymbol && <span style={{ marginRight: '0.25rem' }}>{weaponSymbol}</span>}
+                              {weapon.name}
+                            </td>
+                          </tr>
+                          {/* Profile rows */}
+                          {weapon.profiles.map((profile, profileIdx) => (
+                            <tr key={profile.id || `${weapon.id}-${profileIdx}`} className="weapon-profile-row">
+                              <td>
+                                {profile.profileName || 'Default'}
+                              </td>
+                              <td>{profile.atk || '-'}</td>
+                              <td>{profile.hit || '-'}</td>
+                              <td>{profile.dmg || '-'}</td>
+                              <td className="muted">
+                                {profile.specialRules && profile.specialRules.length > 0 
+                                  ? profile.specialRules.join(', ')
+                                  : '-'}
+                              </td>
+                            </tr>
+                          ))}
+                        </React.Fragment>
+                      );
+                    }
+                    
+                    // Single profile or no profiles - show as single row
+                    if (hasProfiles && weapon.profiles.length === 1) {
+                      const profile = weapon.profiles[0];
+                      return (
+                        <tr key={weapon.id || weaponIdx}>
+                          <td>
+                            <strong>
+                              {weaponSymbol && <span style={{ marginRight: '0.25rem' }}>{weaponSymbol}</span>}
+                              {weapon.name}
+                            </strong>
+                          </td>
+                          <td>{profile.atk || '-'}</td>
+                          <td>{profile.hit || '-'}</td>
+                          <td>{profile.dmg || '-'}</td>
+                          <td className="muted">
+                            {profile.specialRules && profile.specialRules.length > 0 
+                              ? profile.specialRules.join(', ')
+                              : '-'}
+                          </td>
+                        </tr>
+                      );
+                    }
+                    
+                    // No profiles - show weapon name only
                     return (
-                      <tr key={idx}>
+                      <tr key={weapon.id || weaponIdx}>
                         <td>
                           <strong>
                             {weaponSymbol && <span style={{ marginRight: '0.25rem' }}>{weaponSymbol}</span>}
                             {weapon.name}
                           </strong>
                         </td>
-                        <td>{weapon.atk || '-'}</td>
-                        <td>{weapon.hit || '-'}</td>
-                        <td>{weapon.dmg || '-'}</td>
-                        <td className="muted">
-                          {weapon.specialRules && weapon.specialRules.length > 0 
-                            ? weapon.specialRules.join(', ')
-                            : '-'}
-                        </td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td className="muted">-</td>
                       </tr>
                     );
                   })}
