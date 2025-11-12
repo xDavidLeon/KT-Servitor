@@ -12,10 +12,9 @@ import Seo from '../../components/Seo'
 function parseArchetypes(value) {
   if (!value) return []
   if (Array.isArray(value)) return value.filter(Boolean)
-  return String(value)
-    .split(/[\/,]/)
-    .map(part => part.trim())
-    .filter(Boolean)
+  // Legacy support: if it's a string, treat it as a single archetype
+  const trimmed = String(value).trim()
+  return trimmed ? [trimmed] : []
 }
 
 const ARCHETYPE_PILL_MAP = {

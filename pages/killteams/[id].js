@@ -327,10 +327,9 @@ function renderTacOpActionCards(actions = [], actionLookup = new Map(), anchorPr
 function parseArchetypes(value) {
   if (!value) return []
   if (Array.isArray(value)) return value.filter(Boolean)
-  return String(value)
-    .split(/[\/,]/)
-    .map(part => part.trim())
-    .filter(Boolean)
+  // Legacy support: if it's a string, treat it as a single archetype
+  const trimmed = String(value).trim()
+  return trimmed ? [trimmed] : []
 }
 
 function splitKeywords(value) {
@@ -1532,7 +1531,7 @@ export default function KillteamPage() {
                   }}
                   aria-label="Open designer notes PDF"
                 >
-                  <span aria-hidden="true" style={{ fontSize: '1.1rem' }}>⬇️</span>
+                  <span aria-hidden="true" style={{ fontSize: '1.1rem' }}>🔄</span>
                   <span>{killteam.version}</span>
                 </a>
               </div>
