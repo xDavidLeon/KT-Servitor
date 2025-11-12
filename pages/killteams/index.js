@@ -18,6 +18,30 @@ function parseArchetypes(value) {
     .filter(Boolean)
 }
 
+const ARCHETYPE_PILL_MAP = {
+  infiltration: { background: '#2b2d33', color: '#f4f6ff' },
+  security: { background: '#1e5dff', color: '#f4f6ff' },
+  'seek & destroy': { background: '#d62d3a', color: '#fef6f6' },
+  recon: { background: '#c85c11', color: '#fff5ec' }
+}
+
+function getArchetypePillStyle(archetype) {
+  if (!archetype) return null
+  const normalised = String(archetype)
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/\band\b/gi, '&')
+  const key = normalised.toLowerCase()
+  const style = ARCHETYPE_PILL_MAP[key]
+  if (!style) return { label: normalised }
+  return {
+    label: normalised,
+    backgroundColor: style.background,
+    borderColor: style.background,
+    color: style.color
+  }
+}
+
 export default function Killteams() {
   const [killteams, setKillteams] = useState([])
 
@@ -108,9 +132,19 @@ export default function Killteams() {
                       <strong style={{ cursor: 'pointer' }}>{kt.killteamName}</strong>
                       {archetypes.length > 0 && (
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'flex-end' }}>
-                          {archetypes.map(archetype => (
-                            <span key={archetype} className="pill">{archetype}</span>
-                          ))}
+                          {archetypes.map(archetype => {
+                            const style = getArchetypePillStyle(archetype)
+                            const label = style?.label || archetype
+                            return (
+                              <span
+                                key={archetype}
+                                className="pill"
+                                style={style?.backgroundColor ? style : undefined}
+                              >
+                                {label}
+                              </span>
+                            )
+                          })}
                         </div>
                       )}
                     </div>

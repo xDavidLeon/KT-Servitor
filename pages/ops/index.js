@@ -8,6 +8,30 @@ const OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/
 const OPS_UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
 const OPS_MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
 
+const ARCHETYPE_PILL_MAP = {
+  infiltration: { background: '#2b2d33', color: '#f4f6ff' },
+  security: { background: '#1e5dff', color: '#f4f6ff' },
+  'seek & destroy': { background: '#d62d3a', color: '#fef6f6' },
+  recon: { background: '#c85c11', color: '#fff5ec' }
+}
+
+function getArchetypePillStyle(archetype) {
+  if (!archetype) return null
+  const normalised = String(archetype)
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/\band\b/gi, '&')
+  const key = normalised.toLowerCase()
+  const style = ARCHETYPE_PILL_MAP[key]
+  if (!style) return { label: normalised }
+  return {
+    label: normalised,
+    backgroundColor: style.background,
+    borderColor: style.background,
+    color: style.color
+  }
+}
+
 let cachedCritOps = null
 let cachedTacOps = null
 let cachedOpsActionMap = null
@@ -479,78 +503,199 @@ const sections = useMemo(() => {
       )
     }
 
-    const renderOpCard = (op) => {
-      const archetypes = Array.isArray(op.archetype)
-        ? op.archetype.filter(Boolean)
-        : op.archetype
-          ? [op.archetype]
-          : []
-      const packs = Array.isArray(op.packs) ? op.packs.filter(Boolean) : []
+  const renderOpCard = (op, index) => {
+    const archetypes = Array.isArray(op.archetype)
+      ? op.archetype.filter(Boolean)
+      : op.archetype
+        ? [op.archetype]
+        : []
+    const packs = Array.isArray(op.packs) ? op.packs.filter(Boolean) : []
 
+    const renderActions = (actionsArray) => {
+      if (!Array.isArray(actionsArray) || actionsArray.length === 0) return null
       return (
-        <div key={op.id} id={`operation-${op.id}`} className="card" style={{ margin: '.75rem 0' }}>
-          <div
-            className="heading"
-            style={{ justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}
-          >
-            <strong>{op.title.toUpperCase()}</strong>
-            <div style={{ display: 'flex', gap: '0.35rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
-              <span className="pill">{type === 'crit-op' ? 'Critical Operation' : 'Tactical Operation'}</span>
-              {packs.map(pack => (
-                <span key={`${op.id}-pack-${pack}`} className="pill">{pack}</span>
-              ))}
-              {archetypes.map(arch => (
-                <span key={`${op.id}-arch-${arch}`} className="pill">{arch}</span>
-              ))}
-            </div>
-          </div>
+        <div className="card-section-list" style={{ marginTop: '0.75rem' }}>
+          {actionsArray.map(action => {
+            const entry = typeof action === 'string'
+              ? actionLookup.get(action) || normaliseActionDefinition(action)
+              : normaliseActionDefinition(action)
+            if (!entry) return null
 
-          {op.objective && (
-            <div style={{ marginTop: '0.75rem' }}>
-              <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Objective</strong>
-              <RichText className="muted" text={op.objective} />
-            </div>
-          )}
+            const rawActionId = entry.id || entry.name || ''
+            const safeActionId = String(rawActionId).trim().replace(/\s+/g, '-')
+            const apLabel = entry.AP !== undefined && entry.AP !== null && entry.AP !== '' ? `${entry.AP} AP` : null
 
-          {op.briefing && (
-            <div style={{ marginTop: '0.75rem' }}>
-              <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Briefing</strong>
-              <RichText className="muted" text={op.briefing} />
-            </div>
-          )}
-
-          {op.restrictions && (
-            <div style={{ marginTop: '0.75rem' }}>
-              <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Restrictions</strong>
-              <RichText className="muted" text={op.restrictions} />
-            </div>
-          )}
-
-          {op.reveal && (
-            <div style={{ marginTop: '0.75rem' }}>
-              <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Reveal</strong>
-              <RichText className="muted" text={op.reveal} />
-            </div>
-          )}
-
-          {op.additionalRules && (
-            <div style={{ marginTop: '0.75rem' }}>
-              <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Additional Rules</strong>
-              <RichText className="muted" text={op.additionalRules} />
-            </div>
-          )}
-
-          {renderActionCards(op.actions, actionLookup, `operation-action-${op.id}`)}
-
-          {op.victoryPoints && (
-            <div style={{ marginTop: '0.75rem' }}>
-              <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Victory Points</strong>
-              <RichText className="muted" text={op.victoryPoints} />
-            </div>
-          )}
+            return (
+              <div
+                key={safeActionId || rawActionId}
+                id={`operation-action-${safeActionId || rawActionId}`}
+                className="ability-card"
+              >
+                <div className="ability-card-header">
+                  <h4 className="ability-card-title">{entry.name.toUpperCase()}</h4>
+                  {apLabel && <span className="ability-card-ap">{apLabel}</span>}
+                </div>
+                {(entry.description || (entry.effects && entry.effects.length) || (entry.conditions && entry.conditions.length)) && (
+                  <div className="ability-card-body">
+                    {entry.description && <p style={{ marginTop: 0 }}>{entry.description}</p>}
+                    {entry.effects && entry.effects.length > 0 && (
+                      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                        {entry.effects.map((effect, index) => (
+                          <li
+                            key={`${safeActionId}-effect-${index}`}
+                            style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
+                          >
+                            <span aria-hidden="true" style={{ color: '#2ecc71', fontWeight: 'bold' }}>➤</span>
+                            <span>{effect}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {entry.conditions && entry.conditions.length > 0 && (
+                      <ul style={{ margin: entry.effects && entry.effects.length ? '0.5rem 0 0 0' : 0, padding: 0, listStyle: 'none' }}>
+                        {entry.conditions.map((condition, index) => (
+                          <li
+                            key={`${safeActionId}-condition-${index}`}
+                            style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
+                          >
+                            <span aria-hidden="true" style={{ color: '#e74c3c', fontWeight: 'bold' }}>◆</span>
+                            <span>{condition}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )}
+                {entry.packs && entry.packs.length > 0 && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '0.35rem',
+                      marginTop: '0.75rem',
+                      justifyContent: 'flex-end'
+                    }}
+                  >
+                    {entry.packs.map(pack => (
+                      <span key={`${safeActionId}-pack-${pack}`} className="pill">
+                        {pack}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })}
         </div>
       )
     }
+
+    return (
+      <div key={op.id} id={`operation-${op.id}`} className="card" style={{ margin: '.75rem 0', position: 'relative' }}>
+        {type === 'crit-op' && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '1.1rem',
+              left: '1.1rem',
+              width: '2.4rem',
+              height: '2.4rem',
+              borderRadius: '999px',
+              background: 'var(--accent)',
+              color: '#0f1115',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 700,
+              fontSize: '1.15rem',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.35)'
+            }}
+          >
+            {index + 1}
+          </div>
+        )}
+        <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
+          {(() => {
+            const archetypeLabel = (archetypes && archetypes[0]) ? archetypes[0] : (type === 'crit-op' ? 'Critical Operation' : 'Tactical Operation')
+            const style = getArchetypePillStyle(archetypeLabel)
+            const label = style?.label || archetypeLabel
+            return (
+              <span
+                className="pill"
+                style={{
+                  margin: '0 auto',
+                  ...(style?.backgroundColor ? style : {})
+                }}
+              >
+                {label.toUpperCase()}
+              </span>
+            )
+          })()}
+        </div>
+        <div style={{ textAlign: 'center', marginBottom: '0.75rem' }}>
+          <strong style={{ fontSize: '1.1rem' }}>{op.title.toUpperCase()}</strong>
+        </div>
+
+        {op.briefing && (
+          <div style={{ marginTop: '0.5rem' }}>
+            <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Briefing</strong>
+            <RichText className="muted" text={op.briefing} />
+          </div>
+        )}
+
+        {op.objective && (
+          <div style={{ marginTop: '0.5rem' }}>
+            <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Objective</strong>
+            <RichText className="muted" text={op.objective} />
+          </div>
+        )}
+
+        {op.reveal && (
+          <div className="ability-card" style={{ marginTop: '0.75rem' }}>
+            <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
+              <h4 className="ability-card-title" style={{ margin: 0 }}>Reveal</h4>
+            </div>
+            <RichText className="ability-card-body muted" text={op.reveal} />
+          </div>
+        )}
+
+        {op.additionalRules && (
+          <div className="ability-card" style={{ marginTop: '0.75rem' }}>
+            <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
+              <h4 className="ability-card-title" style={{ margin: 0 }}>Additional Rules</h4>
+            </div>
+            <RichText className="ability-card-body muted" text={op.additionalRules} />
+          </div>
+        )}
+
+        {renderActions(op.actions)}
+
+        {op.victoryPoints && (
+          <div className="ability-card" style={{ marginTop: '0.75rem' }}>
+            <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
+              <h4 className="ability-card-title" style={{ margin: 0 }}>Victory Points</h4>
+            </div>
+            <RichText className="ability-card-body muted" text={op.victoryPoints} />
+          </div>
+        )}
+        {packs.length > 0 && (
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.35rem',
+              justifyContent: 'flex-end',
+              marginTop: '0.75rem'
+            }}
+          >
+            {packs.map(pack => (
+              <span key={`${op.id}-pack-${pack}`} className="pill">{pack}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
 
     if (type === 'tac-op') {
       const grouped = ops.reduce((acc, op) => {
@@ -583,7 +728,7 @@ const sections = useMemo(() => {
 
     return (
       <div className="card-section-list">
-        {ops.map(op => renderOpCard(op))}
+        {ops.map((op, index) => renderOpCard(op, index))}
       </div>
     )
   }

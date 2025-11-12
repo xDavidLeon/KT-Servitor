@@ -9,6 +9,321 @@ import { db } from '../../lib/db'
 import { ensureIndex } from '../../lib/search'
 import Seo from '../../components/Seo'
 
+const TAC_OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/ops_2025.json'
+const TAC_OPS_UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
+const TAC_OPS_MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
+
+const ARCHETYPE_PILL_MAP = {
+  infiltration: { background: '#2b2d33', color: '#f4f6ff' },
+  security: { background: '#1e5dff', color: '#f4f6ff' },
+  'seek & destroy': { background: '#d62d3a', color: '#fef6f6' },
+  recon: { background: '#c85c11', color: '#fff5ec' }
+}
+
+function getArchetypePillStyle(archetype) {
+  if (!archetype) return null
+  const normalised = String(archetype)
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/\band\b/gi, '&')
+  const key = normalised.toLowerCase()
+  const style = ARCHETYPE_PILL_MAP[key]
+  if (!style) return { label: normalised }
+  return {
+    label: normalised,
+    backgroundColor: style.background,
+    borderColor: style.background,
+    color: style.color
+  }
+}
+
+let cachedTacOpsByArchetype = null
+let cachedTacOpsActionLookup = null
+let tacOpsLoadPromise = null
+
+function normaliseTacOpsText(value) {
+  if (value === null || value === undefined) return ''
+  if (typeof value === 'string') return value
+  if (Array.isArray(value)) {
+    return value.map(item => normaliseTacOpsText(item)).filter(Boolean).join('\n\n')
+  }
+  if (typeof value === 'object') {
+    return Object.entries(value)
+      .map(([key, val]) => {
+        const text = normaliseTacOpsText(val)
+        if (!text) return ''
+        return key ? `${key.toUpperCase()}\n${text}` : text
+      })
+      .filter(Boolean)
+      .join('\n\n')
+  }
+  return String(value)
+}
+
+function normaliseTacOpsAction(action) {
+  if (!action) return null
+  if (typeof action === 'string') {
+    return {
+      id: action,
+      name: action,
+      AP: null,
+      description: '',
+      effects: [],
+      conditions: [],
+      packs: [],
+      type: '',
+      seq: null
+    }
+  }
+
+  const id = action.id || action.name || ''
+  if (!id) return null
+
+  const name = action.name || id
+  const apValue = action.AP ?? action.ap ?? null
+  const description = normaliseTacOpsText(action.description)
+  const effects = Array.isArray(action.effects)
+    ? action.effects.filter(Boolean)
+    : action.effects
+      ? [action.effects]
+      : []
+  const conditions = Array.isArray(action.conditions)
+    ? action.conditions.filter(Boolean)
+    : action.conditions
+      ? [action.conditions]
+      : []
+  const packs = Array.isArray(action.packs)
+    ? action.packs.filter(Boolean)
+    : action.packs
+      ? [action.packs]
+      : []
+  const type = (action.type || '').toLowerCase()
+  const seq = typeof action.seq === 'number' ? action.seq : null
+
+  return {
+    id,
+    name,
+    AP: apValue,
+    description,
+    effects,
+    conditions,
+    packs,
+    type,
+    seq
+  }
+}
+
+function normaliseTacOp(raw, actionLookup) {
+  if (!raw || !raw.id) return null
+
+  const archetypes = Array.isArray(raw.archetype)
+    ? raw.archetype.filter(Boolean)
+    : raw.archetype
+      ? [raw.archetype]
+      : []
+
+  const actionRefs = Array.isArray(raw.actions) ? raw.actions.filter(Boolean) : []
+  const actionIds = actionRefs.map(actionRef => {
+    if (typeof actionRef === 'string') {
+      return actionRef
+    }
+    const normalised = normaliseTacOpsAction(actionRef)
+    if (normalised?.id && !actionLookup.has(normalised.id)) {
+      actionLookup.set(normalised.id, normalised)
+    }
+    return normalised?.id || null
+  }).filter(Boolean)
+
+  return {
+    id: raw.id,
+    title: raw.title || 'Tac Op',
+    packs: Array.isArray(raw.packs)
+      ? raw.packs.filter(Boolean)
+      : raw.packs
+        ? [raw.packs]
+        : [],
+    archetypes,
+    reveal: normaliseTacOpsText(raw.reveal),
+    additionalRules: normaliseTacOpsText(raw.additionalRules || raw.additionalRule),
+    victoryPoints: normaliseTacOpsText(raw.victoryPoints),
+    objective: normaliseTacOpsText(raw.objective),
+    briefing: normaliseTacOpsText(raw.briefing),
+    restrictions: normaliseTacOpsText(raw.restrictions),
+    actions: actionIds,
+    seq: typeof raw.seq === 'number' ? raw.seq : null
+  }
+}
+
+async function loadTacOpsByArchetype() {
+  if (cachedTacOpsByArchetype && cachedTacOpsActionLookup) {
+    return {
+      byArchetype: cachedTacOpsByArchetype,
+      actionLookup: cachedTacOpsActionLookup
+    }
+  }
+
+  if (!tacOpsLoadPromise) {
+    tacOpsLoadPromise = (async () => {
+      const res = await fetch(TAC_OPS_DATA_URL, { cache: 'no-store' })
+      if (!res.ok) {
+        throw new Error(`Failed to load tac ops dataset (${res.status})`)
+      }
+      const json = await res.json()
+      const actionsList = Array.isArray(json?.actions) ? json.actions : []
+
+      const actionLookup = new Map()
+      const addAction = (actionDef) => {
+        const normalised = normaliseTacOpsAction(actionDef)
+        if (normalised?.id && !actionLookup.has(normalised.id)) {
+          actionLookup.set(normalised.id, normalised)
+        }
+      }
+
+      actionsList.forEach(addAction)
+
+      await Promise.allSettled([
+        fetch(TAC_OPS_UNIVERSAL_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
+          if (!res.ok) return
+          const json = await res.json()
+          const universalActions = Array.isArray(json?.actions) ? json.actions : []
+          universalActions.forEach(addAction)
+        }),
+        fetch(TAC_OPS_MISSION_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
+          if (!res.ok) return
+          const json = await res.json()
+          const missionActions = Array.isArray(json?.actions) ? json.actions : []
+          missionActions.forEach(addAction)
+        })
+      ])
+
+      const opsList = Array.isArray(json?.ops)
+        ? json.ops
+        : Array.isArray(json?.operations)
+          ? json.operations
+          : []
+
+      const byArchetype = new Map()
+
+      for (const rawOp of opsList) {
+        const normalised = normaliseTacOp(rawOp, actionLookup)
+        if (!normalised) continue
+        const archetypes = normalised.archetypes.length ? normalised.archetypes : ['Unassigned']
+        for (const arch of archetypes) {
+          const key = arch || 'Unassigned'
+          if (!byArchetype.has(key)) {
+            byArchetype.set(key, [])
+          }
+          byArchetype.get(key).push(normalised)
+        }
+      }
+
+      for (const [key, list] of byArchetype.entries()) {
+        list.sort((a, b) => {
+          const seqA = typeof a.seq === 'number' ? a.seq : Number.POSITIVE_INFINITY
+          const seqB = typeof b.seq === 'number' ? b.seq : Number.POSITIVE_INFINITY
+          if (seqA !== seqB) return seqA - seqB
+          return a.title.localeCompare(b.title)
+        })
+      }
+
+      cachedTacOpsByArchetype = byArchetype
+      cachedTacOpsActionLookup = actionLookup
+      return { byArchetype, actionLookup }
+    })().catch(err => {
+      cachedTacOpsByArchetype = null
+      cachedTacOpsActionLookup = null
+      throw err
+    }).finally(() => {
+      tacOpsLoadPromise = null
+    })
+  }
+
+  await tacOpsLoadPromise
+  return {
+    byArchetype: cachedTacOpsByArchetype,
+    actionLookup: cachedTacOpsActionLookup
+  }
+}
+
+function renderTacOpActionCards(actions = [], actionLookup = new Map(), anchorPrefix = 'action') {
+  if (!Array.isArray(actions) || actions.length === 0) return null
+
+  return (
+    <div className="card-section-list" style={{ marginTop: '0.75rem' }}>
+      {actions.map(action => {
+        const entry = typeof action === 'string'
+          ? actionLookup.get(action) || normaliseTacOpsAction(action)
+          : normaliseTacOpsAction(action)
+        if (!entry) return null
+
+        const rawActionId = entry.id || entry.name || ''
+        const safeActionId = String(rawActionId).trim().replace(/\s+/g, '-')
+        const apLabel = entry.AP !== undefined && entry.AP !== null && entry.AP !== '' ? `${entry.AP} AP` : null
+
+        return (
+          <div
+            key={safeActionId || rawActionId}
+            id={`${anchorPrefix}-${safeActionId || rawActionId}`}
+            className="ability-card"
+          >
+            <div className="ability-card-header">
+              <h4 className="ability-card-title">{entry.name.toUpperCase()}</h4>
+              {apLabel && <span className="ability-card-ap">{apLabel}</span>}
+            </div>
+            {(entry.description || (entry.effects && entry.effects.length) || (entry.conditions && entry.conditions.length)) && (
+              <div className="ability-card-body">
+                {entry.description && <p style={{ marginTop: 0 }}>{entry.description}</p>}
+                {entry.effects && entry.effects.length > 0 && (
+                  <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                    {entry.effects.map((effect, index) => (
+                      <li
+                        key={`${safeActionId}-effect-${index}`}
+                        style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
+                      >
+                        <span aria-hidden="true" style={{ color: '#2ecc71', fontWeight: 'bold' }}>➤</span>
+                        <span>{effect}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {entry.conditions && entry.conditions.length > 0 && (
+                  <ul style={{ margin: entry.effects && entry.effects.length ? '0.5rem 0 0 0' : 0, padding: 0, listStyle: 'none' }}>
+                    {entry.conditions.map((condition, index) => (
+                      <li
+                        key={`${safeActionId}-condition-${index}`}
+                        style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
+                      >
+                        <span aria-hidden="true" style={{ color: '#e74c3c', fontWeight: 'bold' }}>◆</span>
+                        <span>{condition}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+            {entry.packs && entry.packs.length > 0 && (
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '0.35rem',
+                  marginTop: '0.75rem',
+                  justifyContent: 'flex-end'
+                }}
+              >
+                {entry.packs.map(pack => (
+                  <span key={`${safeActionId}-pack-${pack}`} className="pill">
+                    {pack}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 function parseArchetypes(value) {
   if (!value) return []
   if (Array.isArray(value)) return value.filter(Boolean)
@@ -372,6 +687,11 @@ export default function KillteamPage() {
   const selectorCardRef = useRef(null)
   const hasSyncedInitialHashRef = useRef(false)
   const [isSelectorVisible, setIsSelectorVisible] = useState(true)
+  const [tacOpsByArchetype, setTacOpsByArchetype] = useState(cachedTacOpsByArchetype ? new Map(cachedTacOpsByArchetype) : null)
+  const [tacOpsActionLookup, setTacOpsActionLookup] = useState(cachedTacOpsActionLookup ? new Map(cachedTacOpsActionLookup) : new Map())
+  const [tacOpsLoading, setTacOpsLoading] = useState(!cachedTacOpsByArchetype)
+  const [tacOpsLoaded, setTacOpsLoaded] = useState(Boolean(cachedTacOpsByArchetype))
+  const [tacOpsError, setTacOpsError] = useState(null)
 
   useEffect(() => {
     if (!id) return
@@ -418,6 +738,37 @@ export default function KillteamPage() {
       cancelled = true
     }
   }, [])
+
+  useEffect(() => {
+    if (tacOpsLoaded) return
+
+    let cancelled = false
+    setTacOpsLoading(true)
+
+    loadTacOpsByArchetype()
+      .then(({ byArchetype, actionLookup }) => {
+        if (cancelled) return
+        setTacOpsByArchetype(new Map(byArchetype))
+        setTacOpsActionLookup(new Map(actionLookup))
+        setTacOpsLoaded(true)
+        setTacOpsError(null)
+      })
+      .catch(err => {
+        if (cancelled) return
+        console.error('Failed to load tac ops dataset', err)
+        setTacOpsError(err)
+        setTacOpsLoaded(true)
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setTacOpsLoading(false)
+        }
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [tacOpsLoaded])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -661,6 +1012,29 @@ export default function KillteamPage() {
 
   const archetypes = useMemo(() => parseArchetypes(killteam?.archetypes), [killteam])
 
+  const killteamTacOps = useMemo(() => {
+    if (!Array.isArray(archetypes) || archetypes.length === 0) return []
+    if (!tacOpsByArchetype) return []
+
+    const seen = new Set()
+    const list = []
+
+    archetypes.forEach(arch => {
+      const key = arch || 'Unassigned'
+      const ops = tacOpsByArchetype.get(key)
+      if (ops) {
+        ops.forEach(op => {
+          if (!seen.has(op.id)) {
+            list.push(op)
+            seen.add(op.id)
+          }
+        })
+      }
+    })
+
+    return list
+  }, [archetypes, tacOpsByArchetype])
+
   const sections = useMemo(() => {
     if (!killteam) return []
 
@@ -776,6 +1150,17 @@ export default function KillteamPage() {
       })
     }
 
+    if (killteamTacOps.length > 0) {
+      result.push({
+        id: 'tac-ops',
+        label: 'Tac Ops',
+        items: killteamTacOps.map(op => ({
+          id: `tac-op-${op.id}`,
+          label: op.title
+        }))
+      })
+    }
+
     return result
   }, [
     killteam,
@@ -786,7 +1171,8 @@ export default function KillteamPage() {
     firefightPloys,
     factionEquipment,
     universalEquipment,
-    hasEquipment
+    hasEquipment,
+    killteamTacOps
   ])
 
   const findSectionForAnchor = useCallback((anchor) => {
@@ -805,6 +1191,118 @@ export default function KillteamPage() {
       setActiveSectionId(sections[0].id)
     }
   }, [sections, activeSectionId])
+
+  const renderTacOpsSection = () => {
+    if (!Array.isArray(archetypes) || archetypes.length === 0) {
+      return <div className="muted">This kill team has no assigned archetypes.</div>
+    }
+    if (!tacOpsLoaded) {
+      if (tacOpsLoading) {
+        return <div className="muted">Loading Tac Ops…</div>
+      }
+      return null
+    }
+    if (tacOpsError) {
+      return (
+        <div className="muted">
+          Failed to load Tac Ops.
+          {' '}
+          <span style={{ fontSize: '0.85rem' }}>{tacOpsError.message || String(tacOpsError)}</span>
+        </div>
+      )
+    }
+    if (!killteamTacOps.length) {
+      return <div className="muted">No Tac Ops available for this kill team.</div>
+    }
+
+    return (
+      <div className="card-section-list">
+        {killteamTacOps.map(op => (
+          <div key={op.id} id={`tac-op-${op.id}`} className="ability-card" style={{ position: 'relative' }}>
+            <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
+              {(() => {
+                const archetypeLabel = (op.archetypes && op.archetypes[0]) ? op.archetypes[0] : 'Tac Op'
+                const style = getArchetypePillStyle(archetypeLabel)
+                const label = style?.label || archetypeLabel
+                return (
+                  <span
+                    className="pill"
+                    style={{
+                      margin: '0 auto',
+                      ...(style?.backgroundColor ? style : {})
+                    }}
+                  >
+                    {label.toUpperCase()}
+                  </span>
+                )
+              })()}
+            </div>
+            <div style={{ textAlign: 'center', marginBottom: '0.75rem' }}>
+              <h4 className="ability-card-title" style={{ margin: 0 }}>{op.title.toUpperCase()}</h4>
+            </div>
+
+            {op.briefing && (
+              <div style={{ marginTop: '0.5rem' }}>
+                <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Briefing</strong>
+                <RichText className="muted" text={op.briefing} />
+              </div>
+            )}
+
+            {op.objective && (
+              <div style={{ marginTop: '0.5rem' }}>
+                <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Objective</strong>
+                <RichText className="muted" text={op.objective} />
+              </div>
+            )}
+
+            {op.reveal && (
+              <div className="ability-card" style={{ marginTop: '0.75rem' }}>
+                <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
+                  <h4 className="ability-card-title" style={{ margin: 0 }}>Reveal</h4>
+                </div>
+                <RichText className="ability-card-body muted" text={op.reveal} />
+              </div>
+            )}
+
+            {op.additionalRules && (
+              <div className="ability-card" style={{ marginTop: '0.75rem' }}>
+                <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
+                  <h4 className="ability-card-title" style={{ margin: 0 }}>Additional Rules</h4>
+                </div>
+                <RichText className="ability-card-body muted" text={op.additionalRules} />
+              </div>
+            )}
+
+            {renderTacOpActionCards(op.actions, tacOpsActionLookup, `operation-action-${op.id}`)}
+
+            {op.victoryPoints && (
+              <div className="ability-card" style={{ marginTop: '0.75rem' }}>
+                <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
+                  <h4 className="ability-card-title" style={{ margin: 0 }}>Victory Points</h4>
+                </div>
+                <RichText className="ability-card-body muted" text={op.victoryPoints} />
+              </div>
+            )}
+            {op.packs && op.packs.length > 0 && (
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '0.35rem',
+                  justifyContent: 'flex-end',
+                  marginTop: '0.75rem'
+                }}
+              >
+                {op.packs.map(pack => (
+                  <span key={`${op.id}-pack-${pack}`} className="pill">{pack}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    )
+  }
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -993,9 +1491,19 @@ export default function KillteamPage() {
               <h2 style={{ margin: 0 }}>{killteamTitle}</h2>
               {archetypes.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'flex-end' }}>
-                  {archetypes.map(archetype => (
-                    <span key={archetype} className="pill">{archetype}</span>
-                  ))}
+                  {archetypes.map(archetype => {
+                    const style = getArchetypePillStyle(archetype)
+                    const label = style?.label || archetype
+                    return (
+                      <span
+                        key={archetype}
+                        className="pill"
+                        style={style?.backgroundColor ? style : undefined}
+                      >
+                        {label}
+                      </span>
+                    )
+                  })}
                 </div>
               )}
             </div>
@@ -1191,6 +1699,13 @@ export default function KillteamPage() {
             ) : (
               <div className="muted">No equipment listed.</div>
             )}
+          </section>
+        )
+      case 'tac-ops':
+        return (
+          <section id="tac-ops" className="card killteam-tab-panel">
+            <h3 style={{ marginTop: 0 }}>Tac Ops</h3>
+            {renderTacOpsSection()}
           </section>
         )
       default:
