@@ -999,6 +999,36 @@ export default function KillteamPage() {
                 </div>
               )}
             </div>
+            {(killteam?.file && killteam?.version) && (
+              <div
+                style={{
+                  marginTop: '1rem',
+                  marginBottom: '1.25rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end'
+                }}
+              >
+                <a
+                  href={killteam.file}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="pill-button"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    justifyContent: 'center',
+                    padding: '0.4rem 0.8rem',
+                    fontSize: '0.95rem'
+                  }}
+                  aria-label="Open designer notes PDF"
+                >
+                  <span aria-hidden="true" style={{ fontSize: '1.1rem' }}>⬇️</span>
+                  <span>{killteam.version}</span>
+                </a>
+              </div>
+            )}
             {killteam.description && <RichText className="muted" text={killteam.description} />}
             {killteam.composition && (
               <div id="killteam-composition" style={{ marginTop: '1.5rem' }}>
