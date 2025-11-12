@@ -38,11 +38,13 @@ export default function KillteamSectionNavigator({
   sections = [],
   activeSectionId,
   onSectionChange,
+  onItemSelect,
   showTabs = true,
   showDropdown = true,
   dropdownVariant = 'default',
   className = '',
-  style = {}
+  style = {},
+  rightButton = null
 }) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -82,7 +84,7 @@ export default function KillteamSectionNavigator({
   const hasDropdownItems = dropdownItems.length > 0
 
   const dropdownLabel = hasDropdownItems
-    ? `Jump within ${activeSection?.label}...`
+    ? (activeSection?.dropdownLabel || `Jump within ${activeSection?.label}...`)
     : 'No subsections available'
 
   const toggleDropdown = () => {
@@ -115,6 +117,7 @@ export default function KillteamSectionNavigator({
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-label={dropdownLabel}
+          style={rightButton ? { marginTop: 0 } : undefined}
         >
           <span aria-hidden="true">⋮</span>
         </button>
@@ -129,6 +132,7 @@ export default function KillteamSectionNavigator({
         disabled={!hasDropdownItems}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
+        style={rightButton ? { marginTop: 0 } : undefined}
       >
         <span>
           {dropdownLabel}
@@ -145,6 +149,15 @@ export default function KillteamSectionNavigator({
 
   const handleItemSelect = (targetId) => {
     if (!targetId) return
+    // If onItemSelect callback is provided, call it first
+    if (onItemSelect) {
+      const handled = onItemSelect(targetId)
+      if (handled) {
+        setIsOpen(false)
+        return
+      }
+    }
+    // Otherwise, try to scroll to the element
     const didScroll = scrollToKillteamSection(targetId)
     if (!didScroll) return
     setIsOpen(false)
@@ -172,7 +185,18 @@ export default function KillteamSectionNavigator({
         </div>
       )}
 
-      {showDropdown && renderDropdownTrigger()}
+      {showDropdown && (
+        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'stretch', marginTop: rightButton ? '0.75rem' : undefined }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            {renderDropdownTrigger()}
+          </div>
+          {rightButton && (
+            <div style={{ flexShrink: 0 }}>
+              {rightButton}
+            </div>
+          )}
+        </div>
+      )}
 
       {showDropdown && isOpen && hasDropdownItems && (
         <div className="section-dropdown">

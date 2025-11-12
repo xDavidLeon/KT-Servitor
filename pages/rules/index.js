@@ -644,7 +644,6 @@ export default function Rules() {
       case 'rules-universal-actions':
         return (
           <div className="card">
-            <h2 style={{ marginTop: 0 }}>Universal Actions</h2>
             <KillteamSectionNavigator
               sections={[
                 {
@@ -672,7 +671,6 @@ export default function Rules() {
       case 'rules-mission-actions':
         return (
           <div className="card">
-            <h2 style={{ marginTop: 0 }}>Mission Actions</h2>
             <KillteamSectionNavigator
               sections={[
                 {
@@ -700,7 +698,6 @@ export default function Rules() {
       case 'rules-weapon-rules':
         return (
           <div className="card">
-            <h2 style={{ marginTop: 0 }}>Weapon Rules</h2>
             <KillteamSectionNavigator
               sections={[
                 {
@@ -728,7 +725,6 @@ export default function Rules() {
       default:
         return (
           <div className="card">
-            <h2 style={{ marginTop: 0 }}>Universal Equipment</h2>
             <KillteamSectionNavigator
               sections={[
                 {

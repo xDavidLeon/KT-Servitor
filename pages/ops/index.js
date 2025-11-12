@@ -8,6 +8,71 @@ const OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/
 const OPS_UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
 const OPS_MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
 
+// Map group definitions
+const MAP_GROUPS = [
+  { id: 'generic', label: 'Non-Specific', folder: 'generic' },
+  { id: 'volkus', label: 'Volkus', folder: 'volkus' },
+  { id: 'gallowdark', label: 'Gallowdark', folder: 'gallowdark' },
+  { id: 'bheta-decima', label: 'Bheta-Decima', folder: 'bheta-decima' },
+  { id: 'tomb-world', label: 'Tomb World', folder: 'tomb-world' }
+]
+
+// Static list of images for each group
+const MAP_IMAGES = {
+  'generic': [
+    'map-op-1-min.png',
+    'map-op-2-min.png',
+    'map-op-3-min.png',
+    'map-op-4-min.png',
+    'map-op-5-min.png',
+    'map-op-6-min.png'
+  ],
+  'volkus': [
+    'map-vk-1-min.png',
+    'map-vk-2-min.png',
+    'map-vk-3-min.png',
+    'map-vk-4-min.png',
+    'map-vk-5-min.png',
+    'map-vk-6-min.png',
+    'map-vk-7-min.png',
+    'map-vk-8-min.png',
+    'map-vk-9-min.png',
+    'map-vk-10-min.png',
+    'map-vk-11-min.png',
+    'map-vk-12-min.png'
+  ],
+  'gallowdark': [
+    'map-itd-1-min.png',
+    'map-itd-2-min.png',
+    'map-itd-3-min.png',
+    'map-itd-4-min.png',
+    'map-itd-5-min.png',
+    'map-itd-6-min.png'
+  ],
+  'bheta-decima': [
+    'map-bd-1-min.png',
+    'map-bd-2-min.png',
+    'map-bd-3-min.png',
+    'map-bd-4-min.png',
+    'map-bd-5-min.png',
+    'map-bd-6-min.png',
+    'map-bd-7-min.png',
+    'map-bd-8-min.png',
+    'map-bd-9-min.png',
+    'map-bd-10-min.png',
+    'map-bd-11-min.png',
+    'map-bd-12-min.png'
+  ],
+  'tomb-world': [
+    'map-tw-1-min.png',
+    'map-tw-2-min.png',
+    'map-tw-3-min.png',
+    'map-tw-4-min.png',
+    'map-tw-5-min.png',
+    'map-tw-6-min.png'
+  ]
+}
+
 const ARCHETYPE_PILL_MAP = {
   infiltration: { background: '#2b2d33', color: '#f4f6ff' },
   security: { background: '#1e5dff', color: '#f4f6ff' },
@@ -204,6 +269,7 @@ export default function OpsPage() {
 
   const [activeSectionId, setActiveSectionId] = useState('ops-critical')
   const [pendingAnchor, setPendingAnchor] = useState(null)
+  const [selectedMapCategory, setSelectedMapCategory] = useState(MAP_GROUPS[0]?.id || 'generic')
 
   useEffect(() => {
     let cancelled = false
@@ -372,6 +438,13 @@ const sections = useMemo(() => {
       ]
     })
 
+  const mapCategoryItems = MAP_GROUPS.map(group => ({
+    id: `map-category-${group.id}`,
+    label: group.label
+  }))
+  
+  const selectedMapGroup = MAP_GROUPS.find(group => group.id === selectedMapCategory) || MAP_GROUPS[0]
+
   return [
     {
       id: 'ops-critical',
@@ -385,9 +458,15 @@ const sections = useMemo(() => {
       id: 'ops-tactical',
       label: 'Tac Ops',
       items: tacSectionItems
+    },
+    {
+      id: 'ops-maps',
+      label: 'Maps',
+      dropdownLabel: selectedMapGroup.label,
+      items: mapCategoryItems
     }
   ]
-}, [critOps, tacOps])
+}, [critOps, tacOps, selectedMapCategory])
 
   useEffect(() => {
     if (!sections.length) return
@@ -398,15 +477,21 @@ const sections = useMemo(() => {
 
   const findSectionForAnchor = useCallback((anchor) => {
     if (!anchor) return null
+    // Handle map category anchors
+    if (anchor.startsWith('map-category-')) {
+      return 'ops-maps'
+    }
     const section = sections.find(section => {
       if (section.id === anchor) return true
       return Array.isArray(section.items) && section.items.some(item => item?.id === anchor)
     })
     return section ? section.id : null
   }, [sections])
+  
 
   const scrollToAnchor = useCallback((anchorId) => {
     if (typeof document === 'undefined' || !anchorId) return false
+    
     const element = document.getElementById(anchorId)
     if (!element) return false
 
@@ -425,12 +510,58 @@ const sections = useMemo(() => {
     return true
   }, [])
 
+  const navigateToRandom = useCallback(() => {
+    if (!sections.length) return
+    
+    const activeSection = sections.find(s => s.id === activeSectionId)
+    if (!activeSection || !activeSection.items || activeSection.items.length === 0) return
+
+    // Filter out heading items (type === 'heading') and get only navigable items
+    const navigableItems = activeSection.items.filter(item => item.id && item.type !== 'heading')
+    if (navigableItems.length === 0) return
+
+    // Select a random item
+    const randomIndex = Math.floor(Math.random() * navigableItems.length)
+    const randomItem = navigableItems[randomIndex]
+    
+    if (randomItem.id) {
+      // Handle special cases
+      if (randomItem.id.startsWith('map-category-')) {
+        // For map categories, change the category instead of scrolling
+        const categoryId = randomItem.id.replace('map-category-', '')
+        if (MAP_GROUPS.some(group => group.id === categoryId)) {
+          setSelectedMapCategory(categoryId)
+          if (typeof window !== 'undefined') {
+            window.location.hash = randomItem.id
+          }
+        }
+      } else {
+        // Scroll to the element
+        scrollToAnchor(randomItem.id)
+        if (typeof window !== 'undefined') {
+          window.location.hash = randomItem.id
+        }
+      }
+    }
+  }, [sections, activeSectionId, scrollToAnchor])
+
   useEffect(() => {
     if (typeof window === 'undefined') return undefined
 
     const handleHashChange = () => {
-      const hash = window.location.hash?.replace('#', '')
+      const hash = window.location.hash?.replace('#', '') || ''
       if (!hash) return
+      
+      // Check if it's a map category selection
+      if (hash.startsWith('map-category-')) {
+        const categoryId = hash.replace('map-category-', '')
+        if (MAP_GROUPS.some(group => group.id === categoryId)) {
+          setActiveSectionId('ops-maps')
+          setSelectedMapCategory(categoryId)
+          return
+        }
+      }
+      
       const sectionId = findSectionForAnchor(hash)
       if (sectionId) {
         setActiveSectionId(prev => (prev === sectionId ? prev : sectionId))
@@ -450,6 +581,13 @@ const sections = useMemo(() => {
 
   useEffect(() => {
     if (!pendingAnchor?.id) return undefined
+    
+    // Don't scroll for map category selections
+    if (pendingAnchor.id.startsWith('map-category-')) {
+      setPendingAnchor(null)
+      return undefined
+    }
+    
     let cancelled = false
     let attempts = 0
     let timerId = null
@@ -733,6 +871,73 @@ const sections = useMemo(() => {
     )
   }
 
+  // Create map navigation items for the dropdown
+  const mapNavItems = useMemo(() => {
+    if (activeSectionId !== 'ops-maps') return []
+    const selectedGroup = MAP_GROUPS.find(group => group.id === selectedMapCategory) || MAP_GROUPS[0]
+    const images = MAP_IMAGES[selectedMapCategory] || []
+    const groupLabel = selectedGroup.label
+    
+    return images.map((imageName, index) => {
+      const mapIndex = index + 1
+      return {
+        id: `map-${selectedMapCategory}-${mapIndex}`,
+        label: `${groupLabel} - Map ${mapIndex}`
+      }
+    })
+  }, [activeSectionId, selectedMapCategory])
+
+  const renderMaps = () => {
+    const selectedGroup = MAP_GROUPS.find(group => group.id === selectedMapCategory) || MAP_GROUPS[0]
+    const images = MAP_IMAGES[selectedMapCategory] || []
+    const groupLabel = selectedGroup.label
+
+    if (images.length === 0) {
+      return <div className="muted">No maps available for this category.</div>
+    }
+
+    return (
+      <div style={{ display: 'grid', gap: '2rem', marginTop: '1rem' }}>
+        {images.map((imageName, index) => {
+          const imagePath = `/data/v1/maps/${selectedGroup.folder}/${imageName}`
+          const mapIndex = index + 1
+          const mapId = `map-${selectedMapCategory}-${mapIndex}`
+          
+          return (
+            <div key={imageName} id={mapId} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', scrollMarginTop: '80px' }}>
+              <h3 style={{ 
+                margin: 0, 
+                fontSize: '1.1rem', 
+                fontWeight: 600,
+                color: 'var(--text)',
+                textAlign: 'center'
+              }}>
+                {groupLabel} - Map {mapIndex}
+              </h3>
+              <div style={{
+                width: '100%',
+                borderRadius: '8px',
+                overflow: 'hidden',
+                border: '1px solid #262a36',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.25)'
+              }}>
+                <img
+                  src={imagePath}
+                  alt={`${groupLabel} - Map ${mapIndex}`}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    display: 'block'
+                  }}
+                />
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
   return (
     <>
       <Seo
@@ -746,10 +951,93 @@ const sections = useMemo(() => {
             sections={sections}
             activeSectionId={activeSectionId}
             onSectionChange={setActiveSectionId}
+            onItemSelect={(targetId) => {
+              // Handle map category selection
+              if (targetId && targetId.startsWith('map-category-')) {
+                const categoryId = targetId.replace('map-category-', '')
+                if (MAP_GROUPS.some(group => group.id === categoryId)) {
+                  setSelectedMapCategory(categoryId)
+                  if (typeof window !== 'undefined') {
+                    window.location.hash = targetId
+                  }
+                  return true // Indicate that we handled it
+                }
+              }
+              return false // Let the default scrolling handle it
+            }}
             showTabs
             showDropdown
             dropdownVariant="default"
+            rightButton={(() => {
+              const activeSection = sections.find(s => s.id === activeSectionId)
+              const hasNavigableItems = activeSection?.items?.some(item => item.id && item.type !== 'heading')
+              if (!hasNavigableItems && activeSectionId === 'ops-maps' && mapNavItems.length === 0) {
+                return null
+              }
+              return (
+                <button
+                  type="button"
+                  onClick={navigateToRandom}
+                  className="section-dropdown-trigger icon"
+                  style={{
+                    marginTop: 0
+                  }}
+                  aria-label="Go to random section"
+                  title="Go to random section"
+                >
+                  <span aria-hidden="true">🎲</span>
+                </button>
+              )
+            })()}
           />
+          {activeSectionId === 'ops-maps' && mapNavItems.length > 0 && (
+            <div style={{ marginTop: '1rem' }}>
+              <KillteamSectionNavigator
+                sections={[{
+                  id: 'maps-navigation',
+                  label: 'Maps',
+                  dropdownLabel: `Navigate to map...`,
+                  items: mapNavItems
+                }]}
+                activeSectionId="maps-navigation"
+                onSectionChange={() => {}}
+                onItemSelect={(targetId) => {
+                  if (targetId) {
+                    scrollToAnchor(targetId)
+                    return true
+                  }
+                  return false
+                }}
+                showTabs={false}
+                showDropdown
+                dropdownVariant="default"
+                rightButton={(
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (mapNavItems.length === 0) return
+                      const randomIndex = Math.floor(Math.random() * mapNavItems.length)
+                      const randomItem = mapNavItems[randomIndex]
+                      if (randomItem.id) {
+                        scrollToAnchor(randomItem.id)
+                        if (typeof window !== 'undefined') {
+                          window.location.hash = randomItem.id
+                        }
+                      }
+                    }}
+                    className="section-dropdown-trigger icon"
+                    style={{
+                      marginTop: 0
+                    }}
+                    aria-label="Go to random map"
+                    title="Go to random map"
+                  >
+                    <span aria-hidden="true">🎲</span>
+                  </button>
+                )}
+              />
+            </div>
+          )}
         </div>
 
         <section
@@ -757,7 +1045,6 @@ const sections = useMemo(() => {
           style={{ display: activeSectionId === 'ops-critical' ? 'block' : 'none' }}
         >
           <div className="card">
-            <h2 style={{ marginTop: 0 }}>Critical Operations</h2>
             {renderOperationsList(critOps, 'crit-op')}
           </div>
         </section>
@@ -767,8 +1054,16 @@ const sections = useMemo(() => {
           style={{ display: activeSectionId === 'ops-tactical' ? 'block' : 'none' }}
         >
           <div className="card">
-            <h2 style={{ marginTop: 0 }}>Tactical Operations</h2>
             {renderOperationsList(tacOps, 'tac-op')}
+          </div>
+        </section>
+
+        <section
+          id="ops-maps"
+          style={{ display: activeSectionId === 'ops-maps' ? 'block' : 'none' }}
+        >
+          <div className="card">
+            {renderMaps()}
           </div>
         </section>
       </div>
