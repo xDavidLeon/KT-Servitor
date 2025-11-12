@@ -5,8 +5,12 @@ import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
 import RichText from '../../components/RichText'
 
 const OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/ops_2025.json'
-const UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
-const MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
+const OPS_UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
+const OPS_MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
+
+let cachedCritOps = null
+let cachedTacOps = null
+let cachedOpsActionMap = null
 
 function normaliseToText(value) {
   if (value === null || value === undefined) return ''
@@ -40,7 +44,9 @@ function normaliseActionDefinition(action) {
       description: '',
       effects: [],
       conditions: [],
-      packs: []
+      packs: [],
+      type: '',
+      seq: null
     }
   }
 
@@ -64,6 +70,8 @@ function normaliseActionDefinition(action) {
     : action.packs
       ? [action.packs]
       : []
+  const type = (action.type || '').toLowerCase()
+  const seq = typeof action.seq === 'number' ? action.seq : null
 
   return {
     id,
@@ -72,17 +80,21 @@ function normaliseActionDefinition(action) {
     description,
     effects,
     conditions,
-    packs
+    packs,
+    type,
+    seq
   }
 }
 
-function renderActionCards(actions = [], anchorPrefix = 'action') {
+function renderActionCards(actions = [], actionLookup = new Map(), anchorPrefix = 'action') {
   if (!Array.isArray(actions) || actions.length === 0) return null
 
   return (
     <div className="card-section-list" style={{ marginTop: '0.75rem' }}>
       {actions.map(action => {
-        const normalised = normaliseActionDefinition(action)
+        const normalised = typeof action === 'string'
+          ? (actionLookup.get(action) || normaliseActionDefinition(action))
+          : normaliseActionDefinition(action)
         if (!normalised) return null
 
         const rawActionId = normalised.id || normalised.name || ''
@@ -159,9 +171,11 @@ function renderActionCards(actions = [], anchorPrefix = 'action') {
 }
 
 export default function OpsPage() {
-  const [critOps, setCritOps] = useState([])
-  const [tacOps, setTacOps] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [critOps, setCritOps] = useState(cachedCritOps || [])
+  const [tacOps, setTacOps] = useState(cachedTacOps || [])
+  const [actionLookup, setActionLookup] = useState(() => cachedOpsActionMap ? new Map(cachedOpsActionMap) : new Map())
+  const [loading, setLoading] = useState(!(cachedCritOps && cachedTacOps))
+  const [loaded, setLoaded] = useState(Boolean(cachedCritOps && cachedTacOps))
   const [error, setError] = useState(null)
 
   const [activeSectionId, setActiveSectionId] = useState('ops-critical')
@@ -171,7 +185,9 @@ export default function OpsPage() {
     let cancelled = false
 
     const fetchOps = async () => {
-      setLoading(true)
+      if (!loaded) {
+        setLoading(true)
+      }
       try {
         const res = await fetch(OPS_DATA_URL, { cache: 'no-store' })
         if (!res.ok) {
@@ -185,7 +201,7 @@ export default function OpsPage() {
         const actionMap = new Map()
         const addAction = (actionDef) => {
           const normalised = normaliseActionDefinition(actionDef)
-          if (normalised?.id) {
+          if (normalised?.id && !actionMap.has(normalised.id)) {
             actionMap.set(normalised.id, normalised)
           }
         }
@@ -195,7 +211,7 @@ export default function OpsPage() {
         }
 
         await Promise.allSettled([
-          fetch(UNIVERSAL_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
+          fetch(OPS_UNIVERSAL_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
             if (!res.ok) return
             const json = await res.json()
             const universalActions = Array.isArray(json?.actions) ? json.actions : []
@@ -203,7 +219,7 @@ export default function OpsPage() {
               addAction(actionDef)
             }
           }),
-          fetch(MISSION_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
+          fetch(OPS_MISSION_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
             if (!res.ok) return
             const json = await res.json()
             const missionActions = Array.isArray(json?.actions) ? json.actions : []
@@ -223,38 +239,38 @@ export default function OpsPage() {
         const tac = []
 
         for (const op of list) {
-        if (!op || !op.id) continue
-        const normalised = {
-          id: op.id,
-          title: op.title || 'Untitled Operation',
-          type: (op.type || '').toLowerCase(),
-          packs: Array.isArray(op.packs)
-            ? op.packs.filter(Boolean)
-            : op.packs
-              ? [op.packs]
+          if (!op || !op.id) continue
+          const normalised = {
+            id: op.id,
+            title: op.title || 'Untitled Operation',
+            type: (op.type || '').toLowerCase(),
+            packs: Array.isArray(op.packs)
+              ? op.packs.filter(Boolean)
+              : op.packs
+                ? [op.packs]
+                : [],
+            reveal: normaliseToText(op.reveal),
+            additionalRules: normaliseToText(op.additionalRules || op.additionalRule),
+            victoryPoints: normaliseToText(op.victoryPoints),
+            actions: Array.isArray(op.actions)
+              ? op.actions
+                  .map(actionRef => {
+                    if (typeof actionRef === 'string') {
+                      return actionMap.get(actionRef) || normaliseActionDefinition(actionRef)
+                    }
+                    const normalisedAction = normaliseActionDefinition(actionRef)
+                    if (normalisedAction?.id && !actionMap.has(normalisedAction.id)) {
+                      actionMap.set(normalisedAction.id, normalisedAction)
+                    }
+                    return normalisedAction
+                  })
+                  .filter(Boolean)
               : [],
-          reveal: normaliseToText(op.reveal),
-          additionalRules: normaliseToText(op.additionalRules || op.additionalRule),
-          victoryPoints: normaliseToText(op.victoryPoints),
-          actions: Array.isArray(op.actions)
-            ? op.actions
-                .map(actionRef => {
-                  if (typeof actionRef === 'string') {
-                    return actionMap.get(actionRef) || normaliseActionDefinition(actionRef)
-                  }
-                  const normalisedAction = normaliseActionDefinition(actionRef)
-                  if (normalisedAction?.id) {
-                    actionMap.set(normalisedAction.id, normalisedAction)
-                  }
-                  return normalisedAction
-                })
-                .filter(Boolean)
-            : [],
-          archetype: op.archetype ?? op.archetypes ?? null,
-          objective: normaliseToText(op.objective),
-          briefing: normaliseToText(op.briefing),
-          restrictions: normaliseToText(op.restrictions)
-        }
+            archetype: op.archetype ?? op.archetypes ?? null,
+            objective: normaliseToText(op.objective),
+            briefing: normaliseToText(op.briefing),
+            restrictions: normaliseToText(op.restrictions)
+          }
 
           if (normalised.type === 'tac-op') {
             tac.push(normalised)
@@ -270,15 +286,22 @@ export default function OpsPage() {
         sortById(crit)
         sortById(tac)
 
+        cachedCritOps = crit
+        cachedTacOps = tac
+        cachedOpsActionMap = new Map(actionMap)
+
         setCritOps(crit)
         setTacOps(tac)
+        setActionLookup(new Map(actionMap))
         setError(null)
+        setLoaded(true)
       } catch (err) {
         if (cancelled) return
         console.error('Failed to load operations', err)
         setError(err)
-        setCritOps([])
-        setTacOps([])
+        if (!cachedCritOps && !cachedTacOps) {
+          setLoaded(true)
+        }
       } finally {
         if (!cancelled) {
           setLoading(false)
@@ -433,8 +456,11 @@ const sections = useMemo(() => {
   }, [pendingAnchor, scrollToAnchor])
 
   const renderOperationsList = (ops, type) => {
-    if (loading) {
-      return <div className="muted">Loading operations…</div>
+    if (!loaded) {
+      if (loading) {
+        return <div className="muted">Loading operations…</div>
+      }
+      return null
     }
     if (error) {
       return (
@@ -514,7 +540,7 @@ const sections = useMemo(() => {
             </div>
           )}
 
-          {renderActionCards(op.actions, `operation-action-${op.id}`)}
+          {renderActionCards(op.actions, actionLookup, `operation-action-${op.id}`)}
 
           {op.victoryPoints && (
             <div style={{ marginTop: '0.75rem' }}>

@@ -11,6 +11,11 @@ const MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killte
 const WEAPON_RULES_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/weapon_rules.json'
 const OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/ops_2025.json'
 
+let cachedEquipment = null
+let cachedUniversalActions = null
+let cachedMissionActions = null
+let cachedWeaponRules = null
+
 const SECTION_DEFINITIONS = [
   { id: 'rules-universal-actions', label: 'Universal Actions' },
   { id: 'rules-mission-actions', label: 'Mission Actions' },
@@ -113,20 +118,24 @@ function sortActions(list) {
 }
 
 export default function Rules() {
-  const [equipment, setEquipment] = useState([])
-  const [equipmentLoading, setEquipmentLoading] = useState(true)
+  const [equipment, setEquipment] = useState(cachedEquipment || [])
+  const [equipmentLoading, setEquipmentLoading] = useState(!cachedEquipment)
+  const [equipmentLoaded, setEquipmentLoaded] = useState(Boolean(cachedEquipment))
   const [equipmentError, setEquipmentError] = useState(null)
 
-  const [universalActions, setUniversalActions] = useState([])
-  const [actionsLoading, setActionsLoading] = useState(true)
+  const [universalActions, setUniversalActions] = useState(cachedUniversalActions || [])
+  const [actionsLoading, setActionsLoading] = useState(!cachedUniversalActions)
+  const [actionsLoaded, setActionsLoaded] = useState(Boolean(cachedUniversalActions))
   const [actionsError, setActionsError] = useState(null)
 
-  const [weaponRules, setWeaponRules] = useState([])
-  const [weaponRulesLoading, setWeaponRulesLoading] = useState(true)
+  const [weaponRules, setWeaponRules] = useState(cachedWeaponRules || [])
+  const [weaponRulesLoading, setWeaponRulesLoading] = useState(!cachedWeaponRules)
+  const [weaponRulesLoaded, setWeaponRulesLoaded] = useState(Boolean(cachedWeaponRules))
   const [weaponRulesError, setWeaponRulesError] = useState(null)
 
-  const [missionActions, setMissionActions] = useState([])
-  const [missionActionsLoading, setMissionActionsLoading] = useState(true)
+  const [missionActions, setMissionActions] = useState(cachedMissionActions || [])
+  const [missionActionsLoading, setMissionActionsLoading] = useState(!cachedMissionActions)
+  const [missionActionsLoaded, setMissionActionsLoaded] = useState(Boolean(cachedMissionActions))
   const [missionActionsError, setMissionActionsError] = useState(null)
 
   const [activeSectionId, setActiveSectionId] = useState(SECTION_DEFINITIONS[0].id)
@@ -136,7 +145,7 @@ export default function Rules() {
     let cancelled = false
 
     const loadEquipment = async () => {
-      setEquipmentLoading(true)
+      if (!equipmentLoaded) setEquipmentLoading(true)
       try {
         await checkForUpdates()
         const rows = await db.universalEquipment.toArray()
@@ -148,12 +157,17 @@ export default function Rules() {
           return (a.eqName || '').localeCompare(b.eqName || '')
         })
         setEquipment(sorted)
+        cachedEquipment = sorted
         setEquipmentError(null)
+        setEquipmentLoaded(true)
       } catch (err) {
         if (cancelled) return
         console.error('Failed to load universal equipment', err)
         setEquipmentError(err)
-        setEquipment([])
+        if (!cachedEquipment) {
+          setEquipment([])
+        }
+        setEquipmentLoaded(true)
       } finally {
         if (!cancelled) {
           setEquipmentLoading(false)
@@ -162,7 +176,7 @@ export default function Rules() {
     }
 
     const loadActions = async () => {
-      setActionsLoading(true)
+      if (!actionsLoaded) setActionsLoading(true)
       try {
         const res = await fetch(UNIVERSAL_ACTIONS_URL, { cache: 'no-store' })
         if (!res.ok) {
@@ -173,23 +187,27 @@ export default function Rules() {
         const rawActions = Array.isArray(json?.actions) ? json.actions : []
         const list = rawActions.map(action => normaliseActionDefinition(action)).filter(Boolean)
         const sorted = sortActions(list)
-        setUniversalActions(
-          sorted.map(action => ({
-            id: action.id,
-            name: action.name,
-            ap: action.AP ?? null,
-            description: action.description || '',
-            effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
-            conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
-            packs: Array.isArray(action.packs) ? action.packs.filter(Boolean) : []
-          }))
-        )
+        const mappedActions = sorted.map(action => ({
+          id: action.id,
+          name: action.name,
+          ap: action.AP ?? null,
+          description: action.description || '',
+          effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
+          conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
+          packs: Array.isArray(action.packs) ? action.packs.filter(Boolean) : []
+        }))
+        setUniversalActions(mappedActions)
+        cachedUniversalActions = mappedActions
+        setActionsLoaded(true)
         setActionsError(null)
       } catch (err) {
         if (cancelled) return
         console.error('Failed to load universal actions', err)
         setActionsError(err)
-        setUniversalActions([])
+        if (!cachedUniversalActions) {
+          setUniversalActions([])
+        }
+        setActionsLoaded(true)
       } finally {
         if (!cancelled) {
           setActionsLoading(false)
@@ -198,7 +216,7 @@ export default function Rules() {
     }
 
     const loadMissionActions = async () => {
-      setMissionActionsLoading(true)
+      if (!missionActionsLoaded) setMissionActionsLoading(true)
       try {
         const res = await fetch(MISSION_ACTIONS_URL, { cache: 'no-store' })
         if (!res.ok) {
@@ -239,23 +257,27 @@ export default function Rules() {
           .sort((a, b) => a.id.localeCompare(b.id))
 
         const sorted = sortActions(finalList)
-        setMissionActions(
-          sorted.map(action => ({
-            id: action.id,
-            name: action.name,
-            ap: action.AP ?? null,
-            description: action.description || '',
-            effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
-            conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
-            packs: Array.isArray(action.packs) ? action.packs.filter(Boolean) : []
-          }))
-        )
+        const mappedMissionActions = sorted.map(action => ({
+          id: action.id,
+          name: action.name,
+          ap: action.AP ?? null,
+          description: action.description || '',
+          effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
+          conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
+          packs: Array.isArray(action.packs) ? action.packs.filter(Boolean) : []
+        }))
+        setMissionActions(mappedMissionActions)
+        cachedMissionActions = mappedMissionActions
+        setMissionActionsLoaded(true)
         setMissionActionsError(null)
       } catch (err) {
         if (cancelled) return
         console.error('Failed to load mission actions', err)
         setMissionActionsError(err)
-        setMissionActions([])
+        if (!cachedMissionActions) {
+          setMissionActions([])
+        }
+        setMissionActionsLoaded(true)
       } finally {
         if (!cancelled) {
           setMissionActionsLoading(false)
@@ -264,7 +286,7 @@ export default function Rules() {
     }
 
     const loadWeaponRules = async () => {
-      setWeaponRulesLoading(true)
+      if (!weaponRulesLoaded) setWeaponRulesLoading(true)
       try {
         const res = await fetch(WEAPON_RULES_URL, { cache: 'no-store' })
         if (!res.ok) {
@@ -273,20 +295,24 @@ export default function Rules() {
         const json = await res.json()
         if (cancelled) return
         const list = Array.isArray(json?.weapon_rules) ? json.weapon_rules : []
-        setWeaponRules(
-          list.map(rule => ({
-            id: rule.id || rule.name || '',
-            name: rule.name || 'Unnamed rule',
-            description: rule.description || '',
-            variable: Boolean(rule.variable)
-          }))
-        )
+        const mappedWeaponRules = list.map(rule => ({
+          id: rule.id || rule.name || '',
+          name: rule.name || 'Unnamed rule',
+          description: rule.description || '',
+          variable: Boolean(rule.variable)
+        }))
+        setWeaponRules(mappedWeaponRules)
+        cachedWeaponRules = mappedWeaponRules
+        setWeaponRulesLoaded(true)
         setWeaponRulesError(null)
       } catch (err) {
         if (cancelled) return
         console.error('Failed to load weapon rules', err)
         setWeaponRulesError(err)
-        setWeaponRules([])
+        if (!cachedWeaponRules) {
+          setWeaponRules([])
+        }
+        setWeaponRulesLoaded(true)
       } finally {
         if (!cancelled) {
           setWeaponRulesLoading(false)
@@ -375,9 +401,12 @@ export default function Rules() {
     return true
   }, [])
 
-  const renderActionCollection = ({ loading, error, actions, anchorPrefix, emptyMessage }) => {
-    if (loading) {
-      return <div className="muted">Loading actions…</div>
+  const renderActionCollection = ({ loading, loaded, error, actions, anchorPrefix, emptyMessage }) => {
+    if (!loaded) {
+      if (loading) {
+        return <div className="muted">Loading…</div>
+      }
+      return null
     }
     if (error) {
       return (
@@ -460,6 +489,7 @@ export default function Rules() {
 
   const renderUniversalActions = () => renderActionCollection({
     loading: actionsLoading,
+    loaded: actionsLoaded,
     error: actionsError,
     actions: universalActions,
     anchorPrefix: 'universal-action',
@@ -468,6 +498,7 @@ export default function Rules() {
 
   const renderMissionActions = () => renderActionCollection({
     loading: missionActionsLoading,
+    loaded: missionActionsLoaded,
     error: missionActionsError,
     actions: missionActions,
     anchorPrefix: 'mission-action',
@@ -509,8 +540,11 @@ export default function Rules() {
   }
 
   const renderUniversalEquipment = () => {
-    if (equipmentLoading) {
-      return <div className="muted">Loading universal equipment…</div>
+    if (!equipmentLoaded) {
+      if (equipmentLoading) {
+        return <div className="muted">Loading universal equipment…</div>
+      }
+      return null
     }
     if (equipmentError) {
       return (

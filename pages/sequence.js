@@ -6,8 +6,11 @@ import { ensureIndex } from '../lib/search'
 import { checkForUpdates } from '../lib/update'
 import Seo from '../components/Seo'
 
+let cachedSequenceSteps = null
+
 export default function Sequence(){
-  const [steps,setSteps] = useState([])
+  const [steps,setSteps] = useState(cachedSequenceSteps || [])
+  const [loaded, setLoaded] = useState(Boolean(cachedSequenceSteps))
 
   useEffect(() => { 
     let cancelled = false
@@ -22,7 +25,9 @@ export default function Sequence(){
       const rows = await db.articles.where('type').equals('sequence_step').toArray()
       rows.sort((a,b)=> (a.order||0) - (b.order||0))
       if (!cancelled) {
+        cachedSequenceSteps = rows
         setSteps(rows)
+        setLoaded(true)
       }
     }
 
@@ -41,8 +46,10 @@ export default function Sequence(){
         <Header />
         <div className="card">
           <h2 style={{marginTop:0}}>Game Sequence</h2>
-          {steps.length===0 && <div className="muted">No steps found.</div>}
-          <ol style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+          {!loaded && <div className="muted">Loading…</div>}
+          {loaded && steps.length===0 && <div className="muted">No steps found.</div>}
+          {loaded && (
+            <ol style={{ listStyle: 'none', padding: 0, margin: 0 }}>
             {steps.map((s, index)=> {
               const iconSequence = ['⚡', '♟', '🔥', '🕒', '🏆', '🔚']
               const icon = iconSequence[index] || '●'
@@ -85,6 +92,7 @@ export default function Sequence(){
               )
             })}
           </ol>
+          )}
         </div>
       </div>
     </>
