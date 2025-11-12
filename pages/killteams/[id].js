@@ -12,6 +12,7 @@ import Seo from '../../components/Seo'
 const TAC_OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/ops_2025.json'
 const TAC_OPS_UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
 const TAC_OPS_MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
+const WEAPON_RULES_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/weapon_rules.json'
 
 const ARCHETYPE_PILL_MAP = {
   infiltration: { background: '#2b2d33', color: '#f4f6ff' },
@@ -40,6 +41,8 @@ function getArchetypePillStyle(archetype) {
 let cachedTacOpsByArchetype = null
 let cachedTacOpsActionLookup = null
 let tacOpsLoadPromise = null
+let cachedWeaponRules = null
+let weaponRulesLoadPromise = null
 
 function normaliseTacOpsText(value) {
   if (value === null || value === undefined) return ''
@@ -619,7 +622,97 @@ function sortUniversalEquipmentRows(rows) {
   })
 }
 
-function normaliseOperative(opType) {
+async function loadWeaponRules() {
+  if (cachedWeaponRules) {
+    return cachedWeaponRules
+  }
+
+  if (!weaponRulesLoadPromise) {
+    weaponRulesLoadPromise = (async () => {
+      try {
+        const res = await fetch(WEAPON_RULES_URL, { cache: 'no-store' })
+        if (!res.ok) {
+          throw new Error(`Failed to load weapon rules (${res.status})`)
+        }
+        const json = await res.json()
+        const list = Array.isArray(json?.weapon_rules) ? json.weapon_rules : []
+        const weaponRulesMap = new Map()
+        for (const rule of list) {
+          const ruleId = rule.id || rule.name || ''
+          if (ruleId) {
+            weaponRulesMap.set(ruleId, {
+              id: ruleId,
+              name: rule.name || 'Unnamed rule',
+              description: rule.description || '',
+              variable: Boolean(rule.variable)
+            })
+          }
+        }
+        cachedWeaponRules = weaponRulesMap
+        return weaponRulesMap
+      } catch (err) {
+        console.warn('Failed to load weapon rules', err)
+        cachedWeaponRules = new Map()
+        return cachedWeaponRules
+      }
+    })().finally(() => {
+      weaponRulesLoadPromise = null
+    })
+  }
+
+  return await weaponRulesLoadPromise
+}
+
+function formatWeaponRuleInstance(wpi, weaponRulesMap) {
+  if (!wpi || typeof wpi !== 'object') return null
+  
+  const ruleId = wpi.id
+  const rule = weaponRulesMap.get(ruleId)
+  const ruleName = rule ? rule.name : (ruleId || 'Unknown Rule')
+  const ruleDescription = rule ? rule.description : ''
+  
+  // Handle prefix_num (if present) - append '' after it
+  const prefixNum = wpi.prefix_num !== undefined && wpi.prefix_num !== null ? String(wpi.prefix_num) : ''
+  const number = wpi.number !== undefined && wpi.number !== null ? String(wpi.number) : ''
+  const details = wpi.details || ''
+  
+  // Format: prefix_num + '' + rule name + details + number (with special formatting)
+  const parts = []
+  if (prefixNum) {
+    parts.push(prefixNum + '"')
+  }
+  parts.push(ruleName)
+  if (details) {
+    parts.push(details)
+  }
+  if (number) {
+    const ruleNameLower = ruleName.toLowerCase()
+    // For Lethal rule, append '+' after the number
+    if (ruleNameLower === 'lethal') {
+      parts.push(number + '+')
+    }
+    // For Range, Blast, Torrent, append '' after the number
+    else if (ruleNameLower === 'range' || ruleNameLower === 'blast' || ruleNameLower === 'torrent') {
+      parts.push(number + '"')
+    }
+    // If prefix_num exists (and not Devastating), append '' after the number
+    else if (prefixNum && ruleNameLower !== 'devastating') {
+      parts.push(number + '"')
+    }
+    // Otherwise, just the number
+    else {
+      parts.push(number)
+    }
+  }
+  
+  return {
+    displayText: parts.join(' '),
+    description: ruleDescription,
+    ruleId: ruleId
+  }
+}
+
+function normaliseOperative(opType, weaponRulesMap = new Map()) {
   if (!opType) return null
 
   const buildWeapons = () => {
@@ -635,14 +728,34 @@ function normaliseOperative(opType) {
       const weaponId = weapon.wepId
 
       if (Array.isArray(weapon.profiles) && weapon.profiles.length) {
-        const profiles = weapon.profiles.map(profile => ({
-          id: `${weaponId}-${profile.wepprofileId || profile.seq || 0}`,
-          profileName: profile.profileName || null,
-          atk: profile.ATK || '-',
-          hit: profile.HIT || '-',
-          dmg: profile.DMG || '-',
-          specialRules: splitKeywords(profile.WR)
-        }))
+        const profiles = weapon.profiles.map(profile => {
+          // Handle new WPI structure
+          let specialRules = []
+          if (Array.isArray(profile.WR)) {
+            // New structure: array of WPI objects
+            specialRules = profile.WR
+              .map(wpi => formatWeaponRuleInstance(wpi, weaponRulesMap))
+              .filter(Boolean)
+          } else if (profile.WR) {
+            // Legacy support: string or comma-separated string
+            // Convert to objects for consistency
+            const legacyRules = splitKeywords(profile.WR)
+            specialRules = legacyRules.map(ruleText => ({
+              displayText: ruleText,
+              description: '',
+              ruleId: null
+            }))
+          }
+          
+          return {
+            id: `${weaponId}-${profile.wepprofileId || profile.seq || 0}`,
+            profileName: profile.profileName || null,
+            atk: profile.ATK || '-',
+            hit: profile.HIT || '-',
+            dmg: profile.DMG || '-',
+            specialRules
+          }
+        })
         
         result.push({
           id: weaponId,
@@ -697,6 +810,7 @@ export default function KillteamPage() {
   const [tacOpsLoading, setTacOpsLoading] = useState(!cachedTacOpsByArchetype)
   const [tacOpsLoaded, setTacOpsLoaded] = useState(Boolean(cachedTacOpsByArchetype))
   const [tacOpsError, setTacOpsError] = useState(null)
+  const [weaponRulesMap, setWeaponRulesMap] = useState(cachedWeaponRules || new Map())
 
   useEffect(() => {
     if (!id) return
@@ -776,6 +890,24 @@ export default function KillteamPage() {
   }, [tacOpsLoaded])
 
   useEffect(() => {
+    let cancelled = false
+
+    loadWeaponRules()
+      .then(map => {
+        if (cancelled) return
+        setWeaponRulesMap(map)
+      })
+      .catch(err => {
+        if (cancelled) return
+        console.warn('Failed to load weapon rules', err)
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  useEffect(() => {
     if (typeof window === 'undefined') return
 
     const handleUpdate = async () => {
@@ -821,9 +953,9 @@ export default function KillteamPage() {
   const rawOperatives = useMemo(() => {
     if (!killteam?.opTypes) return []
     return killteam.opTypes
-      .map(normaliseOperative)
+      .map(opType => normaliseOperative(opType, weaponRulesMap))
       .filter(Boolean)
-  }, [killteam])
+  }, [killteam, weaponRulesMap])
 
   const teamAbilities = useMemo(() => {
     if (!rawOperatives.length) return []

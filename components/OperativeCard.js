@@ -1,5 +1,91 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import RichText from './RichText'
+
+function WeaponRuleTooltip({ rule, children }) {
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 })
+  const spanRef = useRef(null)
+  
+  useEffect(() => {
+    if (showTooltip && spanRef.current) {
+      const rect = spanRef.current.getBoundingClientRect()
+      setTooltipPosition({
+        top: rect.top - 10,
+        left: rect.left + rect.width / 2
+      })
+    }
+  }, [showTooltip])
+  
+  if (!rule || typeof rule !== 'object' || !rule.description) {
+    return <>{children}</>
+  }
+  
+  return (
+    <>
+      <span
+        ref={spanRef}
+        style={{ 
+          display: 'inline-block',
+          textDecoration: 'underline',
+          textDecorationStyle: 'dotted',
+          textDecorationColor: 'rgba(154, 160, 170, 0.6)',
+          textUnderlineOffset: '2px',
+          cursor: 'help'
+        }}
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+      >
+        {children}
+      </span>
+      {showTooltip && (
+        <div
+          style={{
+            position: 'fixed',
+            top: `${tooltipPosition.top}px`,
+            left: `${tooltipPosition.left}px`,
+            transform: 'translate(-50%, -100%)',
+            marginBottom: '0.5rem',
+            padding: '0.5rem 0.75rem',
+            background: '#1a1f2b',
+            border: '1px solid #2a2f3f',
+            borderRadius: '8px',
+            color: '#e6e6e6',
+            fontSize: '0.85rem',
+            lineHeight: '1.4',
+            whiteSpace: 'normal',
+            wordWrap: 'break-word',
+            overflowWrap: 'break-word',
+            minWidth: '200px',
+            maxWidth: '300px',
+            zIndex: 10000,
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.4)',
+            pointerEvents: 'none'
+          }}
+        >
+          <div style={{ fontWeight: '600', marginBottom: '0.25rem', color: '#fb923c', wordWrap: 'break-word', overflowWrap: 'break-word' }}>
+            {rule.displayText}
+          </div>
+          <div style={{ color: '#9aa0aa', wordWrap: 'break-word', overflowWrap: 'break-word' }}>
+            {rule.description}
+          </div>
+          <div
+            style={{
+              position: 'absolute',
+              top: '100%',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: 0,
+              height: 0,
+              borderLeft: '6px solid transparent',
+              borderRight: '6px solid transparent',
+              borderTop: '6px solid #1a1f2b'
+            }}
+          />
+        </div>
+      )}
+    </>
+  )
+}
 
 export default function OperativeCard({ operative }) {
   const anchorId = operative?.id ? `operative-${operative.id}` : undefined
@@ -97,7 +183,18 @@ export default function OperativeCard({ operative }) {
                               <td>{profile.dmg || '-'}</td>
                               <td className="muted">
                                 {profile.specialRules && profile.specialRules.length > 0 
-                                  ? profile.specialRules.join(', ')
+                                  ? profile.specialRules.map((rule, ruleIdx) => {
+                                      const displayText = typeof rule === 'object' ? rule.displayText : rule
+                                      const isLast = ruleIdx === profile.specialRules.length - 1
+                                      return (
+                                        <React.Fragment key={ruleIdx}>
+                                          <WeaponRuleTooltip rule={typeof rule === 'object' ? rule : null}>
+                                            {displayText}
+                                          </WeaponRuleTooltip>
+                                          {!isLast && ', '}
+                                        </React.Fragment>
+                                      )
+                                    })
                                   : '-'}
                               </td>
                             </tr>
@@ -122,7 +219,18 @@ export default function OperativeCard({ operative }) {
                           <td>{profile.dmg || '-'}</td>
                           <td className="muted">
                             {profile.specialRules && profile.specialRules.length > 0 
-                              ? profile.specialRules.join(', ')
+                              ? profile.specialRules.map((rule, ruleIdx) => {
+                                  const displayText = typeof rule === 'object' ? rule.displayText : rule
+                                  const isLast = ruleIdx === profile.specialRules.length - 1
+                                  return (
+                                    <React.Fragment key={ruleIdx}>
+                                      <WeaponRuleTooltip rule={typeof rule === 'object' ? rule : null}>
+                                        {displayText}
+                                      </WeaponRuleTooltip>
+                                      {!isLast && ', '}
+                                    </React.Fragment>
+                                  )
+                                })
                               : '-'}
                           </td>
                         </tr>
