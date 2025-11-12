@@ -23,7 +23,7 @@ export default function Header() {
           }}
         >
           <img
-            src="/icons/ktservitor_icon_01.png"
+            src="/icons/icon-512.png"
             alt="KT Servitor icon"
             style={{
               width: '6.5rem',
@@ -33,7 +33,7 @@ export default function Header() {
             }}
             onError={event => {
               event.currentTarget.onerror = null
-              event.currentTarget.src = '/icons/icon-512.png'
+              event.currentTarget.src = '/icons/icon.png'
             }}
           />
         </div>

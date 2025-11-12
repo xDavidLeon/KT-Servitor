@@ -16,13 +16,13 @@ export default function App({ Component, pageProps }) {
         <link
           rel="icon"
           type="image/png"
-          href="/icons/ktservitor_icon_01.png"
+          href="/icons/icon-512.png"
         />
         <link rel="icon" href="/icons/icon-192.png" sizes="192x192" />
         <link rel="icon" href="/icons/icon-512.png" sizes="512x512" />
         <link
           rel="apple-touch-icon"
-          href="/icons/ktservitor_icon_01.png"
+          href="/icons/icon-512.png"
         />
         <link rel="apple-touch-icon" href="/icons/icon-512.png" />
         <link rel="manifest" href="/manifest.json" />
