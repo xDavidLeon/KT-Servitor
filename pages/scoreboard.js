@@ -447,7 +447,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
                 const value = event.target.value
                 updatePlayer(prev => ({ ...prev, customKillteam: value }))
               }}
-              placeholder="Custom label shown on the card"
+              placeholder="Team Name"
             />
           </label>
         </div>
@@ -599,33 +599,43 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
         >
           <h4 style={{ margin: 0 }}>Kill Op Tracker</h4>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.65rem' }}>
-            <Stepper
-              value={player.enemyOperatives}
-              min={1}
-              max={30}
-              ariaLabel="Enemy operatives at start"
-              onChange={(nextValue) => {
-                updatePlayer(prev => {
-                  const updated = { ...prev }
-                  updated.enemyOperatives = nextValue
-                  if (updated.enemyKilled > nextValue) {
-                    updated.enemyKilled = nextValue
-                  }
-                  return updated
-                })
-              }}
-              size="lg"
-            />
-            <Stepper
-              value={player.enemyKilled}
-              min={0}
-              max={player.enemyOperatives}
-              ariaLabel="Enemy operatives incapacitated"
-              onChange={(nextValue) => {
-                updatePlayer(prev => ({ ...prev, enemyKilled: nextValue }))
-              }}
-              size="lg"
-            />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'center' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                Total Operatives
+              </span>
+              <Stepper
+                value={player.enemyOperatives}
+                min={1}
+                max={30}
+                ariaLabel="Enemy operatives at start"
+                onChange={(nextValue) => {
+                  updatePlayer(prev => {
+                    const updated = { ...prev }
+                    updated.enemyOperatives = nextValue
+                    if (updated.enemyKilled > nextValue) {
+                      updated.enemyKilled = nextValue
+                    }
+                    return updated
+                  })
+                }}
+                size="lg"
+              />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'center' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                Killed Operatives
+              </span>
+              <Stepper
+                value={player.enemyKilled}
+                min={0}
+                max={player.enemyOperatives}
+                ariaLabel="Enemy operatives incapacitated"
+                onChange={(nextValue) => {
+                  updatePlayer(prev => ({ ...prev, enemyKilled: nextValue }))
+                }}
+                size="lg"
+              />
+            </div>
           </div>
           <KillThresholdTrack thresholds={thresholds} kills={player.enemyKilled} />
           {player.enemyOperatives < MIN_KILL_OPERATIVES || player.enemyOperatives > MAX_KILL_OPERATIVES ? (
@@ -694,7 +704,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: 'var(--muted)' }}>Primary bonus</span>
-              <strong>∑ {totals.primaryBonus}</strong>
+              <strong>+ {totals.primaryBonus}</strong>
             </div>
           </div>
         </div>
@@ -711,7 +721,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
           { label: 'Crit Op VP', value: totals.critTotal },
           { label: 'Tac Op VP', value: totals.tacTotal },
           { label: 'Kill Op VP', value: totals.killTotal },
-          { label: 'Primary Bonus', value: `∑ ${totals.primaryBonus}` },
+          { label: 'Primary Bonus', value: `+ ${totals.primaryBonus}` },
           { label: 'Total VP', value: totals.total }
         ].map(item => (
           <div
