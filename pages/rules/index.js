@@ -17,11 +17,11 @@ let cachedUniversalActions = null
 let cachedMissionActions = null
 let cachedWeaponRules = null
 
-const SECTION_DEFINITIONS = [
-  { id: 'rules-universal-actions', label: 'Universal Actions' },
-  { id: 'rules-mission-actions', label: 'Mission Actions' },
-  { id: 'rules-weapon-rules', label: 'Weapon Rules' },
-  { id: 'rules-universal-equipment', label: 'Universal Equipment' }
+const STATIC_SECTION_DEFINITIONS = [
+  { id: 'rules-universal-actions', label: 'Universal Actions', kind: 'universalActions' },
+  { id: 'rules-mission-actions', label: 'Mission Actions', kind: 'missionActions' },
+  { id: 'rules-weapon-rules', label: 'Weapon Rules', kind: 'weaponRules' },
+  { id: 'rules-universal-equipment', label: 'Universal Equipment', kind: 'universalEquipment' }
 ]
 
 function normaliseToText(value) {
@@ -215,7 +215,7 @@ function sortMissionActions(list) {
   })
 }
 
-export default function Rules() {
+export default function Rules({ rulesTabs = [] }) {
   const [equipment, setEquipment] = useState(cachedEquipment || [])
   const [equipmentLoading, setEquipmentLoading] = useState(!cachedEquipment)
   const [equipmentLoaded, setEquipmentLoaded] = useState(Boolean(cachedEquipment))
@@ -240,7 +240,10 @@ export default function Rules() {
   const [equipmentActions, setEquipmentActions] = useState([])
   const [equipmentActionsLoaded, setEquipmentActionsLoaded] = useState(false)
 
-  const [activeSectionId, setActiveSectionId] = useState(SECTION_DEFINITIONS[0].id)
+  const initialSectionId = rulesTabs.length > 0
+    ? `rules-${rulesTabs[0].slug}`
+    : STATIC_SECTION_DEFINITIONS[0].id
+  const [activeSectionId, setActiveSectionId] = useState(initialSectionId)
   const [pendingAnchor, setPendingAnchor] = useState(null)
 
   useEffect(() => {
@@ -563,9 +566,25 @@ export default function Rules() {
     return sortMissionActions(merged)
   }, [missionActions, equipmentActions, equipmentActionsLoaded])
 
-  const sections = useMemo(() => {
-    return SECTION_DEFINITIONS.map(def => {
-      if (def.id === 'rules-universal-actions') {
+  const rulesTabMap = useMemo(() => {
+    const map = new Map()
+    for (const tab of rulesTabs) {
+      map.set(`rules-${tab.slug}`, tab)
+    }
+    return map
+  }, [rulesTabs])
+
+  const combinedSections = useMemo(() => {
+    const tabSections = rulesTabs.map(tab => ({
+      id: `rules-${tab.slug}`,
+      label: tab.title,
+      kind: 'rulesTab',
+      slug: tab.slug,
+      items: []
+    }))
+
+    const staticSections = STATIC_SECTION_DEFINITIONS.map(def => {
+      if (def.kind === 'universalActions') {
         return {
           ...def,
           items: combinedUniversalActions.map(action => ({
@@ -574,7 +593,7 @@ export default function Rules() {
           }))
         }
       }
-      if (def.id === 'rules-mission-actions') {
+      if (def.kind === 'missionActions') {
         return {
           ...def,
           items: combinedMissionActions.map(action => ({
@@ -583,7 +602,7 @@ export default function Rules() {
           }))
         }
       }
-      if (def.id === 'rules-weapon-rules') {
+      if (def.kind === 'weaponRules') {
         return {
           ...def,
           items: weaponRules.map(rule => ({
@@ -600,16 +619,18 @@ export default function Rules() {
         }))
       }
     })
-  }, [equipment, combinedUniversalActions, combinedMissionActions, weaponRules])
+
+    return [...tabSections, ...staticSections]
+  }, [rulesTabs, equipment, combinedUniversalActions, combinedMissionActions, weaponRules])
 
   const findSectionForAnchor = useCallback((anchor) => {
     if (!anchor) return null
-    const section = sections.find(section => {
+    const section = combinedSections.find(section => {
       if (section.id === anchor) return true
       return Array.isArray(section.items) && section.items.some(item => item?.id === anchor)
     })
     return section ? section.id : null
-  }, [sections])
+  }, [combinedSections])
 
   const scrollToRulesAnchor = useCallback((anchor) => {
     if (typeof document === 'undefined' || !anchor) return false
@@ -751,7 +772,6 @@ export default function Rules() {
       </div>
     )
   }
-
   const renderUniversalActions = () => renderActionCollection({
     loading: actionsLoading && !equipmentActionsLoaded,
     loaded: actionsLoaded && equipmentActionsLoaded,
@@ -996,8 +1016,42 @@ export default function Rules() {
     )
   }
 
-  const renderSection = (sectionId) => {
-    switch (sectionId) {
+  const renderSection = (section) => {
+    if (!section) return null
+
+    if (section.kind === 'rulesTab') {
+      const tab = rulesTabMap.get(section.id)
+      if (!tab) {
+        return (
+          <div className="card">
+            <div style={{ padding: '1.5rem' }}>
+              <div className="muted">No content available.</div>
+            </div>
+          </div>
+        )
+      }
+
+      const hasBody = Boolean(tab.body && tab.body.trim().length > 0)
+
+      return (
+        <div className="card" data-sb-object-id={tab.objectId}>
+          <div style={{ padding: '1.5rem' }}>
+            <h2 style={{ marginTop: 0 }} data-sb-field-path="title">
+              {tab.title}
+            </h2>
+            {hasBody ? (
+              <RichText text={tab.body} data-sb-field-path="body" />
+            ) : (
+              <p className="muted" data-sb-field-path="body" style={{ marginBottom: 0 }}>
+                Work in Progress
+              </p>
+            )}
+          </div>
+        </div>
+      )
+    }
+
+    switch (section.id) {
       case 'rules-universal-actions':
         return (
           <div className="card">
@@ -1133,6 +1187,16 @@ export default function Rules() {
   }, [findSectionForAnchor])
 
   useEffect(() => {
+    if (!combinedSections.length) {
+      return
+    }
+    const hasActive = combinedSections.some(section => section.id === activeSectionId)
+    if (!hasActive) {
+      setActiveSectionId(combinedSections[0].id)
+    }
+  }, [combinedSections, activeSectionId])
+
+  useEffect(() => {
     if (!pendingAnchor?.id) return undefined
     let cancelled = false
     let attempts = 0
@@ -1173,22 +1237,85 @@ export default function Rules() {
         <Header />
         <div className="card" style={{ marginBottom: '1rem' }}>
           <KillteamSectionNavigator
-            sections={sections}
+            sections={combinedSections}
             activeSectionId={activeSectionId}
             onSectionChange={setActiveSectionId}
             showDropdown={false}
           />
         </div>
-        {SECTION_DEFINITIONS.map(section => (
+        {combinedSections.map(section => (
           <section
             key={section.id}
             id={section.id}
             style={{ display: activeSectionId === section.id ? 'block' : 'none' }}
           >
-            {renderSection(section.id)}
+            {renderSection(section)}
           </section>
         ))}
       </div>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const fs = await import('fs/promises')
+  const pathModule = await import('path')
+  const { default: matter } = await import('gray-matter')
+
+  const path = pathModule.default
+  const contentDir = path.join(process.cwd(), 'content', 'rules')
+  const tabs = []
+
+  try {
+    const entries = await fs.readdir(contentDir)
+    for (const entry of entries) {
+      if (!entry.endsWith('.md')) continue
+      const filePath = path.join(contentDir, entry)
+      const fileContents = await fs.readFile(filePath, 'utf8')
+      const parsed = matter(fileContents)
+      const modelType = parsed.data?.type || parsed.data?.model || parsed.data?.stackbit_model_type
+      if (modelType && modelType !== 'rulesTab') continue
+
+      const slug = parsed.data?.slug || entry.replace(/\.md$/, '')
+      const title = parsed.data?.title || slug
+      const orderValue = typeof parsed.data?.order === 'number' ? parsed.data.order : null
+      const sortOrder = orderValue === null ? Number.MAX_SAFE_INTEGER : orderValue
+      const body = parsed.content ? parsed.content.trim() : ''
+      const relativeFilePath = path.relative(process.cwd(), filePath).split(path.sep).join('/')
+
+      tabs.push({
+        title,
+        slug,
+        order: orderValue,
+        sortOrder,
+        body,
+        objectId: relativeFilePath
+      })
+    }
+
+    tabs.sort((a, b) => {
+      const orderA = a.sortOrder ?? Number.MAX_SAFE_INTEGER
+      const orderB = b.sortOrder ?? Number.MAX_SAFE_INTEGER
+      if (orderA !== orderB) {
+        return orderA - orderB
+      }
+      return a.title.localeCompare(b.title)
+    })
+  } catch (err) {
+    console.warn('Failed to load rules tab content', err)
+  }
+
+  const serializedTabs = tabs.map(tab => ({
+    title: tab.title,
+    slug: tab.slug,
+    order: tab.order,
+    body: tab.body,
+    objectId: tab.objectId
+  }))
+
+  return {
+    props: {
+      rulesTabs: serializedTabs
+    }
+  }
 }
