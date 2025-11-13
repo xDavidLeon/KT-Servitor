@@ -8,6 +8,27 @@ import Seo from '../components/Seo'
 
 let cachedSequenceSteps = null
 
+function processSequenceText(text) {
+  if (!text || typeof text !== 'string') return text
+  
+  // Replace "kill team" (case-insensitive, but preserve original case) with link
+  text = text.replace(/\b(kill team)\b/gi, (match) => {
+    return `[${match}](/killteams)`
+  })
+  
+  // Replace "killzone" (case-insensitive) with link to Maps tab
+  text = text.replace(/\b(killzone)\b/gi, (match) => {
+    return `[${match}](/ops#ops-maps)`
+  })
+  
+  // Replace "crit op" (case-insensitive) with link to Crit Ops tab
+  text = text.replace(/\b(crit op)\b/gi, (match) => {
+    return `[${match}](/ops#ops-critical)`
+  })
+  
+  return text
+}
+
 export default function Sequence(){
   const [steps,setSteps] = useState(cachedSequenceSteps || [])
   const [loaded, setLoaded] = useState(Boolean(cachedSequenceSteps))
@@ -86,7 +107,7 @@ export default function Sequence(){
                   </span>
                   <div style={{ marginLeft: '0.25rem', flex: 1 }}>
                     <strong>{s.title}</strong>
-                    <RichText className="muted" text={s.body} />
+                    <RichText className="muted" text={processSequenceText(s.body)} />
                   </div>
                 </li>
               )

@@ -101,6 +101,16 @@ export default function OperativeCard({ operative }) {
     (operative?.factionKeyword && operative.factionKeyword !== 'UNKNOWN') ||
     keywords.length > 0
   const showKeywordSection = hasKeywords || !!baseSizeText
+  const getStatIcon = (label) => {
+    const iconMap = {
+      'APL': '/img/apl.svg',
+      'MOVE': '/img/move.svg',
+      'SAVE': '/img/save.svg',
+      'WOUNDS': '/img/wounds.svg'
+    }
+    return iconMap[label] || null
+  }
+
   const headerStats = [
     { label: 'APL', value: operative?.apl },
     { label: 'MOVE', value: operative?.move },
@@ -114,12 +124,29 @@ export default function OperativeCard({ operative }) {
         <h4 style={{ margin: 0 }}>{operative.name || operative.title}</h4>
         {headerStats.length > 0 && (
           <div className="operative-header-stats">
-            {headerStats.map(stat => (
-              <div key={stat.label} className="operative-header-stat">
-                <span className="label">{stat.label}</span>
-                <span className="value">{stat.value}</span>
-              </div>
-            ))}
+            {headerStats.map(stat => {
+              const iconPath = getStatIcon(stat.label)
+              return (
+                <div key={stat.label} className="operative-header-stat">
+                  <span className="label">{stat.label}</span>
+                  <span className="value" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                    {iconPath && (
+                      <img 
+                        src={iconPath} 
+                        alt={stat.label}
+                        style={{ 
+                          width: '1em', 
+                          height: '1em', 
+                          display: 'inline-block',
+                          verticalAlign: 'middle'
+                        }}
+                      />
+                    )}
+                    {stat.value}
+                  </span>
+                </div>
+              )
+            })}
           </div>
         )}
       </div>
@@ -135,11 +162,11 @@ export default function OperativeCard({ operative }) {
           return getTypeOrder(a.type) - getTypeOrder(b.type);
         });
         
-        // Determine weapon type symbol
-        const getWeaponSymbol = (type) => {
-          if (type === 'Ranged Weapon') return '⌖';
-          if (type === 'Melee Weapon') return '⚔';
-          return '';
+        // Determine weapon type icon
+        const getWeaponIcon = (type) => {
+          if (type === 'Ranged Weapon') return '/img/shoot.svg';
+          if (type === 'Melee Weapon') return '/img/attack.svg';
+          return null;
         };
         
         return (
@@ -157,7 +184,7 @@ export default function OperativeCard({ operative }) {
                 </thead>
                 <tbody>
                   {sortedWeapons.map((weapon, weaponIdx) => {
-                    const weaponSymbol = getWeaponSymbol(weapon.type);
+                    const weaponIcon = getWeaponIcon(weapon.type);
                     const hasProfiles = Array.isArray(weapon.profiles) && weapon.profiles.length > 0;
                     const hasMultipleProfiles = weapon.hasMultipleProfiles || (hasProfiles && weapon.profiles.length > 1);
                     
@@ -167,15 +194,40 @@ export default function OperativeCard({ operative }) {
                         <React.Fragment key={weapon.id || weaponIdx}>
                           {/* Weapon header row */}
                           <tr className="weapon-header-row">
-                            <td colSpan="5">
-                              {weaponSymbol && <span style={{ marginRight: '0.25rem' }}>{weaponSymbol}</span>}
+                            <td colSpan="5" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                              {weaponIcon && (
+                                <img 
+                                  src={weaponIcon} 
+                                  alt={weapon.type}
+                                  style={{ 
+                                    width: '1.25em', 
+                                    height: '1.25em', 
+                                    display: 'block',
+                                    flexShrink: 0,
+                                    marginTop: '0.00em'
+                                  }}
+                                />
+                              )}
                               {weapon.name}
                             </td>
                           </tr>
                           {/* Profile rows */}
                           {weapon.profiles.map((profile, profileIdx) => (
                             <tr key={profile.id || `${weapon.id}-${profileIdx}`} className="weapon-profile-row">
-                              <td>
+                              <td style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                {weaponIcon && (
+                                  <img 
+                                    src={weaponIcon} 
+                                    alt={weapon.type}
+                                    style={{ 
+                                      width: '1.25em', 
+                                      height: '1.25em', 
+                                      display: 'block',
+                                      flexShrink: 0,
+                                      marginTop: '0.0em'
+                                    }}
+                                  />
+                                )}
                                 {profile.profileName || 'Default'}
                               </td>
                               <td>{profile.atk || '-'}</td>
@@ -209,8 +261,20 @@ export default function OperativeCard({ operative }) {
                       return (
                         <tr key={weapon.id || weaponIdx}>
                           <td>
-                            <strong>
-                              {weaponSymbol && <span style={{ marginRight: '0.25rem' }}>{weaponSymbol}</span>}
+                            <strong style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                              {weaponIcon && (
+                                <img 
+                                  src={weaponIcon} 
+                                  alt={weapon.type}
+                                  style={{ 
+                                    width: '1.25em', 
+                                    height: '1.25em', 
+                                    display: 'block',
+                                    flexShrink: 0,
+                                    marginTop: '0.0em'
+                                  }}
+                                />
+                              )}
                               {weapon.name}
                             </strong>
                           </td>
@@ -242,7 +306,19 @@ export default function OperativeCard({ operative }) {
                       <tr key={weapon.id || weaponIdx}>
                         <td>
                           <strong>
-                            {weaponSymbol && <span style={{ marginRight: '0.25rem' }}>{weaponSymbol}</span>}
+                            {weaponIcon && (
+                              <img 
+                                src={weaponIcon} 
+                                alt={weapon.type}
+                                style={{ 
+                                  width: '1em', 
+                                  height: '1em', 
+                                  display: 'inline-block',
+                                  verticalAlign: 'middle',
+                                  marginRight: '0.25rem'
+                                }}
+                              />
+                            )}
                             {weapon.name}
                           </strong>
                         </td>

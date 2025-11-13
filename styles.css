@@ -224,7 +224,7 @@ th{position:sticky;top:0;background:#121521}
   .operative-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 0.75rem;
     gap: 0.5rem;
   }
@@ -250,13 +250,13 @@ th{position:sticky;top:0;background:#121521}
   }
   .operative-header-stat .label {
     color: var(--muted);
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
   .operative-header-stat .value {
     color: var(--text);
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: 600;
     line-height: 1.2;
   }
