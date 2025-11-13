@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /.git/
+Disallow: /.git
+Disallow: /.github/
+Disallow: /.svn/
+Disallow: /.hg/
+
+Sitemap: https://ktservitor.app/sitemap.xml
