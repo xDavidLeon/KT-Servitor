@@ -12,8 +12,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "frame-ancestors 'self' https://app.netlify.com https://app.netlifyusercontent.com https://visual-editor.netlify.app https://visual-editor.netlify.com"
-    X-Frame-Options = "ALLOW-FROM https://app.netlify.com"
+    Content-Security-Policy = "frame-ancestors 'self' https://*.netlify.app https://*.netlify.com https://app.netlifyusercontent.com"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
