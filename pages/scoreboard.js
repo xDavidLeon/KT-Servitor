@@ -465,17 +465,12 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
         </div>
         <div
           style={{
-            marginTop: '0.25rem',
+            marginTop: '0.75rem',
             display: 'flex',
-            justifyContent: 'space-between',
             alignItems: 'center',
-            gap: '0.75rem',
-            flexWrap: 'wrap'
+            gap: '0.5rem'
           }}
         >
-          <span style={{ fontSize: '0.85rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Command Points
-          </span>
           <Stepper
             value={player.cp}
             min={0}
@@ -485,6 +480,20 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
               updatePlayer(prev => ({ ...prev, cp: nextValue }))
             }}
           />
+          <span
+            style={{
+              fontSize: '0.85rem',
+              color: 'var(--muted)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              minWidth: '2.5rem',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            CP
+          </span>
         </div>
       </header>
 
@@ -516,19 +525,6 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
                     }}
                   >
                     <strong style={{ fontSize: '0.95rem' }}>TP{tp}</strong>
-                    {locked && (
-                      <span
-                        className="pill"
-                        style={{
-                          fontSize: '0.7rem',
-                          padding: '0.2rem 0.5rem',
-                          borderColor: '#2a2f3f',
-                          color: 'var(--muted)'
-                        }}
-                      >
-                        Primary selection
-                      </span>
-                    )}
                   </div>
                   {['crit', 'tac'].map((rowKey) => (
                     <div
@@ -944,10 +940,10 @@ export default function Scoreboard() {
                       <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>{summary.killteam}</span>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.45rem' }}>
-                    <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>Total</span>
-                    <span style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--accent)' }}>{summary.total}</span>
-                  </div>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.45rem' }}>
+                      <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>VP</span>
+                      <span style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--accent)' }}>{summary.total}</span>
+                    </div>
                   <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', fontSize: '0.8rem', color: 'var(--muted)' }}>
                     <span>Crit {summary.critTotal}</span>
                     <span>• Tac {summary.tacTotal}</span>
