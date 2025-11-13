@@ -1,0 +1,56 @@
+{
+  "common": {
+    "loading": "Loading…",
+    "noResults": "No results found.",
+    "search": "Search",
+    "select": "Select"
+  },
+  "nav": {
+    "home": "Home",
+    "gameSequence": "Game Sequence",
+    "gameRules": "Game Rules",
+    "ops": "Ops",
+    "killTeams": "Kill Teams",
+    "scoreboard": "Scoreboard"
+  },
+  "scoreboard": {
+    "title": "Scoreboard",
+    "description": "Record Crit, Tac, and Kill Op VP each turning point, then reveal primaries to add the bonus at the end of the battle.",
+    "reset": "Reset scoreboard",
+    "player": "Player",
+    "playerName": "Player Name",
+    "killTeam": "Kill Team",
+    "killTeamNotSet": "Kill team not set",
+    "selectKillTeam": "Select kill team…",
+    "cp": "CP",
+    "scoring": "Scoring",
+    "critOp": "Crit Op",
+    "tacOp": "Tac Op",
+    "killOp": "Kill Op",
+    "primaryOp": "Primary Op",
+    "primaryOpRevealed": "Primary OP revealed",
+    "primaryOpVp": "Primary op VP",
+    "primaryBonus": "Primary bonus",
+    "killed": "Killed",
+    "total": "Total",
+    "quickReference": "Quick reference",
+    "quickReference1": "Score up to 2 VP each turning point for both Crit and Tac ops (starting at TP2).",
+    "quickReference2": "Kill Op VP unlock as enemy operatives are incapacitated following the kill grade chart.",
+    "quickReference3": "When primaries are revealed, add half of the total VP from the chosen op (rounded down).",
+    "quickReference4": "Use the reset button at any time to clear both cards and begin a new match."
+  },
+  "sequence": {
+    "title": "Game Sequence",
+    "description": "Step through every phase of the Kill Team 2024 round sequence with clear reference text for each action.",
+    "noSteps": "No steps found."
+  },
+  "operative": {
+    "apl": "APL",
+    "move": "MOVE",
+    "save": "SAVE",
+    "wounds": "WOUNDS",
+    "abilities": "Abilities",
+    "options": "Options"
+  }
+}
+

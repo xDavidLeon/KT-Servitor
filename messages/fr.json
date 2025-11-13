@@ -1,0 +1,56 @@
+{
+  "common": {
+    "loading": "Chargement…",
+    "noResults": "Aucun résultat trouvé.",
+    "search": "Rechercher",
+    "select": "Sélectionner"
+  },
+  "nav": {
+    "home": "Accueil",
+    "gameSequence": "Séquence de jeu",
+    "gameRules": "Règles du jeu",
+    "ops": "Opérations",
+    "killTeams": "Kill Teams",
+    "scoreboard": "Tableau de bord"
+  },
+  "scoreboard": {
+    "title": "Tableau de bord",
+    "description": "Enregistrez les VP de Crit, Tac et Kill Op à chaque point tournant, puis révélez les primaires pour ajouter le bonus à la fin de la bataille.",
+    "reset": "Réinitialiser le tableau",
+    "player": "Joueur",
+    "playerName": "Nom du joueur",
+    "killTeam": "Kill Team",
+    "killTeamNotSet": "Kill team non définie",
+    "selectKillTeam": "Sélectionner une kill team…",
+    "cp": "CP",
+    "scoring": "Score",
+    "critOp": "Op Crit",
+    "tacOp": "Op Tac",
+    "killOp": "Op Kill",
+    "primaryOp": "Op Primaire",
+    "primaryOpRevealed": "OP primaire révélé",
+    "primaryOpVp": "VP op primaire",
+    "primaryBonus": "Bonus primaire",
+    "killed": "Tués",
+    "total": "Total",
+    "quickReference": "Référence rapide",
+    "quickReference1": "Marquez jusqu'à 2 VP à chaque point tournant pour les op Crit et Tac (à partir de TP2).",
+    "quickReference2": "Les VP d'Op Kill se débloquent lorsque les opératifs ennemis sont mis hors de combat selon le tableau de grade de mise à mort.",
+    "quickReference3": "Lorsque les primaires sont révélées, ajoutez la moitié du total de VP de l'op choisie (arrondi à l'inférieur).",
+    "quickReference4": "Utilisez le bouton de réinitialisation à tout moment pour effacer les deux cartes et commencer un nouveau match."
+  },
+  "sequence": {
+    "title": "Séquence de jeu",
+    "description": "Parcourez chaque phase de la séquence de tour de Kill Team 2024 avec un texte de référence clair pour chaque action.",
+    "noSteps": "Aucune étape trouvée."
+  },
+  "operative": {
+    "apl": "APL",
+    "move": "MOUV",
+    "save": "SAUV",
+    "wounds": "BLES",
+    "abilities": "Capacités",
+    "options": "Options"
+  }
+}
+

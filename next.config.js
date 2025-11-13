@@ -4,6 +4,10 @@ const baseConfig = {
   reactStrictMode: true,
   // An empty turbopack config silences the warning in Next 16
   turbopack: {},
+  i18n: {
+    locales: ['en', 'fr', 'es'],
+    defaultLocale: 'en'
+  }
 };
 
 if (!isProd) {

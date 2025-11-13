@@ -1,0 +1,56 @@
+{
+  "common": {
+    "loading": "Cargando…",
+    "noResults": "No se encontraron resultados.",
+    "search": "Buscar",
+    "select": "Seleccionar"
+  },
+  "nav": {
+    "home": "Inicio",
+    "gameSequence": "Secuencia de juego",
+    "gameRules": "Reglas del juego",
+    "ops": "Operaciones",
+    "killTeams": "Kill Teams",
+    "scoreboard": "Marcador"
+  },
+  "scoreboard": {
+    "title": "Marcador",
+    "description": "Registra los VP de Crit, Tac y Kill Op en cada punto de inflexión, luego revela las primarias para agregar el bonus al final de la batalla.",
+    "reset": "Reiniciar marcador",
+    "player": "Jugador",
+    "playerName": "Nombre del jugador",
+    "killTeam": "Kill Team",
+    "killTeamNotSet": "Kill team no establecido",
+    "selectKillTeam": "Seleccionar un kill team…",
+    "cp": "CP",
+    "scoring": "Puntuación",
+    "critOp": "Op Crit",
+    "tacOp": "Op Tac",
+    "killOp": "Op Kill",
+    "primaryOp": "Op Primaria",
+    "primaryOpRevealed": "OP primaria revelada",
+    "primaryOpVp": "VP op primaria",
+    "primaryBonus": "Bonus primario",
+    "killed": "Eliminados",
+    "total": "Total",
+    "quickReference": "Referencia rápida",
+    "quickReference1": "Marca hasta 2 VP en cada punto de inflexión para las op Crit y Tac (a partir de TP2).",
+    "quickReference2": "Los VP de Op Kill se desbloquean cuando los operativos enemigos son incapacitados siguiendo la tabla de grado de eliminación.",
+    "quickReference3": "Cuando se revelan las primarias, agrega la mitad del total de VP de la op elegida (redondeado hacia abajo).",
+    "quickReference4": "Usa el botón de reinicio en cualquier momento para limpiar ambas cartas y comenzar un nuevo partido."
+  },
+  "sequence": {
+    "title": "Secuencia de juego",
+    "description": "Recorre cada fase de la secuencia de ronda de Kill Team 2024 con texto de referencia claro para cada acción.",
+    "noSteps": "No se encontraron pasos."
+  },
+  "operative": {
+    "apl": "APL",
+    "move": "MOV",
+    "save": "SALV",
+    "wounds": "HER",
+    "abilities": "Habilidades",
+    "options": "Opciones"
+  }
+}
+

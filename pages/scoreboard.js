@@ -1,18 +1,16 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useCallback } from 'react'
+import { useRouter } from 'next/router'
 import Header from '../components/Header'
 import Seo from '../components/Seo'
 import { db } from '../lib/db'
+import { useTranslations } from '../lib/i18n'
 
 const TURNING_POINTS = [1, 2, 3, 4]
 const MAX_OP_SCORE_PER_TP = 2
 const SCOREBOARD_STORAGE_KEY = 'kt-servitor-scoreboard-v1'
 const PLAYER_COLORS = ['#be123c', '#1d4ed8']
 
-const PRIMARY_OPTIONS = [
-  { value: 'crit', label: 'Crit Op' },
-  { value: 'tac', label: 'Tac Op' },
-  { value: 'kill', label: 'Kill Op' }
-]
+// PRIMARY_OPTIONS will be created dynamically with translations
 
 const KILL_GRADE_TABLE = {
   5: [1, 2, 3, 4, 5],
@@ -319,6 +317,8 @@ function KillThresholdTrack({ thresholds, kills }) {
 }
 
 function PlayerCard({ index, player, killteams, onChange, isCompact }) {
+  const t = useTranslations('scoreboard')
+  const { locale } = useRouter()
   const totals = useMemo(() => computePlayerTotals(player), [player])
   const { thresholds, usedValue, isExact } = useMemo(
     () => resolveKillThresholds(player.enemyOperatives),
@@ -328,7 +328,16 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
     () => killteams.find(kt => kt.killteamId === player.killteamId),
     [killteams, player.killteamId]
   )
-  const killteamLabel = player.customKillteam?.trim() || selectedKillteam?.killteamName || 'Kill team not set'
+  const killteamLabel = useMemo(
+    () => player.customKillteam?.trim() || selectedKillteam?.killteamName || t('killTeamNotSet'),
+    [player.customKillteam, selectedKillteam?.killteamName, t, locale]
+  )
+  
+  const PRIMARY_OPTIONS = [
+    { value: 'crit', label: t('critOp') },
+    { value: 'tac', label: t('tacOp') },
+    { value: 'kill', label: t('killOp') }
+  ]
 
   const updatePlayer = (updater) => {
     onChange(prev => {
@@ -352,7 +361,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
       value={player[rowKey][tpIndex]}
       min={0}
       max={MAX_OP_SCORE_PER_TP}
-      ariaLabel={`${rowKey === 'crit' ? 'Crit op' : 'Tac op'} TP${tpIndex + 1}`}
+      ariaLabel={`${rowKey === 'crit' ? t('critOp') : t('tacOp')} TP${tpIndex + 1}`}
       onChange={(nextValue) => handleVpChange(rowKey, tpIndex, nextValue)}
       disabled={tpIndex === 0}
       size={controlSize}
@@ -402,14 +411,14 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
                   borderRadius: '999px'
                 }}
               />
-              Player {index + 1}
+              {t('player')} {index + 1}
             </span>
           </h2>
           <div style={{ fontSize: '0.9rem', color: 'var(--muted)' }}>{killteamLabel}</div>
         </div>
         <label style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
           <span style={{ fontSize: '0.85rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Player Name
+            {t('playerName')}
           </span>
           <input
             type="text"
@@ -418,13 +427,13 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
               const value = event.target.value
               updatePlayer(prev => ({ ...prev, name: value }))
             }}
-            placeholder="Player name"
+            placeholder={t('playerName')}
             style={{ width: '100%' }}
           />
         </label>
         <label style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
           <span style={{ fontSize: '0.85rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Kill Team
+            {t('killTeam')}
           </span>
           <select
             value={player.killteamId}
@@ -433,7 +442,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
               updatePlayer(prev => ({ ...prev, killteamId: value }))
             }}
           >
-            <option value="">Select kill team…</option>
+            <option value="">{t('selectKillTeam')}</option>
             {killteams.map(team => (
               <option key={team.killteamId} value={team.killteamId}>
                 {team.killteamName}
@@ -444,7 +453,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
       </header>
 
       <section>
-        <h3 style={{ marginTop: 0, marginBottom: '0.75rem', textAlign: 'center' }}>Scoring</h3>
+        <h3 style={{ marginTop: 0, marginBottom: '0.75rem', textAlign: 'center' }}>{t('scoring')}</h3>
         {isCompact ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
             {TURNING_POINTS.map((tp, tpIndex) => {
@@ -483,7 +492,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
                       }}
                     >
                       <span style={{ fontSize: '0.85rem', color: 'var(--muted)', flexShrink: 0 }}>
-                        {rowKey === 'crit' ? 'Crit Op' : 'Tac Op'}
+                        {rowKey === 'crit' ? t('critOp') : t('tacOp')}
                       </span>
                       {renderVpControl(rowKey, tpIndex)}
                     </div>
@@ -581,11 +590,11 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             alignItems: 'center'
           }}
         >
-          <h4 style={{ margin: 0 }}>Kill Op</h4>
+          <h4 style={{ margin: 0 }}>{t('killOp')}</h4>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: '0.65rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'center' }}>
               <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                Killed
+                {t('killed')}
               </span>
               <Stepper
                 value={player.enemyKilled}
@@ -600,7 +609,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'center' }}>
               <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                Total
+                {t('total')}
               </span>
               <Stepper
                 value={player.enemyOperatives}
@@ -645,7 +654,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             alignItems: 'center'
           }}
         >
-          <h4 style={{ margin: 0 }}>Primary Op</h4>
+          <h4 style={{ margin: 0 }}>{t('primaryOp')}</h4>
           <label style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', width: '100%', alignItems: 'center' }}>
             <select
               value={player.primaryOp}
@@ -671,7 +680,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
                 updatePlayer(prev => ({ ...prev, revealPrimary: checked }))
               }}
             />
-            <span>Primary OP revealed</span>
+            <span>{t('primaryOpRevealed')}</span>
           </label>
           <div
             style={{
@@ -684,11 +693,11 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ color: 'var(--muted)' }}>Primary op VP</span>
+              <span style={{ color: 'var(--muted)' }}>{t('primaryOpVp')}</span>
               <strong>{totals.primarySource}</strong>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ color: 'var(--muted)' }}>Primary bonus</span>
+              <span style={{ color: 'var(--muted)' }}>{t('primaryBonus')}</span>
               <strong>+ {totals.primaryBonus}</strong>
             </div>
           </div>
@@ -707,17 +716,17 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             {[
               {
                 key: 'crit',
-                label: 'Crit Op',
+                label: t('critOp'),
                 value: totals.critTotal + (player.primaryOp === 'crit' ? totals.primaryBonus : 0)
               },
               {
                 key: 'tac',
-                label: 'Tac Op',
+                label: t('tacOp'),
                 value: totals.tacTotal + (player.primaryOp === 'tac' ? totals.primaryBonus : 0)
               },
               {
                 key: 'kill',
-                label: 'Kill Op',
+                label: t('killOp'),
                 value: totals.killTotal + (player.primaryOp === 'kill' ? totals.primaryBonus : 0)
               }
             ].map(item => (
@@ -822,7 +831,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
               fontWeight: 600
             }}
           >
-            CP
+            {t('cp')}
           </span>
           <button
             type="button"
@@ -859,6 +868,9 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
 }
 
 export default function Scoreboard() {
+  const t = useTranslations('scoreboard')
+  const router = useRouter()
+  const locale = router.locale || 'en'
   const [players, setPlayers] = useState(() => [createPlayerState('Player 1'), createPlayerState('Player 2')])
   const [killteams, setKillteams] = useState([])
   const isCompact = useIsCompact()
@@ -898,10 +910,10 @@ export default function Scoreboard() {
     }
   }, [])
 
-  const getKillteamName = (player) => {
+  const getKillteamName = useCallback((player) => {
     const found = killteams.find(team => team.killteamId === player.killteamId)
-    return player.customKillteam?.trim() || found?.killteamName || 'Kill team not set'
-  }
+    return player.customKillteam?.trim() || found?.killteamName || t('killTeamNotSet')
+  }, [killteams, t, locale])
 
   const playerSummaries = useMemo(() => players.map((player, index) => {
     const totals = computePlayerTotals(player)
@@ -913,7 +925,7 @@ export default function Scoreboard() {
       primaryOp: player.primaryOp,
       ...totals
     }
-  }), [players, killteams])
+  }), [players, getKillteamName])
 
   const resetScoreboard = () => {
     setPlayers([createPlayerState('Player 1'), createPlayerState('Player 2')])
@@ -922,8 +934,8 @@ export default function Scoreboard() {
   return (
     <>
       <Seo
-        title="Scoreboard"
-        description="Track turning point scoring, kill progress, and primary op bonuses for both players across a full Kill Team battle."
+        title={t('title')}
+        description={t('description')}
       />
       <div className="container">
         <Header />
@@ -945,9 +957,9 @@ export default function Scoreboard() {
               }}
             >
               <div>
-                <h1 style={{ margin: 0 }}>Scoreboard</h1>
+                <h1 style={{ margin: 0 }}>{t('title')}</h1>
                 <p style={{ margin: '0.35rem 0 0', color: 'var(--muted)' }}>
-                  Record Crit, Tac, and Kill Op VP each turning point, then reveal primaries to add the bonus at the end of the battle.
+                  {t('description')}
                 </p>
               </div>
               <button
@@ -962,7 +974,7 @@ export default function Scoreboard() {
                   cursor: 'pointer'
                 }}
               >
-                Reset scoreboard
+                {t('reset')}
               </button>
             </div>
 
@@ -1007,11 +1019,11 @@ export default function Scoreboard() {
                       <span style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--accent)' }}>{summary.total}</span>
                     </div>
                   <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', fontSize: '0.8rem', color: 'var(--muted)', justifyContent: 'center' }}>
-                    <span>Crit {summary.critTotal}</span>
-                    <span>• Tac {summary.tacTotal}</span>
-                    <span>• Kill {summary.killTotal}</span>
-                    {summary.primaryBonus > 0 && <span>• Bonus {summary.primaryBonus}</span>}
-                    <span>• CP {summary.cp}</span>
+                    <span>{t('critOp')} {summary.critTotal}</span>
+                    <span>• {t('tacOp')} {summary.tacTotal}</span>
+                    <span>• {t('killOp')} {summary.killTotal}</span>
+                    {summary.primaryBonus > 0 && <span>• {t('primaryBonus')} {summary.primaryBonus}</span>}
+                    <span>• {t('cp')} {summary.cp}</span>
                   </div>
                 </div>
               ))}
@@ -1059,12 +1071,12 @@ export default function Scoreboard() {
                 lineHeight: 1.6
               }}
             >
-              <strong style={{ display: 'block', marginBottom: '0.35rem', color: 'var(--text)' }}>Quick reference</strong>
+              <strong style={{ display: 'block', marginBottom: '0.35rem', color: 'var(--text)' }}>{t('quickReference')}</strong>
               <ul style={{ margin: 0, paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                <li>Score up to 2 VP each turning point for both Crit and Tac ops (starting at TP2).</li>
-                <li>Kill Op VP unlock as enemy operatives are incapacitated following the kill grade chart.</li>
-                <li>When primaries are revealed, add half of the total VP from the chosen op (rounded down).</li>
-                <li>Use the reset button at any time to clear both cards and begin a new match.</li>
+                <li>{t('quickReference1')}</li>
+                <li>{t('quickReference2')}</li>
+                <li>{t('quickReference3')}</li>
+                <li>{t('quickReference4')}</li>
               </ul>
             </div>
           </div>

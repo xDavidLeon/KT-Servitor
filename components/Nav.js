@@ -1,9 +1,11 @@
 // components/Nav.js
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useTranslations } from '../lib/i18n'
 
 export default function Nav(){
   const r = useRouter()
+  const t = useTranslations('nav')
   
   const Item = ({href,label,isActive}) => {
     const currentPath = r.asPath?.split('?')[0] || r.pathname
@@ -24,19 +26,19 @@ export default function Nav(){
     }
 
     const navItems = [
-      { key: 'home', href: '/', label: 'Home', isActive: (path) => path === '/' },
-      { key: 'sequence', href: '/sequence', label: 'Game Sequence', isActive: (path) => path === '/sequence' || path.startsWith('/sequence/') },
-      { key: 'rules', href: '/rules', label: 'Game Rules', isActive: (path) => path === '/rules' || path.startsWith('/rules/') },
-      { key: 'ops', href: '/ops', label: 'Ops', isActive: (path) => path === '/ops' || path.startsWith('/ops/') },
-      { key: 'killteams', href: '/killteams', label: 'Kill Teams', isActive: (path) => path === '/killteams' || path.startsWith('/killteams/') },
-      { key: 'scoreboard', href: '/scoreboard', label: 'Scoreboard', isActive: (path) => path === '/scoreboard' }
+      { key: 'home', href: '/', labelKey: 'home', isActive: (path) => path === '/' },
+      { key: 'sequence', href: '/sequence', labelKey: 'gameSequence', isActive: (path) => path === '/sequence' || path.startsWith('/sequence/') },
+      { key: 'rules', href: '/rules', labelKey: 'gameRules', isActive: (path) => path === '/rules' || path.startsWith('/rules/') },
+      { key: 'ops', href: '/ops', labelKey: 'ops', isActive: (path) => path === '/ops' || path.startsWith('/ops/') },
+      { key: 'killteams', href: '/killteams', labelKey: 'killTeams', isActive: (path) => path === '/killteams' || path.startsWith('/killteams/') },
+      { key: 'scoreboard', href: '/scoreboard', labelKey: 'scoreboard', isActive: (path) => path === '/scoreboard' }
     ]
 
   return (
     <nav className="nav-links" aria-label="Primary navigation">
       <div className="nav-links-row">
-        {navItems.map(({ key, href, label, isActive }) => (
-          <Item key={key} href={href} label={label} isActive={isActive} />
+        {navItems.map(({ key, href, labelKey, isActive }) => (
+          <Item key={key} href={href} label={t(labelKey)} isActive={isActive} />
         ))}
       </div>
     </nav>

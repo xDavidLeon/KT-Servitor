@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import RichText from './RichText'
+import { useTranslations } from '../lib/i18n'
 
 function WeaponRuleTooltip({ rule, children }) {
   const [showTooltip, setShowTooltip] = useState(false)
@@ -88,6 +89,7 @@ function WeaponRuleTooltip({ rule, children }) {
 }
 
 export default function OperativeCard({ operative }) {
+  const t = useTranslations('operative')
   const anchorId = operative?.id ? `operative-${operative.id}` : undefined
   const baseSizeText = (() => {
     const value = operative?.baseSize
@@ -101,21 +103,21 @@ export default function OperativeCard({ operative }) {
     (operative?.factionKeyword && operative.factionKeyword !== 'UNKNOWN') ||
     keywords.length > 0
   const showKeywordSection = hasKeywords || !!baseSizeText
-  const getStatIcon = (label) => {
+  const getStatIcon = (key) => {
     const iconMap = {
-      'APL': '/img/apl.svg',
-      'MOVE': '/img/move.svg',
-      'SAVE': '/img/save.svg',
-      'WOUNDS': '/img/wounds.svg'
+      'apl': '/img/apl.svg',
+      'move': '/img/move.svg',
+      'save': '/img/save.svg',
+      'wounds': '/img/wounds.svg'
     }
-    return iconMap[label] || null
+    return iconMap[key] || null
   }
 
   const headerStats = [
-    { label: 'APL', value: operative?.apl },
-    { label: 'MOVE', value: operative?.move },
-    { label: 'SAVE', value: operative?.save },
-    { label: 'WOUNDS', value: operative?.wounds }
+    { key: 'apl', label: t('apl'), value: operative?.apl },
+    { key: 'move', label: t('move'), value: operative?.move },
+    { key: 'save', label: t('save'), value: operative?.save },
+    { key: 'wounds', label: t('wounds'), value: operative?.wounds }
   ].filter(stat => stat.value !== null && stat.value !== undefined && stat.value !== '')
 
   return (
@@ -125,9 +127,9 @@ export default function OperativeCard({ operative }) {
         {headerStats.length > 0 && (
           <div className="operative-header-stats">
             {headerStats.map(stat => {
-              const iconPath = getStatIcon(stat.label)
+              const iconPath = getStatIcon(stat.key)
               return (
-                <div key={stat.label} className="operative-header-stat">
+                <div key={stat.key} className="operative-header-stat">
                   <span className="label">{stat.label}</span>
                   <span className="value" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
                     {iconPath && (
@@ -338,7 +340,7 @@ export default function OperativeCard({ operative }) {
 
         {Array.isArray(operative.specialRules) && operative.specialRules.length > 0 && (
           <div className="operative-abilities">
-            <strong className="operative-abilities-title">Abilities</strong>
+            <strong className="operative-abilities-title">{t('abilities')}</strong>
             <div className="operative-abilities-list">
               {operative.specialRules.map((ability, idx) => {
                 const key = ability?.name ? `${ability.name}-${idx}` : `ability-${idx}`
@@ -358,7 +360,7 @@ export default function OperativeCard({ operative }) {
         
         {Array.isArray(operative.specialActions) && operative.specialActions.length > 0 && (
           <div className="operative-actions">
-            <strong className="operative-actions-title">Options</strong>
+            <strong className="operative-actions-title">{t('options')}</strong>
             <div className="operative-actions-list">
               {operative.specialActions.map((action, idx) => {
                 const key = action?.name ? `${action.name}-${idx}` : `action-${idx}`

@@ -5,6 +5,7 @@ import { db } from '../lib/db'
 import { ensureIndex } from '../lib/search'
 import { checkForUpdates } from '../lib/update'
 import Seo from '../components/Seo'
+import { useTranslations } from '../lib/i18n'
 
 let cachedSequenceSteps = null
 
@@ -30,6 +31,8 @@ function processSequenceText(text) {
 }
 
 export default function Sequence(){
+  const t = useTranslations('sequence')
+  const tCommon = useTranslations('common')
   const [steps,setSteps] = useState(cachedSequenceSteps || [])
   const [loaded, setLoaded] = useState(Boolean(cachedSequenceSteps))
 
@@ -60,15 +63,15 @@ export default function Sequence(){
   return (
     <>
       <Seo
-        title="Game Sequence"
-        description="Step through every phase of the Kill Team 2024 round sequence with clear reference text for each action."
+        title={t('title')}
+        description={t('description')}
       />
       <div className="container">
         <Header />
         <div className="card">
-          <h2 style={{marginTop:0}}>Game Sequence</h2>
-          {!loaded && <div className="muted">Loading…</div>}
-          {loaded && steps.length===0 && <div className="muted">No steps found.</div>}
+          <h2 style={{marginTop:0}}>{t('title')}</h2>
+          {!loaded && <div className="muted">{tCommon('loading')}</div>}
+          {loaded && steps.length===0 && <div className="muted">{t('noSteps')}</div>}
           {loaded && (
             <ol style={{ listStyle: 'none', padding: 0, margin: 0 }}>
             {steps.map((s, index)=> {
