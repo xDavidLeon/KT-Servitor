@@ -954,57 +954,57 @@ export default function Scoreboard() {
             </div>
           </div>
 
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '1.5rem'
-            }}
-          >
-            {players.map((player, index) => (
-              <PlayerCard
-                key={index}
-                index={index}
-                player={player}
-                killteams={killteams}
-                isCompact={isCompact}
-                onChange={(updater) => {
-                  setPlayers(prev =>
-                    prev.map((current, idx) =>
-                      idx === index
-                        ? sanitizePlayer(
-                          typeof updater === 'function' ? updater(current) : updater,
-                          `Player ${idx + 1}`
-                        )
-                        : current
+            <div
+              style={{
+                display: 'grid',
+                gap: '1.5rem',
+                gridTemplateColumns: '1fr'
+              }}
+            >
+              {players.map((player, index) => (
+                <PlayerCard
+                  key={index}
+                  index={index}
+                  player={player}
+                  killteams={killteams}
+                  isCompact={isCompact}
+                  onChange={(updater) => {
+                    setPlayers(prev =>
+                      prev.map((current, idx) =>
+                        idx === index
+                          ? sanitizePlayer(
+                            typeof updater === 'function' ? updater(current) : updater,
+                            `Player ${idx + 1}`
+                          )
+                          : current
+                      )
                     )
-                  )
-                }}
-              />
-            ))}
-          </div>
+                  }}
+                />
+              ))}
+            </div>
 
-          <div
-            style={{
-              padding: '1rem',
-              borderRadius: '12px',
-              border: '1px solid #1f2433',
-              background: '#10131a',
-              color: 'var(--muted)',
-              fontSize: '0.85rem',
-              lineHeight: 1.6
-            }}
-          >
-            <strong style={{ display: 'block', marginBottom: '0.35rem', color: 'var(--text)' }}>Quick reference</strong>
-            <ul style={{ margin: 0, paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-              <li>Score up to 2 VP each turning point for both Crit and Tac ops (starting at TP2).</li>
-              <li>Kill Op VP unlock as enemy operatives are incapacitated following the kill grade chart.</li>
-              <li>When primaries are revealed, add half of the total VP from the chosen op (rounded down).</li>
-              <li>Use the reset button at any time to clear both cards and begin a new match.</li>
-            </ul>
+            <div
+              style={{
+                padding: '1rem',
+                borderRadius: '12px',
+                border: '1px solid #1f2433',
+                background: '#10131a',
+                color: 'var(--muted)',
+                fontSize: '0.85rem',
+                lineHeight: 1.6
+              }}
+            >
+              <strong style={{ display: 'block', marginBottom: '0.35rem', color: 'var(--text)' }}>Quick reference</strong>
+              <ul style={{ margin: 0, paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+                <li>Score up to 2 VP each turning point for both Crit and Tac ops (starting at TP2).</li>
+                <li>Kill Op VP unlock as enemy operatives are incapacitated following the kill grade chart.</li>
+                <li>When primaries are revealed, add half of the total VP from the chosen op (rounded down).</li>
+                <li>Use the reset button at any time to clear both cards and begin a new match.</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </>
-  )
-}
+      </>
+    )
+  }
