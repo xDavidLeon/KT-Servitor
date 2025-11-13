@@ -221,22 +221,22 @@ function Stepper({
         disabled={disabled || value <= min}
         aria-label={ariaLabel ? `${ariaLabel} decrease` : undefined}
         style={{
-          background: disabled ? '#141828' : '#0e1016',
+          background: (disabled || value <= min) ? '#141828' : '#0e1016',
           border: '1px solid #2a2f3f',
-          color: disabled ? 'var(--muted)' : 'var(--text)',
+          color: (disabled || value <= min) ? 'var(--muted)' : 'var(--text)',
           borderRadius: '8px',
           width: buttonWidth,
           height,
           fontSize,
           cursor: disabled || value <= min ? 'not-allowed' : 'pointer',
-          opacity: disabled ? 0.55 : 1,
+          opacity: (disabled || value <= min) ? 0.55 : 1,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           lineHeight: 1
         }}
       >
-        –
+        −
       </button>
       <div
         style={{
@@ -255,15 +255,15 @@ function Stepper({
         disabled={disabled || value >= max}
         aria-label={ariaLabel ? `${ariaLabel} increase` : undefined}
         style={{
-          background: disabled ? '#141828' : '#0e1016',
+          background: (disabled || value >= max) ? '#141828' : '#0e1016',
           border: '1px solid #2a2f3f',
-          color: disabled ? 'var(--muted)' : 'var(--text)',
+          color: (disabled || value >= max) ? 'var(--muted)' : 'var(--text)',
           borderRadius: '8px',
           width: buttonWidth,
           height,
           fontSize,
           cursor: disabled || value >= max ? 'not-allowed' : 'pointer',
-          opacity: disabled ? 0.55 : 1,
+          opacity: (disabled || value >= max) ? 0.55 : 1,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -422,87 +422,33 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             style={{ width: '100%' }}
           />
         </label>
-        <div
-          style={{
-            display: 'grid',
-            gap: '0.75rem',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))'
-          }}
-        >
-          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-            <span style={{ fontSize: '0.85rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Kill Team
-            </span>
-            <select
-              value={player.killteamId}
-              onChange={(event) => {
-                const value = event.target.value
-                updatePlayer(prev => ({ ...prev, killteamId: value }))
-              }}
-            >
-              <option value="">Select kill team…</option>
-              {killteams.map(team => (
-                <option key={team.killteamId} value={team.killteamId}>
-                  {team.killteamName}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-            <span style={{ fontSize: '0.85rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Display Name (optional)
-            </span>
-            <input
-              type="text"
-              value={player.customKillteam}
-              onChange={(event) => {
-                const value = event.target.value
-                updatePlayer(prev => ({ ...prev, customKillteam: value }))
-              }}
-              placeholder="Team Name"
-            />
-          </label>
-        </div>
-        <div
-          style={{
-            marginTop: '0.75rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem'
-          }}
-        >
-          <Stepper
-            value={player.cp}
-            min={0}
-            max={12}
-            ariaLabel="Command points"
-            onChange={(nextValue) => {
-              updatePlayer(prev => ({ ...prev, cp: nextValue }))
-            }}
-          />
-          <span
-            style={{
-              fontSize: '0.85rem',
-              color: 'var(--muted)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              minWidth: '2.5rem',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center'
+        <label style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+          <span style={{ fontSize: '0.85rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Kill Team
+          </span>
+          <select
+            value={player.killteamId}
+            onChange={(event) => {
+              const value = event.target.value
+              updatePlayer(prev => ({ ...prev, killteamId: value }))
             }}
           >
-            CP
-          </span>
-        </div>
+            <option value="">Select kill team…</option>
+            {killteams.map(team => (
+              <option key={team.killteamId} value={team.killteamId}>
+                {team.killteamName}
+              </option>
+            ))}
+          </select>
+        </label>
       </header>
 
       <section>
-        <h3 style={{ marginTop: 0, marginBottom: '0.75rem' }}>Scoring</h3>
+        <h3 style={{ marginTop: 0, marginBottom: '0.75rem', textAlign: 'center' }}>Scoring</h3>
         {isCompact ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
             {TURNING_POINTS.map((tp, tpIndex) => {
-              const locked = tpIndex === 0
+              if (tpIndex === 0) return null
               return (
                 <div
                   key={tp}
@@ -558,19 +504,22 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
               <thead>
                 <tr>
                   <th style={{ textAlign: 'left', padding: '0.45rem', fontSize: '0.8rem', color: 'var(--muted)' }} />
-                  {TURNING_POINTS.map(tp => (
-                    <th
-                      key={tp}
-                      style={{
-                        textAlign: 'center',
-                        padding: '0.45rem',
-                        fontSize: '0.8rem',
-                        color: 'var(--muted)'
-                      }}
-                    >
-                      TP{tp}
-                    </th>
-                  ))}
+                  {TURNING_POINTS.map((tp, tpIndex) => {
+                    if (tpIndex === 0) return null
+                    return (
+                      <th
+                        key={tp}
+                        style={{
+                          textAlign: 'center',
+                          padding: '0.45rem',
+                          fontSize: '0.8rem',
+                          color: 'var(--muted)'
+                        }}
+                      >
+                        TP{tp}
+                      </th>
+                    )
+                  })}
                 </tr>
               </thead>
               <tbody>
@@ -589,19 +538,22 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
                     >
                       {rowKey === 'crit' ? 'Crit Op' : 'Tac Op'}
                     </th>
-                    {TURNING_POINTS.map((_, tpIndex) => (
-                      <td
-                        key={tpIndex}
-                        style={{
-                          textAlign: 'center',
-                          padding: '0.55rem 0.35rem',
-                          borderBottom: '1px solid #1f2433',
-                          minWidth: '3.4rem'
-                        }}
-                      >
-                        {renderVpControl(rowKey, tpIndex)}
-                      </td>
-                    ))}
+                    {TURNING_POINTS.map((_, tpIndex) => {
+                      if (tpIndex === 0) return null
+                      return (
+                        <td
+                          key={tpIndex}
+                          style={{
+                            textAlign: 'center',
+                            padding: '0.55rem 0.35rem',
+                            borderBottom: '1px solid #1f2433',
+                            minWidth: '3.4rem'
+                          }}
+                        >
+                          {renderVpControl(rowKey, tpIndex)}
+                        </td>
+                      )
+                    })}
                   </tr>
                 ))}
               </tbody>
@@ -625,11 +577,12 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             padding: '1rem',
             background: '#10131a',
             borderRadius: '12px',
-            border: '1px solid #1f2433'
+            border: '1px solid #1f2433',
+            alignItems: 'center'
           }}
         >
           <h4 style={{ margin: 0 }}>Kill Op</h4>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.65rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: '0.65rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'center' }}>
               <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 Killed
@@ -688,17 +641,19 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             padding: '1rem',
             background: '#10131a',
             borderRadius: '12px',
-            border: '1px solid #1f2433'
+            border: '1px solid #1f2433',
+            alignItems: 'center'
           }}
         >
           <h4 style={{ margin: 0 }}>Primary Op</h4>
-          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', width: '100%', alignItems: 'center' }}>
             <select
               value={player.primaryOp}
               onChange={(event) => {
                 const value = event.target.value
                 updatePlayer(prev => ({ ...prev, primaryOp: value }))
               }}
+              style={{ width: '100%', maxWidth: '300px' }}
             >
               {PRIMARY_OPTIONS.map(option => (
                 <option key={option.value} value={option.value}>
@@ -723,14 +678,16 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
               display: 'flex',
               flexDirection: 'column',
               gap: '0.35rem',
-              fontSize: '0.9rem'
+              fontSize: '0.9rem',
+              width: '100%',
+              alignItems: 'center'
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}>
               <span style={{ color: 'var(--muted)' }}>Primary op VP</span>
               <strong>{totals.primarySource}</strong>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}>
               <span style={{ color: 'var(--muted)' }}>Primary bonus</span>
               <strong>+ {totals.primaryBonus}</strong>
             </div>
@@ -738,52 +695,164 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
         </div>
       </section>
 
+      <section>
+        <table
+          style={{
+            width: '100%',
+            borderCollapse: 'collapse',
+            tableLayout: 'fixed'
+          }}
+        >
+          <tbody>
+            {[
+              {
+                key: 'crit',
+                label: 'Crit Op',
+                value: totals.critTotal + (player.primaryOp === 'crit' ? totals.primaryBonus : 0)
+              },
+              {
+                key: 'tac',
+                label: 'Tac Op',
+                value: totals.tacTotal + (player.primaryOp === 'tac' ? totals.primaryBonus : 0)
+              },
+              {
+                key: 'kill',
+                label: 'Kill Op',
+                value: totals.killTotal + (player.primaryOp === 'kill' ? totals.primaryBonus : 0)
+              }
+            ].map(item => (
+              <tr key={item.key}>
+                <th
+                  scope="row"
+                  style={{
+                    textAlign: 'center',
+                    padding: '0.75rem 0.5rem',
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
+                    color: 'var(--text)',
+                    borderBottom: '1px solid #1f2433',
+                    width: '50%'
+                  }}
+                >
+                  {item.label}
+                </th>
+                <td
+                  style={{
+                    textAlign: 'center',
+                    padding: '0.75rem 0.5rem',
+                    fontSize: '1.1rem',
+                    fontWeight: 600,
+                    color: item.key === player.primaryOp ? 'var(--accent)' : 'var(--text)',
+                    borderBottom: '1px solid #1f2433',
+                    width: '50%'
+                  }}
+                >
+                  {item.value}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
       <section
         style={{
-          display: 'grid',
-          gap: '0.75rem',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))'
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.5rem',
+          paddingTop: '0.5rem'
         }}
       >
-        {[
-          {
-            key: 'crit',
-            label: 'Crit Op VP',
-            value: totals.critTotal + (player.primaryOp === 'crit' ? totals.primaryBonus : 0)
-          },
-          {
-            key: 'tac',
-            label: 'Tac Op VP',
-            value: totals.tacTotal + (player.primaryOp === 'tac' ? totals.primaryBonus : 0)
-          },
-          {
-            key: 'kill',
-            label: 'Kill Op VP',
-            value: totals.killTotal + (player.primaryOp === 'kill' ? totals.primaryBonus : 0)
-          }
-        ].map(item => (
-          <div
-            key={item.key}
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.45rem'
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => {
+              const next = clamp(player.cp - 1, 0, 12)
+              if (next !== player.cp) {
+                updatePlayer(prev => ({ ...prev, cp: next }))
+              }
+            }}
+            disabled={player.cp <= 0}
+            aria-label="Command points decrease"
             style={{
-              padding: '0.9rem',
-              background: '#10131a',
-              borderRadius: '12px',
-              border: '1px solid #1f2433',
+              background: player.cp <= 0 ? '#141828' : '#0e1016',
+              border: '1px solid #2a2f3f',
+              color: player.cp <= 0 ? 'var(--muted)' : 'var(--text)',
+              borderRadius: '8px',
+              width: '2.4rem',
+              height: '2.4rem',
+              fontSize: '1.1rem',
+              cursor: player.cp <= 0 ? 'not-allowed' : 'pointer',
+              opacity: player.cp <= 0 ? 0.55 : 1,
               display: 'flex',
-              flexDirection: 'column',
-              gap: '0.35rem',
               alignItems: 'center',
-              textAlign: 'center'
+              justifyContent: 'center',
+              lineHeight: 1
             }}
           >
-            <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-              {item.label}
-            </span>
-            <strong style={{ fontSize: '1.4rem', color: item.key === player.primaryOp ? 'var(--accent)' : 'var(--text)' }}>
-              {item.value}
-            </strong>
+            −
+          </button>
+          <div
+            style={{
+              minWidth: '2.2rem',
+              textAlign: 'center',
+              fontWeight: 600,
+              fontSize: '1.1rem',
+              color: 'var(--text)'
+            }}
+          >
+            {player.cp}
           </div>
-        ))}
+          <span
+            style={{
+              fontSize: '1.1rem',
+              color: 'var(--muted)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 600
+            }}
+          >
+            CP
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              const next = clamp(player.cp + 1, 0, 12)
+              if (next !== player.cp) {
+                updatePlayer(prev => ({ ...prev, cp: next }))
+              }
+            }}
+            disabled={player.cp >= 12}
+            aria-label="Command points increase"
+            style={{
+              background: player.cp >= 12 ? '#141828' : '#0e1016',
+              border: '1px solid #2a2f3f',
+              color: player.cp >= 12 ? 'var(--muted)' : 'var(--text)',
+              borderRadius: '8px',
+              width: '2.4rem',
+              height: '2.4rem',
+              fontSize: '1.1rem',
+              cursor: player.cp >= 12 ? 'not-allowed' : 'pointer',
+              opacity: player.cp >= 12 ? 0.55 : 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              lineHeight: 1
+            }}
+          >
+            +
+          </button>
+        </div>
       </section>
     </section>
   )
@@ -845,14 +914,6 @@ export default function Scoreboard() {
       ...totals
     }
   }), [players, killteams])
-
-  const scoreDelta = Math.abs(playerSummaries[0]?.total - playerSummaries[1]?.total || 0)
-  const leader =
-    playerSummaries[0]?.total === playerSummaries[1]?.total
-      ? null
-      : playerSummaries[0]?.total > playerSummaries[1]?.total
-        ? playerSummaries[0]
-        : playerSummaries[1]
 
   const resetScoreboard = () => {
     setPlayers([createPlayerState('Player 1'), createPlayerState('Player 2')])
@@ -922,10 +983,11 @@ export default function Scoreboard() {
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '0.35rem'
+                    gap: '0.35rem',
+                    alignItems: 'center'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
                     <span
                       style={{
                         display: 'inline-block',
@@ -935,16 +997,16 @@ export default function Scoreboard() {
                         background: summary.color
                       }}
                     />
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                       <strong style={{ fontSize: '1.05rem' }}>{summary.name}</strong>
                       <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>{summary.killteam}</span>
                     </div>
                   </div>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.45rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.45rem', justifyContent: 'center' }}>
                       <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>VP</span>
                       <span style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--accent)' }}>{summary.total}</span>
                     </div>
-                  <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', fontSize: '0.8rem', color: 'var(--muted)' }}>
+                  <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', fontSize: '0.8rem', color: 'var(--muted)', justifyContent: 'center' }}>
                     <span>Crit {summary.critTotal}</span>
                     <span>• Tac {summary.tacTotal}</span>
                     <span>• Kill {summary.killTotal}</span>
@@ -953,27 +1015,6 @@ export default function Scoreboard() {
                   </div>
                 </div>
               ))}
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  gap: '0.35rem',
-                  padding: '0.75rem 0',
-                  borderTop: '1px solid #1f2433'
-                }}
-              >
-                {leader ? (
-                  <>
-                    <span style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>Leader</span>
-                    <strong style={{ fontSize: '1.1rem' }}>
-                      {leader.name} ahead by {scoreDelta} VP
-                    </strong>
-                  </>
-                ) : (
-                  <strong style={{ fontSize: '1.1rem' }}>The game is tied</strong>
-                )}
-              </div>
             </div>
           </div>
 
@@ -981,7 +1022,7 @@ export default function Scoreboard() {
               style={{
                 display: 'grid',
                 gap: '1.5rem',
-                gridTemplateColumns: '1fr'
+                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))'
               }}
             >
               {players.map((player, index) => (

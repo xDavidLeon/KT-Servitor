@@ -9,11 +9,11 @@
     "lint": "echo \"(no lint)\""
   },
   "dependencies": {
-    "dexie": "^4.0.8",
+    "dexie": "^4.2.1",
     "gray-matter": "^4.0.3",
-    "marked": "^12.0.2",
-    "minisearch": "^7.1.0",
-    "next": "^16.0.1",
+    "marked": "^17.0.0",
+    "minisearch": "^7.2.0",
+    "next": "^16.0.3",
     "next-pwa": "^5.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -23,5 +23,16 @@
     "@stackbit/cli": "^0.3.133",
     "@stackbit/cms-git": "^1.0.35",
     "@stackbit/types": "^2.1.14"
+  },
+  "overrides": {
+    "rimraf": "^5.0.0",
+    "axios": "^1.7.0",
+    "tmp": "^0.2.3",
+    "lodash.pick": "npm:lodash@^4.17.21",
+    "lodash.set": "npm:lodash@^4.17.21",
+    "@octokit/plugin-paginate-rest": "^14.0.0",
+    "@octokit/request": "^9.0.0",
+    "@octokit/request-error": "^6.0.0",
+    "esbuild": "^0.25.0"
   }
 }
