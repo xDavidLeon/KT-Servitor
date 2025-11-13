@@ -13,6 +13,7 @@ const TAC_OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamj
 const TAC_OPS_UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
 const TAC_OPS_MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
 const WEAPON_RULES_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/weapon_rules.json'
+const UNIVERSAL_EQUIPMENT_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_equipment.json'
 
 const ARCHETYPE_PILL_MAP = {
   infiltration: { background: '#2b2d33', color: '#f4f6ff' },
@@ -811,6 +812,8 @@ export default function KillteamPage() {
   const [tacOpsLoaded, setTacOpsLoaded] = useState(Boolean(cachedTacOpsByArchetype))
   const [tacOpsError, setTacOpsError] = useState(null)
   const [weaponRulesMap, setWeaponRulesMap] = useState(cachedWeaponRules || new Map())
+  const [equipmentActions, setEquipmentActions] = useState([])
+  const [equipmentActionsLoaded, setEquipmentActionsLoaded] = useState(false)
 
   useEffect(() => {
     if (!id) return
@@ -843,7 +846,9 @@ export default function KillteamPage() {
       try {
         const rows = await db.universalEquipment.toArray()
         if (cancelled) return
-        setUniversalEquipmentRecords(sortUniversalEquipmentRows(rows))
+        // Filter for universal equipment only (killteamId === null)
+        const universalRows = rows.filter(row => row.killteamId === null || row.killteamId === undefined)
+        setUniversalEquipmentRecords(sortUniversalEquipmentRows(universalRows))
       } catch (err) {
         if (cancelled) return
         console.warn('Failed to load universal equipment dataset', err)
@@ -851,7 +856,34 @@ export default function KillteamPage() {
       }
     }
 
+    const loadEquipmentActions = async () => {
+      try {
+        const res = await fetch(UNIVERSAL_EQUIPMENT_URL, { cache: 'no-store' })
+        if (!res.ok) {
+          throw new Error(`Failed to load universal equipment (${res.status})`)
+        }
+        const json = await res.json()
+        if (cancelled) return
+        
+        // The actions are in a root-level "actions" array in the JSON
+        const rawActions = Array.isArray(json?.actions) ? json.actions : []
+        const normalizedActions = rawActions
+          .map(action => normaliseTacOpsAction(action))
+          .filter(action => action !== null)
+        
+        // Store the normalized actions (they have AP, type, etc. fields)
+        setEquipmentActions(normalizedActions)
+        setEquipmentActionsLoaded(true)
+      } catch (err) {
+        if (cancelled) return
+        console.error('Failed to load equipment actions', err)
+        setEquipmentActions([])
+        setEquipmentActionsLoaded(true)
+      }
+    }
+
     loadUniversalEquipment()
+    loadEquipmentActions()
 
     return () => {
       cancelled = true
@@ -913,7 +945,9 @@ export default function KillteamPage() {
     const handleUpdate = async () => {
       try {
         const rows = await db.universalEquipment.toArray()
-        setUniversalEquipmentRecords(sortUniversalEquipmentRows(rows))
+        // Filter for universal equipment only (killteamId === null)
+        const universalRows = rows.filter(row => row.killteamId === null || row.killteamId === undefined)
+        setUniversalEquipmentRecords(sortUniversalEquipmentRows(universalRows))
       } catch (err) {
         console.warn('Failed to refresh universal equipment dataset', err)
       }
@@ -1131,6 +1165,7 @@ export default function KillteamPage() {
     return (universalEquipmentRecords || [])
       .map(normaliseEquipment)
       .filter(Boolean)
+      .filter(item => item.killteamId === null || item.killteamId === undefined)
   }, [universalEquipmentRecords])
 
   const hasEquipment = factionEquipment.length > 0 || universalEquipment.length > 0
@@ -1820,15 +1855,161 @@ export default function KillteamPage() {
                       Universal Equipment
                     </h4>
                     <div className="card-section-list">
-                      {universalEquipment.map((item, idx) => (
-                        <div key={item.id || idx} id={item.anchorId} className="ability-card">
-                          <div className="ability-card-header">
-                            <h4 className="ability-card-title">{item.name}</h4>
-                            {item.cost && <span className="ability-card-ap">{item.cost}</span>}
-                          </div>
-                          {item.description && <RichText className="ability-card-body" text={item.description} />}
-                        </div>
-                      ))}
+                      {(() => {
+                        // Create a map of action IDs to action definitions for quick lookup
+                        const actionsMap = new Map()
+                        if (equipmentActionsLoaded && Array.isArray(equipmentActions)) {
+                          for (const action of equipmentActions) {
+                            if (action && action.id) {
+                              actionsMap.set(action.id, action)
+                            }
+                          }
+                        }
+                        
+                        return universalEquipment.map((item, idx) => {
+                          // Get the original equipment record to access actions
+                          const equipmentRecord = universalEquipmentRecords.find(rec => {
+                            const normalized = normaliseEquipment(rec)
+                            return normalized && (normalized.id === item.id || normalized.anchorId === item.anchorId)
+                          })
+                          
+                          // Get actions for this equipment item
+                          const equipmentActionIds = Array.isArray(equipmentRecord?.actions) ? equipmentRecord.actions.filter(Boolean) : []
+                          const equipmentActionsList = equipmentActionIds
+                            .map(actionId => actionsMap.get(actionId))
+                            .filter(action => action !== undefined)
+                            .map(action => ({
+                              id: action.id,
+                              name: action.name,
+                              ap: action.AP ?? null,
+                              description: action.description || '',
+                              effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
+                              conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
+                              packs: Array.isArray(action.packs) ? action.packs.filter(Boolean) : [],
+                              type: (action.type || '').toLowerCase() || 'ability',
+                              fromEquipment: true
+                            }))
+                          
+                          return (
+                            <div key={item.id || idx} id={item.anchorId} className="ability-card">
+                              <div className="ability-card-header">
+                                <h4 className="ability-card-title">{item.name}</h4>
+                                {item.cost && <span className="ability-card-ap">{item.cost}</span>}
+                              </div>
+                              {item.description && <RichText className="ability-card-body" text={item.description} />}
+                              {(() => {
+                                const effectsText = Array.isArray(equipmentRecord?.effects)
+                                  ? equipmentRecord.effects.filter(Boolean).join(', ')
+                                  : (equipmentRecord?.effects || '')
+                                const trimmed = effectsText.trim()
+                                if (!trimmed) return null
+                                return (
+                                  <div className="muted" style={{ marginTop: '0.35rem', fontSize: '0.85rem' }}>
+                                    {trimmed}
+                                  </div>
+                                )
+                              })()}
+                              {/* Render actions inside the equipment card */}
+                              {equipmentActionsList.length > 0 && (
+                                <div style={{ marginTop: '1rem', borderTop: '1px solid #2a2f3f', paddingTop: '1rem' }}>
+                                  {equipmentActionsList.map((action, actionIndex) => {
+                                    const apLabel = action.ap === null || action.ap === undefined ? null : `${action.ap} AP`
+                                    const showEquipmentLabel = action.fromEquipment === true
+                                    const hasPacks = action.packs && action.packs.length > 0
+                                    const actionType = action.type || 'ability'
+                                    const actionTypeLabel = (actionType === 'universal' ? 'Universal' : actionType === 'mission' ? 'Mission' : actionType === 'ability' ? 'Ability' : actionType.charAt(0).toUpperCase() + actionType.slice(1)) + ' Action'
+                                    
+                                    return (
+                                      <div key={`${item.id}-${action.id}-${actionIndex}`} id={`equipment-action-${item.id || item.anchorId}-${action.id}${actionIndex > 0 ? `-${actionIndex}` : ''}`} style={{ marginBottom: actionIndex < equipmentActionsList.length - 1 ? '1rem' : 0 }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                                          <h4 className="ability-card-title" style={{ margin: 0 }}>{action.name.toUpperCase()}</h4>
+                                          {apLabel && <span className="ability-card-ap">{apLabel}</span>}
+                                        </div>
+                                        {(action.description || action.effects.length > 0 || action.conditions.length > 0) && (
+                                          <div className="ability-card-body" style={{ marginBottom: '0.75rem' }}>
+                                            {action.description && (
+                                              <p style={{ marginTop: 0 }}>{action.description}</p>
+                                            )}
+                                            {action.effects.length > 0 && (
+                                              <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                                                {action.effects.map((effect, effectIndex) => (
+                                                  <li
+                                                    key={`${action.id}-effect-${effectIndex}`}
+                                                    style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
+                                                  >
+                                                    <span aria-hidden="true" style={{ color: '#2ecc71', fontWeight: 'bold' }}>➤</span>
+                                                    <span>{typeof effect === 'string' ? effect : String(effect)}</span>
+                                                  </li>
+                                                ))}
+                                              </ul>
+                                            )}
+                                            {action.conditions.length > 0 && (
+                                              <ul style={{ margin: action.effects.length ? '0.5rem 0 0 0' : 0, padding: 0, listStyle: 'none' }}>
+                                                {action.conditions.map((condition, conditionIndex) => (
+                                                  <li
+                                                    key={`${action.id}-condition-${conditionIndex}`}
+                                                    style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
+                                                  >
+                                                    <span aria-hidden="true" style={{ color: '#e74c3c', fontWeight: 'bold' }}>◆</span>
+                                                    <span>{typeof condition === 'string' ? condition : String(condition)}</span>
+                                                  </li>
+                                                ))}
+                                              </ul>
+                                            )}
+                                          </div>
+                                        )}
+                                        {/* Footer: Action type centered, Packs and Equipment on right */}
+                                        <div
+                                          style={{
+                                            position: 'relative',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            marginTop: '0.75rem',
+                                            minHeight: '1.5rem'
+                                          }}
+                                        >
+                                          {/* Action type centered */}
+                                          <span style={{
+                                            color: 'var(--muted)',
+                                            fontSize: '0.85rem'
+                                          }}>
+                                            - {actionTypeLabel} -
+                                          </span>
+                                          {/* Packs and Equipment on right - absolutely positioned */}
+                                          {(hasPacks || showEquipmentLabel) && (
+                                            <div
+                                              style={{
+                                                position: 'absolute',
+                                                right: 0,
+                                                display: 'flex',
+                                                flexWrap: 'wrap',
+                                                gap: '0.35rem',
+                                                alignItems: 'center'
+                                              }}
+                                            >
+                                              {hasPacks && action.packs.map(pack => (
+                                                <span key={`${action.id}-pack-${pack}`} className="pill">
+                                                  {pack}
+                                                </span>
+                                              ))}
+                                              {showEquipmentLabel && (
+                                                <span key={`${action.id}-equipment`} className="pill">
+                                                  Equipment
+                                                </span>
+                                              )}
+                                            </div>
+                                          )}
+                                        </div>
+                                      </div>
+                                    )
+                                  })}
+                                </div>
+                              )}
+                            </div>
+                          )
+                        })
+                      })()}
                     </div>
                   </>
                 )}
