@@ -8,7 +8,7 @@ marked.setOptions({
   smartypants: true,
 });
 
-export default function RichText({ text, className, as: Component = 'div', inline = false }) {
+export default function RichText({ text, className, as: Component = 'div', inline = false, ...rest }) {
   const html = useMemo(() => {
     if (!text) return '';
     const value = typeof text === 'string' ? text : String(text);
@@ -26,6 +26,7 @@ export default function RichText({ text, className, as: Component = 'div', inlin
     <Component
       className={combinedClassName}
       dangerouslySetInnerHTML={{ __html: html }}
+      {...rest}
     />
   );
 }
