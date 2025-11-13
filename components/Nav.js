@@ -21,14 +21,15 @@ export default function Nav(){
         {label}
       </Link>
     )
-  }
-  
+    }
+
     const navItems = [
       { key: 'home', href: '/', label: 'Home', isActive: (path) => path === '/' },
       { key: 'sequence', href: '/sequence', label: 'Game Sequence', isActive: (path) => path === '/sequence' || path.startsWith('/sequence/') },
       { key: 'rules', href: '/rules', label: 'Game Rules', isActive: (path) => path === '/rules' || path.startsWith('/rules/') },
       { key: 'ops', href: '/ops', label: 'Ops', isActive: (path) => path === '/ops' || path.startsWith('/ops/') },
-      { key: 'killteams', href: '/killteams', label: 'Kill Teams', isActive: (path) => path === '/killteams' || path.startsWith('/killteams/') }
+      { key: 'killteams', href: '/killteams', label: 'Kill Teams', isActive: (path) => path === '/killteams' || path.startsWith('/killteams/') },
+      { key: 'scoreboard', href: '/scoreboard', label: 'Scoreboard', isActive: (path) => path === '/scoreboard' }
     ]
 
   return (
