@@ -598,50 +598,34 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
           }}
         >
           <h4 style={{ margin: 0 }}>Kill Op Tracker</h4>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.65rem' }}>
-              <div>
-                <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                  Enemy operatives
-                </span>
-                <div style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text)' }}>{player.enemyOperatives}</div>
-              </div>
-              <Stepper
-                value={player.enemyOperatives}
-                min={1}
-                max={30}
-                ariaLabel="Enemy operatives at start"
-                onChange={(nextValue) => {
-                  updatePlayer(prev => {
-                    const updated = { ...prev }
-                    updated.enemyOperatives = nextValue
-                    if (updated.enemyKilled > nextValue) {
-                      updated.enemyKilled = nextValue
-                    }
-                    return updated
-                  })
-                }}
-                size="lg"
-              />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.65rem' }}>
-              <div>
-                <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                  Operatives killed
-                </span>
-                <div style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text)' }}>{player.enemyKilled}</div>
-              </div>
-              <Stepper
-                value={player.enemyKilled}
-                min={0}
-                max={player.enemyOperatives}
-                ariaLabel="Enemy operatives incapacitated"
-                onChange={(nextValue) => {
-                  updatePlayer(prev => ({ ...prev, enemyKilled: nextValue }))
-                }}
-                size="lg"
-              />
-            </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.65rem' }}>
+            <Stepper
+              value={player.enemyOperatives}
+              min={1}
+              max={30}
+              ariaLabel="Enemy operatives at start"
+              onChange={(nextValue) => {
+                updatePlayer(prev => {
+                  const updated = { ...prev }
+                  updated.enemyOperatives = nextValue
+                  if (updated.enemyKilled > nextValue) {
+                    updated.enemyKilled = nextValue
+                  }
+                  return updated
+                })
+              }}
+              size="lg"
+            />
+            <Stepper
+              value={player.enemyKilled}
+              min={0}
+              max={player.enemyOperatives}
+              ariaLabel="Enemy operatives incapacitated"
+              onChange={(nextValue) => {
+                updatePlayer(prev => ({ ...prev, enemyKilled: nextValue }))
+              }}
+              size="lg"
+            />
           </div>
           <KillThresholdTrack thresholds={thresholds} kills={player.enemyKilled} />
           {player.enemyOperatives < MIN_KILL_OPERATIVES || player.enemyOperatives > MAX_KILL_OPERATIVES ? (
@@ -667,38 +651,24 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
           }}
         >
           <h4 style={{ margin: 0 }}>Primary Op Selection</h4>
-          <fieldset
-            style={{
-              border: '1px solid #1f2433',
-              borderRadius: '10px',
-              padding: '0.75rem',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.5rem'
-            }}
-          >
-            <legend style={{ padding: '0 0.5rem', fontSize: '0.85rem', color: 'var(--muted)' }}>Chosen primary</legend>
-            {PRIMARY_OPTIONS.map(option => (
-              <label
-                key={option.value}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  cursor: 'pointer'
-                }}
-              >
-                <input
-                  type="radio"
-                  name={`primary-op-${index}`}
-                  value={option.value}
-                  checked={player.primaryOp === option.value}
-                  onChange={() => updatePlayer(prev => ({ ...prev, primaryOp: option.value }))}
-                />
-                <span>{option.label}</span>
-              </label>
-            ))}
-          </fieldset>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+            <span style={{ fontSize: '0.85rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Chosen primary
+            </span>
+            <select
+              value={player.primaryOp}
+              onChange={(event) => {
+                const value = event.target.value
+                updatePlayer(prev => ({ ...prev, primaryOp: value }))
+              }}
+            >
+              {PRIMARY_OPTIONS.map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
           <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
             <input
               type="checkbox"
@@ -708,7 +678,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
                 updatePlayer(prev => ({ ...prev, revealPrimary: checked }))
               }}
             />
-            <span>Primary revealed (add half rounded down)</span>
+            <span>Primary OP revealed</span>
           </label>
           <div
             style={{
@@ -724,7 +694,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ color: 'var(--muted)' }}>Primary bonus</span>
-              <strong>{totals.primaryBonus}</strong>
+              <strong>∑ {totals.primaryBonus}</strong>
             </div>
           </div>
         </div>
@@ -741,7 +711,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
           { label: 'Crit Op VP', value: totals.critTotal },
           { label: 'Tac Op VP', value: totals.tacTotal },
           { label: 'Kill Op VP', value: totals.killTotal },
-          { label: 'Primary Bonus', value: totals.primaryBonus },
+          { label: 'Primary Bonus', value: `∑ ${totals.primaryBonus}` },
           { label: 'Total VP', value: totals.total }
         ].map(item => (
           <div
@@ -753,7 +723,9 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
               border: '1px solid #1f2433',
               display: 'flex',
               flexDirection: 'column',
-              gap: '0.35rem'
+              gap: '0.35rem',
+              alignItems: 'center',
+              textAlign: 'center'
             }}
           >
             <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
