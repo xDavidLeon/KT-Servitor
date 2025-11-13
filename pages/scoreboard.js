@@ -610,7 +610,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.65rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'center' }}>
               <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                Killed Operatives
+                Killed
               </span>
               <Stepper
                 value={player.enemyKilled}
@@ -625,7 +625,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', alignItems: 'center' }}>
               <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                Total Operatives
+                Total
               </span>
               <Stepper
                 value={player.enemyOperatives}
@@ -724,18 +724,24 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
         }}
       >
         {[
-          { label: 'Crit Op VP', value: totals.critTotal },
-          { label: 'Tac Op VP', value: totals.tacTotal },
-          { label: 'Kill Op VP', value: totals.killTotal },
           {
-            label: 'Primary Op VP',
-            value: totals.primaryBonus > 0
-              ? `${totals.primarySource + totals.primaryBonus} (+${totals.primaryBonus})`
-              : `${totals.primarySource}`
+            key: 'crit',
+            label: 'Crit Op VP',
+            value: totals.critTotal + (player.primaryOp === 'crit' ? totals.primaryBonus : 0)
+          },
+          {
+            key: 'tac',
+            label: 'Tac Op VP',
+            value: totals.tacTotal + (player.primaryOp === 'tac' ? totals.primaryBonus : 0)
+          },
+          {
+            key: 'kill',
+            label: 'Kill Op VP',
+            value: totals.killTotal + (player.primaryOp === 'kill' ? totals.primaryBonus : 0)
           }
         ].map(item => (
           <div
-            key={item.label}
+            key={item.key}
             style={{
               padding: '0.9rem',
               background: '#10131a',
@@ -751,7 +757,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
             <span style={{ fontSize: '0.75rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               {item.label}
             </span>
-            <strong style={{ fontSize: '1.4rem', color: item.label === 'Total VP' ? 'var(--accent)' : 'var(--text)' }}>
+            <strong style={{ fontSize: '1.4rem', color: item.key === player.primaryOp ? 'var(--accent)' : 'var(--text)' }}>
               {item.value}
             </strong>
           </div>
