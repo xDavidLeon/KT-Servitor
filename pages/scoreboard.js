@@ -190,22 +190,26 @@ function Stepper({
   size = 'md',
   disabled = false
 }) {
+  const sizeMap = {
+    sm: { height: '1.8rem', fontSize: '0.85rem', buttonWidth: '1.8rem', labelMinWidth: '1.6rem', gap: '0.3rem' },
+    md: { height: '2rem', fontSize: '0.95rem', buttonWidth: '2rem', labelMinWidth: '1.75rem', gap: '0.4rem' },
+    lg: { height: '2.4rem', fontSize: '1.1rem', buttonWidth: '2.4rem', labelMinWidth: '2.2rem', gap: '0.45rem' }
+  }
+
+  const { height, fontSize, buttonWidth, labelMinWidth, gap } = sizeMap[size] || sizeMap.md
+
   const handleAdjust = (delta) => {
     if (disabled) return
     const next = clamp(value + delta, min, max)
     if (next !== value) onChange(next)
   }
 
-  const height = size === 'lg' ? '2.4rem' : '2rem'
-  const fontSize = size === 'lg' ? '1.1rem' : '0.95rem'
-  const buttonWidth = size === 'lg' ? '2.4rem' : '2rem'
-
   return (
     <div
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '0.4rem'
+        gap
       }}
     >
       <button
@@ -229,7 +233,7 @@ function Stepper({
       </button>
       <div
         style={{
-          minWidth: size === 'lg' ? '2.2rem' : '1.75rem',
+          minWidth: labelMinWidth,
           textAlign: 'center',
           fontWeight: 600,
           fontSize,
@@ -331,7 +335,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
     })
   }
 
-  const renderVpControl = (rowKey, tpIndex) => (
+  const renderVpControl = (rowKey, tpIndex, controlSize = isCompact ? 'md' : 'sm') => (
     <Stepper
       value={player[rowKey][tpIndex]}
       min={0}
@@ -339,6 +343,7 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
       ariaLabel={`${rowKey === 'crit' ? 'Crit op' : 'Tac op'} TP${tpIndex + 1}`}
       onChange={(nextValue) => handleVpChange(rowKey, tpIndex, nextValue)}
       disabled={tpIndex === 0}
+      size={controlSize}
     />
   )
 
@@ -509,9 +514,6 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
                 </div>
               )
             })}
-            <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--muted)' }}>
-              TP1 is reserved for primary selection—scoring for Crit and Tac ops starts at TP2.
-            </p>
           </div>
         ) : (
           <div style={{ overflowX: 'hidden' }}>
@@ -573,9 +575,6 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
                 ))}
               </tbody>
             </table>
-            <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--muted)' }}>
-              TP1 is reserved for primary selection—scoring for Crit and Tac ops starts at TP2.
-            </p>
           </div>
         )}
       </section>
