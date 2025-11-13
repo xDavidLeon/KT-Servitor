@@ -94,11 +94,13 @@ function sanitizePlayer(player, fallbackName) {
   next.customKillteam = typeof player.customKillteam === 'string' ? player.customKillteam : ''
 
   next.crit = TURNING_POINTS.map((_, index) => {
+    if (index === 0) return 0
     const value = Array.isArray(player.crit) ? Number(player.crit[index]) : Number.NaN
     return clamp(Math.round(value), 0, MAX_OP_SCORE_PER_TP)
   })
 
   next.tac = TURNING_POINTS.map((_, index) => {
+    if (index === 0) return 0
     const value = Array.isArray(player.tac) ? Number(player.tac[index]) : Number.NaN
     return clamp(Math.round(value), 0, MAX_OP_SCORE_PER_TP)
   })
@@ -154,14 +156,49 @@ function loadStoredPlayers() {
   }
 }
 
-function Stepper({ value, min = Number.NEGATIVE_INFINITY, max = Number.POSITIVE_INFINITY, onChange, ariaLabel, size = 'md' }) {
+function useIsCompact(breakpoint = 640) {
+  const [isCompact, setIsCompact] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined
+    const query = window.matchMedia(`(max-width: ${breakpoint}px)`)
+
+    const handleChange = (event) => {
+      setIsCompact(event.matches)
+    }
+
+    setIsCompact(query.matches)
+
+    if (typeof query.addEventListener === 'function') {
+      query.addEventListener('change', handleChange)
+      return () => query.removeEventListener('change', handleChange)
+    }
+
+    query.addListener(handleChange)
+    return () => query.removeListener(handleChange)
+  }, [breakpoint])
+
+  return isCompact
+}
+
+function Stepper({
+  value,
+  min = Number.NEGATIVE_INFINITY,
+  max = Number.POSITIVE_INFINITY,
+  onChange,
+  ariaLabel,
+  size = 'md',
+  disabled = false
+}) {
   const handleAdjust = (delta) => {
+    if (disabled) return
     const next = clamp(value + delta, min, max)
     if (next !== value) onChange(next)
   }
 
-  const height = size === 'lg' ? '2.75rem' : '2.1rem'
-  const fontSize = size === 'lg' ? '1.2rem' : '1rem'
+  const height = size === 'lg' ? '2.4rem' : '2rem'
+  const fontSize = size === 'lg' ? '1.1rem' : '0.95rem'
+  const buttonWidth = size === 'lg' ? '2.4rem' : '2rem'
 
   return (
     <div
@@ -174,28 +211,29 @@ function Stepper({ value, min = Number.NEGATIVE_INFINITY, max = Number.POSITIVE_
       <button
         type="button"
         onClick={() => handleAdjust(-1)}
-        disabled={value <= min}
+        disabled={disabled || value <= min}
         aria-label={ariaLabel ? `${ariaLabel} decrease` : undefined}
         style={{
-          background: '#0e1016',
+          background: disabled ? '#141828' : '#0e1016',
           border: '1px solid #2a2f3f',
-          color: 'var(--text)',
+          color: disabled ? 'var(--muted)' : 'var(--text)',
           borderRadius: '8px',
-          width: height,
+          width: buttonWidth,
           height,
           fontSize,
-          cursor: value <= min ? 'not-allowed' : 'pointer'
+          cursor: disabled || value <= min ? 'not-allowed' : 'pointer',
+          opacity: disabled ? 0.55 : 1
         }}
       >
         –
       </button>
       <div
         style={{
-          minWidth: size === 'lg' ? '2.5rem' : '2rem',
+          minWidth: size === 'lg' ? '2.2rem' : '1.75rem',
           textAlign: 'center',
           fontWeight: 600,
           fontSize,
-          color: 'var(--text)'
+          color: disabled ? 'var(--muted)' : 'var(--text)'
         }}
       >
         {value}
@@ -203,17 +241,18 @@ function Stepper({ value, min = Number.NEGATIVE_INFINITY, max = Number.POSITIVE_
       <button
         type="button"
         onClick={() => handleAdjust(1)}
-        disabled={value >= max}
+        disabled={disabled || value >= max}
         aria-label={ariaLabel ? `${ariaLabel} increase` : undefined}
         style={{
-          background: '#0e1016',
+          background: disabled ? '#141828' : '#0e1016',
           border: '1px solid #2a2f3f',
-          color: 'var(--text)',
+          color: disabled ? 'var(--muted)' : 'var(--text)',
           borderRadius: '8px',
-          width: height,
+          width: buttonWidth,
           height,
           fontSize,
-          cursor: value >= max ? 'not-allowed' : 'pointer'
+          cursor: disabled || value >= max ? 'not-allowed' : 'pointer',
+          opacity: disabled ? 0.55 : 1
         }}
       >
         +
@@ -263,7 +302,7 @@ function KillThresholdTrack({ thresholds, kills }) {
   )
 }
 
-function PlayerCard({ index, player, killteams, onChange }) {
+function PlayerCard({ index, player, killteams, onChange, isCompact }) {
   const totals = useMemo(() => computePlayerTotals(player), [player])
   const { thresholds, usedValue, isExact } = useMemo(
     () => resolveKillThresholds(player.enemyOperatives),
@@ -282,16 +321,37 @@ function PlayerCard({ index, player, killteams, onChange }) {
     })
   }
 
+  const handleVpChange = (rowKey, tpIndex, nextValue) => {
+    updatePlayer(prev => {
+      const updated = { ...prev }
+      const nextArray = [...updated[rowKey]]
+      nextArray[tpIndex] = nextValue
+      updated[rowKey] = nextArray
+      return updated
+    })
+  }
+
+  const renderVpControl = (rowKey, tpIndex) => (
+    <Stepper
+      value={player[rowKey][tpIndex]}
+      min={0}
+      max={MAX_OP_SCORE_PER_TP}
+      ariaLabel={`${rowKey === 'crit' ? 'Crit op' : 'Tac op'} TP${tpIndex + 1}`}
+      onChange={(nextValue) => handleVpChange(rowKey, tpIndex, nextValue)}
+      disabled={tpIndex === 0}
+    />
+  )
+
   return (
     <section
       className="card"
       style={{
         background: '#131722',
         border: `1px solid rgba(255, 255, 255, 0.08)`,
-        flex: '1 1 360px',
+        flex: '1 1 320px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '1.25rem'
+        gap: isCompact ? '1rem' : '1.25rem'
       }}
     >
       <header
@@ -390,71 +450,134 @@ function PlayerCard({ index, player, killteams, onChange }) {
 
       <section>
         <h3 style={{ marginTop: 0, marginBottom: '0.75rem' }}>Turning Point VP</h3>
-        <div style={{ overflowX: 'auto' }}>
-          <table
-            style={{
-              width: '100%',
-              borderCollapse: 'collapse',
-              minWidth: '420px'
-            }}
-          >
-            <thead>
-              <tr>
-                <th style={{ textAlign: 'left', padding: '0.5rem', fontSize: '0.85rem', color: 'var(--muted)' }} />
-                {TURNING_POINTS.map(tp => (
-                  <th key={tp} style={{ textAlign: 'center', padding: '0.5rem', fontSize: '0.85rem', color: 'var(--muted)' }}>
-                    TP{tp}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {['crit', 'tac'].map((rowKey) => (
-                <tr key={rowKey}>
-                  <th
-                    scope="row"
+        {isCompact ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+            {TURNING_POINTS.map((tp, tpIndex) => {
+              const locked = tpIndex === 0
+              return (
+                <div
+                  key={tp}
+                  style={{
+                    padding: '0.75rem',
+                    background: '#10131a',
+                    borderRadius: '12px',
+                    border: '1px solid #1f2433',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.55rem'
+                  }}
+                >
+                  <div
                     style={{
-                      textAlign: 'left',
-                      padding: '0.6rem',
-                      fontSize: '0.9rem',
-                      fontWeight: 600,
-                      color: 'var(--text)',
-                      background: '#10131a'
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      gap: '0.5rem'
                     }}
                   >
-                    {rowKey === 'crit' ? 'Crit Op' : 'Tac Op'}
-                  </th>
-                  {TURNING_POINTS.map((_, tpIndex) => (
-                    <td
-                      key={tpIndex}
+                    <strong style={{ fontSize: '0.95rem' }}>TP{tp}</strong>
+                    {locked && (
+                      <span
+                        className="pill"
+                        style={{
+                          fontSize: '0.7rem',
+                          padding: '0.2rem 0.5rem',
+                          borderColor: '#2a2f3f',
+                          color: 'var(--muted)'
+                        }}
+                      >
+                        Primary selection
+                      </span>
+                    )}
+                  </div>
+                  {['crit', 'tac'].map((rowKey) => (
+                    <div
+                      key={`${rowKey}-${tp}`}
                       style={{
-                        textAlign: 'center',
-                        padding: '0.65rem 0.5rem',
-                        borderBottom: '1px solid #1f2433'
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '0.65rem'
                       }}
                     >
-                      <Stepper
-                        value={player[rowKey][tpIndex]}
-                        min={0}
-                        max={MAX_OP_SCORE_PER_TP}
-                        ariaLabel={`${rowKey === 'crit' ? 'Crit op' : 'Tac op'} TP${tpIndex + 1}`}
-                        onChange={(nextValue) => {
-                          updatePlayer(prev => {
-                            const updated = { ...prev }
-                            const nextArray = [...updated[rowKey]]
-                            nextArray[tpIndex] = nextValue
-                            updated[rowKey] = nextArray
-                            return updated
-                          })
-                        }}
-                      />
-                    </td>
+                      <span style={{ fontSize: '0.85rem', color: 'var(--muted)', flexShrink: 0 }}>
+                        {rowKey === 'crit' ? 'Crit Op' : 'Tac Op'}
+                      </span>
+                      {renderVpControl(rowKey, tpIndex)}
+                    </div>
+                  ))}
+                </div>
+              )
+            })}
+            <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--muted)' }}>
+              TP1 is reserved for primary selection—scoring for Crit and Tac ops starts at TP2.
+            </p>
+          </div>
+        ) : (
+          <div style={{ overflowX: 'hidden' }}>
+            <table
+              style={{
+                width: '100%',
+                borderCollapse: 'collapse',
+                tableLayout: 'fixed'
+              }}
+            >
+              <thead>
+                <tr>
+                  <th style={{ textAlign: 'left', padding: '0.45rem', fontSize: '0.8rem', color: 'var(--muted)' }} />
+                  {TURNING_POINTS.map(tp => (
+                    <th
+                      key={tp}
+                      style={{
+                        textAlign: 'center',
+                        padding: '0.45rem',
+                        fontSize: '0.8rem',
+                        color: 'var(--muted)'
+                      }}
+                    >
+                      TP{tp}
+                    </th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {['crit', 'tac'].map((rowKey) => (
+                  <tr key={rowKey}>
+                    <th
+                      scope="row"
+                      style={{
+                        textAlign: 'left',
+                        padding: '0.55rem 0.45rem',
+                        fontSize: '0.85rem',
+                        fontWeight: 600,
+                        color: 'var(--text)',
+                        background: '#10131a'
+                      }}
+                    >
+                      {rowKey === 'crit' ? 'Crit Op' : 'Tac Op'}
+                    </th>
+                    {TURNING_POINTS.map((_, tpIndex) => (
+                      <td
+                        key={tpIndex}
+                        style={{
+                          textAlign: 'center',
+                          padding: '0.55rem 0.35rem',
+                          borderBottom: '1px solid #1f2433',
+                          minWidth: '3.4rem'
+                        }}
+                      >
+                        {renderVpControl(rowKey, tpIndex)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--muted)' }}>
+              TP1 is reserved for primary selection—scoring for Crit and Tac ops starts at TP2.
+            </p>
+          </div>
+        )}
       </section>
 
       <section
@@ -650,6 +773,7 @@ function PlayerCard({ index, player, killteams, onChange }) {
 export default function Scoreboard() {
   const [players, setPlayers] = useState(() => [createPlayerState('Player 1'), createPlayerState('Player 2')])
   const [killteams, setKillteams] = useState([])
+  const isCompact = useIsCompact()
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -844,6 +968,7 @@ export default function Scoreboard() {
                 index={index}
                 player={player}
                 killteams={killteams}
+                isCompact={isCompact}
                 onChange={(updater) => {
                   setPlayers(prev =>
                     prev.map((current, idx) =>
@@ -873,7 +998,7 @@ export default function Scoreboard() {
           >
             <strong style={{ display: 'block', marginBottom: '0.35rem', color: 'var(--text)' }}>Quick reference</strong>
             <ul style={{ margin: 0, paddingLeft: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-              <li>Score up to 2 VP each turning point for both Crit and Tac ops.</li>
+              <li>Score up to 2 VP each turning point for both Crit and Tac ops (starting at TP2).</li>
               <li>Kill Op VP unlock as enemy operatives are incapacitated following the kill grade chart.</li>
               <li>When primaries are revealed, add half of the total VP from the chosen op (rounded down).</li>
               <li>Use the reset button at any time to clear both cards and begin a new match.</li>
