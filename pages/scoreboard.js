@@ -45,7 +45,8 @@ function createPlayerState(name) {
     enemyOperatives: 10,
     enemyKilled: 0,
     primaryOp: 'crit',
-    revealPrimary: false
+    revealPrimary: false,
+    cp: 2
   }
 }
 
@@ -117,6 +118,8 @@ function sanitizePlayer(player, fallbackName) {
     ? player.primaryOp
     : base.primaryOp
   next.revealPrimary = Boolean(player.revealPrimary)
+  const cpValue = Math.round(Number(player.cp))
+  next.cp = Number.isFinite(cpValue) ? clamp(cpValue, 0, 12) : base.cp
 
   return next
 }
@@ -459,6 +462,29 @@ function PlayerCard({ index, player, killteams, onChange, isCompact }) {
               placeholder="Team Name"
             />
           </label>
+        </div>
+        <div
+          style={{
+            marginTop: '0.25rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '0.75rem',
+            flexWrap: 'wrap'
+          }}
+        >
+          <span style={{ fontSize: '0.85rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Command Points
+          </span>
+          <Stepper
+            value={player.cp}
+            min={0}
+            max={12}
+            ariaLabel="Command points"
+            onChange={(nextValue) => {
+              updatePlayer(prev => ({ ...prev, cp: nextValue }))
+            }}
+          />
         </div>
       </header>
 
@@ -818,6 +844,8 @@ export default function Scoreboard() {
       name: player.name,
       killteam: getKillteamName(player),
       color: PLAYER_COLORS[index] || 'var(--accent)',
+      cp: player.cp,
+      primaryOp: player.primaryOp,
       ...totals
     }
   }), [players, killteams])
@@ -925,6 +953,7 @@ export default function Scoreboard() {
                     <span>• Tac {summary.tacTotal}</span>
                     <span>• Kill {summary.killTotal}</span>
                     {summary.primaryBonus > 0 && <span>• Bonus {summary.primaryBonus}</span>}
+                    <span>• CP {summary.cp}</span>
                   </div>
                 </div>
               ))}
