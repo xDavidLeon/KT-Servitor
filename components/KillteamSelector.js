@@ -1,8 +1,9 @@
 // components/KillteamSelector.js
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { db } from '../lib/db'
+import { useRouter } from 'next/router'
 import { FACTION_ORDER, getFactionName } from '../lib/factions'
+import { useKillteams } from '../hooks/useKillteams'
 
 const RECENT_KILLTEAMS_KEY = 'kt-servitor-recent-killteams'
 const MAX_RECENT = 3
@@ -30,49 +31,16 @@ function addRecentKillteam(killteamId) {
   }
 }
 
-function sortKillteams(list) {
-  return [...list].sort((a, b) => {
-    const nameA = (a.killteamName || a.killteamId || '').toLowerCase()
-    const nameB = (b.killteamName || b.killteamId || '').toLowerCase()
-    return nameA.localeCompare(nameB)
-  })
-}
-
 export default function KillteamSelector({ currentKillteamId, leftControl = null, rightControl = null }) {
-  const [killteams, setKillteams] = useState([])
+  const router = useRouter()
+  const locale = router?.locale || 'en'
+  const { data: killteams = [], isLoading } = useKillteams(locale)
   const [recentIds, setRecentIds] = useState([])
   const [isOpen, setIsOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
-    let cancelled = false
-
-    async function loadKillteams() {
-      try {
-        const rows = await db.killteams.orderBy('killteamName').toArray()
-        if (!cancelled) setKillteams(sortKillteams(rows))
-      } catch (err) {
-        console.error('Error loading kill teams:', err)
-      }
-    }
-
-    loadKillteams()
     setRecentIds(getRecentKillteams())
-
-    function onUpdate() {
-      loadKillteams()
-    }
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('kt-killteams-updated', onUpdate)
-    }
-
-    return () => {
-      cancelled = true
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('kt-killteams-updated', onUpdate)
-      }
-    }
   }, [])
 
   useEffect(() => {
@@ -290,13 +258,17 @@ export default function KillteamSelector({ currentKillteamId, leftControl = null
             onClick={(e) => e.stopPropagation()}
             autoFocus
           />
-          <div
-            style={{
-              overflowY: 'auto',
-              maxHeight: '350px'
-            }}
-          >
-              {orderedGroups.length > 0 ? (
+            <div
+              style={{
+                overflowY: 'auto',
+                maxHeight: '350px'
+              }}
+            >
+              {isLoading ? (
+                <div style={{ padding: '1rem', color: 'var(--muted)', textAlign: 'center' }}>
+                  Loading kill teams...
+                </div>
+              ) : orderedGroups.length > 0 ? (
                 orderedGroups.map(group => (
                   <div key={group.label} style={{ padding: '0.5rem 0' }}>
                     <div
@@ -313,12 +285,12 @@ export default function KillteamSelector({ currentKillteamId, leftControl = null
                     {group.items.map(kt => renderKillteamOption(kt))}
                   </div>
                 ))
-            ) : (
-              <div style={{ padding: '1rem', color: 'var(--muted)', textAlign: 'center' }}>
-                No kill teams found
-              </div>
-            )}
-          </div>
+              ) : (
+                <div style={{ padding: '1rem', color: 'var(--muted)', textAlign: 'center' }}>
+                  No kill teams found
+                </div>
+              )}
+            </div>
         </div>
       )}
     </div>
