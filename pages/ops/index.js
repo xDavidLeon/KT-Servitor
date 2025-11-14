@@ -4,7 +4,7 @@ import Header from '../../components/Header'
 import Seo from '../../components/Seo'
 import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
 import RichText from '../../components/RichText'
-import { getLocalePath } from '../../lib/update'
+import { getLocalePath, fetchWithLocaleFallback } from '../../lib/update'
 
 // Map group definitions
 const MAP_GROUPS = [
@@ -292,7 +292,7 @@ export default function OpsPage() {
         setLoading(true)
       }
       try {
-        const res = await fetch(getLocalePath(locale, 'ops_2025.json'), { cache: 'no-store' })
+        const res = await fetchWithLocaleFallback(locale, 'ops_2025.json')
         if (!res.ok) {
           throw new Error(`Failed to load operations (${res.status})`)
         }
@@ -314,7 +314,7 @@ export default function OpsPage() {
         }
 
         // Fetch merged actions.json instead of separate universal_actions.json and mission_actions.json
-        const actionsRes = await fetch(getLocalePath(locale, 'actions.json'), { cache: 'no-store' })
+        const actionsRes = await fetchWithLocaleFallback(locale, 'actions.json')
         if (actionsRes.ok) {
           const json = await actionsRes.json()
           // Handle both old format (separate arrays) and new format (merged)

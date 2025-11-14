@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Header from '../../components/Header'
 import RichText from '../../components/RichText'
 import { db } from '../../lib/db'
-import { checkForUpdates, getLocalePath } from '../../lib/update'
+import { checkForUpdates, getLocalePath, fetchWithLocaleFallback } from '../../lib/update'
 import Seo from '../../components/Seo'
 import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
 
@@ -300,7 +300,7 @@ export default function Rules({ rulesTabs = [] }) {
       if (!actionsLoaded) setActionsLoading(true)
       try {
         // Fetch merged actions.json instead of separate universal_actions.json
-        const res = await fetch(getLocalePath(locale, 'actions.json'), { cache: 'no-store' })
+        const res = await fetchWithLocaleFallback(locale, 'actions.json')
         if (!res.ok) {
           throw new Error(`Failed to load actions (${res.status})`)
         }
@@ -355,7 +355,7 @@ export default function Rules({ rulesTabs = [] }) {
       if (!missionActionsLoaded) setMissionActionsLoading(true)
       try {
         // Fetch merged actions.json instead of separate mission_actions.json
-        const res = await fetch(getLocalePath(locale, 'actions.json'), { cache: 'no-store' })
+        const res = await fetchWithLocaleFallback(locale, 'actions.json')
         if (!res.ok) {
           throw new Error(`Failed to load actions (${res.status})`)
         }
@@ -387,7 +387,7 @@ export default function Rules({ rulesTabs = [] }) {
         }
 
         try {
-          const opsRes = await fetch(getLocalePath(locale, 'ops_2025.json'), { cache: 'no-store' })
+          const opsRes = await fetchWithLocaleFallback(locale, 'ops_2025.json')
           if (opsRes.ok) {
             const opsJson = await opsRes.json()
             const opsActions = Array.isArray(opsJson?.actions) ? opsJson.actions : []
@@ -439,7 +439,7 @@ export default function Rules({ rulesTabs = [] }) {
     const loadWeaponRules = async () => {
       if (!weaponRulesLoaded) setWeaponRulesLoading(true)
       try {
-        const res = await fetch(getLocalePath(locale, 'weapon_rules.json'), { cache: 'no-store' })
+        const res = await fetchWithLocaleFallback(locale, 'weapon_rules.json')
         if (!res.ok) {
           console.warn(`Failed to load weapon rules (${res.status}) for locale ${locale}`)
           // Continue with empty array instead of throwing
@@ -514,9 +514,14 @@ export default function Rules({ rulesTabs = [] }) {
 
     const loadEquipmentActions = async () => {
       try {
-        const res = await fetch(getLocalePath(locale, 'universal_equipment.json'), { cache: 'no-store' })
+        const res = await fetchWithLocaleFallback(locale, 'universal_equipment.json')
         if (!res.ok) {
-          throw new Error(`Failed to load universal equipment (${res.status})`)
+          console.warn(`Failed to load universal equipment (${res.status}) for locale ${locale}`)
+          // Continue with empty array instead of throwing
+          if (cancelled) return
+          setEquipmentActions([])
+          setEquipmentActionsLoaded(true)
+          return
         }
         const json = await res.json()
         if (cancelled) return
@@ -532,7 +537,7 @@ export default function Rules({ rulesTabs = [] }) {
         setEquipmentActionsLoaded(true)
       } catch (err) {
         if (cancelled) return
-        console.error('Failed to load equipment actions', err)
+        console.warn('Failed to load equipment actions', err)
         setEquipmentActions([])
         setEquipmentActionsLoaded(true)
       }
