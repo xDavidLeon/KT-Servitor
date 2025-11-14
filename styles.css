@@ -238,12 +238,12 @@ th{position:sticky;top:0;background:#121521}
       gap: 0.35rem;
       flex: 1;
       min-width: 0;
+      border-bottom: 2px solid #F55A07;
+      padding-bottom: 0.25rem;
     }
     .operative-header h4 {
     color: #ffffff;
     font-size: 1.1rem;
-    border-bottom: 2px solid #F55A07;
-    padding-bottom: 0.25rem;
     text-transform: uppercase;
   }
     .operative-photo-button {
