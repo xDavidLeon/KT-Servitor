@@ -88,10 +88,10 @@ function WeaponRuleTooltip({ rule, children }) {
   )
 }
 
-
 export default function OperativeCard({ operative }) {
   const t = useTranslations('operative')
   const anchorId = operative?.id ? `operative-${operative.id}` : undefined
+  const operativeDisplayName = operative?.name || operative?.title || ''
   const baseSizeText = (() => {
     const value = operative?.baseSize
     if (value === null || value === undefined || value === '') return null
@@ -121,11 +121,63 @@ export default function OperativeCard({ operative }) {
     { key: 'save', label: t('save'), value: operative?.save },
     { key: 'wounds', label: t('wounds'), value: operative?.wounds }
   ].filter(stat => stat.value !== null && stat.value !== undefined && stat.value !== '')
+  const handleImageSearch = () => {
+    if (!operativeDisplayName) return
+    const query = encodeURIComponent(`Kill Team ${operativeDisplayName}`)
+    const url = `https://www.google.com/search?tbm=isch&q=${query}`
+    if (typeof window !== 'undefined') {
+      window.open(url, '_blank', 'noopener,noreferrer')
+    }
+  }
 
   return (
     <div id={anchorId} className="operative-card">
       <div className="operative-header">
-        <h4 style={{ margin: 0 }}>{operative.name || operative.title}</h4>
+        <div className="operative-header-title">
+          <h4 style={{ margin: 0 }}>{operativeDisplayName}</h4>
+          {operativeDisplayName && (
+            <button
+              type="button"
+              className="operative-photo-button"
+              aria-label={`Search images for ${operativeDisplayName}`}
+              onClick={handleImageSearch}
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4 6.5C4 5.67157 4.67157 5 5.5 5H18.5C19.3284 5 20 5.67157 20 6.5V17.5C20 18.3284 19.3284 19 18.5 19H5.5C4.67157 19 4 18.3284 4 17.5V6.5Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M4 15L8.5 10.5C8.89782 10.1022 9.53033 10.1022 9.9282 10.5L14 14.5718"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M12.5 13L14.5 11C14.8876 10.6124 15.5124 10.6124 15.9 11L20 15"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M9.5 8C9.5 8.82843 8.82843 9.5 8 9.5C7.17157 9.5 6.5 8.82843 6.5 8C6.5 7.17157 7.17157 6.5 8 6.5C8.82843 6.5 9.5 7.17157 9.5 8Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
+              </svg>
+            </button>
+          )}
+        </div>
         {headerStats.length > 0 && (
           <div className="operative-header-stats">
             {headerStats.map(stat => {
