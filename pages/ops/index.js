@@ -9,10 +9,10 @@ import { getLocalePath, fetchWithLocaleFallback } from '../../lib/update'
 // Map group definitions
 const MAP_GROUPS = [
   { id: 'generic', label: 'Non-Specific', folder: 'generic' },
-  { id: 'volkus', label: 'Volkus', folder: 'volkus' },
-  { id: 'gallowdark', label: 'Gallowdark', folder: 'gallowdark' },
-  { id: 'bheta-decima', label: 'Bheta-Decima', folder: 'bheta-decima' },
-  { id: 'tomb-world', label: 'Tomb World', folder: 'tomb-world' }
+  { id: 'volkus', label: 'Killzone: Volkus', folder: 'volkus' },
+  { id: 'gallowdark', label: 'Killzone: Gallowdark', folder: 'gallowdark' },
+  { id: 'bheta-decima', label: 'Killzone: Bheta-Decima', folder: 'bheta-decima' },
+  { id: 'tomb-world', label: 'Killzone: Tomb World', folder: 'tomb-world' }
 ]
 
 // Static list of images for each group
@@ -951,10 +951,13 @@ const sections = useMemo(() => {
                 margin: 0, 
                 fontSize: '1.1rem', 
                 fontWeight: 600,
-                color: 'var(--text)',
-                textAlign: 'center'
+                color: '#ffffff',
+                background: '#F55A07',
+                padding: '0.5rem 0.75rem',
+                textAlign: 'center',
+                borderRadius: '4px'
               }}>
-                {groupLabel} - Map {mapIndex}
+                {`${groupLabel} - Map ${mapIndex}`.toUpperCase()}
               </h3>
               <div style={{
                 width: '100%',
