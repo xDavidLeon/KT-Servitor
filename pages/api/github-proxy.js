@@ -1,5 +1,14 @@
 // API route to proxy GitHub API requests to avoid CORS issues on localhost
 export default async function handler(req, res) {
+  // Enable CORS for localhost
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end()
+  }
+
   const { path } = req.query
 
   if (!path || typeof path !== 'string') {
@@ -8,23 +17,25 @@ export default async function handler(req, res) {
 
   try {
     const url = `https://api.github.com/repos/xDavidLeon/killteamjson/contents/${path}`
-    const response = await fetch(url, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'KT-Servitor'
-      }
-    })
-
-    if (!response.ok) {
-      const errorText = await response.text()
-      return res.status(response.status).json({ 
-        error: errorText,
-        status: response.status 
-      })
+    const headers = {
+      'Accept': 'application/vnd.github.v3+json',
+      'User-Agent': 'KT-Servitor'
     }
+    
+    // Add GitHub token if available (for higher rate limits)
+    const githubToken = process.env.GITHUB_TOKEN
+    if (githubToken) {
+      headers['Authorization'] = `token ${githubToken}`
+    }
+    
+    const response = await fetch(url, { headers })
 
-    const data = await response.json()
-    res.status(200).json(data)
+    // Always return the response status and body, even for errors
+    // This allows the client to handle 404s and other errors properly
+    const data = await response.json().catch(() => ({ error: 'Failed to parse response' }))
+    
+    // Return the same status code from GitHub API
+    res.status(response.status).json(data)
   } catch (error) {
     console.error('GitHub API proxy error:', error)
     res.status(500).json({ error: error.message })
