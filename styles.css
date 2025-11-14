@@ -451,6 +451,9 @@ th{position:sticky;top:0;background:#121521}
 .weapon-rule-card {
   background: #E0E0E0 !important;
 }
+.action-card {
+  border: 2px solid #F55A07 !important;
+}
 .ability-card-header {
   display: flex;
   align-items: baseline;
