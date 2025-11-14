@@ -1006,93 +1006,63 @@ export default function KillteamPage() {
       .filter(Boolean)
   }, [killteam, weaponRulesMap])
 
+  // Read teamAbilities directly from killteam JSON (new schema)
+  // teamAbilities can be an array, or an object with 'abilities' and 'options' arrays
   const teamAbilities = useMemo(() => {
-    if (!rawOperatives.length) return []
-
-    const abilityLists = rawOperatives.map(op => {
-      if (!Array.isArray(op.specialRules)) return []
-      return op.specialRules.filter(Boolean)
-    })
-
-    if (!abilityLists.length) return []
-
-    const [firstList, ...otherLists] = abilityLists
-    if (!firstList.length) return []
-
-    const commonMap = new Map()
-
-    for (const ability of firstList) {
-      const signature = abilitySignature(ability)
-      if (!signature || commonMap.has(signature)) continue
-
-      const isCommon = otherLists.every(list =>
-        list.some(item => abilitySignature(item) === signature)
-      )
-
-      if (isCommon) {
-        commonMap.set(signature, ability)
-      }
+    if (!killteam) return []
+    
+    // Check if teamAbilities exists and is an array
+    if (Array.isArray(killteam.teamAbilities)) {
+      return killteam.teamAbilities
+        .map(ability => normaliseAbility(ability))
+        .filter(Boolean)
+        .map((ability, index) => ({
+          ...ability,
+          anchorId: buildTeamAnchor('team-ability', ability?.name, index)
+        }))
     }
-
-    if (!commonMap.size) return []
-
-    return Array.from(commonMap.values()).map((ability, index) => ({
-      ...ability,
-      anchorId: buildTeamAnchor('team-ability', ability?.name, index)
-    }))
-  }, [rawOperatives])
-
-  const teamAbilitySignatures = useMemo(() => {
-    if (!teamAbilities.length) return null
-    const signatures = teamAbilities
-      .map(abilitySignature)
-      .filter(Boolean)
-    return signatures.length ? new Set(signatures) : null
-  }, [teamAbilities])
+    
+    // Check if teamAbilities is an object with 'abilities' array
+    if (killteam.teamAbilities && typeof killteam.teamAbilities === 'object' && Array.isArray(killteam.teamAbilities.abilities)) {
+      return killteam.teamAbilities.abilities
+        .map(ability => normaliseAbility(ability))
+        .filter(Boolean)
+        .map((ability, index) => ({
+          ...ability,
+          anchorId: buildTeamAnchor('team-ability', ability?.name, index)
+        }))
+    }
+    
+    return []
+  }, [killteam])
 
   const teamOptions = useMemo(() => {
-    if (!rawOperatives.length) return []
-
-    const optionLists = rawOperatives.map(op => {
-      if (!Array.isArray(op.specialActions)) return []
-      return op.specialActions.filter(Boolean)
-    })
-
-    if (!optionLists.length) return []
-
-    const [firstList, ...otherLists] = optionLists
-    if (!firstList.length) return []
-
-    const commonMap = new Map()
-
-    for (const option of firstList) {
-      const signature = abilitySignature(option)
-      if (!signature || commonMap.has(signature)) continue
-
-      const isCommon = otherLists.every(list =>
-        list.some(item => abilitySignature(item) === signature)
-      )
-
-      if (isCommon) {
-        commonMap.set(signature, option)
-      }
+    if (!killteam) return []
+    
+    // Check if teamAbilities is an object with 'options' array
+    if (killteam.teamAbilities && typeof killteam.teamAbilities === 'object' && Array.isArray(killteam.teamAbilities.options)) {
+      return killteam.teamAbilities.options
+        .map(option => normaliseOption(option))
+        .filter(Boolean)
+        .map((option, index) => ({
+          ...option,
+          anchorId: buildTeamAnchor('team-option', option?.name, index)
+        }))
     }
-
-    if (!commonMap.size) return []
-
-    return Array.from(commonMap.values()).map((option, index) => ({
-      ...option,
-      anchorId: buildTeamAnchor('team-option', option?.name, index)
-    }))
-  }, [rawOperatives])
-
-  const teamOptionSignatures = useMemo(() => {
-    if (!teamOptions.length) return null
-    const signatures = teamOptions
-      .map(abilitySignature)
-      .filter(Boolean)
-    return signatures.length ? new Set(signatures) : null
-  }, [teamOptions])
+    
+    // Check for separate teamOptions field (backward compatibility)
+    if (Array.isArray(killteam.teamOptions)) {
+      return killteam.teamOptions
+        .map(option => normaliseOption(option))
+        .filter(Boolean)
+        .map((option, index) => ({
+          ...option,
+          anchorId: buildTeamAnchor('team-option', option?.name, index)
+        }))
+    }
+    
+    return []
+  }, [killteam])
 
   const factionRules = useMemo(() => {
     const combined = []
@@ -1123,38 +1093,10 @@ export default function KillteamPage() {
     }))
   }, [teamAbilities, teamOptions])
 
+  // Operatives no longer need filtering since common abilities/options are already removed from JSON
   const operatives = useMemo(() => {
-    if (!rawOperatives.length) return []
-    if (
-      (!teamAbilitySignatures || teamAbilitySignatures.size === 0) &&
-      (!teamOptionSignatures || teamOptionSignatures.size === 0)
-    ) {
-      return rawOperatives
-    }
-
-    return rawOperatives.map(operative => {
-      const abilities = Array.isArray(operative.specialRules) ? operative.specialRules : []
-      const options = Array.isArray(operative.specialActions) ? operative.specialActions : []
-
-      const filteredAbilities = !abilities.length || !teamAbilitySignatures
-        ? abilities
-        : abilities.filter(ability => !teamAbilitySignatures.has(abilitySignature(ability)))
-
-      const filteredOptions = !options.length || !teamOptionSignatures
-        ? options
-        : options.filter(option => !teamOptionSignatures.has(abilitySignature(option)))
-
-      if (filteredAbilities.length === abilities.length && filteredOptions.length === options.length) {
-        return operative
-      }
-
-      return {
-        ...operative,
-        specialRules: filteredAbilities,
-        specialActions: filteredOptions
-      }
-    })
-  }, [rawOperatives, teamAbilitySignatures, teamOptionSignatures])
+    return rawOperatives
+  }, [rawOperatives])
 
   const strategyPloys = useMemo(() => {
     return (killteam?.ploys || [])

@@ -46,11 +46,13 @@ export default function Killteams() {
   const router = useRouter()
   const locale = router.locale || 'en'
   const [killteams, setKillteams] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     let cancelled = false
 
     const run = async () => {
+      setLoading(true)
       setKillteams([]) // Clear existing data when locale changes
       try {
         await checkForUpdates(locale)
@@ -63,6 +65,7 @@ export default function Killteams() {
       rows.sort((a, b) => (a.killteamName || '').localeCompare(b.killteamName || ''))
       if (!cancelled) {
         setKillteams(rows)
+        setLoading(false)
       }
     }
 
@@ -101,64 +104,72 @@ export default function Killteams() {
           <div style={{ marginBottom: '1rem' }}>
             <KillteamSelector />
           </div>
-          {groupedKillteams.map((group, index) => (
-            <div key={group.label} style={{ marginTop: index === 0 ? '0.5rem' : '1.5rem' }}>
-              <div
-                style={{
-                  padding: '0.3rem 0',
-                  fontSize: '0.85rem',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  color: 'var(--muted)'
-                }}
-              >
-                {group.label}
-              </div>
-              {group.items.map(kt => {
-                const archetypes = parseArchetypes(kt.archetypes)
-                return (
-                  <Link
-                    key={kt.killteamId}
-                    href={`/killteams/${kt.killteamId}`}
-                    className="card killteam-card-link"
+          {loading ? (
+            <div className="muted" style={{ textAlign: 'center', padding: '2rem 0' }}>
+              Loading kill teams...
+            </div>
+          ) : (
+            <>
+              {groupedKillteams.map((group, index) => (
+                <div key={group.label} style={{ marginTop: index === 0 ? '0.5rem' : '1.5rem' }}>
+                  <div
                     style={{
-                      margin: '.5rem 0',
-                      display: 'block',
-                      textDecoration: 'none',
-                      color: 'inherit'
+                      padding: '0.3rem 0',
+                      fontSize: '0.85rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      color: 'var(--muted)'
                     }}
                   >
-                    <div
-                      className="heading"
-                      style={{ justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}
-                    >
-                      <strong style={{ cursor: 'pointer' }}>{kt.killteamName}</strong>
-                      {archetypes.length > 0 && (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'flex-end' }}>
-                          {archetypes.map(archetype => {
-                            const style = getArchetypePillStyle(archetype)
-                            const label = style?.label || archetype
-                            return (
-                              <span
-                                key={archetype}
-                                className="pill"
-                                style={style?.backgroundColor ? style : undefined}
-                              >
-                                {label}
-                              </span>
-                            )
-                          })}
+                    {group.label}
+                  </div>
+                  {group.items.map(kt => {
+                    const archetypes = parseArchetypes(kt.archetypes)
+                    return (
+                      <Link
+                        key={kt.killteamId}
+                        href={`/killteams/${kt.killteamId}`}
+                        className="card killteam-card-link"
+                        style={{
+                          margin: '.5rem 0',
+                          display: 'block',
+                          textDecoration: 'none',
+                          color: 'inherit'
+                        }}
+                      >
+                        <div
+                          className="heading"
+                          style={{ justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}
+                        >
+                          <strong style={{ cursor: 'pointer' }}>{kt.killteamName}</strong>
+                          {archetypes.length > 0 && (
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'flex-end' }}>
+                              {archetypes.map(archetype => {
+                                const style = getArchetypePillStyle(archetype)
+                                const label = style?.label || archetype
+                                return (
+                                  <span
+                                    key={archetype}
+                                    className="pill"
+                                    style={style?.backgroundColor ? style : undefined}
+                                  >
+                                    {label}
+                                  </span>
+                                )
+                              })}
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                    {kt.description && <RichText className="muted" text={kt.description} />}
-                  </Link>
-                )
-              })}
-            </div>
-          ))}
-          {groupedKillteams.length === 0 && (
-            <div className="muted">No kill teams available. Try forcing an update from the menu.</div>
+                        {kt.description && <RichText className="muted" text={kt.description} />}
+                      </Link>
+                    )
+                  })}
+                </div>
+              ))}
+              {groupedKillteams.length === 0 && (
+                <div className="muted">No kill teams available. Try forcing an update from the menu.</div>
+              )}
+            </>
           )}
         </div>
       </div>
