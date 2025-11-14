@@ -234,14 +234,14 @@ th{position:sticky;top:0;background:#121521}
     }
     .operative-header-title {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      width: 100%;
+      align-items: flex-end;
+      gap: 0.35rem;
+      flex: 1;
+      min-width: 0;
     }
     .operative-header h4 {
     color: #ffffff;
     font-size: 1.1rem;
-    flex: 1;
     border-bottom: 2px solid #F55A07;
     padding-bottom: 0.25rem;
     text-transform: uppercase;
