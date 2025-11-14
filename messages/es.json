@@ -42,7 +42,29 @@
   "sequence": {
     "title": "Secuencia de juego",
     "description": "Recorre cada fase de la secuencia de ronda de Kill Team 2024 con texto de referencia claro para cada acción.",
-    "noSteps": "No se encontraron pasos."
+    "noSteps": "No se encontraron pasos.",
+    "steps": {
+      "seq_01_setup": {
+        "title": "Preparar la batalla",
+        "body": "1. Cada jugador selecciona un kill team para la batalla.\n2. Determina la killzone y coloca las características del terreno. Asegúrate de que los tipos de terreno estén especificados.\n3. Determina una op crit compartida y coloca los marcadores de objetivo. Excepto en Killzone: Bheta-Decima, todos los marcadores de objetivo deben colocarse en el suelo de la killzone.\n4. **Tirada decisiva:** el ganador decide quién tiene la iniciativa.\n5. El jugador con la iniciativa selecciona una zona de despliegue. Su oponente tiene la otra zona de despliegue y gana la carta de Iniciativa de relanzamiento (explicada en el paso 4)."
+      },
+      "seq_02_roster": {
+        "title": "Seleccionar operativos",
+        "body": "1. Cada jugador selecciona secretamente sus operativos para la batalla, adhiriéndose a los requisitos de selección en las reglas de su kill team. Luego revelan sus selecciones simultáneamente.\n2. Cada jugador selecciona secretamente hasta cuatro opciones de equipo. Cada opción no puede ser seleccionada más de una vez por jugador. Luego revelan sus selecciones simultáneamente.\n3. Cada jugador comienza con 2CP.\n4. Cada jugador selecciona secretamente una op tac de uno de los arquetipos de su kill team (Infiltración, Reconocimiento, Seguridad o Buscar y Destruir, según se especifica en las reglas de su kill team)."
+      },
+      "seq_03_deploy": {
+        "title": "Colocar operativos",
+        "body": "1. Cada jugador alterna colocando un elemento de equipo que se coloca antes de la batalla (escaleras, etc.), comenzando con el jugador con la iniciativa. Nota: es elemento por elemento, no opción por opción.\n2. Cada jugador alterna colocando un tercio de su kill team (redondeando hacia arriba), comenzando con el jugador con la iniciativa. Cuando un jugador coloca un operativo, debe estar completamente dentro de su zona de despliegue y debe recibir una orden de Ocultación."
+      },
+      "seq_04_initiative": {
+        "title": "Jugar la batalla",
+        "body": "1. Para determinar la iniciativa durante cada punto de inflexión (incluido el primero), los jugadores hacen una tirada decisiva (los empates no se vuelven a tirar). Comenzando con el jugador que perdió la tirada decisiva, cada jugador alterna usando una carta de iniciativa para alterar el resultado de su tirada o pasando, hasta que ambos pasen sucesivamente.\n2. Si uno o más jugadores usarían las reglas de su kill team para afectar la tirada decisiva, deben hacerlo antes de jugar las cartas de iniciativa, comenzando con el jugador que está perdiendo la tirada decisiva.\n3. La carta de Iniciativa de relanzamiento permite al jugador volver a tirar su tirada de iniciativa. Las cartas de iniciativa restantes cambian el resultado de la tirada del jugador hacia arriba o hacia abajo (esto puede llevarlo por encima de 6 o por debajo de 1).\n4. El ganador de la tirada decisiva decide quién tiene la iniciativa. Excepto durante el cuarto punto de inflexión, el perdedor de la tirada decisiva gana una carta de iniciativa con un valor igual al punto de inflexión. Si la tirada decisiva es un empate, el jugador que no tenía la iniciativa en ese momento es el ganador.\n5. Como **Gambito estratégico** durante el primer punto de inflexión, cada jugador selecciona secretamente una de sus tres operaciones (Op Crit, Op Tac u Op Kill) como su Op Primaria. Luego, cada jugador coloca una carta con su elección boca abajo, o usa un dado u otro método para indicarlo.\n6. Cada jugador puede marcar un máximo de 6VP para cada operación."
+      },
+      "seq_05_strategy": {
+        "title": "Terminar la batalla",
+        "body": "1. La batalla termina después de que se hayan completado cuatro puntos de inflexión. Si un jugador no tiene operativos en la killzone pero la batalla no ha terminado, el otro jugador completa los puntos de inflexión restantes hasta que la batalla termine.\n2. Al final de la batalla, todos los jugadores revelan simultáneamente sus operaciones primarias. Marcan VP adicionales iguales a la mitad de lo que marcaron para esa operación (redondeando hacia arriba).\n3. El jugador con más VP es el ganador. Si los jugadores están empatados, la batalla es un empate."
+      }
+    }
   },
   "operative": {
     "apl": "APL",

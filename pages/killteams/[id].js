@@ -7,13 +7,8 @@ import OperativeCard from '../../components/OperativeCard'
 import RichText from '../../components/RichText'
 import { db } from '../../lib/db'
 import { ensureIndex } from '../../lib/search'
+import { getLocalePath, checkForUpdates } from '../../lib/update'
 import Seo from '../../components/Seo'
-
-const TAC_OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/ops_2025.json'
-const TAC_OPS_UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
-const TAC_OPS_MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
-const WEAPON_RULES_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/weapon_rules.json'
-const UNIVERSAL_EQUIPMENT_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_equipment.json'
 
 const ARCHETYPE_PILL_MAP = {
   infiltration: { background: '#2b2d33', color: '#f4f6ff' },
@@ -158,7 +153,7 @@ function normaliseTacOp(raw, actionLookup) {
   }
 }
 
-async function loadTacOpsByArchetype() {
+async function loadTacOpsByArchetype(locale = 'en') {
   if (cachedTacOpsByArchetype && cachedTacOpsActionLookup) {
     return {
       byArchetype: cachedTacOpsByArchetype,
@@ -168,7 +163,7 @@ async function loadTacOpsByArchetype() {
 
   if (!tacOpsLoadPromise) {
     tacOpsLoadPromise = (async () => {
-      const res = await fetch(TAC_OPS_DATA_URL, { cache: 'no-store' })
+      const res = await fetch(getLocalePath(locale, 'ops_2025.json'), { cache: 'no-store' })
       if (!res.ok) {
         throw new Error(`Failed to load tac ops dataset (${res.status})`)
       }
@@ -186,13 +181,13 @@ async function loadTacOpsByArchetype() {
       actionsList.forEach(addAction)
 
       await Promise.allSettled([
-        fetch(TAC_OPS_UNIVERSAL_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
+        fetch(getLocalePath(locale, 'universal_actions.json'), { cache: 'no-store' }).then(async res => {
           if (!res.ok) return
           const json = await res.json()
           const universalActions = Array.isArray(json?.actions) ? json.actions : []
           universalActions.forEach(addAction)
         }),
-        fetch(TAC_OPS_MISSION_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
+        fetch(getLocalePath(locale, 'mission_actions.json'), { cache: 'no-store' }).then(async res => {
           if (!res.ok) return
           const json = await res.json()
           const missionActions = Array.isArray(json?.actions) ? json.actions : []
@@ -623,7 +618,7 @@ function sortUniversalEquipmentRows(rows) {
   })
 }
 
-async function loadWeaponRules() {
+async function loadWeaponRules(locale = 'en') {
   if (cachedWeaponRules) {
     return cachedWeaponRules
   }
@@ -631,7 +626,7 @@ async function loadWeaponRules() {
   if (!weaponRulesLoadPromise) {
     weaponRulesLoadPromise = (async () => {
       try {
-        const res = await fetch(WEAPON_RULES_URL, { cache: 'no-store' })
+        const res = await fetch(getLocalePath(locale, 'weapon_rules.json'), { cache: 'no-store' })
         if (!res.ok) {
           throw new Error(`Failed to load weapon rules (${res.status})`)
         }
@@ -795,6 +790,7 @@ function normaliseOperative(opType, weaponRulesMap = new Map()) {
 
 export default function KillteamPage() {
   const router = useRouter()
+  const locale = router.locale || 'en'
   const { id } = router.query
 
   const [killteam, setKillteam] = useState(null)
@@ -815,14 +811,26 @@ export default function KillteamPage() {
   const [equipmentActions, setEquipmentActions] = useState([])
   const [equipmentActionsLoaded, setEquipmentActionsLoaded] = useState(false)
 
+  const prevLocaleRef = useRef(locale)
+  
   useEffect(() => {
     if (!id) return
 
     let cancelled = false
 
     ;(async () => {
-      if (!hasLoadedOnceRef.current) {
+      // Reset loading state when locale or id changes
+      const localeChanged = prevLocaleRef.current !== locale
+      if (localeChanged || !hasLoadedOnceRef.current) {
         setLoading(true)
+        prevLocaleRef.current = locale
+      }
+      
+      // Reload data when locale changes
+      try {
+        await checkForUpdates(locale)
+      } catch (err) {
+        console.warn('Update check failed', err)
       }
       await ensureIndex()
 
@@ -837,7 +845,7 @@ export default function KillteamPage() {
     return () => {
       cancelled = true
     }
-  }, [id])
+  }, [id, locale])
 
   useEffect(() => {
     let cancelled = false
@@ -858,7 +866,7 @@ export default function KillteamPage() {
 
     const loadEquipmentActions = async () => {
       try {
-        const res = await fetch(UNIVERSAL_EQUIPMENT_URL, { cache: 'no-store' })
+        const res = await fetch(getLocalePath(locale, 'universal_equipment.json'), { cache: 'no-store' })
         if (!res.ok) {
           throw new Error(`Failed to load universal equipment (${res.status})`)
         }
@@ -888,7 +896,7 @@ export default function KillteamPage() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [locale])
 
   useEffect(() => {
     if (tacOpsLoaded) return
@@ -896,7 +904,7 @@ export default function KillteamPage() {
     let cancelled = false
     setTacOpsLoading(true)
 
-    loadTacOpsByArchetype()
+    loadTacOpsByArchetype(locale)
       .then(({ byArchetype, actionLookup }) => {
         if (cancelled) return
         setTacOpsByArchetype(new Map(byArchetype))
@@ -919,12 +927,12 @@ export default function KillteamPage() {
     return () => {
       cancelled = true
     }
-  }, [tacOpsLoaded])
+  }, [tacOpsLoaded, locale])
 
   useEffect(() => {
     let cancelled = false
 
-    loadWeaponRules()
+    loadWeaponRules(locale)
       .then(map => {
         if (cancelled) return
         setWeaponRulesMap(map)

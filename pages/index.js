@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import Header from '../components/Header'
 import SearchBox from '../components/SearchBox'
 import Results from '../components/Results'
@@ -45,6 +46,8 @@ function rankResults(results, query) {
 }
 
 export default function Home() {
+  const router = useRouter()
+  const locale = router.locale || 'en'
   const [q, setQ] = useState('')
   const [res, setRes] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -87,7 +90,7 @@ export default function Home() {
 
     const run = async () => {
       try {
-        await checkForUpdates()
+        await checkForUpdates(locale)
       } catch (err) {
         console.warn('Update check failed', err)
       }
@@ -107,7 +110,7 @@ export default function Home() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [locale])
   
   useEffect(() => {
     (async () => {

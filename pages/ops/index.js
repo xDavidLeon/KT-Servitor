@@ -1,12 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 import Header from '../../components/Header'
 import Seo from '../../components/Seo'
 import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
 import RichText from '../../components/RichText'
-
-const OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/ops_2025.json'
-const OPS_UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
-const OPS_MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
+import { getLocalePath } from '../../lib/update'
 
 // Map group definitions
 const MAP_GROUPS = [
@@ -260,6 +258,9 @@ function renderActionCards(actions = [], actionLookup = new Map(), anchorPrefix 
 }
 
 export default function OpsPage() {
+  const router = useRouter()
+  const locale = router.locale || 'en'
+  const prevLocaleRef = useRef(locale)
   const [critOps, setCritOps] = useState(cachedCritOps || [])
   const [tacOps, setTacOps] = useState(cachedTacOps || [])
   const [actionLookup, setActionLookup] = useState(() => cachedOpsActionMap ? new Map(cachedOpsActionMap) : new Map())
@@ -275,11 +276,23 @@ export default function OpsPage() {
     let cancelled = false
 
     const fetchOps = async () => {
-      if (!loaded) {
+      // Clear cached data only when locale actually changes
+      const localeChanged = prevLocaleRef.current !== locale
+      if (localeChanged) {
+        cachedCritOps = null
+        cachedTacOps = null
+        cachedOpsActionMap = null
+        setCritOps([])
+        setTacOps([])
+        setActionLookup(new Map())
+        setLoaded(false)
+        setLoading(true)
+        prevLocaleRef.current = locale
+      } else if (!loaded) {
         setLoading(true)
       }
       try {
-        const res = await fetch(OPS_DATA_URL, { cache: 'no-store' })
+        const res = await fetch(getLocalePath(locale, 'ops_2025.json'), { cache: 'no-store' })
         if (!res.ok) {
           throw new Error(`Failed to load operations (${res.status})`)
         }
@@ -301,7 +314,7 @@ export default function OpsPage() {
         }
 
         await Promise.allSettled([
-          fetch(OPS_UNIVERSAL_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
+          fetch(getLocalePath(locale, 'universal_actions.json'), { cache: 'no-store' }).then(async res => {
             if (!res.ok) return
             const json = await res.json()
             const universalActions = Array.isArray(json?.actions) ? json.actions : []
@@ -309,7 +322,7 @@ export default function OpsPage() {
               addAction(actionDef)
             }
           }),
-          fetch(OPS_MISSION_ACTIONS_URL, { cache: 'no-store' }).then(async res => {
+          fetch(getLocalePath(locale, 'mission_actions.json'), { cache: 'no-store' }).then(async res => {
             if (!res.ok) return
             const json = await res.json()
             const missionActions = Array.isArray(json?.actions) ? json.actions : []
@@ -404,7 +417,7 @@ export default function OpsPage() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [locale])
 
 const sections = useMemo(() => {
   const groupedTacOps = tacOps.reduce((acc, op) => {

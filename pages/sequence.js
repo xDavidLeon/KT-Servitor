@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 import Header from '../components/Header'
 import RichText from '../components/RichText'
-import { db } from '../lib/db'
-import { ensureIndex } from '../lib/search'
-import { checkForUpdates } from '../lib/update'
 import Seo from '../components/Seo'
 import { useTranslations } from '../lib/i18n'
 
-let cachedSequenceSteps = null
+// Step IDs in order
+const STEP_IDS = [
+  'seq_01_setup',
+  'seq_02_roster',
+  'seq_03_deploy',
+  'seq_04_initiative',
+  'seq_05_strategy'
+]
 
 function processSequenceText(text) {
   if (!text || typeof text !== 'string') return text
@@ -33,32 +37,18 @@ function processSequenceText(text) {
 export default function Sequence(){
   const t = useTranslations('sequence')
   const tCommon = useTranslations('common')
-  const [steps,setSteps] = useState(cachedSequenceSteps || [])
-  const [loaded, setLoaded] = useState(Boolean(cachedSequenceSteps))
-
-  useEffect(() => { 
-    let cancelled = false
-
-    const run = async () => {
-      try {
-        await checkForUpdates()
-      } catch (err) {
-        console.warn('Update check failed', err)
+  
+  const steps = useMemo(() => {
+    return STEP_IDS.map(stepId => {
+      const title = t(`steps.${stepId}.title`)
+      const body = t(`steps.${stepId}.body`)
+      return {
+        id: stepId,
+        title: title || '',
+        body: body || ''
       }
-      await ensureIndex()
-      const rows = await db.articles.where('type').equals('sequence_step').toArray()
-      rows.sort((a,b)=> (a.order||0) - (b.order||0))
-      if (!cancelled) {
-        cachedSequenceSteps = rows
-        setSteps(rows)
-        setLoaded(true)
-      }
-    }
-
-    run()
-
-    return () => { cancelled = true }
-  },[])
+    }).filter(step => step.title && step.body)
+  }, [t])
 
   return (
     <>
@@ -70,9 +60,8 @@ export default function Sequence(){
         <Header />
         <div className="card">
           <h2 style={{marginTop:0}}>{t('title')}</h2>
-          {!loaded && <div className="muted">{tCommon('loading')}</div>}
-          {loaded && steps.length===0 && <div className="muted">{t('noSteps')}</div>}
-          {loaded && (
+          {steps.length===0 && <div className="muted">{t('noSteps')}</div>}
+          {steps.length > 0 && (
             <ol style={{ listStyle: 'none', padding: 0, margin: 0 }}>
             {steps.map((s, index)=> {
               const iconSequence = ['⚡', '♟', '🔥', '🕒', '🏆', '🔚']

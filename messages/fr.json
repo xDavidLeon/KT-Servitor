@@ -42,7 +42,29 @@
   "sequence": {
     "title": "Séquence de jeu",
     "description": "Parcourez chaque phase de la séquence de tour de Kill Team 2024 avec un texte de référence clair pour chaque action.",
-    "noSteps": "Aucune étape trouvée."
+    "noSteps": "Aucune étape trouvée.",
+    "steps": {
+      "seq_01_setup": {
+        "title": "Préparer la bataille",
+        "body": "1. Chaque joueur sélectionne une kill team pour la bataille.\n2. Déterminez la killzone et installez les éléments de terrain. Assurez-vous que les types de terrain sont spécifiés.\n3. Déterminez une op crit partagée et installez les marqueurs d'objectif. Sauf dans la Killzone : Bheta-Decima, tous les marqueurs d'objectif doivent être installés sur le sol de la killzone.\n4. **Jet de décisif :** le gagnant décide qui a l'initiative.\n5. Le joueur avec l'initiative sélectionne une zone de largage. Son adversaire a l'autre zone de largage et gagne la carte Initiative de relance (expliquée à l'étape 4)."
+      },
+      "seq_02_roster": {
+        "title": "Sélectionner les opératifs",
+        "body": "1. Chaque joueur sélectionne secrètement ses opératifs pour la bataille, en respectant les exigences de sélection dans les règles de sa kill team. Ils révèlent ensuite leurs sélections simultanément.\n2. Chaque joueur sélectionne secrètement jusqu'à quatre options d'équipement. Chaque option ne peut être sélectionnée qu'une seule fois par joueur. Ils révèlent ensuite leurs sélections simultanément.\n3. Chaque joueur commence avec 2CP.\n4. Chaque joueur sélectionne secrètement une op tac parmi l'un des archétypes de sa kill team (Infiltration, Reconnaissance, Sécurité ou Recherche et Destruction, tel que spécifié dans les règles de sa kill team)."
+      },
+      "seq_03_deploy": {
+        "title": "Installer les opératifs",
+        "body": "1. Chaque joueur alterne l'installation d'un élément d'équipement qui est installé avant la bataille (échelles, etc.), en commençant par le joueur avec l'initiative. Note : c'est élément par élément, pas option par option.\n2. Chaque joueur alterne l'installation d'un tiers de sa kill team (arrondi à l'inférieur), en commençant par le joueur avec l'initiative. Lorsqu'un joueur installe un opératif, il doit être entièrement dans sa zone de largage et doit recevoir un ordre de Dissimulation."
+      },
+      "seq_04_initiative": {
+        "title": "Jouer la bataille",
+        "body": "1. Pour déterminer l'initiative pendant chaque point tournant (y compris le premier), les joueurs font un jet de décisif (les égalités ne sont pas relancées). En commençant par le joueur qui a perdu le jet de décisif, chaque joueur alterne soit l'utilisation d'une carte d'initiative pour modifier le résultat de son jet, soit passe, jusqu'à ce qu'ils passent tous les deux successivement.\n2. Si un ou plusieurs joueurs utiliseraient les règles de leur kill team pour affecter le jet de décisif, ils doivent le faire avant de jouer les cartes d'initiative, en commençant par le joueur qui perd le jet de décisif.\n3. La carte Initiative de relance permet au joueur de relancer son jet d'initiative. Les autres cartes d'initiative modifient toutes le résultat du jet du joueur vers le haut ou vers le bas (cela peut le porter au-dessus de 6 ou en dessous de 1).\n4. Le gagnant du jet de décisif décide qui a l'initiative. Sauf pendant le quatrième point tournant, le perdant du jet de décisif gagne une carte d'initiative d'une valeur égale au point tournant. Si le jet de décisif est une égalité, le joueur qui n'avait pas l'initiative à ce moment-là est le gagnant.\n5. En tant que **Gambit stratégique** pendant le premier point tournant, chaque joueur sélectionne secrètement l'une de ses trois opérations (Op Crit, Op Tac ou Op Kill) comme son Op Primaire. Ensuite, chaque joueur place une carte avec son choix face cachée, ou utilise un dé ou une autre méthode pour l'indiquer.\n6. Chaque joueur peut marquer un maximum de 6VP pour chaque opération."
+      },
+      "seq_05_strategy": {
+        "title": "Terminer la bataille",
+        "body": "1. La bataille se termine après que quatre points tournants aient été complétés. Si un joueur n'a pas d'opératifs dans la killzone mais que la bataille n'est pas terminée, l'autre joueur complète les points tournants restants jusqu'à ce que la bataille se termine.\n2. À la fin de la bataille, tous les joueurs révèlent simultanément leurs opérations primaires. Ils marquent des VP supplémentaires égaux à la moitié de ce qu'ils ont marqué pour cette opération (arrondi à l'inférieur).\n3. Le joueur avec le plus de VP est le gagnant. Si les joueurs sont à égalité, la bataille est un match nul."
+      }
+    }
   },
   "operative": {
     "apl": "APL",

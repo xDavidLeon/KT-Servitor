@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { forceUpdateAndReindex, checkForUpdates } from '../lib/update'
 
 function download(filename, text) {
@@ -23,6 +24,8 @@ function formatVersion(version) {
 }
 
 export default function Footer() {
+  const router = useRouter()
+  const locale = router.locale || 'en'
   const [versionLabel, setVersionLabel] = useState(null)
   const [status, setStatus] = useState('Checking for data updates…')
   const [menuOpen, setMenuOpen] = useState(false)
@@ -65,7 +68,7 @@ export default function Footer() {
     async function runUpdateCheck() {
       setStatus('Checking for data updates…')
       try {
-        const upd = await checkForUpdates()
+        const upd = await checkForUpdates(locale)
         if (cancelled) return
 
         if (upd.error) {
@@ -96,7 +99,7 @@ export default function Footer() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [locale])
 
   useEffect(() => {
     if (typeof document === 'undefined') return undefined
@@ -138,7 +141,7 @@ export default function Footer() {
   async function handleForceUpdate() {
     setMenuOpen(false)
     setStatus('Updating data…')
-    const res = await forceUpdateAndReindex()
+    const res = await forceUpdateAndReindex(locale)
     if (!res.ok) {
       setStatus('Update failed')
       alert(`Update failed: ${res.error}`)

@@ -1,16 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 import Header from '../../components/Header'
 import RichText from '../../components/RichText'
 import { db } from '../../lib/db'
-import { checkForUpdates } from '../../lib/update'
+import { checkForUpdates, getLocalePath } from '../../lib/update'
 import Seo from '../../components/Seo'
 import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
-
-const UNIVERSAL_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_actions.json'
-const MISSION_ACTIONS_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/mission_actions.json'
-const WEAPON_RULES_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/weapon_rules.json'
-const OPS_DATA_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/ops_2025.json'
-const UNIVERSAL_EQUIPMENT_URL = 'https://raw.githubusercontent.com/xDavidLeon/killteamjson/main/universal_equipment.json'
 
 let cachedEquipment = null
 let cachedUniversalActions = null
@@ -216,6 +211,9 @@ function sortMissionActions(list) {
 }
 
 export default function Rules({ rulesTabs = [] }) {
+  const router = useRouter()
+  const locale = router.locale || 'en'
+  const prevLocaleRef = useRef(locale)
   const [equipment, setEquipment] = useState(cachedEquipment || [])
   const [equipmentLoading, setEquipmentLoading] = useState(!cachedEquipment)
   const [equipmentLoaded, setEquipmentLoaded] = useState(Boolean(cachedEquipment))
@@ -249,10 +247,28 @@ export default function Rules({ rulesTabs = [] }) {
   useEffect(() => {
     let cancelled = false
 
+    // Clear cached data only when locale actually changes
+    const localeChanged = prevLocaleRef.current !== locale
+    if (localeChanged) {
+      cachedEquipment = null
+      cachedUniversalActions = null
+      cachedMissionActions = null
+      cachedWeaponRules = null
+      setEquipment([])
+      setUniversalActions([])
+      setMissionActions([])
+      setWeaponRules([])
+      setEquipmentLoaded(false)
+      setActionsLoaded(false)
+      setMissionActionsLoaded(false)
+      setWeaponRulesLoaded(false)
+      prevLocaleRef.current = locale
+    }
+
     const loadEquipment = async () => {
       if (!equipmentLoaded) setEquipmentLoading(true)
       try {
-        await checkForUpdates()
+        await checkForUpdates(locale)
         const rows = await db.universalEquipment.toArray()
         if (cancelled) return
         const sorted = rows.slice().sort((a, b) => {
@@ -283,7 +299,7 @@ export default function Rules({ rulesTabs = [] }) {
     const loadActions = async () => {
       if (!actionsLoaded) setActionsLoading(true)
       try {
-        const res = await fetch(UNIVERSAL_ACTIONS_URL, { cache: 'no-store' })
+        const res = await fetch(getLocalePath(locale, 'universal_actions.json'), { cache: 'no-store' })
         if (!res.ok) {
           throw new Error(`Failed to load universal actions (${res.status})`)
         }
@@ -325,7 +341,7 @@ export default function Rules({ rulesTabs = [] }) {
     const loadMissionActions = async () => {
       if (!missionActionsLoaded) setMissionActionsLoading(true)
       try {
-        const res = await fetch(MISSION_ACTIONS_URL, { cache: 'no-store' })
+        const res = await fetch(getLocalePath(locale, 'mission_actions.json'), { cache: 'no-store' })
         if (!res.ok) {
           throw new Error(`Failed to load mission actions (${res.status})`)
         }
@@ -345,7 +361,7 @@ export default function Rules({ rulesTabs = [] }) {
         }
 
         try {
-          const opsRes = await fetch(OPS_DATA_URL, { cache: 'no-store' })
+          const opsRes = await fetch(getLocalePath(locale, 'ops_2025.json'), { cache: 'no-store' })
           if (opsRes.ok) {
             const opsJson = await opsRes.json()
             const opsActions = Array.isArray(opsJson?.actions) ? opsJson.actions : []
@@ -397,7 +413,7 @@ export default function Rules({ rulesTabs = [] }) {
     const loadWeaponRules = async () => {
       if (!weaponRulesLoaded) setWeaponRulesLoading(true)
       try {
-        const res = await fetch(WEAPON_RULES_URL, { cache: 'no-store' })
+        const res = await fetch(getLocalePath(locale, 'weapon_rules.json'), { cache: 'no-store' })
         if (!res.ok) {
           throw new Error(`Failed to load weapon rules (${res.status})`)
         }
@@ -447,7 +463,7 @@ export default function Rules({ rulesTabs = [] }) {
 
     const loadKillteams = async () => {
       try {
-        await checkForUpdates()
+        await checkForUpdates(locale)
         const killteams = await db.killteams.toArray()
         if (cancelled) return
         const map = new Map()
@@ -464,7 +480,7 @@ export default function Rules({ rulesTabs = [] }) {
 
     const loadEquipmentActions = async () => {
       try {
-        const res = await fetch(UNIVERSAL_EQUIPMENT_URL, { cache: 'no-store' })
+        const res = await fetch(getLocalePath(locale, 'universal_equipment.json'), { cache: 'no-store' })
         if (!res.ok) {
           throw new Error(`Failed to load universal equipment (${res.status})`)
         }
@@ -498,7 +514,7 @@ export default function Rules({ rulesTabs = [] }) {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [locale])
 
   const combinedUniversalActions = useMemo(() => {
     if (!equipmentActionsLoaded) return universalActions

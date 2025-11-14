@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Header from '../../components/Header'
 import KillteamSelector from '../../components/KillteamSelector'
@@ -42,14 +43,17 @@ function getArchetypePillStyle(archetype) {
 }
 
 export default function Killteams() {
+  const router = useRouter()
+  const locale = router.locale || 'en'
   const [killteams, setKillteams] = useState([])
 
   useEffect(() => {
     let cancelled = false
 
     const run = async () => {
+      setKillteams([]) // Clear existing data when locale changes
       try {
-        await checkForUpdates()
+        await checkForUpdates(locale)
       } catch (err) {
         console.warn('Update check failed', err)
       }
@@ -67,7 +71,7 @@ export default function Killteams() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [locale])
 
   const groupedKillteams = useMemo(() => {
     const byFaction = killteams.reduce((acc, kt) => {
