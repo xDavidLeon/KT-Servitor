@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useLocale } from '../lib/i18n'
 
@@ -6,10 +7,83 @@ const languages = [
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'es', name: 'Español', flag: '🇪🇸' }
 ]
+const DEFAULT_LOCALE = 'en'
 
 export default function LanguageSwitcher() {
   const router = useRouter()
   const currentLocale = useLocale()
+  const [availableLocales, setAvailableLocales] = useState(null)
+
+  useEffect(() => {
+    let cancelled = false
+
+    async function resolveLocales() {
+      try {
+        const availability = await Promise.all(
+          languages.map(async ({ code }) => {
+            try {
+              const res = await fetch(`/api/github-proxy?path=${encodeURIComponent(code)}`)
+              if (!res.ok) {
+                return code === DEFAULT_LOCALE
+              }
+
+              const payload = await res.json()
+              if (!Array.isArray(payload)) {
+                return code === DEFAULT_LOCALE
+              }
+
+              return payload.some(entry => entry?.type === 'dir')
+            } catch (err) {
+              console.warn(`Failed to inspect locale directory for ${code}`, err)
+              return code === DEFAULT_LOCALE
+            }
+          })
+        )
+
+        if (cancelled) {
+          return
+        }
+
+        const localesWithData = languages
+          .filter((_, index) => availability[index])
+          .map(lang => lang.code)
+
+        setAvailableLocales(new Set(localesWithData))
+      } catch (err) {
+        console.warn('Failed to determine available locales', err)
+        if (!cancelled) {
+          setAvailableLocales(new Set([DEFAULT_LOCALE]))
+        }
+      }
+    }
+
+    resolveLocales()
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const visibleLanguages = useMemo(() => {
+    if (!availableLocales) {
+      const fallbackLocale = currentLocale || DEFAULT_LOCALE
+      const fallbackLang = languages.find(lang => lang.code === fallbackLocale)
+      return fallbackLang ? [fallbackLang] : []
+    }
+
+    const filtered = languages.filter((lang) => {
+      if (availableLocales.has(lang.code)) {
+        return true
+      }
+      return lang.code === currentLocale
+    })
+
+    if (filtered.length === 0) {
+      return languages.filter((lang) => lang.code === (currentLocale || DEFAULT_LOCALE))
+    }
+
+    return filtered
+  }, [availableLocales, currentLocale])
 
   const switchLanguage = (locale) => {
     router.push(router.asPath, router.asPath, { locale })
@@ -17,7 +91,7 @@ export default function LanguageSwitcher() {
 
   return (
     <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-      {languages.map((lang) => (
+      {visibleLanguages.map((lang) => (
         <button
           key={lang.code}
           type="button"
