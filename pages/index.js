@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Header from '../components/Header'
 import SearchBox from '../components/SearchBox'
 import Results from '../components/Results'
-import { ensureIndex, getAllIndexedDocuments } from '../lib/search'
+import { ensureIndex, getAllIndexedDocuments, isIndexReady } from '../lib/search'
 import { checkForUpdates } from '../lib/update'
 import Seo from '../components/Seo'
 
@@ -50,7 +50,7 @@ export default function Home() {
   const locale = router.locale || 'en'
   const [q, setQ] = useState('')
   const [res, setRes] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(() => !isIndexReady())
 
   const runSearch = async (query, idx) => {
     const mini = idx || await ensureIndex()
