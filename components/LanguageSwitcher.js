@@ -66,12 +66,17 @@ export default function LanguageSwitcher() {
 
   const visibleLanguages = useMemo(() => {
     if (!availableLocales) {
-      return languages
+      const fallbackLocale = currentLocale || DEFAULT_LOCALE
+      const fallbackLang = languages.find(lang => lang.code === fallbackLocale)
+      return fallbackLang ? [fallbackLang] : []
     }
 
-    const filtered = languages.filter(
-      (lang) => availableLocales.has(lang.code) || lang.code === currentLocale
-    )
+    const filtered = languages.filter((lang) => {
+      if (availableLocales.has(lang.code)) {
+        return true
+      }
+      return lang.code === currentLocale
+    })
 
     if (filtered.length === 0) {
       return languages.filter((lang) => lang.code === (currentLocale || DEFAULT_LOCALE))
