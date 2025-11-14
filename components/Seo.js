@@ -7,9 +7,11 @@ const DEFAULT_DESCRIPTION = 'KT Servitor is a fast, offline-capable reference fo
 const FALLBACK_IMAGE = '/icons/icon-512.png'
 const DEFAULT_TYPE = 'website'
 
+const FALLBACK_SITE_URL = 'https://ktservitor.app'
+
 const RAW_BASE_URL =
   (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_SITE_URL) ||
-  'https://ktservitor.xdavidleon.com'
+  FALLBACK_SITE_URL
 
 function buildCanonicalUrl(router) {
   const base = RAW_BASE_URL.replace(/\/+$/, '')

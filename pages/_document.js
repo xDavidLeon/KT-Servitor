@@ -4,9 +4,11 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head>
+          <Head>
           <meta name="color-scheme" content="dark light" />
-          <link rel="icon" href="/icons/favicon.ico" />
+            <link rel="icon" href="/favicon.ico" sizes="any" />
+            <link rel="shortcut icon" href="/favicon.ico" />
+            <link rel="icon" href="/icons/favicon.ico" />
           <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
           <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png" />
