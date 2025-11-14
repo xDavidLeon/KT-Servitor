@@ -196,7 +196,7 @@ function renderActionCards(actions = [], actionLookup = new Map(), anchorPrefix 
           <div
             key={safeActionId || rawActionId}
             id={`${anchorPrefix}-${safeActionId || rawActionId}`}
-            className="ability-card"
+            className="ability-card action-card"
           >
             <div className="ability-card-header">
               <h4 className="ability-card-title">{(normalised.name || rawActionId || '').toUpperCase()}</h4>
@@ -682,7 +682,7 @@ const sections = useMemo(() => {
               <div
                 key={safeActionId || rawActionId}
                 id={`operation-action-${safeActionId || rawActionId}`}
-                className="ability-card"
+                className="ability-card action-card"
               >
                 <div className="ability-card-header">
                   <h4 className="ability-card-title">{entry.name.toUpperCase()}</h4>
@@ -744,7 +744,7 @@ const sections = useMemo(() => {
     }
 
     return (
-      <div key={op.id} id={`operation-${op.id}`} className="card" style={{ margin: '.75rem 0', position: 'relative' }}>
+      <div key={op.id} id={`operation-${op.id}`} className="card operation-card" style={{ margin: '.75rem 0', position: 'relative' }}>
         {type === 'crit-op' && (
           <div
             style={{
@@ -786,7 +786,7 @@ const sections = useMemo(() => {
           })()}
         </div>
         <div style={{ textAlign: 'center', marginBottom: '0.75rem' }}>
-          <strong style={{ fontSize: '1.1rem' }}>{op.title.toUpperCase()}</strong>
+          <strong style={{ fontSize: '1.1rem', color: '#000000' }}>{op.title.toUpperCase()}</strong>
         </div>
 
         {op.briefing && (

@@ -740,7 +740,7 @@ export default function Rules({ rulesTabs = [] }) {
           const actionTypeLabel = (actionType === 'universal' ? 'Universal' : actionType === 'mission' ? 'Mission' : actionType === 'ability' ? 'Ability' : actionType.charAt(0).toUpperCase() + actionType.slice(1)) + ' Action'
           
           return (
-            <div key={action.id} id={`${anchorPrefix}-${action.id}`} className="ability-card">
+            <div key={action.id} id={`${anchorPrefix}-${action.id}`} className="ability-card action-card">
               <div className="ability-card-header">
                 <h4 className="ability-card-title">{action.name.toUpperCase()}</h4>
                 {apLabel && <span className="ability-card-ap">{apLabel}</span>}
@@ -791,7 +791,7 @@ export default function Rules({ rulesTabs = [] }) {
               >
                 {/* Action type centered */}
                 <span style={{
-                  color: 'var(--muted)',
+                  color: '#000000',
                   fontSize: '0.85rem'
                 }}>
                   - {actionTypeLabel} -
@@ -866,7 +866,7 @@ export default function Rules({ rulesTabs = [] }) {
         {weaponRules.map(rule => {
           const killteamName = rule.team ? killteamsMap.get(rule.team) : null
           return (
-            <div key={rule.id} id={`weapon-rule-${rule.id}`} className="ability-card" style={{ position: 'relative' }}>
+            <div key={rule.id} id={`weapon-rule-${rule.id}`} className="ability-card weapon-rule-card" style={{ position: 'relative' }}>
               <div className="ability-card-header">
                 <h4 className="ability-card-title">
                   {rule.variable ? `${rule.name} (X)` : rule.name}
@@ -978,7 +978,7 @@ export default function Rules({ rulesTabs = [] }) {
                     const actionTypeLabel = (actionType === 'universal' ? 'Universal' : actionType === 'mission' ? 'Mission' : actionType === 'ability' ? 'Ability' : actionType.charAt(0).toUpperCase() + actionType.slice(1)) + ' Action'
                     
                     return (
-                      <div key={`${item.eqId}-${action.id}-${actionIndex}`} id={`equipment-action-${item.eqId}-${action.id}${actionIndex > 0 ? `-${actionIndex}` : ''}`} style={{ marginBottom: actionIndex < equipmentActionsList.length - 1 ? '1rem' : 0 }}>
+                      <div key={`${item.eqId}-${action.id}-${actionIndex}`} id={`equipment-action-${item.eqId}-${action.id}${actionIndex > 0 ? `-${actionIndex}` : ''}`} className="action-card" style={{ marginBottom: actionIndex < equipmentActionsList.length - 1 ? '1rem' : 0 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                           <h4 className="ability-card-title" style={{ margin: 0 }}>{action.name.toUpperCase()}</h4>
                           {apLabel && <span className="ability-card-ap">{apLabel}</span>}
@@ -1029,7 +1029,7 @@ export default function Rules({ rulesTabs = [] }) {
                         >
                           {/* Action type centered */}
                           <span style={{
-                            color: 'var(--muted)',
+                            color: '#000000',
                             fontSize: '0.85rem'
                           }}>
                             - {actionTypeLabel} -

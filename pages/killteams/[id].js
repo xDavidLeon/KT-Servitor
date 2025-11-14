@@ -262,7 +262,7 @@ function renderTacOpActionCards(actions = [], actionLookup = new Map(), anchorPr
           <div
             key={safeActionId || rawActionId}
             id={`${anchorPrefix}-${safeActionId || rawActionId}`}
-            className="ability-card"
+            className="ability-card action-card"
           >
             <div className="ability-card-header">
               <h4 className="ability-card-title">{entry.name.toUpperCase()}</h4>
@@ -828,12 +828,15 @@ export default function KillteamPage() {
         prevLocaleRef.current = locale
       }
       
-      // Reload data when locale changes
-      try {
-        await checkForUpdates(locale)
-      } catch (err) {
-        console.warn('Update check failed', err)
+      // Only check for updates when locale changes, not on every id change
+      if (localeChanged) {
+        try {
+          await checkForUpdates(locale)
+        } catch (err) {
+          console.warn('Update check failed', err)
+        }
       }
+      
       await ensureIndex()
 
       const data = await db.killteams.get(id)
@@ -1002,7 +1005,14 @@ export default function KillteamPage() {
   const rawOperatives = useMemo(() => {
     if (!killteam?.opTypes) return []
     return killteam.opTypes
-      .map(opType => normaliseOperative(opType, weaponRulesMap))
+      .map(opType => {
+        const operative = normaliseOperative(opType, weaponRulesMap)
+        if (operative && Array.isArray(operative.keywords) && operative.keywords.length > 0) {
+          // The first keyword is the faction/kill team keyword
+          operative.factionKeyword = operative.keywords[0].toUpperCase()
+        }
+        return operative
+      })
       .filter(Boolean)
   }, [killteam, weaponRulesMap])
 
@@ -1347,7 +1357,7 @@ export default function KillteamPage() {
     return (
       <div className="card-section-list">
         {killteamTacOps.map(op => (
-          <div key={op.id} id={`tac-op-${op.id}`} className="ability-card" style={{ position: 'relative' }}>
+          <div key={op.id} id={`tac-op-${op.id}`} className="card operation-card" style={{ margin: '.75rem 0', position: 'relative' }}>
             <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
               {(() => {
                 const archetypeLabel = (op.archetypes && op.archetypes[0]) ? op.archetypes[0] : 'Tac Op'
@@ -1367,7 +1377,7 @@ export default function KillteamPage() {
               })()}
             </div>
             <div style={{ textAlign: 'center', marginBottom: '0.75rem' }}>
-              <h4 className="ability-card-title" style={{ margin: 0 }}>{op.title.toUpperCase()}</h4>
+              <strong style={{ fontSize: '1.1rem', color: '#000000' }}>{op.title.toUpperCase()}</strong>
             </div>
 
             {op.briefing && (
@@ -1685,7 +1695,7 @@ export default function KillteamPage() {
                   <div
                     key={rule.anchorId || rule.name || idx}
                     id={rule.anchorId}
-                    className="ability-card"
+                    className="ability-card ability-card-item"
                   >
                     <div className="ability-card-header">
                       <h4 className="ability-card-title">{rule.name || 'Rule'}</h4>
@@ -1734,7 +1744,7 @@ export default function KillteamPage() {
                     </h4>
                     <div className="card-section-list">
                       {strategyPloys.map((ploy, idx) => (
-                        <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card">
+                        <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card ploy-card">
                           <div className="ability-card-header">
                             <h4 className="ability-card-title">{ploy.name}</h4>
                             {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
@@ -1760,7 +1770,7 @@ export default function KillteamPage() {
                     </h4>
                     <div className="card-section-list">
                       {firefightPloys.map((ploy, idx) => (
-                        <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card">
+                        <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card ploy-card">
                           <div className="ability-card-header">
                             <h4 className="ability-card-title">{ploy.name}</h4>
                             {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
@@ -1790,7 +1800,7 @@ export default function KillteamPage() {
                     </h4>
                     <div className="card-section-list">
                       {factionEquipment.map((item, idx) => (
-                        <div key={item.id || idx} id={item.anchorId} className="ability-card">
+                        <div key={item.id || idx} id={item.anchorId} className="ability-card equipment-card">
                           <div className="ability-card-header">
                             <h4 className="ability-card-title">{item.name}</h4>
                             {item.cost && <span className="ability-card-ap">{item.cost}</span>}
@@ -1848,7 +1858,7 @@ export default function KillteamPage() {
                             }))
                           
                           return (
-                            <div key={item.id || idx} id={item.anchorId} className="ability-card">
+                            <div key={item.id || idx} id={item.anchorId} className="ability-card equipment-card">
                               <div className="ability-card-header">
                                 <h4 className="ability-card-title">{item.name}</h4>
                                 {item.cost && <span className="ability-card-ap">{item.cost}</span>}
@@ -1877,7 +1887,7 @@ export default function KillteamPage() {
                                     const actionTypeLabel = (actionType === 'universal' ? 'Universal' : actionType === 'mission' ? 'Mission' : actionType === 'ability' ? 'Ability' : actionType.charAt(0).toUpperCase() + actionType.slice(1)) + ' Action'
                                     
                                     return (
-                                      <div key={`${item.id}-${action.id}-${actionIndex}`} id={`equipment-action-${item.id || item.anchorId}-${action.id}${actionIndex > 0 ? `-${actionIndex}` : ''}`} style={{ marginBottom: actionIndex < equipmentActionsList.length - 1 ? '1rem' : 0 }}>
+                                      <div key={`${item.id}-${action.id}-${actionIndex}`} id={`equipment-action-${item.id || item.anchorId}-${action.id}${actionIndex > 0 ? `-${actionIndex}` : ''}`} className="action-card" style={{ marginBottom: actionIndex < equipmentActionsList.length - 1 ? '1rem' : 0 }}>
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                                           <h4 className="ability-card-title" style={{ margin: 0 }}>{action.name.toUpperCase()}</h4>
                                           {apLabel && <span className="ability-card-ap">{apLabel}</span>}

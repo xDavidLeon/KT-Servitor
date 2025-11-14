@@ -88,6 +88,7 @@ function WeaponRuleTooltip({ rule, children }) {
   )
 }
 
+
 export default function OperativeCard({ operative }) {
   const t = useTranslations('operative')
   const anchorId = operative?.id ? `operative-${operative.id}` : undefined
@@ -103,6 +104,7 @@ export default function OperativeCard({ operative }) {
     (operative?.factionKeyword && operative.factionKeyword !== 'UNKNOWN') ||
     keywords.length > 0
   const showKeywordSection = hasKeywords || !!baseSizeText
+  const factionKeyword = operative?.factionKeyword
   const getStatIcon = (key) => {
     const iconMap = {
       'apl': '/img/apl.svg',
@@ -340,17 +342,20 @@ export default function OperativeCard({ operative }) {
 
         {Array.isArray(operative.specialRules) && operative.specialRules.length > 0 && (
           <div className="operative-abilities">
-            <strong className="operative-abilities-title">{t('abilities')}</strong>
             <div className="operative-abilities-list">
               {operative.specialRules.map((ability, idx) => {
                 const key = ability?.name ? `${ability.name}-${idx}` : `ability-${idx}`
                 return (
-                  <div key={key} className="ability-card">
+                  <div key={key} className="ability-card ability-card-item">
                     <div className="ability-card-header">
                       <h5 className="ability-card-title">{ability?.name || 'Ability'}</h5>
                       {ability?.apCost && <span className="ability-card-ap">{ability.apCost}</span>}
                     </div>
-                    <RichText className="ability-card-body" text={ability?.description} />
+                    <RichText 
+                      className="ability-card-body" 
+                      text={ability?.description}
+                      highlightText={factionKeyword}
+                    />
                   </div>
                 )
               })}
@@ -365,12 +370,16 @@ export default function OperativeCard({ operative }) {
               {operative.specialActions.map((action, idx) => {
                 const key = action?.name ? `${action.name}-${idx}` : `action-${idx}`
                 return (
-                  <div key={key} className="ability-card">
+                  <div key={key} className="ability-card action-card">
                     <div className="ability-card-header">
                       <h5 className="ability-card-title">{action?.name || 'Option'}</h5>
                       {action?.apCost && <span className="ability-card-ap">{action.apCost}</span>}
                     </div>
-                    <RichText className="ability-card-body" text={action?.description} />
+                    <RichText 
+                      className="ability-card-body" 
+                      text={action?.description}
+                      highlightText={factionKeyword}
+                    />
                   </div>
                 )
               })}
@@ -384,10 +393,19 @@ export default function OperativeCard({ operative }) {
           <div className="operative-keywords-row">
             <div className="operative-keywords-list">
               {operative.factionKeyword && operative.factionKeyword !== 'UNKNOWN' && (
-                <span className="pill" key="faction-keyword">{operative.factionKeyword}</span>
+                <>
+                  <span key="faction-keyword" className="faction-keyword">
+                    {operative.factionKeyword}
+                    <span className="faction-keyword-skull">💀</span>
+                  </span>
+                  {keywords.length > 1 && <span>, </span>}
+                </>
               )}
-              {keywords.map((keyword, idx) => (
-                <span key={idx} className="pill">{keyword}</span>
+              {keywords.slice(1).map((keyword, idx) => (
+                <React.Fragment key={idx}>
+                  {idx > 0 && <span>, </span>}
+                  <span>{keyword}</span>
+                </React.Fragment>
               ))}
             </div>
             {baseSizeText && (

@@ -84,6 +84,7 @@ input,select,button{background:#0e1016;color:var(--text);border:1px solid #262a3
   text-align:center;
 }
 .pill{display:inline-block;padding:.2rem .5rem;border:1px solid #2a2f3f;border-radius:999px;font-size:.8rem;color:var(--muted)}
+.action-card .pill{color:#000000}
 table{width:100%;border-collapse:collapse}
 th,td{padding:.4rem;border-bottom:1px solid #2a2f3f;text-align:left}
 th{position:sticky;top:0;background:#121521}
@@ -154,7 +155,7 @@ th{position:sticky;top:0;background:#121521}
   font-size:0.95rem;
 }
 .app-footer-credit a{
-  color:var(--accent);
+  color:#F55A07;
   font-weight:600;
 }
 .app-footer-link{
@@ -211,7 +212,7 @@ th{position:sticky;top:0;background:#121521}
     margin-top: 0.5rem;
   }
   .operative-card {
-    background: #0e1016;
+    background: #E0E0E0;
     border: 1px solid #262a36;
     border-radius: 12px;
     padding: 1rem;
@@ -225,13 +226,19 @@ th{position:sticky;top:0;background:#121521}
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.75rem;
+    margin: -1rem -1rem 0.75rem -1rem;
+    padding: 1rem;
     gap: 0.5rem;
+    background: #141414;
+    border-radius: 12px 12px 0 0;
   }
   .operative-header h4 {
-    color: var(--text);
+    color: #ffffff;
     font-size: 1.1rem;
     flex: 1;
+    border-bottom: 2px solid #F55A07;
+    padding-bottom: 0.25rem;
+    text-transform: uppercase;
   }
   .operative-header-stats {
     display: flex;
@@ -249,21 +256,26 @@ th{position:sticky;top:0;background:#121521}
     min-width: 3.25rem;
   }
   .operative-header-stat .label {
-    color: var(--muted);
+    color: #ffffff;
     font-size: 0.75rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
   .operative-header-stat .value {
-    color: var(--text);
+    color: #F55A07;
     font-size: 1.25rem;
     font-weight: 600;
     line-height: 1.2;
   }
   .operative-keywords {
-    margin-top: 1rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid #2a2f3f;
+    margin: 1rem -1rem -1rem -1rem;
+    padding: 0.75rem 1rem 1rem 1rem;
+    background: #141414;
+    border-radius: 0 0 12px 12px;
+    color: #ffffff;
+  }
+  .operative-keywords strong {
+    color: #F55A07;
   }
   .operative-keywords-row {
     margin-top: 0.5rem;
@@ -278,6 +290,25 @@ th{position:sticky;top:0;background:#121521}
     gap: 0.25rem;
     flex: 1 1 auto;
   }
+  .operative-keywords-list span {
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .operative-keywords-list .faction-keyword {
+    color: #F55A07;
+    font-weight: 600;
+  }
+  .faction-keyword-highlight {
+    color: #F55A07;
+    font-weight: 600;
+  }
+  .faction-keyword-skull {
+    color: #F55A07;
+    font-weight: 600;
+    margin-left: 0.15em;
+    display: inline-block;
+  }
   .operative-base-size {
     display: inline-flex;
     margin-left: auto;
@@ -286,7 +317,7 @@ th{position:sticky;top:0;background:#121521}
     border-radius: 999px;
     border: 1px solid #2a2f3f;
     background: #131722;
-    color: var(--muted);
+    color: #ffffff;
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.03em;
@@ -335,7 +366,7 @@ th{position:sticky;top:0;background:#121521}
   font-size: 0.9rem;
 }
 .operative-weapons strong {
-  color: var(--accent);
+  color: #000000;
   display: block;
   margin-bottom: 0.25rem;
 }
@@ -349,10 +380,10 @@ th{position:sticky;top:0;background:#121521}
 .operative-abilities,
 .operative-actions,
 .card-section {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 .operative-abilities-title,
 .operative-actions-title,
@@ -367,46 +398,83 @@ th{position:sticky;top:0;background:#121521}
 .card-section-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 .card-section-list {
   margin-top: 0.75rem;
 }
 .ability-card {
-  background: #111520;
-  border: 1px solid #262a36;
+  background: transparent;
+  border: none;
   border-radius: 10px;
-  padding: 0.85rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  padding: 0.5rem;
+  box-shadow: none;
+}
+.ability-card-item,
+.ploy-card,
+.equipment-card,
+.operation-card,
+.action-card,
+.weapon-rule-card {
+  background: #E0E0E0 !important;
 }
 .ability-card-header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 0.75rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+.action-card .ability-card-header,
+.ability-card-item .ability-card-header {
+  background: #F55A07 !important;
+  padding: 0.5rem 0.75rem !important;
+  margin: -0.5rem -0.5rem 0.5rem -0.5rem !important;
+  border-radius: 8px 8px 0 0;
 }
 .ability-card-title {
   margin: 0;
   font-size: 1rem;
-  color: var(--text);
+  color: #000000;
   font-weight: 600;
+}
+.action-card .ability-card-title,
+.ability-card-item .ability-card-title {
+  color: #ffffff !important;
+  text-transform: uppercase;
+}
+.action-card > div:first-child:not(.ability-card-body),
+.ability-card-item > div:first-child:not(.ability-card-body) {
+  background: #F55A07 !important;
+  padding: 0.5rem 0.75rem !important;
+  margin: -0.5rem -0.5rem 0.5rem -0.5rem !important;
+  border-radius: 8px 8px 0 0;
+}
+.action-card > div:first-child:not(.ability-card-body) .ability-card-title,
+.ability-card-item > div:first-child:not(.ability-card-body) .ability-card-title {
+  color: #ffffff !important;
+  text-transform: uppercase;
 }
 .ability-card-ap {
   display: inline-flex;
   align-items: center;
   padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid rgba(251, 146, 60, 0.35);
-  background: rgba(251, 146, 60, 0.12);
-  color: var(--accent);
-  font-size: 0.8rem;
+  border: none;
+  background: transparent;
+  color: #F55A07;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+.action-card .ability-card-ap,
+.ability-card-item .ability-card-ap {
+  color: #ffffff !important;
+  border: none;
+  background: transparent;
+}
 .ability-card-body {
-  color: var(--muted);
+  color: #000000;
   font-size: 0.9rem;
   line-height: 1.6;
 }
@@ -421,18 +489,28 @@ th{position:sticky;top:0;background:#121521}
   margin: 0.35rem 0 0.35rem 1.25rem;
   padding: 0;
 }
+.ability-card-body ul li::marker,
+.ability-card-body ol li::marker {
+  color: #F55A07;
+}
+.ability-card-body ul li,
+.ability-card-body ol li {
+  color: #000000;
+}
   .weapons-table {
     margin-top: 0.5rem;
     font-size: 0.85rem;
+    border-collapse: collapse;
   }
   .weapons-table th {
-    background: #1a1f2b;
-    color: var(--muted);
+    background: #E0E0E0;
+    color: #000000;
     font-weight: 600;
     text-align: left;
     padding: 0.4rem 0.5rem;
     font-size: 0.8rem;
-    border-bottom: 1px solid #2a2f3f;
+    border-bottom: 1px solid #F55A07;
+    text-transform: uppercase;
   }
   .weapons-table th:nth-child(2),
   .weapons-table th:nth-child(3),
@@ -441,28 +519,42 @@ th{position:sticky;top:0;background:#121521}
   }
 .weapons-table td {
     padding: 0.5rem;
-    border-bottom: 1px solid #2a2f3f;
-    vertical-align: top;
-  word-break: break-word;
+    vertical-align: middle;
+    word-break: break-word;
+    border-bottom: none;
+  }
+  .weapons-table tbody tr:nth-child(even) td {
+    background: #D5D5D5;
+  }
+  .weapons-table tbody tr:nth-child(odd) td {
+    background: #E0E0E0;
   }
   .weapons-table td:nth-child(2),
   .weapons-table td:nth-child(3),
   .weapons-table td:nth-child(4) {
     text-align: center;
-  }
-  .weapons-table tr:last-child td {
-    border-bottom: none;
+    color: #000000;
+    font-weight: 600;
   }
   .weapons-table .weapon-header-row td {
+    background: #E0E0E0;
     font-weight: 600;
-    padding-top: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #2a2f3f;
-    color: var(--accent);
+    padding: 0.75rem 0.5rem 0.5rem 0.5rem;
+    color: #000000;
   }
   .weapons-table .weapon-profile-row td:first-child {
     padding-left: 1.5rem;
-    color: var(--muted);
+    color: #000000;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+  .weapons-table td.muted {
+    color: #000000;
+    font-weight: 600;
+  }
+  .weapons-table td strong {
+    color: #000000;
+    font-weight: 600;
   }
 
 @media (min-width: 640px) {
