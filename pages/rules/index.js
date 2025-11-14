@@ -299,13 +299,26 @@ export default function Rules({ rulesTabs = [] }) {
     const loadActions = async () => {
       if (!actionsLoaded) setActionsLoading(true)
       try {
-        const res = await fetch(getLocalePath(locale, 'universal_actions.json'), { cache: 'no-store' })
+        // Fetch merged actions.json instead of separate universal_actions.json
+        const res = await fetch(getLocalePath(locale, 'actions.json'), { cache: 'no-store' })
         if (!res.ok) {
-          throw new Error(`Failed to load universal actions (${res.status})`)
+          throw new Error(`Failed to load actions (${res.status})`)
         }
         const json = await res.json()
         if (cancelled) return
-        const rawActions = Array.isArray(json?.actions) ? json.actions : []
+        // Extract universal actions from merged file
+        // Support both new format (all in actions array with type field) and old format (separate arrays)
+        let rawActions = []
+        if (Array.isArray(json?.actions)) {
+          // New format: filter by type or assume all are universal if no type field
+          rawActions = json.actions.filter(action => {
+            const type = (action.type || '').toLowerCase()
+            return !type || type === 'universal' || type === ''
+          })
+        } else if (Array.isArray(json?.universal_actions)) {
+          // Old format fallback
+          rawActions = json.universal_actions
+        }
         const list = rawActions.map(action => normaliseActionDefinition(action)).filter(Boolean)
         const sorted = sortActions(list)
         const mappedActions = sorted.map(action => ({
@@ -341,13 +354,26 @@ export default function Rules({ rulesTabs = [] }) {
     const loadMissionActions = async () => {
       if (!missionActionsLoaded) setMissionActionsLoading(true)
       try {
-        const res = await fetch(getLocalePath(locale, 'mission_actions.json'), { cache: 'no-store' })
+        // Fetch merged actions.json instead of separate mission_actions.json
+        const res = await fetch(getLocalePath(locale, 'actions.json'), { cache: 'no-store' })
         if (!res.ok) {
-          throw new Error(`Failed to load mission actions (${res.status})`)
+          throw new Error(`Failed to load actions (${res.status})`)
         }
         const json = await res.json()
         if (cancelled) return
-        const rawActions = Array.isArray(json?.actions) ? json.actions : []
+        // Extract mission actions from merged file
+        // Support both new format (all in actions array with type field) and old format (separate arrays)
+        let rawActions = []
+        if (Array.isArray(json?.actions)) {
+          // New format: filter by type
+          rawActions = json.actions.filter(action => {
+            const type = (action.type || '').toLowerCase()
+            return type === 'mission'
+          })
+        } else if (Array.isArray(json?.mission_actions)) {
+          // Old format fallback
+          rawActions = json.mission_actions
+        }
         const actionMap = new Map()
         const addAction = (actionDef) => {
           const normalised = normaliseActionDefinition(actionDef)
@@ -415,7 +441,15 @@ export default function Rules({ rulesTabs = [] }) {
       try {
         const res = await fetch(getLocalePath(locale, 'weapon_rules.json'), { cache: 'no-store' })
         if (!res.ok) {
-          throw new Error(`Failed to load weapon rules (${res.status})`)
+          console.warn(`Failed to load weapon rules (${res.status}) for locale ${locale}`)
+          // Continue with empty array instead of throwing
+          if (cancelled) return
+          setWeaponRules([])
+          cachedWeaponRules = []
+          setWeaponRulesLoaded(true)
+          setWeaponRulesError(null)
+          setWeaponRulesLoading(false)
+          return
         }
         const json = await res.json()
         if (cancelled) return

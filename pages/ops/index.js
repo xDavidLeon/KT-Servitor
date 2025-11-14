@@ -313,24 +313,26 @@ export default function OpsPage() {
           addAction(actionDef)
         }
 
-        await Promise.allSettled([
-          fetch(getLocalePath(locale, 'universal_actions.json'), { cache: 'no-store' }).then(async res => {
-            if (!res.ok) return
-            const json = await res.json()
-            const universalActions = Array.isArray(json?.actions) ? json.actions : []
-            for (const actionDef of universalActions) {
-              addAction(actionDef)
-            }
-          }),
-          fetch(getLocalePath(locale, 'mission_actions.json'), { cache: 'no-store' }).then(async res => {
-            if (!res.ok) return
-            const json = await res.json()
-            const missionActions = Array.isArray(json?.actions) ? json.actions : []
-            for (const actionDef of missionActions) {
-              addAction(actionDef)
-            }
-          })
-        ])
+        // Fetch merged actions.json instead of separate universal_actions.json and mission_actions.json
+        const actionsRes = await fetch(getLocalePath(locale, 'actions.json'), { cache: 'no-store' })
+        if (actionsRes.ok) {
+          const json = await actionsRes.json()
+          // Handle both old format (separate arrays) and new format (merged)
+          let allActions = []
+          if (Array.isArray(json?.actions)) {
+            // New format: all actions in one array
+            allActions = json.actions
+          } else {
+            // Old format fallback
+            allActions = [
+              ...(Array.isArray(json?.universal_actions) ? json.universal_actions : []),
+              ...(Array.isArray(json?.mission_actions) ? json.mission_actions : [])
+            ]
+          }
+          for (const actionDef of allActions) {
+            addAction(actionDef)
+          }
+        }
 
         const list = Array.isArray(json?.ops)
           ? json.ops

@@ -180,20 +180,19 @@ async function loadTacOpsByArchetype(locale = 'en') {
 
       actionsList.forEach(addAction)
 
-      await Promise.allSettled([
-        fetch(getLocalePath(locale, 'universal_actions.json'), { cache: 'no-store' }).then(async res => {
-          if (!res.ok) return
-          const json = await res.json()
-          const universalActions = Array.isArray(json?.actions) ? json.actions : []
-          universalActions.forEach(addAction)
-        }),
-        fetch(getLocalePath(locale, 'mission_actions.json'), { cache: 'no-store' }).then(async res => {
-          if (!res.ok) return
-          const json = await res.json()
-          const missionActions = Array.isArray(json?.actions) ? json.actions : []
-          missionActions.forEach(addAction)
-        })
-      ])
+      // Fetch merged actions.json instead of separate universal_actions.json and mission_actions.json
+      const actionsRes = await fetch(getLocalePath(locale, 'actions.json'), { cache: 'no-store' })
+      if (actionsRes.ok) {
+        const json = await actionsRes.json()
+        // Handle both old format (separate arrays) and new format (merged)
+        const allActions = Array.isArray(json?.actions) 
+          ? json.actions 
+          : [
+              ...(Array.isArray(json?.universal_actions) ? json.universal_actions : []),
+              ...(Array.isArray(json?.mission_actions) ? json.mission_actions : [])
+            ]
+        allActions.forEach(addAction)
+      }
 
       const opsList = Array.isArray(json?.ops)
         ? json.ops
@@ -628,7 +627,10 @@ async function loadWeaponRules(locale = 'en') {
       try {
         const res = await fetch(getLocalePath(locale, 'weapon_rules.json'), { cache: 'no-store' })
         if (!res.ok) {
-          throw new Error(`Failed to load weapon rules (${res.status})`)
+          console.warn(`Failed to load weapon rules (${res.status}) for locale ${locale}`)
+          // Return empty Map instead of throwing
+          cachedWeaponRules = new Map()
+          return cachedWeaponRules
         }
         const json = await res.json()
         const list = Array.isArray(json?.weapon_rules) ? json.weapon_rules : []
