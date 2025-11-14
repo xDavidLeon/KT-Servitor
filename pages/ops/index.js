@@ -72,7 +72,7 @@ const MAP_IMAGES = {
 }
 
 const ARCHETYPE_PILL_MAP = {
-  infiltration: { background: '#2b2d33', color: '#f4f6ff' },
+  infiltration: { background: '#4D4D4D', color: '#f4f6ff' },
   security: { background: '#1e5dff', color: '#f4f6ff' },
   'seek & destroy': { background: '#d62d3a', color: '#fef6f6' },
   recon: { background: '#c85c11', color: '#fff5ec' }
@@ -769,24 +769,36 @@ const sections = useMemo(() => {
             CRIT OP
           </div>
         ) : (
-          <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
+          <>
+            <div style={{ 
+              background: '#333333', 
+              color: '#ffffff', 
+              padding: '0.5rem 0.75rem', 
+              margin: '-0.5rem -0.5rem 0 -0.5rem',
+              borderRadius: '8px 8px 0 0',
+              textAlign: 'center',
+              fontWeight: 600
+            }}>
+              TAC OP
+            </div>
             {(() => {
               const archetypeLabel = (archetypes && archetypes[0]) ? archetypes[0] : 'Tactical Operation'
               const style = getArchetypePillStyle(archetypeLabel)
               const label = style?.label || archetypeLabel
               return (
-                <span
-                  className="pill"
-                  style={{
-                    margin: '0 auto',
-                    ...(style?.backgroundColor ? style : {})
-                  }}
-                >
+                <div style={{ 
+                  background: style?.backgroundColor || '#2b2d33',
+                  color: style?.color || '#f4f6ff',
+                  padding: '0.5rem 0.75rem', 
+                  margin: '0 -0.5rem 0.75rem -0.5rem',
+                  textAlign: 'center',
+                  fontWeight: 600
+                }}>
                   {label.toUpperCase()}
-                </span>
+                </div>
               )
             })()}
-          </div>
+          </>
         )}
         <div style={{ textAlign: 'center', marginBottom: '0.75rem' }}>
           {type === 'crit-op' ? (
@@ -801,9 +813,22 @@ const sections = useMemo(() => {
               {`${index + 1}. ${op.title.toUpperCase()}`}
             </strong>
           ) : (
-            <strong style={{ fontSize: '1.1rem', color: '#000000' }}>
-              {op.title.toUpperCase()}
-            </strong>
+            (() => {
+              const archetypeLabel = (archetypes && archetypes[0]) ? archetypes[0] : 'Tactical Operation'
+              const style = getArchetypePillStyle(archetypeLabel)
+              return (
+                <strong style={{ 
+                  fontSize: '1.1rem', 
+                  color: '#ffffff',
+                  background: style?.backgroundColor || '#4D4D4D',
+                  padding: '0.5rem 0.75rem',
+                  display: 'block',
+                  borderRadius: '4px'
+                }}>
+                  {op.title.toUpperCase()}
+                </strong>
+              )
+            })()
           )}
         </div>
 
@@ -824,7 +849,7 @@ const sections = useMemo(() => {
         {op.reveal && (
           <div className="ability-card" style={{ marginTop: '0.75rem' }}>
             <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
-              <h4 className="ability-card-title" style={{ margin: 0 }}>Reveal</h4>
+              <h4 className="ability-card-title" style={{ margin: 0, color: '#F55A07' }}>REVEAL</h4>
             </div>
             <RichText className="ability-card-body muted" text={op.reveal} />
           </div>
@@ -872,7 +897,6 @@ const sections = useMemo(() => {
         <div className="card-section-list">
           {sortedGroups.map(groupLabel => (
             <section key={`group-${groupLabel}`} id={`section-${groupLabel}`} style={{ marginBottom: '1.5rem' }}>
-              <h3 style={{ marginTop: 0, marginBottom: '0.5rem' }}>{groupLabel}</h3>
               <div className="card-section-list">
                 {grouped[groupLabel].map(op => renderOpCard(op))}
               </div>
