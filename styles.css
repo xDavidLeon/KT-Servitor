@@ -77,15 +77,45 @@ input,select,button{background:#0e1016;color:var(--text);border:1px solid #262a3
 }
 .nav-links-row{
   display:flex;
-  justify-content:center;
-  align-items:center;
+  align-items:stretch;
+  justify-content:flex-start;
   flex-wrap:wrap;
-  gap:0.5rem;
-  margin-top:0.25rem;
+  gap:0;
+  margin-top:0;
+  width:100%;
+  border-bottom:1px solid #2a2f3f;
 }
 .nav-links-row .pill{
-  padding:0.4rem 0.9rem;
+  flex:1 1 auto;
+  min-width:fit-content;
+  padding:0.5rem 1rem;
   text-align:center;
+  border:none;
+  border-right:1px solid #2a2f3f;
+  border-top:1px solid #2a2f3f;
+  border-left:none;
+  border-radius:0;
+  background:#0e1016;
+  font-size:0.85rem;
+  white-space:nowrap;
+  text-transform:uppercase;
+  transition:background 0.2s,color 0.2s;
+}
+.nav-links-row .pill:first-child{
+  border-left:1px solid #2a2f3f;
+}
+.nav-links-row .pill:hover{
+  color:var(--text);
+  background:#151822;
+}
+.nav-links-row .pill.active{
+  background:#F55A07 !important;
+  color:#ffffff !important;
+  font-weight:600;
+  border-bottom:1px solid #F55A07 !important;
+  margin-bottom:-1px;
+  position:relative;
+  z-index:1;
 }
 .pill{display:inline-block;padding:.2rem .5rem;border:1px solid #2a2f3f;border-radius:999px;font-size:.8rem;color:var(--muted)}
 .action-card .pill{color:#000000}
@@ -709,38 +739,56 @@ th{position:sticky;top:0;background:transparent}
 
 .killteam-tabs{
   display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:0.4rem;
+  align-items:stretch;
+  justify-content:flex-start;
+  gap:0;
   flex-wrap:wrap;
-  overflow-x:auto;
+  overflow-x:visible;
+  overflow-y:visible;
   -webkit-overflow-scrolling:touch;
-  padding-bottom:0.25rem;
+  padding:0;
+  margin:0;
   width:100%;
+  border-bottom:1px solid #2a2f3f;
+  height:auto;
 }
 
 .killteam-tab{
-  border:1px solid #2a2f3f;
-  border-radius:999px;
-  padding:0.35rem 0.85rem;
+  flex:1 1 auto;
+  min-width:fit-content;
+  border:none;
+  border-right:1px solid #2a2f3f;
+  border-top:1px solid #2a2f3f;
+  border-left:none;
+  padding:0.5rem 1rem;
   background:#0e1016;
   color:var(--muted);
   cursor:pointer;
   font-size:0.85rem;
   font-weight:500;
-  transition:background 0.2s,color 0.2s,border-color 0.2s;
+  transition:background 0.2s,color 0.2s;
+  text-align:center;
+  white-space:nowrap;
+  text-transform:uppercase;
+}
+
+.killteam-tab:first-child{
+  border-left:1px solid #2a2f3f;
 }
 
 .killteam-tab:hover{
   color:var(--text);
-  border-color:#3a4050;
+  background:#151822;
 }
 
 .killteam-tab.active{
-  background:var(--accent);
-  border-color:var(--accent);
-  color:#0f1115;
+  background:#F55A07;
+  color:#ffffff;
   font-weight:600;
+  border-bottom:1px solid #F55A07;
+  margin-bottom:-1px;
+  position:relative;
+  z-index:1;
 }
 
 .section-dropdown-trigger{

@@ -14,7 +14,7 @@ export default function Nav(){
       : currentPath === href || currentPath.startsWith(`${href}/`)
     return (
       <Link href={href}
-        className="pill"
+        className={`pill ${active ? 'active' : ''}`}
         style={{
           textDecoration: 'none',
           borderColor: active ? 'var(--accent)' : '#2a2f3f',

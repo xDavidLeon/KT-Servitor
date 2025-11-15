@@ -20,23 +20,37 @@ export default function Header() {
           className="heading"
           style={{
             display: 'flex',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '1rem'
           }}
         >
           <img
-            src="/icons/icon-512.png"
+            src="/icons/icon-head.png"
             alt="KT Servitor icon"
             style={{
-              width: '6.5rem',
-              height: '6.5rem',
-              borderRadius: '0.9rem',
-              boxShadow: '0 0 0.75rem rgba(0, 0, 0, 0.4)'
+              width: '3.25rem',
+              height: '3.25rem',
+              background: 'transparent'
             }}
             onError={event => {
               event.currentTarget.onerror = null
               event.currentTarget.src = '/icons/icon.png'
             }}
           />
+          <h1
+            style={{
+              margin: 0,
+              fontFamily: "'Orbitron', monospace",
+              fontSize: '2rem',
+              fontWeight: 700,
+              letterSpacing: '0.1em',
+              color: 'var(--text)',
+              textTransform: 'uppercase'
+            }}
+          >
+            KT SERVITOR
+          </h1>
         </div>
       </div>
 

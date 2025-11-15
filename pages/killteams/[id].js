@@ -1870,7 +1870,6 @@ export default function KillteamPage() {
       case 'operatives':
         return (
           <section id="operatives" className="card killteam-tab-panel">
-            <h3 style={{ marginTop: 0 }}>Operatives</h3>
             {operatives.length ? (
               <div className="operatives-grid">
                 {operatives.map(operative => (
@@ -2147,7 +2146,6 @@ export default function KillteamPage() {
       case 'tac-ops':
         return (
           <section id="tac-ops" className="card killteam-tab-panel">
-            <h3 style={{ marginTop: 0 }}>Tac Ops</h3>
             {renderTacOpsSection()}
           </section>
         )
