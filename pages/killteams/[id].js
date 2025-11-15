@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import Header from '../../components/Header'
 import KillteamSelector from '../../components/KillteamSelector'
 import KillteamSectionNavigator, { scrollToKillteamSection } from '../../components/KillteamSectionNavigator'
@@ -855,6 +856,7 @@ export default function KillteamPage() {
   const selectorCardRef = useRef(null)
   const hasSyncedInitialHashRef = useRef(false)
   const [isSelectorVisible, setIsSelectorVisible] = useState(true)
+  const operativesScrollRef = useRef(null)
   const [tacOpsByArchetype, setTacOpsByArchetype] = useState(cachedTacOpsByArchetype ? new Map(cachedTacOpsByArchetype) : null)
   const [tacOpsActionLookup, setTacOpsActionLookup] = useState(cachedTacOpsActionLookup ? new Map(cachedTacOpsActionLookup) : new Map())
   const [tacOpsLoading, setTacOpsLoading] = useState(!cachedTacOpsByArchetype)
@@ -1219,6 +1221,20 @@ export default function KillteamPage() {
   const operatives = useMemo(() => {
     return rawOperatives
   }, [rawOperatives])
+
+  // Virtual scrolling for operatives - uses window/document scrolling
+  const operativesVirtualizer = useVirtualizer({
+    count: operatives.length,
+    getScrollElement: () => (typeof document !== 'undefined' ? document.documentElement : null),
+    estimateSize: () => 600, // Initial estimate, will be measured dynamically
+    overscan: 5, // Render 5 extra items outside viewport for smooth scrolling
+    measureElement: (element) => {
+      if (!element || !(element instanceof Element)) return 600
+      const rect = element.getBoundingClientRect()
+      // Include margin-bottom (1rem = ~16px) in measurement
+      return rect.height + 16
+    },
+  })
 
   const strategyPloys = useMemo(() => {
     return (killteam?.ploys || [])
@@ -1790,6 +1806,69 @@ export default function KillteamPage() {
     }
   }, [pendingHash, findSectionForAnchor, activeSectionId])
 
+  // Handle scrolling to specific operatives in virtualized list (using window scroll)
+  useEffect(() => {
+    if (!pendingHash) return
+    if (activeSectionId !== 'operatives') return
+    if (!operatives.length) return
+    if (!operativesScrollRef.current) return
+
+    // Check if hash is for an operative (format: operative-{id} or operative-{index})
+    const operativeMatch = pendingHash.match(/^operative-(.+)$/)
+    if (!operativeMatch) return
+
+    const operativeIdentifier = operativeMatch[1]
+    
+    // Find the operative index
+    let operativeIndex = operatives.findIndex(op => {
+      const opId = op?.id ? `operative-${op.id}` : null
+      return opId === pendingHash || op?.id === operativeIdentifier || op?.id === parseInt(operativeIdentifier)
+    })
+
+    if (operativeIndex === -1) {
+      // Try by index (operative-1, operative-2, etc.)
+      const indexMatch = parseInt(operativeIdentifier)
+      if (!isNaN(indexMatch) && indexMatch > 0 && indexMatch <= operatives.length) {
+        operativeIndex = indexMatch - 1
+      } else {
+        return
+      }
+    }
+
+    // Wait a bit for virtualizer to be ready, then scroll
+    const scrollToOperative = () => {
+      try {
+        const virtualItem = operativesVirtualizer.getVirtualItems().find(item => item.index === operativeIndex)
+        if (virtualItem) {
+          // Item is already rendered, scroll to it
+          const element = document.getElementById(operativeIndex === -1 ? pendingHash : `operative-${operatives[operativeIndex]?.id || operativeIndex + 1}`)
+          if (element) {
+            const containerTop = operativesScrollRef.current?.getBoundingClientRect().top || 0
+            const elementTop = element.getBoundingClientRect().top
+            const offset = containerTop + elementTop - 100 // 100px offset from top
+            window.scrollTo({ top: window.scrollY + offset, behavior: 'smooth' })
+            setPendingHash(null)
+            return
+          }
+        }
+        
+        // Use virtualizer's scrollToIndex which works with window scrolling
+        operativesVirtualizer.scrollToIndex(operativeIndex, {
+          align: 'start',
+          behavior: 'smooth'
+        })
+        setPendingHash(null)
+      } catch (err) {
+        console.warn('Failed to scroll to operative', err)
+        setPendingHash(null)
+      }
+    }
+
+    // Small delay to ensure virtualizer is ready
+    const timeoutId = setTimeout(scrollToOperative, 100)
+    return () => clearTimeout(timeoutId)
+  }, [pendingHash, activeSectionId, operatives, operativesVirtualizer])
+
   useEffect(() => {
     if (typeof window === 'undefined') return
     const element = selectorCardRef.current
@@ -1970,10 +2049,40 @@ export default function KillteamPage() {
         return (
           <section id="operatives" className="card killteam-tab-panel">
             {operatives.length ? (
-              <div className="operatives-grid">
-                {operatives.map(operative => (
-                  <OperativeCard key={operative.id} operative={operative} />
-                ))}
+              <div
+                ref={operativesScrollRef}
+                className="operatives-grid"
+                style={{
+                  position: 'relative',
+                  minHeight: `${operativesVirtualizer.getTotalSize()}px`
+                }}
+              >
+                {operativesVirtualizer.getVirtualItems().map((virtualItem) => {
+                  const operative = operatives[virtualItem.index]
+                  const operativeId = operative?.id ? `operative-${operative.id}` : `operative-${virtualItem.index + 1}`
+                  return (
+                    <div
+                      key={virtualItem.key}
+                      id={operativeId}
+                      data-index={virtualItem.index}
+                      ref={(node) => {
+                        if (node && node instanceof Element) {
+                          operativesVirtualizer.measureElement(node)
+                        }
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        transform: `translateY(${virtualItem.start}px)`,
+                        willChange: 'transform'
+                      }}
+                    >
+                      <OperativeCard operative={operative} />
+                    </div>
+                  )
+                })}
               </div>
             ) : (
               <div className="muted">No operatives listed for this kill team.</div>

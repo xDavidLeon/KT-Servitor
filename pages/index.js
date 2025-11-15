@@ -114,11 +114,24 @@ export default function Home() {
   }, [locale])
   
   useEffect(() => {
-    (async () => {
+    let cancelled = false
+    
+    // Debounce: wait 300ms after user stops typing before searching
+    const timeoutId = setTimeout(async () => {
       const idx = await ensureIndex()
+      if (cancelled) return
+      
       const results = await runSearch(q, idx)
-      setRes(results)
-    })()
+      if (!cancelled) {
+        setRes(results)
+      }
+    }, 300)
+
+    // Cleanup: cancel the timeout if user types again before 300ms
+    return () => {
+      cancelled = true
+      clearTimeout(timeoutId)
+    }
   }, [q])
 
   return (
