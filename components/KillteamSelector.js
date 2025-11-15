@@ -31,7 +31,7 @@ function addRecentKillteam(killteamId) {
   }
 }
 
-export default function KillteamSelector({ currentKillteamId, leftControl = null, rightControl = null }) {
+export default function KillteamSelector({ currentKillteamId, leftControl = null, rightControl = null, showRecentTeams = true }) {
   const router = useRouter()
   const locale = router?.locale || 'en'
   const { data: killteams = [], isLoading } = useKillteams(locale)
@@ -125,7 +125,7 @@ export default function KillteamSelector({ currentKillteamId, leftControl = null
         alignItems: 'stretch'
       }}
     >
-      {recentKillteams.length > 0 && (
+      {showRecentTeams && recentKillteams.length > 0 && (
         <div
           className="killteam-selector-recent"
           style={{

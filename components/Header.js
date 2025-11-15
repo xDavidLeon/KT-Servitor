@@ -13,7 +13,7 @@ export default function Header() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '0.25rem 0'
+          padding: '0.15rem 0'
         }}
       >
         <div

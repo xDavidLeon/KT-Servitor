@@ -70,9 +70,8 @@ export default function Killteams() {
       <div className="container">
         <Header />
         <div className="card">
-          <h2 style={{ marginTop: 0 }}>Kill Teams</h2>
           <div style={{ marginBottom: '1rem' }}>
-            <KillteamSelector />
+            <KillteamSelector showRecentTeams={false} />
           </div>
             {loading ? (
               <div className="muted" style={{ textAlign: 'center', padding: '2rem 0' }}>

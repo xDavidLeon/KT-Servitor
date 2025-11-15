@@ -122,8 +122,7 @@ export default function LanguageSwitcher() {
         aria-label="Select language"
         aria-expanded={isOpen}
       >
-        <span style={{ marginRight: '0.35rem' }}>{currentLanguage?.flag || '🌐'}</span>
-        <span>{currentLanguage?.code.toUpperCase() || 'EN'}</span>
+        <span>{currentLanguage?.flag || '🌐'}</span>
         <span style={{ marginLeft: '0.35rem', fontSize: '0.75rem' }}>{isOpen ? '▲' : '▼'}</span>
       </button>
       {isOpen && (

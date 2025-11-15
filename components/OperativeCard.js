@@ -235,7 +235,7 @@ export default function OperativeCard({ operative }) {
                     <th>ATK</th>
                     <th>HIT</th>
                     <th>DMG</th>
-                    <th>Special Rules</th>
+                    <th>WR</th>
                   </tr>
                 </thead>
                 <tbody>

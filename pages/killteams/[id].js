@@ -38,6 +38,7 @@ let cachedTacOpsByArchetype = null
 let cachedTacOpsActionLookup = null
 let tacOpsLoadPromise = null
 let cachedWeaponRules = null
+let cachedWeaponRulesLocale = null
 let weaponRulesLoadPromise = null
 let cachedEquipmentActions = null
 let cachedEquipmentActionsLocale = null
@@ -635,8 +636,16 @@ function sortUniversalEquipmentRows(rows) {
 }
 
 async function loadWeaponRules(locale = 'en') {
-  if (cachedWeaponRules) {
+  // Check if we have cached weapon rules for this locale
+  if (cachedWeaponRules && cachedWeaponRulesLocale === locale) {
     return cachedWeaponRules
+  }
+
+  // Clear cache if locale changed
+  if (cachedWeaponRulesLocale && cachedWeaponRulesLocale !== locale) {
+    cachedWeaponRules = null
+    cachedWeaponRulesLocale = null
+    weaponRulesLoadPromise = null
   }
 
   if (!weaponRulesLoadPromise) {
@@ -647,6 +656,7 @@ async function loadWeaponRules(locale = 'en') {
           console.warn(`Failed to load weapon rules (${res.status}) for locale ${locale}`)
           // Return empty Map instead of throwing
           cachedWeaponRules = new Map()
+          cachedWeaponRulesLocale = locale
           return cachedWeaponRules
         }
         const json = await res.json()
@@ -664,10 +674,12 @@ async function loadWeaponRules(locale = 'en') {
           }
         }
         cachedWeaponRules = weaponRulesMap
+        cachedWeaponRulesLocale = locale
         return weaponRulesMap
       } catch (err) {
         console.warn('Failed to load weapon rules', err)
         cachedWeaponRules = new Map()
+        cachedWeaponRulesLocale = locale
         return cachedWeaponRules
       }
     })().finally(() => {
@@ -848,7 +860,7 @@ export default function KillteamPage() {
   const [tacOpsLoading, setTacOpsLoading] = useState(!cachedTacOpsByArchetype)
   const [tacOpsLoaded, setTacOpsLoaded] = useState(Boolean(cachedTacOpsByArchetype))
   const [tacOpsError, setTacOpsError] = useState(null)
-  const [weaponRulesMap, setWeaponRulesMap] = useState(cachedWeaponRules || new Map())
+  const [weaponRulesMap, setWeaponRulesMap] = useState(cachedWeaponRules && cachedWeaponRulesLocale === locale ? cachedWeaponRules : new Map())
   const [equipmentActions, setEquipmentActions] = useState(cachedEquipmentActions && cachedEquipmentActionsLocale === locale ? cachedEquipmentActions : [])
   const [equipmentActionsLoaded, setEquipmentActionsLoaded] = useState(Boolean(cachedEquipmentActions && cachedEquipmentActionsLocale === locale))
   const [universalEquipmentRecords, setUniversalEquipmentRecords] = useState(cachedUniversalEquipment && cachedUniversalEquipmentLocale === locale ? cachedUniversalEquipment : [])
@@ -1048,7 +1060,7 @@ export default function KillteamPage() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [locale])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
