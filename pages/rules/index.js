@@ -121,7 +121,8 @@ function normaliseEquipment(equipment) {
     description: equipment.description || '',
     cost: cost || null,
     killteamId: equipment.killteamId ?? null,
-    isUniversal: equipment.killteamId === null
+    isUniversal: equipment.killteamId === null,
+    amount: equipment.amount ?? equipment.amountValue ?? null
   }
 }
 
@@ -884,47 +885,30 @@ export default function Rules({ rulesTabs = [] }) {
                   )}
                 </div>
               )}
-              {/* Footer: Action type centered, Packs and Equipment on right */}
+              {/* Footer: Action type and packs */}
               <div
                 style={{
-                  position: 'relative',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginTop: '0.75rem',
-                  minHeight: '1.5rem'
+                  background: '#333333',
+                  color: '#ffffff',
+                  padding: '0.5rem 0.75rem',
+                  margin: '0.75rem -0.5rem -0.5rem -0.5rem',
+                  borderRadius: '0 0 8px 8px',
+                  textAlign: 'left',
+                  fontSize: '0.85rem',
+                  textTransform: 'uppercase'
                 }}
               >
-                {/* Action type centered */}
-                <span style={{
-                  color: '#000000',
-                  fontSize: '0.85rem'
-                }}>
-                  - {actionTypeLabel} -
-                </span>
-                {/* Packs and Equipment on right - absolutely positioned */}
-                {(hasPacks || showEquipmentLabel) && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      right: 0,
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      gap: '0.35rem',
-                      alignItems: 'center'
-                    }}
-                  >
-                    {hasPacks && action.packs.map(pack => (
-                      <span key={`${action.id}-pack-${pack}`} className="pill">
-                        {pack}
+                <span style={{ color: '#F55A07' }}>{actionTypeLabel.toUpperCase()}</span>
+                {hasPacks && action.packs.length > 0 && (
+                  <>
+                    {', '}
+                    {action.packs.map((pack, idx) => (
+                      <span key={`${action.id}-pack-${idx}`}>
+                        {idx > 0 && ', '}
+                        {pack.toUpperCase()}
                       </span>
                     ))}
-                    {showEquipmentLabel && (
-                      <span key={`${action.id}-equipment`} className="pill">
-                        Equipment
-                      </span>
-                    )}
-                  </div>
+                  </>
                 )}
               </div>
             </div>
@@ -1066,8 +1050,33 @@ export default function Rules({ rulesTabs = [] }) {
           
           return (
             <div key={item.id || idx} id={item.anchorId} className="ability-card equipment-card">
+              <div style={{ 
+                background: '#333333', 
+                color: '#ffffff', 
+                padding: '0.5rem 0.75rem', 
+                margin: '-0.5rem -0.5rem 0.5rem -0.5rem',
+                borderRadius: '8px 8px 0 0',
+                textAlign: 'center',
+                fontWeight: 600,
+                textTransform: 'uppercase'
+              }}>
+                UNIVERSAL EQUIPMENT
+              </div>
               <div className="ability-card-header">
-                <h4 className="ability-card-title">{item.name}</h4>
+                <h4 className="ability-card-title" style={{ 
+                  textTransform: 'uppercase',
+                  border: '1px solid #333333',
+                  padding: '0.25rem 0.5rem',
+                  display: 'block',
+                  width: '100%',
+                  boxSizing: 'border-box'
+                }}>
+                  {(() => {
+                    const amount = item.amount ?? (equipmentRecord?.amount) ?? null
+                    const name = item.name || ''
+                    return amount ? `${amount} x ${name}` : name
+                  })()}
+                </h4>
                 {item.cost && <span className="ability-card-ap">{item.cost}</span>}
               </div>
               {item.description && <RichText className="ability-card-body" text={item.description} />}
@@ -1094,21 +1103,21 @@ export default function Rules({ rulesTabs = [] }) {
                     const actionTypeLabel = (actionType === 'universal' ? 'Universal' : actionType === 'mission' ? 'Mission' : actionType === 'ability' ? 'Ability' : actionType.charAt(0).toUpperCase() + actionType.slice(1)) + ' Action'
                     
                     return (
-                      <div key={`${item.id}-${action.id}-${actionIndex}`} id={`equipment-action-${item.id || item.anchorId}-${action.id}${actionIndex > 0 ? `-${actionIndex}` : ''}`} className="action-card" style={{ marginBottom: actionIndex < equipmentActionsList.length - 1 ? '1rem' : 0 }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                          <h4 className="ability-card-title" style={{ margin: 0 }}>{action.name.toUpperCase()}</h4>
+                      <div key={`${item.id}-${action.id}-${actionIndex}`} id={`equipment-action-${item.id || item.anchorId}-${action.id}${actionIndex > 0 ? `-${actionIndex}` : ''}`} className="ability-card action-card" style={{ marginBottom: actionIndex < equipmentActionsList.length - 1 ? '1rem' : 0 }}>
+                        <div className="ability-card-header">
+                          <h4 className="ability-card-title">{action.name.toUpperCase()}</h4>
                           {apLabel && <span className="ability-card-ap">{apLabel}</span>}
                         </div>
                         {(action.description || action.effects.length > 0 || action.conditions.length > 0) && (
-                          <div className="ability-card-body" style={{ marginBottom: '0.75rem' }}>
+                          <div className="ability-card-body">
                             {action.description && (
                               <p style={{ marginTop: 0 }}>{action.description}</p>
                             )}
                             {action.effects.length > 0 && (
                               <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-                                {action.effects.map((effect, effectIndex) => (
+                                {action.effects.map((effect, index) => (
                                   <li
-                                    key={`${action.id}-effect-${effectIndex}`}
+                                    key={`${action.id}-effect-${index}`}
                                     style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
                                   >
                                     <span aria-hidden="true" style={{ color: '#2ecc71', fontWeight: 'bold' }}>➤</span>
@@ -1119,9 +1128,9 @@ export default function Rules({ rulesTabs = [] }) {
                             )}
                             {action.conditions.length > 0 && (
                               <ul style={{ margin: action.effects.length ? '0.5rem 0 0 0' : 0, padding: 0, listStyle: 'none' }}>
-                                {action.conditions.map((condition, conditionIndex) => (
+                                {action.conditions.map((condition, index) => (
                                   <li
-                                    key={`${action.id}-condition-${conditionIndex}`}
+                                    key={`${action.id}-condition-${index}`}
                                     style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
                                   >
                                     <span aria-hidden="true" style={{ color: '#e74c3c', fontWeight: 'bold' }}>◆</span>
@@ -1132,47 +1141,30 @@ export default function Rules({ rulesTabs = [] }) {
                             )}
                           </div>
                         )}
-                        {/* Footer: Action type centered, Packs and Equipment on right */}
+                        {/* Footer: Action type and packs */}
                         <div
                           style={{
-                            position: 'relative',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            marginTop: '0.75rem',
-                            minHeight: '1.5rem'
+                            background: '#333333',
+                            color: '#ffffff',
+                            padding: '0.5rem 0.75rem',
+                            margin: '0.75rem -0.5rem -0.5rem -0.5rem',
+                            borderRadius: '0 0 8px 8px',
+                            textAlign: 'left',
+                            fontSize: '0.85rem',
+                            textTransform: 'uppercase'
                           }}
                         >
-                          {/* Action type centered */}
-                          <span style={{
-                            color: '#000000',
-                            fontSize: '0.85rem'
-                          }}>
-                            - {actionTypeLabel} -
-                          </span>
-                          {/* Packs and Equipment on right - absolutely positioned */}
-                          {(hasPacks || showEquipmentLabel) && (
-                            <div
-                              style={{
-                                position: 'absolute',
-                                right: 0,
-                                display: 'flex',
-                                flexWrap: 'wrap',
-                                gap: '0.35rem',
-                                alignItems: 'center'
-                              }}
-                            >
-                              {hasPacks && action.packs.map(pack => (
-                                <span key={`${action.id}-pack-${pack}`} className="pill">
-                                  {pack}
+                          <span style={{ color: '#F55A07' }}>{actionTypeLabel.toUpperCase()}</span>
+                          {hasPacks && action.packs.length > 0 && (
+                            <>
+                              {', '}
+                              {action.packs.map((pack, idx) => (
+                                <span key={`${action.id}-pack-${idx}`}>
+                                  {idx > 0 && ', '}
+                                  {pack.toUpperCase()}
                                 </span>
                               ))}
-                              {showEquipmentLabel && (
-                                <span key={`${action.id}-equipment`} className="pill">
-                                  Equipment
-                                </span>
-                              )}
-                            </div>
+                            </>
                           )}
                         </div>
                       </div>

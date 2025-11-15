@@ -746,6 +746,40 @@ const sections = useMemo(() => {
                     )}
                   </div>
                 )}
+                {/* Footer: Action type and packs */}
+                {(() => {
+                  const hasPacks = entry.packs && Array.isArray(entry.packs) && entry.packs.length > 0
+                  if (!actionTypeLabel && !hasPacks) return null
+                  return (
+                    <div
+                      style={{
+                        background: '#333333',
+                        color: '#ffffff',
+                        padding: '0.5rem 0.75rem',
+                        margin: '0.75rem -0.5rem -0.5rem -0.5rem',
+                        borderRadius: '0 0 8px 8px',
+                        textAlign: 'left',
+                        fontSize: '0.85rem',
+                        textTransform: 'uppercase'
+                      }}
+                    >
+                      {actionTypeLabel && (
+                        <span style={{ color: '#F55A07' }}>{actionTypeLabel}</span>
+                      )}
+                      {hasPacks && entry.packs.length > 0 && (
+                        <>
+                          {actionTypeLabel && ', '}
+                          {entry.packs.map((pack, idx) => (
+                            <span key={`${safeActionId}-pack-${idx}`}>
+                              {idx > 0 && ', '}
+                              {pack.toUpperCase()}
+                            </span>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  )
+                })()}
                 </div>
               </div>
             )

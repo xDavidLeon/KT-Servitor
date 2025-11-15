@@ -614,7 +614,8 @@ function normaliseEquipment(equipment) {
     description: equipment.description || '',
     cost: cost || null,
     killteamId: equipment.killteamId ?? null,
-    isUniversal: equipment.killteamId === null
+    isUniversal: equipment.killteamId === null,
+    amount: equipment.amount ?? equipment.amountValue ?? null
   }
 }
 
@@ -1464,6 +1465,40 @@ export default function KillteamPage() {
                     )}
                   </div>
                 )}
+                {/* Footer: Action type and packs */}
+                {(() => {
+                  const hasPacks = entry.packs && Array.isArray(entry.packs) && entry.packs.length > 0
+                  if (!actionTypeLabel && !hasPacks) return null
+                  return (
+                    <div
+                      style={{
+                        background: '#333333',
+                        color: '#ffffff',
+                        padding: '0.5rem 0.75rem',
+                        margin: '0.75rem -0.5rem -0.5rem -0.5rem',
+                        borderRadius: '0 0 8px 8px',
+                        textAlign: 'left',
+                        fontSize: '0.85rem',
+                        textTransform: 'uppercase'
+                      }}
+                    >
+                      {actionTypeLabel && (
+                        <span style={{ color: '#F55A07' }}>{actionTypeLabel}</span>
+                      )}
+                      {hasPacks && entry.packs.length > 0 && (
+                        <>
+                          {actionTypeLabel && ', '}
+                          {entry.packs.map((pack, idx) => (
+                            <span key={`${safeActionId}-pack-${idx}`}>
+                              {idx > 0 && ', '}
+                              {pack.toUpperCase()}
+                            </span>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  )
+                })()}
                 </div>
               </div>
             )
@@ -1892,15 +1927,47 @@ export default function KillteamPage() {
               <>
                 {factionEquipment.length > 0 && (
                   <div className="card-section-list">
-                      {factionEquipment.map((item, idx) => (
-                        <div key={item.id || idx} id={item.anchorId} className="ability-card equipment-card">
-                          <div className="ability-card-header">
-                            <h4 className="ability-card-title">{item.name}</h4>
-                            {item.cost && <span className="ability-card-ap">{item.cost}</span>}
+                      {factionEquipment.map((item, idx) => {
+                        // Get the original equipment record to access amount
+                        const equipmentRecord = killteam?.equipments?.find(rec => {
+                          const normalized = normaliseEquipment(rec)
+                          return normalized && (normalized.id === item.id || normalized.anchorId === item.anchorId)
+                        })
+                        return (
+                          <div key={item.id || idx} id={item.anchorId} className="ability-card equipment-card">
+                            <div style={{ 
+                              background: '#333333', 
+                              color: '#ffffff', 
+                              padding: '0.5rem 0.75rem', 
+                              margin: '-0.5rem -0.5rem 0.5rem -0.5rem',
+                              borderRadius: '8px 8px 0 0',
+                              textAlign: 'center',
+                              fontWeight: 600,
+                              textTransform: 'uppercase'
+                            }}>
+                              FACTION EQUIPMENT
+                            </div>
+                            <div className="ability-card-header">
+                              <h4 className="ability-card-title" style={{ 
+                                textTransform: 'uppercase',
+                                border: '1px solid #333333',
+                                padding: '0.25rem 0.5rem',
+                                display: 'block',
+                                width: '100%',
+                                boxSizing: 'border-box'
+                              }}>
+                                {(() => {
+                                  const amount = item.amount ?? (equipmentRecord?.amount ?? equipmentRecord?.amountValue) ?? null
+                                  const name = item.name || ''
+                                  return amount ? `${amount} x ${name}` : name
+                                })()}
+                              </h4>
+                              {item.cost && <span className="ability-card-ap">{item.cost}</span>}
+                            </div>
+                            {item.description && <RichText className="ability-card-body" text={item.description} highlightText={factionKeyword} />}
                           </div>
-                          {item.description && <RichText className="ability-card-body" text={item.description} />}
-                        </div>
-                      ))}
+                        )
+                      })}
                     </div>
                 )}
 
@@ -1943,8 +2010,33 @@ export default function KillteamPage() {
                           
                           return (
                             <div key={item.id || idx} id={item.anchorId} className="ability-card equipment-card">
+                              <div style={{ 
+                                background: '#333333', 
+                                color: '#ffffff', 
+                                padding: '0.5rem 0.75rem', 
+                                margin: '-0.5rem -0.5rem 0.5rem -0.5rem',
+                                borderRadius: '8px 8px 0 0',
+                                textAlign: 'center',
+                                fontWeight: 600,
+                                textTransform: 'uppercase'
+                              }}>
+                                UNIVERSAL EQUIPMENT
+                              </div>
                               <div className="ability-card-header">
-                                <h4 className="ability-card-title">{item.name}</h4>
+                                <h4 className="ability-card-title" style={{ 
+                                  textTransform: 'uppercase',
+                                  border: '1px solid #333333',
+                                  padding: '0.25rem 0.5rem',
+                                  display: 'block',
+                                  width: '100%',
+                                  boxSizing: 'border-box'
+                                }}>
+                                  {(() => {
+                                    const amount = item.amount ?? (equipmentRecord?.amount) ?? null
+                                    const name = item.name || ''
+                                    return amount ? `${amount} x ${name}` : name
+                                  })()}
+                                </h4>
                                 {item.cost && <span className="ability-card-ap">{item.cost}</span>}
                               </div>
                               {item.description && <RichText className="ability-card-body" text={item.description} />}
@@ -2009,47 +2101,30 @@ export default function KillteamPage() {
                                             )}
                                           </div>
                                         )}
-                                        {/* Footer: Action type centered, Packs and Equipment on right */}
+                                        {/* Footer: Action type and packs */}
                                         <div
                                           style={{
-                                            position: 'relative',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            marginTop: '0.75rem',
-                                            minHeight: '1.5rem'
+                                            background: '#333333',
+                                            color: '#ffffff',
+                                            padding: '0.5rem 0.75rem',
+                                            margin: '0.75rem -0.5rem -0.5rem -0.5rem',
+                                            borderRadius: '0 0 8px 8px',
+                                            textAlign: 'left',
+                                            fontSize: '0.85rem',
+                                            textTransform: 'uppercase'
                                           }}
                                         >
-                                          {/* Action type centered */}
-                                          <span style={{
-                                            color: 'var(--muted)',
-                                            fontSize: '0.85rem'
-                                          }}>
-                                            - {actionTypeLabel} -
-                                          </span>
-                                          {/* Packs and Equipment on right - absolutely positioned */}
-                                          {(hasPacks || showEquipmentLabel) && (
-                                            <div
-                                              style={{
-                                                position: 'absolute',
-                                                right: 0,
-                                                display: 'flex',
-                                                flexWrap: 'wrap',
-                                                gap: '0.35rem',
-                                                alignItems: 'center'
-                                              }}
-                                            >
-                                              {hasPacks && action.packs.map(pack => (
-                                                <span key={`${action.id}-pack-${pack}`} className="pill">
-                                                  {pack}
+                                          <span style={{ color: '#F55A07' }}>{actionTypeLabel.toUpperCase()}</span>
+                                          {hasPacks && action.packs.length > 0 && (
+                                            <>
+                                              {', '}
+                                              {action.packs.map((pack, idx) => (
+                                                <span key={`${action.id}-pack-${idx}`}>
+                                                  {idx > 0 && ', '}
+                                                  {pack.toUpperCase()}
                                                 </span>
                                               ))}
-                                              {showEquipmentLabel && (
-                                                <span key={`${action.id}-equipment`} className="pill">
-                                                  Equipment
-                                                </span>
-                                              )}
-                                            </div>
+                                            </>
                                           )}
                                         </div>
                                       </div>

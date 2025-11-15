@@ -91,7 +91,7 @@ input,select,button{background:#0e1016;color:var(--text);border:1px solid #262a3
 .action-card .pill{color:#000000}
 table{width:100%;border-collapse:collapse}
 th,td{padding:.4rem;border-bottom:1px solid #2a2f3f;text-align:left}
-th{position:sticky;top:0;background:#121521}
+th{position:sticky;top:0;background:transparent}
 .muted{color:var(--muted)}
 .results-summary{
   display:flex;
@@ -252,11 +252,11 @@ th{position:sticky;top:0;background:#121521}
   }
     .operative-photo-button {
       background: transparent;
-      border: 1px solid #2a2f3f;
+      border: 0px solid #2a2f3f;
       color: #ffffff;
       width: 2.25rem;
       height: 2.25rem;
-      border-radius: 999px;
+      border-radius: 0px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -267,8 +267,7 @@ th{position:sticky;top:0;background:#121521}
     }
     .operative-photo-button:hover,
     .operative-photo-button:focus-visible {
-      border-color: #F55A07;
-      background: rgba(245, 90, 7, 0.15);
+      background: rgba(245, 90, 7, 0.0);
       color: #F55A07;
       outline: none;
       transform: translateY(-1px);
@@ -355,7 +354,7 @@ th{position:sticky;top:0;background:#121521}
     align-items: center;
     padding: 0.2rem 0.6rem;
     border-radius: 999px;
-    border: 1px solid #2a2f3f;
+    border: 1px solid #ffffff;
     background: #131722;
     color: #ffffff;
     font-size: 0.85rem;
@@ -385,7 +384,7 @@ th{position:sticky;top:0;background:#121521}
   table-layout: fixed;
 }
 .stats-table th {
-  background: #1a1f2b;
+  background: transparent;
   color: var(--muted);
   font-weight: 600;
   text-align: center;
@@ -457,6 +456,7 @@ th{position:sticky;top:0;background:#121521}
 .action-card,
 .weapon-rule-card {
   background: #E0E0E0 !important;
+  border-radius: 10px;
 }
 .action-card {
   border: 2px solid #F55A07 !important;
@@ -495,11 +495,20 @@ th{position:sticky;top:0;background:#121521}
   color: #F55A07 !important;
   text-transform: uppercase;
 }
-.action-card > div:first-child:not(.ability-card-body) {
+.weapon-rule-card .ability-card-header {
   background: #F55A07 !important;
   padding: 0.5rem 0.75rem !important;
   margin: -0.5rem -0.5rem 0.5rem -0.5rem !important;
   border-radius: 8px 8px 0 0;
+}
+.weapon-rule-card .ability-card-title {
+  color: #ffffff !important;
+  text-transform: uppercase;
+}
+.action-card > div:first-child:not(.ability-card-body) {
+  background: #F55A07 !important;
+  padding: 0.5rem 0.75rem !important;
+  margin: -0.5rem -0.5rem 0.5rem -0.5rem !important;
 }
 .action-card > div:first-child:not(.ability-card-body) .ability-card-title {
   color: #ffffff !important;
@@ -509,7 +518,6 @@ th{position:sticky;top:0;background:#121521}
   background: #E0E0E0 !important;
   padding: 0.5rem 0.75rem !important;
   margin: -0.5rem -0.5rem 0.5rem -0.5rem !important;
-  border-radius: 8px 8px 0 0;
   border-bottom: 2px solid #F55A07;
 }
 .ability-card-item > div:first-child:not(.ability-card-body) .ability-card-title {
@@ -562,9 +570,13 @@ th{position:sticky;top:0;background:#121521}
     margin-top: 0.5rem;
     font-size: 0.85rem;
     border-collapse: collapse;
+    width: 100%;
+    table-layout: auto;
+    background: #E0E0E0;
+    background-color: #E0E0E0;
   }
   .weapons-table th {
-    background: #E0E0E0;
+    background: transparent;
     color: #000000;
     font-weight: 600;
     text-align: left;
@@ -583,12 +595,54 @@ th{position:sticky;top:0;background:#121521}
     vertical-align: middle;
     word-break: break-word;
     border-bottom: none;
+    width: auto;
   }
-  .weapons-table tbody tr:nth-child(even) td {
-    background: #D5D5D5;
+  /* Ensure profile row cells fill the table width properly */
+  .weapons-table .weapon-profile-row td {
+    width: auto;
+    min-width: 0;
   }
-  .weapons-table tbody tr:nth-child(odd) td {
-    background: #E0E0E0;
+  /* Ensure the first cell with flex display doesn't break the layout */
+  .weapons-table .weapon-profile-row td:first-child {
+    width: auto;
+    flex: 0 1 auto;
+  }
+  /* Default background for all rows - ensure solid opaque background */
+  .weapons-table tbody tr td {
+    background: #E0E0E0 !important;
+    background-color: #E0E0E0 !important;
+  }
+  /* Header rows always have the same background - solid opaque */
+  .weapons-table .weapon-header-row td {
+    background: #E0E0E0 !important;
+    background-color: #E0E0E0 !important;
+    font-weight: 600;
+    padding: 0.75rem 0.5rem 0.5rem 0.5rem;
+    color: #000000;
+  }
+  /* Table header cells - ensure solid background */
+  .weapons-table thead th {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+  /* Alternate background for non-header rows - this will create a pattern */
+  /* Apply to all cells in the row to ensure consistency - solid opaque */
+  .weapons-table tbody tr:not(.weapon-header-row):nth-child(even) td {
+    background: #D5D5D5 !important;
+    background-color: #D5D5D5 !important;
+  }
+  .weapons-table tbody tr:not(.weapon-header-row):nth-child(odd) td {
+    background: #E0E0E0 !important;
+    background-color: #E0E0E0 !important;
+  }
+  /* Explicitly ensure all cells in profile rows get the row background - solid opaque */
+  .weapons-table .weapon-profile-row:nth-child(even) td {
+    background: #D5D5D5 !important;
+    background-color: #D5D5D5 !important;
+  }
+  .weapons-table .weapon-profile-row:nth-child(odd) td {
+    background: #E0E0E0 !important;
+    background-color: #E0E0E0 !important;
   }
   .weapons-table td:nth-child(2),
   .weapons-table td:nth-child(3),
@@ -596,12 +650,6 @@ th{position:sticky;top:0;background:#121521}
     text-align: center;
     color: #000000;
     font-weight: 600;
-  }
-  .weapons-table .weapon-header-row td {
-    background: #E0E0E0;
-    font-weight: 600;
-    padding: 0.75rem 0.5rem 0.5rem 0.5rem;
-    color: #000000;
   }
   .weapons-table .weapon-profile-row td:first-child {
     padding-left: 1.5rem;
@@ -648,8 +696,8 @@ th{position:sticky;top:0;background:#121521}
     margin: 0.5rem 0;
     padding: 0.25rem;
     border-radius: 12px;
-    border: 1px solid #1a1f2b;
-    background: #10131a;
+    border: none;
+    background: transparent;
   }
   .table-scroll table {
     min-width: 100%;
