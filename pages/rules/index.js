@@ -482,28 +482,22 @@ export default function Rules({ rulesTabs = [] }) {
           : Array.isArray(json?.mission_actions) 
             ? json.mission_actions 
             : []
-        console.log(`Loaded ${rawActions.length} raw actions from packs_actions.json`)
-        
         // Filter to only include actions with type === "mission"
         const missionActionsFromPacks = rawActions.filter(action => {
           const actionType = (action?.type || '').toLowerCase()
           return actionType === 'mission'
         })
-        console.log(`Filtered to ${missionActionsFromPacks.length} mission actions from packs_actions.json`)
         
         const actionMap = new Map()
-        const addAction = (actionDef, source = 'unknown') => {
+        const addAction = (actionDef) => {
           const normalised = normaliseActionDefinition(actionDef)
           if (normalised?.id) {
-            console.log(`Adding mission action: ${normalised.id} (type: ${normalised.type}) from ${source}`)
             actionMap.set(normalised.id, normalised)
-          } else {
-            console.warn(`Skipping action without id:`, actionDef)
           }
         }
 
         for (const actionDef of missionActionsFromPacks) {
-          addAction(actionDef, 'packs_actions.json')
+          addAction(actionDef)
         }
 
         try {
@@ -521,35 +515,9 @@ export default function Rules({ rulesTabs = [] }) {
           console.warn('Failed to load ops actions for mission actions list', opsErr)
         }
 
-        // All actions in the map should already be mission type (filtered before adding)
-        // But double-check to be safe
+        // All actions in the map are already mission type (filtered before adding)
         const finalList = Array.from(actionMap.values())
-          .filter(action => {
-            const actionType = (action.type || '').toLowerCase()
-            const include = actionType === 'mission'
-            if (!include) {
-              console.warn(`Filtering out action ${action.id} with type: ${actionType}`)
-            }
-            return include
-          })
           .sort((a, b) => a.id.localeCompare(b.id))
-        
-        console.log(`Final mission actions list: ${finalList.length} actions`)
-        if (finalList.length > 0) {
-          console.log(`Sample action IDs:`, finalList.slice(0, 10).map(a => a.id))
-          // Check if the specific action the user mentioned is in the list
-          const targetAction = finalList.find(a => a.id.includes('OPEN-STOCKADE-DOOR') || a.id.includes('CTION-OPEN-STOCKADE-DOOR'))
-          if (targetAction) {
-            console.log(`Found target action:`, targetAction.id, targetAction.type)
-          } else {
-            console.warn(`Target action CTION-OPEN-STOCKADE-DOOR not found in final list`)
-            // Check if it's in the raw actions
-            const rawTarget = rawActions.find(a => (a.id || a.name || '').includes('OPEN-STOCKADE-DOOR'))
-            if (rawTarget) {
-              console.warn(`But found in raw actions:`, rawTarget.id || rawTarget.name)
-            }
-          }
-        }
 
         const sorted = sortActions(finalList)
         const mappedMissionActions = sorted.map(action => ({
@@ -615,15 +583,13 @@ export default function Rules({ rulesTabs = [] }) {
         try {
           const killteams = await db.killteams.toArray()
           const killteamsMap = new Map()
-          console.log(`Loading weapon rules from ${killteams.length} killteams`)
-          for (const kt of killteams) {
+            for (const kt of killteams) {
             if (kt.killteamId) {
               killteamsMap.set(kt.killteamId, kt.killteamName || kt.killteamId)
             }
             // Check for weapon_rules field (could be weapon_rules or weaponRules)
             const weaponRules = kt.weapon_rules || kt.weaponRules || []
             if (Array.isArray(weaponRules) && weaponRules.length > 0) {
-              console.log(`Found ${weaponRules.length} weapon rules for team ${kt.killteamId || kt.killteamName}`)
               for (const rule of weaponRules) {
                 if (rule && (rule.id || rule.name)) {
                   teamRules.push({
@@ -637,7 +603,6 @@ export default function Rules({ rulesTabs = [] }) {
               }
             }
           }
-          console.log(`Loaded ${teamRules.length} team-specific weapon rules total`)
           if (!cancelled) {
             setKillteamsMap(killteamsMap)
           }
@@ -729,19 +694,23 @@ export default function Rules({ rulesTabs = [] }) {
   const combinedUniversalActions = useMemo(() => {
     if (!equipmentActionsLoaded) return universalActions
     
-    const equipmentUniversalActions = equipmentActions
-      .filter(action => (action.type || '').toLowerCase() === 'universal')
-      .map(action => ({
-        id: action.id,
-        name: action.name,
-        ap: action.AP ?? null,
-        description: action.description || '',
-        effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
-        conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
-        packs: Array.isArray(action.packs) ? action.packs.filter(Boolean) : [],
-        type: (action.type || '').toLowerCase() || 'universal',
-        fromEquipment: true
-      }))
+    // Combine filter and map in a single pass for better performance
+    const equipmentUniversalActions = []
+    for (const action of equipmentActions) {
+      if ((action.type || '').toLowerCase() === 'universal') {
+        equipmentUniversalActions.push({
+          id: action.id,
+          name: action.name,
+          ap: action.AP ?? null,
+          description: action.description || '',
+          effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
+          conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
+          packs: Array.isArray(action.packs) ? action.packs.filter(Boolean) : [],
+          type: (action.type || '').toLowerCase() || 'universal',
+          fromEquipment: true
+        })
+      }
+    }
     
     // Merge with existing universal actions
     // Equipment actions take precedence (added last) so they overwrite existing ones

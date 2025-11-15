@@ -32,7 +32,8 @@ function rankResults(results, query) {
     return 3 // fallback to score ordering
   }
 
-  return [...results].sort((a, b) => {
+  // Sort in place - results array is already a copy from search results
+  return results.slice().sort((a, b) => {
     const rankA = getRank(a)
     const rankB = getRank(b)
     if (rankA !== rankB) return rankA - rankB
