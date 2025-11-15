@@ -6,6 +6,7 @@ import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
 import Footer from '../components/Footer'
 import ErrorBoundary from '../components/ErrorBoundary'
+import InstallPrompt from '../components/InstallPrompt'
 import { createQueryClient } from '../lib/queryClient'
 import { useDatasetBootstrap } from '../hooks/useDatasetBootstrap'
 import '../styles.css'
@@ -101,6 +102,7 @@ export default function App({ Component, pageProps }) {
         <AppProviders>
           <Component {...pageProps} />
           <Footer />
+          <InstallPrompt />
         </AppProviders>
       </ErrorBoundary>
     </>

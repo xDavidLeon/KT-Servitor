@@ -1110,3 +1110,12 @@ kbd {
     right:0.5rem;
   }
 }
+
+/* Search result highlighting */
+mark {
+  background-color: rgba(251, 146, 60, 0.3);
+  color: #fb923c;
+  padding: 0.1em 0.2em;
+  border-radius: 2px;
+  font-weight: 500;
+}

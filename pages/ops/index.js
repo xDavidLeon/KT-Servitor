@@ -1024,6 +1024,7 @@ const sections = useMemo(() => {
                 <img
                   src={imagePath}
                   alt={`${groupLabel} - Map ${mapIndex}`}
+                  loading="lazy"
                   style={{
                     width: '100%',
                     height: 'auto',

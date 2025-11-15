@@ -27,10 +27,10 @@ export default function Nav(){
 
     const navItems = [
       { key: 'home', href: '/', labelKey: 'home', isActive: (path) => path === '/' },
+      { key: 'killteams', href: '/killteams', labelKey: 'killTeams', isActive: (path) => path === '/killteams' || path.startsWith('/killteams/') },
       { key: 'sequence', href: '/sequence', labelKey: 'gameSequence', isActive: (path) => path === '/sequence' || path.startsWith('/sequence/') },
       { key: 'rules', href: '/rules', labelKey: 'gameRules', isActive: (path) => path === '/rules' || path.startsWith('/rules/') },
       { key: 'ops', href: '/ops', labelKey: 'ops', isActive: (path) => path === '/ops' || path.startsWith('/ops/') },
-      { key: 'killteams', href: '/killteams', labelKey: 'killTeams', isActive: (path) => path === '/killteams' || path.startsWith('/killteams/') },
       { key: 'scoreboard', href: '/scoreboard', labelKey: 'scoreboard', isActive: (path) => path === '/scoreboard' }
     ]
 

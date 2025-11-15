@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ResultsTableSkeleton } from './Skeleton'
+import { highlightText } from '../lib/highlight'
+import { useHapticFeedback } from '../hooks/useHapticFeedback'
 
 function deriveKillteamId(doc) {
   if (!doc) return null
@@ -65,10 +67,11 @@ function formatType(type) {
 
 const PAGE_SIZE = 25
 
-export default function Results({ results, loading, selectedIndex, onResultSelect }) {
+export default function Results({ results, loading, selectedIndex, onResultSelect, searchQuery = '' }) {
   const router = useRouter()
   const [page, setPage] = useState(0)
   const resultRefs = useRef({})
+  const { lightTap, navigation } = useHapticFeedback()
 
   useEffect(() => {
     setPage(0)
@@ -119,11 +122,17 @@ export default function Results({ results, loading, selectedIndex, onResultSelec
   const canNext = clampedPage < totalPages - 1
 
   const handlePrev = () => {
-    if (canPrev) setPage(clampedPage - 1)
+    if (canPrev) {
+      navigation()
+      setPage(clampedPage - 1)
+    }
   }
 
   const handleNext = () => {
-    if (canNext) setPage(clampedPage + 1)
+    if (canNext) {
+      navigation()
+      setPage(clampedPage + 1)
+    }
   }
 
   return (
@@ -180,22 +189,27 @@ export default function Results({ results, loading, selectedIndex, onResultSelec
                     outlineOffset: isSelected ? '-2px' : '0'
                   }}
                 >
-                  <td><Link href={buildResultHref(r)}>{r.title}</Link></td>
+                  <td>
+                    <Link href={buildResultHref(r)}>
+                      {highlightText(r.title || '', searchQuery)}
+                    </Link>
+                  </td>
                   <td className="muted">{formatType(r.type)}</td>
                   <td>
                     {(() => {
                       const resolvedKillteamId = r.killteamId || deriveKillteamId(r) || null
+                      const teamName = r.killteamDisplayName || r.killteamName || ''
                       if (r.killteamDisplayName && resolvedKillteamId) {
                         return (
                           <Link href={`/killteams/${encodeURIComponent(resolvedKillteamId)}`}>
-                            {r.killteamDisplayName}
+                            {highlightText(teamName, searchQuery)}
                           </Link>
                         )
                       }
                       if (r.killteamDisplayName) {
-                        return r.killteamDisplayName
+                        return highlightText(teamName, searchQuery)
                       }
-                      return r.killteamName || ''
+                      return highlightText(teamName, searchQuery)
                     })()}
                   </td>
                 </tr>

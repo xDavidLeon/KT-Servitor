@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useHapticFeedback } from '../hooks/useHapticFeedback'
 
 export function scrollToKillteamSection(sectionId) {
   if (typeof document === 'undefined' || !sectionId) return false
@@ -47,6 +48,7 @@ export default function KillteamSectionNavigator({
   rightButton = null
 }) {
   const [isOpen, setIsOpen] = useState(false)
+  const { navigation, lightTap } = useHapticFeedback()
 
   const activeSection = useMemo(() => {
     if (!Array.isArray(sections) || sections.length === 0) return null
@@ -144,11 +146,13 @@ export default function KillteamSectionNavigator({
 
   const handleTabSelect = (sectionId) => {
     if (!sectionId || sectionId === activeSection.id) return
+    navigation()
     onSectionChange?.(sectionId)
   }
 
   const handleItemSelect = (targetId) => {
     if (!targetId) return
+    lightTap()
     // If onItemSelect callback is provided, call it first
     if (onItemSelect) {
       const handled = onItemSelect(targetId)

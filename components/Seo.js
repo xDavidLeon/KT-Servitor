@@ -36,7 +36,8 @@ export default function Seo({
   description,
   image,
   type = DEFAULT_TYPE,
-  canonical
+  canonical,
+  jsonLd
 }) {
   const router = useRouter()
 
@@ -69,6 +70,13 @@ export default function Seo({
       <meta name="twitter:image" content={absoluteOgImage} />
 
       <link rel="canonical" href={canonicalUrl} key="canonical" />
+
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
     </Head>
   )
 }

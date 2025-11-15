@@ -153,3 +153,15 @@ export function KillTeamPageSkeleton() {
   )
 }
 
+// Section Loading Skeleton
+export function SectionSkeleton() {
+  return (
+    <div className="card killteam-tab-panel">
+      <SkeletonLine width="60%" height="24px" style={{ marginBottom: '1rem' }} />
+      <SkeletonLine width="100%" height="16px" />
+      <SkeletonLine width="90%" height="16px" style={{ marginTop: '0.5rem' }} />
+      <SkeletonLine width="85%" height="16px" style={{ marginTop: '0.5rem' }} />
+    </div>
+  )
+}
+

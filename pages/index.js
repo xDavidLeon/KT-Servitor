@@ -8,6 +8,7 @@ import { ensureIndex, getAllIndexedDocuments, isIndexReady } from '../lib/search
 import { checkForUpdates } from '../lib/update'
 import Seo from '../components/Seo'
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts'
+import { useHapticFeedback } from '../hooks/useHapticFeedback'
 
 
 function rankResults(results, query) {
@@ -146,8 +147,9 @@ export default function Home() {
 
   // Keyboard shortcuts handlers
   const handleFocusSearch = useCallback(() => {
+    lightTap()
     searchInputRef.current?.focus()
-  }, [])
+  }, [lightTap])
 
   const handleClearSearch = useCallback(() => {
     setQ('')
@@ -172,12 +174,14 @@ export default function Home() {
       }
     }
 
+    selection()
     setSelectedIndex(newIndex)
-  }, [res])
+  }, [res, selection])
 
   const handleSelectResult = useCallback((index) => {
     const safeResults = Array.isArray(res) ? res : []
     if (index >= 0 && index < safeResults.length) {
+      navigation()
       const result = safeResults[index]
       if (result) {
         // Build href using same logic as Results component
@@ -268,6 +272,7 @@ export default function Home() {
             loading={loading}
             selectedIndex={selectedIndex}
             onResultSelect={handleSelectResult}
+            searchQuery={q}
           />
         </ErrorBoundary>
         

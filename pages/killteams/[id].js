@@ -1,17 +1,48 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useVirtualizer } from '@tanstack/react-virtual'
+import dynamic from 'next/dynamic'
 import Header from '../../components/Header'
 import KillteamSelector from '../../components/KillteamSelector'
 import KillteamSectionNavigator, { scrollToKillteamSection } from '../../components/KillteamSectionNavigator'
-import OperativeCard from '../../components/OperativeCard'
-import RichText from '../../components/RichText'
 import ErrorBoundary from '../../components/ErrorBoundary'
-import { KillTeamPageSkeleton } from '../../components/Skeleton'
+import { KillTeamPageSkeleton, SectionSkeleton } from '../../components/Skeleton'
+import { useSwipeGesture } from '../../hooks/useSwipeGesture'
 import { db } from '../../lib/db'
 import { ensureIndex, isIndexReady } from '../../lib/search'
 import { getLocalePath, checkForUpdates, fetchWithLocaleFallback } from '../../lib/update'
 import Seo from '../../components/Seo'
+
+// Dynamic imports for sections with loading states
+const OverviewSection = dynamic(
+  () => import('../../components/killteams/OverviewSection'),
+  { loading: () => <SectionSkeleton /> }
+)
+
+const FactionRulesSection = dynamic(
+  () => import('../../components/killteams/FactionRulesSection'),
+  { loading: () => <SectionSkeleton /> }
+)
+
+const OperativesSection = dynamic(
+  () => import('../../components/killteams/OperativesSection'),
+  { loading: () => <SectionSkeleton /> }
+)
+
+const PloysSection = dynamic(
+  () => import('../../components/killteams/PloysSection'),
+  { loading: () => <SectionSkeleton /> }
+)
+
+const EquipmentSection = dynamic(
+  () => import('../../components/killteams/EquipmentSection'),
+  { loading: () => <SectionSkeleton /> }
+)
+
+const TacOpsSection = dynamic(
+  () => import('../../components/killteams/TacOpsSection'),
+  { loading: () => <SectionSkeleton /> }
+)
 
 const ARCHETYPE_PILL_MAP = {
   infiltration: { background: '#4D4D4D', color: '#f4f6ff' },
@@ -1470,6 +1501,32 @@ export default function KillteamPage() {
     )
   }, [sections])
 
+  // Swipe gesture handlers for mobile navigation
+  const handleSwipeLeft = useCallback(() => {
+    if (!sections.length) return
+    const currentIndex = sections.findIndex(s => s.id === activeSectionId)
+    if (currentIndex < sections.length - 1) {
+      setActiveSectionId(sections[currentIndex + 1].id)
+    }
+  }, [sections, activeSectionId])
+
+  const handleSwipeRight = useCallback(() => {
+    if (!sections.length) return
+    const currentIndex = sections.findIndex(s => s.id === activeSectionId)
+    if (currentIndex > 0) {
+      setActiveSectionId(sections[currentIndex - 1].id)
+    }
+  }, [sections, activeSectionId])
+
+  // Attach swipe gesture to the section container
+  const swipeRef = useSwipeGesture({
+    onSwipeLeft: handleSwipeLeft,
+    onSwipeRight: handleSwipeRight,
+    minSwipeDistance: 50,
+    maxVerticalSwipe: 100,
+    enabled: sections.length > 1 // Only enable if there are multiple sections
+  })
+
   useEffect(() => {
     if (!sections.length) return
     if (!activeSectionId || !sections.some(section => section.id === activeSectionId)) {
@@ -1477,258 +1534,6 @@ export default function KillteamPage() {
     }
   }, [sections, activeSectionId])
 
-  const renderTacOpsSection = () => {
-    if (!Array.isArray(archetypes) || archetypes.length === 0) {
-      return <div className="muted">This kill team has no assigned archetypes.</div>
-    }
-    if (!tacOpsLoaded) {
-      if (tacOpsLoading) {
-        return <div className="muted">Loading Tac Ops…</div>
-      }
-      return null
-    }
-    if (tacOpsError) {
-      return (
-        <div className="muted">
-          Failed to load Tac Ops.
-          {' '}
-          <span style={{ fontSize: '0.85rem' }}>{tacOpsError.message || String(tacOpsError)}</span>
-        </div>
-      )
-    }
-    if (!killteamTacOps.length) {
-      return <div className="muted">No Tac Ops available for this kill team.</div>
-    }
-
-    const renderActions = (actionsArray) => {
-      if (!Array.isArray(actionsArray) || actionsArray.length === 0) return null
-      return (
-        <div className="card-section-list" style={{ marginTop: '0.75rem' }}>
-          {actionsArray.map((action, actionIndex) => {
-            const entry = typeof action === 'string'
-              ? tacOpsActionLookup.get(action) || normaliseTacOpsAction(action)
-              : normaliseTacOpsAction(action)
-            if (!entry) return null
-
-            const rawActionId = entry.id || entry.name || ''
-            const safeActionId = String(rawActionId).trim().replace(/\s+/g, '-')
-            const apLabel = entry.AP !== undefined && entry.AP !== null && entry.AP !== '' ? `${entry.AP} AP` : null
-
-            // Determine action type label
-            const actionType = (entry.type || '').toLowerCase()
-            let actionTypeLabel = ''
-            if (actionType === 'mission') {
-              actionTypeLabel = 'MISSION ACTION'
-            } else if (actionType === 'universal') {
-              actionTypeLabel = 'UNIVERSAL ACTION'
-            } else if (actionType) {
-              // Capitalize first letter of each word for other types
-              actionTypeLabel = actionType.split(' ').map(word => 
-                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-              ).join(' ').toUpperCase() + ' ACTION'
-            }
-
-            return (
-              <div key={safeActionId || rawActionId}>
-                {actionTypeLabel && (
-                  <div style={{ 
-                    marginTop: actionIndex === 0 ? '0' : '0.75rem', 
-                    marginBottom: '0.5rem',
-                    fontSize: '0.9rem',
-                    fontWeight: 600,
-                    color: '#F55A07',
-                    borderBottom: '1px solid #F55A07',
-                    paddingBottom: '0.25rem'
-                  }}>
-                    {actionTypeLabel}
-                  </div>
-                )}
-                <div
-                  id={`operation-action-${safeActionId || rawActionId}`}
-                  className="ability-card action-card"
-                >
-                  <div className="ability-card-header">
-                    <h4 className="ability-card-title">{entry.name.toUpperCase()}</h4>
-                    {apLabel && <span className="ability-card-ap">{apLabel}</span>}
-                  </div>
-                {(entry.description || (entry.effects && entry.effects.length) || (entry.conditions && entry.conditions.length)) && (
-                  <div className="ability-card-body">
-                    {entry.description && <p style={{ marginTop: 0 }}>{entry.description}</p>}
-                    {entry.effects && entry.effects.length > 0 && (
-                      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-                        {entry.effects.map((effect, index) => (
-                          <li
-                            key={`${safeActionId}-effect-${index}`}
-                            style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
-                          >
-                            <span aria-hidden="true" style={{ color: '#2ecc71', fontWeight: 'bold' }}>➤</span>
-                            <span>{effect}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    {entry.conditions && entry.conditions.length > 0 && (
-                      <ul style={{ margin: entry.effects && entry.effects.length ? '0.5rem 0 0 0' : 0, padding: 0, listStyle: 'none' }}>
-                        {entry.conditions.map((condition, index) => (
-                          <li
-                            key={`${safeActionId}-condition-${index}`}
-                            style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
-                          >
-                            <span aria-hidden="true" style={{ color: '#e74c3c', fontWeight: 'bold' }}>◆</span>
-                            <span>{condition}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                )}
-                {/* Footer: Action type and packs */}
-                {(() => {
-                  const hasPacks = entry.packs && Array.isArray(entry.packs) && entry.packs.length > 0
-                  if (!actionTypeLabel && !hasPacks) return null
-                  return (
-                    <div
-                      style={{
-                        background: '#333333',
-                        color: '#ffffff',
-                        padding: '0.5rem 0.75rem',
-                        margin: '0.75rem -0.5rem -0.5rem -0.5rem',
-                        borderRadius: '0 0 8px 8px',
-                        textAlign: 'left',
-                        fontSize: '0.85rem',
-                        textTransform: 'uppercase'
-                      }}
-                    >
-                      {actionTypeLabel && (
-                        <span style={{ color: '#F55A07' }}>{actionTypeLabel}</span>
-                      )}
-                      {hasPacks && entry.packs.length > 0 && (
-                        <>
-                          {actionTypeLabel && ', '}
-                          {entry.packs.map((pack, idx) => (
-                            <span key={`${safeActionId}-pack-${idx}`}>
-                              {idx > 0 && ', '}
-                              {pack.toUpperCase()}
-                            </span>
-                          ))}
-                        </>
-                      )}
-                    </div>
-                  )
-                })()}
-                </div>
-              </div>
-            )
-          })}
-        </div>
-      )
-    }
-
-    return (
-      <div className="card-section-list">
-        {killteamTacOps.map(op => {
-          const archetypes = Array.isArray(op.archetypes) && op.archetypes.length > 0
-            ? op.archetypes.filter(Boolean)
-            : []
-          return (
-          <div key={op.id} id={`tac-op-${op.id}`} className="card operation-card" style={{ margin: '.75rem 0', position: 'relative' }}>
-            <>
-              <div style={{ 
-                background: '#333333', 
-                color: '#ffffff', 
-                padding: '0.5rem 0.75rem', 
-                margin: '-0.5rem -0.5rem 0 -0.5rem',
-                borderRadius: '8px 8px 0 0',
-                textAlign: 'center',
-                fontWeight: 600
-              }}>
-                TAC OP
-              </div>
-              {(() => {
-                const archetypeLabel = (archetypes && archetypes.length > 0 && archetypes[0]) ? archetypes[0] : 'Tactical Operation'
-                const style = getArchetypePillStyle(archetypeLabel)
-                const label = style?.label || archetypeLabel
-                return (
-                  <div style={{ 
-                    background: style?.backgroundColor || '#2b2d33',
-                    color: style?.color || '#f4f6ff',
-                    padding: '0.5rem 0.75rem', 
-                    margin: '0 -0.5rem 0.75rem -0.5rem',
-                    textAlign: 'center',
-                    fontWeight: 600
-                  }}>
-                    {label.toUpperCase()}
-                  </div>
-                )
-              })()}
-            </>
-            <div style={{ textAlign: 'center', marginBottom: '0.75rem' }}>
-              {(() => {
-                const archetypeLabel = (archetypes && archetypes.length > 0 && archetypes[0]) ? archetypes[0] : 'Tactical Operation'
-                const style = getArchetypePillStyle(archetypeLabel)
-                return (
-                  <strong style={{ 
-                    fontSize: '1.1rem', 
-                    color: '#ffffff',
-                    background: style?.backgroundColor || '#4D4D4D',
-                    padding: '0.5rem 0.75rem',
-                    display: 'block',
-                    borderRadius: '4px'
-                  }}>
-                    {op.title.toUpperCase()}
-                  </strong>
-                )
-              })()}
-            </div>
-
-            {op.briefing && (
-              <div style={{ marginTop: '0.5rem' }}>
-                <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Briefing</strong>
-                <RichText className="muted" text={op.briefing} />
-              </div>
-            )}
-
-            {op.objective && (
-              <div style={{ marginTop: '0.5rem' }}>
-                <strong style={{ display: 'block', marginBottom: '0.25rem' }}>Objective</strong>
-                <RichText className="muted" text={op.objective} />
-              </div>
-            )}
-
-            {op.reveal && (
-              <div className="ability-card" style={{ marginTop: '0.75rem' }}>
-                <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
-                  <h4 className="ability-card-title" style={{ margin: 0, color: '#F55A07' }}>REVEAL</h4>
-                </div>
-                <RichText className="ability-card-body muted" text={op.reveal} />
-              </div>
-            )}
-
-            {op.additionalRules && (
-              <div className="ability-card" style={{ marginTop: '0.75rem' }}>
-                <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
-                  <h4 className="ability-card-title" style={{ margin: 0, color: '#F55A07' }}>ADDITIONAL RULES</h4>
-                </div>
-                <RichText className="ability-card-body muted" text={op.additionalRules} />
-              </div>
-            )}
-
-            {renderActions(op.actions)}
-
-            {op.victoryPoints && (
-              <div className="ability-card" style={{ marginTop: '0.75rem' }}>
-                <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
-                  <h4 className="ability-card-title" style={{ margin: 0, color: '#F55A07' }}>VICTORY POINTS</h4>
-                </div>
-                <RichText className="ability-card-body muted" text={op.victoryPoints} />
-              </div>
-            )}
-          </div>
-          )
-        })}
-      </div>
-    )
-  }
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -1966,447 +1771,59 @@ export default function KillteamPage() {
     switch (currentSectionId) {
       case 'killteam-overview':
         return (
-          <section id="killteam-overview" className="card killteam-tab-panel" style={{ position: 'relative' }}>
-            {(killteam?.file && killteam?.version) && (
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '1rem',
-                  right: '1rem',
-                  zIndex: 10
-                }}
-              >
-                <a
-                  href={killteam.file}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="pill-button"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '0.4rem',
-                    justifyContent: 'center',
-                    padding: '0.4rem 0.8rem',
-                    fontSize: '0.95rem'
-                  }}
-                  aria-label="Open designer notes PDF"
-                >
-                  <span aria-hidden="true" style={{ fontSize: '1.1rem' }}>🔄</span>
-                  <span>{killteam.version}</span>
-                </a>
-              </div>
-            )}
-            <div style={{ marginBottom: '0.75rem' }}>
-              <h2 style={{ margin: 0 }}>{killteamTitle.toUpperCase()}</h2>
-              {archetypes.length > 0 && (
-                <div style={{ 
-                  marginTop: '0.5rem', 
-                  color: '#ffffff',
-                  background: '#F55A07',
-                  padding: '0.5rem 0.75rem',
-                  borderRadius: '4px',
-                  width: '100%',
-                  boxSizing: 'border-box'
-                }}>
-                  <strong>ARCHETYPE:</strong> {archetypes.map(a => a.toUpperCase()).join(', ')}
-                </div>
-              )}
-            </div>
-            {killteam.description && <RichText className="muted" text={killteam.description} style={{ color: '#ffffff' }} highlightText={factionKeyword} />}
-            {killteam.composition && (
-              <div id="killteam-composition" style={{ marginTop: '1.5rem' }}>
-                <h3 style={{ marginTop: 0, borderBottom: '2px solid #F55A07', paddingBottom: '0.5rem' }}>OPERATIVES</h3>
-                <RichText className="muted" text={killteam.composition} style={{ color: '#ffffff' }} highlightText={factionKeyword} />
-              </div>
-            )}
-          </section>
+          <OverviewSection
+            killteam={killteam}
+            killteamTitle={killteamTitle}
+            archetypes={archetypes}
+            factionKeyword={factionKeyword}
+          />
         )
       case 'faction-rules':
         return (
-          <section id="faction-rules" className="card killteam-tab-panel">
-            <ErrorBoundary 
-              fallbackMessage="Failed to load faction rules"
-              showDetails={process.env.NODE_ENV === 'development'}
-            >
-              {factionRules.length > 0 ? (
-                <div className="card-section-list">
-                  {factionRules.map((rule, idx) => (
-                    <ErrorBoundary 
-                      key={rule.anchorId || rule.name || idx}
-                      fallbackMessage={`Failed to load rule: ${rule.name || 'Unknown'}`}
-                      showDetails={false}
-                    >
-                      <div
-                        id={rule.anchorId}
-                        className="ability-card ability-card-item"
-                      >
-                        <div className="ability-card-header">
-                          <h4 className="ability-card-title" style={{ color: '#F55A07' }}>{(rule.name || 'Rule').toUpperCase()}</h4>
-                          {rule.apCost && <span className="ability-card-ap">{rule.apCost}</span>}
-                        </div>
-                        {rule.description && (
-                          <RichText className="ability-card-body" text={rule.description} highlightText={factionKeyword} />
-                        )}
-                      </div>
-                    </ErrorBoundary>
-                  ))}
-                </div>
-              ) : (
-                <div className="muted">No faction rules available.</div>
-              )}
-            </ErrorBoundary>
-          </section>
+          <FactionRulesSection
+            factionRules={factionRules}
+            factionKeyword={factionKeyword}
+          />
         )
       case 'operatives':
         return (
-          <section id="operatives" className="card killteam-tab-panel">
-            {operatives.length ? (
-              <div
-                ref={operativesScrollRef}
-                className="operatives-grid"
-                style={{
-                  position: 'relative',
-                  minHeight: `${operativesVirtualizer.getTotalSize()}px`
-                }}
-              >
-                {operativesVirtualizer.getVirtualItems().map((virtualItem) => {
-                  const operative = operatives[virtualItem.index]
-                  const operativeId = operative?.id ? `operative-${operative.id}` : `operative-${virtualItem.index + 1}`
-                  return (
-                    <div
-                      key={virtualItem.key}
-                      id={operativeId}
-                      data-index={virtualItem.index}
-                      ref={(node) => {
-                        if (node && node instanceof Element) {
-                          operativesVirtualizer.measureElement(node)
-                        }
-                      }}
-                      style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        transform: `translateY(${virtualItem.start}px)`,
-                        willChange: 'transform'
-                      }}
-                    >
-                      <ErrorBoundary 
-                        fallbackMessage={`Failed to load ${operative?.name || 'operative'} data`}
-                        showDetails={process.env.NODE_ENV === 'development'}
-                      >
-                        <OperativeCard operative={operative} />
-                      </ErrorBoundary>
-                    </div>
-                  )
-                })}
-              </div>
-            ) : (
-              <div className="muted">No operatives listed for this kill team.</div>
-            )}
-          </section>
+          <OperativesSection
+            operatives={operatives}
+            operativesVirtualizer={operativesVirtualizer}
+            operativesScrollRef={operativesScrollRef}
+          />
         )
       case 'ploys':
         return (
-          <section id="ploys" className="card killteam-tab-panel">
-            <ErrorBoundary 
-              fallbackMessage="Failed to load ploys"
-              showDetails={process.env.NODE_ENV === 'development'}
-            >
-              {strategyPloys.length || firefightPloys.length ? (
-                <>
-                  {strategyPloys.length > 0 && (
-                    <div className="card-section-list">
-                      {strategyPloys.map((ploy, idx) => (
-                        <ErrorBoundary 
-                          key={ploy.id || idx}
-                          fallbackMessage={`Failed to load ploy: ${ploy.name || 'Unknown'}`}
-                          showDetails={false}
-                        >
-                          <div id={ploy.anchorId} className="ability-card ploy-card">
-                            <div className="ability-card-header" style={{ background: '#3F5C4D', padding: '0.5rem 0.75rem', margin: '-0.5rem -0.5rem 0.5rem -0.5rem', borderRadius: '8px 8px 0 0' }}>
-                              <h4 className="ability-card-title" style={{ color: '#ffffff' }}>{(ploy.name || '').toUpperCase()}</h4>
-                              {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
-                            </div>
-                            {ploy.description && <RichText className="ability-card-body" text={ploy.description} highlightText={factionKeyword} />}
-                          </div>
-                        </ErrorBoundary>
-                      ))}
-                    </div>
-                  )}
-
-                  {firefightPloys.length > 0 && (
-                    <div className="card-section-list" style={{ marginTop: strategyPloys.length > 0 ? '0.75rem' : 0 }}>
-                      {firefightPloys.map((ploy, idx) => (
-                        <ErrorBoundary 
-                          key={ploy.id || idx}
-                          fallbackMessage={`Failed to load ploy: ${ploy.name || 'Unknown'}`}
-                          showDetails={false}
-                        >
-                          <div id={ploy.anchorId} className="ability-card ploy-card">
-                            <div className="ability-card-header" style={{ background: '#333333', padding: '0.5rem 0.75rem', margin: '-0.5rem -0.5rem 0.5rem -0.5rem', borderRadius: '8px 8px 0 0' }}>
-                              <h4 className="ability-card-title" style={{ color: '#ffffff' }}>{(ploy.name || '').toUpperCase()}</h4>
-                              {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
-                            </div>
-                            {ploy.description && <RichText className="ability-card-body" text={ploy.description} highlightText={factionKeyword} />}
-                          </div>
-                        </ErrorBoundary>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div className="muted">No ploys available.</div>
-              )}
-            </ErrorBoundary>
-          </section>
+          <PloysSection
+            strategyPloys={strategyPloys}
+            firefightPloys={firefightPloys}
+            factionKeyword={factionKeyword}
+          />
         )
       case 'equipment':
         return (
-          <section id="equipment" className="card killteam-tab-panel">
-            <ErrorBoundary 
-              fallbackMessage="Failed to load equipment"
-              showDetails={process.env.NODE_ENV === 'development'}
-            >
-              {hasEquipment ? (
-                <>
-                  {factionEquipment.length > 0 && (
-                    <div className="card-section-list">
-                        {factionEquipment.map((item, idx) => {
-                          // Get the original equipment record to access amount
-                          const equipmentRecord = killteam?.equipments?.find(rec => {
-                            const normalized = normaliseEquipment(rec)
-                            return normalized && (normalized.id === item.id || normalized.anchorId === item.anchorId)
-                          })
-                          return (
-                            <ErrorBoundary 
-                              key={item.id || idx}
-                              fallbackMessage={`Failed to load equipment: ${item.name || 'Unknown'}`}
-                              showDetails={false}
-                            >
-                              <div id={item.anchorId} className="ability-card equipment-card">
-                            <div style={{ 
-                              background: '#333333', 
-                              color: '#ffffff', 
-                              padding: '0.5rem 0.75rem', 
-                              margin: '-0.5rem -0.5rem 0.5rem -0.5rem',
-                              borderRadius: '8px 8px 0 0',
-                              textAlign: 'center',
-                              fontWeight: 600,
-                              textTransform: 'uppercase'
-                            }}>
-                              FACTION EQUIPMENT
-                            </div>
-                            <div className="ability-card-header">
-                              <h4 className="ability-card-title" style={{ 
-                                textTransform: 'uppercase',
-                                border: '1px solid #333333',
-                                padding: '0.25rem 0.5rem',
-                                display: 'block',
-                                width: '100%',
-                                boxSizing: 'border-box'
-                              }}>
-                                {(() => {
-                                  const amount = item.amount ?? (equipmentRecord?.amount ?? equipmentRecord?.amountValue) ?? null
-                                  const name = item.name || ''
-                                  return amount ? `${amount} x ${name}` : name
-                                })()}
-                              </h4>
-                              {item.cost && <span className="ability-card-ap">{item.cost}</span>}
-                            </div>
-                            {item.description && <RichText className="ability-card-body" text={item.description} highlightText={factionKeyword} />}
-                              </div>
-                            </ErrorBoundary>
-                          )
-                        })}
-                    </div>
-                )}
-
-                {universalEquipment.length > 0 && (
-                  <div className="card-section-list" style={{ marginTop: factionEquipment.length > 0 ? '0.75rem' : 0 }}>
-                      {(() => {
-                        // Create a map of action IDs to action definitions for quick lookup
-                        const actionsMap = new Map()
-                        if (equipmentActionsLoaded && Array.isArray(equipmentActions)) {
-                          for (const action of equipmentActions) {
-                            if (action && action.id) {
-                              actionsMap.set(action.id, action)
-                            }
-                          }
-                        }
-                        
-                        return universalEquipment.map((item, idx) => {
-                          // Get the original equipment record to access actions
-                          const equipmentRecord = universalEquipmentRecords.find(rec => {
-                            const normalized = normaliseEquipment(rec)
-                            return normalized && (normalized.id === item.id || normalized.anchorId === item.anchorId)
-                          })
-                          
-                          // Get actions for this equipment item
-                          const equipmentActionIds = Array.isArray(equipmentRecord?.actions) ? equipmentRecord.actions.filter(Boolean) : []
-                          const equipmentActionsList = equipmentActionIds
-                            .map(actionId => actionsMap.get(actionId))
-                            .filter(action => action !== undefined)
-                            .map(action => ({
-                              id: action.id,
-                              name: action.name,
-                              ap: action.AP ?? null,
-                              description: action.description || '',
-                              effects: Array.isArray(action.effects) ? action.effects.filter(Boolean) : [],
-                              conditions: Array.isArray(action.conditions) ? action.conditions.filter(Boolean) : [],
-                              packs: Array.isArray(action.packs) ? action.packs.filter(Boolean) : [],
-                              type: (action.type || '').toLowerCase() || 'ability',
-                              fromEquipment: true
-                            }))
-                          
-                          return (
-                            <ErrorBoundary 
-                              key={item.id || idx}
-                              fallbackMessage={`Failed to load equipment: ${item.name || 'Unknown'}`}
-                              showDetails={false}
-                            >
-                              <div id={item.anchorId} className="ability-card equipment-card">
-                              <div style={{ 
-                                background: '#333333', 
-                                color: '#ffffff', 
-                                padding: '0.5rem 0.75rem', 
-                                margin: '-0.5rem -0.5rem 0.5rem -0.5rem',
-                                borderRadius: '8px 8px 0 0',
-                                textAlign: 'center',
-                                fontWeight: 600,
-                                textTransform: 'uppercase'
-                              }}>
-                                UNIVERSAL EQUIPMENT
-                              </div>
-                              <div className="ability-card-header">
-                                <h4 className="ability-card-title" style={{ 
-                                  textTransform: 'uppercase',
-                                  border: '1px solid #333333',
-                                  padding: '0.25rem 0.5rem',
-                                  display: 'block',
-                                  width: '100%',
-                                  boxSizing: 'border-box'
-                                }}>
-                                  {(() => {
-                                    const amount = item.amount ?? (equipmentRecord?.amount) ?? null
-                                    const name = item.name || ''
-                                    return amount ? `${amount} x ${name}` : name
-                                  })()}
-                                </h4>
-                                {item.cost && <span className="ability-card-ap">{item.cost}</span>}
-                              </div>
-                              {item.description && <RichText className="ability-card-body" text={item.description} />}
-                              {(() => {
-                                const effectsText = Array.isArray(equipmentRecord?.effects)
-                                  ? equipmentRecord.effects.filter(Boolean).join(', ')
-                                  : (equipmentRecord?.effects || '')
-                                const trimmed = effectsText.trim()
-                                if (!trimmed) return null
-                                return (
-                                  <div className="muted" style={{ marginTop: '0.35rem', fontSize: '0.85rem' }}>
-                                    {trimmed}
-                                  </div>
-                                )
-                              })()}
-                              {/* Render actions inside the equipment card */}
-                              {equipmentActionsList.length > 0 && (
-                                <div style={{ marginTop: '1rem', borderTop: '1px solid #2a2f3f', paddingTop: '1rem' }}>
-                                  {equipmentActionsList.map((action, actionIndex) => {
-                                    const apLabel = action.ap === null || action.ap === undefined ? null : `${action.ap} AP`
-                                    const showEquipmentLabel = action.fromEquipment === true
-                                    const hasPacks = action.packs && action.packs.length > 0
-                                    const actionType = action.type || 'ability'
-                                    const actionTypeLabel = (actionType === 'universal' ? 'Universal' : actionType === 'mission' ? 'Mission' : actionType === 'ability' ? 'Ability' : actionType.charAt(0).toUpperCase() + actionType.slice(1)) + ' Action'
-                                    
-                                    return (
-                                      <div key={`${item.id}-${action.id}-${actionIndex}`} id={`equipment-action-${item.id || item.anchorId}-${action.id}${actionIndex > 0 ? `-${actionIndex}` : ''}`} className="action-card" style={{ marginBottom: actionIndex < equipmentActionsList.length - 1 ? '1rem' : 0 }}>
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                                          <h4 className="ability-card-title" style={{ margin: 0 }}>{action.name.toUpperCase()}</h4>
-                                          {apLabel && <span className="ability-card-ap">{apLabel}</span>}
-                                        </div>
-                                        {(action.description || action.effects.length > 0 || action.conditions.length > 0) && (
-                                          <div className="ability-card-body" style={{ marginBottom: '0.75rem' }}>
-                                            {action.description && (
-                                              <p style={{ marginTop: 0 }}>{action.description}</p>
-                                            )}
-                                            {action.effects.length > 0 && (
-                                              <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-                                                {action.effects.map((effect, effectIndex) => (
-                                                  <li
-                                                    key={`${action.id}-effect-${effectIndex}`}
-                                                    style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
-                                                  >
-                                                    <span aria-hidden="true" style={{ color: '#2ecc71', fontWeight: 'bold' }}>➤</span>
-                                                    <span>{typeof effect === 'string' ? effect : String(effect)}</span>
-                                                  </li>
-                                                ))}
-                                              </ul>
-                                            )}
-                                            {action.conditions.length > 0 && (
-                                              <ul style={{ margin: action.effects.length ? '0.5rem 0 0 0' : 0, padding: 0, listStyle: 'none' }}>
-                                                {action.conditions.map((condition, conditionIndex) => (
-                                                  <li
-                                                    key={`${action.id}-condition-${conditionIndex}`}
-                                                    style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
-                                                  >
-                                                    <span aria-hidden="true" style={{ color: '#e74c3c', fontWeight: 'bold' }}>◆</span>
-                                                    <span>{typeof condition === 'string' ? condition : String(condition)}</span>
-                                                  </li>
-                                                ))}
-                                              </ul>
-                                            )}
-                                          </div>
-                                        )}
-                                        {/* Footer: Action type and packs */}
-                                        <div
-                                          style={{
-                                            background: '#333333',
-                                            color: '#ffffff',
-                                            padding: '0.5rem 0.75rem',
-                                            margin: '0.75rem -0.5rem -0.5rem -0.5rem',
-                                            borderRadius: '0 0 8px 8px',
-                                            textAlign: 'left',
-                                            fontSize: '0.85rem',
-                                            textTransform: 'uppercase'
-                                          }}
-                                        >
-                                          <span style={{ color: '#F55A07' }}>{actionTypeLabel.toUpperCase()}</span>
-                                          {hasPacks && action.packs.length > 0 && (
-                                            <>
-                                              {', '}
-                                              {action.packs.map((pack, idx) => (
-                                                <span key={`${action.id}-pack-${idx}`}>
-                                                  {idx > 0 && ', '}
-                                                  {pack.toUpperCase()}
-                                                </span>
-                                              ))}
-                                            </>
-                                          )}
-                                        </div>
-                                      </div>
-                                    )
-                                  })}
-                                </div>
-                              )}
-                              </div>
-                            </ErrorBoundary>
-                          )
-                        })
-                      })()}
-                    </div>
-                )}
-              </>
-            ) : (
-              <div className="muted">No equipment listed.</div>
-            )}
-            </ErrorBoundary>
-          </section>
+          <EquipmentSection
+            killteam={killteam}
+            factionEquipment={factionEquipment}
+            universalEquipment={universalEquipment}
+            universalEquipmentRecords={universalEquipmentRecords}
+            equipmentActions={equipmentActions}
+            equipmentActionsLoaded={equipmentActionsLoaded}
+            hasEquipment={hasEquipment}
+            factionKeyword={factionKeyword}
+          />
         )
       case 'tac-ops':
         return (
-          <section id="tac-ops" className="card killteam-tab-panel">
-            {renderTacOpsSection()}
-          </section>
+          <TacOpsSection
+            archetypes={archetypes}
+            killteamTacOps={killteamTacOps}
+            tacOpsActionLookup={tacOpsActionLookup}
+            tacOpsLoaded={tacOpsLoaded}
+            tacOpsLoading={tacOpsLoading}
+            tacOpsError={tacOpsError}
+          />
         )
       default:
         return null
@@ -2457,7 +1874,9 @@ export default function KillteamPage() {
               />
             </div>
           )}
-          {renderActiveSection()}
+          <div ref={swipeRef} style={{ position: 'relative' }}>
+            {renderActiveSection()}
+          </div>
         </div>
       </>
     )
