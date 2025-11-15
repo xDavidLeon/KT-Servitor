@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { useRouter } from 'next/router'
 import RichText from './RichText'
 import ShareButton from './ShareButton'
@@ -6,18 +7,222 @@ import { useTranslations } from '../lib/i18n'
 
 function WeaponRuleTooltip({ rule, children }) {
   const [showTooltip, setShowTooltip] = useState(false)
-  const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 })
+  const [tooltipPosition, setTooltipPosition] = useState(null) // null means position not calculated yet
   const spanRef = useRef(null)
+  const tooltipRef = useRef(null)
   
+  const updateTooltipPosition = useCallback((mouseX = null, mouseY = null) => {
+    if (!spanRef.current || typeof window === 'undefined') {
+      return
+    }
+    
+    try {
+      // Get the element's position relative to the viewport
+      // getBoundingClientRect() returns viewport coordinates
+      const rect = spanRef.current.getBoundingClientRect()
+      
+      // Validate that we got valid coordinates
+      if (!rect || rect.width === 0 || rect.height === 0) {
+        return
+      }
+      
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight
+      
+      // Use mouse position if available and close to element, otherwise use element center
+      let centerX, elementTop, elementBottom
+      
+      if (mouseX !== null && mouseY !== null) {
+        // Check if mouse is near the element (within 50px)
+        const mouseNearElement = (
+          mouseX >= rect.left - 50 && 
+          mouseX <= rect.right + 50 &&
+          mouseY >= rect.top - 50 && 
+          mouseY <= rect.bottom + 50
+        )
+        
+        if (mouseNearElement) {
+          // Use mouse X position, but clamp to element bounds
+          centerX = Math.max(rect.left, Math.min(mouseX, rect.right))
+          elementTop = rect.top
+          elementBottom = rect.bottom
+        } else {
+          // Mouse is far, use element center
+          centerX = rect.left + (rect.width / 2)
+          elementTop = rect.top
+          elementBottom = rect.bottom
+        }
+      } else {
+        // No mouse position, use element center
+        centerX = rect.left + (rect.width / 2)
+        elementTop = rect.top
+        elementBottom = rect.bottom
+      }
+      
+      // Estimate tooltip dimensions
+      const tooltipWidth = 300 // maxWidth
+      const tooltipHeight = 150 // estimated
+      
+      // Default: show above
+      let top = elementTop - 10
+      let showBelow = false
+      
+      // Check if there's enough space above
+      if (elementTop - tooltipHeight < 20) {
+        // Not enough space above, show below instead
+        top = elementBottom + 10
+        showBelow = true
+      }
+      
+      // Calculate horizontal position (centered on element)
+      let left = centerX
+      
+      // Adjust if tooltip would overflow left edge
+      if (centerX - (tooltipWidth / 2) < 10) {
+        left = (tooltipWidth / 2) + 10
+      }
+      // Adjust if tooltip would overflow right edge
+      else if (centerX + (tooltipWidth / 2) > viewportWidth - 10) {
+        left = viewportWidth - (tooltipWidth / 2) - 10
+      }
+      
+      // Ensure coordinates are valid numbers and within reasonable bounds
+      if (isNaN(top) || isNaN(left)) {
+        console.warn('Invalid tooltip position calculated', { top, left, rect })
+        return
+      }
+      
+      // Clamp coordinates to viewport bounds as a safety measure
+      const clampedLeft = Math.max(10, Math.min(left, viewportWidth - 10))
+      const clampedTop = Math.max(10, Math.min(top, viewportHeight - 10))
+      
+      // If we have mouse coordinates and the calculated position seems way off, use mouse position
+      if (mouseX !== null && mouseY !== null) {
+        const distanceFromMouse = Math.sqrt(
+          Math.pow(clampedLeft - mouseX, 2) + Math.pow(clampedTop - mouseY, 2)
+        )
+        
+        // If calculated position is more than 200px from mouse, something's wrong - use mouse position
+        if (distanceFromMouse > 200) {
+          // Use mouse position with offset
+          const tooltipWidth = 300
+          const tooltipHeight = 150
+          const offsetX = 15 // Offset to the right of cursor
+          const offsetY = 15 // Offset below cursor
+          
+          let finalLeft = mouseX + offsetX
+          let finalTop = mouseY + offsetY
+          let finalShowBelow = true
+          
+          // Adjust if would overflow
+          if (finalLeft + tooltipWidth > viewportWidth) {
+            finalLeft = mouseX - tooltipWidth - offsetX // Show to the left
+          }
+          if (finalTop + tooltipHeight > viewportHeight) {
+            finalTop = mouseY - tooltipHeight - offsetY // Show above
+            finalShowBelow = false
+          }
+          
+          setTooltipPosition({ 
+            top: Math.max(10, Math.min(finalTop, viewportHeight - 10)), 
+            left: Math.max(10, Math.min(finalLeft, viewportWidth - 10)), 
+            showBelow: finalShowBelow 
+          })
+          return
+        }
+      }
+      
+      // Only set position if coordinates are reasonable (not way off screen)
+      if (Math.abs(clampedLeft - left) > 100 || Math.abs(clampedTop - top) > 100) {
+        // If we have mouse position, use it as fallback
+        if (mouseX !== null && mouseY !== null) {
+          const tooltipWidth = 300
+          const offsetX = 15
+          const offsetY = 15
+          setTooltipPosition({ 
+            top: Math.max(10, Math.min(mouseY + offsetY, viewportHeight - 10)), 
+            left: Math.max(10, Math.min(mouseX + offsetX, viewportWidth - 10)), 
+            showBelow: true 
+          })
+          return
+        }
+        
+        console.warn('Tooltip position seems incorrect, recalculating...', { 
+          original: { top, left }, 
+          clamped: { top: clampedTop, left: clampedLeft },
+          rect,
+          viewport: { width: viewportWidth, height: viewportHeight }
+        })
+        // Try recalculating after a brief delay
+        setTimeout(() => {
+          if (spanRef.current) {
+            updateTooltipPosition(mouseX, mouseY)
+          }
+        }, 50)
+        return
+      }
+      
+      setTooltipPosition({ top: clampedTop, left: clampedLeft, showBelow })
+    } catch (error) {
+      console.warn('Error calculating tooltip position:', error)
+    }
+  }, [])
+  
+  // Update position when tooltip is shown
   useEffect(() => {
     if (showTooltip && spanRef.current) {
-      const rect = spanRef.current.getBoundingClientRect()
-      setTooltipPosition({
-        top: rect.top - 10,
-        left: rect.left + rect.width / 2
+      // Calculate position immediately - use requestAnimationFrame to ensure element is in DOM
+      const rafId = requestAnimationFrame(() => {
+        if (spanRef.current) {
+          updateTooltipPosition()
+        }
       })
+      
+      // Also update after a short delay to ensure DOM is ready
+      const timeoutId = setTimeout(() => {
+        if (spanRef.current) {
+          updateTooltipPosition()
+        }
+      }, 0)
+      
+      // Update position on scroll/resize
+      const handleScroll = () => {
+        if (spanRef.current) {
+          updateTooltipPosition()
+        }
+      }
+      const handleResize = () => {
+        if (spanRef.current) {
+          updateTooltipPosition()
+        }
+      }
+      
+      // Use capture phase to catch all scrolls (including nested scrollable containers)
+      window.addEventListener('scroll', handleScroll, true)
+      window.addEventListener('resize', handleResize)
+      
+      return () => {
+        cancelAnimationFrame(rafId)
+        clearTimeout(timeoutId)
+        window.removeEventListener('scroll', handleScroll, true)
+        window.removeEventListener('resize', handleResize)
+      }
+    } else {
+      // Reset position when tooltip is hidden
+      setTooltipPosition(null)
     }
-  }, [showTooltip])
+  }, [showTooltip, updateTooltipPosition])
+  
+  // Also update position when tooltip element is rendered
+  useEffect(() => {
+    if (showTooltip && tooltipRef.current && spanRef.current) {
+      // Use requestAnimationFrame to ensure tooltip is rendered
+      const rafId = requestAnimationFrame(() => {
+        updateTooltipPosition()
+      })
+      return () => cancelAnimationFrame(rafId)
+    }
+  }, [showTooltip, updateTooltipPosition])
   
   if (!rule || typeof rule !== 'object' || !rule.description) {
     return <>{children}</>
@@ -35,18 +240,44 @@ function WeaponRuleTooltip({ rule, children }) {
           textUnderlineOffset: '2px',
           cursor: 'help'
         }}
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
+        onMouseEnter={(e) => {
+          // Capture mouse coordinates immediately before async operations
+          const mouseX = e.clientX
+          const mouseY = e.clientY
+          setShowTooltip(true)
+          // Calculate position immediately on mouse enter using mouse coordinates
+          if (spanRef.current) {
+            // Use requestAnimationFrame to ensure DOM is ready
+            requestAnimationFrame(() => {
+              if (spanRef.current) {
+                updateTooltipPosition(mouseX, mouseY)
+              }
+            })
+          }
+        }}
+        onMouseMove={(e) => {
+          // Update position as mouse moves while tooltip is shown
+          if (showTooltip && spanRef.current) {
+            updateTooltipPosition(e.clientX, e.clientY)
+          }
+        }}
+        onMouseLeave={() => {
+          setShowTooltip(false)
+          setTooltipPosition(null)
+        }}
       >
         {children}
       </span>
-      {showTooltip && (
+      {showTooltip && tooltipPosition && typeof document !== 'undefined' && createPortal(
         <div
+          ref={tooltipRef}
           style={{
             position: 'fixed',
             top: `${tooltipPosition.top}px`,
             left: `${tooltipPosition.left}px`,
-            transform: 'translate(-50%, -100%)',
+            transform: tooltipPosition.showBelow
+              ? 'translate(-50%, 0)' // Show below
+              : 'translate(-50%, -100%)', // Show above
             marginBottom: '0.5rem',
             padding: '0.5rem 0.75rem',
             background: '#1a1f2b',
@@ -74,17 +305,18 @@ function WeaponRuleTooltip({ rule, children }) {
           <div
             style={{
               position: 'absolute',
-              top: '100%',
+              [tooltipPosition.showBelow ? 'top' : 'bottom']: '100%',
               left: '50%',
               transform: 'translateX(-50%)',
               width: 0,
               height: 0,
               borderLeft: '6px solid transparent',
               borderRight: '6px solid transparent',
-              borderTop: '6px solid #1a1f2b'
+              [tooltipPosition.showBelow ? 'borderTop' : 'borderBottom']: '6px solid #1a1f2b'
             }}
           />
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )
