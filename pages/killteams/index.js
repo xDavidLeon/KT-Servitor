@@ -135,7 +135,6 @@ export default function Killteams() {
                               </div>
                             )}
                           </div>
-                          {kt.description && <RichText className="muted" text={kt.description} />}
                         </Link>
                       )
                     })}
