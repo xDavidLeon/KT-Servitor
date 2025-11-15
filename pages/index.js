@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Header from '../components/Header'
 import SearchBox from '../components/SearchBox'
 import Results from '../components/Results'
+import ErrorBoundary from '../components/ErrorBoundary'
 import { ensureIndex, getAllIndexedDocuments, isIndexReady } from '../lib/search'
 import { checkForUpdates } from '../lib/update'
 import Seo from '../components/Seo'
@@ -258,12 +259,17 @@ export default function Home() {
       <div className="container">
         <Header />
         <SearchBox ref={searchInputRef} q={q} setQ={setQ} />
-        <Results 
-          results={res} 
-          loading={loading}
-          selectedIndex={selectedIndex}
-          onResultSelect={handleSelectResult}
-        />
+        <ErrorBoundary 
+          fallbackMessage="Search results failed to load. Try searching again."
+          showDetails={process.env.NODE_ENV === 'development'}
+        >
+          <Results 
+            results={res} 
+            loading={loading}
+            selectedIndex={selectedIndex}
+            onResultSelect={handleSelectResult}
+          />
+        </ErrorBoundary>
         
         {/* Keyboard Shortcuts Help Modal */}
         {showHelp && (

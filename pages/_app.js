@@ -5,6 +5,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
 import Footer from '../components/Footer'
+import ErrorBoundary from '../components/ErrorBoundary'
 import { createQueryClient } from '../lib/queryClient'
 import { useDatasetBootstrap } from '../hooks/useDatasetBootstrap'
 import '../styles.css'
@@ -69,6 +70,8 @@ function AppProviders({ children }) {
 }
 
 export default function App({ Component, pageProps }) {
+  const isDevelopment = process.env.NODE_ENV === 'development'
+  
   return (
     <>
       <Head>
@@ -90,10 +93,16 @@ export default function App({ Component, pageProps }) {
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <AppProviders>
-        <Component {...pageProps} />
-        <Footer />
-      </AppProviders>
+      <ErrorBoundary 
+        fallbackMessage="The application encountered an error. Please refresh the page."
+        showDetails={isDevelopment}
+        onRetry={() => window.location.reload()}
+      >
+        <AppProviders>
+          <Component {...pageProps} />
+          <Footer />
+        </AppProviders>
+      </ErrorBoundary>
     </>
   )
 }

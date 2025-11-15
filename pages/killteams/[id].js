@@ -6,6 +6,7 @@ import KillteamSelector from '../../components/KillteamSelector'
 import KillteamSectionNavigator, { scrollToKillteamSection } from '../../components/KillteamSectionNavigator'
 import OperativeCard from '../../components/OperativeCard'
 import RichText from '../../components/RichText'
+import ErrorBoundary from '../../components/ErrorBoundary'
 import { db } from '../../lib/db'
 import { ensureIndex, isIndexReady } from '../../lib/search'
 import { getLocalePath, checkForUpdates, fetchWithLocaleFallback } from '../../lib/update'
@@ -2022,27 +2023,37 @@ export default function KillteamPage() {
       case 'faction-rules':
         return (
           <section id="faction-rules" className="card killteam-tab-panel">
-            {factionRules.length > 0 ? (
-              <div className="card-section-list">
-                {factionRules.map((rule, idx) => (
-                  <div
-                    key={rule.anchorId || rule.name || idx}
-                    id={rule.anchorId}
-                    className="ability-card ability-card-item"
-                  >
-                    <div className="ability-card-header">
-                      <h4 className="ability-card-title" style={{ color: '#F55A07' }}>{(rule.name || 'Rule').toUpperCase()}</h4>
-                      {rule.apCost && <span className="ability-card-ap">{rule.apCost}</span>}
-                    </div>
-                    {rule.description && (
-                      <RichText className="ability-card-body" text={rule.description} highlightText={factionKeyword} />
-                    )}
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="muted">No faction rules available.</div>
-            )}
+            <ErrorBoundary 
+              fallbackMessage="Failed to load faction rules"
+              showDetails={process.env.NODE_ENV === 'development'}
+            >
+              {factionRules.length > 0 ? (
+                <div className="card-section-list">
+                  {factionRules.map((rule, idx) => (
+                    <ErrorBoundary 
+                      key={rule.anchorId || rule.name || idx}
+                      fallbackMessage={`Failed to load rule: ${rule.name || 'Unknown'}`}
+                      showDetails={false}
+                    >
+                      <div
+                        id={rule.anchorId}
+                        className="ability-card ability-card-item"
+                      >
+                        <div className="ability-card-header">
+                          <h4 className="ability-card-title" style={{ color: '#F55A07' }}>{(rule.name || 'Rule').toUpperCase()}</h4>
+                          {rule.apCost && <span className="ability-card-ap">{rule.apCost}</span>}
+                        </div>
+                        {rule.description && (
+                          <RichText className="ability-card-body" text={rule.description} highlightText={factionKeyword} />
+                        )}
+                      </div>
+                    </ErrorBoundary>
+                  ))}
+                </div>
+              ) : (
+                <div className="muted">No faction rules available.</div>
+              )}
+            </ErrorBoundary>
           </section>
         )
       case 'operatives':
@@ -2079,7 +2090,12 @@ export default function KillteamPage() {
                         willChange: 'transform'
                       }}
                     >
-                      <OperativeCard operative={operative} />
+                      <ErrorBoundary 
+                        fallbackMessage={`Failed to load ${operative?.name || 'operative'} data`}
+                        showDetails={process.env.NODE_ENV === 'development'}
+                      >
+                        <OperativeCard operative={operative} />
+                      </ErrorBoundary>
                     </div>
                   )
                 })}
@@ -2092,56 +2108,82 @@ export default function KillteamPage() {
       case 'ploys':
         return (
           <section id="ploys" className="card killteam-tab-panel">
-            {strategyPloys.length || firefightPloys.length ? (
-              <>
-                {strategyPloys.length > 0 && (
-                  <div className="card-section-list">
-                    {strategyPloys.map((ploy, idx) => (
-                      <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card ploy-card">
-                        <div className="ability-card-header" style={{ background: '#3F5C4D', padding: '0.5rem 0.75rem', margin: '-0.5rem -0.5rem 0.5rem -0.5rem', borderRadius: '8px 8px 0 0' }}>
-                          <h4 className="ability-card-title" style={{ color: '#ffffff' }}>{(ploy.name || '').toUpperCase()}</h4>
-                          {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
-                        </div>
-                        {ploy.description && <RichText className="ability-card-body" text={ploy.description} highlightText={factionKeyword} />}
-                      </div>
-                    ))}
-                  </div>
-                )}
+            <ErrorBoundary 
+              fallbackMessage="Failed to load ploys"
+              showDetails={process.env.NODE_ENV === 'development'}
+            >
+              {strategyPloys.length || firefightPloys.length ? (
+                <>
+                  {strategyPloys.length > 0 && (
+                    <div className="card-section-list">
+                      {strategyPloys.map((ploy, idx) => (
+                        <ErrorBoundary 
+                          key={ploy.id || idx}
+                          fallbackMessage={`Failed to load ploy: ${ploy.name || 'Unknown'}`}
+                          showDetails={false}
+                        >
+                          <div id={ploy.anchorId} className="ability-card ploy-card">
+                            <div className="ability-card-header" style={{ background: '#3F5C4D', padding: '0.5rem 0.75rem', margin: '-0.5rem -0.5rem 0.5rem -0.5rem', borderRadius: '8px 8px 0 0' }}>
+                              <h4 className="ability-card-title" style={{ color: '#ffffff' }}>{(ploy.name || '').toUpperCase()}</h4>
+                              {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
+                            </div>
+                            {ploy.description && <RichText className="ability-card-body" text={ploy.description} highlightText={factionKeyword} />}
+                          </div>
+                        </ErrorBoundary>
+                      ))}
+                    </div>
+                  )}
 
-                {firefightPloys.length > 0 && (
-                  <div className="card-section-list" style={{ marginTop: strategyPloys.length > 0 ? '0.75rem' : 0 }}>
-                    {firefightPloys.map((ploy, idx) => (
-                      <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card ploy-card">
-                        <div className="ability-card-header" style={{ background: '#333333', padding: '0.5rem 0.75rem', margin: '-0.5rem -0.5rem 0.5rem -0.5rem', borderRadius: '8px 8px 0 0' }}>
-                          <h4 className="ability-card-title" style={{ color: '#ffffff' }}>{(ploy.name || '').toUpperCase()}</h4>
-                          {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
-                        </div>
-                        {ploy.description && <RichText className="ability-card-body" text={ploy.description} highlightText={factionKeyword} />}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </>
-            ) : (
-              <div className="muted">No ploys available.</div>
-            )}
+                  {firefightPloys.length > 0 && (
+                    <div className="card-section-list" style={{ marginTop: strategyPloys.length > 0 ? '0.75rem' : 0 }}>
+                      {firefightPloys.map((ploy, idx) => (
+                        <ErrorBoundary 
+                          key={ploy.id || idx}
+                          fallbackMessage={`Failed to load ploy: ${ploy.name || 'Unknown'}`}
+                          showDetails={false}
+                        >
+                          <div id={ploy.anchorId} className="ability-card ploy-card">
+                            <div className="ability-card-header" style={{ background: '#333333', padding: '0.5rem 0.75rem', margin: '-0.5rem -0.5rem 0.5rem -0.5rem', borderRadius: '8px 8px 0 0' }}>
+                              <h4 className="ability-card-title" style={{ color: '#ffffff' }}>{(ploy.name || '').toUpperCase()}</h4>
+                              {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
+                            </div>
+                            {ploy.description && <RichText className="ability-card-body" text={ploy.description} highlightText={factionKeyword} />}
+                          </div>
+                        </ErrorBoundary>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="muted">No ploys available.</div>
+              )}
+            </ErrorBoundary>
           </section>
         )
       case 'equipment':
         return (
           <section id="equipment" className="card killteam-tab-panel">
-            {hasEquipment ? (
-              <>
-                {factionEquipment.length > 0 && (
-                  <div className="card-section-list">
-                      {factionEquipment.map((item, idx) => {
-                        // Get the original equipment record to access amount
-                        const equipmentRecord = killteam?.equipments?.find(rec => {
-                          const normalized = normaliseEquipment(rec)
-                          return normalized && (normalized.id === item.id || normalized.anchorId === item.anchorId)
-                        })
-                        return (
-                          <div key={item.id || idx} id={item.anchorId} className="ability-card equipment-card">
+            <ErrorBoundary 
+              fallbackMessage="Failed to load equipment"
+              showDetails={process.env.NODE_ENV === 'development'}
+            >
+              {hasEquipment ? (
+                <>
+                  {factionEquipment.length > 0 && (
+                    <div className="card-section-list">
+                        {factionEquipment.map((item, idx) => {
+                          // Get the original equipment record to access amount
+                          const equipmentRecord = killteam?.equipments?.find(rec => {
+                            const normalized = normaliseEquipment(rec)
+                            return normalized && (normalized.id === item.id || normalized.anchorId === item.anchorId)
+                          })
+                          return (
+                            <ErrorBoundary 
+                              key={item.id || idx}
+                              fallbackMessage={`Failed to load equipment: ${item.name || 'Unknown'}`}
+                              showDetails={false}
+                            >
+                              <div id={item.anchorId} className="ability-card equipment-card">
                             <div style={{ 
                               background: '#333333', 
                               color: '#ffffff', 
@@ -2172,9 +2214,10 @@ export default function KillteamPage() {
                               {item.cost && <span className="ability-card-ap">{item.cost}</span>}
                             </div>
                             {item.description && <RichText className="ability-card-body" text={item.description} highlightText={factionKeyword} />}
-                          </div>
-                        )
-                      })}
+                              </div>
+                            </ErrorBoundary>
+                          )
+                        })}
                     </div>
                 )}
 
@@ -2216,7 +2259,12 @@ export default function KillteamPage() {
                             }))
                           
                           return (
-                            <div key={item.id || idx} id={item.anchorId} className="ability-card equipment-card">
+                            <ErrorBoundary 
+                              key={item.id || idx}
+                              fallbackMessage={`Failed to load equipment: ${item.name || 'Unknown'}`}
+                              showDetails={false}
+                            >
+                              <div id={item.anchorId} className="ability-card equipment-card">
                               <div style={{ 
                                 background: '#333333', 
                                 color: '#ffffff', 
@@ -2339,7 +2387,8 @@ export default function KillteamPage() {
                                   })}
                                 </div>
                               )}
-                            </div>
+                              </div>
+                            </ErrorBoundary>
                           )
                         })
                       })()}
@@ -2349,6 +2398,7 @@ export default function KillteamPage() {
             ) : (
               <div className="muted">No equipment listed.</div>
             )}
+            </ErrorBoundary>
           </section>
         )
       case 'tac-ops':
