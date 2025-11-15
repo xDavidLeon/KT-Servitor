@@ -423,6 +423,42 @@ kbd {
   min-width: 1.5em;
   text-align: center;
 }
+
+/* Loading Skeletons */
+.skeleton-line,
+.skeleton-circle,
+.skeleton-box {
+  background: linear-gradient(
+    90deg,
+    #2a2f3f 0%,
+    #3a4050 50%,
+    #2a2f3f 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-line {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.skeleton-circle {
+  display: inline-block;
+}
+
+.skeleton-box {
+  display: block;
+}
 .table-scroll table {
   width: 100%;
   min-width: 100%;

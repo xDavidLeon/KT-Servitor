@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { ResultsTableSkeleton } from './Skeleton'
 
 function deriveKillteamId(doc) {
   if (!doc) return null
@@ -110,7 +111,7 @@ export default function Results({ results, loading, selectedIndex, onResultSelec
   // Note: This effect should not auto-navigate - navigation is handled by the parent
   // We just need to ensure the selected result is visible
 
-  if (loading) return <div className="card">Building index…</div>
+  if (loading) return <ResultsTableSkeleton rowCount={8} />
   if (!results) return null
   if (safeResults.length === 0) return <div className="card">No results.</div>
 

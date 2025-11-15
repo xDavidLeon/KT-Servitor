@@ -7,6 +7,7 @@ import KillteamSectionNavigator, { scrollToKillteamSection } from '../../compone
 import OperativeCard from '../../components/OperativeCard'
 import RichText from '../../components/RichText'
 import ErrorBoundary from '../../components/ErrorBoundary'
+import { KillTeamPageSkeleton } from '../../components/Skeleton'
 import { db } from '../../lib/db'
 import { ensureIndex, isIndexReady } from '../../lib/search'
 import { getLocalePath, checkForUpdates, fetchWithLocaleFallback } from '../../lib/update'
@@ -1931,7 +1932,7 @@ export default function KillteamPage() {
         <Seo title="Loading Kill Team" description="Loading kill team data." />
         <div className="container">
           <Header />
-          <div className="card">Loading…</div>
+          <KillTeamPageSkeleton />
         </div>
       </>
     )
