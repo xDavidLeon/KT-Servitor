@@ -677,6 +677,28 @@ async function loadWeaponRules(locale = 'en') {
   return await weaponRulesLoadPromise
 }
 
+function mergeWeaponRules(universalRules, teamRules) {
+  // Start with a copy of universal rules
+  const merged = new Map(universalRules)
+  
+  // Add or override with team-specific rules
+  if (Array.isArray(teamRules)) {
+    for (const rule of teamRules) {
+      const ruleId = rule.id || rule.name || ''
+      if (ruleId) {
+        merged.set(ruleId, {
+          id: ruleId,
+          name: rule.name || 'Unnamed rule',
+          description: rule.description || '',
+          variable: Boolean(rule.variable)
+        })
+      }
+    }
+  }
+  
+  return merged
+}
+
 function formatWeaponRuleInstance(wpi, weaponRulesMap) {
   if (!wpi || typeof wpi !== 'object') return null
   
@@ -1072,11 +1094,18 @@ export default function KillteamPage() {
     return () => window.clearInterval(timer)
   }, [killteam])
 
+  // Merge universal weapon rules with team-specific weapon rules
+  const mergedWeaponRulesMap = useMemo(() => {
+    if (!killteam) return weaponRulesMap
+    const teamRules = Array.isArray(killteam.weapon_rules) ? killteam.weapon_rules : []
+    return mergeWeaponRules(weaponRulesMap, teamRules)
+  }, [killteam, weaponRulesMap])
+
   const rawOperatives = useMemo(() => {
     if (!killteam?.opTypes) return []
     return killteam.opTypes
       .map(opType => {
-        const operative = normaliseOperative(opType, weaponRulesMap)
+        const operative = normaliseOperative(opType, mergedWeaponRulesMap)
         if (operative && Array.isArray(operative.keywords) && operative.keywords.length > 0) {
           // The first keyword is the faction/kill team keyword
           operative.factionKeyword = operative.keywords[0].toUpperCase()
@@ -1084,7 +1113,7 @@ export default function KillteamPage() {
         return operative
       })
       .filter(Boolean)
-  }, [killteam, weaponRulesMap])
+  }, [killteam, mergedWeaponRulesMap])
 
   // Read teamAbilities directly from killteam JSON (new schema)
   // teamAbilities can be an array, or an object with 'abilities' and 'options' arrays

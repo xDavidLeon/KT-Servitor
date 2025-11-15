@@ -560,14 +560,47 @@ export default function Rules({ rulesTabs = [] }) {
         }
         const json = await res.json()
         if (cancelled) return
+        
+        // Load universal weapon rules
         const list = Array.isArray(json?.weapon_rules) ? json.weapon_rules : []
-        const mappedWeaponRules = list.map(rule => ({
+        const universalRules = list.map(rule => ({
           id: rule.id || rule.name || '',
           name: rule.name || 'Unnamed rule',
           description: rule.description || '',
           variable: Boolean(rule.variable),
-          team: rule.team || null
+          team: null // Universal rules have no team
         }))
+        
+        // Load team-specific weapon rules from killteams
+        const teamRules = []
+        try {
+          const killteams = await db.killteams.toArray()
+          const killteamsMap = new Map()
+          for (const kt of killteams) {
+            if (kt.killteamId) {
+              killteamsMap.set(kt.killteamId, kt.killteamName || kt.killteamId)
+            }
+            if (Array.isArray(kt.weapon_rules)) {
+              for (const rule of kt.weapon_rules) {
+                teamRules.push({
+                  id: rule.id || rule.name || '',
+                  name: rule.name || 'Unnamed rule',
+                  description: rule.description || '',
+                  variable: Boolean(rule.variable),
+                  team: kt.killteamId || null
+                })
+              }
+            }
+          }
+          if (!cancelled) {
+            setKillteamsMap(killteamsMap)
+          }
+        } catch (err) {
+          console.warn('Failed to load team-specific weapon rules', err)
+        }
+        
+        // Combine universal and team-specific rules
+        const mappedWeaponRules = [...universalRules, ...teamRules]
         // Sort: rules with no team first, then alphabetically by name
         const sortedWeaponRules = mappedWeaponRules.sort((a, b) => {
           // First, sort by team: null/undefined first, then by team value
@@ -602,22 +635,7 @@ export default function Rules({ rulesTabs = [] }) {
       }
     }
 
-    const loadKillteams = async () => {
-      try {
-        await checkForUpdates(locale)
-        const killteams = await db.killteams.toArray()
-        if (cancelled) return
-        const map = new Map()
-        for (const kt of killteams) {
-          if (kt.killteamId && kt.killteamName) {
-            map.set(kt.killteamId, kt.killteamName)
-          }
-        }
-        setKillteamsMap(map)
-      } catch (err) {
-        console.error('Failed to load killteams for weapon rules', err)
-      }
-    }
+    // loadKillteams is now handled within loadWeaponRules
 
     const loadEquipmentActions = async () => {
       try {
@@ -654,7 +672,7 @@ export default function Rules({ rulesTabs = [] }) {
     loadActions()
     loadMissionActions()
     loadWeaponRules()
-    loadKillteams()
+    // Killteams are now loaded as part of loadWeaponRules
     loadEquipmentActions()
 
     return () => {
