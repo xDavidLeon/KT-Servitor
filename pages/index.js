@@ -1,8 +1,9 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import Header from '../components/Header'
 import SearchBox from '../components/SearchBox'
 import Results from '../components/Results'
+import SearchFilters from '../components/SearchFilters'
 import ErrorBoundary from '../components/ErrorBoundary'
 import { ensureIndex, getAllIndexedDocuments, isIndexReady } from '../lib/search'
 import { checkForUpdates } from '../lib/update'
@@ -49,6 +50,53 @@ function rankResults(results, query) {
   })
 }
 
+function deriveKillteamId(doc) {
+  if (!doc) return null
+  if (doc.killteamId) return doc.killteamId
+  if (typeof doc.id === 'string' && doc.id.startsWith('killteam:')) {
+    return doc.id.slice('killteam:'.length)
+  }
+  return null
+}
+
+function applyFilters(results, typeFilter, killteamFilter, sortBy, query) {
+  let filtered = results
+
+  // Apply type filter
+  if (typeFilter) {
+    filtered = filtered.filter(result => result.type === typeFilter)
+  }
+
+  // Apply kill team filter
+  if (killteamFilter) {
+    filtered = filtered.filter(result => {
+      const killteamId = deriveKillteamId(result) || result.killteamId
+      return killteamId === killteamFilter
+    })
+  }
+
+  // Apply sorting
+  if (sortBy === 'alphabetical') {
+    filtered = filtered.slice().sort((a, b) => 
+      (a.title || '').localeCompare(b.title || '')
+    )
+  } else if (sortBy === 'alphabetical-desc') {
+    filtered = filtered.slice().sort((a, b) => 
+      (b.title || '').localeCompare(a.title || '')
+    )
+  } else if (sortBy === 'relevance' && query) {
+    // Relevance sorting is already done in rankResults
+    filtered = rankResults(filtered, query)
+  } else if (sortBy === 'relevance') {
+    // If no query, just sort alphabetically
+    filtered = filtered.slice().sort((a, b) => 
+      (a.title || '').localeCompare(b.title || '')
+    )
+  }
+
+  return filtered
+}
+
 export default function Home() {
   const router = useRouter()
   const locale = router.locale || 'en'
@@ -58,6 +106,12 @@ export default function Home() {
   const [showHelp, setShowHelp] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const searchInputRef = useRef(null)
+  const { selection, navigation, lightTap } = useHapticFeedback()
+  
+  // Filter state
+  const [typeFilter, setTypeFilter] = useState(null)
+  const [killteamFilter, setKillteamFilter] = useState(null)
+  const [sortBy, setSortBy] = useState('relevance')
 
   const runSearch = async (query, idx) => {
     const mini = idx || await ensureIndex()
@@ -92,6 +146,9 @@ export default function Home() {
     return rankResults(fallbackCandidates, trimmed)
   }
 
+  // Store raw search results (before filtering)
+  const [rawResults, setRawResults] = useState(null)
+
   useEffect(() => {
     let cancelled = false
 
@@ -108,7 +165,7 @@ export default function Home() {
 
       const results = await runSearch(q, idx)
       if (!cancelled) {
-        setRes(results)
+        setRawResults(results)
       }
     }
 
@@ -129,7 +186,7 @@ export default function Home() {
       
       const results = await runSearch(q, idx)
       if (!cancelled) {
-        setRes(results)
+        setRawResults(results)
       }
     }, 300)
 
@@ -140,10 +197,28 @@ export default function Home() {
     }
   }, [q])
 
+  // Apply filters to raw results
+  const filteredResults = useMemo(() => {
+    if (!rawResults) return null
+    return applyFilters(rawResults, typeFilter, killteamFilter, sortBy, q)
+  }, [rawResults, typeFilter, killteamFilter, sortBy, q])
+
+  // Update displayed results when filters change
+  useEffect(() => {
+    setRes(filteredResults)
+  }, [filteredResults])
+
   // Reset selected index when results change
   useEffect(() => {
     setSelectedIndex(-1)
   }, [res])
+
+  // Clear all filters
+  const handleClearFilters = useCallback(() => {
+    setTypeFilter(null)
+    setKillteamFilter(null)
+    setSortBy('relevance')
+  }, [])
 
   // Keyboard shortcuts handlers
   const handleFocusSearch = useCallback(() => {
@@ -263,6 +338,18 @@ export default function Home() {
       <div className="container">
         <Header />
         <SearchBox ref={searchInputRef} q={q} setQ={setQ} />
+        {rawResults && rawResults.length > 0 && (
+          <SearchFilters
+            results={rawResults}
+            typeFilter={typeFilter}
+            setTypeFilter={setTypeFilter}
+            killteamFilter={killteamFilter}
+            setKillteamFilter={setKillteamFilter}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            onClearFilters={handleClearFilters}
+          />
+        )}
         <ErrorBoundary 
           fallbackMessage="Search results failed to load. Try searching again."
           showDetails={process.env.NODE_ENV === 'development'}

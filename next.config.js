@@ -29,6 +29,14 @@ const baseConfig = {
   i18n: {
     locales: ['en', 'fr', 'es'],
     defaultLocale: 'en'
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap.xml'
+      }
+    ]
   }
 };
 
