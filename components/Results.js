@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useRef } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 function deriveKillteamId(doc) {
   if (!doc) return null
@@ -63,8 +64,10 @@ function formatType(type) {
 
 const PAGE_SIZE = 25
 
-export default function Results({ results, loading }) {
+export default function Results({ results, loading, selectedIndex, onResultSelect }) {
+  const router = useRouter()
   const [page, setPage] = useState(0)
+  const resultRefs = useRef({})
 
   useEffect(() => {
     setPage(0)
@@ -80,6 +83,32 @@ export default function Results({ results, loading }) {
     () => safeResults.slice(start, end),
     [safeResults, start, end]
   )
+
+  // Scroll selected result into view
+  useEffect(() => {
+    if (selectedIndex >= 0 && selectedIndex < safeResults.length) {
+      // Calculate which page the selected index is on
+      const selectedPage = Math.floor(selectedIndex / PAGE_SIZE)
+      if (selectedPage !== clampedPage) {
+        setPage(selectedPage)
+      } else {
+        // Scroll the selected row into view
+        const localIndex = selectedIndex % PAGE_SIZE
+        if (localIndex >= 0 && localIndex < pageResults.length) {
+          const result = pageResults[localIndex]
+          const resultId = `${result.id}-${result.anchorId || ''}`
+          const element = resultRefs.current[resultId]
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+          }
+        }
+      }
+    }
+  }, [selectedIndex, safeResults.length, pageResults, clampedPage])
+
+  // Handle result selection via Enter key
+  // Note: This effect should not auto-navigate - navigation is handled by the parent
+  // We just need to ensure the selected result is visible
 
   if (loading) return <div className="card">Building index…</div>
   if (!results) return null
@@ -134,28 +163,43 @@ export default function Results({ results, loading }) {
             </tr>
           </thead>
           <tbody>
-            {pageResults.map(r => (
-              <tr key={`${r.id}-${r.anchorId || ''}`}>
-                <td><Link href={buildResultHref(r)}>{r.title}</Link></td>
-                <td className="muted">{formatType(r.type)}</td>
-                <td>
-                  {(() => {
-                    const resolvedKillteamId = r.killteamId || deriveKillteamId(r) || null
-                    if (r.killteamDisplayName && resolvedKillteamId) {
-                      return (
-                        <Link href={`/killteams/${encodeURIComponent(resolvedKillteamId)}`}>
-                          {r.killteamDisplayName}
-                        </Link>
-                      )
-                    }
-                    if (r.killteamDisplayName) {
-                      return r.killteamDisplayName
-                    }
-                    return r.killteamName || ''
-                  })()}
-                </td>
-              </tr>
-            ))}
+            {pageResults.map((r, index) => {
+              const resultId = `${r.id}-${r.anchorId || ''}`
+              const globalIndex = start + index
+              const isSelected = selectedIndex === globalIndex
+              
+              return (
+                <tr
+                  key={resultId}
+                  ref={el => { resultRefs.current[resultId] = el }}
+                  className={isSelected ? 'result-selected' : ''}
+                  style={{
+                    backgroundColor: isSelected ? 'rgba(251, 146, 60, 0.15)' : 'transparent',
+                    outline: isSelected ? '2px solid #fb923c' : 'none',
+                    outlineOffset: isSelected ? '-2px' : '0'
+                  }}
+                >
+                  <td><Link href={buildResultHref(r)}>{r.title}</Link></td>
+                  <td className="muted">{formatType(r.type)}</td>
+                  <td>
+                    {(() => {
+                      const resolvedKillteamId = r.killteamId || deriveKillteamId(r) || null
+                      if (r.killteamDisplayName && resolvedKillteamId) {
+                        return (
+                          <Link href={`/killteams/${encodeURIComponent(resolvedKillteamId)}`}>
+                            {r.killteamDisplayName}
+                          </Link>
+                        )
+                      }
+                      if (r.killteamDisplayName) {
+                        return r.killteamDisplayName
+                      }
+                      return r.killteamName || ''
+                    })()}
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>
