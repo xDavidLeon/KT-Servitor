@@ -9,14 +9,25 @@ export default async function handler(req, res) {
     return res.status(200).end()
   }
 
-  const { path } = req.query
+  const { path, limit } = req.query
 
   if (!path || typeof path !== 'string') {
     return res.status(400).json({ error: 'Path parameter is required' })
   }
 
   try {
-    const url = `https://api.github.com/repos/xDavidLeon/killteamjson/contents/${path}`
+    // Handle different GitHub API endpoints
+    let url
+    if (path.startsWith('repos/')) {
+      // Direct API path (e.g., repos/owner/repo/commits)
+      url = `https://api.github.com/${path}`
+      if (limit) {
+        url += `${url.includes('?') ? '&' : '?'}per_page=${limit}`
+      }
+    } else {
+      // Legacy: contents path
+      url = `https://api.github.com/repos/xDavidLeon/killteamjson/contents/${path}`
+    }
     const headers = {
       'Accept': 'application/vnd.github.v3+json',
       'User-Agent': 'KT-Servitor'

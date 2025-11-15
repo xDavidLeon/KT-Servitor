@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { forceUpdateAndReindex, checkForUpdates } from '../lib/update'
+import VersionInfo from './VersionInfo'
+import Changelog from './Changelog'
+import ChangelogBadge from './ChangelogBadge'
 
 function download(filename, text) {
   const blob = new Blob([text], { type: 'application/json' })
@@ -29,6 +32,8 @@ export default function Footer() {
   const [versionLabel, setVersionLabel] = useState(null)
   const [status, setStatus] = useState('Checking for data updates…')
   const [menuOpen, setMenuOpen] = useState(false)
+  const [showVersionInfo, setShowVersionInfo] = useState(false)
+  const [showChangelog, setShowChangelog] = useState(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -213,7 +218,22 @@ export default function Footer() {
           </div>
 
           {versionLabel && (
-            <div style={{ marginTop: '1.5rem', textAlign: 'center', width: '100%', fontSize: '0.85rem', color: 'var(--muted)' }}>
+            <div 
+              style={{ 
+                marginTop: '1.5rem', 
+                textAlign: 'center', 
+                width: '100%', 
+                fontSize: '0.85rem', 
+                color: 'var(--muted)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '0.5rem',
+                cursor: 'pointer'
+              }}
+              onClick={() => setShowVersionInfo(true)}
+              title="Click to view version information"
+            >
               {versionLabel}
             </div>
           )}
@@ -232,6 +252,7 @@ export default function Footer() {
             }}
           >
             {status && <span>{status}</span>}
+            <ChangelogBadge onClick={() => setShowChangelog(true)} />
             <div id="footer-gear" style={{ position: 'relative', display: 'inline-flex' }}>
               <button
                 onClick={() => setMenuOpen((v) => !v)}
@@ -268,6 +289,10 @@ export default function Footer() {
                     right: 'auto'
                   }}
                 >
+                  <button onClick={() => { setShowVersionInfo(true); setMenuOpen(false); }}>Version info</button>
+                  <div className="sep"></div>
+                  <button onClick={() => { setShowChangelog(true); setMenuOpen(false); }}>Changelog</button>
+                  <div className="sep"></div>
                   <button onClick={handleForceUpdate}>Force update</button>
                   <div className="sep"></div>
                   <button onClick={handleExport}>Export data (JSON)</button>
@@ -278,6 +303,64 @@ export default function Footer() {
             </div>
           </div>
       </div>
+      
+      {/* Version Info Modal */}
+      {showVersionInfo && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(0, 0, 0, 0.7)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            padding: '1rem',
+            overflow: 'auto'
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowVersionInfo(false)
+            }
+          }}
+        >
+          <div style={{ maxWidth: '600px', width: '100%' }}>
+            <VersionInfo onClose={() => setShowVersionInfo(false)} />
+          </div>
+        </div>
+      )}
+      
+      {/* Changelog Modal */}
+      {showChangelog && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(0, 0, 0, 0.7)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            padding: '1rem',
+            overflow: 'auto'
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowChangelog(false)
+            }
+          }}
+        >
+          <div style={{ maxWidth: '800px', width: '100%', maxHeight: '90vh', overflow: 'auto' }}>
+            <Changelog onClose={() => setShowChangelog(false)} />
+          </div>
+        </div>
+      )}
     </footer>
   )
 }
