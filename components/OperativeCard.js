@@ -438,6 +438,67 @@ export default function OperativeCard({ operative }) {
             </div>
           </div>
         )}
+
+        {Array.isArray(operative.actions) && operative.actions.length > 0 && (
+          <div className="operative-actions">
+            <div className="operative-actions-list">
+              {operative.actions.map((action, idx) => {
+                const key = action?.id || action?.name ? `${action.id || action.name}-${idx}` : `action-${idx}`
+                const actionName = action?.name || action?.id || 'Action'
+                const apValue = action?.AP ?? action?.ap ?? action?.apCost ?? null
+                const apLabel = apValue !== null && apValue !== undefined && apValue !== '' ? `${apValue} AP` : null
+                const description = action?.description || ''
+                const effects = Array.isArray(action?.effects) ? action.effects.filter(Boolean) : []
+                const conditions = Array.isArray(action?.conditions) ? action.conditions.filter(Boolean) : []
+                
+                return (
+                  <div key={key} className="ability-card action-card">
+                    <div className="ability-card-header">
+                      <h5 className="ability-card-title">{actionName.toUpperCase()}</h5>
+                      {apLabel && <span className="ability-card-ap">{apLabel}</span>}
+                    </div>
+                    {(description || effects.length > 0 || conditions.length > 0) && (
+                      <div className="ability-card-body">
+                        {description && (
+                          <RichText 
+                            text={description}
+                            highlightText={factionKeyword}
+                          />
+                        )}
+                        {effects.length > 0 && (
+                          <ul style={{ margin: description ? '0.5rem 0 0 0' : 0, padding: 0, paddingLeft: '1.25rem', listStyle: 'none' }}>
+                            {effects.map((effect, effectIdx) => (
+                              <li
+                                key={`${key}-effect-${effectIdx}`}
+                                style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
+                              >
+                                <span aria-hidden="true" style={{ color: '#2ecc71', fontWeight: 'bold', marginLeft: '-1.25rem' }}>➤</span>
+                                <span>{typeof effect === 'string' ? effect : String(effect)}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {conditions.length > 0 && (
+                          <ul style={{ margin: (description || effects.length) ? '0.5rem 0 0 0' : 0, padding: 0, paddingLeft: '1.25rem', listStyle: 'none' }}>
+                            {conditions.map((condition, conditionIdx) => (
+                              <li
+                                key={`${key}-condition-${conditionIdx}`}
+                                style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
+                              >
+                                <span aria-hidden="true" style={{ color: '#e74c3c', fontWeight: 'bold', marginLeft: '-1.25rem' }}>◆</span>
+                                <span>{typeof condition === 'string' ? condition : String(condition)}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
       
       {/* Keywords section at the bottom */}
       {showKeywordSection && (

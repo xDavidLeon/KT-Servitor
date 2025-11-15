@@ -798,6 +798,7 @@ function normaliseOperative(opType, weaponRulesMap = new Map()) {
     keywords: splitKeywords(opType.keywords),
     specialRules: (opType.abilities || []).map(normaliseAbility).filter(Boolean),
     specialActions: (opType.options || []).map(normaliseOption).filter(Boolean),
+    actions: (opType.actions || []).map(normaliseTacOpsAction).filter(Boolean),
     weapons: buildWeapons()
   }
 }
