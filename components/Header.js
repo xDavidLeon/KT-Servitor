@@ -6,16 +6,7 @@ import LanguageSwitcher from './LanguageSwitcher'
 export default function Header() {
   return (
     <div className="card header-sticky">
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '0.5rem 0 0.25rem 0'
-        }}
-      >
-        <LanguageSwitcher />
-      </div>
+      <LanguageSwitcher />
       <div
         className="header-top-row"
         style={{

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useLocale } from '../lib/i18n'
 
@@ -13,6 +13,8 @@ export default function LanguageSwitcher() {
   const router = useRouter()
   const currentLocale = useLocale()
   const [availableLocales, setAvailableLocales] = useState(null)
+  const [isOpen, setIsOpen] = useState(false)
+  const dropdownRef = useRef(null)
 
   useEffect(() => {
     let cancelled = false
@@ -85,32 +87,61 @@ export default function LanguageSwitcher() {
     return filtered
   }, [availableLocales, currentLocale])
 
+  const currentLanguage = useMemo(() => {
+    return languages.find(lang => lang.code === currentLocale) || languages.find(lang => lang.code === DEFAULT_LOCALE)
+  }, [currentLocale])
+
   const switchLanguage = (locale) => {
     router.push(router.asPath, router.asPath, { locale })
+    setIsOpen(false)
   }
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
+
   return (
-    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-      {visibleLanguages.map((lang) => (
-        <button
-          key={lang.code}
-          type="button"
-          onClick={() => switchLanguage(lang.code)}
-          className="pill"
-          style={{
-            cursor: 'pointer',
-            borderColor: currentLocale === lang.code ? 'var(--accent)' : '#2a2f3f',
-            color: currentLocale === lang.code ? 'var(--accent)' : 'var(--muted)',
-            background: currentLocale === lang.code ? 'rgba(251, 146, 60, 0.1)' : 'transparent',
-            padding: '0.35rem 0.75rem',
-            fontSize: '0.85rem'
-          }}
-          aria-label={`Switch to ${lang.name}`}
-        >
-          <span style={{ marginRight: '0.35rem' }}>{lang.flag}</span>
-          {lang.code.toUpperCase()}
-        </button>
-      ))}
+    <div className="language-switcher" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="language-switcher-button"
+        aria-label="Select language"
+        aria-expanded={isOpen}
+      >
+        <span style={{ marginRight: '0.35rem' }}>{currentLanguage?.flag || '🌐'}</span>
+        <span>{currentLanguage?.code.toUpperCase() || 'EN'}</span>
+        <span style={{ marginLeft: '0.35rem', fontSize: '0.75rem' }}>{isOpen ? '▲' : '▼'}</span>
+      </button>
+      {isOpen && (
+        <div className="language-switcher-dropdown">
+          {visibleLanguages.map((lang) => (
+            <button
+              key={lang.code}
+              type="button"
+              onClick={() => switchLanguage(lang.code)}
+              className={`language-switcher-option ${currentLocale === lang.code ? 'active' : ''}`}
+              aria-label={`Switch to ${lang.name}`}
+            >
+              <span style={{ marginRight: '0.5rem' }}>{lang.flag}</span>
+              <span>{lang.name}</span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

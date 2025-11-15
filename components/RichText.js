@@ -47,13 +47,30 @@ export default function RichText({ text, className, as: Component = 'div', inlin
           if (part.startsWith('<') && part.endsWith('>')) {
             return part;
           }
-          // Process text content - match case-insensitively but preserve original case
+          // Process text content - match case-insensitively and make it uppercase
           return part.replace(regex, (match) => {
-            return `<span class="faction-keyword-highlight">${match}<span class="faction-keyword-skull">💀</span></span>`;
+            return `<span class="faction-keyword-highlight">${match.toUpperCase()}<span class="faction-keyword-skull">💀</span></span>`;
           });
         }).join('');
       }
     }
+    
+    // Make asterisks orange - process after markdown parsing to avoid interfering with markdown formatting
+    // Split by HTML tags and process only text nodes
+    const tagRegex = /(<[^>]+>)/g;
+    const parts = parsed.split(tagRegex);
+    
+    parsed = parts.map((part) => {
+      // Skip HTML tags
+      if (part.startsWith('<') && part.endsWith('>')) {
+        return part;
+      }
+      // Replace asterisks in text content (avoiding markdown formatting which is already processed)
+      // Match single asterisks that aren't part of markdown patterns
+      return part.replace(/\*(?!\*)/g, (match) => {
+        return `<span class="asterisk-orange">${match}</span>`;
+      });
+    }).join('');
     
     return parsed;
   }, [text, inline, Component, highlightText]);

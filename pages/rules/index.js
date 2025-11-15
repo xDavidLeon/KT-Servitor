@@ -19,6 +19,112 @@ const STATIC_SECTION_DEFINITIONS = [
   { id: 'rules-universal-equipment', label: 'Universal Equipment', kind: 'universalEquipment' }
 ]
 
+function formatCost(value, defaultUnit) {
+  if (value === null || value === undefined) return null
+  const unit = (defaultUnit || '').toUpperCase()
+
+  if (typeof value === 'number' && !Number.isNaN(value)) {
+    return unit ? `${value} ${unit}` : String(value)
+  }
+
+  const stringValue = String(value).trim()
+  if (!stringValue) return null
+
+  const numeric = stringValue.match(/^(\d+(?:\.\d+)?)$/)
+  if (numeric) {
+    return unit ? `${numeric[1]} ${unit}` : numeric[1]
+  }
+
+  if (unit) {
+    const labelled = stringValue.match(new RegExp(`^(\\d+(?:\\.\\d+)?)\\s*${unit}$`, 'i'))
+    if (labelled) {
+      return `${labelled[1]} ${unit}`
+    }
+  }
+
+  const genericLabelled = stringValue.match(/^(\d+(?:\.\d+)?)\s*([A-Za-z]+)$/)
+  if (genericLabelled) {
+    return `${genericLabelled[1]} ${genericLabelled[2].toUpperCase()}`
+  }
+
+  if (/[A-Za-z]/.test(stringValue)) {
+    return stringValue.replace(/\s+/g, ' ')
+  }
+
+  return unit ? `${stringValue} ${unit}` : stringValue
+}
+
+function extractCostFromName(rawName, units) {
+  if (!rawName || typeof rawName !== 'string') {
+    return { cleanName: rawName || '', inferredCost: null }
+  }
+
+  const unitPattern = Array.isArray(units) && units.length
+    ? units.map(unit => unit.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')).join('|')
+    : 'AP'
+
+  const costRegex = new RegExp(`\\(([^)]*?\\b\\d+(?:\\.\\d+)?\\s*(?:${unitPattern}))\\)`, 'i')
+  const match = rawName.match(costRegex)
+  if (!match) {
+    return { cleanName: rawName.trim(), inferredCost: null }
+  }
+
+  const costText = match[1].trim()
+  const cleanName = rawName.replace(costRegex, '').trim()
+
+  const costMatch = costText.match(/\b(\d+(?:\.\d+)?)\b/)
+  const inferredCost = costMatch ? parseFloat(costMatch[1]) : null
+
+  return { cleanName, inferredCost }
+}
+
+function normaliseEquipment(equipment) {
+  if (!equipment) return null
+
+  const rawName = equipment.eqName ?? equipment.name ?? ''
+  const { cleanName, inferredCost } = extractCostFromName(rawName, ['EP'])
+
+  const candidateKeys = [
+    'epCost',
+    'ep',
+    'EP',
+    'cost',
+    'equipmentPoints',
+    'points',
+    'ep_value',
+    'epValue'
+  ]
+
+  let explicitCost = null
+  for (const key of candidateKeys) {
+    if (Object.prototype.hasOwnProperty.call(equipment, key)) {
+      const value = equipment[key]
+      if (value !== undefined && value !== null && value !== '') {
+        explicitCost = value
+        break
+      }
+    }
+  }
+
+  const cost = formatCost(explicitCost ?? inferredCost, 'EP')
+
+  if (!cleanName && !equipment.description) {
+    return null
+  }
+
+  const identifier = equipment.eqId ?? equipment.id ?? cleanName ?? rawName ?? null
+
+  return {
+    id: identifier,
+    anchorId: identifier ? `equipment-${identifier}` : undefined,
+    name: cleanName || rawName,
+    description: equipment.description || '',
+    cost: cost || null,
+    killteamId: equipment.killteamId ?? null,
+    isUniversal: equipment.killteamId === null
+  }
+}
+
 function normaliseToText(value) {
   if (value === null || value === undefined) return ''
   if (typeof value === 'string') return value
@@ -927,11 +1033,22 @@ export default function Rules({ rulesTabs = [] }) {
       }
     }
     
+    // Normalize equipment items
+    const normalizedEquipment = equipment
+      .map(normaliseEquipment)
+      .filter(Boolean)
+    
     return (
       <div className="card-section-list">
-        {equipment.map(item => {
+        {normalizedEquipment.map((item, idx) => {
+          // Get the original equipment record to access actions
+          const equipmentRecord = equipment.find(rec => {
+            const normalized = normaliseEquipment(rec)
+            return normalized && (normalized.id === item.id || normalized.anchorId === item.anchorId)
+          })
+          
           // Get actions for this equipment item
-          const equipmentActionIds = Array.isArray(item.actions) ? item.actions.filter(Boolean) : []
+          const equipmentActionIds = Array.isArray(equipmentRecord?.actions) ? equipmentRecord.actions.filter(Boolean) : []
           const equipmentActionsList = equipmentActionIds
             .map(actionId => actionsMap.get(actionId))
             .filter(action => action !== undefined)
@@ -948,17 +1065,16 @@ export default function Rules({ rulesTabs = [] }) {
             }))
           
           return (
-            <div key={item.eqId} id={`equipment-${item.eqId}`} className="ability-card">
+            <div key={item.id || idx} id={item.anchorId} className="ability-card equipment-card">
               <div className="ability-card-header">
-                <h4 className="ability-card-title">{item.eqName || item.eqId}</h4>
+                <h4 className="ability-card-title">{item.name}</h4>
+                {item.cost && <span className="ability-card-ap">{item.cost}</span>}
               </div>
-              {item.description && (
-                <RichText className="ability-card-body" text={item.description} />
-              )}
+              {item.description && <RichText className="ability-card-body" text={item.description} />}
               {(() => {
-                const effectsText = Array.isArray(item.effects)
-                  ? item.effects.filter(Boolean).join(', ')
-                  : (item.effects || '')
+                const effectsText = Array.isArray(equipmentRecord?.effects)
+                  ? equipmentRecord.effects.filter(Boolean).join(', ')
+                  : (equipmentRecord?.effects || '')
                 const trimmed = effectsText.trim()
                 if (!trimmed) return null
                 return (
@@ -978,7 +1094,7 @@ export default function Rules({ rulesTabs = [] }) {
                     const actionTypeLabel = (actionType === 'universal' ? 'Universal' : actionType === 'mission' ? 'Mission' : actionType === 'ability' ? 'Ability' : actionType.charAt(0).toUpperCase() + actionType.slice(1)) + ' Action'
                     
                     return (
-                      <div key={`${item.eqId}-${action.id}-${actionIndex}`} id={`equipment-action-${item.eqId}-${action.id}${actionIndex > 0 ? `-${actionIndex}` : ''}`} className="action-card" style={{ marginBottom: actionIndex < equipmentActionsList.length - 1 ? '1rem' : 0 }}>
+                      <div key={`${item.id}-${action.id}-${actionIndex}`} id={`equipment-action-${item.id || item.anchorId}-${action.id}${actionIndex > 0 ? `-${actionIndex}` : ''}`} className="action-card" style={{ marginBottom: actionIndex < equipmentActionsList.length - 1 ? '1rem' : 0 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                           <h4 className="ability-card-title" style={{ margin: 0 }}>{action.name.toUpperCase()}</h4>
                           {apLabel && <span className="ability-card-ap">{apLabel}</span>}

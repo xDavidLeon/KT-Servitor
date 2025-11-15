@@ -11,7 +11,7 @@ import { getLocalePath, checkForUpdates, fetchWithLocaleFallback } from '../../l
 import Seo from '../../components/Seo'
 
 const ARCHETYPE_PILL_MAP = {
-  infiltration: { background: '#2b2d33', color: '#f4f6ff' },
+  infiltration: { background: '#4D4D4D', color: '#f4f6ff' },
   security: { background: '#1e5dff', color: '#f4f6ff' },
   'seek & destroy': { background: '#d62d3a', color: '#fef6f6' },
   recon: { background: '#c85c11', color: '#fff5ec' }
@@ -248,7 +248,7 @@ function renderTacOpActionCards(actions = [], actionLookup = new Map(), anchorPr
 
   return (
     <div className="card-section-list" style={{ marginTop: '0.75rem' }}>
-      {actions.map(action => {
+      {actions.map((action, actionIndex) => {
         const entry = typeof action === 'string'
           ? actionLookup.get(action) || normaliseTacOpsAction(action)
           : normaliseTacOpsAction(action)
@@ -258,16 +258,43 @@ function renderTacOpActionCards(actions = [], actionLookup = new Map(), anchorPr
         const safeActionId = String(rawActionId).trim().replace(/\s+/g, '-')
         const apLabel = entry.AP !== undefined && entry.AP !== null && entry.AP !== '' ? `${entry.AP} AP` : null
 
+        // Determine action type label
+        const actionType = (entry.type || '').toLowerCase()
+        let actionTypeLabel = ''
+        if (actionType === 'mission') {
+          actionTypeLabel = 'MISSION ACTION'
+        } else if (actionType === 'universal') {
+          actionTypeLabel = 'UNIVERSAL ACTION'
+        } else if (actionType) {
+          // Capitalize first letter of each word for other types
+          actionTypeLabel = actionType.split(' ').map(word => 
+            word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+          ).join(' ').toUpperCase() + ' ACTION'
+        }
+
         return (
-          <div
-            key={safeActionId || rawActionId}
-            id={`${anchorPrefix}-${safeActionId || rawActionId}`}
-            className="ability-card action-card"
-          >
-            <div className="ability-card-header">
-              <h4 className="ability-card-title">{entry.name.toUpperCase()}</h4>
-              {apLabel && <span className="ability-card-ap">{apLabel}</span>}
-            </div>
+          <div key={safeActionId || rawActionId}>
+            {actionTypeLabel && (
+              <div style={{ 
+                marginTop: actionIndex === 0 ? '0' : '0.75rem', 
+                marginBottom: '0.5rem',
+                fontSize: '0.9rem',
+                fontWeight: 600,
+                color: '#F55A07',
+                borderBottom: '1px solid #F55A07',
+                paddingBottom: '0.25rem'
+              }}>
+                {actionTypeLabel}
+              </div>
+            )}
+            <div
+              id={`${anchorPrefix}-${safeActionId || rawActionId}`}
+              className="ability-card action-card"
+            >
+              <div className="ability-card-header">
+                <h4 className="ability-card-title">{entry.name.toUpperCase()}</h4>
+                {apLabel && <span className="ability-card-ap">{apLabel}</span>}
+              </div>
             {(entry.description || (entry.effects && entry.effects.length) || (entry.conditions && entry.conditions.length)) && (
               <div className="ability-card-body">
                 {entry.description && <p style={{ marginTop: 0 }}>{entry.description}</p>}
@@ -299,23 +326,7 @@ function renderTacOpActionCards(actions = [], actionLookup = new Map(), anchorPr
                 )}
               </div>
             )}
-            {entry.packs && entry.packs.length > 0 && (
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '0.35rem',
-                  marginTop: '0.75rem',
-                  justifyContent: 'flex-end'
-                }}
-              >
-                {entry.packs.map(pack => (
-                  <span key={`${safeActionId}-pack-${pack}`} className="pill">
-                    {pack}
-                  </span>
-                ))}
-              </div>
-            )}
+            </div>
           </div>
         )
       })}
@@ -823,13 +834,14 @@ export default function KillteamPage() {
     ;(async () => {
       // Reset loading state when locale or id changes
       const localeChanged = prevLocaleRef.current !== locale
-      if (localeChanged || !hasLoadedOnceRef.current) {
+      const isInitialLoad = !hasLoadedOnceRef.current
+      if (localeChanged || isInitialLoad) {
         setLoading(true)
         prevLocaleRef.current = locale
       }
       
-      // Only check for updates when locale changes, not on every id change
-      if (localeChanged) {
+      // Check for updates when locale changes or on initial load
+      if (localeChanged || isInitialLoad) {
         try {
           await checkForUpdates(locale)
         } catch (err) {
@@ -1151,6 +1163,22 @@ export default function KillteamPage() {
 
   const archetypes = useMemo(() => parseArchetypes(killteam?.archetypes), [killteam])
 
+  // Get faction keyword for highlighting - it's the first keyword from any operative
+  const factionKeyword = useMemo(() => {
+    if (rawOperatives.length > 0) {
+      // Get the first keyword from the first operative
+      const firstOperative = rawOperatives[0]
+      if (firstOperative?.factionKeyword) {
+        return firstOperative.factionKeyword
+      }
+      // Fallback: get first keyword directly
+      if (Array.isArray(firstOperative?.keywords) && firstOperative.keywords.length > 0) {
+        return firstOperative.keywords[0].toUpperCase()
+      }
+    }
+    return null
+  }, [rawOperatives])
+
   const killteamTacOps = useMemo(() => {
     if (!Array.isArray(archetypes) || archetypes.length === 0) return []
     if (!tacOpsByArchetype) return []
@@ -1354,30 +1382,151 @@ export default function KillteamPage() {
       return <div className="muted">No Tac Ops available for this kill team.</div>
     }
 
+    const renderActions = (actionsArray) => {
+      if (!Array.isArray(actionsArray) || actionsArray.length === 0) return null
+      return (
+        <div className="card-section-list" style={{ marginTop: '0.75rem' }}>
+          {actionsArray.map((action, actionIndex) => {
+            const entry = typeof action === 'string'
+              ? tacOpsActionLookup.get(action) || normaliseTacOpsAction(action)
+              : normaliseTacOpsAction(action)
+            if (!entry) return null
+
+            const rawActionId = entry.id || entry.name || ''
+            const safeActionId = String(rawActionId).trim().replace(/\s+/g, '-')
+            const apLabel = entry.AP !== undefined && entry.AP !== null && entry.AP !== '' ? `${entry.AP} AP` : null
+
+            // Determine action type label
+            const actionType = (entry.type || '').toLowerCase()
+            let actionTypeLabel = ''
+            if (actionType === 'mission') {
+              actionTypeLabel = 'MISSION ACTION'
+            } else if (actionType === 'universal') {
+              actionTypeLabel = 'UNIVERSAL ACTION'
+            } else if (actionType) {
+              // Capitalize first letter of each word for other types
+              actionTypeLabel = actionType.split(' ').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+              ).join(' ').toUpperCase() + ' ACTION'
+            }
+
+            return (
+              <div key={safeActionId || rawActionId}>
+                {actionTypeLabel && (
+                  <div style={{ 
+                    marginTop: actionIndex === 0 ? '0' : '0.75rem', 
+                    marginBottom: '0.5rem',
+                    fontSize: '0.9rem',
+                    fontWeight: 600,
+                    color: '#F55A07',
+                    borderBottom: '1px solid #F55A07',
+                    paddingBottom: '0.25rem'
+                  }}>
+                    {actionTypeLabel}
+                  </div>
+                )}
+                <div
+                  id={`operation-action-${safeActionId || rawActionId}`}
+                  className="ability-card action-card"
+                >
+                  <div className="ability-card-header">
+                    <h4 className="ability-card-title">{entry.name.toUpperCase()}</h4>
+                    {apLabel && <span className="ability-card-ap">{apLabel}</span>}
+                  </div>
+                {(entry.description || (entry.effects && entry.effects.length) || (entry.conditions && entry.conditions.length)) && (
+                  <div className="ability-card-body">
+                    {entry.description && <p style={{ marginTop: 0 }}>{entry.description}</p>}
+                    {entry.effects && entry.effects.length > 0 && (
+                      <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                        {entry.effects.map((effect, index) => (
+                          <li
+                            key={`${safeActionId}-effect-${index}`}
+                            style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
+                          >
+                            <span aria-hidden="true" style={{ color: '#2ecc71', fontWeight: 'bold' }}>➤</span>
+                            <span>{effect}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {entry.conditions && entry.conditions.length > 0 && (
+                      <ul style={{ margin: entry.effects && entry.effects.length ? '0.5rem 0 0 0' : 0, padding: 0, listStyle: 'none' }}>
+                        {entry.conditions.map((condition, index) => (
+                          <li
+                            key={`${safeActionId}-condition-${index}`}
+                            style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}
+                          >
+                            <span aria-hidden="true" style={{ color: '#e74c3c', fontWeight: 'bold' }}>◆</span>
+                            <span>{condition}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )
+    }
+
     return (
       <div className="card-section-list">
-        {killteamTacOps.map(op => (
+        {killteamTacOps.map(op => {
+          const archetypes = Array.isArray(op.archetypes) && op.archetypes.length > 0
+            ? op.archetypes.filter(Boolean)
+            : []
+          return (
           <div key={op.id} id={`tac-op-${op.id}`} className="card operation-card" style={{ margin: '.75rem 0', position: 'relative' }}>
-            <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
+            <>
+              <div style={{ 
+                background: '#333333', 
+                color: '#ffffff', 
+                padding: '0.5rem 0.75rem', 
+                margin: '-0.5rem -0.5rem 0 -0.5rem',
+                borderRadius: '8px 8px 0 0',
+                textAlign: 'center',
+                fontWeight: 600
+              }}>
+                TAC OP
+              </div>
               {(() => {
-                const archetypeLabel = (op.archetypes && op.archetypes[0]) ? op.archetypes[0] : 'Tac Op'
+                const archetypeLabel = (archetypes && archetypes.length > 0 && archetypes[0]) ? archetypes[0] : 'Tactical Operation'
                 const style = getArchetypePillStyle(archetypeLabel)
                 const label = style?.label || archetypeLabel
                 return (
-                  <span
-                    className="pill"
-                    style={{
-                      margin: '0 auto',
-                      ...(style?.backgroundColor ? style : {})
-                    }}
-                  >
+                  <div style={{ 
+                    background: style?.backgroundColor || '#2b2d33',
+                    color: style?.color || '#f4f6ff',
+                    padding: '0.5rem 0.75rem', 
+                    margin: '0 -0.5rem 0.75rem -0.5rem',
+                    textAlign: 'center',
+                    fontWeight: 600
+                  }}>
                     {label.toUpperCase()}
-                  </span>
+                  </div>
                 )
               })()}
-            </div>
+            </>
             <div style={{ textAlign: 'center', marginBottom: '0.75rem' }}>
-              <strong style={{ fontSize: '1.1rem', color: '#000000' }}>{op.title.toUpperCase()}</strong>
+              {(() => {
+                const archetypeLabel = (archetypes && archetypes.length > 0 && archetypes[0]) ? archetypes[0] : 'Tactical Operation'
+                const style = getArchetypePillStyle(archetypeLabel)
+                return (
+                  <strong style={{ 
+                    fontSize: '1.1rem', 
+                    color: '#ffffff',
+                    background: style?.backgroundColor || '#4D4D4D',
+                    padding: '0.5rem 0.75rem',
+                    display: 'block',
+                    borderRadius: '4px'
+                  }}>
+                    {op.title.toUpperCase()}
+                  </strong>
+                )
+              })()}
             </div>
 
             {op.briefing && (
@@ -1397,7 +1546,7 @@ export default function KillteamPage() {
             {op.reveal && (
               <div className="ability-card" style={{ marginTop: '0.75rem' }}>
                 <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
-                  <h4 className="ability-card-title" style={{ margin: 0 }}>Reveal</h4>
+                  <h4 className="ability-card-title" style={{ margin: 0, color: '#F55A07' }}>REVEAL</h4>
                 </div>
                 <RichText className="ability-card-body muted" text={op.reveal} />
               </div>
@@ -1406,39 +1555,25 @@ export default function KillteamPage() {
             {op.additionalRules && (
               <div className="ability-card" style={{ marginTop: '0.75rem' }}>
                 <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
-                  <h4 className="ability-card-title" style={{ margin: 0 }}>Additional Rules</h4>
+                  <h4 className="ability-card-title" style={{ margin: 0, color: '#F55A07' }}>ADDITIONAL RULES</h4>
                 </div>
                 <RichText className="ability-card-body muted" text={op.additionalRules} />
               </div>
             )}
 
-            {renderTacOpActionCards(op.actions, tacOpsActionLookup, `operation-action-${op.id}`)}
+            {renderActions(op.actions)}
 
             {op.victoryPoints && (
               <div className="ability-card" style={{ marginTop: '0.75rem' }}>
                 <div className="ability-card-header" style={{ justifyContent: 'flex-start' }}>
-                  <h4 className="ability-card-title" style={{ margin: 0 }}>Victory Points</h4>
+                  <h4 className="ability-card-title" style={{ margin: 0, color: '#F55A07' }}>VICTORY POINTS</h4>
                 </div>
                 <RichText className="ability-card-body muted" text={op.victoryPoints} />
               </div>
             )}
-            {op.packs && op.packs.length > 0 && (
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '0.35rem',
-                  justifyContent: 'flex-end',
-                  marginTop: '0.75rem'
-                }}
-              >
-                {op.packs.map(pack => (
-                  <span key={`${op.id}-pack-${pack}`} className="pill">{pack}</span>
-                ))}
-              </div>
-            )}
           </div>
-        ))}
+          )
+        })}
       </div>
     )
   }
@@ -1616,44 +1751,14 @@ export default function KillteamPage() {
     switch (currentSectionId) {
       case 'killteam-overview':
         return (
-          <section id="killteam-overview" className="card killteam-tab-panel">
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'space-between',
-                alignItems: 'flex-start',
-                gap: '1rem',
-                marginBottom: '0.75rem'
-              }}
-            >
-              <h2 style={{ margin: 0 }}>{killteamTitle}</h2>
-              {archetypes.length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', justifyContent: 'flex-end' }}>
-                  {archetypes.map(archetype => {
-                    const style = getArchetypePillStyle(archetype)
-                    const label = style?.label || archetype
-                    return (
-                      <span
-                        key={archetype}
-                        className="pill"
-                        style={style?.backgroundColor ? style : undefined}
-                      >
-                        {label}
-                      </span>
-                    )
-                  })}
-                </div>
-              )}
-            </div>
+          <section id="killteam-overview" className="card killteam-tab-panel" style={{ position: 'relative' }}>
             {(killteam?.file && killteam?.version) && (
               <div
                 style={{
-                  marginTop: '1rem',
-                  marginBottom: '1.25rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'flex-end'
+                  position: 'absolute',
+                  top: '1rem',
+                  right: '1rem',
+                  zIndex: 10
                 }}
               >
                 <a
@@ -1676,11 +1781,27 @@ export default function KillteamPage() {
                 </a>
               </div>
             )}
-            {killteam.description && <RichText className="muted" text={killteam.description} />}
+            <div style={{ marginBottom: '0.75rem' }}>
+              <h2 style={{ margin: 0 }}>{killteamTitle.toUpperCase()}</h2>
+              {archetypes.length > 0 && (
+                <div style={{ 
+                  marginTop: '0.5rem', 
+                  color: '#ffffff',
+                  background: '#F55A07',
+                  padding: '0.5rem 0.75rem',
+                  borderRadius: '4px',
+                  width: '100%',
+                  boxSizing: 'border-box'
+                }}>
+                  <strong>ARCHETYPE:</strong> {archetypes.map(a => a.toUpperCase()).join(', ')}
+                </div>
+              )}
+            </div>
+            {killteam.description && <RichText className="muted" text={killteam.description} style={{ color: '#ffffff' }} highlightText={factionKeyword} />}
             {killteam.composition && (
               <div id="killteam-composition" style={{ marginTop: '1.5rem' }}>
-                <h3 style={{ marginTop: 0 }}>Composition</h3>
-                <RichText className="muted" text={killteam.composition} />
+                <h3 style={{ marginTop: 0, borderBottom: '2px solid #F55A07', paddingBottom: '0.5rem' }}>OPERATIVES</h3>
+                <RichText className="muted" text={killteam.composition} style={{ color: '#ffffff' }} highlightText={factionKeyword} />
               </div>
             )}
           </section>
@@ -1688,7 +1809,6 @@ export default function KillteamPage() {
       case 'faction-rules':
         return (
           <section id="faction-rules" className="card killteam-tab-panel">
-            <h3 style={{ marginTop: 0 }}>Faction Rules</h3>
             {factionRules.length > 0 ? (
               <div className="card-section-list">
                 {factionRules.map((rule, idx) => (
@@ -1698,11 +1818,11 @@ export default function KillteamPage() {
                     className="ability-card ability-card-item"
                   >
                     <div className="ability-card-header">
-                      <h4 className="ability-card-title">{rule.name || 'Rule'}</h4>
+                      <h4 className="ability-card-title" style={{ color: '#F55A07' }}>{(rule.name || 'Rule').toUpperCase()}</h4>
                       {rule.apCost && <span className="ability-card-ap">{rule.apCost}</span>}
                     </div>
                     {rule.description && (
-                      <RichText className="ability-card-body" text={rule.description} />
+                      <RichText className="ability-card-body" text={rule.description} highlightText={factionKeyword} />
                     )}
                   </div>
                 ))}
@@ -1730,56 +1850,34 @@ export default function KillteamPage() {
       case 'ploys':
         return (
           <section id="ploys" className="card killteam-tab-panel">
-            <h3 style={{ marginTop: 0 }}>Ploys</h3>
             {strategyPloys.length || firefightPloys.length ? (
               <>
                 {strategyPloys.length > 0 && (
-                  <>
-                    <h4
-                      id="strategy-ploys"
-                      className="muted"
-                      style={{ margin: 0, marginBottom: '0.5rem' }}
-                    >
-                      Strategy Ploys
-                    </h4>
-                    <div className="card-section-list">
-                      {strategyPloys.map((ploy, idx) => (
-                        <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card ploy-card">
-                          <div className="ability-card-header">
-                            <h4 className="ability-card-title">{ploy.name}</h4>
-                            {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
-                          </div>
-                          {ploy.description && <RichText className="ability-card-body" text={ploy.description} />}
+                  <div className="card-section-list">
+                    {strategyPloys.map((ploy, idx) => (
+                      <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card ploy-card">
+                        <div className="ability-card-header" style={{ background: '#3F5C4D', padding: '0.5rem 0.75rem', margin: '-0.5rem -0.5rem 0.5rem -0.5rem', borderRadius: '8px 8px 0 0' }}>
+                          <h4 className="ability-card-title" style={{ color: '#ffffff' }}>{(ploy.name || '').toUpperCase()}</h4>
+                          {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
                         </div>
-                      ))}
-                    </div>
-                  </>
+                        {ploy.description && <RichText className="ability-card-body" text={ploy.description} highlightText={factionKeyword} />}
+                      </div>
+                    ))}
+                  </div>
                 )}
 
                 {firefightPloys.length > 0 && (
-                  <>
-                    <h4
-                      id="firefight-ploys"
-                      className="muted"
-                      style={{
-                        marginTop: strategyPloys.length > 0 ? '1rem' : 0,
-                        marginBottom: '0.5rem'
-                      }}
-                    >
-                      Firefight Ploys
-                    </h4>
-                    <div className="card-section-list">
-                      {firefightPloys.map((ploy, idx) => (
-                        <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card ploy-card">
-                          <div className="ability-card-header">
-                            <h4 className="ability-card-title">{ploy.name}</h4>
-                            {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
-                          </div>
-                          {ploy.description && <RichText className="ability-card-body" text={ploy.description} />}
+                  <div className="card-section-list" style={{ marginTop: strategyPloys.length > 0 ? '0.75rem' : 0 }}>
+                    {firefightPloys.map((ploy, idx) => (
+                      <div key={ploy.id || idx} id={ploy.anchorId} className="ability-card ploy-card">
+                        <div className="ability-card-header" style={{ background: '#333333', padding: '0.5rem 0.75rem', margin: '-0.5rem -0.5rem 0.5rem -0.5rem', borderRadius: '8px 8px 0 0' }}>
+                          <h4 className="ability-card-title" style={{ color: '#ffffff' }}>{(ploy.name || '').toUpperCase()}</h4>
+                          {ploy.cost && <span className="ability-card-ap">{ploy.cost}</span>}
                         </div>
-                      ))}
-                    </div>
-                  </>
+                        {ploy.description && <RichText className="ability-card-body" text={ploy.description} highlightText={factionKeyword} />}
+                      </div>
+                    ))}
+                  </div>
                 )}
               </>
             ) : (
@@ -1790,15 +1888,10 @@ export default function KillteamPage() {
       case 'equipment':
         return (
           <section id="equipment" className="card killteam-tab-panel">
-            <h3 style={{ marginTop: 0 }}>Equipment</h3>
             {hasEquipment ? (
               <>
                 {factionEquipment.length > 0 && (
-                  <>
-                    <h4 id="faction-equipment" className="muted" style={{ margin: 0, marginBottom: '0.5rem' }}>
-                      Faction Equipment
-                    </h4>
-                    <div className="card-section-list">
+                  <div className="card-section-list">
                       {factionEquipment.map((item, idx) => (
                         <div key={item.id || idx} id={item.anchorId} className="ability-card equipment-card">
                           <div className="ability-card-header">
@@ -1809,19 +1902,10 @@ export default function KillteamPage() {
                         </div>
                       ))}
                     </div>
-                  </>
                 )}
 
                 {universalEquipment.length > 0 && (
-                  <>
-                    <h4
-                      id="universal-equipment"
-                      className="muted"
-                      style={{ marginTop: factionEquipment.length > 0 ? '1rem' : 0, marginBottom: '0.5rem' }}
-                    >
-                      Universal Equipment
-                    </h4>
-                    <div className="card-section-list">
+                  <div className="card-section-list" style={{ marginTop: factionEquipment.length > 0 ? '0.75rem' : 0 }}>
                       {(() => {
                         // Create a map of action IDs to action definitions for quick lookup
                         const actionsMap = new Map()
@@ -1978,7 +2062,6 @@ export default function KillteamPage() {
                         })
                       })()}
                     </div>
-                  </>
                 )}
               </>
             ) : (
