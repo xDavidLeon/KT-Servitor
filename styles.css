@@ -741,8 +741,8 @@ th{position:sticky;top:0;background:transparent}
   .weapons-table td:nth-child(2),
   .weapons-table td:nth-child(3),
   .weapons-table td:nth-child(4) {
-    width: 25px;
-    min-width: 25px;
+    width: 30px;
+    min-width: 30px;
     text-align: center;
     white-space: nowrap;
   }
