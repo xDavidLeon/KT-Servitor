@@ -6,7 +6,7 @@ import KillteamSectionNavigator, { scrollToKillteamSection } from '../../compone
 import OperativeCard from '../../components/OperativeCard'
 import RichText from '../../components/RichText'
 import { db } from '../../lib/db'
-import { ensureIndex } from '../../lib/search'
+import { ensureIndex, isIndexReady } from '../../lib/search'
 import { getLocalePath, checkForUpdates, fetchWithLocaleFallback } from '../../lib/update'
 import Seo from '../../components/Seo'
 
@@ -39,6 +39,10 @@ let cachedTacOpsActionLookup = null
 let tacOpsLoadPromise = null
 let cachedWeaponRules = null
 let weaponRulesLoadPromise = null
+let cachedEquipmentActions = null
+let cachedEquipmentActionsLocale = null
+let cachedUniversalEquipment = null
+let cachedUniversalEquipmentLocale = null
 
 function normaliseTacOpsText(value) {
   if (value === null || value === undefined) return ''
@@ -809,7 +813,6 @@ export default function KillteamPage() {
   const { id } = router.query
 
   const [killteam, setKillteam] = useState(null)
-  const [universalEquipmentRecords, setUniversalEquipmentRecords] = useState([])
   const [loading, setLoading] = useState(true)
   const hasLoadedOnceRef = useRef(false)
   const [activeSectionId, setActiveSectionId] = useState(null)
@@ -823,8 +826,9 @@ export default function KillteamPage() {
   const [tacOpsLoaded, setTacOpsLoaded] = useState(Boolean(cachedTacOpsByArchetype))
   const [tacOpsError, setTacOpsError] = useState(null)
   const [weaponRulesMap, setWeaponRulesMap] = useState(cachedWeaponRules || new Map())
-  const [equipmentActions, setEquipmentActions] = useState([])
-  const [equipmentActionsLoaded, setEquipmentActionsLoaded] = useState(false)
+  const [equipmentActions, setEquipmentActions] = useState(cachedEquipmentActions && cachedEquipmentActionsLocale === locale ? cachedEquipmentActions : [])
+  const [equipmentActionsLoaded, setEquipmentActionsLoaded] = useState(Boolean(cachedEquipmentActions && cachedEquipmentActionsLocale === locale))
+  const [universalEquipmentRecords, setUniversalEquipmentRecords] = useState(cachedUniversalEquipment && cachedUniversalEquipmentLocale === locale ? cachedUniversalEquipment : [])
 
   const prevLocaleRef = useRef(locale)
   
@@ -842,18 +846,45 @@ export default function KillteamPage() {
         prevLocaleRef.current = locale
       }
       
-      // Check for updates when locale changes or on initial load
-      if (localeChanged || isInitialLoad) {
+      // Try to load killteam data first - if it exists, skip update check
+      let data = await db.killteams.get(id)
+      
+      // Only check for updates if:
+      // 1. This is the initial load AND no data exists, OR
+      // 2. Locale changed
+      const shouldCheckUpdates = (isInitialLoad && !data) || localeChanged
+      
+      if (shouldCheckUpdates) {
         try {
-          await checkForUpdates(locale)
+          // Run update check in background - don't wait for it
+          checkForUpdates(locale).catch(err => {
+            console.warn('Update check failed', err)
+          })
         } catch (err) {
           console.warn('Update check failed', err)
         }
       }
       
-      await ensureIndex()
-
-      const data = await db.killteams.get(id)
+      // If we have data, use it immediately
+      if (data) {
+        if (!cancelled) {
+          setKillteam(data)
+          setLoading(false)
+          hasLoadedOnceRef.current = true
+        }
+        // Still ensure index in background if not ready
+        if (!isIndexReady()) {
+          ensureIndex().catch(() => {})
+        }
+        return
+      }
+      
+      // If no data, ensure index and try again after a short delay
+      if (!isIndexReady()) {
+        await ensureIndex()
+      }
+      data = await db.killteams.get(id)
+      
       if (!cancelled) {
         setKillteam(data || null)
         setLoading(false)
@@ -870,12 +901,22 @@ export default function KillteamPage() {
     let cancelled = false
 
     const loadUniversalEquipment = async () => {
+      // Check cache first
+      if (cachedUniversalEquipment && cachedUniversalEquipmentLocale === locale) {
+        setUniversalEquipmentRecords(cachedUniversalEquipment)
+        return
+      }
+
       try {
         const rows = await db.universalEquipment.toArray()
         if (cancelled) return
         // Filter for universal equipment only (killteamId === null)
         const universalRows = rows.filter(row => row.killteamId === null || row.killteamId === undefined)
-        setUniversalEquipmentRecords(sortUniversalEquipmentRows(universalRows))
+        const sorted = sortUniversalEquipmentRows(universalRows)
+        // Cache the result
+        cachedUniversalEquipment = sorted
+        cachedUniversalEquipmentLocale = locale
+        setUniversalEquipmentRecords(sorted)
       } catch (err) {
         if (cancelled) return
         console.warn('Failed to load universal equipment dataset', err)
@@ -884,12 +925,21 @@ export default function KillteamPage() {
     }
 
     const loadEquipmentActions = async () => {
+      // Check cache first
+      if (cachedEquipmentActions && cachedEquipmentActionsLocale === locale) {
+        setEquipmentActions(cachedEquipmentActions)
+        setEquipmentActionsLoaded(true)
+        return
+      }
+
       try {
         const res = await fetchWithLocaleFallback(locale, 'universal_equipment.json')
         if (!res.ok) {
           console.warn(`Failed to load universal equipment (${res.status}) for locale ${locale}`)
           // Continue with empty array instead of throwing
           if (cancelled) return
+          cachedEquipmentActions = []
+          cachedEquipmentActionsLocale = locale
           setEquipmentActions([])
           setEquipmentActionsLoaded(true)
           return
@@ -903,12 +953,18 @@ export default function KillteamPage() {
           .map(action => normaliseTacOpsAction(action))
           .filter(action => action !== null)
         
+        // Cache the result
+        cachedEquipmentActions = normalizedActions
+        cachedEquipmentActionsLocale = locale
+        
         // Store the normalized actions (they have AP, type, etc. fields)
         setEquipmentActions(normalizedActions)
         setEquipmentActionsLoaded(true)
       } catch (err) {
         if (cancelled) return
         console.warn('Failed to load equipment actions', err)
+        cachedEquipmentActions = []
+        cachedEquipmentActionsLocale = locale
         setEquipmentActions([])
         setEquipmentActionsLoaded(true)
       }
