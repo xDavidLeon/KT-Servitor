@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
 import RichText from './RichText'
+import ShareButton from './ShareButton'
 import { useTranslations } from '../lib/i18n'
 
 function WeaponRuleTooltip({ rule, children }) {
@@ -89,9 +91,23 @@ function WeaponRuleTooltip({ rule, children }) {
 }
 
 export default function OperativeCard({ operative }) {
+  const router = useRouter()
   const t = useTranslations('operative')
   const anchorId = operative?.id ? `operative-${operative.id}` : undefined
   const operativeDisplayName = operative?.name || operative?.title || ''
+  
+  // Build share URL for this operative (client-only to avoid hydration issues)
+  const [shareUrl, setShareUrl] = useState(null)
+  
+  useEffect(() => {
+    if (typeof window === 'undefined' || !anchorId) {
+      setShareUrl(null)
+      return
+    }
+    const base = (process.env.NEXT_PUBLIC_SITE_URL || window.location.origin).replace(/\/+$/, '')
+    const path = router.asPath?.split('#')[0] || router.pathname?.replace('[id]', router.query?.id || '')
+    setShareUrl(`${base}${path}#${anchorId}`)
+  }, [anchorId, router.asPath, router.pathname, router.query?.id])
   const baseSizeText = (() => {
     const value = operative?.baseSize
     if (value === null || value === undefined || value === '') return null
@@ -134,7 +150,17 @@ export default function OperativeCard({ operative }) {
     <div id={anchorId} className="operative-card">
       <div className="operative-header">
         <div className="operative-header-title">
-          <h4 style={{ margin: 0 }}>{operativeDisplayName}</h4>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'space-between' }}>
+            <h4 style={{ margin: 0, flex: 1 }}>{operativeDisplayName}</h4>
+            {shareUrl && (
+              <ShareButton
+                title={operativeDisplayName}
+                text={`Check out ${operativeDisplayName} on KT Servitor`}
+                url={shareUrl}
+                size="small"
+              />
+            )}
+          </div>
           {operativeDisplayName && (
             <button
               type="button"

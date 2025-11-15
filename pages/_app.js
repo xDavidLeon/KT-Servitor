@@ -7,6 +7,7 @@ import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persist
 import Footer from '../components/Footer'
 import ErrorBoundary from '../components/ErrorBoundary'
 import InstallPrompt from '../components/InstallPrompt'
+import UpdateNotification from '../components/UpdateNotification'
 import { createQueryClient } from '../lib/queryClient'
 import { useDatasetBootstrap } from '../hooks/useDatasetBootstrap'
 import '../styles.css'
@@ -103,6 +104,7 @@ export default function App({ Component, pageProps }) {
           <Component {...pageProps} />
           <Footer />
           <InstallPrompt />
+          <UpdateNotification />
         </AppProviders>
       </ErrorBoundary>
     </>

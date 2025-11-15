@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 
 /**
  * Custom hook for haptic feedback on mobile devices
@@ -6,7 +6,12 @@ import { useCallback } from 'react'
  * @returns {Object} - Haptic feedback functions
  */
 export function useHapticFeedback() {
-  const isSupported = typeof window !== 'undefined' && 'vibrate' in navigator
+  const [isSupported, setIsSupported] = useState(false)
+
+  // Only check for support on client to avoid hydration issues
+  useEffect(() => {
+    setIsSupported(typeof window !== 'undefined' && 'vibrate' in navigator)
+  }, [])
 
   const vibrate = useCallback((pattern) => {
     if (!isSupported) return false

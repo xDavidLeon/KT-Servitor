@@ -899,8 +899,22 @@ export default function KillteamPage() {
   const [equipmentActions, setEquipmentActions] = useState(cachedEquipmentActions && cachedEquipmentActionsLocale === locale ? cachedEquipmentActions : [])
   const [equipmentActionsLoaded, setEquipmentActionsLoaded] = useState(Boolean(cachedEquipmentActions && cachedEquipmentActionsLocale === locale))
   const [universalEquipmentRecords, setUniversalEquipmentRecords] = useState(cachedUniversalEquipment && cachedUniversalEquipmentLocale === locale ? cachedUniversalEquipment : [])
+  
+  // Build share URL (client-only to avoid hydration issues)
+  const [shareUrl, setShareUrl] = useState(null)
 
   const prevLocaleRef = useRef(locale)
+  
+  // Build share URL on client (to avoid hydration issues)
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      setShareUrl(null)
+      return
+    }
+    const base = (process.env.NEXT_PUBLIC_SITE_URL || window.location.origin).replace(/\/+$/, '')
+    const path = router.asPath?.split('#')[0] || `/killteams/${id}`
+    setShareUrl(`${base}${path}`)
+  }, [router.asPath, id])
   
   useEffect(() => {
     if (!id) return
@@ -1776,6 +1790,7 @@ export default function KillteamPage() {
             killteamTitle={killteamTitle}
             archetypes={archetypes}
             factionKeyword={factionKeyword}
+            shareUrl={shareUrl}
           />
         )
       case 'faction-rules':

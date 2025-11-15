@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import Header from '../../components/Header'
 import Seo from '../../components/Seo'
 import KillteamSectionNavigator from '../../components/KillteamSectionNavigator'
@@ -1021,15 +1022,19 @@ const sections = useMemo(() => {
                 border: '1px solid #262a36',
                 boxShadow: '0 2px 8px rgba(0, 0, 0, 0.25)'
               }}>
-                <img
+                <Image
                   src={imagePath}
                   alt={`${groupLabel} - Map ${mapIndex}`}
+                  width={1200}
+                  height={900}
                   loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
                   style={{
                     width: '100%',
                     height: 'auto',
                     display: 'block'
                   }}
+                  quality={85}
                 />
               </div>
             </div>

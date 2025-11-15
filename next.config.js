@@ -30,6 +30,14 @@ const baseConfig = {
     locales: ['en', 'fr', 'es'],
     defaultLocale: 'en'
   },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
   async rewrites() {
     return [
       {
@@ -48,7 +56,15 @@ if (!isProd) {
   const withPWA = require('next-pwa')({
     dest: 'public',
     disable: false,
-    runtimeCaching
+    runtimeCaching,
+    workboxOptions: {
+      // Don't auto-skip waiting - let user control when to update
+      skipWaiting: false,
+      clientsClaim: false,
+      // Note: The service worker needs to listen for SKIP_WAITING messages
+      // This is handled by the useServiceWorkerUpdate hook which sends the message
+      // and the service worker should call skipWaiting() when it receives it
+    }
   });
   module.exports = withPWA(baseConfig);
 }
