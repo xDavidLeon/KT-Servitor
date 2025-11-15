@@ -292,9 +292,17 @@ export default function OpsPage() {
         setLoading(true)
       }
       try {
-        const res = await fetchWithLocaleFallback(locale, 'ops_2025.json')
+        const res = await fetchWithLocaleFallback(locale, 'packs/ops_2025.json')
         if (!res.ok) {
-          throw new Error(`Failed to load operations (${res.status})`)
+          // File might not exist yet, continue with empty arrays
+          if (cancelled) return
+          setCritOps([])
+          setTacOps([])
+          setActionLookup(new Map())
+          setLoaded(true)
+          setError(null)
+          setLoading(false)
+          return
         }
         const json = await res.json()
         if (cancelled) return
@@ -313,23 +321,36 @@ export default function OpsPage() {
           addAction(actionDef)
         }
 
-        // Fetch merged actions.json instead of separate universal_actions.json and mission_actions.json
-        const actionsRes = await fetchWithLocaleFallback(locale, 'actions.json')
+        // Fetch universal_actions.json
+        const actionsRes = await fetchWithLocaleFallback(locale, 'universal_actions.json')
         if (actionsRes.ok) {
           const json = await actionsRes.json()
-          // Handle both old format (separate arrays) and new format (merged)
-          let allActions = []
-          if (Array.isArray(json?.actions)) {
-            // New format: all actions in one array
-            allActions = json.actions
-          } else {
-            // Old format fallback
-            allActions = [
-              ...(Array.isArray(json?.universal_actions) ? json.universal_actions : []),
-              ...(Array.isArray(json?.mission_actions) ? json.mission_actions : [])
-            ]
-          }
+          // Load universal actions
+          const allActions = Array.isArray(json?.actions) 
+            ? json.actions 
+            : Array.isArray(json?.universal_actions) 
+              ? json.universal_actions 
+              : []
           for (const actionDef of allActions) {
+            addAction(actionDef)
+          }
+        }
+        
+        // Fetch packs/packs_actions.json for mission actions
+        const packsActionsRes = await fetchWithLocaleFallback(locale, 'packs/packs_actions.json')
+        if (packsActionsRes.ok) {
+          const packsJson = await packsActionsRes.json()
+          const allPacksActions = Array.isArray(packsJson?.actions) 
+            ? packsJson.actions 
+            : Array.isArray(packsJson?.mission_actions) 
+              ? packsJson.mission_actions 
+              : []
+          // Filter to only include actions with type === "mission"
+          const packsActions = allPacksActions.filter(action => {
+            const actionType = (action?.type || '').toLowerCase()
+            return actionType === 'mission'
+          })
+          for (const actionDef of packsActions) {
             addAction(actionDef)
           }
         }

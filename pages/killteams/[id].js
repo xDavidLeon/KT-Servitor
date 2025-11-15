@@ -167,9 +167,11 @@ async function loadTacOpsByArchetype(locale = 'en') {
 
   if (!tacOpsLoadPromise) {
     tacOpsLoadPromise = (async () => {
-      const res = await fetchWithLocaleFallback(locale, 'ops_2025.json')
+      const res = await fetchWithLocaleFallback(locale, 'packs/ops_2025.json')
       if (!res.ok) {
-        throw new Error(`Failed to load tac ops dataset (${res.status})`)
+        // File might not exist yet, return empty data
+        console.warn(`packs/ops_2025.json not found (${res.status}), using empty operations`)
+        return { byArchetype: new Map(), actionLookup: new Map() }
       }
       const json = await res.json()
       const actionsList = Array.isArray(json?.actions) ? json.actions : []
@@ -184,17 +186,16 @@ async function loadTacOpsByArchetype(locale = 'en') {
 
       actionsList.forEach(addAction)
 
-      // Fetch merged actions.json instead of separate universal_actions.json and mission_actions.json
-      const actionsRes = await fetchWithLocaleFallback(locale, 'actions.json')
+      // Fetch universal_actions.json
+      const actionsRes = await fetchWithLocaleFallback(locale, 'universal_actions.json')
       if (actionsRes.ok) {
         const json = await actionsRes.json()
-        // Handle both old format (separate arrays) and new format (merged)
+        // Load universal actions
         const allActions = Array.isArray(json?.actions) 
           ? json.actions 
-          : [
-              ...(Array.isArray(json?.universal_actions) ? json.universal_actions : []),
-              ...(Array.isArray(json?.mission_actions) ? json.mission_actions : [])
-            ]
+          : Array.isArray(json?.universal_actions) 
+            ? json.universal_actions 
+            : []
         allActions.forEach(addAction)
       }
 

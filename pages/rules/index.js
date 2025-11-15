@@ -406,26 +406,26 @@ export default function Rules({ rulesTabs = [] }) {
     const loadActions = async () => {
       if (!actionsLoaded) setActionsLoading(true)
       try {
-        // Fetch merged actions.json instead of separate universal_actions.json
-        const res = await fetchWithLocaleFallback(locale, 'actions.json')
+        // Fetch universal_actions.json
+        const res = await fetchWithLocaleFallback(locale, 'universal_actions.json')
         if (!res.ok) {
-          throw new Error(`Failed to load actions (${res.status})`)
+          // File might not exist yet, continue with empty array
+          if (cancelled) return
+          setUniversalActions([])
+          cachedUniversalActions = []
+          setActionsLoaded(true)
+          setActionsError(null)
+          setActionsLoading(false)
+          return
         }
         const json = await res.json()
         if (cancelled) return
-        // Extract universal actions from merged file
-        // Support both new format (all in actions array with type field) and old format (separate arrays)
-        let rawActions = []
-        if (Array.isArray(json?.actions)) {
-          // New format: filter by type or assume all are universal if no type field
-          rawActions = json.actions.filter(action => {
-            const type = (action.type || '').toLowerCase()
-            return !type || type === 'universal' || type === ''
-          })
-        } else if (Array.isArray(json?.universal_actions)) {
-          // Old format fallback
-          rawActions = json.universal_actions
-        }
+        // Extract universal actions
+        const rawActions = Array.isArray(json?.actions) 
+          ? json.actions 
+          : Array.isArray(json?.universal_actions) 
+            ? json.universal_actions 
+            : []
         const list = rawActions.map(action => normaliseActionDefinition(action)).filter(Boolean)
         const sorted = sortActions(list)
         const mappedActions = sorted.map(action => ({
@@ -461,40 +461,53 @@ export default function Rules({ rulesTabs = [] }) {
     const loadMissionActions = async () => {
       if (!missionActionsLoaded) setMissionActionsLoading(true)
       try {
-        // Fetch merged actions.json instead of separate mission_actions.json
-        const res = await fetchWithLocaleFallback(locale, 'actions.json')
+        // Fetch packs/packs_actions.json for mission actions
+        const res = await fetchWithLocaleFallback(locale, 'packs/packs_actions.json')
         if (!res.ok) {
-          throw new Error(`Failed to load actions (${res.status})`)
+          // File might not exist yet, continue with empty array
+          if (cancelled) return
+          setMissionActions([])
+          cachedMissionActions = []
+          setMissionActionsLoaded(true)
+          setMissionActionsError(null)
+          setMissionActionsLoading(false)
+          return
         }
         const json = await res.json()
         if (cancelled) return
-        // Extract mission actions from merged file
-        // Support both new format (all in actions array with type field) and old format (separate arrays)
-        let rawActions = []
-        if (Array.isArray(json?.actions)) {
-          // New format: filter by type
-          rawActions = json.actions.filter(action => {
-            const type = (action.type || '').toLowerCase()
-            return type === 'mission'
-          })
-        } else if (Array.isArray(json?.mission_actions)) {
-          // Old format fallback
-          rawActions = json.mission_actions
-        }
+        // Extract mission actions from packs_action.json
+        // Only include actions with type === "mission"
+        const rawActions = Array.isArray(json?.actions) 
+          ? json.actions 
+          : Array.isArray(json?.mission_actions) 
+            ? json.mission_actions 
+            : []
+        console.log(`Loaded ${rawActions.length} raw actions from packs_actions.json`)
+        
+        // Filter to only include actions with type === "mission"
+        const missionActionsFromPacks = rawActions.filter(action => {
+          const actionType = (action?.type || '').toLowerCase()
+          return actionType === 'mission'
+        })
+        console.log(`Filtered to ${missionActionsFromPacks.length} mission actions from packs_actions.json`)
+        
         const actionMap = new Map()
-        const addAction = (actionDef) => {
+        const addAction = (actionDef, source = 'unknown') => {
           const normalised = normaliseActionDefinition(actionDef)
           if (normalised?.id) {
+            console.log(`Adding mission action: ${normalised.id} (type: ${normalised.type}) from ${source}`)
             actionMap.set(normalised.id, normalised)
+          } else {
+            console.warn(`Skipping action without id:`, actionDef)
           }
         }
 
-        for (const actionDef of rawActions) {
-          addAction(actionDef)
+        for (const actionDef of missionActionsFromPacks) {
+          addAction(actionDef, 'packs_actions.json')
         }
 
         try {
-          const opsRes = await fetchWithLocaleFallback(locale, 'ops_2025.json')
+          const opsRes = await fetchWithLocaleFallback(locale, 'packs/ops_2025.json')
           if (opsRes.ok) {
             const opsJson = await opsRes.json()
             const opsActions = Array.isArray(opsJson?.actions) ? opsJson.actions : []
@@ -508,9 +521,35 @@ export default function Rules({ rulesTabs = [] }) {
           console.warn('Failed to load ops actions for mission actions list', opsErr)
         }
 
+        // All actions in the map should already be mission type (filtered before adding)
+        // But double-check to be safe
         const finalList = Array.from(actionMap.values())
-          .filter(action => (action.type ? action.type === 'mission' : true))
+          .filter(action => {
+            const actionType = (action.type || '').toLowerCase()
+            const include = actionType === 'mission'
+            if (!include) {
+              console.warn(`Filtering out action ${action.id} with type: ${actionType}`)
+            }
+            return include
+          })
           .sort((a, b) => a.id.localeCompare(b.id))
+        
+        console.log(`Final mission actions list: ${finalList.length} actions`)
+        if (finalList.length > 0) {
+          console.log(`Sample action IDs:`, finalList.slice(0, 10).map(a => a.id))
+          // Check if the specific action the user mentioned is in the list
+          const targetAction = finalList.find(a => a.id.includes('OPEN-STOCKADE-DOOR') || a.id.includes('CTION-OPEN-STOCKADE-DOOR'))
+          if (targetAction) {
+            console.log(`Found target action:`, targetAction.id, targetAction.type)
+          } else {
+            console.warn(`Target action CTION-OPEN-STOCKADE-DOOR not found in final list`)
+            // Check if it's in the raw actions
+            const rawTarget = rawActions.find(a => (a.id || a.name || '').includes('OPEN-STOCKADE-DOOR'))
+            if (rawTarget) {
+              console.warn(`But found in raw actions:`, rawTarget.id || rawTarget.name)
+            }
+          }
+        }
 
         const sorted = sortActions(finalList)
         const mappedMissionActions = sorted.map(action => ({
@@ -576,22 +615,29 @@ export default function Rules({ rulesTabs = [] }) {
         try {
           const killteams = await db.killteams.toArray()
           const killteamsMap = new Map()
+          console.log(`Loading weapon rules from ${killteams.length} killteams`)
           for (const kt of killteams) {
             if (kt.killteamId) {
               killteamsMap.set(kt.killteamId, kt.killteamName || kt.killteamId)
             }
-            if (Array.isArray(kt.weapon_rules)) {
-              for (const rule of kt.weapon_rules) {
-                teamRules.push({
-                  id: rule.id || rule.name || '',
-                  name: rule.name || 'Unnamed rule',
-                  description: rule.description || '',
-                  variable: Boolean(rule.variable),
-                  team: kt.killteamId || null
-                })
+            // Check for weapon_rules field (could be weapon_rules or weaponRules)
+            const weaponRules = kt.weapon_rules || kt.weaponRules || []
+            if (Array.isArray(weaponRules) && weaponRules.length > 0) {
+              console.log(`Found ${weaponRules.length} weapon rules for team ${kt.killteamId || kt.killteamName}`)
+              for (const rule of weaponRules) {
+                if (rule && (rule.id || rule.name)) {
+                  teamRules.push({
+                    id: rule.id || rule.name || '',
+                    name: rule.name || 'Unnamed rule',
+                    description: rule.description || '',
+                    variable: Boolean(rule.variable),
+                    team: kt.killteamId || null
+                  })
+                }
               }
             }
           }
+          console.log(`Loaded ${teamRules.length} team-specific weapon rules total`)
           if (!cancelled) {
             setKillteamsMap(killteamsMap)
           }
