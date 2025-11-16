@@ -55,30 +55,67 @@ export default function TierListPage() {
         if (needsDefault) {
           // Load default (empty) tier list
           const defaultData = await loadDefaultTierList()
-          createTierList(defaultData.title || 'Kill Team Tier List', {
+          console.log('Default tier list data:', defaultData) // Debug log
+          const defaultTitle = defaultData.title || 'Default Tier List'
+          createTierList(defaultTitle, {
             ...defaultData,
-            name: defaultData.title || 'Kill Team Tier List',
+            name: defaultTitle,
+            title: defaultTitle,
             createdAt: new Date().toISOString()
           }, true, false) // Use 'default' as the ID, not read-only
+        } else {
+          // Update existing default tier list if it has "Untitled" title
+          const existingDefault = tierLists.default
+          if (existingDefault && (existingDefault.title === 'Untitled' || !existingDefault.title)) {
+            const defaultData = await loadDefaultTierList()
+            if (defaultData.title) {
+              saveTierList('default', {
+                ...existingDefault,
+                title: defaultData.title,
+                name: defaultData.title
+              })
+            }
+          }
         }
         
         if (needsMerc) {
           // Load merc tier list
           const mercData = await loadMercTierList()
           if (mercData) {
-            createTierList(mercData.title || 'Kill Team Mercenarios Tier List', {
+            console.log('Merc tier list data:', mercData) // Debug log
+            const mercTitle = mercData.title || 'Kill Team Mercenarios Tier List'
+            createTierList(mercTitle, {
               ...mercData,
-              name: mercData.title || 'Kill Team Mercenarios Tier List',
+              name: mercTitle,
+              title: mercTitle,
               createdAt: new Date().toISOString()
             }, false, true, 'merc') // Use 'merc' as the fixed ID, read-only
+          }
+        } else {
+          // Update existing merc tier list if it has "Untitled" title
+          const existingMerc = tierLists.merc
+          if (existingMerc && (existingMerc.title === 'Untitled' || !existingMerc.title)) {
+            const mercData = await loadMercTierList()
+            if (mercData && mercData.title) {
+              saveTierList('merc', {
+                ...existingMerc,
+                title: mercData.title,
+                name: mercData.title
+              })
+            }
           }
         }
         
         // Reload tier lists after initialization
         const { tierLists: updatedTierLists, activeTierListId: updatedActiveId } = getSavedTierLists()
         
-        // Use active tier list or default
-        const activeId = updatedActiveId || 'default'
+        // Always use 'default' as the initial active tier list (not 'merc')
+        // Only use the saved activeId if it's not 'merc' and the tier list exists
+        let activeId = 'default'
+        if (updatedActiveId && updatedActiveId !== 'merc' && updatedTierLists[updatedActiveId]) {
+          activeId = updatedActiveId
+        }
+        
         let tierList = getTierList(activeId)
         
         // If active tier list doesn't exist, use default
@@ -87,6 +124,7 @@ export default function TierListPage() {
           setActiveTierList('default')
           setCurrentTierListId('default')
         } else {
+          setActiveTierList(activeId)
           setCurrentTierListId(activeId)
         }
         
@@ -379,6 +417,7 @@ export default function TierListPage() {
             onTierListChange={handleTierListChange}
             onNewTierList={handleNewTierList}
             onLoadDefault={handleLoadDefault}
+            isReadOnly={tierListData?.isReadOnly || false}
           />
 
           {tierListData && (

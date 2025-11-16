@@ -14,7 +14,8 @@ export default function TierListManager({
   currentTierListId,
   onTierListChange,
   onNewTierList,
-  onLoadDefault
+  onLoadDefault,
+  isReadOnly = false
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const [editingId, setEditingId] = useState(null)
@@ -192,10 +193,15 @@ export default function TierListManager({
         {onLoadDefault && (
           <button
             onClick={onLoadDefault}
+            disabled={isReadOnly}
             className="pill-button"
-            style={{ fontSize: '0.9rem' }}
+            style={{ 
+              fontSize: '0.9rem',
+              opacity: isReadOnly ? 0.5 : 1,
+              cursor: isReadOnly ? 'not-allowed' : 'pointer'
+            }}
           >
-            Load Default
+            Reset
           </button>
         )}
       </div>
