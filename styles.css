@@ -1119,3 +1119,121 @@ mark {
   border-radius: 2px;
   font-weight: 500;
 }
+
+/* Tier List Styles */
+.tier-list-container {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tier-list-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tier-list-container::-webkit-scrollbar-track {
+  background: var(--panel);
+  border-radius: 4px;
+}
+
+.tier-list-container::-webkit-scrollbar-thumb {
+  background: #2a2f3f;
+  border-radius: 4px;
+}
+
+.tier-list-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+.tier-column {
+  min-width: 250px;
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.tier-column-header {
+  padding: 0.75rem;
+  border-bottom: 1px solid #2a2f3f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tier-column-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  flex: 1;
+}
+
+.tier-column-content {
+  padding: 0.75rem;
+  min-height: 100px;
+}
+
+.tier-killteam-card {
+  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  cursor: grab;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.tier-killteam-card:active {
+  cursor: grabbing;
+}
+
+.tier-killteam-card.dragging {
+  opacity: 0.5;
+  transform: rotate(5deg);
+}
+
+.tier-drop-zone {
+  min-height: 200px;
+  border: 2px dashed transparent;
+  border-radius: 8px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.tier-drop-zone.drag-over {
+  border-color: var(--accent);
+  background-color: rgba(251, 146, 60, 0.05);
+}
+
+.tier-empty-state {
+  color: var(--muted);
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+}
+
+/* Responsive tier list */
+@media (max-width: 768px) {
+  .tier-column {
+    min-width: 200px;
+    width: 200px;
+  }
+  
+  .tier-list-container {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .tier-column {
+    min-width: 180px;
+    width: 180px;
+  }
+  
+  .tier-column-header h3 {
+    font-size: 1rem;
+  }
+  
+  .tier-killteam-card {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,49 @@
+Kill Team IDs
+==================================================
+
+AEL-BOK	Blades Of Khaine
+AEL-COR	Corsair Voidscarred
+AEL-HOTA	Hand Of The Archon
+AEL-MND	Mandrakes
+AEL-VDT	Void-Dancer Troupe
+CHAOS-BLD	Blooded
+CHAOS-CULT	Chaos Cult
+CHAOS-FELL	Fellgor Ravagers
+CHAOS-GORE	Goremongers
+CHAOS-GPI	Gellerpox Infected
+CHAOS-LEG	Legionaries
+CHAOS-NC	Nemesis Claw
+CHAOS-PM	Plague Marines
+CHAOS-WC	Warpcoven
+IMP-AES	Exaction Squad
+IMP-AOD	Angels Of Death
+IMP-BC	Battleclade
+IMP-DKK	Death Korps
+IMP-DW	Deathwatch
+IMP-ESS	Elucidian Starstriders
+IMP-HC	Hunter Clade
+IMP-INB	Imperial Navy Breachers
+IMP-INQ	Inquisitorial Agents
+IMP-KAS	Kasrkin
+IMP-NOV	Novitiates
+IMP-PHO	Phobos Strike Team
+IMP-RAT	Ratlings
+IMP-SANC	Sanctifiers
+IMP-SCT	Scout Squad
+IMP-TEMPAQ	Tempestus Aquilons
+NEC-CAN	Canoptek Circle
+NEC-HIER	Hierotek Circle
+ORK-KOM	Kommandos
+ORK-WK	Wrecka Krew
+SPEC-NPO	Non-Player Operatives
+SPEC-TITUS	Titus Mission Pack
+TAU-FSKB	Farstalker Kinband
+TAU-PF	Pathfinders
+TAU-VESP	Vespid Stingwings
+TYR-BBRO	Brood Brothers
+TYR-RAV	Raveners
+TYR-WB	Wyrmblade
+VOT-HKS	Hearthkyn Salvagers
+VOT-HKY	Hernkyn Yaegirs
+
+Total: 44 teams
